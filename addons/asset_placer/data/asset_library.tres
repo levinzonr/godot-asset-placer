@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="AssetLibrary" load_steps=9 format=3 uid="uid://c5hrd4gpiheyt"]
+
+[ext_resource type="Script" uid="uid://c1y1lmxbmk18r" path="res://addons/asset_placer/data/asset_resource.gd" id="1_e4lis"]
+[ext_resource type="PackedScene" uid="uid://dnjrvjljdl02" path="res://demo/assets/cube.tscn" id="2_jsn4x"]
+[ext_resource type="Script" uid="uid://c7nn0sp4y58cq" path="res://addons/asset_placer/data/asset_library.gd" id="2_p2yon"]
+[ext_resource type="PackedScene" uid="uid://1hx47t5c3wpf" path="res://demo/assets/rock.glb" id="3_jsn4x"]
+[ext_resource type="PackedScene" uid="uid://c55qvy8fdcxsd" path="res://demo/assets/sphere.tscn" id="4_eav4o"]
+
+[sub_resource type="Resource" id="Resource_eav4o"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("2_jsn4x")
+name = "cube.tscn"
+
+[sub_resource type="Resource" id="Resource_5b1m7"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("3_jsn4x")
+name = "rock.glb"
+
+[sub_resource type="Resource" id="Resource_3eep0"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("4_eav4o")
+name = "sphere.tscn"
+
+[resource]
+script = ExtResource("2_p2yon")
+folders = Array[StringName]([&"res://demo/assets"])
+items = Array[ExtResource("1_e4lis")]([SubResource("Resource_eav4o"), SubResource("Resource_5b1m7"), SubResource("Resource_3eep0")])
+metadata/_custom_type_script = "uid://c7nn0sp4y58cq"

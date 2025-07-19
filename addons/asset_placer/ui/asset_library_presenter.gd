@@ -8,7 +8,7 @@ var assets_repository: AssetsRepository
 signal assets_loaded(assets: Array[AssetResource])
 
 func _init():
-	self.library = load("res://demo/test_library.tres")
+	self.library = load("res://addons/asset_placer/data/asset_library.tres")
 	self.folder_repository = FolderRepository.new(library)
 	self.assets_repository = AssetsRepository.new(library)
 	library.changed.connect(func(): 
