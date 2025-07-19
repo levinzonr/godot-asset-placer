@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfnj2xve84rvc"]
+
+[ext_resource type="Script" uid="uid://dacpe4563g5x2" path="res://addons/asset_placer/ui/components/asset_resource_preview.gd" id="1_q3676"]
+[ext_resource type="Script" uid="uid://dephufwlu765k" path="res://addons/asset_placer/ui/components/asset_thumbnail.gd" id="2_xdgah"]
+
+[node name="AssetResourcePreview" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q3676")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="AssetThumbnail" type="TextureRect" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+stretch_mode = 3
+script = ExtResource("2_xdgah")
+metadata/_custom_type_script = "uid://dephufwlu765k"
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+text = "Asset"
