@@ -52,8 +52,6 @@ func _place_instance(transform: Transform3D):
 		EditorInterface.get_selection().clear()
 		EditorInterface.get_selection().add_node(new_node)
 		print("Asset placed")
-		stop_placement()
-	
 	
 func stop_placement():
 	self.asset = null

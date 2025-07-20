@@ -17,7 +17,7 @@ enum SystemIcon {
 @export var icon_type: SystemIcon = SystemIcon.Godot:
 	set(value):
 		icon_type = value
-		_update_icon()
+		#_update_icon()
 
 func _ready():
 	if Engine.is_editor_hint():

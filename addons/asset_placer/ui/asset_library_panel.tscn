@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://c47vtmub8cdjf"]
+
+[ext_resource type="PackedScene" uid="uid://3qun24bndqll" path="res://addons/asset_placer/ui/asset_library_window/asset_library_window.tscn" id="1_535dl"]
+[ext_resource type="Script" uid="uid://bracm8jmjlw2v" path="res://addons/asset_placer/ui/asset_library_panel.gd" id="1_otjr6"]
+[ext_resource type="PackedScene" uid="uid://4jjhsl7nom4c" path="res://addons/asset_placer/ui/folders_window/folders_window.tscn" id="2_otjr6"]
+
+[node name="AssetLibraryPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_otjr6")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 1
+
+[node name="Assets" parent="Panel/TabContainer" instance=ExtResource("1_535dl")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Folders" parent="Panel/TabContainer" instance=ExtResource("2_otjr6")]
+layout_mode = 2
+metadata/_tab_index = 1

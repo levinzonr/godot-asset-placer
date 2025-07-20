@@ -1,10 +1,45 @@
-[gd_resource type="Resource" script_class="AssetLibrary" load_steps=9 format=3 uid="uid://c5hrd4gpiheyt"]
+[gd_resource type="Resource" script_class="AssetLibrary" load_steps=81 format=3 uid="uid://c5hrd4gpiheyt"]
 
 [ext_resource type="Script" uid="uid://c1y1lmxbmk18r" path="res://addons/asset_placer/data/asset_resource.gd" id="1_e4lis"]
 [ext_resource type="PackedScene" uid="uid://dnjrvjljdl02" path="res://demo/assets/cube.tscn" id="2_jsn4x"]
 [ext_resource type="Script" uid="uid://c7nn0sp4y58cq" path="res://addons/asset_placer/data/asset_library.gd" id="2_p2yon"]
 [ext_resource type="PackedScene" uid="uid://1hx47t5c3wpf" path="res://demo/assets/rock.glb" id="3_jsn4x"]
 [ext_resource type="PackedScene" uid="uid://c55qvy8fdcxsd" path="res://demo/assets/sphere.tscn" id="4_eav4o"]
+[ext_resource type="PackedScene" uid="uid://gwihxo1nnefo" path="res://demo/assets/ForestRock1.glb" id="5_5b1m7"]
+[ext_resource type="PackedScene" uid="uid://b8p1iy52py3xm" path="res://demo/assets/ForestRock2.glb" id="6_3eep0"]
+[ext_resource type="PackedScene" uid="uid://b1nm40p57ntoa" path="res://demo/assets/ForestRock3.glb" id="7_n30m8"]
+[ext_resource type="PackedScene" uid="uid://catkv6vbqtum0" path="res://demo/assets/ForestRock4.glb" id="8_xd2xt"]
+[ext_resource type="PackedScene" uid="uid://dig47ichuqflf" path="res://demo/assets/ForestRockCluster1.glb" id="9_xgeyg"]
+[ext_resource type="PackedScene" uid="uid://b5cskstxopmxr" path="res://demo/assets/ForestRockCluster2.glb" id="10_3andj"]
+[ext_resource type="PackedScene" uid="uid://dqpwyuw1xhymj" path="res://demo/assets/JaggedRock1.glb" id="11_miew2"]
+[ext_resource type="PackedScene" uid="uid://dqq10eqcfkv1p" path="res://demo/assets/JaggedRock2.glb" id="12_f85b6"]
+[ext_resource type="PackedScene" uid="uid://dk831mrcik0rw" path="res://demo/assets/JaggedRock3.glb" id="13_bx31r"]
+[ext_resource type="PackedScene" uid="uid://csh67skstdhqw" path="res://demo/assets/JaggedRock4.glb" id="14_ll0h4"]
+[ext_resource type="PackedScene" uid="uid://d1v6os586pjoe" path="res://demo/assets/LandscapeRock1.glb" id="15_n5a4n"]
+[ext_resource type="PackedScene" uid="uid://i8qv802uro30" path="res://demo/assets/LandscapeRock2.glb" id="16_c4prj"]
+[ext_resource type="PackedScene" uid="uid://lmaf0pnsx1oc" path="res://demo/assets/LandscapeRock3.glb" id="17_t6u8d"]
+[ext_resource type="PackedScene" uid="uid://cc2qfrbt4tdir" path="res://demo/assets/Rock_01.fbx" id="18_vdss7"]
+[ext_resource type="PackedScene" uid="uid://d0tor7nrcteb0" path="res://demo/assets/Rock_02.fbx" id="19_ad0sa"]
+[ext_resource type="PackedScene" uid="uid://jmxu1dxg60is" path="res://demo/assets/Rock_03.fbx" id="20_wo8yd"]
+[ext_resource type="PackedScene" uid="uid://2ru1yg5lunq3" path="res://demo/assets/Rock_04.fbx" id="21_6j62n"]
+[ext_resource type="PackedScene" uid="uid://cdktcqca102oo" path="res://demo/assets/Rock_05.fbx" id="22_1qpx2"]
+[ext_resource type="PackedScene" uid="uid://c10k7kckm8agn" path="res://demo/assets/Rock_06.fbx" id="23_rb0vk"]
+[ext_resource type="PackedScene" uid="uid://5uu4q23wa6bv" path="res://demo/assets/Rock_07.fbx" id="24_llj7g"]
+[ext_resource type="PackedScene" uid="uid://bu0erudwemt17" path="res://demo/assets/Rock_08.fbx" id="25_udnt4"]
+[ext_resource type="PackedScene" uid="uid://bxg40mla0hemf" path="res://demo/assets/Rock_09.fbx" id="26_6r5v3"]
+[ext_resource type="PackedScene" uid="uid://chd5il1eqwhef" path="res://demo/assets/Rock_10.fbx" id="27_xwcan"]
+[ext_resource type="PackedScene" uid="uid://chwvehxnm5sjd" path="res://demo/assets/Rock_12.fbx" id="29_j7lid"]
+[ext_resource type="PackedScene" uid="uid://b3wmfffwfqdr5" path="res://demo/assets/Rock_13.fbx" id="30_7lrsc"]
+[ext_resource type="PackedScene" uid="uid://i24x1xlqth3x" path="res://demo/assets/Rock_14.fbx" id="31_kt2mu"]
+[ext_resource type="PackedScene" uid="uid://bceyudm7iw6nr" path="res://demo/assets/Rock_15.fbx" id="32_pcuwi"]
+[ext_resource type="PackedScene" uid="uid://b2htw2xvffvye" path="res://demo/assets/earth_impact.glb" id="33_1im6i"]
+[ext_resource type="PackedScene" uid="uid://7u1qc3y84jbe" path="res://demo/assets/pillar.glb" id="34_va2jg"]
+[ext_resource type="PackedScene" uid="uid://cd3ekr61iqju3" path="res://demo/assets/pillar_fractured.glb" id="35_jnsao"]
+[ext_resource type="PackedScene" uid="uid://d0gk8sxc4ilal" path="res://demo/assets/rock_1.glb" id="36_tfvu0"]
+[ext_resource type="PackedScene" uid="uid://ck53lndhlklvp" path="res://demo/assets/rock_2_fractured.glb" id="37_4uvef"]
+[ext_resource type="PackedScene" uid="uid://ec1dfcde5g6n" path="res://demo/assets/small_fraactures.glb" id="38_y7yhx"]
+[ext_resource type="PackedScene" uid="uid://cqa7ue7ivlklj" path="res://demo/assets/thin_wall_fractured.glb" id="39_i0mrx"]
+[ext_resource type="PackedScene" uid="uid://sas7j2dyfkr3" path="res://demo/demo.tscn" id="40_dyvwd"]
 
 [sub_resource type="Resource" id="Resource_eav4o"]
 script = ExtResource("1_e4lis")
@@ -21,8 +56,191 @@ script = ExtResource("1_e4lis")
 scene = ExtResource("4_eav4o")
 name = "sphere.tscn"
 
+[sub_resource type="Resource" id="Resource_n30m8"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("5_5b1m7")
+name = "ForestRock1.glb"
+
+[sub_resource type="Resource" id="Resource_xd2xt"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("6_3eep0")
+name = "ForestRock2.glb"
+
+[sub_resource type="Resource" id="Resource_xgeyg"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("7_n30m8")
+name = "ForestRock3.glb"
+
+[sub_resource type="Resource" id="Resource_3andj"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("8_xd2xt")
+name = "ForestRock4.glb"
+
+[sub_resource type="Resource" id="Resource_miew2"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("9_xgeyg")
+name = "ForestRockCluster1.glb"
+
+[sub_resource type="Resource" id="Resource_f85b6"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("10_3andj")
+name = "ForestRockCluster2.glb"
+
+[sub_resource type="Resource" id="Resource_bx31r"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("11_miew2")
+name = "JaggedRock1.glb"
+
+[sub_resource type="Resource" id="Resource_ll0h4"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("12_f85b6")
+name = "JaggedRock2.glb"
+
+[sub_resource type="Resource" id="Resource_n5a4n"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("13_bx31r")
+name = "JaggedRock3.glb"
+
+[sub_resource type="Resource" id="Resource_c4prj"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("14_ll0h4")
+name = "JaggedRock4.glb"
+
+[sub_resource type="Resource" id="Resource_t6u8d"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("15_n5a4n")
+name = "LandscapeRock1.glb"
+
+[sub_resource type="Resource" id="Resource_vdss7"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("16_c4prj")
+name = "LandscapeRock2.glb"
+
+[sub_resource type="Resource" id="Resource_ad0sa"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("17_t6u8d")
+name = "LandscapeRock3.glb"
+
+[sub_resource type="Resource" id="Resource_wo8yd"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("18_vdss7")
+name = "Rock_01.fbx"
+
+[sub_resource type="Resource" id="Resource_6j62n"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("19_ad0sa")
+name = "Rock_02.fbx"
+
+[sub_resource type="Resource" id="Resource_1qpx2"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("20_wo8yd")
+name = "Rock_03.fbx"
+
+[sub_resource type="Resource" id="Resource_rb0vk"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("21_6j62n")
+name = "Rock_04.fbx"
+
+[sub_resource type="Resource" id="Resource_llj7g"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("22_1qpx2")
+name = "Rock_05.fbx"
+
+[sub_resource type="Resource" id="Resource_udnt4"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("23_rb0vk")
+name = "Rock_06.fbx"
+
+[sub_resource type="Resource" id="Resource_6r5v3"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("24_llj7g")
+name = "Rock_07.fbx"
+
+[sub_resource type="Resource" id="Resource_xwcan"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("25_udnt4")
+name = "Rock_08.fbx"
+
+[sub_resource type="Resource" id="Resource_y5aec"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("26_6r5v3")
+name = "Rock_09.fbx"
+
+[sub_resource type="Resource" id="Resource_j7lid"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("27_xwcan")
+name = "Rock_10.fbx"
+
+[sub_resource type="Resource" id="Resource_6aax4"]
+metadata/__load_path__ = "res://demo/assets/Rock_11.fbx"
+
+[sub_resource type="Resource" id="Resource_7lrsc"]
+script = ExtResource("1_e4lis")
+scene = SubResource("Resource_6aax4")
+name = "Rock_11.fbx"
+
+[sub_resource type="Resource" id="Resource_kt2mu"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("29_j7lid")
+name = "Rock_12.fbx"
+
+[sub_resource type="Resource" id="Resource_pcuwi"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("30_7lrsc")
+name = "Rock_13.fbx"
+
+[sub_resource type="Resource" id="Resource_1im6i"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("31_kt2mu")
+name = "Rock_14.fbx"
+
+[sub_resource type="Resource" id="Resource_va2jg"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("32_pcuwi")
+name = "Rock_15.fbx"
+
+[sub_resource type="Resource" id="Resource_jnsao"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("33_1im6i")
+name = "earth_impact.glb"
+
+[sub_resource type="Resource" id="Resource_tfvu0"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("34_va2jg")
+name = "pillar.glb"
+
+[sub_resource type="Resource" id="Resource_4uvef"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("35_jnsao")
+name = "pillar_fractured.glb"
+
+[sub_resource type="Resource" id="Resource_y7yhx"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("36_tfvu0")
+name = "rock_1.glb"
+
+[sub_resource type="Resource" id="Resource_i0mrx"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("37_4uvef")
+name = "rock_2_fractured.glb"
+
+[sub_resource type="Resource" id="Resource_dyvwd"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("38_y7yhx")
+name = "small_fraactures.glb"
+
+[sub_resource type="Resource" id="Resource_7wpqt"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("39_i0mrx")
+name = "thin_wall_fractured.glb"
+
+[sub_resource type="Resource" id="Resource_uo1n8"]
+script = ExtResource("1_e4lis")
+scene = ExtResource("40_dyvwd")
+name = "demo.tscn"
+
 [resource]
 script = ExtResource("2_p2yon")
-folders = Array[StringName]([&"res://demo/assets"])
-items = Array[ExtResource("1_e4lis")]([SubResource("Resource_eav4o"), SubResource("Resource_5b1m7"), SubResource("Resource_3eep0")])
+folders = Array[String](["res://demo/assets"])
+items = Array[ExtResource("1_e4lis")]([SubResource("Resource_eav4o"), SubResource("Resource_5b1m7"), SubResource("Resource_3eep0"), SubResource("Resource_n30m8"), SubResource("Resource_xd2xt"), SubResource("Resource_xgeyg"), SubResource("Resource_3andj"), SubResource("Resource_miew2"), SubResource("Resource_f85b6"), SubResource("Resource_bx31r"), SubResource("Resource_ll0h4"), SubResource("Resource_n5a4n"), SubResource("Resource_c4prj"), SubResource("Resource_t6u8d"), SubResource("Resource_vdss7"), SubResource("Resource_ad0sa"), SubResource("Resource_wo8yd"), SubResource("Resource_6j62n"), SubResource("Resource_1qpx2"), SubResource("Resource_rb0vk"), SubResource("Resource_llj7g"), SubResource("Resource_udnt4"), SubResource("Resource_6r5v3"), SubResource("Resource_xwcan"), SubResource("Resource_y5aec"), SubResource("Resource_j7lid"), SubResource("Resource_7lrsc"), SubResource("Resource_kt2mu"), SubResource("Resource_pcuwi"), SubResource("Resource_1im6i"), SubResource("Resource_va2jg"), SubResource("Resource_jnsao"), SubResource("Resource_tfvu0"), SubResource("Resource_4uvef"), SubResource("Resource_y7yhx"), SubResource("Resource_i0mrx"), SubResource("Resource_dyvwd"), SubResource("Resource_7wpqt"), SubResource("Resource_uo1n8")])
 metadata/_custom_type_script = "uid://c7nn0sp4y58cq"

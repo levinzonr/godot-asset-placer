@@ -2,7 +2,7 @@
 extends Resource
 class_name AssetLibrary
 
-@export var folders: Array[StringName]
+@export var folders: Array[String]
 
 @export var items: Array[AssetResource] = []:
 	set(value):

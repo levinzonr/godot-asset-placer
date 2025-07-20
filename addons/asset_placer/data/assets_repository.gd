@@ -19,6 +19,7 @@ func add_asset(scene_path: String):
 	print("Adding asset " + scene_path)
 	var asset = AssetResource.new()
 	var loaded_scene: PackedScene = load(scene_path)
+	loaded_scene.is_queued_for_deletion()
 	var segments = scene_path.split("/")
 	
 	var file_name = segments.get(segments.size() - 1)

@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://4jjhsl7nom4c"]
+
+[ext_resource type="Script" uid="uid://tkdl83npcow1" path="res://addons/asset_placer/ui/folders_window/folders_window.gd" id="1_umbsx"]
+[ext_resource type="Script" uid="uid://b1evllvhpb7y4" path="res://addons/asset_placer/ui/components/system_button.gd" id="2_1gh27"]
+
+[sub_resource type="SVGTexture" id="SVGTexture_ojff7"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><g fill=\"#fff\" transform=\"scale(.01563)\"><path d=\"M105 673v33q407 354 814 0v-33z\"/><path fill=\"#478cbf\" d=\"m105 673 152 14q12 1 15 14l4 67 132 10 8-61q2-11 15-15h162q13 4 15 15l8 61 132-10 4-67q3-13 15-14l152-14V427q30-39 56-81-35-59-83-108-43 20-82 47-40-37-88-64 7-51 8-102-59-28-123-42-26 43-46 89-49-7-98 0-20-46-46-89-64 14-123 42 1 51 8 102-48 27-88 64-39-27-82-47-48 49-83 108 26 42 56 81zm0 33v39c0 276 813 276 814 0v-39l-134 12-5 69q-2 10-14 13l-162 11q-12 0-16-11l-10-65H446l-10 65q-4 11-16 11l-162-11q-12-3-14-13l-5-69z\"/><path d=\"M483 600c0 34 58 34 58 0v-86c0-34-58-34-58 0z\"/><circle cx=\"725\" cy=\"526\" r=\"90\"/><circle cx=\"299\" cy=\"526\" r=\"90\"/></g><g fill=\"#414042\" transform=\"scale(.01563)\"><circle cx=\"307\" cy=\"532\" r=\"60\"/><circle cx=\"717\" cy=\"532\" r=\"60\"/></g></svg>
+"
+base_scale = 1.75
+
+[node name="FoldersWindow" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_umbsx")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/MarginContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="AddFolderButton" type="Button" parent="Panel/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Godot"
+icon = SubResource("SVGTexture_ojff7")
+script = ExtResource("2_1gh27")
+icon_type = 3
+metadata/_custom_type_script = "uid://b1evllvhpb7y4"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2

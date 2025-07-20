@@ -22,6 +22,13 @@ func on_ready():
 func add_asset_folder(path: String):
 	folder_repository.add(path)
 
+func on_query_change(query: String):
+	var assets = assets_repository.get_all_assets()
+	if query.is_empty():
+		assets_loaded.emit(assets)
+	else:
+		var filtered = assets.filter(func(item: AssetResource): return item.name.contains(query))
+		assets_loaded.emit(filtered)
 
 func sync():
 	for folder in folder_repository.get_all():
@@ -34,4 +41,4 @@ func sync():
 			
 
 func is_file_supported(file: String)	->  bool:
-	return file.ends_with(".tscn") || file.ends_with(".glb")
+	return file.ends_with(".tscn") || file.ends_with(".glb") || file.ends_with(".fbx")

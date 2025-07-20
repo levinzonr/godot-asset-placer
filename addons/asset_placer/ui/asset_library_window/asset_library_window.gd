@@ -7,6 +7,7 @@ class_name AssetLibraryWindow
 @onready var preview_resource = preload("res://addons/asset_placer/ui/components/asset_resource_preview.tscn")
 @onready var add_folder_button: Button = %AddFolderButton
 @onready var sync_button: Button = %SyncButton
+@onready var search_field: LineEdit = %SearchField
 
 signal asset_selected(asset: AssetResource)
 
@@ -16,6 +17,7 @@ func _ready():
 	presenter.on_ready()
 	add_folder_button.pressed.connect(show_folder_dialog)
 	sync_button.pressed.connect(presenter.sync)
+	search_field.text_changed.connect(presenter.on_query_change)
 	
 func show_assets(assets: Array[AssetResource]):
 	for child in grid_container.get_children():

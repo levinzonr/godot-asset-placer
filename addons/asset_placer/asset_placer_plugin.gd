@@ -4,7 +4,7 @@ extends EditorPlugin
 
 @onready var  _asset_placer: AssetPlacer = AssetPlacer.new()
 
-var _asset_placer_window: AssetLibraryWindow
+var _asset_placer_window: AssetLibraryPanel
 
 var plugin_path: String:
 	get(): return get_script().resource_path.get_base_dir()
@@ -15,10 +15,14 @@ func _enable_plugin():
 	
 func _disable_plugin():
 	pass
+	
 func _enter_tree():
-	_asset_placer_window= load("res://addons/asset_placer/ui/asset_library_window.tscn").instantiate()
+	_asset_placer_window = load("res://addons/asset_placer/ui/asset_library_panel.tscn").instantiate()
 	add_control_to_bottom_panel(_asset_placer_window, "Asset Placer")
-	_asset_placer_window.asset_selected.connect(func(asset):
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_asset_placer_window.asset_library_window.asset_selected.connect(func(asset):
 		_asset_placer.start_placement(get_tree().root, asset)
 	)
 
@@ -29,6 +33,7 @@ func _exit_tree():
 
 func _handles(object):
 	return true
+
 
 
 func _forward_3d_gui_input(viewport_camera, event):
