@@ -3,6 +3,7 @@
 [sub_resource type="BoxMesh" id="BoxMesh_h3i25"]
 
 [node name="AnotherCube" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4867587, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_h3i25")

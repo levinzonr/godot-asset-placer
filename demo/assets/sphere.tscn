@@ -6,6 +6,7 @@
 albedo_color = Color(1, 0.9490196, 0, 1)
 
 [node name="Sphere" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4511541, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_lavwk")

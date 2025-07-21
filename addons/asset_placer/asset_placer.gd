@@ -28,10 +28,10 @@ func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
 			params.from = ray_origin
 			params.to = ray_origin + ray_dir * 1000
 			var result = space_state.intersect_ray(params)
-			if result:
-				var offset_y = preview_aabb.position.y + preview_aabb.size.y
-				preview_node.global_transform.origin = result.position + Vector3(0, offset_y, 0)
-				preview_node.visible = true
+			if result: 
+				var snapped_pos = result.position
+				var base_y = preview_aabb.position.y
+				preview_node.global_transform.origin = snapped_pos - Vector3(0, base_y, 0)
 
 
 		elif event is InputEventMouseButton and event.pressed:
@@ -68,24 +68,22 @@ func pause_placement():
 func resume_placement():
 	if preview_node:
 		preview_node.show()	
-		
+
 func _get_combined_aabb(root: Node3D) -> AABB:
 	var aabb := AABB()
 	var first = true
 
-	for child in root.get_children():
-		if child is MeshInstance3D:
-			var mesh: Mesh = child.mesh
-			if mesh:
-				var local_aabb: AABB = mesh.get_aabb()
-				local_aabb = transform_aabb(local_aabb, child.global_transform)
-				if first:
-					aabb = local_aabb
-					first = false
-				else:
-					aabb = aabb.merge(local_aabb)
+	# Include root if it is a MeshInstance3D
+	if root is MeshInstance3D:
+		var mesh: Mesh = root.mesh
+		if mesh:
+			var local_aabb: AABB = mesh.get_aabb()
+			# Use transform instead of global_transform
+			local_aabb = transform_aabb(local_aabb, root.transform)
+			aabb = local_aabb
+			first = false
 
-		# Recursively include nested children
+	for child in root.get_children():
 		if child is Node3D:
 			var sub_aabb = _get_combined_aabb(child)
 			if !first:
