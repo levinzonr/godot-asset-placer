@@ -17,6 +17,7 @@ func start_placement(root: Window, asset: AssetResource):
 		EditorInterface.get_selection().add_node(scene)
 	
 func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
+	
 	if  preview_node:
 		if event is InputEventMouseMotion:
 			var ray_origin = camera.project_ray_origin(event.position)
@@ -52,6 +53,7 @@ func _place_instance(transform: Transform3D):
 		EditorInterface.get_selection().clear()
 		EditorInterface.get_selection().add_node(new_node)
 		print("Asset placed")
+		stop_placement()
 	
 func stop_placement():
 	self.asset = null

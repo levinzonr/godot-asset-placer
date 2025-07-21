@@ -2,7 +2,7 @@
 extends TextureRect
 class_name AssetThumbnail
 
-@export var resource: AssetResource
+var resource: AssetResource
 var previewer: EditorResourcePreview
 var last_time_modified = 0
 

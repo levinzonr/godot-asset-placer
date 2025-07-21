@@ -58,10 +58,16 @@ transform = Transform3D(-0.009285003, 0, 0.9999569, 0, 1, 0, -0.9999569, 0, -0.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9218931, 0.9726453, -7.5610223)
 
 [node name="ForestRock22" parent="." instance=ExtResource("6_onvmd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.604866, 1.2811966, -5.659626)
+transform = Transform3D(0.11816137, 0, -0.9929944, 0, 1, 0, 0.9929944, 0, 0.11816137, 7.8605304, 1.42609, -7.6003447)
 
 [node name="thin_wall_fractured" parent="." instance=ExtResource("7_oeqrt")]
-transform = Transform3D(-0.49488252, 0, 0.8689599, 0, 1, 0, -0.8689599, 0, -0.49488252, -5.1827426, 0.3309797, 13.523483)
+transform = Transform3D(-0.49488252, 0, 0.8689599, 0, 1, 0, -0.8689599, 0, -0.49488252, -8.847445, 0.5082774, -5.902891)
 
-[node name="@Node3D@28085" type="Node3D" parent="." instance=ExtResource("1_ytiva")]
+[node name="@Node3D@28085" parent="." instance=ExtResource("1_ytiva")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9499774, 0.9687026, -6.4501224)
+
+[node name="@Node3D@27639" type="Node3D" parent="." instance=ExtResource("6_onvmd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3924551, 1.2811966, -10.354879)
+
+[node name="@Node3D@28396" type="Node3D" parent="." instance=ExtResource("6_onvmd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.686036, 1.42609, -9.6543)
