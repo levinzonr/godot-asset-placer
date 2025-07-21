@@ -1,11 +1,11 @@
 @tool
-extends Resource
+extends RefCounted
 class_name AssetLibrary
 
-@export var folders: Array[String]
+var folders: Array[AssetFolder] = []
+var items: Array[AssetResource] = []
 
-@export var items: Array[AssetResource] = []:
-	set(value):
-		print("Change")
-		items = value
-		changed.emit()
+
+func _init(items: Array[AssetResource], folders: Array[AssetFolder]):
+	self.folders = folders
+	self.items = items

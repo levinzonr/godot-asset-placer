@@ -4,20 +4,19 @@ class_name AssetLibraryPresenter
 var library: AssetLibrary
 var folder_repository: FolderRepository
 var assets_repository: AssetsRepository
+var synchronizer: Synchronize
 
 signal assets_loaded(assets: Array[AssetResource])
 
 func _init():
-	self.library = load("res://addons/asset_placer/data/asset_library.tres")
-	self.folder_repository = FolderRepository.new(library)
-	self.assets_repository = AssetsRepository.new(library)
-	library.changed.connect(func(): 
-		print("Changes in library")
-		self.assets_loaded.emit(self.assets_repository.get_all_assets())
-	)
+	self.folder_repository = FolderRepository.new()
+	self.assets_repository = AssetsRepository.new()
+	self.synchronizer = Synchronize.new(self.folder_repository, self.assets_repository)
+	
 
 func on_ready():
-	assets_loaded.emit(library.items)
+	var assets = assets_repository.get_all_assets()
+	assets_loaded.emit(assets)
 
 func add_asset_folder(path: String):
 	folder_repository.add(path)
@@ -31,14 +30,6 @@ func on_query_change(query: String):
 		assets_loaded.emit(filtered)
 
 func sync():
-	for folder in folder_repository.get_all():
-		var dir = DirAccess.open(folder)
-		for file in dir.get_files():
-			if is_file_supported(file):
-				var path = folder + "/" + file
-				assets_repository.add_asset(path)
+	synchronizer.sync_all()
 				
 			
-
-func is_file_supported(file: String)	->  bool:
-	return file.ends_with(".tscn") || file.ends_with(".glb") || file.ends_with(".fbx")

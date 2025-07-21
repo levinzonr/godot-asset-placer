@@ -1,15 +1,16 @@
 extends RefCounted
 class_name FolderPresenter
 
-signal folders_loaded(folder: Array[String])
+signal folders_loaded(folder: Array[AssetFolder])
 
 var folder_repository: FolderRepository
 var asset_repository: AssetsRepository
+var sync: Synchronize
 
 func _init():
-	var lib = load("res://addons/asset_placer/data/asset_library.tres")
-	self.folder_repository = FolderRepository.new(lib)
-	self.asset_repository = AssetsRepository.new(lib)
+	self.folder_repository = FolderRepository.new()
+	self.asset_repository = AssetsRepository.new()
+	self.sync = Synchronize.new(self.folder_repository, self.asset_repository)
 
 
 func _ready():
@@ -21,16 +22,15 @@ func _ready():
 	)
 
 
-func delete_folder(folder: String):
-	folder_repository.delete(folder)
+func delete_folder(folder: AssetFolder):
+	folder_repository.delete(folder.path)
 
-func sync_folder(folder: String):
-	var dir = DirAccess.open(folder)
-	for file in dir.get_files():
-		if is_file_supported(file):
-			var path = folder + "/" + file
-			asset_repository.add_asset(path)
+func sync_folder(folder: AssetFolder):
+	sync.sync_folder(folder)
 
+func include_subfolders(include: bool, folder: AssetFolder):
+	folder.include_subfolders = include
+	folder_repository.update(folder)
 
 func add_folder(folder: String):
 	folder_repository.add(folder)	

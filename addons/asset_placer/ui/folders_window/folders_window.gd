@@ -17,7 +17,7 @@ func _ready():
 	)
 	
 
-func show_folders(folders: Array[String]):
+func show_folders(folders: Array[AssetFolder]):
 	print("Show filders")
 	for child in v_box_container.get_children():
 		child.queue_free()
@@ -28,6 +28,9 @@ func show_folders(folders: Array[String]):
 		instance.set_folder(folder)
 		instance.folder_delete_clicked.connect(func():
 			presenter.delete_folder(folder)
+		)
+		instance.folder_include_subfloders_change.connect(func(include):
+			presenter.include_subfolders(include, folder)
 		)
 		instance.folder_sync_clicked.connect(func():
 			presenter.sync_folder(folder)

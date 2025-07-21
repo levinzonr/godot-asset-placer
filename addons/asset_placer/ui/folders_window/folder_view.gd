@@ -24,5 +24,6 @@ func _ready():
 		folder_include_subfloders_change.emit(toggled)
 	)
 
-func set_folder(folder: String):
-	path_label.text = folder
+func set_folder(folder: AssetFolder):
+	path_label.text = folder.path
+	subfolders_checkbox.button_pressed = folder.include_subfolders
