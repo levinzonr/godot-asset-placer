@@ -1,12 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://sas7j2dyfkr3"]
-
-[ext_resource type="PackedScene" uid="uid://c55qvy8fdcxsd" path="res://demo/assets/sphere.tscn" id="1_ytiva"]
-[ext_resource type="PackedScene" uid="uid://dnjrvjljdl02" path="res://demo/assets/cube.tscn" id="2_dar0o"]
-[ext_resource type="PackedScene" uid="uid://1hx47t5c3wpf" path="res://demo/assets/rock.glb" id="3_dar0o"]
-[ext_resource type="PackedScene" uid="uid://ukx3omtlce8n" path="res://demo/assets/subfloder/another_cube.tscn" id="4_j5lb4"]
-[ext_resource type="PackedScene" uid="uid://gwihxo1nnefo" path="res://demo/assets/ForestRock1.glb" id="5_s1s6j"]
-[ext_resource type="PackedScene" uid="uid://b8p1iy52py3xm" path="res://demo/assets/ForestRock2.glb" id="6_onvmd"]
-[ext_resource type="PackedScene" uid="uid://cqa7ue7ivlklj" path="res://demo/assets/thin_wall_fractured.glb" id="7_oeqrt"]
+[gd_scene load_steps=6 format=3 uid="uid://sas7j2dyfkr3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hjng"]
 size = Vector3(100, 0.1, 100)
@@ -36,24 +28,3 @@ shape = SubResource("BoxShape3D_5hjng")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00016975403, 0, 0)
 mesh = SubResource("PlaneMesh_d6po2")
-
-[node name="Sphere" parent="." instance=ExtResource("1_ytiva")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9506674, 0.96870327, -0.91022784)
-
-[node name="Cube" parent="." instance=ExtResource("2_dar0o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.712393, 0.96870303, 2.9950945)
-
-[node name="rock" parent="." instance=ExtResource("3_dar0o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95829, 0.7800375, -3.5067384)
-
-[node name="ForestRock22" parent="." instance=ExtResource("6_onvmd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0161495, 1.4260898, 22.781675)
-
-[node name="ForestRock12" parent="." instance=ExtResource("5_s1s6j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.6079067, 25)
-
-[node name="thin_wall_fractured" parent="." instance=ExtResource("7_oeqrt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.039574265, 22)
-
-[node name="AnotherCube" parent="." instance=ExtResource("4_j5lb4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.5, 19)
