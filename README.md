@@ -13,6 +13,8 @@ This is Godot Editor plugin that allows for quick asset placement and management
 
 ![addon_preview.png](docs/addon_preview.png)
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ffRDdsYeiqM" frameborder="0" allowfullscreen></iframe>
+
 
 
 # Installation
