@@ -11,13 +11,15 @@ This is Godot Editor plugin that allows for quick asset placement and management
 - Organize Assets into collections for quick access and filtering
 - Filter Assets by their name and collection
 
-![addon_preview.png](docs/addon_preview.png)
-
 <p align="center">
   <a href="https://youtu.be/ffRDdsYeiqM" target="_blank">
     <img src="https://img.youtube.com/vi/ffRDdsYeiqM/0.jpg" alt="YouTube Video" />
   </a>
 </p>
+
+![addon_preview.png](docs/addon_preview.png)
+
+
 
 
 
