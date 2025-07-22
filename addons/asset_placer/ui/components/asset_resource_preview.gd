@@ -2,7 +2,8 @@
 extends Control
 class_name  AssetResourcePreview
 
-signal clicked(asset: AssetResource)
+signal left_clicked(asset: AssetResource)
+signal right_clicked(asset: AssetResource)
 
 @onready var label = %Label
 @onready var asset_thumbnail = %AssetThumbnail
@@ -20,4 +21,7 @@ func set_asset(asset: AssetResource):
 func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			clicked.emit(resource)
+			left_clicked.emit(resource)
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			right_clicked.emit(resource)
+			

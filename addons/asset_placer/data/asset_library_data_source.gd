@@ -5,15 +5,17 @@ var _asset_lib_json := "user://asset_library.json"
 
 func get_library() -> AssetLibrary:
 	var file = FileAccess.open(_asset_lib_json, FileAccess.READ)
-	if file == null:
-		return AssetLibrary.new([], [])
+	if file == null || file.get_as_text().is_empty():
+		return AssetLibrary.new([], [], [])
 	else:
 		var data = JSON.parse_string(file.get_as_text())
 		var folders_dicts: Array = data["folders"]
 		var assets_dicts: Array = data["assets"]
+		var collections_dict: Array = data["collections"]
 		
 		var folders: Array[AssetFolder]
 		var assets: Array[AssetResource]
+		var collections: Array[AssetCollection]
 		
 		for folder_dict in folders_dicts:
 			var path = folder_dict["path"]
@@ -24,17 +26,31 @@ func get_library() -> AssetLibrary:
 		for asset_dict in assets_dicts:
 			var name = asset_dict["name"]
 			var id = asset_dict["id"]
+			var dict = asset_dict as Dictionary
+			var tags: Array[String] = []
+			if dict.has("tags"):
+				var raw_tags = dict["tags"]
+				for tag in raw_tags:
+					tags.append(tag)
 			var scene = load(id)
-			var asset = AssetResource.new(scene, name)
+			var asset = AssetResource.new(scene, name, tags)
 			assets.append(asset)
+		
+		for collection_dict in collections_dict:
+			var name =collection_dict["name"]
+			var color_string: String = collection_dict["color"]
+			var color = Color.from_string(color_string, Color.AQUA)
+			collections.append(AssetCollection.new(name, color))
+			
 		file.close()
-		return AssetLibrary.new(assets, folders)
+		return AssetLibrary.new(assets, folders, collections)
 		
 	
 func save_libray(library: AssetLibrary):	
 	if library:
 		var assets_dict : Array[Dictionary] = []
-		var folders_dict: Array[Dictionary] = [] 
+		var folders_dict: Array[Dictionary] = []
+		var collections_dict: Array[Dictionary] = []
 		
 		for folder in library.folders:
 			folders_dict.append({
@@ -45,12 +61,20 @@ func save_libray(library: AssetLibrary):
 		for asset in library.items:
 			assets_dict.append({
 				"name": asset.name,
-				"id": ResourceUID.path_to_uid(asset.scene.resource_path)
+				"id": asset.id,
+				"tags": asset.tags
 			})
+		
+		for collection in library.collections:
+			collections_dict.append({
+				"name": collection.name,
+				"color": collection.backgroundColor.to_html()
+			})	
 		
 		var lib_dict = {
 			"assets": assets_dict,
-			"folders": folders_dict
+			"folders": folders_dict,
+			"collections": collections_dict
 		}
 		
 		var json = JSON.stringify(lib_dict)
