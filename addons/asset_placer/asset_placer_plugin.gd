@@ -37,6 +37,7 @@ func _exit_tree():
 func _handles(object):
 	return true
 
+	
 
 func start_placement(asset: AssetResource):
 	_asset_placer.start_placement(get_tree().root, asset)

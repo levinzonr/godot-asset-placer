@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://3qun24bndqll"]
+[gd_scene load_steps=7 format=3 uid="uid://3qun24bndqll"]
 
 [ext_resource type="Script" uid="uid://d3hm5bn8vmd2" path="res://addons/asset_placer/ui/asset_library_window/asset_library_window.gd" id="1_l06eo"]
 [ext_resource type="Script" uid="uid://b1evllvhpb7y4" path="res://addons/asset_placer/ui/components/system_button.gd" id="2_1vfrr"]
+[ext_resource type="PackedScene" uid="uid://dua2vx4bi1gmf" path="res://addons/asset_placer/ui/asset_placer_options/asset_placer_options.tscn" id="2_qx6qk"]
 
 [sub_resource type="SVGTexture" id="SVGTexture_yqak7"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"m7 1c-.554 0-1 .446-1 1v2h4v-2c0-.554-.446-1-1-1zm-1 4v7l2 3 2-3v-7zm1 1h1v5h-1z\"/></svg>
@@ -54,41 +55,54 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AssetPlacerOptions" parent="Panel/HBoxContainer" instance=ExtResource("2_qx6qk")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.34
+localize_numeral_system = false
+
+[node name="VSeparator" type="VSeparator" parent="Panel/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 2
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 36
-text = "Asset Placer"
+text = "Assets"
 
-[node name="SearchField" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SearchField" type="LineEdit" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 placeholder_text = "Filter assets"
 
-[node name="FilterButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="FilterButton" type="Button" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Edit"
@@ -97,7 +111,7 @@ script = ExtResource("2_1vfrr")
 icon_type = 6
 metadata/_custom_type_script = "uid://b1evllvhpb7y4"
 
-[node name="SyncButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SyncButton" type="Button" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Reload"
@@ -106,7 +120,7 @@ script = ExtResource("2_1vfrr")
 icon_type = 1
 metadata/_custom_type_script = "uid://b1evllvhpb7y4"
 
-[node name="AddFolderButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="AddFolderButton" type="Button" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "FolderCreate"
@@ -115,11 +129,11 @@ script = ExtResource("2_1vfrr")
 icon_type = 3
 metadata/_custom_type_script = "uid://b1evllvhpb7y4"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2

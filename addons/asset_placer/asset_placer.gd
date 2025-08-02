@@ -14,8 +14,13 @@ func start_placement(root: Window, asset: AssetResource):
 	var scene = EditorInterface.get_edited_scene_root()
 	if scene is Node3D:
 		EditorInterface.get_selection().add_node(scene)
+		preview_node.global_transform = AssetTransformations.transform_rotation(preview_node.global_transform, AssetPlacerPresenter._instance.options)
+		
 	
 func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
+	
+	if EditorInterface.get_edited_scene_root() is not Node3D:
+		stop_placement()
 	
 	if  preview_node:
 		if event is InputEventMouseMotion:
@@ -28,7 +33,7 @@ func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
 			params.to = ray_origin + ray_dir * 1000
 			var result = space_state.intersect_ray(params)
 			if result: 
-				var snapped_pos = result.position
+				var snapped_pos = _snap_position(result.position)
 				var base_y = preview_aabb.position.y
 				preview_node.global_transform.origin = snapped_pos - Vector3(0, base_y, 0)
 
@@ -39,7 +44,15 @@ func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
 
 	return false
 	
-	
+func _snap_position(pos: Vector3):
+	if !AssetPlacerPresenter._instance.options.snapping_enabled:
+		return pos
+	var grid_step: float = AssetPlacerPresenter._instance.options.snapping_grid_step
+	return Vector3(
+		round(pos.x / grid_step) * grid_step,
+		round(pos.y / grid_step) * grid_step,
+		round(pos.z / grid_step) * grid_step
+	)
 	
 func _place_instance(transform: Transform3D):
 	var scene_root = EditorInterface.get_edited_scene_root()
@@ -50,10 +63,11 @@ func _place_instance(transform: Transform3D):
 		new_node.owner = scene_root
 		EditorInterface.get_selection().clear()
 		EditorInterface.get_selection().add_node(new_node)
-		stop_placement()
+		preview_node.global_transform = AssetTransformations.transform_rotation(preview_node.global_transform, AssetPlacerPresenter._instance.options)
 	
 func stop_placement():
 	self.asset = null
+	AssetPlacerPresenter._instance.select_asset(null)
 	if preview_node:
 		preview_node.queue_free()
 		preview_node = null
