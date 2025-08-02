@@ -4,28 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://d38742thvyt85" path="res://icon.svg" id="2_55ohh"]
 [ext_resource type="Script" uid="uid://dephufwlu765k" path="res://addons/asset_placer/ui/components/asset_thumbnail.gd" id="2_xdgah"]
 
-[node name="AssetResourcePreview" type="Control"]
+[node name="AssetResourcePreview" type="Button"]
 custom_minimum_size = Vector2(150, 250)
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -832.0
-offset_bottom = -328.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 150.0
+offset_bottom = 250.0
+theme_type_variation = &"FlatButton"
+toggle_mode = true
 script = ExtResource("1_q3676")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,7 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AssetThumbnail" type="TextureRect" parent="Panel/VBoxContainer"]
+[node name="AssetThumbnail" type="TextureRect" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("2_55ohh")
@@ -41,7 +28,7 @@ stretch_mode = 3
 script = ExtResource("2_xdgah")
 metadata/_custom_type_script = "uid://dephufwlu765k"
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 2

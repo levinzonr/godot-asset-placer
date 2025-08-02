@@ -17,6 +17,8 @@ signal asset_selected(asset: AssetResource)
 
 func _ready():
 	presenter.assets_loaded.connect(show_assets)
+	AssetPlacerPresenter._instance.asset_selected.connect(set_selected_asset)
+	AssetPlacerPresenter._instance.asset_deselcted.connect(clear_selected_asset)
 	presenter.on_ready()
 	add_folder_button.pressed.connect(show_folder_dialog)
 	sync_button.pressed.connect(presenter.sync)
@@ -36,8 +38,9 @@ func show_assets(assets: Array[AssetResource]):
 		child.queue_free()
 	for asset in assets:
 		var child: AssetResourcePreview = preview_resource.instantiate()
-		child.left_clicked.connect(func(a): asset_selected.emit(a))
+		child.left_clicked.connect(AssetPlacerPresenter._instance.select_asset)
 		child.right_clicked.connect(show_asset_menu)
+		child.set_meta("id", asset.id)
 		grid_container.add_child(child)
 		child.set_asset(asset)
 
@@ -61,3 +64,14 @@ func show_folder_dialog():
 	folder_dialog.access = EditorFileDialog.ACCESS_RESOURCES
 	folder_dialog.dir_selected.connect(presenter.add_asset_folder)
 	EditorInterface.popup_dialog_centered(folder_dialog)
+
+
+func clear_selected_asset():
+	for child in grid_container.get_children():
+		if child is Button:
+			child.set_pressed_no_signal(false)
+
+func set_selected_asset(asset: AssetResource):
+	for child in grid_container.get_children():
+		if child is Button:
+			child.set_pressed_no_signal(child.get_meta("id") == asset.id)

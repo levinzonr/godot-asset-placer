@@ -3,13 +3,8 @@
 [ext_resource type="Script" uid="uid://d3hm5bn8vmd2" path="res://addons/asset_placer/ui/asset_library_window/asset_library_window.gd" id="1_l06eo"]
 [ext_resource type="Script" uid="uid://b1evllvhpb7y4" path="res://addons/asset_placer/ui/components/system_button.gd" id="2_1vfrr"]
 
-[sub_resource type="SVGTexture" id="SVGTexture_x040h"]
-_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><g fill=\"#fff\" transform=\"scale(.01563)\"><path d=\"M105 673v33q407 354 814 0v-33z\"/><path fill=\"#478cbf\" d=\"m105 673 152 14q12 1 15 14l4 67 132 10 8-61q2-11 15-15h162q13 4 15 15l8 61 132-10 4-67q3-13 15-14l152-14V427q30-39 56-81-35-59-83-108-43 20-82 47-40-37-88-64 7-51 8-102-59-28-123-42-26 43-46 89-49-7-98 0-20-46-46-89-64 14-123 42 1 51 8 102-48 27-88 64-39-27-82-47-48 49-83 108 26 42 56 81zm0 33v39c0 276 813 276 814 0v-39l-134 12-5 69q-2 10-14 13l-162 11q-12 0-16-11l-10-65H446l-10 65q-4 11-16 11l-162-11q-12-3-14-13l-5-69z\"/><path d=\"M483 600c0 34 58 34 58 0v-86c0-34-58-34-58 0z\"/><circle cx=\"725\" cy=\"526\" r=\"90\"/><circle cx=\"299\" cy=\"526\" r=\"90\"/></g><g fill=\"#414042\" transform=\"scale(.01563)\"><circle cx=\"307\" cy=\"532\" r=\"60\"/><circle cx=\"717\" cy=\"532\" r=\"60\"/></g></svg>
-"
-base_scale = 1.75
-
 [sub_resource type="SVGTexture" id="SVGTexture_yqak7"]
-_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M4 12a1 1 0 0 0 1.555.832l6-4a1 1 0 0 0 0-1.664l-6-4A1 1 0 0 0 4 4z\"/></svg>
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"m7 1c-.554 0-1 .446-1 1v2h4v-2c0-.554-.446-1-1-1zm-1 4v7l2 3 2-3v-7zm1 1h1v5h-1z\"/></svg>
 "
 base_scale = 1.75
 saturation = 2.0
@@ -19,7 +14,18 @@ Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
 Color(1, 0.8666667, 0.39607844, 1): Color(1, 0.87, 0.4, 1)
 }
 
-[sub_resource type="SVGTexture" id="SVGTexture_1gh27"]
+[sub_resource type="SVGTexture" id="SVGTexture_qx6qk"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M5 8a4 4 0 1 1 4 4v2a6 6 0 1 0-6-6H1l3 4 3-4z\"/></svg>
+"
+base_scale = 1.75
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(1, 0.87, 0.4, 1)
+}
+
+[sub_resource type="SVGTexture" id="SVGTexture_5cqey"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M2 3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8v-1H8v-4h2V8h4v2h1V7a1 1 0 0 0-1-1h-4a1 1 0 0 1-1-1V4a1 1 0 0 0-1-1Z\"/><path fill=\"#5fff97\" d=\"M13 13h2v-2h-2V9h-2v2H9v2h2v2h2z\"/></svg>
 "
 base_scale = 1.75
@@ -85,8 +91,8 @@ placeholder_text = "Filter assets"
 [node name="FilterButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Godot"
-icon = SubResource("SVGTexture_x040h")
+tooltip_text = "Edit"
+icon = SubResource("SVGTexture_yqak7")
 script = ExtResource("2_1vfrr")
 icon_type = 6
 metadata/_custom_type_script = "uid://b1evllvhpb7y4"
@@ -94,8 +100,8 @@ metadata/_custom_type_script = "uid://b1evllvhpb7y4"
 [node name="SyncButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Play"
-icon = SubResource("SVGTexture_yqak7")
+tooltip_text = "Reload"
+icon = SubResource("SVGTexture_qx6qk")
 script = ExtResource("2_1vfrr")
 icon_type = 1
 metadata/_custom_type_script = "uid://b1evllvhpb7y4"
@@ -104,7 +110,7 @@ metadata/_custom_type_script = "uid://b1evllvhpb7y4"
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "FolderCreate"
-icon = SubResource("SVGTexture_1gh27")
+icon = SubResource("SVGTexture_5cqey")
 script = ExtResource("2_1vfrr")
 icon_type = 3
 metadata/_custom_type_script = "uid://b1evllvhpb7y4"

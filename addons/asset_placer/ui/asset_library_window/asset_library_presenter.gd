@@ -10,6 +10,7 @@ var _current_collection_filter: AssetCollection
 var _current_assets: Array[AssetResource]
 
 signal assets_loaded(assets: Array[AssetResource])
+signal asset_selection_change
 
 func _init():
 	self.folder_repository = FolderRepository.new()

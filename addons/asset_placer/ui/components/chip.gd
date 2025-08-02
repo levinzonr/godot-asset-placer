@@ -4,13 +4,13 @@ class_name Chip
 
 @export var backgroundColor: Color = Color(0, 0, 0, 0.5): set = set_background_color
 @export var corner_radius: int = 32: set = set_corner_radius
-@export var content_margin_vertical: int = 8: set = set_content_margin_v
-@export var content_margin_horizontal: int = 16: set = set_content_margin_h
+@export var content_margin_vertical: int = 4: set = set_content_margin_v
+@export var content_margin_horizontal: int = 8: set = set_content_margin_h
 
 var asset_collection: AssetCollection
 
 func _ready():
-	add_theme_font_size_override("font_size", 12)
+	add_theme_font_size_override("font_size", 22)
 	add_theme_color_override("font_color", Color.BLACK)
 	_update_stylebox()
 	_update_minimum_size()

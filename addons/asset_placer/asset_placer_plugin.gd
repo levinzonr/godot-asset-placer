@@ -2,9 +2,11 @@
 extends EditorPlugin
 
 
-@onready var  _asset_placer: AssetPlacer = AssetPlacer.new()
+var _presenter: AssetPlacerPresenter
+var  _asset_placer: AssetPlacer = AssetPlacer.new()
 
 var _asset_placer_window: AssetLibraryPanel
+
 
 var plugin_path: String:
 	get(): return get_script().resource_path.get_base_dir()
@@ -17,16 +19,17 @@ func _disable_plugin():
 	pass
 	
 func _enter_tree():
+	_asset_placer = AssetPlacer.new()
+	_presenter = AssetPlacerPresenter.new()
+	_presenter.asset_selected.connect(start_placement)
+	_presenter.asset_deselcted.connect(_asset_placer.stop_placement)
+	
 	_asset_placer_window = load("res://addons/asset_placer/ui/asset_library_panel.tscn").instantiate()
 	add_control_to_bottom_panel(_asset_placer_window, "Asset Placer")
-	await get_tree().process_frame
-	await get_tree().process_frame
-	await get_tree().process_frame
-	_asset_placer_window.asset_library_window.asset_selected.connect(func(asset):
-		_asset_placer.start_placement(get_tree().root, asset)
-	)
 
 func _exit_tree():
+	_presenter.asset_selected.disconnect(start_placement)
+	_presenter.asset_deselcted.disconnect(_asset_placer.stop_placement)
 	_asset_placer.stop_placement()
 	remove_control_from_bottom_panel(_asset_placer_window)
 	_asset_placer_window.queue_free()
@@ -34,6 +37,9 @@ func _exit_tree():
 func _handles(object):
 	return true
 
+
+func start_placement(asset: AssetResource):
+	_asset_placer.start_placement(get_tree().root, asset)
 
 
 func _forward_3d_gui_input(viewport_camera, event):

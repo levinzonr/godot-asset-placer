@@ -5,12 +5,11 @@ var preview_node: Node3D
 var preview_aabb: AABB
 var asset: AssetResource
 
-
 func start_placement(root: Window, asset: AssetResource):
 	stop_placement()
 	self.asset = asset
 	preview_node = asset.scene.instantiate()
-	self.preview_aabb = _get_combined_aabb(preview_node)
+	self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 	root.add_child(preview_node)
 	var scene = EditorInterface.get_edited_scene_root()
 	if scene is Node3D:
@@ -44,7 +43,6 @@ func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
 	
 func _place_instance(transform: Transform3D):
 	var scene_root = EditorInterface.get_edited_scene_root()
-	print("About to place asset")
 	if scene_root and asset.scene:
 		var new_node =  asset.scene.instantiate()
 		new_node.transform = transform
@@ -52,7 +50,6 @@ func _place_instance(transform: Transform3D):
 		new_node.owner = scene_root
 		EditorInterface.get_selection().clear()
 		EditorInterface.get_selection().add_node(new_node)
-		print("Asset placed")
 		stop_placement()
 	
 func stop_placement():
@@ -68,49 +65,3 @@ func pause_placement():
 func resume_placement():
 	if preview_node:
 		preview_node.show()	
-
-func _get_combined_aabb(root: Node3D) -> AABB:
-	var aabb := AABB()
-	var first = true
-
-	# Include root if it is a MeshInstance3D
-	if root is MeshInstance3D:
-		var mesh: Mesh = root.mesh
-		if mesh:
-			var local_aabb: AABB = mesh.get_aabb()
-			# Use transform instead of global_transform
-			local_aabb = transform_aabb(local_aabb, root.transform)
-			aabb = local_aabb
-			first = false
-
-	for child in root.get_children():
-		if child is Node3D:
-			var sub_aabb = _get_combined_aabb(child)
-			if !first:
-				aabb = aabb.merge(sub_aabb)
-			else:
-				aabb = sub_aabb
-				first = false
-
-	return aabb
-
-func transform_aabb(aabb: AABB, transform: Transform3D) -> AABB:
-	var corners = [
-		Vector3(aabb.position.x, aabb.position.y, aabb.position.z),
-		Vector3(aabb.position.x + aabb.size.x, aabb.position.y, aabb.position.z),
-		Vector3(aabb.position.x, aabb.position.y + aabb.size.y, aabb.position.z),
-		Vector3(aabb.position.x, aabb.position.y, aabb.position.z + aabb.size.z),
-		Vector3(aabb.position.x + aabb.size.x, aabb.position.y + aabb.size.y, aabb.position.z),
-		Vector3(aabb.position.x + aabb.size.x, aabb.position.y, aabb.position.z + aabb.size.z),
-		Vector3(aabb.position.x, aabb.position.y + aabb.size.y, aabb.position.z + aabb.size.z),
-		Vector3(aabb.position.x + aabb.size.x, aabb.position.y + aabb.size.y, aabb.position.z + aabb.size.z)
-	]
-
-	var transformed = transform * corners[0]
-	var result = AABB(transformed, Vector3.ZERO)
-
-	for i in range(1, corners.size()):
-		transformed = transform * corners[i]
-		result = result.expand(transformed)
-
-	return result
