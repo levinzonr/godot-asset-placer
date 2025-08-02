@@ -6,8 +6,9 @@ var folder_repository: FolderRepository
 var assets_repository: AssetsRepository
 var synchronizer: Synchronize
 
-var _current_collection_filter: AssetCollection
+var _active_collections: Array[AssetCollection] = []
 var _current_assets: Array[AssetResource]
+var _current_query: String
 
 signal assets_loaded(assets: Array[AssetResource])
 signal asset_selection_change
@@ -26,38 +27,50 @@ func add_asset_folder(path: String):
 	folder_repository.add(path)
 
 func on_query_change(query: String):
-	if query.is_empty():
-		assets_loaded.emit(_current_assets)
+	self._current_query = query
+	_filter_by_collections_and_query()
+
+
+func toggle_asset_collection(asset: AssetResource, collection: AssetCollection, add: bool):
+	if add:
+		asset.tags.append(collection.name)
+		assets_repository.update(asset)
 	else:
-		var filtered = _current_assets.filter(func(item: AssetResource): return item.name.containsn(query))
-		assets_loaded.emit(filtered)
+		asset.tags.erase(collection.name)
+		assets_repository.update(asset)
+	
+	_filter_by_collections_and_query()
 
-
-func add_asset_to_collection(asset: AssetResource, collection: AssetCollection):
-	asset.tags.append(collection.name)
-	assets_repository.update(asset)
-	on_ready()
+func toggle_collection_filter(collection: AssetCollection, enabled: bool):
+	if enabled:
+		print("add" + collection.name)
+		_active_collections.push_back(collection)
+	else:
+		print("rempve " + collection.name)
+		_active_collections = _active_collections.filter(func(a):
+			return a.name != collection.name
+		)
+	
+	print("new state:")
+	for a in _active_collections:
+		print("Filters " + a.name)	
+		
+	_filter_by_collections_and_query()
 	
 
-func filter_by_collection(collection: AssetCollection):
+
+func _filter_by_collections_and_query():
 	var all = assets_repository.get_all_assets()
-	
-	
-	if _current_collection_filter and _current_collection_filter.name == collection.name:
-		_current_collection_filter = null
-		_current_assets = all
-		assets_loaded.emit(all)
-		return
-	
-	_current_collection_filter = collection
 	var filtered: Array[AssetResource] = []
-	for asset in all:
-		if asset.tags.has(collection.name):
-			filtered.append(asset)
 	
-	_current_assets = filtered
+	for asset in all:
+		var matches_query = asset.name.containsn(_current_query) || _current_query.is_empty()
+		var belongs_to_collection = asset.belongs_to_some_collection(_active_collections) || _active_collections.is_empty()
+		
+		if matches_query and belongs_to_collection:
+			filtered.push_back(asset)
+			
 	assets_loaded.emit(filtered)
-
 
 
 func sync():

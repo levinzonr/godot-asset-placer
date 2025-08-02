@@ -25,12 +25,7 @@ func _ready():
 	search_field.text_changed.connect(presenter.on_query_change)
 	
 	filter_button.pressed.connect(func ():
-		var picker: CollectionPicker = picker_resource.instantiate()
-		picker.collection_selected.connect(presenter.filter_by_collection)
-		var global_pos = filter_button.get_screen_position() + Vector2(0, filter_button.size.y)
-		var size = Vector2i(500, 500)
-		var position = filter_button.get_screen_position() - Vector2(size.x, size.y)
-		EditorInterface.popup_dialog(picker, Rect2(position, size))
+		CollectionPicker.show_in(self, presenter._active_collections, presenter.toggle_collection_filter)
 	)
 	
 func show_assets(assets: Array[AssetResource]):
@@ -49,12 +44,9 @@ func show_asset_menu(asset: AssetResource):
 	var mouse_pos = EditorInterface.get_base_control().get_global_mouse_position()
 	options_menu.add_item("Add to collection")
 	options_menu.index_pressed.connect(func(index):
-		var collection_picker: CollectionPicker = load("res://addons/asset_placer/ui/collection_picker/collection_picker.tscn").instantiate()
-		collection_picker.collection_selected.connect(func(collection):
-			presenter.add_asset_to_collection(asset, collection)
-			
+		CollectionPicker.show_in(self, asset.shallow_collections, func(collection, add):
+			presenter.toggle_asset_collection(asset, collection, add)
 		)
-		EditorInterface.popup_dialog(collection_picker, Rect2i(mouse_pos, Vector2(500, 500)))
 	)
 	EditorInterface.popup_dialog(options_menu, Rect2(mouse_pos, options_menu.get_contents_minimum_size()))
 
