@@ -15,7 +15,17 @@ func _ready():
 	add_folder_button.pressed.connect(func():
 		show_folder_dialog()
 	)
+
+func _can_drop_data(at_position, data):
+	if data is Dictionary:
+		var type = data["type"]
+		var files_or_dirs = type == "files_and_dirs" || type == "files"
+		return files_or_dirs and data.has("files")
+	return false	
 	
+func _drop_data(at_position, data):
+	var dirs: PackedStringArray = data["files"]
+	presenter.add_folders(dirs)
 
 func show_folders(folders: Array[AssetFolder]):
 	print("Show filders")

@@ -155,7 +155,7 @@ func _get_minimum_size():
 		var c: Control = get_child(i)
 		if !c or !c.is_visible():
 			continue
-		var row = valid_controls_index / columns
+		var row = valid_controls_index / max(1, columns)
 		valid_controls_index += 1
 
 		var ms = c.get_combined_minimum_size()

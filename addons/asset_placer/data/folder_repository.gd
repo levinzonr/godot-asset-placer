@@ -3,17 +3,21 @@ class_name FolderRepository
 
 var data_source: AssetLibraryDataSource
 
+static var instance: FolderRepository
+
+	
 signal folder_changed
 
 func _init():
 	self.data_source = AssetLibraryDataSource.new()
+	instance = self
 
 func get_all() -> Array[AssetFolder]:
 	return data_source.get_library().folders
 
 func find(path: String)  -> AssetFolder:
 	var folders = get_all()
-	var folder = folders.find_custom(func(f: String): return f == path)
+	var folder = folders.find_custom(func(f: AssetFolder): return f.path == path)
 	return folders[folder]
 	
 
@@ -38,12 +42,7 @@ func add(folder: String):
 	folder_changed.emit()
 	
 func delete(folder: String):
-	var folders = get_all()
-	var to_delete = find(folder)
-	if to_delete != null:
-		var library := data_source.get_library()
-		var duplicated_folders := library.folders.duplicate()
-		duplicated_folders.erase(to_delete)
-		library.folders = duplicated_folders
-		data_source.save_libray(library)
-		folder_changed.emit()
+	var library := data_source.get_library()
+	library.folders = library.folders.filter(func(f): return f.path != folder)
+	data_source.save_libray(library)
+	folder_changed.emit()

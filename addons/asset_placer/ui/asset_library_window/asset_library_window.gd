@@ -3,6 +3,7 @@ extends Control
 class_name AssetLibraryWindow
 
 @onready var presenter = AssetLibraryPresenter.new()
+@onready var folder_presenter = FolderPresenter.new()
 @onready var grid_container: Container = %GridContainer
 @onready var preview_resource = preload("res://addons/asset_placer/ui/components/asset_resource_preview.tscn")
 @onready var add_folder_button: Button = %AddFolderButton
@@ -62,6 +63,18 @@ func clear_selected_asset():
 	for child in grid_container.get_children():
 		if child is Button:
 			child.set_pressed_no_signal(false)
+			
+func _can_drop_data(at_position, data):
+	if data is Dictionary:
+		var type = data["type"]
+		var files_or_dirs = type == "files_and_dirs" || type == "files"
+		return files_or_dirs and data.has("files")
+	return false	
+	
+func _drop_data(at_position, data):
+	var dirs: PackedStringArray = data["files"]
+	folder_presenter.add_folders(dirs)
+	
 
 func set_selected_asset(asset: AssetResource):
 	for child in grid_container.get_children():

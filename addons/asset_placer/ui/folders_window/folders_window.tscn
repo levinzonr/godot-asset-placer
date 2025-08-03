@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://tkdl83npcow1" path="res://addons/asset_placer/ui/folders_window/folders_window.gd" id="1_umbsx"]
 [ext_resource type="Script" uid="uid://b1evllvhpb7y4" path="res://addons/asset_placer/ui/components/system_button.gd" id="2_1gh27"]
 
-[sub_resource type="SVGTexture" id="SVGTexture_1gh27"]
+[sub_resource type="SVGTexture" id="SVGTexture_gvdec"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M2 3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8v-1H8v-4h2V8h4v2h1V7a1 1 0 0 0-1-1h-4a1 1 0 0 1-1-1V4a1 1 0 0 0-1-1Z\"/><path fill=\"#5fff97\" d=\"M13 13h2v-2h-2V9h-2v2H9v2h2v2h2z\"/></svg>
 "
 base_scale = 1.75
@@ -21,6 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_umbsx")
 
 [node name="Panel" type="Panel" parent="."]
@@ -30,6 +31,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
@@ -54,7 +56,7 @@ alignment = 2
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "FolderCreate"
-icon = SubResource("SVGTexture_1gh27")
+icon = SubResource("SVGTexture_gvdec")
 script = ExtResource("2_1gh27")
 icon_type = 3
 metadata/_custom_type_script = "uid://b1evllvhpb7y4"

@@ -8,7 +8,7 @@ var asset_repository: AssetsRepository
 var sync: Synchronize
 
 func _init():
-	self.folder_repository = FolderRepository.new()
+	self.folder_repository = FolderRepository.instance
 	self.asset_repository = AssetsRepository.new()
 	self.sync = Synchronize.new(self.folder_repository, self.asset_repository)
 
@@ -20,6 +20,7 @@ func _ready():
 		var folders = folder_repository.get_all()
 		folders_loaded.emit(folders)
 	)
+
 
 
 func delete_folder(folder: AssetFolder):
@@ -35,6 +36,9 @@ func include_subfolders(include: bool, folder: AssetFolder):
 func add_folder(folder: String):
 	folder_repository.add(folder)	
 
+func add_folders(folders: PackedStringArray):
+	for folder in folders:
+		add_folder(folder)
 
 func is_file_supported(file: String)	->  bool:
 	return file.ends_with(".tscn") || file.ends_with(".glb") || file.ends_with(".fbx")

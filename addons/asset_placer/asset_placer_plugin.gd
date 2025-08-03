@@ -2,6 +2,7 @@
 extends EditorPlugin
 
 
+var _folder_repository: FolderRepository
 var _presenter: AssetPlacerPresenter
 var  _asset_placer: AssetPlacer = AssetPlacer.new()
 
@@ -19,6 +20,7 @@ func _disable_plugin():
 	pass
 	
 func _enter_tree():
+	_folder_repository = FolderRepository.new()
 	_asset_placer = AssetPlacer.new()
 	_presenter = AssetPlacerPresenter.new()
 	_presenter.asset_selected.connect(start_placement)
@@ -37,11 +39,9 @@ func _exit_tree():
 func _handles(object):
 	return true
 
-	
 
 func start_placement(asset: AssetResource):
 	_asset_placer.start_placement(get_tree().root, asset)
-
 
 func _forward_3d_gui_input(viewport_camera, event):
 	return _asset_placer.handle_3d_input(viewport_camera, event)
