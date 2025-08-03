@@ -3,7 +3,7 @@ extends Control
 class_name AssetLibraryWindow
 
 @onready var presenter = AssetLibraryPresenter.new()
-@onready var grid_container: GridContainer = %GridContainer
+@onready var grid_container: Container = %GridContainer
 @onready var preview_resource = preload("res://addons/asset_placer/ui/components/asset_resource_preview.tscn")
 @onready var add_folder_button: Button = %AddFolderButton
 @onready var sync_button: Button = %SyncButton
