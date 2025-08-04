@@ -32,9 +32,12 @@ func set_transform_rotation(x: bool, y: bool, z: bool):
 	options.transform_rotate_y = y;
 	options.transform_rotate_z = z	
 	options_changed.emit(options)
+	
+func clear_selection():
+	_selected_asset = null
+	asset_deselcted.emit()	
 
 func select_asset(asset: AssetResource):
-	print("Select")
 	if asset == _selected_asset:
 		_selected_asset = null
 		asset_deselcted.emit()

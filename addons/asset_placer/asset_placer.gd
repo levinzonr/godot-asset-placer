@@ -3,24 +3,23 @@ class_name AssetPlacer
 
 var preview_node: Node3D
 var preview_aabb: AABB
+var node_history: Array[String] = []
 var asset: AssetResource
 
 func start_placement(root: Window, asset: AssetResource):
-	stop_placement()
 	self.asset = asset
 	preview_node = asset.scene.instantiate()
 	self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 	root.add_child(preview_node)
-	var scene = EditorInterface.get_edited_scene_root()
+	var scene = AssetContextProvider.resolve_current_context()
 	if scene is Node3D:
-		EditorInterface.get_selection().add_node(scene)
 		preview_node.global_transform = AssetTransformations.transform_rotation(preview_node.global_transform, AssetPlacerPresenter._instance.options)
 		
 	
 func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
 	
 	if EditorInterface.get_edited_scene_root() is not Node3D:
-		stop_placement()
+		pass
 	
 	if  preview_node:
 		if event is InputEventMouseMotion:
@@ -56,26 +55,32 @@ func _snap_position(pos: Vector3):
 	
 func _place_instance(transform: Transform3D):
 	var scene_root = EditorInterface.get_edited_scene_root()
+	print("Place ata" +str(scene_root.name))
 	if scene_root and asset.scene:
-		var new_node =  asset.scene.instantiate()
-		new_node.transform = transform
-		scene_root.add_child(new_node)
-		new_node.owner = scene_root
-		EditorInterface.get_selection().clear()
-		EditorInterface.get_selection().add_node(new_node)
+		var undoredo = EditorInterface.get_editor_undo_redo()
+		undoredo.create_action("Place Asset")
+		undoredo.add_do_method(self, "_do_placement", scene_root, transform)
+		undoredo.add_undo_method(self, "_undo_placement", scene_root)
+		undoredo.commit_action()
 		preview_node.global_transform = AssetTransformations.transform_rotation(preview_node.global_transform, AssetPlacerPresenter._instance.options)
+
+func _do_placement(root: Node3D, transform: Transform3D):
+	var new_node =  asset.scene.instantiate()
+	new_node.transform = transform
+	root.add_child(new_node)
+	new_node.owner = root
+	node_history.push_back(new_node.name)
+
+func _undo_placement(root: Node3D):
+	var last_added = node_history.pop_front()
+	var node_index = root.get_children().find_custom(func(a): return a.name == last_added)
+	var node = root.get_child(node_index)
+	node.queue_free()
 	
+
 func stop_placement():
 	self.asset = null
-	AssetPlacerPresenter._instance.select_asset(null)
 	if preview_node:
 		preview_node.queue_free()
 		preview_node = null
 		
-func pause_placement():
-	if preview_node:
-		preview_node.hide()
-
-func resume_placement():
-	if preview_node:
-		preview_node.show()	
