@@ -28,14 +28,9 @@ func update(asset: AssetResource):
 		lib.items[index] = asset
 		data_source.save_libray(lib)
 
-func add_asset(scene_path: String):
-	print("Adding asset " + scene_path)
+func add_asset(scene_path: String, tags: Array[String] = []):
 	var loaded_scene: PackedScene = load(scene_path)
-	loaded_scene.is_queued_for_deletion()
-	var segments = scene_path.split("/")
-	
-	var file_name = segments.get(segments.size() - 1)
-	var asset = AssetResource.new(loaded_scene, file_name)
+	var asset = AssetResource.new(loaded_scene, scene_path.get_file())
 	
 	if exists(asset):
 		print("Asset already exists")

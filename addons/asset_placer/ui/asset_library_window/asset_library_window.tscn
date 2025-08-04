@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dua2vx4bi1gmf" path="res://addons/asset_placer/ui/asset_placer_options/asset_placer_options.tscn" id="2_qx6qk"]
 [ext_resource type="Script" uid="uid://bwpmmb4pdbynf" path="res://addons/asset_placer/ui/asset_library_window/flex_grid_container.gd" id="4_5cqey"]
 
-[sub_resource type="SVGTexture" id="SVGTexture_qx6qk"]
+[sub_resource type="SVGTexture" id="SVGTexture_5cqey"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"m7 1c-.554 0-1 .446-1 1v2h4v-2c0-.554-.446-1-1-1zm-1 4v7l2 3 2-3v-7zm1 1h1v5h-1z\"/></svg>
 "
 base_scale = 1.75
@@ -16,7 +16,7 @@ Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
 Color(1, 0.8666667, 0.39607844, 1): Color(1, 0.87, 0.4, 1)
 }
 
-[sub_resource type="SVGTexture" id="SVGTexture_5cqey"]
+[sub_resource type="SVGTexture" id="SVGTexture_gvdec"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M5 8a4 4 0 1 1 4 4v2a6 6 0 1 0-6-6H1l3 4 3-4z\"/></svg>
 "
 base_scale = 1.75
@@ -27,7 +27,7 @@ Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
 Color(1, 0.8666667, 0.39607844, 1): Color(1, 0.87, 0.4, 1)
 }
 
-[sub_resource type="SVGTexture" id="SVGTexture_gvdec"]
+[sub_resource type="SVGTexture" id="SVGTexture_mdpb8"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M2 3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8v-1H8v-4h2V8h4v2h1V7a1 1 0 0 0-1-1h-4a1 1 0 0 1-1-1V4a1 1 0 0 0-1-1Z\"/><path fill=\"#5fff97\" d=\"M13 13h2v-2h-2V9h-2v2H9v2h2v2h2z\"/></svg>
 "
 base_scale = 1.75
@@ -110,7 +110,7 @@ placeholder_text = "Filter assets"
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Edit"
-icon = SubResource("SVGTexture_qx6qk")
+icon = SubResource("SVGTexture_5cqey")
 script = ExtResource("2_1vfrr")
 icon_type = 6
 metadata/_custom_type_script = "uid://b1evllvhpb7y4"
@@ -119,7 +119,7 @@ metadata/_custom_type_script = "uid://b1evllvhpb7y4"
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Reload"
-icon = SubResource("SVGTexture_5cqey")
+icon = SubResource("SVGTexture_gvdec")
 script = ExtResource("2_1vfrr")
 icon_type = 1
 metadata/_custom_type_script = "uid://b1evllvhpb7y4"
@@ -128,7 +128,7 @@ metadata/_custom_type_script = "uid://b1evllvhpb7y4"
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "FolderCreate"
-icon = SubResource("SVGTexture_gvdec")
+icon = SubResource("SVGTexture_mdpb8")
 script = ExtResource("2_1vfrr")
 icon_type = 3
 metadata/_custom_type_script = "uid://b1evllvhpb7y4"
