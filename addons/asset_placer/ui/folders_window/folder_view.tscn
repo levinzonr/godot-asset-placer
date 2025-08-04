@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://d7ay5upbgnx0"]
+[gd_scene load_steps=5 format=3 uid="uid://d7ay5upbgnx0"]
 
 [ext_resource type="Script" uid="uid://dclcoehldtdcd" path="res://addons/asset_placer/ui/folders_window/folder_view.gd" id="1_q40po"]
-[ext_resource type="Script" uid="uid://b1evllvhpb7y4" path="res://addons/asset_placer/ui/components/system_button.gd" id="1_vuvxv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q40po"]
 content_margin_left = 0.0
@@ -91,15 +90,9 @@ unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Reload"
 icon = SubResource("SVGTexture_q40po")
-script = ExtResource("1_vuvxv")
-icon_type = 1
-metadata/_custom_type_script = "uid://b1evllvhpb7y4"
 
 [node name="DeleteButton" type="Button" parent="Panel/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Remove"
 icon = SubResource("SVGTexture_ojff7")
-script = ExtResource("1_vuvxv")
-icon_type = 5
-metadata/_custom_type_script = "uid://b1evllvhpb7y4"

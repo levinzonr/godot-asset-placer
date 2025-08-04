@@ -13,7 +13,12 @@ func exists(asset: AssetResource):
 	return get_all_assets().any(func(item: AssetResource):
 		return item.scene == asset.scene
 	)
-	
+
+func delete(asset: AssetResource):
+	var lib = data_source.get_library()
+	var assets = lib.items.filter(func(a): return a.id != asset.id)
+	lib.items = assets
+	data_source.save_libray(lib)
 
 func find_by_uid(uid: String) -> AssetResource:
 	for asset in get_all_assets():

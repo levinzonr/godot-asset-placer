@@ -38,6 +38,10 @@ func add_asset(path: String):
 	assets_repository.add_asset(path, tags)
 	
 
+func delete_asset(asset: AssetResource):
+	assets_repository.delete(asset)
+	_filter_by_collections_and_query()
+
 func add_assets_or_folders(files: PackedStringArray):
 	for file in files:
 		var extension = file.get_extension()

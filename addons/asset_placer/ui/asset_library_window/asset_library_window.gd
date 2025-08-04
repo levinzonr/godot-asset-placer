@@ -43,11 +43,19 @@ func show_assets(assets: Array[AssetResource]):
 func show_asset_menu(asset: AssetResource):
 	var options_menu := PopupMenu.new()
 	var mouse_pos = EditorInterface.get_base_control().get_global_mouse_position()
-	options_menu.add_item("Add to collection")
+	options_menu.add_item("Manage collections")
+	options_menu.add_item("Open")
+	options_menu.add_item("Remove")
 	options_menu.index_pressed.connect(func(index):
-		CollectionPicker.show_in(self, asset.shallow_collections, func(collection, add):
-			presenter.toggle_asset_collection(asset, collection, add)
-		)
+		match index:
+			0: CollectionPicker.show_in(self, asset.shallow_collections, func(collection, add):
+				presenter.toggle_asset_collection(asset, collection, add)
+			)
+			1: 
+				EditorInterface.open_scene_from_path(asset.scene.resource_path)
+				EditorInterface.set_main_screen_editor("3D")
+			2: presenter.delete_asset(asset)
+			_: pass
 	)
 	EditorInterface.popup_dialog(options_menu, Rect2(mouse_pos, options_menu.get_contents_minimum_size()))
 
