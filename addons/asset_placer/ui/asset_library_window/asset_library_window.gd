@@ -27,7 +27,7 @@ func _ready():
 	search_field.text_changed.connect(presenter.on_query_change)
 	
 	filter_button.pressed.connect(func ():
-		CollectionPicker.show_in(self, presenter._active_collections, presenter.toggle_collection_filter)
+		CollectionPicker.show_in(filter_button, presenter._active_collections, presenter.toggle_collection_filter)
 	)
 	
 func show_assets(assets: Array[AssetResource]):
@@ -36,12 +36,14 @@ func show_assets(assets: Array[AssetResource]):
 	for asset in assets:
 		var child: AssetResourcePreview = preview_resource.instantiate()
 		child.left_clicked.connect(AssetPlacerPresenter._instance.select_asset)
-		child.right_clicked.connect(show_asset_menu)
+		child.right_clicked.connect(func(asset):
+			show_asset_menu(asset, child)
+		)
 		child.set_meta("id", asset.id)
 		grid_container.add_child(child)
 		child.set_asset(asset)
 
-func show_asset_menu(asset: AssetResource):
+func show_asset_menu(asset: AssetResource, control: Control):
 	var options_menu := PopupMenu.new()
 	var mouse_pos = EditorInterface.get_base_control().get_global_mouse_position()
 	options_menu.add_item("Manage collections")
@@ -49,7 +51,7 @@ func show_asset_menu(asset: AssetResource):
 	options_menu.add_item("Remove")
 	options_menu.index_pressed.connect(func(index):
 		match index:
-			0: CollectionPicker.show_in(self, asset.shallow_collections, func(collection, add):
+			0: CollectionPicker.show_in(control, asset.shallow_collections, func(collection, add):
 				presenter.toggle_asset_collection(asset, collection, add)
 			)
 			1: 

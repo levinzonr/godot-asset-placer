@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://dmicn3kmr620j"
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("3_gvdec")
-icon_name = &"Edit"
+icon_name = &"Groups"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cqey"]
@@ -32,7 +32,7 @@ anti_aliasing = false
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("3_gvdec")
-icon_name = &"Play"
+icon_name = &"FolderCreate"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [node name="AssetLibraryWindow" type="Control"]
