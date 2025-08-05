@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://3qun24bndqll"]
+[gd_scene load_steps=8 format=3 uid="uid://3qun24bndqll"]
 
 [ext_resource type="Script" uid="uid://d3hm5bn8vmd2" path="res://addons/asset_placer/ui/asset_library_window/asset_library_window.gd" id="1_l06eo"]
 [ext_resource type="PackedScene" uid="uid://dua2vx4bi1gmf" path="res://addons/asset_placer/ui/asset_placer_options/asset_placer_options.tscn" id="2_qx6qk"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="3_gvdec"]
-[ext_resource type="Script" uid="uid://bwpmmb4pdbynf" path="res://addons/asset_placer/ui/asset_library_window/flex_grid_container.gd" id="4_5cqey"]
 
 [sub_resource type="Texture2D" id="Texture2D_gvdec"]
 resource_local_to_scene = false
@@ -144,10 +143,8 @@ icon = SubResource("Texture2D_5cqey")
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GridContainer" type="Container" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="GridContainer" type="HFlowContainer" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("4_5cqey")
-metadata/_custom_type_script = "uid://bwpmmb4pdbynf"
