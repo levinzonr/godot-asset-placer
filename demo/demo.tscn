@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://sas7j2dyfkr3"]
+[gd_scene load_steps=9 format=3 uid="uid://sas7j2dyfkr3"]
 
-[ext_resource type="Script" uid="uid://btdof7vykvkiw" path="res://addons/asset_placer/asset_placer_context.gd" id="1_d6po2"]
+[ext_resource type="PackedScene" uid="uid://dqpwyuw1xhymj" path="res://demo/assets/JaggedRock1.glb" id="2_ytiva"]
+[ext_resource type="PackedScene" uid="uid://b1nm40p57ntoa" path="res://demo/assets/ForestRock3.glb" id="3_dar0o"]
+[ext_resource type="PackedScene" uid="uid://b8p1iy52py3xm" path="res://demo/assets/ForestRock2.glb" id="3_j5lb4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hjng"]
 size = Vector3(100, 0.1, 100)
@@ -32,6 +34,14 @@ shape = SubResource("BoxShape3D_5hjng")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00016975403, 0, 0)
 mesh = SubResource("PlaneMesh_d6po2")
 
-[node name="AssetPlacerContext" type="Node3D" parent="StaticBody3D"]
-script = ExtResource("1_d6po2")
-metadata/_custom_type_script = "uid://btdof7vykvkiw"
+[node name="@Node3D@56943" parent="." instance=ExtResource("3_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.104689, 1.426089, 32.50158)
+
+[node name="JaggedRock12" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.190771, 0.87377894, 29.812342)
+
+[node name="ForestRock32" type="Node3D" parent="." instance=ExtResource("3_dar0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.997204, 1.3894974, 25.904137)
+
+[node name="@Node3D@32857" type="Node3D" parent="." instance=ExtResource("3_dar0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.934145, 1.3894974, 30.855982)

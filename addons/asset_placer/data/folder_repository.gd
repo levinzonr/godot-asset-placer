@@ -29,8 +29,6 @@ func update(folder: AssetFolder):
 		folders[to_update_index] = folder
 		library.folders = folders
 		data_source.save_libray(library)
-	else:
-		print("Did not find a folder to update")
 
 func add(folder: String):
 	var library := data_source.get_library()

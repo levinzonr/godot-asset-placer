@@ -11,7 +11,7 @@ func start_placement(root: Window, asset: AssetResource):
 	preview_node = asset.scene.instantiate()
 	self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 	root.add_child(preview_node)
-	var scene = AssetContextProvider.resolve_current_context()
+	var scene = EditorInterface.get_selection().get_selected_nodes()[0]
 	if scene is Node3D:
 		preview_node.global_transform = AssetTransformations.transform_rotation(preview_node.global_transform, AssetPlacerPresenter._instance.options)
 		
@@ -38,8 +38,11 @@ func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
 
 
 		elif event is InputEventMouseButton and event.pressed:
-			_place_instance(preview_node.global_transform)
-			return true
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				_place_instance(preview_node.global_transform)
+				return true
+			else:
+				return false
 
 	return false
 	
@@ -54,21 +57,22 @@ func _snap_position(pos: Vector3):
 	)
 	
 func _place_instance(transform: Transform3D):
-	var scene_root = EditorInterface.get_edited_scene_root()
-	print("Place ata" +str(scene_root.name))
+	var selection = EditorInterface.get_selection()
+	var scene_root = selection.get_selected_nodes()[0]
 	if scene_root and asset.scene:
 		var undoredo = EditorInterface.get_editor_undo_redo()
-		undoredo.create_action("Place Asset")
+		undoredo.create_action("Place Asset: %s" % asset.name)
 		undoredo.add_do_method(self, "_do_placement", scene_root, transform)
 		undoredo.add_undo_method(self, "_undo_placement", scene_root)
 		undoredo.commit_action()
 		preview_node.global_transform = AssetTransformations.transform_rotation(preview_node.global_transform, AssetPlacerPresenter._instance.options)
 
 func _do_placement(root: Node3D, transform: Transform3D):
-	var new_node =  asset.scene.instantiate()
-	new_node.transform = transform
+	var new_node: Node3D =  asset.scene.instantiate()
+	new_node.global_transform = transform
+	new_node.position = root.to_local(transform.origin)
 	root.add_child(new_node)
-	new_node.owner = root
+	new_node.owner = EditorInterface.get_edited_scene_root()
 	node_history.push_back(new_node.name)
 
 func _undo_placement(root: Node3D):

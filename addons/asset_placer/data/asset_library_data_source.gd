@@ -83,4 +83,4 @@ func save_libray(library: AssetLibrary):
 		file.close()
 		
 	else:
-		print("AssetLibraryDataSource: Cannot save null library.")
+		push_error("AssetLibraryDataSource: Cannot save null library.")

@@ -11,7 +11,6 @@ signal asset_deselcted
 signal options_changed(options: AssetPlacerOptions)
 
 func _init():
-	print("Init")
 	options = AssetPlacerOptions.new()
 	self._selected_asset = null
 	self._instance = self

@@ -38,8 +38,8 @@ func add_asset(scene_path: String, tags: Array[String] = []):
 	var asset = AssetResource.new(loaded_scene, scene_path.get_file())
 	
 	if exists(asset):
-		print("Asset already exists")
 		return
+		
 	var library: AssetLibrary = data_source.get_library()
 	var duplicated_items = library.items.duplicate()
 	duplicated_items.append(asset)

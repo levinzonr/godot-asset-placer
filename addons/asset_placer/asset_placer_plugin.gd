@@ -27,13 +27,6 @@ func _enter_tree():
 	_asset_placer_window = load("res://addons/asset_placer/ui/asset_library_panel.tscn").instantiate()
 	add_control_to_bottom_panel(_asset_placer_window, "Asset Placer")
 	
-	EditorInterface.get_selection().selection_changed.connect(func():
-		var selected = EditorInterface.get_selection().get_selected_nodes()
-		if selected.is_empty() || selected[0] is not AssetPlacerContext:
-			_presenter.clear_selection()
-		else:
-			make_bottom_panel_item_visible(_asset_placer_window)
-	)
 	
 func _exit_tree():
 	_presenter.asset_selected.disconnect(start_placement)
@@ -47,6 +40,7 @@ func _handles(object):
 
 func start_placement(asset: AssetResource):
 	EditorInterface.set_main_screen_editor("3D")
+	AssetPlacerContextUtil.select_context()
 	_asset_placer.start_placement(get_tree().root, asset)
 
 func _forward_3d_gui_input(viewport_camera, event):

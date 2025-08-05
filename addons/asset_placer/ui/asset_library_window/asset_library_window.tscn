@@ -95,12 +95,16 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 36
 text = "Assets"
 
+[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("Texture2D_gvdec")
+stretch_mode = 3
+
 [node name="SearchField" type="LineEdit" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 placeholder_text = "Filter assets by name"
-right_icon = SubResource("Texture2D_gvdec")
 
 [node name="FilterButton" type="Button" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true

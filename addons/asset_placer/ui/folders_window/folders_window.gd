@@ -28,7 +28,6 @@ func _drop_data(at_position, data):
 	presenter.add_folders(dirs)
 
 func show_folders(folders: Array[AssetFolder]):
-	print("Show filders")
 	for child in v_box_container.get_children():
 		child.queue_free()
 		
