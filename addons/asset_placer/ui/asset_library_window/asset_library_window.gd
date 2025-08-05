@@ -7,9 +7,9 @@ class_name AssetLibraryWindow
 @onready var grid_container: Container = %GridContainer
 @onready var preview_resource = preload("res://addons/asset_placer/ui/components/asset_resource_preview.tscn")
 @onready var add_folder_button: Button = %AddFolderButton
-@onready var sync_button: Button = %SyncButton
 @onready var search_field: LineEdit = %SearchField
 @onready var filter_button: Button = %FilterButton
+@onready var filters_label: Label = %FiltersLabel
 
 var picker_resource = preload("res://addons/asset_placer/ui/collection_picker/collection_picker.tscn")
 
@@ -18,11 +18,12 @@ signal asset_selected(asset: AssetResource)
 
 func _ready():
 	presenter.assets_loaded.connect(show_assets)
+	presenter.show_filter_info.connect(show_filter_info)
+	
 	AssetPlacerPresenter._instance.asset_selected.connect(set_selected_asset)
 	AssetPlacerPresenter._instance.asset_deselcted.connect(clear_selected_asset)
 	presenter.on_ready()
 	add_folder_button.pressed.connect(show_folder_dialog)
-	sync_button.pressed.connect(presenter.sync)
 	search_field.text_changed.connect(presenter.on_query_change)
 	
 	filter_button.pressed.connect(func ():
@@ -82,7 +83,13 @@ func _can_drop_data(at_position, data):
 func _drop_data(at_position, data):
 	var dirs: PackedStringArray = data["files"]
 	presenter.add_assets_or_folders(dirs)
-	
+
+func show_filter_info(size: int):
+	if size == 0:
+		filters_label.hide()
+	else:
+		filters_label.show()
+		filters_label.text = str(size)	
 
 func set_selected_asset(asset: AssetResource):
 	for child in grid_container.get_children():

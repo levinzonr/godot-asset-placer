@@ -12,6 +12,7 @@ var _current_query: String
 
 signal assets_loaded(assets: Array[AssetResource])
 signal asset_selection_change
+signal show_filter_info(size: int)
 
 func _init():
 	self.folder_repository = FolderRepository.instance
@@ -21,6 +22,7 @@ func _init():
 
 func on_ready():
 	_current_assets = assets_repository.get_all_assets()
+	show_filter_info.emit(0)
 	assets_repository
 	assets_loaded.emit(_current_assets)
 
@@ -69,7 +71,7 @@ func toggle_collection_filter(collection: AssetCollection, enabled: bool):
 		_active_collections = _active_collections.filter(func(a):
 			return a.name != collection.name
 		)
-	
+	show_filter_info.emit(_active_collections.size())
 	_filter_by_collections_and_query()
 	
 

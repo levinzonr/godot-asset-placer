@@ -19,12 +19,15 @@ script = ExtResource("3_gvdec")
 icon_name = &"Edit"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
-[sub_resource type="Texture2D" id="Texture2D_mdpb8"]
-resource_local_to_scene = false
-resource_name = ""
-script = ExtResource("3_gvdec")
-icon_name = &"Reload"
-metadata/_custom_type_script = "uid://dmicn3kmr620j"
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cqey"]
+bg_color = Color(0.25038558, 0.49941733, 6.738305e-07, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+anti_aliasing = false
 
 [sub_resource type="Texture2D" id="Texture2D_5cqey"]
 resource_local_to_scene = false
@@ -112,11 +115,24 @@ layout_mode = 2
 tooltip_text = "Edit"
 icon = SubResource("Texture2D_yvyyx")
 
-[node name="SyncButton" type="Button" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="FiltersLabel" type="Label" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/FilterButton"]
 unique_name_in_owner = true
-layout_mode = 2
-tooltip_text = "Reload"
-icon = SubResource("Texture2D_mdpb8")
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -18.22
+offset_top = -18.02
+offset_right = 8.780006
+offset_bottom = 12.98
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_5cqey")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AddFolderButton" type="Button" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
