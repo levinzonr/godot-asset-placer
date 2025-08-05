@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://sas7j2dyfkr3"]
+[gd_scene load_steps=9 format=3 uid="uid://sas7j2dyfkr3"]
 
 [ext_resource type="PackedScene" uid="uid://dqpwyuw1xhymj" path="res://demo/assets/JaggedRock1.glb" id="2_ytiva"]
+[ext_resource type="PackedScene" uid="uid://gwihxo1nnefo" path="res://demo/assets/ForestRock1.glb" id="3_dar0o"]
 [ext_resource type="PackedScene" uid="uid://b8p1iy52py3xm" path="res://demo/assets/ForestRock2.glb" id="3_j5lb4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hjng"]
@@ -38,3 +39,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.104689, 1.426089, 32.50158
 
 [node name="JaggedRock12" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.190771, 0.87377894, 29.812342)
+
+[node name="ForestRock12" type="Node3D" parent="." instance=ExtResource("3_dar0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.382004, 1.0443063, -1.8280133)
+
+[node name="@Node3D@261040" type="Node3D" parent="." instance=ExtResource("3_dar0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.295742, 1.0443063, -7.035724)
+
+[node name="@Node3D@261041" type="Node3D" parent="." instance=ExtResource("3_dar0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.778627, 1.0443063, -9.745813)

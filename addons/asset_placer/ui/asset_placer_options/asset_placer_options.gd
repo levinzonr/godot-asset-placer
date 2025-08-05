@@ -4,9 +4,8 @@ extends Control
 var presenter: AssetPlacerPresenter
 @onready var grid_snapping_checkbox = %GridSnappingCheckbox
 @onready var grid_snap_value_spin_box: SpinBox = %GridSnapValueSpinBox
-@onready var x_rotation_checkbox: CheckBox = %XRotationCheckbox
-@onready var z_rotation_checkbox: CheckBox = %ZRotationCheckbox
-@onready var y_rotation_checkbox: CheckBox = %YRotationCheckbox
+@onready var min_rotation_selector: SpinBoxVector3 = %MinRotationSelector
+@onready var max_rotation_selector: SpinBoxVector3 = %MaxRotationSelector
 
 
 func _ready():
@@ -16,18 +15,9 @@ func _ready():
 	
 	grid_snapping_checkbox.toggled.connect(presenter.set_grid_snapping_enabled)
 	
-	x_rotation_checkbox.toggled.connect(func(x):
-		presenter.set_transform_rotation(x, y_rotation_checkbox.button_pressed, z_rotation_checkbox.button_pressed)
-	)
-	
-	y_rotation_checkbox.toggled.connect(func(y):
-		presenter.set_transform_rotation(x_rotation_checkbox.button_pressed, y, z_rotation_checkbox.button_pressed)
-	)
-	
-	z_rotation_checkbox.toggled.connect(func(z):
-		presenter.set_transform_rotation(x_rotation_checkbox.button_pressed, y_rotation_checkbox.button_pressed,z)
+	max_rotation_selector.value_changed.connect(presenter.set_max_rotation)
+	min_rotation_selector.value_changed.connect(presenter.set_min_rotation)
 
-	)
 	
 
 
@@ -35,9 +25,7 @@ func set_options(options: AssetPlacerOptions):
 	grid_snapping_checkbox.set_pressed_no_signal(options.snapping_enabled)
 	grid_snap_value_spin_box.editable = options.snapping_enabled
 	grid_snap_value_spin_box.set_value_no_signal(options.snapping_grid_step)
-	x_rotation_checkbox.set_pressed_no_signal(options.transform_rotate_x)	
-	y_rotation_checkbox.set_pressed_no_signal(options.transform_rotate_y)	
-	z_rotation_checkbox.set_pressed_no_signal(options.transform_rotate_z)	
-	
+	max_rotation_selector.set_value_no_signal(options.max_rotation)
+	min_rotation_selector.set_value_no_signal(options.min_rotation)
 	
 	

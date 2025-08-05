@@ -55,23 +55,25 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+[node name="HBoxContainer" type="HSplitContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+split_offset = -370
 
-[node name="AssetPlacerOptions" parent="Panel/HBoxContainer" instance=ExtResource("2_qx6qk")]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AssetPlacerOptions" parent="Panel/HBoxContainer/ScrollContainer" instance=ExtResource("2_qx6qk")]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.34
+size_flags_vertical = 3
 localize_numeral_system = false
-
-[node name="VSeparator" type="VSeparator" parent="Panel/HBoxContainer"]
-layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer"]
 layout_mode = 2
@@ -116,6 +118,7 @@ icon = SubResource("Texture2D_yvyyx")
 
 [node name="FiltersLabel" type="Label" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/FilterButton"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0

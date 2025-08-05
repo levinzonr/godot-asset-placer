@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dua2vx4bi1gmf"]
+[gd_scene load_steps=3 format=3 uid="uid://dua2vx4bi1gmf"]
 
 [ext_resource type="Script" uid="uid://b4q0diu63qlg8" path="res://addons/asset_placer/ui/asset_placer_options/asset_placer_options.gd" id="1_7uy5w"]
+[ext_resource type="Script" uid="uid://btqju8qjrlawq" path="res://addons/asset_placer/ui/components/vector3_spinbox.gd" id="2_k4pj7"]
 
 [node name="AssetPlacerOptions" type="Control"]
 layout_mode = 3
@@ -29,76 +30,66 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Options"
 
-[node name="SnappingHeader" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Snapping" type="FoldableContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+title = "Snapping Options"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Snapping"]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/SnappingHeader"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/SnappingHeader"]
-layout_mode = 2
-text = "Snapping Options"
-
-[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer/SnappingHeader"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-
-[node name="GridSnappingCheckbox" type="CheckBox" parent="MarginContainer/VBoxContainer"]
+[node name="GridSnappingCheckbox" type="CheckBox" parent="MarginContainer/VBoxContainer/Snapping/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Use Grid Snapping"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Snapping/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Snapping/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Grid Step"
 
-[node name="GridSnapValueSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="GridSnapValueSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/Snapping/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 step = 0.10000000000582077
 value = 1.0000000000582077
 
-[node name="TransformHeader" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="FoldableContainer" type="FoldableContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+title = "Transformations Options"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/FoldableContainer"]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/TransformHeader"]
-custom_minimum_size = Vector2(50, 0)
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
 layout_mode = 2
+text = "Randomize Rotation"
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/TransformHeader"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
 layout_mode = 2
-text = "Transformations"
+columns = 2
 
-[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer/TransformHeader"]
-custom_minimum_size = Vector2(50, 0)
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
+text = "Min"
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Rotation"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Axis"
-
-[node name="XRotationCheckbox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="MinRotationSelector" type="HBoxContainer" parent="MarginContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "X"
+script = ExtResource("2_k4pj7")
+min = Vector3(-180, -180, -180)
+max = Vector3(180, 180, 180)
+metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
-[node name="YRotationCheckbox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Max"
+
+[node name="MaxRotationSelector" type="HBoxContainer" parent="MarginContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Y"
-
-[node name="ZRotationCheckbox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Z"
+script = ExtResource("2_k4pj7")
+min = Vector3(-180, -180, -180)
+max = Vector3(180, 180, 180)
+metadata/_custom_type_script = "uid://btqju8qjrlawq"

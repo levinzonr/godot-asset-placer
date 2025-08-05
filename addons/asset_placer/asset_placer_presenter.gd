@@ -26,10 +26,12 @@ func set_grid_snapping_enabled(value: bool):
 	options.snapping_enabled = value
 	options_changed.emit(options)
 	
-func set_transform_rotation(x: bool, y: bool, z: bool):
-	options.transform_rotate_x = x;
-	options.transform_rotate_y = y;
-	options.transform_rotate_z = z	
+func set_min_rotation(vector: Vector3):
+	options.min_rotation = vector
+	options_changed.emit(options)
+
+func set_max_rotation(vector: Vector3):
+	options.max_rotation = vector
 	options_changed.emit(options)
 	
 func clear_selection():
