@@ -13,6 +13,7 @@
 ### Fixed
 - Align behavior of placement to place under currently selected node3d
 - Fixed and Issue of Every Mouse click resulting in Asset Placement
+- Fixed and Issue of Asset flying towards the camera when in placement mode
 
 ## 1.0.0 - ALPHA-02
 ### Added
