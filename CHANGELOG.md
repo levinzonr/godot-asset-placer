@@ -1,5 +1,18 @@
 # Godot Asset Placer Changelog
 
+## 1.0.0 - ALPHA03
+### Added
+- Add Options To Randomly Scale placed assets
+- Add more flexible options for Random Asset rotation
+- Add UndoRedo Integration for asset placement
+- Add Ability to Drag and Drop Folders and Assets into Assets and Folders window
+### Changed
+- Adjust the Icons for most fo the Icon Buttons
+- Update UI for the Collection Picker
+
+### Fixed
+- Align behavior of placement to place under currently selected node3d
+- Fixed and Issue of Every Mouse click resulting in Asset Placement
 
 ## 1.0.0 - ALPHA-02
 ### Added

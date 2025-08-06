@@ -10,11 +10,12 @@ This is Godot Editor plugin that allows for quick asset placement and management
 - Organize Assets into collections for quick access and filtering
 - Filter Assets by their name and collection
 - Grid snapping when placing assets
-- Randomize asset rotation on placement
+- Randomize asset Rotation and Scale on placement
+- Undo-Redo Integration
 
 <p align="center">
   <a href="https://youtu.be/ffRDdsYeiqM" target="_blank">
-    <img src="https://img.youtube.com/vi/ffRDdsYeiqM/0.jpg" alt="YouTube Video" />
+	<img src="https://img.youtube.com/vi/ffRDdsYeiqM/0.jpg" alt="YouTube Video" />
   </a>
 </p>
 
@@ -44,7 +45,6 @@ You can organize your assets into collections by selecting the assets and clicki
 Collections is a simple way to "group" assets together by some criteria. For example, you can create a collection for all the trees in your scene, or all the rocks, etc.
 
 ## Known Issues
-- The plugin currently does not support undo/redo for asset placement. This is a known issue and will be addressed in future updates.
 - So far plugin only supports .tscn files, glb and fbx models. If you have any other formats you would like to see supported, please let me know.
 - The UI is work in progress..
 
