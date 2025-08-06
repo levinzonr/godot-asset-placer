@@ -12,6 +12,9 @@ signal value_changed(vector: Vector3)
 @onready var spin_y := SpinBox.new()
 @onready var spin_z := SpinBox.new()
 
+
+@export var uniform: bool = false
+
 func _ready():
 	print("Add")
 	_add_spinbox("X", spin_x, min.x, max.y)
@@ -40,8 +43,8 @@ func _add_spinbox(axis: String, spinbox: SpinBox, min: float, max: float) -> voi
 	add_child(spinbox)
 
 func react_to_value_change(v: float):
-	print("Change")
-	print(str(get_vector()))
+	if uniform:
+		set_value_no_signal(Vector3(v, v,v))
 	value_changed.emit(get_vector())
 
 func get_vector() -> Vector3:

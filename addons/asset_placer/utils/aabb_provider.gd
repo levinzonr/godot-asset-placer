@@ -15,7 +15,7 @@ static func _get_combined_aabb(root: Node3D) -> AABB:
 		if mesh:
 			var local_aabb: AABB = mesh.get_aabb()
 			# Use transform instead of global_transform
-			local_aabb = _transform_aabb(local_aabb, root.transform)
+			local_aabb = _transform_aabb(local_aabb, root.global_transform)
 			aabb = local_aabb
 			first = false
 

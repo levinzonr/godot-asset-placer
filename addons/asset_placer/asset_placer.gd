@@ -9,12 +9,12 @@ var asset: AssetResource
 func start_placement(root: Window, asset: AssetResource):
 	self.asset = asset
 	preview_node = asset.scene.instantiate()
-	self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 	root.add_child(preview_node)
 	var scene = EditorInterface.get_selection().get_selected_nodes()[0]
 	if scene is Node3D:
-		preview_node.global_transform = AssetTransformations.transform_rotation(preview_node.global_transform, AssetPlacerPresenter._instance.options)
-		
+		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
+		self.preview_aabb = AABBProvider.provide_aabb(preview_node)
+
 	
 func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
 	
@@ -65,7 +65,7 @@ func _place_instance(transform: Transform3D):
 		undoredo.add_do_method(self, "_do_placement", scene_root, transform)
 		undoredo.add_undo_method(self, "_undo_placement", scene_root)
 		undoredo.commit_action()
-		preview_node.global_transform = AssetTransformations.transform_rotation(preview_node.global_transform, AssetPlacerPresenter._instance.options)
+		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
 
 func _do_placement(root: Node3D, transform: Transform3D):
 	var new_node: Node3D =  asset.scene.instantiate()
@@ -73,7 +73,7 @@ func _do_placement(root: Node3D, transform: Transform3D):
 	new_node.position = root.to_local(transform.origin)
 	root.add_child(new_node)
 	new_node.owner = EditorInterface.get_edited_scene_root()
-	node_history.push_back(new_node.name)
+	node_history.push_front(new_node.name)
 
 func _undo_placement(root: Node3D):
 	var last_added = node_history.pop_front()

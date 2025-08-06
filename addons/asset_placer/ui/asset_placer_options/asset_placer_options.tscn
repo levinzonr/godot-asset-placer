@@ -13,83 +13,130 @@ grow_vertical = 2
 script = ExtResource("1_7uy5w")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Options"
 
-[node name="Snapping" type="FoldableContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Snapping" type="FoldableContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 title = "Snapping Options"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Snapping"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping"]
 layout_mode = 2
 
-[node name="GridSnappingCheckbox" type="CheckBox" parent="MarginContainer/VBoxContainer/Snapping/VBoxContainer"]
+[node name="GridSnappingCheckbox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Use Grid Snapping"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Snapping/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Snapping/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Grid Step"
 
-[node name="GridSnapValueSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/Snapping/VBoxContainer/HBoxContainer"]
+[node name="GridSnapValueSpinBox" type="SpinBox" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 step = 0.10000000000582077
 value = 1.0000000000582077
 
-[node name="FoldableContainer" type="FoldableContainer" parent="MarginContainer/VBoxContainer"]
+[node name="FoldableContainer" type="FoldableContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 title = "Transformations Options"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/FoldableContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
 layout_mode = 2
 text = "Randomize Rotation"
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Min"
 
-[node name="MinRotationSelector" type="HBoxContainer" parent="MarginContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
+[node name="MinRotationSelector" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("2_k4pj7")
 min = Vector3(-180, -180, -180)
 max = Vector3(180, 180, 180)
+uniform = null
 metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Max"
 
-[node name="MaxRotationSelector" type="HBoxContainer" parent="MarginContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
+[node name="MaxRotationSelector" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("2_k4pj7")
 min = Vector3(-180, -180, -180)
 max = Vector3(180, 180, 180)
+uniform = null
+metadata/_custom_type_script = "uid://btqju8qjrlawq"
+
+[node name="Label2" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
+layout_mode = 2
+text = "Randomize Scale"
+
+[node name="UniformScaleCheckBox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Unform Scaling"
+
+[node name="GridContainer2" type="GridContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+text = "Min"
+
+[node name="MinScaleSelector" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2_k4pj7")
+min = Vector3(-100, -100, -100)
+max = Vector3(100, 100, 100)
+uniform = null
+metadata/_custom_type_script = "uid://btqju8qjrlawq"
+
+[node name="Label2" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer2"]
+layout_mode = 2
+text = "Max"
+
+[node name="MaxScaleSelector" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2_k4pj7")
+min = Vector3(-100, -100, -100)
+max = Vector3(100, 100, 100)
+uniform = null
 metadata/_custom_type_script = "uid://btqju8qjrlawq"
