@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://sas7j2dyfkr3"]
+[gd_scene load_steps=10 format=3 uid="uid://sas7j2dyfkr3"]
 
 [ext_resource type="PackedScene" uid="uid://dqpwyuw1xhymj" path="res://demo/assets/JaggedRock1.glb" id="2_ytiva"]
 [ext_resource type="PackedScene" uid="uid://b8p1iy52py3xm" path="res://demo/assets/ForestRock2.glb" id="3_j5lb4"]
+[ext_resource type="PackedScene" uid="uid://7u1qc3y84jbe" path="res://demo/assets/pillar.glb" id="4_j5lb4"]
+[ext_resource type="PackedScene" uid="uid://dnjrvjljdl02" path="res://demo/assets/cube.tscn" id="4_onu7k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hjng"]
 size = Vector3(100, 0.1, 100)
@@ -33,8 +35,29 @@ shape = SubResource("BoxShape3D_5hjng")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00016975403, 0, 0)
 mesh = SubResource("PlaneMesh_d6po2")
 
+[node name="Cube" type="Node3D" parent="StaticBody3D" instance=ExtResource("4_onu7k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.793158, 1.0187035, 12.722178)
+
+[node name="@Node3D@34099" type="Node3D" parent="StaticBody3D" instance=ExtResource("4_onu7k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3121861, 1.018703, 19.993536)
+
+[node name="@Node3D@34100" type="Node3D" parent="StaticBody3D" instance=ExtResource("4_onu7k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7980447, 1.018703, 22.782814)
+
 [node name="@Node3D@56943" parent="." instance=ExtResource("3_j5lb4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.104689, 1.426089, 32.50158)
 
-[node name="JaggedRock12" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+[node name="JaggedRock12" parent="." instance=ExtResource("2_ytiva")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.190771, 0.87377894, 29.812342)
+
+[node name="Cube" type="Node3D" parent="." instance=ExtResource("4_onu7k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.024559, 0.96870303, 22.047274)
+
+[node name="@Node3D@34279" type="Node3D" parent="." instance=ExtResource("4_onu7k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.239805, 0.96870303, 16.602142)
+
+[node name="@Node3D@34280" type="Node3D" parent="." instance=ExtResource("4_onu7k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.389158, 0.96870303, 14.869788)
+
+[node name="pillar" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5234184, 0.5931597, 15.171877)

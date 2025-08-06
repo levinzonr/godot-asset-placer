@@ -15,26 +15,37 @@ func start_placement(root: Window, asset: AssetResource):
 		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
 		self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
-	
+
 func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
-	
+
 	if EditorInterface.get_edited_scene_root() is not Node3D:
-		pass
-	
+			pass
+
 	if  preview_node:
 		if event is InputEventMouseMotion:
 			var ray_origin = camera.project_ray_origin(event.position)
-			var ray_dir = camera.project_ray_normal(event.position)
+			var	 ray_dir = camera.project_ray_normal(event.position)
 			var space_state = camera.get_world_3d().direct_space_state
 
 			var params = PhysicsRayQueryParameters3D.new()
 			params.from = ray_origin
 			params.to = ray_origin + ray_dir * 1000
 			var result = space_state.intersect_ray(params)
-			if result: 
+			if result:
 				var snapped_pos = _snap_position(result.position)
-				var base_y = preview_aabb.position.y
-				preview_node.global_transform.origin = snapped_pos - Vector3(0, base_y, 0)
+
+				preview_node.global_transform.origin = snapped_pos
+				preview_node.force_update_transform()
+				preview_aabb = AABBProvider.provide_aabb(preview_node)
+
+				var bottom_y = preview_aabb.position.y
+
+				var y_offset = snapped_pos.y - bottom_y
+
+				var new_origin = preview_node.global_transform.origin
+				new_origin.y += y_offset
+				preview_node.global_transform.origin = new_origin
+
 
 
 		elif event is InputEventMouseButton and event.pressed:
@@ -45,7 +56,7 @@ func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
 				return false
 
 	return false
-	
+
 func _snap_position(pos: Vector3):
 	if !AssetPlacerPresenter._instance.options.snapping_enabled:
 		return pos
@@ -55,7 +66,7 @@ func _snap_position(pos: Vector3):
 		round(pos.y / grid_step) * grid_step,
 		round(pos.z / grid_step) * grid_step
 	)
-	
+
 func _place_instance(transform: Transform3D):
 	var selection = EditorInterface.get_selection()
 	var scene_root = selection.get_selected_nodes()[0]
@@ -80,7 +91,7 @@ func _undo_placement(root: Node3D):
 	var node_index = root.get_children().find_custom(func(a): return a.name == last_added)
 	var node = root.get_child(node_index)
 	node.queue_free()
-	
+
 
 func stop_placement():
 	self.asset = null

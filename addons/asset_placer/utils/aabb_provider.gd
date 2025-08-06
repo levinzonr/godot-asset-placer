@@ -2,51 +2,29 @@ extends RefCounted
 class_name AABBProvider
 
 static func provide_aabb(node: Node3D) -> AABB:
-	return _get_combined_aabb(node)
-	
-	
-static func _get_combined_aabb(root: Node3D) -> AABB:
-	var aabb := AABB()
-	var first = true
+	return get_node_aabb(node, false)
 
-	# Include root if it is a MeshInstance3D
-	if root is MeshInstance3D:
-		var mesh: Mesh = root.mesh
-		if mesh:
-			var local_aabb: AABB = mesh.get_aabb()
-			# Use transform instead of global_transform
-			local_aabb = _transform_aabb(local_aabb, root.global_transform)
-			aabb = local_aabb
-			first = false
+## Return the [AABB] of the node.
+static func get_node_aabb(node : Node, exclude_top_level_transform: bool = true) -> AABB:
+	var bounds : AABB = AABB()
 
-	for child in root.get_children():
-		if child is Node3D:
-			var sub_aabb = _get_combined_aabb(child)
-			if !first:
-				aabb = aabb.merge(sub_aabb)
-			else:
-				aabb = sub_aabb
-				first = false
+	# Do not include children that is queued for deletion
+	if node.is_queued_for_deletion():
+		return bounds
 
-	return aabb
+	# Get the aabb of the visual instance
+	if node is VisualInstance3D:
+		bounds = node.get_aabb();
 
-static func _transform_aabb(aabb: AABB, transform: Transform3D) -> AABB:
-	var corners = [
-		Vector3(aabb.position.x, aabb.position.y, aabb.position.z),
-		Vector3(aabb.position.x + aabb.size.x, aabb.position.y, aabb.position.z),
-		Vector3(aabb.position.x, aabb.position.y + aabb.size.y, aabb.position.z),
-		Vector3(aabb.position.x, aabb.position.y, aabb.position.z + aabb.size.z),
-		Vector3(aabb.position.x + aabb.size.x, aabb.position.y + aabb.size.y, aabb.position.z),
-		Vector3(aabb.position.x + aabb.size.x, aabb.position.y, aabb.position.z + aabb.size.z),
-		Vector3(aabb.position.x, aabb.position.y + aabb.size.y, aabb.position.z + aabb.size.z),
-		Vector3(aabb.position.x + aabb.size.x, aabb.position.y + aabb.size.y, aabb.position.z + aabb.size.z)
-	]
+	# Recurse through all children
+	for child in node.get_children():
+		var child_bounds : AABB = get_node_aabb(child, false)
+		if bounds.size == Vector3.ZERO:
+			bounds = child_bounds
+		else:
+			bounds = bounds.merge(child_bounds)
 
-	var transformed = transform * corners[0]
-	var result = AABB(transformed, Vector3.ZERO)
+	if !exclude_top_level_transform:
+		bounds = node.transform * bounds
 
-	for i in range(1, corners.size()):
-		transformed = transform * corners[i]
-		result = result.expand(transformed)
-
-	return result
+	return bounds	

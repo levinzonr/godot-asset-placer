@@ -3,7 +3,7 @@ extends EditorPlugin
 
 var _folder_repository: FolderRepository
 var _presenter: AssetPlacerPresenter
-var  _asset_placer: AssetPlacer = AssetPlacer.new()
+var  _asset_placer: AssetPlacer
 
 var _asset_placer_window: AssetLibraryPanel
 
@@ -19,6 +19,7 @@ func _disable_plugin():
 	pass
 	
 func _enter_tree():
+	_asset_placer = AssetPlacer.new()
 	_folder_repository = FolderRepository.new()
 	_asset_placer = AssetPlacer.new()
 	_presenter = AssetPlacerPresenter.new()
