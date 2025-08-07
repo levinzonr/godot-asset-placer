@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dephufwlu765k" path="res://addons/asset_placer/ui/components/asset_thumbnail.gd" id="2_xdgah"]
 
 [node name="AssetResourcePreview" type="Button"]
-custom_minimum_size = Vector2(150, 250)
+custom_minimum_size = Vector2(200, 200)
 offset_right = 150.0
 offset_bottom = 250.0
 theme_type_variation = &"FlatButton"

@@ -1,7 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://dua2vx4bi1gmf"]
+[gd_scene load_steps=6 format=3 uid="uid://dua2vx4bi1gmf"]
 
 [ext_resource type="Script" uid="uid://b4q0diu63qlg8" path="res://addons/asset_placer/ui/asset_placer_options/asset_placer_options.gd" id="1_7uy5w"]
 [ext_resource type="Script" uid="uid://btqju8qjrlawq" path="res://addons/asset_placer/ui/components/vector3_spinbox.gd" id="2_k4pj7"]
+[ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_o45xf"]
+
+[sub_resource type="Texture2D" id="Texture2D_ik2kd"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_o45xf")
+icon_name = &"KeyTrackRotation"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_o45xf"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_o45xf")
+icon_name = &"KeyTrackScale"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [node name="AssetPlacerOptions" type="Control"]
 layout_mode = 3
@@ -60,6 +75,7 @@ unique_name_in_owner = true
 layout_mode = 2
 step = 0.10000000000582077
 value = 1.0000000000582077
+editable = false
 
 [node name="FoldableContainer" type="FoldableContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -68,7 +84,19 @@ title = "Transformations Options"
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("Texture2D_ik2kd")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Randomize Rotation"
 
@@ -86,7 +114,6 @@ layout_mode = 2
 script = ExtResource("2_k4pj7")
 min = Vector3(-180, -180, -180)
 max = Vector3(180, 180, 180)
-uniform = null
 metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
 [node name="Label2" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
@@ -99,16 +126,28 @@ layout_mode = 2
 script = ExtResource("2_k4pj7")
 min = Vector3(-180, -180, -180)
 max = Vector3(180, 180, 180)
-uniform = null
 metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
-[node name="Label2" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("Texture2D_o45xf")
+stretch_mode = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
 layout_mode = 2
 text = "Randomize Scale"
 
 [node name="UniformScaleCheckBox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+button_pressed = true
 text = "Unform Scaling"
 
 [node name="GridContainer2" type="GridContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer"]
@@ -125,7 +164,7 @@ layout_mode = 2
 script = ExtResource("2_k4pj7")
 min = Vector3(-100, -100, -100)
 max = Vector3(100, 100, 100)
-uniform = null
+uniform = true
 metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
 [node name="Label2" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer2"]
@@ -138,5 +177,5 @@ layout_mode = 2
 script = ExtResource("2_k4pj7")
 min = Vector3(-100, -100, -100)
 max = Vector3(100, 100, 100)
-uniform = null
+uniform = true
 metadata/_custom_type_script = "uid://btqju8qjrlawq"

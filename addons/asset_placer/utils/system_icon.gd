@@ -4,7 +4,7 @@ class_name EditorIconTexture2D
 
 @export var icon_name: StringName = &"Node2D"
 
-var _resolved_icon: Texture2D = null
+var _resolved_icon: Texture2D = null;
 
 func _resolve():
 	if not Engine.is_editor_hint():
