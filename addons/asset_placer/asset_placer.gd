@@ -6,15 +6,26 @@ var preview_aabb: AABB
 var node_history: Array[String] = []
 var asset: AssetResource
 
+var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
+
 func start_placement(root: Window, asset: AssetResource):
 	self.asset = asset
-	preview_node = asset.scene.instantiate()
+	preview_node = (asset.scene.instantiate() as Node3D).duplicate()
 	root.add_child(preview_node)
+	_apply_preview_material(preview_node)
 	var scene = EditorInterface.get_selection().get_selected_nodes()[0]
 	if scene is Node3D:
 		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
 		self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
+func _apply_preview_material(node: Node3D):
+	for child in node.get_children():
+		if child is MeshInstance3D:
+			for i in child.get_surface_override_material_count():
+				print("Set material")
+				child.set_surface_override_material(i, preview_material)
+		_apply_preview_material(child)
+		
 
 func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
 
