@@ -7,6 +7,7 @@ var node_history: Array[String] = []
 var preview_rids = []
 var asset: AssetResource
 
+var meta_asset_id = &"asset_placer_res_id"
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
 
 func start_placement(root: Window, asset: AssetResource):
@@ -104,6 +105,8 @@ func _do_placement(root: Node3D, transform: Transform3D):
 	var new_node: Node3D =  asset.scene.instantiate()
 	new_node.global_transform = transform
 	new_node.position = root.to_local(transform.origin)
+	new_node.set_meta(meta_asset_id, asset.id)
+	new_node.name = _pick_name(new_node, root)
 	root.add_child(new_node)
 	new_node.owner = EditorInterface.get_edited_scene_root()
 	node_history.push_front(new_node.name)
@@ -114,10 +117,16 @@ func _undo_placement(root: Node3D):
 	var node = root.get_child(node_index)
 	node.queue_free()
 
-
 func stop_placement():
 	self.asset = null
 	if preview_node:
 		preview_node.queue_free()
 		preview_node = null
 		
+
+func _pick_name(node: Node3D, parent: Node3D) -> String:
+	var number_of_same_scenes = 0
+	for child in parent.get_children():
+		if child.has_meta(meta_asset_id) && child.get_meta(meta_asset_id) == asset.id:
+			number_of_same_scenes += 1
+	return node.name if number_of_same_scenes == 0 else node.name + " (%s)" % number_of_same_scenes		
