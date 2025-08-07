@@ -11,7 +11,6 @@ class_name AssetLibraryWindow
 @onready var filter_button: Button = %FilterButton
 @onready var filters_label: Label = %FiltersLabel
 
-var picker_resource = preload("res://addons/asset_placer/ui/collection_picker/collection_picker.tscn")
 
 signal asset_selected(asset: AssetResource)
 
@@ -46,9 +45,9 @@ func show_assets(assets: Array[AssetResource]):
 func show_asset_menu(asset: AssetResource, control: Control):
 	var options_menu := PopupMenu.new()
 	var mouse_pos = EditorInterface.get_base_control().get_global_mouse_position()
-	options_menu.add_item("Manage collections")
-	options_menu.add_item("Open")
-	options_menu.add_item("Remove")
+	options_menu.add_icon_item(EditorIconTexture2D.new("Groups"), "Manage collections")
+	options_menu.add_icon_item(EditorIconTexture2D.new("File"), "Open")
+	options_menu.add_icon_item(EditorIconTexture2D.new("Remove"), "Remove")
 	options_menu.index_pressed.connect(func(index):
 		match index:
 			0: CollectionPicker.show_in(control, asset.shallow_collections, func(collection, add):

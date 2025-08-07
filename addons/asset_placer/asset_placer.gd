@@ -4,6 +4,7 @@ class_name AssetPlacer
 var preview_node: Node3D
 var preview_aabb: AABB
 var node_history: Array[String] = []
+var preview_rids = []
 var asset: AssetResource
 
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
@@ -12,6 +13,7 @@ func start_placement(root: Window, asset: AssetResource):
 	self.asset = asset
 	preview_node = (asset.scene.instantiate() as Node3D).duplicate()
 	root.add_child(preview_node)
+	preview_rids = get_collision_rids(preview_node)
 	_apply_preview_material(preview_node)
 	var scene = EditorInterface.get_selection().get_selected_nodes()[0]
 	if scene is Node3D:
@@ -40,6 +42,7 @@ func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
 
 			var params = PhysicsRayQueryParameters3D.new()
 			params.from = ray_origin
+			params.exclude = preview_rids
 			params.to = ray_origin + ray_dir * 1000
 			var result = space_state.intersect_ray(params)
 			if result:
@@ -67,6 +70,14 @@ func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
 				return false
 
 	return false
+
+func get_collision_rids(node: Node) -> Array:
+	var rids = []
+	for child in node.get_children():
+		if child is CollisionObject3D:
+			rids.append(child.get_rid())
+		rids += get_collision_rids(child)
+	return rids
 
 func _snap_position(pos: Vector3):
 	if !AssetPlacerPresenter._instance.options.snapping_enabled:

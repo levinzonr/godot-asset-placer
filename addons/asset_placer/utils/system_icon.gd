@@ -6,6 +6,9 @@ class_name EditorIconTexture2D
 
 var _resolved_icon: Texture2D = null;
 
+func _init(name: String =  &"Node2D"):
+	self.icon_name = name
+
 func _resolve():
 	if not Engine.is_editor_hint():
 		return # Don’t try resolving outside editor
