@@ -4,29 +4,93 @@ class_name Synchronize
 var folder_repository: FolderRepository
 var asset_repository: AssetsRepository
 
+static var instance: Synchronize
+
+signal sync_state_change(running: bool)
+signal sync_complete(added: int, removed: int, scanned: int)
+
+var _added = 0
+var _removed = 0
+var _scanned = 0
+
+var sync_running = false:
+	set(value):
+		sync_running = value
+		call_deferred("emit_signal", "sync_state_change", value)
+
 func _init(folders_repository: FolderRepository, assets_repository: AssetsRepository):
 	self.asset_repository = assets_repository
 	self.folder_repository = folders_repository
-	
-
-func sync_folder(folder: AssetFolder):
-	sync_folder_path(folder.path, folder.include_subfolders)
+	instance = self
 
 func sync_all():
-	for folder in folder_repository:
-		sync_folder(folder)	
+	
+	if sync_running:
+		push_error("Sync is already running")
+		return
+	
+	WorkerThreadPool.add_task(func():
+		sync_running = true
+		_sync_all()
+		_notify_scan_complete()
+		sync_running = false
+	)
 
-func sync_folder_path(folder_path: String, recursive: bool):
+func sync_folder(folder: AssetFolder):
+	
+	if sync_running:
+		push_error("Sync is already running")
+		return
+	
+	WorkerThreadPool.add_task(func():
+		sync_running = true
+		_sync_folder(folder)
+		_notify_scan_complete()
+		sync_running = false
+	)
+
+
+func _sync_folder(folder: AssetFolder):
+	_clear_invalid_assets()
+	add_assets_from_folder(folder.path, folder.include_subfolders)
+
+func _sync_all():
+	print("Sync")
+	_clear_invalid_assets()
+	for folder in folder_repository.get_all():
+		_sync_folder(folder)
+
+func add_assets_from_folder(folder_path: String, recursive: bool):
 	var dir = DirAccess.open(folder_path)
 	for file in dir.get_files():
 		if is_file_supported(file):
+			_scanned += 1
 			var path = folder_path + "/" + file
-			asset_repository.add_asset(path)	
+			if asset_repository.add_asset(path):
+				_added += 1
 		
 	if recursive:
 		for sub_dir in dir.get_directories():
 			var path: String = folder_path + "/" + sub_dir
-			sync_folder_path(path, true)
+			
+			add_assets_from_folder(path, true)
+
+
+func _notify_scan_complete():
+	call_deferred("emit_signal", "sync_complete", _added, _removed, _scanned)
+	_clear_data()
+			
+func _clear_invalid_assets():
+	for asset in asset_repository.get_all_assets():
+		if asset.scene == null:
+			_removed += 1 
+			asset_repository.delete(asset.id)
+
+func _clear_data():
+	_removed = 0
+	_added = 0
+	_scanned = 0		
+			
 	
 func is_file_supported(file: String)	->  bool:
 	return file.ends_with(".tscn") || file.ends_with(".glb") || file.ends_with(".fbx")

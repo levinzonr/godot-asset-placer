@@ -16,7 +16,6 @@ signal value_changed(vector: Vector3)
 @export var uniform: bool = false
 
 func _ready():
-	print("Add")
 	_add_spinbox("X", spin_x, min.x, max.y)
 	_add_spinbox("Y", spin_y, min.y, max.y)
 	_add_spinbox("Z", spin_z, min.z, max.z)

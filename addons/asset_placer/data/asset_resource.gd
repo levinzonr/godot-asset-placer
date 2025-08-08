@@ -2,10 +2,11 @@
 extends RefCounted
 class_name AssetResource
 
-@export var scene: PackedScene
-@export var name: String
-@export var id: String
-@export var tags: Array[String]
+var name: String
+var id: String
+var tags: Array[String]
+
+var _scene: PackedScene = null
 
 
 var shallow_collections: Array[AssetCollection]:
@@ -15,11 +16,20 @@ var shallow_collections: Array[AssetCollection]:
 			shallow.push_back(AssetCollection.new(name, Color.TRANSPARENT))
 		return shallow
 
-func _init(scene: PackedScene, name: String, tags: Array[String] = []):
-	self.scene = scene
+func _init(resId: String, name: String, tags: Array[String] = []):
 	self.name = name
-	self.id = ResourceUID.path_to_uid(scene.resource_path)
+	self.id = resId
 	self.tags = tags
+
+
+var scene: PackedScene:
+	get(): 
+		if _scene == null:
+			_scene = load(id)
+			return _scene
+		else:
+			return _scene
+
 
 
 func belongs_to_collection(collection : AssetCollection) -> bool:

@@ -32,12 +32,11 @@ func get_library() -> AssetLibrary:
 				var raw_tags = dict["tags"]
 				for tag in raw_tags:
 					tags.append(tag)
-			var scene = load(id)
-			var asset = AssetResource.new(scene, name, tags)
+			var asset = AssetResource.new(id, name, tags)
 			assets.append(asset)
 		
 		for collection_dict in collections_dict:
-			var name =collection_dict["name"]
+			var name = collection_dict["name"]
 			var color_string: String = collection_dict["color"]
 			var color = Color.from_string(color_string, Color.AQUA)
 			collections.append(AssetCollection.new(name, color))

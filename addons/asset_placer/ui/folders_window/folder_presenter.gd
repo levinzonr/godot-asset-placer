@@ -9,7 +9,7 @@ var sync: Synchronize
 
 func _init():
 	self.folder_repository = FolderRepository.instance
-	self.asset_repository = AssetsRepository.new()
+	self.asset_repository = AssetsRepository.instance
 	self.sync = Synchronize.new(self.folder_repository, self.asset_repository)
 
 

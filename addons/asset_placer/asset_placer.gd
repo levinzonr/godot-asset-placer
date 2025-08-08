@@ -25,7 +25,6 @@ func _apply_preview_material(node: Node3D):
 	for child in node.get_children():
 		if child is MeshInstance3D:
 			for i in child.get_surface_override_material_count():
-				print("Set material")
 				child.set_surface_override_material(i, preview_material)
 		_apply_preview_material(child)
 		
