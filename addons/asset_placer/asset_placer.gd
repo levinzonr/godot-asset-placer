@@ -73,9 +73,9 @@ func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
 
 func get_collision_rids(node: Node) -> Array:
 	var rids = []
+	if node is CollisionObject3D:
+		rids.append(node.get_rid())
 	for child in node.get_children():
-		if child is CollisionObject3D:
-			rids.append(child.get_rid())
 		rids += get_collision_rids(child)
 	return rids
 
