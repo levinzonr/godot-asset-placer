@@ -40,24 +40,22 @@ func do_update():
 	zip_reader.open(TMP_ZIP)
 	var files: PackedStringArray = zip_reader.get_files()
 	
-	
-	var filtered := PackedStringArray()
-	
-	for path in files:
-		if path.get_file().begins_with("."):
-			pass
-		else:
-			filtered.append(path)
-	
-	
-	
-	var base_path = filtered[1]
-	print(filtered)
-	
-	zip_reader.close()
-	return;
+	OS.move_to_trash(ProjectSettings.globalize_path("res://addons/asset_placer"))
 
-	for path in filtered:
+	
+	var base_path: String
+
+	for path in files:
+		if path.ends_with("/addons/asset_placer/"):
+			base_path = path
+			break
+	
+	
+
+	for path in files:
+		if not path.contains(base_path):
+			continue
+		
 		var new_file_path: String = path.replace(base_path, "")
 		if path.ends_with("/"):
 			DirAccess.make_dir_recursive_absolute("res://addons/%s" % new_file_path)
