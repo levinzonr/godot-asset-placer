@@ -3,6 +3,7 @@ name: "🐛 Bug Report"
 about: Report a bug or unexpected behavior in the Godot Asset Placer plugin
 title: "[BUG] "
 labels: bug
+assignees: levinzonr
 ---
 
 ## Description

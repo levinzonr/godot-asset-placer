@@ -1,8 +1,9 @@
 ---
 name: "✨ Feature Request"
 about: Suggest an idea or improvement for the Godot Asset Placer plugin
-title: "[Feature] "
+title: "[Feature Request] "
 labels: enhancement
+assignees: levinzonr
 ---
 
 ## Describe the Feature
