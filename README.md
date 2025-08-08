@@ -30,11 +30,9 @@ This is Godot Editor plugin that allows for quick asset placement and management
 # Usage
 ## Adding Assets
 Right now the plugin relies on user selecting the folders where your assets are located so that not every scene is added automatically.
-You can folders for the plugin sync using "Add folder button" or Folders Tab
+You can folders to sync by either Drag And Droping the folder or  using "Add folder button" within Folders Tab
 ![addon_folders.png](docs/addon_folders.png)
 
-After you have added the folders, you can use "Reload" button to sync that folder
-> Right now this flow feels a bit clunky, but it is the best I could come up with for now. If you have any suggestions on how to improve it, please let me know.
 
 ## Placing Assets
 To place an asset, select it from the list and click and navigate to the 3D scene of you choice. If all goes well, you should see a preview of your asset snapping to the neares surface
@@ -49,14 +47,12 @@ Collections is a simple way to "group" assets together by some criteria. For exa
 - So far plugin only supports .tscn files, glb and fbx models. If you have any other formats you would like to see supported, please let me know.
 - The UI is work in progress..
 
-[demo.mov](docs/demo.mov)
-
 
 ## Contributing
 Found a problem or have an idea?
 - [🐛 Report a bug](https://github.com/levinzonr/godot-asset-placer/issues/new?template=bug_report.md&labels=bug&title=%5BBUG%5D%20)
 - [✨ Request a feature](https://github.com/levinzonr/godot-asset-placer/issues/new?template=feature_request.md&labels=enhancement&title=%5BFeature%5D%20)
-PR
+
 
 ## Changelog
 See the [CHANGELOG.md](CHANGELOG.md) for a full list of changes and updates.
