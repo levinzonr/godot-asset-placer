@@ -25,7 +25,7 @@ func _init(local_config_path: String, remote_config_path: String):
 func check_for_updates():
 	_latest_update = _get_latest_update()
 	var current_version = PluginConfiguration.new(_local_plugin_path).version
-	if current_version.compare_to(_latest_update.version) > 0:
+	if current_version.compare_to(_latest_update.version) == 0:
 		updater_update_available.emit(_latest_update)
 	else:
 		updater_up_to_date.emit()
@@ -40,13 +40,24 @@ func do_update():
 	zip_reader.open(TMP_ZIP)
 	var files: PackedStringArray = zip_reader.get_files()
 	
-	var base_path = files[1]
-	# Remove archive folder
-	files.remove_at(0)
-	# Remove assets folder
-	files.remove_at(0)
-
+	
+	var filtered := PackedStringArray()
+	
 	for path in files:
+		if path.get_file().begins_with("."):
+			pass
+		else:
+			filtered.append(path)
+	
+	
+	
+	var base_path = filtered[1]
+	print(filtered)
+	
+	zip_reader.close()
+	return;
+
+	for path in filtered:
 		var new_file_path: String = path.replace(base_path, "")
 		if path.ends_with("/"):
 			DirAccess.make_dir_recursive_absolute("res://addons/%s" % new_file_path)

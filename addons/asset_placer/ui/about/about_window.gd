@@ -9,6 +9,7 @@ extends Control
 @onready var update_button: Button = %UpdateButton
 @onready var update_version_label: Label = %UpdateVersionLabel
 @onready var changelog_link_button: LinkButton = %ChangelogLinkButton
+@onready var update_and_restart_btn: Button = %UpdateAndRestartBtn
 
 @onready var update_popup: Popup = $UpdatePopup
 
@@ -25,7 +26,7 @@ func _ready():
 	)
 	PluginUpdater.instance.updater_up_to_date.connect(update_button.hide)
 	update_button.pressed.connect(update_popup.popup)
-
+	update_and_restart_btn.pressed.connect(PluginUpdater.instance.do_update)
 	
 	PluginUpdater.instance.check_for_updates()
 	
