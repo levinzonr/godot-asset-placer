@@ -1,7 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://dynyrwa38r5ag"]
+[gd_scene load_steps=7 format=3 uid="uid://dynyrwa38r5ag"]
 
 [ext_resource type="Script" uid="uid://43kdnn7nr2ch" path="res://addons/asset_placer/ui/about/about_window.gd" id="1_namxt"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_r5xs8"]
+
+[sub_resource type="Texture2D" id="Texture2D_4v60v"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_r5xs8")
+icon_name = &"NodeInfo"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [sub_resource type="Texture2D" id="Texture2D_vijnu"]
 resource_local_to_scene = false
@@ -32,6 +39,51 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_namxt")
+
+[node name="UpdatePopup" type="PopupPanel" parent="."]
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(499, 189)
+
+[node name="MarginContainer" type="MarginContainer" parent="UpdatePopup"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 495.0
+offset_bottom = 185.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Vbox" type="VBoxContainer" parent="UpdatePopup/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="UpdatePopup/MarginContainer/Vbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Update Available"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpdatePopup/MarginContainer/Vbox"]
+layout_mode = 2
+
+[node name="UpdateVersionLabel" type="Label" parent="UpdatePopup/MarginContainer/Vbox/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "Version: 1.0.0"
+
+[node name="ChangelogLinkButton" type="LinkButton" parent="UpdatePopup/MarginContainer/Vbox/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "View Changelog"
+
+[node name="Button" type="Button" parent="UpdatePopup/MarginContainer/Vbox"]
+layout_mode = 2
+text = "Update And Restart"
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -64,6 +116,14 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Version 1.0.0-alpha04"
+
+[node name="UpdateButton" type="Button" parent="Panel/CenterContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 4
+text = "Check For Update"
+icon = SubResource("Texture2D_4v60v")
 
 [node name="Space" type="Control" parent="Panel/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 64)

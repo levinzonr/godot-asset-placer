@@ -6,12 +6,16 @@ var _presenter: AssetPlacerPresenter
 var  _asset_placer: AssetPlacer
 var _assets_repository: AssetsRepository
 var synchronizer: Synchronize
+var _updater: PluginUpdater
 
 var _asset_placer_window: AssetLibraryPanel
 var _file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
 
 var plugin_path: String:
 	get(): return get_script().resource_path.get_base_dir()
+	
+	
+const ADDON_PATH = "res://addons/asset_placer"	
 
 
 func _enable_plugin():
@@ -21,6 +25,7 @@ func _disable_plugin():
 	pass
 	
 func _enter_tree():
+	_updater = PluginUpdater.new(ADDON_PATH +  "/plugin.cfg", "")
 	_asset_placer = AssetPlacer.new()
 	_folder_repository = FolderRepository.new()
 	_assets_repository = AssetsRepository.new()
