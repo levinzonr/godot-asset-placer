@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://3qun24bndqll"]
+[gd_scene load_steps=10 format=3 uid="uid://3qun24bndqll"]
 
 [ext_resource type="Script" uid="uid://d3hm5bn8vmd2" path="res://addons/asset_placer/ui/asset_library_window/asset_library_window.gd" id="1_l06eo"]
 [ext_resource type="PackedScene" uid="uid://dua2vx4bi1gmf" path="res://addons/asset_placer/ui/asset_placer_options/asset_placer_options.tscn" id="2_qx6qk"]
@@ -42,6 +42,13 @@ script = ExtResource("3_gvdec")
 icon_name = &"Reload"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
+[sub_resource type="Texture2D" id="Texture2D_mdpb8"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_gvdec")
+icon_name = &"FolderCreate"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
 [node name="AssetLibraryWindow" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -62,7 +69,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="HBoxContainer" type="HSplitContainer" parent="Panel"]
+[node name="MainContent" type="HSplitContainer" parent="Panel"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,18 +79,18 @@ grow_horizontal = 2
 grow_vertical = 2
 split_offset = -370
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MainContent"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AssetPlacerOptions" parent="Panel/HBoxContainer/ScrollContainer" instance=ExtResource("2_qx6qk")]
+[node name="AssetPlacerOptions" parent="Panel/MainContent/ScrollContainer" instance=ExtResource("2_qx6qk")]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 localize_numeral_system = false
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MainContent"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 16
@@ -90,40 +98,40 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MainContent/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MainContent/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 2
 
-[node name="Label" type="Label" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 36
 text = "Assets"
 
-[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("Texture2D_gvdec")
 stretch_mode = 3
 
-[node name="SearchField" type="LineEdit" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SearchField" type="LineEdit" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 placeholder_text = "Filter assets by name"
 
-[node name="FilterButton" type="Button" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="FilterButton" type="Button" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Edit"
 icon = SubResource("Texture2D_yvyyx")
 
-[node name="FiltersLabel" type="Label" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/FilterButton"]
+[node name="FiltersLabel" type="Label" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer/FilterButton"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -143,19 +151,19 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AddFolderButton" type="Button" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="AddFolderButton" type="Button" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "FolderCreate"
 icon = SubResource("Texture2D_5cqey")
 
-[node name="ReloadButton" type="Button" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ReloadButton" type="Button" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Sync Assets"
 icon = SubResource("Texture2D_qx6qk")
 
-[node name="ProgressBar" type="ProgressBar" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(100, 10)
@@ -165,12 +173,54 @@ size_flags_vertical = 4
 indeterminate = true
 editor_preview_indeterminate = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MainContent/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GridContainer" type="HFlowContainer" parent="Panel/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="GridContainer" type="HFlowContainer" parent="Panel/MainContent/MarginContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="EmptyContent" type="CenterContainer" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Panel/EmptyContent"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/EmptyContent/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Welcome to Asset Placer!"
+horizontal_alignment = 1
+
+[node name="Space" type="Control" parent="Panel/EmptyContent/HBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Panel/EmptyContent/HBoxContainer"]
+layout_mode = 2
+text = "Start by draggin and dropping your folder with Assets or Asset files themeselves to get started"
+
+[node name="Label3" type="Label" parent="Panel/EmptyContent/HBoxContainer"]
+layout_mode = 2
+text = "Or"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel/EmptyContent/HBoxContainer"]
+layout_mode = 2
+
+[node name="EmptyViewAddFolderBtn" type="Button" parent="Panel/EmptyContent/HBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add Folders  Using Dialog"
+icon = SubResource("Texture2D_mdpb8")

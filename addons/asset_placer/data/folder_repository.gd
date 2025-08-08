@@ -30,10 +30,10 @@ func update(folder: AssetFolder):
 		library.folders = folders
 		data_source.save_libray(library)
 
-func add(folder: String):
+func add(folder: String, incldude_subfolders: bool = true):
 	var library := data_source.get_library()
 	var duplicated_folders := library.folders.duplicate()
-	var _folder = AssetFolder.new(folder)
+	var _folder = AssetFolder.new(folder, incldude_subfolders)
 	duplicated_folders.append(_folder)
 	library.folders = duplicated_folders
 	data_source.save_libray(library)

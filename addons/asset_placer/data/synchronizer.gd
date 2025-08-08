@@ -55,7 +55,6 @@ func _sync_folder(folder: AssetFolder):
 	add_assets_from_folder(folder.path, folder.include_subfolders)
 
 func _sync_all():
-	print("Sync")
 	_clear_invalid_assets()
 	for folder in folder_repository.get_all():
 		_sync_folder(folder)
@@ -77,7 +76,8 @@ func add_assets_from_folder(folder_path: String, recursive: bool):
 
 
 func _notify_scan_complete():
-	call_deferred("emit_signal", "sync_complete", _added, _removed, _scanned)
+	if _added != 0 || _removed != 0:
+		call_deferred("emit_signal", "sync_complete", _added, _removed, _scanned)
 	_clear_data()
 			
 func _clear_invalid_assets():

@@ -14,6 +14,8 @@ signal assets_loaded(assets: Array[AssetResource])
 signal asset_selection_change
 signal show_filter_info(size: int)
 signal show_sync_active(bool)
+signal show_empty_view
+signal hide_empty_view
 
 func _init():
 	self.folder_repository = FolderRepository.instance
@@ -26,13 +28,14 @@ func on_ready():
 	_current_assets = assets_repository.get_all_assets()
 	show_filter_info.emit(0)
 	assets_repository.assets_changed.connect(_filter_by_collections_and_query)
-	assets_loaded.emit(_current_assets)
+	_filter_by_collections_and_query()
 	synchronizer.sync_state_change.connect(func(v):
 		show_sync_active.emit(v)
 	)
 
 func add_asset_folder(path: String):
 	folder_repository.add(path)
+	synchronizer.sync_folder(AssetFolder.new(path, true))
 
 func on_query_change(query: String):
 	self._current_query = query
@@ -51,8 +54,7 @@ func delete_asset(asset: AssetResource):
 
 func add_assets_or_folders(files: PackedStringArray):
 	for file in files:
-		var extension = file.get_extension()
-		if extension == "":
+		if file.get_extension().is_empty():
 			add_asset_folder(file)
 		else:
 			add_asset(file)
@@ -93,6 +95,11 @@ func _filter_by_collections_and_query():
 			filtered.push_back(asset)
 			
 	assets_loaded.emit(filtered)
+	
+	if filtered.is_empty():
+		show_empty_view.emit()
+	else:
+		hide_empty_view.emit()
 
 
 func sync():

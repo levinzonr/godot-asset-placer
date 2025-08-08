@@ -12,6 +12,8 @@ class_name AssetLibraryWindow
 @onready var filters_label: Label = %FiltersLabel
 @onready var reload_button: Button = %ReloadButton
 @onready var progress_bar = %ProgressBar
+@onready var empty_content = %EmptyContent
+@onready var main_content = %MainContent
 
 
 signal asset_selected(asset: AssetResource)
@@ -23,6 +25,18 @@ func _ready():
 	presenter.show_sync_active.connect(show_sync_in_progress)
 	AssetPlacerPresenter._instance.asset_selected.connect(set_selected_asset)
 	AssetPlacerPresenter._instance.asset_deselcted.connect(clear_selected_asset)
+	
+		
+	presenter.show_empty_view.connect(func():
+		main_content.hide()
+		empty_content.show()
+	)
+	
+	presenter.hide_empty_view.connect(func():
+		main_content.show()
+		empty_content.hide()
+	)
+	
 	presenter.on_ready()
 	add_folder_button.pressed.connect(show_folder_dialog)
 	search_field.text_changed.connect(presenter.on_query_change)
@@ -30,6 +44,7 @@ func _ready():
 	filter_button.pressed.connect(func ():
 		CollectionPicker.show_in(filter_button, presenter._active_collections, presenter.toggle_collection_filter)
 	)
+
 	
 func show_assets(assets: Array[AssetResource]):
 	for child in grid_container.get_children():
@@ -98,6 +113,7 @@ func set_selected_asset(asset: AssetResource):
 	for child in grid_container.get_children():
 		if child is Button:
 			child.set_pressed_no_signal(child.get_meta("id") == asset.id)
+
 
 
 func show_sync_in_progress(active: bool):
