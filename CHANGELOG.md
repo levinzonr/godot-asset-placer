@@ -1,6 +1,28 @@
 # Godot Asset Placer Changelog
 
-## 1.0.0 - ALPHA03
+## 1.0.0 - ALPHA-04
+### Added
+
+### Synchronize Process.
+ During this process the plugin removes deleted assets
+ from its internal memory and adds new assets that were added to the source folders.
+ The process is done on the separate thread to avoid UI blocking
+
+This is triggered by following:
+- Manual Trigger (Sync Assets Button or Sync Folder button)
+- When Godot completes its ReImport process
+- On Plugin Startup
+
+
+### Changed
+- Minor UI Updates the AssetsPlacer main window
+- Added asset now how more readable name when added to the tree
+
+### Fixed
+- Fixed Asset Placement when the Assst also has any CollisionObjects inside
+
+
+## 1.0.0 - ALPHA-03
 ### Added
 - Add Options To Randomly Scale placed assets
 - Add more flexible options for Random Asset rotation

@@ -5,11 +5,10 @@ var _folder_repository: FolderRepository
 var _presenter: AssetPlacerPresenter
 var  _asset_placer: AssetPlacer
 var _assets_repository: AssetsRepository
-var files_watchdog: FileSystemWatchDog
 var synchronizer: Synchronize
 
 var _asset_placer_window: AssetLibraryPanel
-
+var _file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
 
 var plugin_path: String:
 	get(): return get_script().resource_path.get_base_dir()
@@ -26,7 +25,6 @@ func _enter_tree():
 	_folder_repository = FolderRepository.new()
 	_assets_repository = AssetsRepository.new()
 	synchronizer = Synchronize.new(_folder_repository, _assets_repository)
-	files_watchdog = FileSystemWatchDog.new(_folder_repository)
 	
 	_asset_placer = AssetPlacer.new()
 	_presenter = AssetPlacerPresenter.new()
@@ -47,9 +45,13 @@ func _enter_tree():
 			AssetPlacerPresenter._instance.clear_selection()
 	)
 	
-	synchronizer.sync_all()
+	_file_system.resources_reimported.connect(_react_to_reimorted_files)
+	if !_file_system.is_scanning():
+		synchronizer.sync_all()
+		
 	
 func _exit_tree():
+	_file_system.resources_reimported.disconnect(_react_to_reimorted_files)
 	_presenter.asset_selected.disconnect(start_placement)
 	_presenter.asset_deselcted.disconnect(_asset_placer.stop_placement)
 	_asset_placer.stop_placement()
@@ -58,6 +60,10 @@ func _exit_tree():
 
 func _handles(object):
 	return true
+
+
+func _react_to_reimorted_files(files: PackedStringArray):
+	synchronizer.sync_all()
 
 func start_placement(asset: AssetResource):
 	EditorInterface.set_main_screen_editor("3D")

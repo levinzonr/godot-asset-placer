@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b2htw2xvffvye"
-path="res://.godot/imported/earth_impact.glb-22e4be1be49628b4dbf9633109cd43a7.scn"
+uid="uid://dadopfh3udxxt"
+path="res://.godot/imported/JaggedRock122.glb-667f7f39a1d83340eb57ce29d82dfd5a.scn"
 
 [deps]
 
-source_file="res://demo/assets/earth_impact.glb"
-dest_files=["res://.godot/imported/earth_impact.glb-22e4be1be49628b4dbf9633109cd43a7.scn"]
+source_file="res://demo/assets/JaggedRock122.glb"
+dest_files=["res://.godot/imported/JaggedRock122.glb-667f7f39a1d83340eb57ce29d82dfd5a.scn"]
 
 [params]
 

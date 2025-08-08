@@ -12,6 +12,7 @@ This is Godot Editor plugin that allows for quick asset placement and management
 - Grid snapping when placing assets
 - Randomize asset Rotation and Scale on placement
 - Undo-Redo Integration
+- Internal library is Synchronized with File System
 
 <p align="center">
   <a href="https://youtu.be/ffRDdsYeiqM" target="_blank">

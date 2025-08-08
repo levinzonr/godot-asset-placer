@@ -24,7 +24,7 @@ func delete(assetId: String):
 	var assets = lib.items.filter(func(a): return a.id != assetId)
 	lib.items = assets
 	data_source.save_libray(lib)
-	assets_changed.emit()
+	call_deferred("emit_signal", "assets_changed")
 
 func find_by_uid(uid: String) -> AssetResource:
 	for asset in get_all_assets():
@@ -38,7 +38,7 @@ func update(asset: AssetResource):
 	if index != -1:
 		lib.items[index] = asset
 		data_source.save_libray(lib)
-		assets_changed.emit()
+		call_deferred("emit_signal", "assets_changed")
 	
 
 func add_asset(scene_path: String, tags: Array[String] = []) -> bool:
@@ -53,5 +53,5 @@ func add_asset(scene_path: String, tags: Array[String] = []) -> bool:
 	duplicated_items.append(asset)
 	library.items = duplicated_items
 	data_source.save_libray(library)
-	assets_changed.emit()
+	call_deferred("emit_signal", "assets_changed")
 	return true
