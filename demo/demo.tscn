@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://sas7j2dyfkr3"]
+[gd_scene load_steps=7 format=3 uid="uid://sas7j2dyfkr3"]
+
+[ext_resource type="PackedScene" uid="uid://gwihxo1nnefo" path="res://demo/assets/ForestRock1.glb" id="1_d6po2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hjng"]
 size = Vector3(100, 0.1, 100)
@@ -29,3 +31,7 @@ shape = SubResource("BoxShape3D_5hjng")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00016975403, 0, 0)
 mesh = SubResource("PlaneMesh_d6po2")
+
+[node name="ForestRock12" type="Node3D" parent="." instance=ExtResource("1_d6po2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.311671, 1.0443072, -2.7144928)
+metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
