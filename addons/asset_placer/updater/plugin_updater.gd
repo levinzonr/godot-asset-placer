@@ -46,7 +46,7 @@ func do_update():
 	var base_path: String
 
 	for path in files:
-		if path.ends_with("/addons/asset_placer/"):
+		if path.ends_with("/addons/"):
 			base_path = path
 			break
 	
