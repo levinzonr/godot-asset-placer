@@ -1,5 +1,9 @@
 # Godot Asset Placer Changelog
 
+## 1.0.0-alpha05
+### Added
+- Added In Editor way to update the Plugin with the latest GitHub release
+
 ## 1.0.0 - ALPHA-04
 ### Added
 
