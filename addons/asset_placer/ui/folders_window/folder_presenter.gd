@@ -34,7 +34,8 @@ func include_subfolders(include: bool, folder: AssetFolder):
 	folder_repository.update(folder)
 
 func add_folder(folder: String):
-	folder_repository.add(folder)	
+	if folder.get_extension().is_empty():
+		folder_repository.add(folder)	
 
 func add_folders(folders: PackedStringArray):
 	for folder in folders:

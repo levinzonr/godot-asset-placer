@@ -19,8 +19,8 @@ func _ready():
 func _can_drop_data(at_position, data):
 	if data is Dictionary:
 		var type = data["type"]
-		var files_or_dirs = type == "files_and_dirs" || type == "files"
-		return files_or_dirs and data.has("files")
+		var dirs = type == "files_and_dirs"
+		return dirs and data.has("files")
 	return false	
 	
 func _drop_data(at_position, data):
