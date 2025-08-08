@@ -51,5 +51,12 @@ Collections is a simple way to "group" assets together by some criteria. For exa
 
 [demo.mov](docs/demo.mov)
 
-# Changelog
+
+## Contributing
+Found a problem or have an idea?
+- [🐛 Report a bug](https://github.com/levinzonr/godot-asset-placer/issues/new?template=bug_report.md&labels=bug&title=%5BBUG%5D%20)
+- [✨ Request a feature](https://github.com/levinzonr/godot-asset-placer/issues/new?template=feature_request.md&labels=enhancement&title=%5BFeature%5D%20)
+PR
+
+## Changelog
 See the [CHANGELOG.md](CHANGELOG.md) for a full list of changes and updates.

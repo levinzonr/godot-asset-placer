@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://sas7j2dyfkr3"]
+[gd_scene load_steps=8 format=3 uid="uid://sas7j2dyfkr3"]
 
 [ext_resource type="PackedScene" uid="uid://gwihxo1nnefo" path="res://demo/assets/ForestRock1.glb" id="1_d6po2"]
+[ext_resource type="PackedScene" uid="uid://b8p1iy52py3xm" path="res://demo/assets/ForestRock2.glb" id="2_ytiva"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hjng"]
 size = Vector3(100, 0.1, 100)
@@ -32,6 +33,30 @@ shape = SubResource("BoxShape3D_5hjng")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00016975403, 0, 0)
 mesh = SubResource("PlaneMesh_d6po2")
 
-[node name="ForestRock12" type="Node3D" parent="." instance=ExtResource("1_d6po2")]
+[node name="ForestRock12" parent="." instance=ExtResource("1_d6po2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.311671, 1.0443072, -2.7144928)
 metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
+
+[node name="ForestRock22" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(0.51433265, 0, 0.8575908, 0, 1, 0, -0.8575908, 0, 0.51433265, -11.04497, 1.42609, -9.141989)
+metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
+
+[node name="ForestRock22 (1)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(0.29828742, 0, 0.9544761, 0, 1, 0, -0.9544761, 0, 0.29828742, -13.213842, 1.42609, -10.121177)
+metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
+
+[node name="ForestRock22 (2)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(0.28077188, 0, 0.95977455, 0, 1, 0, -0.95977455, 0, 0.28077188, -15.709213, 1.42609, -11.247768)
+metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
+
+[node name="ForestRock22 (3)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(-0.90775514, 0, 0.4195004, 0, 1, 0, -0.4195004, 0, -0.90775514, -17.930706, 1.42609, -12.044366)
+metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
+
+[node name="ForestRock22 (4)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(-0.7023648, 0, -0.71181715, 0, 1, 0, 0.71181715, 0, -0.7023648, -16.976236, 1.42609, -8.895565)
+metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
+
+[node name="ForestRock22 (5)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(0.94082564, 0, 0.3388911, 0, 1, 0, -0.3388911, 0, 0.94082564, -13.560513, 1.426089, -7.056788)
+metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
