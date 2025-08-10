@@ -62,11 +62,10 @@ func _sync_all():
 func add_assets_from_folder(folder_path: String, recursive: bool):
 	var dir = DirAccess.open(folder_path)
 	for file in dir.get_files():
-		if is_file_supported(file):
-			_scanned += 1
-			var path = folder_path + "/" + file
-			if asset_repository.add_asset(path):
-				_added += 1
+		_scanned += 1
+		var path = folder_path + "/" + file
+		if asset_repository.add_asset(path):
+			_added += 1
 		
 	if recursive:
 		for sub_dir in dir.get_directories():
@@ -91,6 +90,3 @@ func _clear_data():
 	_added = 0
 	_scanned = 0		
 			
-	
-func is_file_supported(file: String)	->  bool:
-	return file.ends_with(".tscn") || file.ends_with(".glb") || file.ends_with(".fbx")

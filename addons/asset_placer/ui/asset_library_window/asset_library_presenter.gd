@@ -38,7 +38,9 @@ func on_ready():
 
 func add_asset_folder(path: String):
 	folder_repository.add(path)
-	synchronizer.sync_folder(AssetFolder.new(path, true))
+	var dir_access = DirAccess.open(path)
+	for file in dir_access.get_files():
+		add_asset(path + file)
 
 func on_query_change(query: String):
 	self._current_query = query
@@ -48,7 +50,23 @@ func add_asset(path: String):
 	var tags: Array[String] = []
 	for collection in _active_collections:
 		tags.push_back(collection.name)
-	assets_repository.add_asset(path, tags)
+		
+	var id = ResourceUID.path_to_uid(path)
+	if !id:
+		push_error("Error getting id from path %s" % path)
+		return
+		
+	var existing = assets_repository.find_by_uid(id)
+	if existing:
+		var new_tags: Array[String] = []
+		for tag in tags:
+			if tag not in existing.tags:
+				new_tags.push_back(tag)
+				
+		existing.tags.append_array(new_tags)
+		assets_repository.update(existing)
+	else:
+		assets_repository.add_asset(path, tags)
 	
 
 func delete_asset(asset: AssetResource):

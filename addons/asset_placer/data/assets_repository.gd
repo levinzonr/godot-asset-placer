@@ -42,9 +42,12 @@ func update(asset: AssetResource):
 	
 
 func add_asset(scene_path: String, tags: Array[String] = []) -> bool:
-	var library = data_source.get_library().items
-	var loaded_scene: PackedScene = load(scene_path)
-	var id = ResourceUID.path_to_uid(loaded_scene.resource_path)
+	
+	if not is_file_supported(scene_path.get_file()):
+		return false
+	
+	var library = data_source.get_library()
+	var id = ResourceUID.path_to_uid(scene_path)
 	var asset = AssetResource.new(id, scene_path.get_file())
 	if exists(id):
 		return false
@@ -55,3 +58,7 @@ func add_asset(scene_path: String, tags: Array[String] = []) -> bool:
 	data_source.save_libray(library)
 	call_deferred("emit_signal", "assets_changed")
 	return true
+
+
+func is_file_supported(file: String)	->  bool:
+	return file.ends_with(".tscn") || file.ends_with(".glb") || file.ends_with(".fbx")
