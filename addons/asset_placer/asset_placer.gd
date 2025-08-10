@@ -11,8 +11,10 @@ var meta_asset_id = &"asset_placer_res_id"
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
 
 func start_placement(root: Window, asset: AssetResource):
+	stop_placement()
 	self.asset = asset
 	preview_node = (asset.scene.instantiate() as Node3D).duplicate()
+	preview_node.global_position
 	root.add_child(preview_node)
 	preview_rids = get_collision_rids(preview_node)
 	_apply_preview_material(preview_node)
