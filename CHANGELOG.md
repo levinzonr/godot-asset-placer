@@ -1,5 +1,19 @@
 # Godot Asset Placer Changelog
 
+## 1.0.0-alpha06
+### Added
+- When placing assets it is now required to select a parent node where assets should placed under
+By Default it will automatically select Root Node of the scene (if it is a Node3D)
+- SHIFT + Mouse Click: Added to shortcut that allows to modify placed asset. This can be usefull if you want to apply additional transformations using standart editor waay
+
+
+## Changed
+- Moved Updater GH API calls to the background thread to avoid UI blocking
+
+## Fixed
+- Avoid adding duplicated folders
+- Fixed Preview node being stuck in window when changing assets
+
 ## 1.0.0-alpha05
 ### Added
 - Added In Editor way to update the Plugin with the latest GitHub release
