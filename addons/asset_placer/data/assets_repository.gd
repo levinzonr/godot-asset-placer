@@ -42,13 +42,13 @@ func update(asset: AssetResource):
 	
 
 func add_asset(scene_path: String, tags: Array[String] = []) -> bool:
+	var library = data_source.get_library().items
 	var loaded_scene: PackedScene = load(scene_path)
 	var id = ResourceUID.path_to_uid(loaded_scene.resource_path)
 	var asset = AssetResource.new(id, scene_path.get_file())
 	if exists(id):
 		return false
 		
-	var library: AssetLibrary = data_source.get_library()
 	var duplicated_items = library.items.duplicate()
 	duplicated_items.append(asset)
 	library.items = duplicated_items

@@ -10,12 +10,15 @@ var _active_collections: Array[AssetCollection] = []
 var _current_assets: Array[AssetResource]
 var _current_query: String
 
+enum EmptyType {
+	Search,  Collection, All, None
+}
+
 signal assets_loaded(assets: Array[AssetResource])
 signal asset_selection_change
 signal show_filter_info(size: int)
 signal show_sync_active(bool)
-signal show_empty_view
-signal hide_empty_view
+signal show_empty_view(type: EmptyType)
 
 func _init():
 	self.folder_repository = FolderRepository.instance
@@ -93,13 +96,17 @@ func _filter_by_collections_and_query():
 		
 		if matches_query and belongs_to_collection:
 			filtered.push_back(asset)
-			
-	assets_loaded.emit(filtered)
 	
 	if filtered.is_empty():
-		show_empty_view.emit()
+		if _active_collections.is_empty() && _current_query.is_empty():
+			show_empty_view.emit(EmptyType.All)
+		elif not _active_collections.is_empty():
+			show_empty_view.emit(EmptyType.Collection)
+		else:
+			show_empty_view.emit(EmptyType.Search)
 	else:
-		hide_empty_view.emit()
+		assets_loaded.emit(filtered)
+		show_empty_view.emit(EmptyType.None)
 
 
 func sync():

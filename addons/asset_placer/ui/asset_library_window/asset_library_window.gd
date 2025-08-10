@@ -14,8 +14,10 @@ class_name AssetLibraryWindow
 @onready var progress_bar = %ProgressBar
 @onready var empty_content = %EmptyContent
 @onready var main_content = %MainContent
-
-
+@onready var empty_collection_content = %EmptyCollectionContent
+@onready var empty_collection_view_add_folder_btn: Button = %EmptyCollectionViewAddFolderBtn
+@onready var scroll_container = %ScrollContainer
+@onready var empty_search_content = %EmptySearchContent
 signal asset_selected(asset: AssetResource)
 
 
@@ -25,18 +27,9 @@ func _ready():
 	presenter.show_sync_active.connect(show_sync_in_progress)
 	AssetPlacerPresenter._instance.asset_selected.connect(set_selected_asset)
 	AssetPlacerPresenter._instance.asset_deselcted.connect(clear_selected_asset)
-	
-		
-	presenter.show_empty_view.connect(func():
-		main_content.hide()
-		empty_content.show()
-	)
-	
-	presenter.hide_empty_view.connect(func():
-		main_content.show()
-		empty_content.hide()
-	)
-	
+	empty_collection_view_add_folder_btn.pressed.connect(show_folder_dialog)
+	presenter.show_empty_view.connect(show_empty_view)
+
 	presenter.on_ready()
 	add_folder_button.pressed.connect(show_folder_dialog)
 	search_field.text_changed.connect(presenter.on_query_change)
@@ -47,6 +40,8 @@ func _ready():
 
 	
 func show_assets(assets: Array[AssetResource]):
+	empty_collection_content.hide()
+	scroll_container.show()
 	for child in grid_container.get_children():
 		child.queue_free()
 	for asset in assets:
@@ -115,6 +110,44 @@ func set_selected_asset(asset: AssetResource):
 			child.set_pressed_no_signal(child.get_meta("id") == asset.id)
 
 
+
+	
+func show_empty_view(type: AssetLibraryPresenter.EmptyType):
+	match type:
+		AssetLibraryPresenter.EmptyType.Search:
+			show_empty_search_content()
+		AssetLibraryPresenter.EmptyType.Collection:
+			show_empty_collection_view()
+		AssetLibraryPresenter.EmptyType.All:
+			show_onboarding()
+		AssetLibraryPresenter.EmptyType.None:
+			show_main_content()
+
+func show_main_content():
+	main_content.show()
+	empty_content.hide()
+	scroll_container.show()
+	empty_collection_content.hide()
+	empty_search_content.hide()
+	
+func show_onboarding():
+	main_content.hide()
+	empty_collection_content.hide()	
+	empty_search_content.hide()
+	empty_content.show()
+			
+func show_empty_collection_view():
+	main_content.show()
+	scroll_container.hide()
+	empty_collection_content.hide()
+	empty_collection_content.show()
+	empty_content.hide()
+	
+func show_empty_search_content():
+	main_content.show()
+	scroll_container.hide()
+	empty_collection_content.hide()	
+	empty_search_content.show()			
 
 func show_sync_in_progress(active: bool):
 	if active:

@@ -135,7 +135,7 @@ icon = SubResource("Texture2D_yvyyx")
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -18.22
@@ -174,6 +174,7 @@ indeterminate = true
 editor_preview_indeterminate = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/MainContent/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -182,6 +183,87 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="EmptyCollectionContent" type="CenterContainer" parent="Panel/MainContent/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Panel/MainContent/MarginContainer/VBoxContainer/EmptyCollectionContent"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/MainContent/MarginContainer/VBoxContainer/EmptyCollectionContent/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "No assets in this collection"
+horizontal_alignment = 1
+
+[node name="Space" type="Control" parent="Panel/MainContent/MarginContainer/VBoxContainer/EmptyCollectionContent/HBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Panel/MainContent/MarginContainer/VBoxContainer/EmptyCollectionContent/HBoxContainer"]
+layout_mode = 2
+text = "This collection currently has no assets assigned. 
+You can Drag and Drop assets/folders into this window to fix that!"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Panel/MainContent/MarginContainer/VBoxContainer/EmptyCollectionContent/HBoxContainer"]
+layout_mode = 2
+text = "Or"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel/MainContent/MarginContainer/VBoxContainer/EmptyCollectionContent/HBoxContainer"]
+layout_mode = 2
+
+[node name="EmptyCollectionViewAddFolderBtn" type="Button" parent="Panel/MainContent/MarginContainer/VBoxContainer/EmptyCollectionContent/HBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add Folders  Using Dialog"
+icon = SubResource("Texture2D_mdpb8")
+
+[node name="EmptySearchContent" type="CenterContainer" parent="Panel/MainContent/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Panel/MainContent/MarginContainer/VBoxContainer/EmptySearchContent"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/MainContent/MarginContainer/VBoxContainer/EmptySearchContent/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "No assets found"
+horizontal_alignment = 1
+
+[node name="Space" type="Control" parent="Panel/MainContent/MarginContainer/VBoxContainer/EmptySearchContent/HBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Panel/MainContent/MarginContainer/VBoxContainer/EmptySearchContent/HBoxContainer"]
+layout_mode = 2
+text = "No assets found that would have this name
+You can Drag and Drop assets/folders into this window to fix that!"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Panel/MainContent/MarginContainer/VBoxContainer/EmptySearchContent/HBoxContainer"]
+layout_mode = 2
+text = "Or"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel/MainContent/MarginContainer/VBoxContainer/EmptySearchContent/HBoxContainer"]
+layout_mode = 2
+
+[node name="EmptyCollectionViewAddFolderBtn" type="Button" parent="Panel/MainContent/MarginContainer/VBoxContainer/EmptySearchContent/HBoxContainer/CenterContainer"]
+layout_mode = 2
+text = "Add Folders  Using Dialog"
+icon = SubResource("Texture2D_mdpb8")
 
 [node name="EmptyContent" type="CenterContainer" parent="Panel"]
 unique_name_in_owner = true
