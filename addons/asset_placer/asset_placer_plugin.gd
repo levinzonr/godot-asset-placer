@@ -30,9 +30,9 @@ func _enter_tree():
 	_folder_repository = FolderRepository.new()
 	_assets_repository = AssetsRepository.new()
 	synchronizer = Synchronize.new(_folder_repository, _assets_repository)
-	
 	_asset_placer = AssetPlacer.new()
 	_presenter = AssetPlacerPresenter.new()
+	scene_changed.connect(_handle_scene_changed)
 	_presenter.asset_selected.connect(start_placement)
 	_presenter.asset_deselcted.connect(_asset_placer.stop_placement)
 	_asset_placer_window = load("res://addons/asset_placer/ui/asset_library_panel.tscn").instantiate()
@@ -44,11 +44,6 @@ func _enter_tree():
 		toaster.push_toast(message, EditorToaster.SEVERITY_INFO, "Asset Placer")
 	)
 	
-	EditorInterface.get_selection().selection_changed.connect(func():
-		var nodes = EditorInterface.get_selection().get_selected_nodes()
-		if not nodes.any(func(node): return node is Node3D):
-			AssetPlacerPresenter._instance.clear_selection()
-	)
 	
 	_file_system.resources_reimported.connect(_react_to_reimorted_files)
 	if !_file_system.is_scanning():
@@ -60,12 +55,19 @@ func _exit_tree():
 	_presenter.asset_selected.disconnect(start_placement)
 	_presenter.asset_deselcted.disconnect(_asset_placer.stop_placement)
 	_asset_placer.stop_placement()
+	scene_changed.disconnect(_handle_scene_changed)
 	remove_control_from_bottom_panel(_asset_placer_window)
 	_asset_placer_window.queue_free()
 
 func _handles(object):
 	return true
 
+func _handle_scene_changed(scene: Node):
+	if scene is Node3D:
+		_presenter.select_parent(scene.get_path())
+	else:
+		_presenter.clear_parent()
+	
 
 func _react_to_reimorted_files(files: PackedStringArray):
 	synchronizer.sync_all()

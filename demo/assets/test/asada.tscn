@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://d1tso1ibex52i"]
+[gd_scene load_steps=2 format=3 uid="uid://d1tso1ibex52i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l0vgp"]
+size = Vector3(20, 1, 20)
 
 [node name="Asada" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_l0vgp")

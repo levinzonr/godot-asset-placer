@@ -100,7 +100,9 @@ func _snap_position(pos: Vector3):
 
 func _place_instance(transform: Transform3D, select_after_placement: bool):
 	var selection = EditorInterface.get_selection()
-	var scene_root = selection.get_selected_nodes()[0]
+	var scene = EditorInterface.get_edited_scene_root()
+	var scene_root = scene.get_node(AssetPlacerPresenter._instance._parent)
+	
 	if scene_root and asset.scene:
 		var undoredo = EditorInterface.get_editor_undo_redo()
 		undoredo.create_action("Place Asset: %s" % asset.name)

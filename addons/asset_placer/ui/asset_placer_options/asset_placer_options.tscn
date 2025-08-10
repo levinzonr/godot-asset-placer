@@ -1,8 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://dua2vx4bi1gmf"]
+[gd_scene load_steps=8 format=3 uid="uid://dua2vx4bi1gmf"]
 
 [ext_resource type="Script" uid="uid://b4q0diu63qlg8" path="res://addons/asset_placer/ui/asset_placer_options/asset_placer_options.gd" id="1_7uy5w"]
 [ext_resource type="Script" uid="uid://btqju8qjrlawq" path="res://addons/asset_placer/ui/components/vector3_spinbox.gd" id="2_k4pj7"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_o45xf"]
+
+[sub_resource type="Texture2D" id="Texture2D_rixd2"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_o45xf")
+icon_name = &"Node3D"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_5hqbk"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_o45xf")
+icon_name = &"ErrorWarning"
 
 [sub_resource type="Texture2D" id="Texture2D_ik2kd"]
 resource_local_to_scene = false
@@ -50,6 +63,26 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Options"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("Texture2D_rixd2")
+stretch_mode = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Assets Parent: "
+
+[node name="ParentButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "No parent selected"
+icon = SubResource("Texture2D_5hqbk")
+alignment = 0
 
 [node name="Snapping" type="FoldableContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2

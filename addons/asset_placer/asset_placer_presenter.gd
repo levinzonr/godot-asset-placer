@@ -4,10 +4,11 @@ class_name AssetPlacerPresenter
 static var _instance: AssetPlacerPresenter
 var _selected_asset: AssetResource
 var options: AssetPlacerOptions
-
+var _parent: NodePath = NodePath("")
 signal asset_selected(asset: AssetResource)
 signal asset_deselcted
 
+signal parent_changed(parent: NodePath)
 signal options_changed(options: AssetPlacerOptions)
 
 func _init():
@@ -17,6 +18,15 @@ func _init():
 
 func ready():
 	options_changed.emit(options)
+	
+
+func select_parent(node: NodePath):
+	self._parent = node
+	parent_changed.emit(node)
+
+func clear_parent():
+	self._parent = NodePath("")
+	parent_changed.emit(_parent)	
 	
 func set_unform_scaling(value: bool):
 	options.uniform_scaling = value
