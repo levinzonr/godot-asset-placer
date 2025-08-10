@@ -33,6 +33,11 @@ func update(folder: AssetFolder):
 func add(folder: String, incldude_subfolders: bool = true):
 	var library := data_source.get_library()
 	var duplicated_folders := library.folders.duplicate()
+	
+	if duplicated_folders.any(func(f: AssetFolder): return f.path.contains(folder)):
+		push_warning("Folder with this path already exists")
+		return
+	
 	var _folder = AssetFolder.new(folder, incldude_subfolders)
 	duplicated_folders.append(_folder)
 	library.folders = duplicated_folders
