@@ -17,7 +17,6 @@ func client_get(url: String):
 func _client_get(url: String) -> PackedByteArray:
 	var parts = url.split("/", false, 2)
 	var host = parts[0] + "//" + parts[1]
-	print(str(parts))
 	_client.connect_to_host(host)
 	_do_connection_polling()
 	_client.request(HTTPClient.METHOD_GET,  "/" + parts[2], [])

@@ -18,8 +18,6 @@ func show_collections(collections: Array[AssetCollection]):
 	for i in collections.size():
 		var collection_name = collections[i].name
 		var selected = pre_selected.any(func(c): return c.name == collection_name)
-		print(str(selected))
-		
 		add_check_item(collection_name)
 		set_item_checked(i, selected)
 		set_item_icon(i, make_circle_icon(16, collections[i].backgroundColor))
