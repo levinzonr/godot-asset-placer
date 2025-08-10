@@ -65,11 +65,19 @@ func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
 
 		elif event is InputEventMouseButton and event.pressed:
 			if event.button_index == MOUSE_BUTTON_LEFT:
-				_place_instance(preview_node.global_transform)
+				var focus_on_placement = Input.is_key_pressed(KEY_SHIFT)
+				_place_instance(preview_node.global_transform, focus_on_placement)
 				return true
 			else:
 				return false
-
+		
+		elif event is InputEventKey and event.is_pressed():
+			if event.as_text() == "Escape":
+				AssetPlacerPresenter._instance.clear_selection()
+				return true
+			else: 
+				return false		
+				
 	return false
 
 func get_collision_rids(node: Node) -> Array:
@@ -90,18 +98,18 @@ func _snap_position(pos: Vector3):
 		round(pos.z / grid_step) * grid_step
 	)
 
-func _place_instance(transform: Transform3D):
+func _place_instance(transform: Transform3D, select_after_placement: bool):
 	var selection = EditorInterface.get_selection()
 	var scene_root = selection.get_selected_nodes()[0]
 	if scene_root and asset.scene:
 		var undoredo = EditorInterface.get_editor_undo_redo()
 		undoredo.create_action("Place Asset: %s" % asset.name)
-		undoredo.add_do_method(self, "_do_placement", scene_root, transform)
+		undoredo.add_do_method(self, "_do_placement", scene_root, transform, select_after_placement)
 		undoredo.add_undo_method(self, "_undo_placement", scene_root)
 		undoredo.commit_action()
 		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
 
-func _do_placement(root: Node3D, transform: Transform3D):
+func _do_placement(root: Node3D, transform: Transform3D, select_after_placement: bool):
 	var new_node: Node3D =  asset.scene.instantiate()
 	new_node.global_transform = transform
 	new_node.position = root.to_local(transform.origin)
@@ -110,6 +118,9 @@ func _do_placement(root: Node3D, transform: Transform3D):
 	root.add_child(new_node)
 	new_node.owner = EditorInterface.get_edited_scene_root()
 	node_history.push_front(new_node.name)
+	if select_after_placement:
+		AssetPlacerPresenter._instance.clear_selection()
+		EditorInterface.edit_node(new_node)
 
 func _undo_placement(root: Node3D):
 	var last_added = node_history.pop_front()
