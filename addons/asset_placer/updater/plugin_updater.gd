@@ -7,6 +7,7 @@ static var instance: PluginUpdater
 
 signal updater_up_to_date
 signal updater_update_available(update: PluginUpdate)
+signal show_update_loading(bool)
 
 var _local_plugin_path: String
 var _remote_plugin_path: String
@@ -23,7 +24,7 @@ func _init(local_config_path: String, remote_config_path: String):
 	
 	
 func check_for_updates():
-	_latest_update = _get_latest_update()
+	_latest_update = await _get_latest_update()
 	var current_version = PluginConfiguration.new(_local_plugin_path).version
 	if current_version.compare_to(_latest_update.version) < 0:
 		updater_update_available.emit(_latest_update)
@@ -31,11 +32,19 @@ func check_for_updates():
 		updater_up_to_date.emit()
 
 func do_update():
+	
+	if FileAccess.open("res://docs/addon_folders.png", FileAccess.READ):
+		push_error("Trying to update plugin from within a plugin")
+		return
+		
+	
+	show_update_loading.emit(true)
 	var url_path = _latest_update.download_url;
-	var zip := _client.client_get(url_path)
+	_client.client_get(url_path)
+	
+	var zip: PackedByteArray = await _client.client_response
 	var tmp_file = FileAccess.open(TMP_ZIP, FileAccess.WRITE)
 	tmp_file.store_buffer(zip)
-	
 	var zip_reader: ZIPReader = ZIPReader.new()
 	zip_reader.open(TMP_ZIP)
 	var files: PackedStringArray = zip_reader.get_files()
@@ -66,10 +75,13 @@ func do_update():
 	zip_reader.close()
 	DirAccess.remove_absolute(TMP_ZIP)
 	EditorInterface.restart_editor(true)
+	show_update_loading.emit(false)
+	
 
 
 func _get_latest_update() -> PluginUpdate:
-	var response: PackedByteArray = _client.client_get("https://api.github.com/repos/levinzonr/godot-asset-placer/releases/latest")
+	_client.client_get("https://api.github.com/repos/levinzonr/godot-asset-placer/releases/latest")
+	var response = await  _client.client_response
 	var dict = JSON.parse_string(response.get_string_from_utf8())
 	var tag_name = dict["tag_name"]
 	var change_log = dict["body"]

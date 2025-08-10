@@ -2,11 +2,19 @@ extends RefCounted
 class_name PluginUpdaterHttpClient
 
 var _client = HTTPClient.new()
-signal client_connected
+
 signal client_response(body: PackedByteArray)
+
+
+func client_get(url: String):
+	WorkerThreadPool.add_task(func(): 
+		var response = _client_get(url)
+		call_deferred("emit_signal", "client_response", response)
+	)
+
 	
 	
-func client_get(url: String) -> PackedByteArray:
+func _client_get(url: String) -> PackedByteArray:
 	var parts = url.split("/", false, 2)
 	var host = parts[0] + "//" + parts[1]
 	print(str(parts))
@@ -19,7 +27,7 @@ func client_get(url: String) -> PackedByteArray:
 		var location = _client.get_response_headers_as_dictionary()["Location"]
 		_client.close()
 		await_disconection()
-		return client_get(location)
+		return _client_get(location)
 	
 	var response = _do_response_body_polling()	
 	_client.close()
@@ -38,7 +46,6 @@ func _do_response_body_polling() -> PackedByteArray:
 func _do_connection_polling():
 	while _is_connecting():
 		_client.poll()
-	client_connected.emit()
 		
 func _do_response_polling():
 	while _is_wating_for_response():

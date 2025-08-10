@@ -43,13 +43,14 @@ script = ExtResource("1_namxt")
 [node name="UpdatePopup" type="PopupPanel" parent="."]
 oversampling_override = 1.0
 initial_position = 1
-size = Vector2i(499, 189)
+size = Vector2i(499, 213)
 
 [node name="MarginContainer" type="MarginContainer" parent="UpdatePopup"]
+anchors_preset = -1
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 495.0
-offset_bottom = 185.0
+offset_bottom = 209.0
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
@@ -80,6 +81,12 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "View Changelog"
+
+[node name="ProgressBar" type="ProgressBar" parent="UpdatePopup/MarginContainer/Vbox"]
+visible = false
+layout_mode = 2
+indeterminate = true
+editor_preview_indeterminate = true
 
 [node name="UpdateAndRestartBtn" type="Button" parent="UpdatePopup/MarginContainer/Vbox"]
 unique_name_in_owner = true
@@ -116,7 +123,7 @@ text = "Asset Placer"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Version 1.0.0-alpha04"
+text = "Version 1.0.0-alpha5"
 
 [node name="UpdateButton" type="Button" parent="Panel/CenterContainer/HBoxContainer"]
 unique_name_in_owner = true
