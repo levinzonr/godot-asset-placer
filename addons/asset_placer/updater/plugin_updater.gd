@@ -25,7 +25,7 @@ func _init(local_config_path: String, remote_config_path: String):
 func check_for_updates():
 	_latest_update = _get_latest_update()
 	var current_version = PluginConfiguration.new(_local_plugin_path).version
-	if current_version.compare_to(_latest_update.version) == 0:
+	if current_version.compare_to(_latest_update.version) < 0:
 		updater_update_available.emit(_latest_update)
 	else:
 		updater_up_to_date.emit()

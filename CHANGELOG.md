@@ -4,7 +4,7 @@
 ### Added
 - Added In Editor way to update the Plugin with the latest GitHub release
 
-## 1.0.0 - ALPHA-04
+## 1.0.0-alpha04
 ### Added
 
 ### Synchronize Process.
@@ -26,7 +26,7 @@ This is triggered by following:
 - Fixed Asset Placement when the Assst also has any CollisionObjects inside
 
 
-## 1.0.0 - ALPHA-03
+## 1.0.0-alpha03
 ### Added
 - Add Options To Randomly Scale placed assets
 - Add more flexible options for Random Asset rotation
@@ -41,7 +41,7 @@ This is triggered by following:
 - Fixed and Issue of Every Mouse click resulting in Asset Placement
 - Fixed and Issue of Asset flying towards the camera when in placement mode
 
-## 1.0.0 - ALPHA-02
+## 1.0.0-alpha-02
 ### Added
 - Added options for randomizing asset rotation on placement.
 - Added support for grid snapping when placing assets.
@@ -49,7 +49,7 @@ This is triggered by following:
 - UI adjustments
 - Allow asset to have multiple collections assigned to it.
 
-## 1.0.0 - ALPHA-01
+## 1.0.0-alpha01
 Initial release of the Godot Asset Placer plugin.
 ### Added
 - One-click asset placement with snapping to ground and other collision shapes.
