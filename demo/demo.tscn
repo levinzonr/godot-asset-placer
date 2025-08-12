@@ -1,7 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://sas7j2dyfkr3"]
+[gd_scene load_steps=15 format=3 uid="uid://sas7j2dyfkr3"]
 
 [ext_resource type="PackedScene" uid="uid://gwihxo1nnefo" path="res://demo/assets/ForestRock1.glb" id="1_d6po2"]
+[ext_resource type="PackedScene" uid="uid://b1nm40p57ntoa" path="res://demo/assets/ForestRock3.glb" id="2_onvmd"]
 [ext_resource type="PackedScene" uid="uid://b8p1iy52py3xm" path="res://demo/assets/ForestRock2.glb" id="2_ytiva"]
+[ext_resource type="PackedScene" uid="uid://cffyfbbsr5wu0" path="res://demo/assets/ForestRock4jjk.glb" id="3_oeqrt"]
+[ext_resource type="PackedScene" uid="uid://b5cskstxopmxr" path="res://demo/assets/ForestRockCluster2.glb" id="4_ykvhj"]
+[ext_resource type="PackedScene" uid="uid://dnjrvjljdl02" path="res://demo/assets/cube.tscn" id="5_1rqa4"]
+[ext_resource type="PackedScene" uid="uid://7u1qc3y84jbe" path="res://demo/assets/pillar.glb" id="6_xm42s"]
+[ext_resource type="PackedScene" uid="uid://carqrst2o7odc" path="res://demo/assets/pillar (2).glb" id="7_tdg64"]
+[ext_resource type="PackedScene" uid="uid://c55qvy8fdcxsd" path="res://demo/assets/sphere.tscn" id="9_oeqrt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hjng"]
 size = Vector3(100, 0.1, 100)
@@ -33,50 +40,334 @@ shape = SubResource("BoxShape3D_5hjng")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00016975403, 0, 0)
 mesh = SubResource("PlaneMesh_d6po2")
 
-[node name="ForestRock12" parent="." instance=ExtResource("1_d6po2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.311671, 1.0443072, -2.7144928)
-metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
-
-[node name="ForestRock22" parent="." instance=ExtResource("2_ytiva")]
-transform = Transform3D(0.51433265, 0, 0.8575908, 0, 1, 0, -0.8575908, 0, 0.51433265, -11.04497, 1.42609, -9.141989)
+[node name="ForestRock22" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(-0.5549178, 0, 0.8319052, 0, 1, 0, -0.8319052, 0, -0.5549178, 26.07098, 1.42609, 8.1934595)
 metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
 
-[node name="ForestRock22 (1)" parent="." instance=ExtResource("2_ytiva")]
-transform = Transform3D(0.29828742, 0, 0.9544761, 0, 1, 0, -0.9544761, 0, 0.29828742, -13.213842, 1.42609, -10.121177)
+[node name="ForestRock22 (1)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(-0.9259529, 0, 0.37763903, 0, 1, 0, -0.37763903, 0, -0.9259529, 26.216637, 1.42609, 6.5656114)
 metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
 
-[node name="ForestRock22 (2)" parent="." instance=ExtResource("2_ytiva")]
-transform = Transform3D(0.28077188, 0, 0.95977455, 0, 1, 0, -0.95977455, 0, 0.28077188, -15.709213, 1.42609, -11.247768)
+[node name="ForestRock22 (2)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(0.053322673, 0, -0.99857736, 0, 1, 0, 0.99857736, 0, 0.053322673, 26.620247, 1.42609, 5.2468014)
 metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
 
-[node name="ForestRock22 (3)" parent="." instance=ExtResource("2_ytiva")]
-transform = Transform3D(-0.90775514, 0, 0.4195004, 0, 1, 0, -0.4195004, 0, -0.90775514, -17.930706, 1.42609, -12.044366)
+[node name="ForestRock22 (3)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(0.9978106, 0, 0.066137, 0, 1, 0, -0.066137, 0, 0.9978106, 26.97057, 1.42609, 3.5956175)
 metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
 
-[node name="ForestRock22 (4)" parent="." instance=ExtResource("2_ytiva")]
-transform = Transform3D(-0.7023648, 0, -0.71181715, 0, 1, 0, 0.71181715, 0, -0.7023648, -16.976236, 1.42609, -8.895565)
+[node name="ForestRock22 (4)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(0.99716544, 0, 0.07524114, 0, 1, 0, -0.07524114, 0, 0.99716544, 27.014046, 1.42609, 2.2219906)
 metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
 
-[node name="ForestRock22 (5)" parent="." instance=ExtResource("2_ytiva")]
-transform = Transform3D(0.94082564, 0, 0.3388911, 0, 1, 0, -0.3388911, 0, 0.94082564, -13.560513, 1.426089, -7.056788)
+[node name="ForestRock22 (5)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(0.5767086, 0, 0.8169499, 0, 1, 0, -0.8169499, 0, 0.5767086, 27.26122, 1.42609, 0.5988877)
 metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
 
-[node name="ForestRock12 (1)" parent="." instance=ExtResource("1_d6po2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.683857, 1.0443072, 1.4302502)
+[node name="ForestRock22 (6)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(-0.23790395, 0, 0.9712887, 0, 1, 0, -0.9712887, 0, -0.23790395, 27.330261, 1.42609, 8.262408)
+metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
+
+[node name="ForestRock22 (7)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(-0.6298094, 0, 0.7767498, 0, 1, 0, -0.7767498, 0, -0.6298094, 27.935553, 1.42609, 6.523685)
+metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
+
+[node name="ForestRock22 (8)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(-0.89027286, 0, 0.45542765, 0, 1, 0, -0.45542765, 0, -0.89027286, 27.965652, 1.42609, 5.3118563)
+metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
+
+[node name="ForestRock22 (9)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(0.3764215, 0, -0.9264486, 0, 1, 0, 0.9264486, 0, 0.3764215, 28.719328, 1.42609, 3.632177)
+metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
+
+[node name="ForestRock22 (10)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(0.9872227, 0, 0.15934716, 0, 1, 0, -0.15934716, 0, 0.9872227, 29.171967, 1.42609, 2.3303819)
+metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
+
+[node name="ForestRock22 (11)" type="Node3D" parent="." instance=ExtResource("2_ytiva")]
+transform = Transform3D(-0.6632916, 0, 0.7483611, 0, 1, 0, -0.7483611, 0, -0.6632916, 29.002792, 1.42609, 1.3000839)
+metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
+
+[node name="ForestRock32" type="Node3D" parent="." instance=ExtResource("2_onvmd")]
+transform = Transform3D(0.9292364, 0, 0.36948577, 0, 1, 0, -0.36948577, 0, 0.9292364, 29.150936, 1.3894984, 12.197036)
+metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
+
+[node name="ForestRock32 (1)" type="Node3D" parent="." instance=ExtResource("2_onvmd")]
+transform = Transform3D(0.007390946, 0, 0.9999727, 0, 1, 0, -0.9999727, 0, 0.007390946, 30.779102, 1.3894984, 10.616211)
+metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
+
+[node name="ForestRock32 (2)" type="Node3D" parent="." instance=ExtResource("2_onvmd")]
+transform = Transform3D(-0.99591464, 0, -0.09029994, 0, 1, 0, 0.09029994, 0, -0.99591464, 31.73121, 1.3894984, 9.5632)
+metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
+
+[node name="ForestRock32 (3)" type="Node3D" parent="." instance=ExtResource("2_onvmd")]
+transform = Transform3D(0.3310239, 0, -0.9436224, 0, 1, 0, 0.9436224, 0, 0.3310239, 32.05235, 1.3894984, 7.7508926)
+metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
+
+[node name="ForestRock32 (4)" type="Node3D" parent="." instance=ExtResource("2_onvmd")]
+transform = Transform3D(0.044187218, 0, 0.9990233, 0, 1, 0, -0.9990233, 0, 0.044187218, 27.79705, 1.3894984, 12.541488)
+metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
+
+[node name="ForestRock32 (5)" type="Node3D" parent="." instance=ExtResource("2_onvmd")]
+transform = Transform3D(-0.94144803, 0, -0.33715802, 0, 1, 0, 0.33715802, 0, -0.94144803, 26.42773, 1.3894984, 12.972056)
+metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
+
+[node name="ForestRock32 (6)" type="Node3D" parent="." instance=ExtResource("2_onvmd")]
+transform = Transform3D(-0.675131, 0, -0.7376979, 0, 1, 0, 0.7376979, 0, -0.675131, 24.20768, 1.3894984, 12.040851)
+metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
+
+[node name="ForestRock32 (7)" type="Node3D" parent="." instance=ExtResource("2_onvmd")]
+transform = Transform3D(0.81949425, 0, -0.5730875, 0, 1, 0, 0.5730875, 0, 0.81949425, 22.516905, 1.3894984, 11.459953)
+metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
+
+[node name="ForestRock32 (8)" type="Node3D" parent="." instance=ExtResource("2_onvmd")]
+transform = Transform3D(-0.6164896, 0, 0.7873631, 0, 1, 0, -0.7873631, 0, -0.6164896, 20.478144, 1.3894984, 10.269777)
+metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
+
+[node name="ForestRock32 (9)" type="Node3D" parent="." instance=ExtResource("2_onvmd")]
+transform = Transform3D(-0.9979819, 0, -0.06349924, 0, 1, 0, 0.06349924, 0, -0.9979819, 20.349133, 1.3894984, 8.118647)
+metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
+
+[node name="ForestRock4jjk" type="Node3D" parent="." instance=ExtResource("3_oeqrt")]
+transform = Transform3D(0.9128637, 0, 0.7153303, 0, 1.1597489, 0, -0.7153303, 0, 0.9128637, 36.526512, 0.9913406, 11.839294)
+metadata/asset_placer_res_id = "uid://cffyfbbsr5wu0"
+
+[node name="ForestRock4jjk (1)" type="Node3D" parent="." instance=ExtResource("3_oeqrt")]
+transform = Transform3D(-0.00084953406, 0, 1.2682947, 0, 1.2682949, 0, -1.2682947, 0, -0.00084953394, 36.365032, 1.0402565, 10.286453)
+metadata/asset_placer_res_id = "uid://cffyfbbsr5wu0"
+
+[node name="ForestRock4jjk (2)" type="Node3D" parent="." instance=ExtResource("3_oeqrt")]
+transform = Transform3D(-0.9913584, 0, 2.13326, 0, 2.3523583, 0, -2.13326, 0, -0.9913584, 34.871452, 1.5287864, 12.730065)
+metadata/asset_placer_res_id = "uid://cffyfbbsr5wu0"
+
+[node name="ForestRock4jjk (3)" type="Node3D" parent="." instance=ExtResource("3_oeqrt")]
+transform = Transform3D(-0.5921655, 0, 0.83887315, 0, 1.0268244, 0, -0.83887315, 0, -0.5921655, 35.05375, 0.93143857, 10.212854)
+metadata/asset_placer_res_id = "uid://cffyfbbsr5wu0"
+
+[node name="ForestRock4jjk (4)" type="Node3D" parent="." instance=ExtResource("3_oeqrt")]
+transform = Transform3D(-1.2041363, 0, -0.32450002, 0, 1.2470944, 0, 0.32450002, 0, -1.2041363, 36.439262, 1.0307026, 8.653656)
+metadata/asset_placer_res_id = "uid://cffyfbbsr5wu0"
+
+[node name="ForestRock4jjk (5)" type="Node3D" parent="." instance=ExtResource("3_oeqrt")]
+transform = Transform3D(1.4354935, 0, -1.6438785, 0, 2.1824248, 0, 1.6438785, 0, 1.4354935, 35.011757, 1.4522064, 10.607294)
+metadata/asset_placer_res_id = "uid://cffyfbbsr5wu0"
+
+[node name="ForestRock4jjk (6)" type="Node3D" parent="." instance=ExtResource("3_oeqrt")]
+transform = Transform3D(2.280029, 0, 1.6348917, 0, 2.805602, 0, -1.6348917, 0, 2.280029, 36.11065, 1.7330394, 7.141607)
+metadata/asset_placer_res_id = "uid://cffyfbbsr5wu0"
+
+[node name="ForestRock4jjk (7)" type="Node3D" parent="." instance=ExtResource("3_oeqrt")]
+transform = Transform3D(0.639099, 0, 1.9733167, 0, 2.074229, 0, -1.9733167, 0, 0.639099, 37.40176, 1.4034483, 11.455526)
+metadata/asset_placer_res_id = "uid://cffyfbbsr5wu0"
+
+[node name="ForestRock4jjk (8)" type="Node3D" parent="." instance=ExtResource("3_oeqrt")]
+transform = Transform3D(-2.1340346, 0, -1.0724523, 0, 2.3883588, 0, 1.0724523, 0, -2.1340346, 37.94796, 1.54501, 8.655989)
+metadata/asset_placer_res_id = "uid://cffyfbbsr5wu0"
+
+[node name="ForestRock4jjk (9)" type="Node3D" parent="." instance=ExtResource("3_oeqrt")]
+transform = Transform3D(0.19633876, 0, -1.1273386, 0, 1.1443082, 0, 1.1273386, 0, 0.19633873, 38.174236, 0.9843823, 7.3766537)
+metadata/asset_placer_res_id = "uid://cffyfbbsr5wu0"
+
+[node name="ForestRock4jjk (10)" type="Node3D" parent="." instance=ExtResource("3_oeqrt")]
+transform = Transform3D(2.1293068, 0, 1.5855598, 0, 2.654797, 0, -1.5855598, 0, 2.1293068, 36.695007, 1.6650795, 9.954625)
+metadata/asset_placer_res_id = "uid://cffyfbbsr5wu0"
+
+[node name="ForestRockCluster22" type="Node3D" parent="." instance=ExtResource("4_ykvhj")]
+transform = Transform3D(1.5334384, 0, 0.48453888, 0, 1.6081702, 0, -0.48453888, 0, 1.5334384, 41.694695, 4.1298814, -3.493532)
+metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
+
+[node name="ForestRockCluster22 (1)" type="Node3D" parent="." instance=ExtResource("4_ykvhj")]
+transform = Transform3D(-2.2919178, 0, 1.0151557, 0, 2.5066767, 0, -1.0151557, 0, -2.2919178, 37.345573, 6.175432, -14.20954)
+metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
+
+[node name="ForestRockCluster22 (2)" type="Node3D" parent="." instance=ExtResource("4_ykvhj")]
+transform = Transform3D(1.174852, 0, -0.61817014, 0, 1.3275585, 0, 0.61817014, 0, 1.174852, 28.809921, 3.4910376, -20.31364)
+metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
+
+[node name="ForestRockCluster22 (3)" type="Node3D" parent="." instance=ExtResource("4_ykvhj")]
+transform = Transform3D(-0.99886906, 0, 1.7848712, 0, 2.0453618, 0, -1.7848712, 0, -0.99886906, 24.901764, 5.125197, -22.195595)
+metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
+
+[node name="ForestRockCluster22 (4)" type="Node3D" parent="." instance=ExtResource("4_ykvhj")]
+transform = Transform3D(-0.3130213, 0, -1.2432041, 0, 1.2820058, 0, 1.2432041, 0, -0.3130213, 19.713314, 3.3873317, -17.392412)
+metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
+
+[node name="ForestRockCluster22 (5)" type="Node3D" parent="." instance=ExtResource("4_ykvhj")]
+transform = Transform3D(0.86706305, 0, -1.9919529, 0, 2.1724813, 0, 1.9919529, 0, 0.86706305, 13.619577, 5.414599, -25.731813)
+metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
+
+[node name="ForestRockCluster22 (6)" type="Node3D" parent="." instance=ExtResource("4_ykvhj")]
+transform = Transform3D(0.48174447, 0, 2.7786925, 0, 2.8201435, 0, -2.7786925, 0, 0.48174447, 29.481888, 6.8890743, -10.318443)
+metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
+
+[node name="Cube" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+transform = Transform3D(1.3673549, 0, 0.057156242, 0, 1.3685489, 0, -0.057156242, 0, 1.3673549, -17.95166, 1.1529768, 13.216926)
+metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
+
+[node name="Cube (1)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+transform = Transform3D(0.8408924, 0, 0.81728137, 0, 1.1726247, 0, -0.81728137, 0, 0.8408924, -18.12461, 1.0550146, 15.243293)
+metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
+
+[node name="Cube (2)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+transform = Transform3D(-1.0769159, 0, -0.039241195, 0, 1.0776305, 0, 0.039241195, 0, -1.0769159, -17.890507, 1.0075176, 16.742847)
+metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
+
+[node name="Cube (3)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+transform = Transform3D(2.3557532, 0, -0.9750321, 0, 2.5495608, 0, 0.9750321, 0, 2.3557532, -17.89994, 1.7434827, 18.513916)
+metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
+
+[node name="Cube (4)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+transform = Transform3D(0.91002303, 0, 0.6097197, 0, 1.0953995, 0, -0.6097197, 0, 0.91002303, -17.21722, 1.016402, 21.363792)
+metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
+
+[node name="Cube (5)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+transform = Transform3D(-2.333157, 0, 0.85935235, 0, 2.4863846, 0, -0.85935235, 0, -2.333157, -19.07057, 1.7118946, 21.781567)
+metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
+
+[node name="Cube (6)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+transform = Transform3D(1.8332672, 0, -1.1545314, 0, 2.1665206, 0, 1.1545314, 0, 1.8332672, -21.48257, 1.5519626, 17.976082)
+metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
+
+[node name="Cube (7)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+transform = Transform3D(-0.21221483, 0, 1.597263, 0, 1.6112989, 0, -1.597263, 0, -0.21221483, -22.327158, 1.2743518, 13.965482)
+metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
+
+[node name="Cube (8)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+transform = Transform3D(-0.30418962, 0, -2.353658, 0, 2.3732336, 0, 2.353658, 0, -0.30418962, -22.063238, 1.6553191, 20.357613)
+metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
+
+[node name="Cube (9)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+transform = Transform3D(1.0804976, 0, 2.650859, 0, 2.862609, 0, -2.650859, 0, 1.0804976, -20.17612, 1.9000068, 13.312609)
+metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
+
+[node name="pillar" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(-1.754738, 0, 1.8439895, 0, 2.545467, 0, -1.8439895, 0, -1.754738, -28.584835, 0.7855035, 5.320531)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (1)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(-1.7252926, 0, -0.8201061, 0, 1.9102901, 0, 0.8201061, 0, -1.7252926, -29.47522, 0.70645154, 9.374033)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (2)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(0.8571988, 0, -0.7043603, 0, 1.1094652, 0, 0.7043603, 0, 0.8571988, -29.606716, 0.60678357, 10.639143)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (3)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(-0.20024034, 0, 2.608697, 0, 2.6163707, 0, -2.608697, 0, -0.20024033, -29.433697, 0.794328, 13.01713)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (4)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(-1.2803009, 0, -0.81644154, 0, 1.5184686, 0, 0.81644154, 0, -1.2803009, -29.97826, 0.65768677, 16.294872)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (5)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(1.6908225, 0, 0.039602127, 0, 1.6912861, 0, -0.03960213, 0, 1.6908225, -30.369057, 0.67919505, 18.080044)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (6)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(-1.565075, 0, 1.1843332, 0, 1.9626781, 0, -1.1843332, 0, -1.565075, -30.147045, 0.71297157, 21.148212)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (7)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(-1.7449006, 0, -1.9157205, 0, 2.5912666, 0, 1.9157205, 0, -1.7449006, -25.09446, 0.79120266, 5.220957)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (8)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(-0.5589364, 0, -1.2312188, 0, 1.3521501, 0, 1.2312188, 0, -0.5589364, -22.54742, 0.6369864, 7.3543744)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (9)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(-0.904663, 0, -2.8094516, 0, 2.9515138, 0, 2.8094516, 0, -0.904663, -26.243343, 0.8360397, 23.92916)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (10)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(1.4934863, 0, 0.082655974, 0, 1.4957719, 0, -0.08265597, 0, 1.4934863, -34.840927, 0.65486205, 25.471125)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (11)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(-1.5319167, 0, 0.50287825, 0, 1.6123446, 0, -0.50287825, 0, -1.5319167, -31.605114, 0.6693703, 27.632502)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (12)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(-2.1493413, 0, -0.49185002, 0, 2.2049003, 0, 0.49185002, 0, -2.1493413, -30.076801, 0.74311775, 27.631758)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="@Node3D@74796" type="Node3D" parent="." instance=ExtResource("7_tdg64")]
+transform = Transform3D(1.7244308, 0, 0, 0, 1.7244308, 0, 0, 0, 1.7244308, -9, 0.21461686, 12.000002)
+metadata/asset_placer_res_id = "uid://carqrst2o7odc"
+
+[node name="pillar (2) (1)" type="Node3D" parent="." instance=ExtResource("7_tdg64")]
+transform = Transform3D(1.2496278, 0, 0, 0, 1.2496278, 0, 0, 0, 1.2496278, -10, 0.15552449, 7.000001)
+metadata/asset_placer_res_id = "uid://carqrst2o7odc"
+
+[node name="pillar (2) (2)" type="Node3D" parent="." instance=ExtResource("7_tdg64")]
+transform = Transform3D(1.1423815, 0, 0, 0, 1.1423815, 0, 0, 0, 1.1423815, -11, 0.14217697, 3.0000005)
+metadata/asset_placer_res_id = "uid://carqrst2o7odc"
+
+[node name="pillar (2) (3)" type="Node3D" parent="." instance=ExtResource("7_tdg64")]
+transform = Transform3D(1.8769696, 0, 0, 0, 1.8769696, 0, 0, 0, 1.8769696, -12, 0.23360133, -1.0000001)
+metadata/asset_placer_res_id = "uid://carqrst2o7odc"
+
+[node name="pillar (2) (4)" type="Node3D" parent="." instance=ExtResource("7_tdg64")]
+transform = Transform3D(1.8775113, 0, 0, 0, 1.8775113, 0, 0, 0, 1.8775113, -12, 0.23366874, -5.0000005)
+metadata/asset_placer_res_id = "uid://carqrst2o7odc"
+
+[node name="pillar (2) (5)" type="Node3D" parent="." instance=ExtResource("7_tdg64")]
+transform = Transform3D(1.4156526, 0, 0, 0, 1.4156526, 0, 0, 0, 1.4156526, -12, 0.17618738, -9.000001)
+metadata/asset_placer_res_id = "uid://carqrst2o7odc"
+
+[node name="ForestRock12" type="Node3D" parent="." instance=ExtResource("1_d6po2")]
+transform = Transform3D(2.1101508, 0, 0, 0, 2.1101508, 0, 0, 0, 2.1101508, -2, 1.2146112, 16.000002)
 metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
 
-[node name="ForestRock12 (2)" parent="." instance=ExtResource("1_d6po2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.788754, 1.0443072, 4.2202053)
+[node name="Sphere" type="Node3D" parent="." instance=ExtResource("9_oeqrt")]
+transform = Transform3D(2.937616, 0, 0, 0, 2.937616, 0, 0, 0, 2.937616, -28, 1.468808, 37.000004)
+metadata/asset_placer_res_id = "uid://c55qvy8fdcxsd"
+
+[node name="pillar (13)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(1.521081, 0, 0, 0, 1.521081, 0, 0, 0, 1.521081, -25, 0.18930863, 43.000004)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (14)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(2.0594437, 0, 0, 0, 2.0594437, 0, 0, 0, 2.0594437, -30, 0.25631145, 42.000004)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (15)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(1.2168711, 0, 0, 0, 1.2168711, 0, 0, 0, 1.2168711, -27, 0.1514477, 39.000004)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (16)" type="Node3D" parent="." instance=ExtResource("6_xm42s")]
+transform = Transform3D(2.3446667, 0, 0, 0, 2.3446667, 0, 0, 0, 2.3446667, -28, 0.29180935, 42.000004)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="ForestRock12 (1)" type="Node3D" parent="." instance=ExtResource("1_d6po2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7696066, 1.0443063, 31.0374)
 metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
 
-[node name="ForestRock12 (3)" parent="." instance=ExtResource("1_d6po2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.330893, 1.0443082, 7.067348)
+[node name="ForestRock12 (2)" type="Node3D" parent="." instance=ExtResource("1_d6po2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8527641, 1.0443063, 24.308434)
 metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
 
-[node name="ForestRock12 (4)" parent="." instance=ExtResource("1_d6po2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.415572, 1.0443072, -0.21506883)
+[node name="ForestRock12 (3)" type="Node3D" parent="." instance=ExtResource("1_d6po2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.57560396, 38.000004)
 metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
 
-[node name="ForestRock12 (5)" parent="." instance=ExtResource("1_d6po2")]
-transform = Transform3D(0.38995984, 0, 0.92083186, 0, 1, 0, -0.9208319, 0, 0.38995987, -15.300736, 1.0443072, 7.8190794)
+[node name="ForestRock12 (4)" type="Node3D" parent="." instance=ExtResource("1_d6po2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0.57560396, 30.000004)
 metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
+
+[node name="ForestRock12 (5)" type="Node3D" parent="." instance=ExtResource("1_d6po2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.57560396, 26.000004)
+metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
+
+[node name="ForestRock12 (6)" type="Node3D" parent="." instance=ExtResource("1_d6po2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.57560396, 36.000004)
+metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
+
+[node name="ForestRock12 (7)" type="Node3D" parent="." instance=ExtResource("1_d6po2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.57560396, 21.000002)
+metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
+
+[node name="ForestRock32 (10)" type="Node3D" parent="." instance=ExtResource("2_onvmd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.545513, 1.3894974, 25.756432)
+metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"

@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://dmicn3kmr620j"
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_o45xf")
-icon_name = &"ErrorWarning"
+icon_name = &"Node3D"
 
 [sub_resource type="Texture2D" id="Texture2D_ik2kd"]
 resource_local_to_scene = false
@@ -80,7 +80,7 @@ text = "Assets Parent: "
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
-text = "No parent selected"
+text = "Demo"
 icon = SubResource("Texture2D_5hqbk")
 alignment = 0
 

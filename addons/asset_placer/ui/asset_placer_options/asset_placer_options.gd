@@ -18,6 +18,7 @@ func _ready():
 	presenter.ready()
 	
 	grid_snapping_checkbox.toggled.connect(presenter.set_grid_snapping_enabled)
+	grid_snap_value_spin_box.value_changed.connect(presenter.set_grid_snap_value)
 	
 	max_rotation_selector.value_changed.connect(presenter.set_max_rotation)
 	min_rotation_selector.value_changed.connect(presenter.set_min_rotation)

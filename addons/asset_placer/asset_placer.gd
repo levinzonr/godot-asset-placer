@@ -92,11 +92,7 @@ func _snap_position(pos: Vector3):
 	if !AssetPlacerPresenter._instance.options.snapping_enabled:
 		return pos
 	var grid_step: float = AssetPlacerPresenter._instance.options.snapping_grid_step
-	return Vector3(
-		round(pos.x / grid_step) * grid_step,
-		round(pos.y / grid_step) * grid_step,
-		round(pos.z / grid_step) * grid_step
-	)
+	return pos.snapped(Vector3(grid_step, grid_step, grid_step))
 
 func _place_instance(transform: Transform3D, select_after_placement: bool):
 	var selection = EditorInterface.get_selection()

@@ -42,9 +42,8 @@ Click again to place the asset in the scene. If you want to edit the placed asse
 
 
 ## Organizing Assets
-You can organize your assets into Collection by selecting the assets and clicking the "Create Collection" button within Collections Tab. This will create a new collection with the selected assets. You can also filter assets by their name and collection using the search bar at the top of the plugin window.
-
-Collections is a simple way to "group" assets together by some criteria. For example, you can create a collection for all the trees in your scene, or all the rocks, etc.
+You can organize your assets into Collections. Collections is a simple way to "group" assets together by some criteria. For example, you can create a collection for all the trees in your scene, or all the rocks, etc.
+To create a collection navigate to the Collections tab, choose a name and color. Then you can assing assets into one or more collections, either by using a options menu or draggin and dropping assets into the window while Collection Filter is activee
 
 ## Known Issues
 - So far plugin only supports .tscn files, glb and fbx models. If you have any other formats you would like to see supported, please let me know.
