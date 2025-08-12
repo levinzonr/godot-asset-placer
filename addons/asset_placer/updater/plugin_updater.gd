@@ -77,7 +77,8 @@ func do_update():
 
 	zip_reader.close()
 	DirAccess.remove_absolute(TMP_ZIP)
-	EditorInterface.restart_editor(true)
+	EditorInterface.set_plugin_enabled.call_deferred("asset_placer", true)
+	EditorInterface.set_plugin_enabled("asset_placer", false)
 	show_update_loading.emit(false)
 	
 
@@ -87,6 +88,7 @@ func _get_latest_update() -> PluginUpdate:
 	var response: PackedByteArray = await  _client.client_response
 	if response.is_empty():
 		return null
+		
 	var dict = JSON.parse_string(response.get_string_from_utf8())
 	var tag_name = dict["tag_name"]
 	var change_log = dict["body"]
