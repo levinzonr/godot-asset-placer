@@ -25,6 +25,9 @@ func _init(local_config_path: String, remote_config_path: String):
 	
 func check_for_updates():
 	_latest_update = await _get_latest_update()
+	if !_latest_update:
+		return
+		
 	var current_version = PluginConfiguration.new(_local_plugin_path).version
 	if current_version.compare_to(_latest_update.version) < 0:
 		updater_update_available.emit(_latest_update)
@@ -81,7 +84,9 @@ func do_update():
 
 func _get_latest_update() -> PluginUpdate:
 	_client.client_get("https://api.github.com/repos/levinzonr/godot-asset-placer/releases/latest")
-	var response = await  _client.client_response
+	var response: PackedByteArray = await  _client.client_response
+	if response.is_empty():
+		return null
 	var dict = JSON.parse_string(response.get_string_from_utf8())
 	var tag_name = dict["tag_name"]
 	var change_log = dict["body"]
