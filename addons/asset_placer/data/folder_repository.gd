@@ -34,7 +34,7 @@ func add(folder: String, incldude_subfolders: bool = true):
 	var library := data_source.get_library()
 	var duplicated_folders := library.folders.duplicate()
 	
-	if duplicated_folders.any(func(f: AssetFolder): return f.path.contains(folder)):
+	if exists(folder):
 		push_warning("Folder with this path already exists")
 		return
 	
@@ -43,7 +43,15 @@ func add(folder: String, incldude_subfolders: bool = true):
 	library.folders = duplicated_folders
 	data_source.save_libray(library)
 	folder_changed.emit()
-	
+
+func exists(path: String) -> bool:
+	for folder in get_all():
+		if folder.path == path:
+			return true
+		if folder.include_subfolders && path.contains(folder.path):
+			return true
+		
+	return false
 func delete(folder: String):
 	var library := data_source.get_library()
 	library.folders = library.folders.filter(func(f): return f.path != folder)
