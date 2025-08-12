@@ -14,7 +14,6 @@ This is Godot Editor plugin that allows for quick asset placement and management
 - Grid snapping when placing assets
 - Randomize asset Rotation and Scale on placement
 - Undo-Redo Integration
-- Internal library is Synchronized with File System
 - In Editor Update when new release is published on GitHub
 
 <p align="center">
@@ -39,10 +38,11 @@ You can folders to sync by either Drag And Droping the folder or  using "Add fol
 
 ## Placing Assets
 To place an asset, select it from the list and click and navigate to the 3D scene of you choice. If all goes well, you should see a preview of your asset snapping to the neares surface
-Click again to place the asset in the scene.
+Click again to place the asset in the scene. If you want to edit the placed asset, you can use Shift+Left click shortcut to focus on the placed asset.
+
 
 ## Organizing Assets
-You can organize your assets into collections by selecting the assets and clicking the "Create Collection" button. This will create a new collection with the selected assets. You can also filter assets by their name and collection using the search bar at the top of the plugin window.
+You can organize your assets into Collection by selecting the assets and clicking the "Create Collection" button within Collections Tab. This will create a new collection with the selected assets. You can also filter assets by their name and collection using the search bar at the top of the plugin window.
 
 Collections is a simple way to "group" assets together by some criteria. For example, you can create a collection for all the trees in your scene, or all the rocks, etc.
 

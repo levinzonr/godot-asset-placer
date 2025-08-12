@@ -1,5 +1,16 @@
 # Godot Asset Placer Changelog
 
+
+## 1.0.0-beta1
+### Added
+- Update collections UI to keep it consistent with picker
+- Update the plugin without Restart -> Replaced with Re-Enabling the plugin
+- Option to delete collections
+
+### Fixed
+- Clean up Worker Threads on Exit
+- Avoid adding duplicated folders when subfolders are included 
+
 ## 1.0.0-alpha06
 ### Added
 - When placing assets it is now required to select a parent node where assets should placed under
