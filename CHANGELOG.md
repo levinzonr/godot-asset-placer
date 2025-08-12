@@ -10,6 +10,7 @@
 ### Fixed
 - Clean up Worker Threads on Exit
 - Avoid adding duplicated folders when subfolders are included 
+- Fixed Grid Snapping
 
 ## 1.0.0-alpha06
 ### Added
