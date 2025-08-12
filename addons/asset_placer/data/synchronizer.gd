@@ -29,7 +29,7 @@ func sync_all():
 		push_error("Sync is already running")
 		return
 	
-	WorkerThreadPool.add_task(func():
+	AssetPlacerAsync.instance.enqueue(func():
 		sync_running = true
 		_sync_all()
 		_notify_scan_complete()
@@ -42,7 +42,7 @@ func sync_folder(folder: AssetFolder):
 		push_error("Sync is already running")
 		return
 	
-	WorkerThreadPool.add_task(func():
+	AssetPlacerAsync.instance.enqueue(func():
 		sync_running = true
 		_sync_folder(folder)
 		_notify_scan_complete()

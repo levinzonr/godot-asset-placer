@@ -7,7 +7,7 @@ signal client_response(body: PackedByteArray)
 
 
 func client_get(url: String):
-	WorkerThreadPool.add_task(func(): 
+	AssetPlacerAsync.instance.enqueue(func(): 
 		var response = _client_get(url)
 		call_deferred("emit_signal", "client_response", response)
 	)

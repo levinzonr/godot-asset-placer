@@ -7,6 +7,7 @@ var  _asset_placer: AssetPlacer
 var _assets_repository: AssetsRepository
 var synchronizer: Synchronize
 var _updater: PluginUpdater
+var _async: AssetPlacerAsync
 
 var _asset_placer_window: AssetLibraryPanel
 var _file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
@@ -25,6 +26,7 @@ func _disable_plugin():
 	pass
 	
 func _enter_tree():
+	_async = AssetPlacerAsync.new()
 	_updater = PluginUpdater.new(ADDON_PATH +  "/plugin.cfg", "")
 	_asset_placer = AssetPlacer.new()
 	_folder_repository = FolderRepository.new()
@@ -58,6 +60,8 @@ func _exit_tree():
 	scene_changed.disconnect(_handle_scene_changed)
 	remove_control_from_bottom_panel(_asset_placer_window)
 	_asset_placer_window.queue_free()
+	_async.await_completion()
+
 
 func _handles(object):
 	return true
