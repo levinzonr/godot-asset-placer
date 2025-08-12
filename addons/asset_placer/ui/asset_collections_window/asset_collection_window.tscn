@@ -7,7 +7,7 @@
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_jdl0x")
-icon_name = &"New"
+icon_name = &"Add"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [node name="AssetCollectionWindow" type="Control"]
@@ -41,6 +41,7 @@ theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 32
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer2"]
 layout_mode = 2
@@ -57,6 +58,7 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Color"
 color = Color(0.6156863, 0, 0, 1)
+edit_intensity = false
 
 [node name="AddButton" type="Button" parent="Panel/MarginContainer/VBoxContainer2/HBoxContainer"]
 unique_name_in_owner = true
@@ -67,7 +69,6 @@ text = "Add"
 icon = SubResource("Texture2D_x040h")
 icon_alignment = 2
 
-[node name="ChipsContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer2"]
+[node name="ChipsContainer" type="HFlowContainer" parent="Panel/MarginContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-columns = 2
