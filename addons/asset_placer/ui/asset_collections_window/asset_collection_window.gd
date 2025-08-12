@@ -32,6 +32,17 @@ func show_collections(items: Array[AssetCollection]):
 		chip.text = item.name
 		chip.icon = make_circle_icon(16, item.backgroundColor)
 		chips_container.add_child(chip)
+		chip.pressed.connect(func(): _show_options_dialog(item))
+
+
+func _show_options_dialog(collection: AssetCollection):
+	var dialog = PopupMenu.new()
+	var mouse_pos = EditorInterface.get_base_control().get_global_mouse_position()
+	dialog.add_icon_item(EditorIconTexture2D.new("Remove"), "Delete")
+	dialog.index_pressed.connect(func(i):
+		presenter.delete_collection(collection)
+	)
+	EditorInterface.popup_dialog(dialog, Rect2i(mouse_pos, dialog.get_contents_minimum_size()))
 
 func make_circle_icon(radius: int, color: Color) -> Texture2D:
 	var size = radius * 2

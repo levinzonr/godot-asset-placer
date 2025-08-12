@@ -19,3 +19,9 @@ func add_collection(collection: AssetCollection):
 	_data_source.save_libray(lib)
 	collections_changed.emit()
 	
+func delete_collection(name: String):
+	var lib = _data_source.get_library()
+	var new_collections = lib.collections.filter(func(c): return c.name != name)
+	lib.collections = new_collections
+	_data_source.save_libray(lib)
+	collections_changed.emit()

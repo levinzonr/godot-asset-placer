@@ -2,6 +2,7 @@ extends RefCounted
 class_name AssetCollectionsPresenter
 
 var _repository: AssetCollectionRepository
+var _assets_repository: AssetsRepository
 
 var _new_collection_name: String = ""
 var _new_collection_color: Color
@@ -14,6 +15,7 @@ signal clear_text_field()
 func _init():
 	self._repository = AssetCollectionRepository.new()
 	self._repository.collections_changed.connect(_load_collections)
+	self._assets_repository = AssetsRepository.instance
 
 func ready():
 	_load_collections()
@@ -41,3 +43,13 @@ func _update_state_new_collection_state():
 func _load_collections():
 	var collections = _repository.get_collections()
 	show_collections.emit(collections)
+	
+	
+func delete_collection(collection: AssetCollection):
+	_repository.delete_collection(collection.name)
+	for asset in _assets_repository.get_all_assets():
+		var updated_tags = asset.tags.filter(func(f): return f != collection.name)
+		if updated_tags != asset.tags:
+			asset.tags = updated_tags
+			_assets_repository.update(asset)
+		
