@@ -1,5 +1,8 @@
 # Godot Asset Placer Changelog
 
+## 1.0.0-beta2
+### Fixed
+- Limit Plugin Edit to Node3D to avoid undefined behaviour
 
 ## 1.0.0-beta1
 ### Added
