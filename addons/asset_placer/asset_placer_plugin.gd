@@ -64,7 +64,7 @@ func _exit_tree():
 
 
 func _handles(object):
-	return true
+	return object is Node3D
 
 func _handle_scene_changed(scene: Node):
 	if scene is Node3D:

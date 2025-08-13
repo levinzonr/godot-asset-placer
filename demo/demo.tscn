@@ -32,34 +32,34 @@ shape = SubResource("BoxShape3D_5hjng")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00016975403, 0, 0)
 mesh = SubResource("PlaneMesh_d6po2")
 
-[node name="Cube" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+[node name="Cube" parent="." instance=ExtResource("5_1rqa4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.503952, 0.96870327, 18.256914)
 metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
 
-[node name="Cube (1)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+[node name="Cube (1)" parent="." instance=ExtResource("5_1rqa4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4978647, 0.96870327, 16.771734)
 metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
 
-[node name="Cube (2)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+[node name="Cube (2)" parent="." instance=ExtResource("5_1rqa4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4669743, 0.96870327, 15.0293665)
 metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
 
-[node name="Cube (3)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+[node name="Cube (3)" parent="." instance=ExtResource("5_1rqa4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2997894, 0.96870327, 16.776999)
 metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
 
-[node name="Cube (4)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+[node name="Cube (4)" parent="." instance=ExtResource("5_1rqa4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2988615, 0.96870327, 18.346905)
 metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
 
-[node name="Cube (5)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+[node name="Cube (5)" parent="." instance=ExtResource("5_1rqa4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5823107, 0.96870327, 14.293025)
 metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
 
-[node name="Cube (6)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+[node name="Cube (6)" parent="." instance=ExtResource("5_1rqa4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4998574, 0.96870327, 15.383492)
 metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
 
-[node name="Cube (7)" type="Node3D" parent="." instance=ExtResource("5_1rqa4")]
+[node name="Cube (7)" parent="." instance=ExtResource("5_1rqa4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.947775, 0.96870327, -2.937173)
 metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
