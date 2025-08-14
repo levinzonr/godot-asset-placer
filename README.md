@@ -17,8 +17,8 @@ This is Godot Editor plugin that allows for quick asset placement and management
 - In Editor Update when new release is published on GitHub
 
 <p align="center">
-  <a href="https://youtu.be/ffRDdsYeiqM" target="_blank">
-	<img src="https://img.youtube.com/vi/ffRDdsYeiqM/0.jpg" alt="YouTube Video" />
+  <a href="https://youtu.be/EpFXZa5MfDA" target="_blank">
+	<img src="https://img.youtube.com/vi/EpFXZa5MfDA/0.jpg" alt="YouTube Video" />
   </a>
 </p>
 
