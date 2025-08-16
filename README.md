@@ -4,7 +4,7 @@
 This is Godot Editor plugin that allows for quick asset placement and management when working with large 3D Scenes.
 
 <p align="center">
-	<img src="./docs/logo.svg" alt="Logo" />
+	<img src="./docs/logo.png" alt="Logo" />
 </p>
 > This plugin is still in development and may have bugs or incomplete features. Please report any issues you encounter
 >
