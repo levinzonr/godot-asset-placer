@@ -9,18 +9,19 @@ var last_time_modified = 0
 
 func set_resource(resource: AssetResource):
 	self.resource = resource
-	if Engine.is_editor_hint():
+	preview_resource(resource)
+
+func preview_resource(resource: AssetResource):
+	if Engine.is_editor_hint() and resource and resource.scene:
 		last_time_modified = FileAccess.get_modified_time(resource.scene.resource_path)
 		previewer = EditorInterface.get_resource_previewer()
 		previewer.queue_edited_resource_preview(resource.scene, self, "_on_preview_generated", null)
-		
+
 func _process(_delta):
 	if resource and Engine.is_editor_hint():
 		var new_time_modified = FileAccess.get_modified_time(resource.scene.resource_path)
 		if new_time_modified != last_time_modified:
-			last_time_modified = new_time_modified
-			previewer.queue_edited_resource_preview(resource.scene, self, "_on_preview_generated", null)
-		
+			preview_resource(resource)
+
 func _on_preview_generated(path: String, texture: Texture2D,  thumbnail, data):
 	self.texture = texture
-	
