@@ -12,6 +12,7 @@ var _async: AssetPlacerAsync
 var _asset_placer_window: AssetLibraryPanel
 var _file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
 
+
 var plugin_path: String:
 	get(): return get_script().resource_path.get_base_dir()
 	
@@ -28,11 +29,10 @@ func _disable_plugin():
 func _enter_tree():
 	_async = AssetPlacerAsync.new()
 	_updater = PluginUpdater.new(ADDON_PATH +  "/plugin.cfg", "")
-	_asset_placer = AssetPlacer.new()
+	_asset_placer = AssetPlacer.new(get_undo_redo())
 	_folder_repository = FolderRepository.new()
 	_assets_repository = AssetsRepository.new()
 	synchronizer = Synchronize.new(_folder_repository, _assets_repository)
-	_asset_placer = AssetPlacer.new()
 	_presenter = AssetPlacerPresenter.new()
 	scene_changed.connect(_handle_scene_changed)
 	_presenter.asset_selected.connect(start_placement)
@@ -41,9 +41,8 @@ func _enter_tree():
 	add_control_to_bottom_panel(_asset_placer_window, "Asset Placer")
 	
 	synchronizer.sync_complete.connect(func(added, removed, scanned):
-		var toaster = EditorInterface.get_editor_toaster()
 		var message = "Asset Placer Sync complete\nAdded: %d Removed: %d Scanned total: %d" % [added, removed, scanned]
-		toaster.push_toast(message, EditorToaster.SEVERITY_INFO, "Asset Placer")
+		EditorToasterCompat.toast(message)
 	)
 	
 	
