@@ -51,7 +51,7 @@ func add_asset(path: String):
 	for collection in _active_collections:
 		tags.push_back(collection.name)
 		
-	var id = ResourceUID.path_to_uid(path)
+	var id = ResourceIdCompat.path_to_uid(path)
 	if !id:
 		push_error("Error getting id from path %s" % path)
 		return

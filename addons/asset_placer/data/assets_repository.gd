@@ -47,7 +47,7 @@ func add_asset(scene_path: String, tags: Array[String] = []) -> bool:
 		return false
 	
 	var library = data_source.get_library()
-	var id = ResourceUID.path_to_uid(scene_path)
+	var id = ResourceIdCompat.path_to_uid(scene_path)
 	var asset = AssetResource.new(id, scene_path.get_file())
 	if exists(id):
 		return false

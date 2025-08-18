@@ -6,7 +6,8 @@ class_name FoldersWindow
 @onready var  presenter: FolderPresenter = FolderPresenter.new()
 @onready var add_folder_button: Button = %AddFolderButton
 
-@onready var folder_res = preload("uid://d7ay5upbgnx0")
+@onready var folder_res = preload("res://addons/asset_placer/ui/folders_window/folder_view.tscn")
+
 
 func _ready():
 	presenter.folders_loaded.connect(show_folders)
