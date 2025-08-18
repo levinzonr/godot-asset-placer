@@ -9,9 +9,9 @@ This is Godot Editor plugin that allows for quick asset placement and management
 <p align="center">
 	<img src="./docs/logo.png" alt="Logo" />
 </p>
+
 > This plugin is still in development and may have bugs or incomplete features. Please report any issues you encounter
->
-> Any Features and Suggestions are welcome as well
+Any Features and Suggestions are welcome as well
 
 # Features
 - One-Click Asset Placement with Snapping to Ground and other Collision shapes
