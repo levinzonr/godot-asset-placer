@@ -1,5 +1,8 @@
 ![GitHub Release](https://img.shields.io/github/v/release/levinzonr/godot-asset-placer)
-![Godot4](https://img.shields.io/badge/Godot-4.X%2B-blue)
+![Godot4](https://img.shields.io/badge/Godot-4.5-blue)
+![Godot4](https://img.shields.io/badge/Godot-4.4-blue)
+![Godot4](https://img.shields.io/badge/Godot-4.3-blue)
+
 # Godot Asset Placer
 This is Godot Editor plugin that allows for quick asset placement and management when working with large 3D Scenes.
 

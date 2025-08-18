@@ -18,6 +18,7 @@ To contribute code:
 - Fork the repository: Create your own copy of the repository.
 - Create a branch: Work on your changes in a dedicated branch.
 - Follow coding standards: Adhere to the existing code style and conventions.
+- Use [conventional commit messages](https://www.conventionalcommits.org/en/v1.0.0/): Use clear and descriptive commit messages that explain your changes.
 - Test thoroughly: Ensure your changes work as expected and don't introduce new issues.
 - Submit a pull request: Provide a clear description of your changes and reference any related issues.
 

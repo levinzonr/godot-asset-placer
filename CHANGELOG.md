@@ -1,5 +1,8 @@
 # Godot Asset Placer Changelog
 
+## 1.0.0-beta3
+Added support for the Godot 4.4 and 4.3. Special thanks to @why-try313 for bringing it up, testing compatability and coming up with solutions
+
 ## 1.0.0-beta2
 ### Fixed
 - Limit Plugin Edit to Node3D to avoid undefined behaviour
