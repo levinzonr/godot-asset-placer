@@ -17,7 +17,7 @@ func get_all() -> Array[AssetFolder]:
 
 func find(path: String)  -> AssetFolder:
 	var folders = get_all()
-	var folder = folders.find_custom(func(f: AssetFolder): return f.path == path)
+	var folder:int = -1; for f in len(folders): if folders[f].path == path: folder = f; break
 	return folders[folder]
 	
 

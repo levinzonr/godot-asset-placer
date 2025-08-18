@@ -15,4 +15,5 @@ func _init(items: Array[AssetResource], folders: Array[AssetFolder], collections
 
 
 func index_of_asset(asset: AssetResource):
-	return items.find_custom(func(a): return a.id == asset.id)
+	var idx:int = -1; for a in len(items): if items[a].id == asset.id: idx = a; break
+	return idx
