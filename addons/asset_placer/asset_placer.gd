@@ -7,8 +7,12 @@ var node_history: Array[String] = []
 var preview_rids = []
 var asset: AssetResource
 
+var undo_redo: EditorUndoRedoManager
 var meta_asset_id = &"asset_placer_res_id"
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
+
+func _init(undo_redo: EditorUndoRedoManager):
+	self.undo_redo = undo_redo
 
 func start_placement(root: Window, asset: AssetResource):
 	stop_placement()
@@ -100,11 +104,10 @@ func _place_instance(transform: Transform3D, select_after_placement: bool):
 	var scene_root = scene.get_node(AssetPlacerPresenter._instance._parent)
 	
 	if scene_root and asset.scene:
-		var undoredo = EditorInterface.get_editor_undo_redo()
-		undoredo.create_action("Place Asset: %s" % asset.name)
-		undoredo.add_do_method(self, "_do_placement", scene_root, transform, select_after_placement)
-		undoredo.add_undo_method(self, "_undo_placement", scene_root)
-		undoredo.commit_action()
+		undo_redo.create_action("Place Asset: %s" % asset.name)
+		undo_redo.add_do_method(self, "_do_placement", scene_root, transform, select_after_placement)
+		undo_redo.add_undo_method(self, "_undo_placement", scene_root)
+		undo_redo.commit_action()
 		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
 
 func _do_placement(root: Node3D, transform: Transform3D, select_after_placement: bool):
@@ -122,7 +125,8 @@ func _do_placement(root: Node3D, transform: Transform3D, select_after_placement:
 
 func _undo_placement(root: Node3D):
 	var last_added = node_history.pop_front()
-	var node_index = root.get_children().find_custom(func(a): return a.name == last_added)
+	var children = root.get_children()
+	var node_index = -1; for a in root.get_child_count(): if children[a].name == last_added: node_index = a; break
 	var node = root.get_child(node_index)
 	node.queue_free()
 
