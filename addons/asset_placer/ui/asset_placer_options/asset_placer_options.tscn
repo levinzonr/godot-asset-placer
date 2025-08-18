@@ -84,9 +84,8 @@ text = "Demo"
 icon = SubResource("Texture2D_5hqbk")
 alignment = 0
 
-[node name="Snapping" type="FoldableContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Snapping" type="BoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-title = "Snapping Options"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping"]
 layout_mode = 2
@@ -106,13 +105,12 @@ text = "Grid Step"
 [node name="GridSnapValueSpinBox" type="SpinBox" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-step = 0.10000000000582077
-value = 1.0000000000582077
+step = 0.1
+value = 1.0
 editable = false
 
-[node name="FoldableContainer" type="FoldableContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="FoldableContainer" type="BoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-title = "Transformations Options"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer"]
 layout_mode = 2
