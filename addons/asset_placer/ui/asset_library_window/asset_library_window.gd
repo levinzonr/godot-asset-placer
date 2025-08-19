@@ -18,6 +18,7 @@ class_name AssetLibraryWindow
 @onready var empty_collection_view_add_folder_btn: Button = %EmptyCollectionViewAddFolderBtn
 @onready var scroll_container = %ScrollContainer
 @onready var empty_search_content = %EmptySearchContent
+@onready var empty_view_add_folder_btn = %EmptyViewAddFolderBtn
 signal asset_selected(asset: AssetResource)
 
 
@@ -28,6 +29,7 @@ func _ready():
 	AssetPlacerPresenter._instance.asset_selected.connect(set_selected_asset)
 	AssetPlacerPresenter._instance.asset_deselcted.connect(clear_selected_asset)
 	empty_collection_view_add_folder_btn.pressed.connect(show_folder_dialog)
+	empty_view_add_folder_btn.pressed.connect(show_folder_dialog)
 	presenter.show_empty_view.connect(show_empty_view)
 
 	presenter.on_ready()
