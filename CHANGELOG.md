@@ -1,5 +1,11 @@
 # Godot Asset Placer Changelog
 
+## 1.0.0-beta4
+### Added
+- Updated .gitattributes to ignore files and folder that are not needed by the plugin to work #2
+### Fixed
+- Fixed issue with Add Folder button not working on Onboarding screen
+
 ## 1.0.0-beta3
 Added support for the Godot 4.4 and 4.3. Special thanks to @why-try313 for bringing it up, testing compatability and coming up with solutions
 
