@@ -78,6 +78,7 @@ func do_update():
 	zip_reader.close()
 	DirAccess.remove_absolute(TMP_ZIP)
 	EditorInterface.set_plugin_enabled.call_deferred("asset_placer", true)
+	EditorInterface.get_resource_filesystem().scan.call_deferred()
 	EditorInterface.set_plugin_enabled("asset_placer", false)
 	show_update_loading.emit(false)
 	
