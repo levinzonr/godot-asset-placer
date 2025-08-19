@@ -3,6 +3,8 @@
 ## 1.0.0-beta4
 ### Added
 - Updated .gitattributes to ignore files and folder that are not needed by the plugin to work #2
+### Changed
+- When doing an In Editor Update, the plugin will try to trigger the file scan so that the Editor is aware of the new files/changes to the existing files
 ### Fixed
 - Fixed issue with Add Folder button not working on Onboarding screen
 
