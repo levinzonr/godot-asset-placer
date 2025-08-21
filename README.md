@@ -48,9 +48,14 @@ You can folders to sync by either Drag And Droping the folder or  using "Add fol
 
 
 ## Placing Assets
-To place an asset, select it from the list and click and navigate to the 3D scene of you choice. If all goes well, you should see a preview of your asset snapping to the neares surface
-Click again to place the asset in the scene. If you want to edit the placed asset, you can use Shift+Left click shortcut to focus on the placed asset.
-
+Godot Asset Placer is using RayCasting to determine where to place the asset. This means that you can place assets on any surface that has a CollisionShape attached to it.
+To place an asset, follow these steps:
+1. Navigate to the 3D Scene of your choice
+2. Open Asset Placer Dock window and select the asset you want to place from the Assets tab
+3. Optional: Change Parent Node. By default, the Plugin will select as Root Node3D as the parent, you can change it withing Options Sub View
+4. At this point you will see a preview of the asset in the 3D viewport
+5. Press `Left Mouse Button` to place the asset at the location of the mouse cursor
+6. If you want to modify the asset after placement, you can press `Shift` + `Left Mouse Button` to Place And Focus on the Placed Asset. This allows you to move, rotate, or scale the asset using the standard Godot Editor tools.
 
 ## Organizing Assets
 You can organize your assets into Collections. Collections is a simple way to "group" assets together by some criteria. For example, you can create a collection for all the trees in your scene, or all the rocks, etc.
@@ -58,6 +63,7 @@ To create a collection navigate to the Collections tab, choose a name and color.
 
 ## Known Issues
 - So far plugin only supports .tscn files, glb and fbx models. If you have any other formats you would like to see supported, please let me know.
+- Sometimes Previews for the Assets are not perfect - but they are directly take from the Godot Previews system
 - The UI is work in progress..
 
 

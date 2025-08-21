@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://sas7j2dyfkr3"]
+[gd_scene load_steps=10 format=3 uid="uid://sas7j2dyfkr3"]
 
 [ext_resource type="PackedScene" uid="uid://dig47ichuqflf" path="res://demo/assets/ForestRockCluster1.glb" id="1_u10mr"]
 [ext_resource type="PackedScene" uid="uid://b5cskstxopmxr" path="res://demo/assets/ForestRockCluster2.glb" id="2_onu7k"]
 [ext_resource type="PackedScene" uid="uid://b8p1iy52py3xm" path="res://demo/assets/ForestRock2.glb" id="3_s1s6j"]
 [ext_resource type="PackedScene" uid="uid://dnjrvjljdl02" path="res://demo/assets/cube.tscn" id="4_onvmd"]
 [ext_resource type="PackedScene" uid="uid://7u1qc3y84jbe" path="res://demo/assets/pillar.glb" id="5_oeqrt"]
+[ext_resource type="PackedScene" uid="uid://gwihxo1nnefo" path="res://demo/assets/ForestRock1.glb" id="6_onu7k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hjng"]
 size = Vector3(100, 0.1, 100)
@@ -100,3 +101,11 @@ metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
 [node name="pillar (2)" parent="." instance=ExtResource("5_oeqrt")]
 transform = Transform3D(-1.2492461, 0, -1.5451401, 0, 1.9869761, 0, 1.5451401, 0, -1.2492461, -7.8806076, 0.71599567, 2.4304476)
 metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="ForestRock12" type="Node3D" parent="." instance=ExtResource("6_onu7k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.269475, 1.0443072, -12.330059)
+metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
+
+[node name="ForestRock12 (1)" type="Node3D" parent="." instance=ExtResource("6_onu7k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.993513, 1.0443072, -14.065937)
+metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
