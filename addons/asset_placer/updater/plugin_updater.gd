@@ -77,12 +77,13 @@ func do_update():
 
 	zip_reader.close()
 	DirAccess.remove_absolute(TMP_ZIP)
-	EditorInterface.set_plugin_enabled.call_deferred("asset_placer", true)
-	EditorInterface.get_resource_filesystem().scan.call_deferred()
+	_do_post_update.call_deferred()
 	EditorInterface.set_plugin_enabled("asset_placer", false)
 	show_update_loading.emit(false)
 	
-
+func _do_post_update():
+	EditorInterface.get_resource_filesystem().scan()
+	EditorInterface.set_plugin_enabled("asset_placer", true)
 
 func _get_latest_update() -> PluginUpdate:
 	_client.client_get("https://api.github.com/repos/levinzonr/godot-asset-placer/releases/latest")
