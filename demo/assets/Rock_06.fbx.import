@@ -41,4 +41,4 @@ _subresources={}
 fbx/importer=0
 fbx/allow_geometry_helper_nodes=false
 fbx/embedded_image_handling=1
-fbx/naming_version=2
+fbx/naming_version=1
