@@ -76,7 +76,15 @@ func transform_preview(mode: AssetPlacerPresenter.Mode, axis: Vector3, direction
 		AssetPlacerPresenter.Mode.Scale:
 			var step := 0.1
 			var factor := 1.0 + step * direction
-			preview_node.scale *= axis * factor
+			var min_scale := 0.01
+			var new_scale := preview_node.scale
+			if axis.x != 0:
+				new_scale.x = max(preview_node.scale.x * factor, min_scale)
+			if axis.y != 0:
+				new_scale.y = max(preview_node.scale.y * factor, min_scale)
+			if axis.z != 0:
+				new_scale.z = max(preview_node.scale.z * factor, min_scale)
+			preview_node.scale = new_scale
 			return true
 		AssetPlacerPresenter.Mode.Rotate:
 			var rotation_step = 0.1
