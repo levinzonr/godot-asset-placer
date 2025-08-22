@@ -16,5 +16,3 @@ func set_mode(mode: AssetPlacerPresenter.Mode):
 
 func set_axis(vector: Vector3):
 	label_3.text = "Axis %s" % str(vector)
-
-func _gui_input(event):

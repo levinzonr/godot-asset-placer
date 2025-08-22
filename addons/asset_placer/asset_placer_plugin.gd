@@ -120,9 +120,5 @@ func _forward_3d_gui_input(viewport_camera, event):
 		if event.keycode == KEY_X:
 			_presenter.toggle_axis(Vector3.RIGHT)
 			return true
-		
-			
-			
-		else:
 			
 	return false
