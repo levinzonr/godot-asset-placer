@@ -34,7 +34,7 @@ func _apply_preview_material(node: Node3D):
 		_apply_preview_material(child)
 		
 
-func move_preview(mouse_position: Vector2, camera: Camera3D):
+func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 	if preview_node:
 		var ray_origin = camera.project_ray_origin(mouse_position)
 		var	ray_dir = camera.project_ray_normal(mouse_position)
