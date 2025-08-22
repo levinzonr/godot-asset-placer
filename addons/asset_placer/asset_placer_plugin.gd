@@ -103,7 +103,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 			return true
 		if event.keycode == KEY_R:
 			_presenter.change_mode(AssetPlacerPresenter.Mode.Scale)
-			
+			return true
 		if event.keycode == KEY_W:
 			_presenter.change_mode(AssetPlacerPresenter.Mode.Move)
 		if event.keycode == KEY_ESCAPE:
