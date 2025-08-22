@@ -9,7 +9,7 @@ var _mode: Mode = Mode.Place
 var preview_transform_axis: Vector3 = Vector3.UP
 
 signal asset_selected(asset: AssetResource)
-signal asset_deselcted
+signal asset_deselected
 signal parent_changed(parent: NodePath)
 signal options_changed(options: AssetPlacerOptions)
 signal mode_changed(mode: Mode)
