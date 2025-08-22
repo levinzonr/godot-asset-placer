@@ -123,6 +123,5 @@ func _forward_3d_gui_input(viewport_camera, event):
 			
 			
 		else:
-			return false
 			
 	return false
