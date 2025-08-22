@@ -6,6 +6,7 @@
 
 [node name="AssetResourcePreview" type="Button"]
 custom_minimum_size = Vector2(200, 200)
+anchors_preset = -1
 offset_right = 150.0
 offset_bottom = 250.0
 theme_type_variation = &"FlatButton"
@@ -22,6 +23,7 @@ grow_vertical = 2
 
 [node name="AssetThumbnail" type="TextureRect" parent="VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("2_55ohh")
 stretch_mode = 3
