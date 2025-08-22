@@ -28,6 +28,7 @@ Any Features and Suggestions are welcome as well
   </a>
 </p>
 
+
 ![addon_preview.png](docs/addon_preview.png)
 
 ## Installation
