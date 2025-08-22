@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://y4168twxqqwr"]
+
+[ext_resource type="Script" uid="uid://e3l8cnd506a1" path="res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.gd" id="1_3e3nf"]
+
+[node name="ViewportOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+script = ExtResource("1_3e3nf")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 94.0
+grow_vertical = 0
+text = "Asset Placer"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Mode 0"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Axis"

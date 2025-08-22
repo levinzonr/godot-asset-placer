@@ -34,55 +34,60 @@ func _apply_preview_material(node: Node3D):
 		_apply_preview_material(child)
 		
 
-func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
+func move_preview(mouse_position: Vector2, camera: Camera3D):
+	if preview_node:
+		var ray_origin = camera.project_ray_origin(mouse_position)
+		var	ray_dir = camera.project_ray_normal(mouse_position)
+		var space_state = camera.get_world_3d().direct_space_state
 
-	if EditorInterface.get_edited_scene_root() is not Node3D:
-			pass
+		var params = PhysicsRayQueryParameters3D.new()
+		params.from = ray_origin
+		params.exclude = preview_rids
+		params.to = ray_origin + ray_dir * 1000
+		var result = space_state.intersect_ray(params)
+		if result:
+			var snapped_pos = _snap_position(result.position)
+			preview_node.global_transform.origin = snapped_pos
+			preview_node.force_update_transform()
+			preview_aabb = AABBProvider.provide_aabb(preview_node)
 
-	if  preview_node:
-		if event is InputEventMouseMotion:
-			var ray_origin = camera.project_ray_origin(event.position)
-			var	 ray_dir = camera.project_ray_normal(event.position)
-			var space_state = camera.get_world_3d().direct_space_state
+			var bottom_y = preview_aabb.position.y
+			var y_offset = snapped_pos.y - bottom_y
 
-			var params = PhysicsRayQueryParameters3D.new()
-			params.from = ray_origin
-			params.exclude = preview_rids
-			params.to = ray_origin + ray_dir * 1000
-			var result = space_state.intersect_ray(params)
-			if result:
-				var snapped_pos = _snap_position(result.position)
-
-				preview_node.global_transform.origin = snapped_pos
-				preview_node.force_update_transform()
-				preview_aabb = AABBProvider.provide_aabb(preview_node)
-
-				var bottom_y = preview_aabb.position.y
-
-				var y_offset = snapped_pos.y - bottom_y
-
-				var new_origin = preview_node.global_transform.origin
-				new_origin.y += y_offset
-				preview_node.global_transform.origin = new_origin
-
+			var new_origin = preview_node.global_transform.origin
+			new_origin.y += y_offset
+			preview_node.global_transform.origin = new_origin
+			return true
+	else:
+		return false
+	
+func place_asset(focus_on_placement: bool):
+	if preview_node:
+		_place_instance(preview_node.global_transform, focus_on_placement)
+		return true
+	else:
+		return false	
 
 
-		elif event is InputEventMouseButton and event.pressed:
-			if event.button_index == MOUSE_BUTTON_LEFT:
-				var focus_on_placement = Input.is_key_pressed(KEY_SHIFT)
-				_place_instance(preview_node.global_transform, focus_on_placement)
-				return true
-			else:
-				return false
-		
-		elif event is InputEventKey and event.is_pressed():
-			if event.as_text() == "Escape":
-				AssetPlacerPresenter._instance.clear_selection()
-				return true
-			else: 
-				return false		
-				
-	return false
+func transform_preview(mode: AssetPlacerPresenter.Mode, axis: Vector3, direction: int) -> bool:
+	match mode:
+		AssetPlacerPresenter.Mode.Place:
+			return false
+		AssetPlacerPresenter.Mode.Scale:
+			var step := 0.1
+			var factor := 1.0 + step * direction
+			preview_node.scale *= axis * factor
+			return true
+		AssetPlacerPresenter.Mode.Rotate:
+			var rotation_step = 0.1
+			preview_node.rotate(axis.normalized() * direction, rotation_step)
+			return true
+			
+		AssetPlacerPresenter.Mode.Move:
+			preview_node.translate(axis.normalized() * direction * 0.1)
+			return true
+		_:
+			return false
 
 func get_collision_rids(node: Node) -> Array:
 	var rids = []

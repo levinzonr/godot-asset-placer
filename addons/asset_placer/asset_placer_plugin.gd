@@ -11,7 +11,9 @@ var _async: AssetPlacerAsync
 
 var _asset_placer_window: AssetLibraryPanel
 var _file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
+var _viewport_overlay_res = preload("res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.tscn")
 
+var overlay: Control
 
 var plugin_path: String:
 	get(): return get_script().resource_path.get_base_dir()
@@ -45,6 +47,8 @@ func _enter_tree():
 		EditorToasterCompat.toast(message)
 	)
 	
+	self.overlay =  _viewport_overlay_res.instantiate()
+	get_editor_interface().get_editor_viewport_3d().add_child(overlay)
 	
 	_file_system.resources_reimported.connect(_react_to_reimorted_files)
 	if !_file_system.is_scanning():
@@ -52,6 +56,7 @@ func _enter_tree():
 		
 	
 func _exit_tree():
+	overlay.queue_free()
 	_file_system.resources_reimported.disconnect(_react_to_reimorted_files)
 	_presenter.asset_selected.disconnect(start_placement)
 	_presenter.asset_deselcted.disconnect(_asset_placer.stop_placement)
@@ -80,5 +85,44 @@ func start_placement(asset: AssetResource):
 	AssetPlacerContextUtil.select_context()
 	_asset_placer.start_placement(get_tree().root, asset)
 
-func _forward_3d_gui_input(viewport_camera, event):
-	return _asset_placer.handle_3d_input(viewport_camera, event)
+func _forward_3d_gui_input(viewport_camera, event):	
+	if event is InputEventMouseMotion:
+		if event.button_mask == 0:
+			return _asset_placer.move_preview(event.position, viewport_camera)
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			return _asset_placer.place_asset(Input.is_key_pressed(KEY_SHIFT))
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN or event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			var direction = 1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else -1
+			var axis = _presenter.preview_transform_axis
+			return _asset_placer.transform_preview(_presenter._mode, axis, direction)
+	
+	if event is InputEventKey and event.is_pressed():
+		if event.keycode == KEY_E:
+			_presenter.change_mode(AssetPlacerPresenter.Mode.Rotate)
+			return true
+		if event.keycode == KEY_R:
+			_presenter.change_mode(AssetPlacerPresenter.Mode.Scale)
+			
+		if event.keycode == KEY_W:
+			_presenter.change_mode(AssetPlacerPresenter.Mode.Move)
+		if event.keycode == KEY_ESCAPE:
+			_presenter.cancel()
+			return true
+		if event.keycode == KEY_Y:
+			_presenter.toggle_axis(Vector3.UP)	
+			return true
+			
+		if event.keycode == KEY_Z:
+			_presenter.toggle_axis(Vector3.BACK)
+			return true
+		if event.keycode == KEY_X:
+			_presenter.toggle_axis(Vector3.RIGHT)
+			return true
+		
+			
+			
+		else:
+			return false
+			
+	return false
