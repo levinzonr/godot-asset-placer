@@ -3,7 +3,7 @@
 ## 1.0.0
 First stable release of the Godot Asset Placer plugin 🚀. This version includes all the features and fixes from the beta and alpha releases, providing a robust tool for asset management and placement in Godot.
 
-### Documentation Updaate
+### Documentation Update
 - Updated Asset Placement Instructions in the README
 
 ## 1.0.0-beta4
