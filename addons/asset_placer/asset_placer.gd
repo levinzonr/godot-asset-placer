@@ -7,6 +7,8 @@ var node_history: Array[String] = []
 var preview_rids = []
 var asset: AssetResource
 
+var preview_transform_step : float = 0.1
+
 var undo_redo: EditorUndoRedoManager
 var meta_asset_id = &"asset_placer_res_id"
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
@@ -78,11 +80,10 @@ func place_asset(focus_on_placement: bool):
 
 func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, direction: int) -> bool:
 	match mode:
-		AssetPlacerPresenter.TransformMode.Place:
+		AssetPlacerPresenter.TransformMode.None:
 			return false
 		AssetPlacerPresenter.TransformMode.Scale:
-			var step := 0.1
-			var factor := 1.0 + step * direction
+			var factor := 1.0 + preview_transform_step * direction
 			var min_scale := 0.01
 			var new_scale := preview_node.scale
 			if axis.x != 0:
@@ -94,12 +95,11 @@ func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, 
 			preview_node.scale = new_scale
 			return true
 		AssetPlacerPresenter.TransformMode.Rotate:
-			var rotation_step = 0.1
-			preview_node.rotate(axis.normalized() * direction, rotation_step)
+			preview_node.rotate(axis.normalized() * direction, preview_transform_step)
 			return true
 			
 		AssetPlacerPresenter.TransformMode.Move:
-			preview_node.translate(axis.normalized() * direction * 0.1)
+			preview_node.translate(axis.normalized() * direction * preview_transform_step)
 			return true
 		_:
 			return false

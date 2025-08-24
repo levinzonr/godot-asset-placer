@@ -3,6 +3,7 @@ class_name AssetPlacerPresenter
 
 static var _instance: AssetPlacerPresenter
 
+static var TRANSFORM_STEP: float = 0.1
 
 signal asset_deselected
 signal parent_changed(parent: NodePath)
@@ -14,13 +15,13 @@ signal asset_selected(asset: AssetResource)
 var _selected_asset: AssetResource
 var options: AssetPlacerOptions
 var _parent: NodePath = NodePath("")
-var transform_mode: TransformMode = TransformMode.Place
+var transform_mode: TransformMode = TransformMode.None
 var preview_transform_axis: Vector3 = Vector3.UP
 
 
 
 enum TransformMode {
-	Place,
+	None,
 	Rotate,
 	Scale,
 	Move
@@ -41,7 +42,7 @@ func select_parent(node: NodePath):
 
 func toggle_transformation_mode(mode: TransformMode):
 	if transform_mode == mode:
-		transform_mode = TransformMode.Place
+		transform_mode = TransformMode.None
 	else:
 		transform_mode = mode
 	transform_mode_changed.emit(transform_mode)
@@ -105,8 +106,8 @@ func set_max_rotation(vector: Vector3):
 	options_changed.emit(options)
 
 func cancel():
-	if transform_mode != TransformMode.Place:
-		toggle_transformation_mode(TransformMode.Place)
+	if transform_mode != TransformMode.None:
+		toggle_transformation_mode(TransformMode.None)
 	else:
 		clear_selection()
 	
