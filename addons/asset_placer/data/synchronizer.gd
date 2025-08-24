@@ -52,9 +52,11 @@ func sync_folder(folder: AssetFolder):
 
 func _sync_folder(folder: AssetFolder):
 	_clear_invalid_assets()
+	_clear_unreachable_assets()
 	add_assets_from_folder(folder.path, folder.include_subfolders)
 
 func _sync_all():
+	_clear_unreachable_assets()
 	_clear_invalid_assets()
 	for folder in folder_repository.get_all():
 		_sync_folder(folder)
@@ -77,6 +79,30 @@ func _notify_scan_complete():
 	if _added != 0 || _removed != 0:
 		call_deferred("emit_signal", "sync_complete", _added, _removed, _scanned)
 	_clear_data()
+
+
+func _clear_unreachable_assets():
+	for asset in asset_repository.get_all_assets():
+		var path = asset.folder_path
+		if not path.is_empty():
+			var folder = folder_repository.find(path)
+			if folder == null:
+				# remove asset if folder associated with that asset no longer exists
+				asset_repository.delete(asset.id)
+			elif not _is_asset_reachable_from_folder(asset, folder):
+				asset_repository.delete(asset.id)
+			
+func _is_asset_reachable_from_folder(asset: AssetResource, folder: AssetFolder) -> bool:
+	var asset_folder_path := asset.folder_path
+	var folder_path := folder.path
+	if folder_path == asset_folder_path:
+		return true
+
+	if folder.include_subfolders and asset_folder_path.begins_with(folder_path + "/"):
+		return true
+	
+	return false
+				
 			
 func _clear_invalid_assets():
 	for asset in asset_repository.get_all_assets():
