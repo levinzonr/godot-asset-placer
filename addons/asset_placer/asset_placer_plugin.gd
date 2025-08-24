@@ -38,7 +38,7 @@ func _enter_tree():
 	_presenter = AssetPlacerPresenter.new()
 	scene_changed.connect(_handle_scene_changed)
 	_presenter.asset_selected.connect(start_placement)
-	_presenter.asset_deselcted.connect(_asset_placer.stop_placement)
+	_presenter.asset_deselected.connect(_asset_placer.stop_placement)
 	_asset_placer_window = load("res://addons/asset_placer/ui/asset_library_panel.tscn").instantiate()
 	add_control_to_bottom_panel(_asset_placer_window, "Asset Placer")
 	
@@ -59,7 +59,7 @@ func _exit_tree():
 	overlay.queue_free()
 	_file_system.resources_reimported.disconnect(_react_to_reimorted_files)
 	_presenter.asset_selected.disconnect(start_placement)
-	_presenter.asset_deselcted.disconnect(_asset_placer.stop_placement)
+	_presenter.asset_deselected.disconnect(_asset_placer.stop_placement)
 	_asset_placer.stop_placement()
 	scene_changed.disconnect(_handle_scene_changed)
 	remove_control_from_bottom_panel(_asset_placer_window)
@@ -93,19 +93,19 @@ func _forward_3d_gui_input(viewport_camera, event):
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			return _asset_placer.place_asset(Input.is_key_pressed(KEY_SHIFT))
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN or event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			var direction = 1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else -1
-			var axis = _presenter.preview_transform_axis
-			return _asset_placer.transform_preview(_presenter._mode, axis, direction)
+			var direction := 1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else -1
+			var axis := _presenter.preview_transform_axis
+			return _asset_placer.transform_preview(_presenter.transform_mode, axis, direction)
 	
 	if event is InputEventKey and event.is_pressed():
 		if event.keycode == KEY_E:
-			_presenter.change_mode(AssetPlacerPresenter.Mode.Rotate)
+			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Rotate)
 			return true
 		if event.keycode == KEY_R:
-			_presenter.change_mode(AssetPlacerPresenter.Mode.Scale)
+			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Scale)
 			return true
 		if event.keycode == KEY_W:
-			_presenter.change_mode(AssetPlacerPresenter.Mode.Move)
+			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Move)
 			return true
 		if event.keycode == KEY_ESCAPE:
 			_presenter.cancel()

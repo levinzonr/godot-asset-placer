@@ -63,6 +63,8 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 			new_origin.y += y_offset
 			preview_node.global_transform.origin = new_origin
 			return true
+		else:
+			return false
 	else:
 		return false
 	
@@ -74,11 +76,11 @@ func place_asset(focus_on_placement: bool):
 		return false	
 
 
-func transform_preview(mode: AssetPlacerPresenter.Mode, axis: Vector3, direction: int) -> bool:
+func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, direction: int) -> bool:
 	match mode:
-		AssetPlacerPresenter.Mode.Place:
+		AssetPlacerPresenter.TransformMode.Place:
 			return false
-		AssetPlacerPresenter.Mode.Scale:
+		AssetPlacerPresenter.TransformMode.Scale:
 			var step := 0.1
 			var factor := 1.0 + step * direction
 			var min_scale := 0.01
@@ -91,12 +93,12 @@ func transform_preview(mode: AssetPlacerPresenter.Mode, axis: Vector3, direction
 				new_scale.z = max(preview_node.scale.z * factor, min_scale)
 			preview_node.scale = new_scale
 			return true
-		AssetPlacerPresenter.Mode.Rotate:
+		AssetPlacerPresenter.TransformMode.Rotate:
 			var rotation_step = 0.1
 			preview_node.rotate(axis.normalized() * direction, rotation_step)
 			return true
 			
-		AssetPlacerPresenter.Mode.Move:
+		AssetPlacerPresenter.TransformMode.Move:
 			preview_node.translate(axis.normalized() * direction * 0.1)
 			return true
 		_:

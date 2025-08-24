@@ -30,7 +30,7 @@ func _ready():
 	presenter.show_filter_info.connect(show_filter_info)
 	presenter.show_sync_active.connect(show_sync_in_progress)
 	AssetPlacerPresenter._instance.asset_selected.connect(set_selected_asset)
-	AssetPlacerPresenter._instance.asset_deselcted.connect(clear_selected_asset)
+	AssetPlacerPresenter._instance.asset_deselected.connect(clear_selected_asset)
 	empty_collection_view_add_folder_btn.pressed.connect(show_folder_dialog)
 	empty_view_add_folder_btn.pressed.connect(show_folder_dialog)
 	presenter.show_empty_view.connect(show_empty_view)

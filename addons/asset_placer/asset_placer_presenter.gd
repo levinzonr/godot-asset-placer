@@ -2,19 +2,24 @@ extends RefCounted
 class_name AssetPlacerPresenter
 
 static var _instance: AssetPlacerPresenter
-var _selected_asset: AssetResource
-var options: AssetPlacerOptions
-var _parent: NodePath = NodePath("")
-var _mode: Mode = Mode.Place
-var preview_transform_axis: Vector3 = Vector3.UP
 
-signal asset_selected(asset: AssetResource)
+
 signal asset_deselected
 signal parent_changed(parent: NodePath)
 signal options_changed(options: AssetPlacerOptions)
-signal mode_changed(mode: Mode)
+signal transform_mode_changed(mode: TransformMode)
 signal preview_transform_axis_changed(axis: Vector3)
-enum Mode {
+signal asset_selected(asset: AssetResource)
+
+var _selected_asset: AssetResource
+var options: AssetPlacerOptions
+var _parent: NodePath = NodePath("")
+var transform_mode: TransformMode = TransformMode.Place
+var preview_transform_axis: Vector3 = Vector3.UP
+
+
+
+enum TransformMode {
 	Place,
 	Rotate,
 	Scale,
@@ -34,13 +39,13 @@ func select_parent(node: NodePath):
 	self._parent = node
 	parent_changed.emit(node)
 
-func change_mode(mode: Mode):
-	if _mode == mode:
-		_mode = Mode.Place
+func toggle_transformation_mode(mode: TransformMode):
+	if transform_mode == mode:
+		transform_mode = TransformMode.Place
 	else:
-		_mode = mode
-	mode_changed.emit(_mode)
-	_select_default_axis(_mode)
+		transform_mode = mode
+	transform_mode_changed.emit(transform_mode)
+	_select_default_axis(transform_mode)
 	
 func clear_parent():
 	self._parent = NodePath("")
@@ -58,20 +63,20 @@ func set_grid_snap_value(value: float):
 	options_changed.emit(options)
 
 func toggle_axis(axis: Vector3):
-	var new = (preview_transform_axis - axis).abs()
+	var new := (preview_transform_axis - axis).abs()
 	select_axis(new)
 
 func select_axis(axis: Vector3):	
 	preview_transform_axis = axis
 	preview_transform_axis_changed.emit(preview_transform_axis)
 
-func _select_default_axis(mode: Mode):
+func _select_default_axis(mode: TransformMode):
 	match mode:
-		Mode.Rotate:
+		TransformMode.Rotate:
 			select_axis(Vector3.UP)
-		Mode.Scale:
+		TransformMode.Scale:
 			select_axis(Vector3.ONE)
-		Mode.Move:
+		TransformMode.Move:
 			select_axis(Vector3.FORWARD)
 		_: pass
 
@@ -100,19 +105,19 @@ func set_max_rotation(vector: Vector3):
 	options_changed.emit(options)
 
 func cancel():
-	if _mode != Mode.Place:
-		change_mode(Mode.Place)
+	if transform_mode != TransformMode.Place:
+		toggle_transformation_mode(TransformMode.Place)
 	else:
 		clear_selection()
 	
 func clear_selection():
 	_selected_asset = null
-	asset_deselcted.emit()	
+	asset_deselected.emit()	
 
 func select_asset(asset: AssetResource):
 	if asset == _selected_asset:
 		_selected_asset = null
-		asset_deselcted.emit()
+		asset_deselected.emit()
 	else:
 		_selected_asset = asset
 		asset_selected.emit(asset)
