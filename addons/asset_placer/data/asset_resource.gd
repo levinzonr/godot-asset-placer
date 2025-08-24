@@ -6,7 +6,7 @@ var name: String
 var id: String
 var tags: Array[String]
 
-var _scene: PackedScene = null
+var _scene: Resource = null
 
 
 var shallow_collections: Array[AssetCollection]:
@@ -22,7 +22,7 @@ func _init(resId: String, name: String, tags: Array[String] = []):
 	self.tags = tags
 
 
-var scene: PackedScene:
+var scene: Resource:
 	get(): 
 		if _scene == null:
 			_scene = load(id)
