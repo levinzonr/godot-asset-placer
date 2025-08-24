@@ -60,7 +60,7 @@ To place an asset, follow these steps:
 
 #### Transforming Assets Before Placement
 1.1.0 introduces the ability to modify the preview of the asset before placement. This includes options for rotation and scaling, allowing users to visualize how the asset will appear in the scene prior to placement, do quick and precise adjustment modifications.
-
+![addon_viewport_controls.png](docs/addon_viewport_controls.png)
 Specific transformation mode can be enabled by pressing button while in placement mode (Asset is selected) and transformations can be applied by Mouse Wheel:
 - `Mouse Wheel Up`: "Positive" transformation
 - `Mouse Wheel Down`: "Negative" transformation
@@ -74,7 +74,6 @@ This also requires an ability to select active Axis for the transformation. This
 - `X` to select X axis
 - `Y` to select Y axis
 - `Z` to select Z axis
-
 
 ### Organizing Assets
 You can organize your assets into Collections. Collections is a simple way to "group" assets together by some criteria. For example, you can create a collection for all the trees in your scene, or all the rocks, etc.
