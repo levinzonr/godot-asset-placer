@@ -17,7 +17,7 @@ func _init(undo_redo: EditorUndoRedoManager):
 func start_placement(root: Window, asset: AssetResource):
 	stop_placement()
 	self.asset = asset
-	preview_node = (asset.scene.instantiate() as Node3D).duplicate()
+	preview_node = _instantiate_asset_resource(asset)
 	root.add_child(preview_node)
 	preview_rids = get_collision_rids(preview_node)
 	_apply_preview_material(preview_node)
@@ -27,6 +27,11 @@ func start_placement(root: Window, asset: AssetResource):
 		self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
 func _apply_preview_material(node: Node3D):
+	
+	if node is MeshInstance3D:
+		for i in node.get_surface_override_material_count():
+			node.set_surface_override_material(i, preview_material)
+	
 	for child in node.get_children():
 		if child is MeshInstance3D:
 			for i in child.get_surface_override_material_count():
@@ -111,7 +116,7 @@ func _place_instance(transform: Transform3D, select_after_placement: bool):
 		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
 
 func _do_placement(root: Node3D, transform: Transform3D, select_after_placement: bool):
-	var new_node: Node3D =  asset.scene.instantiate()
+	var new_node: Node3D =  _instantiate_asset_resource(asset)
 	new_node.global_transform = transform
 	new_node.position = root.to_local(transform.origin)
 	new_node.set_meta(meta_asset_id, asset.id)
@@ -136,6 +141,19 @@ func stop_placement():
 		preview_node.queue_free()
 		preview_node = null
 		
+
+func _instantiate_asset_resource(asset: AssetResource) -> Node3D:
+	var _preview_node: Node3D
+	if asset.scene is PackedScene:
+		_preview_node = (asset.scene.instantiate() as Node3D).duplicate()
+	elif asset.scene is ArrayMesh:
+		_preview_node = MeshInstance3D.new()
+		_preview_node.name = asset.name
+		_preview_node.mesh = asset.scene.duplicate()
+	else:
+		push_error("Not supported resource type %s" % str(asset.scene))
+	
+	return _preview_node
 
 func _pick_name(node: Node3D, parent: Node3D) -> String:
 	var number_of_same_scenes = 0
