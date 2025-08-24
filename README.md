@@ -63,7 +63,7 @@ You can organize your assets into Collections. Collections is a simple way to "g
 To create a collection navigate to the Collections tab, choose a name and color. Then you can assing assets into one or more collections, either by using a options menu or draggin and dropping assets into the window while Collection Filter is activee
 
 ## Known Issues
-- So far plugin only supports .tscn files, glb and fbx models. If you have any other formats you would like to see supported, please let me know.
+- So far plugin only supports `tscn` files, `glb`, `obj` and `fbx` models. If you have any other formats you would like to see supported, please let me know.
 - Sometimes Previews for the Assets are not perfect - but they are directly take from the Godot Previews system
 - The UI is work in progress..
 

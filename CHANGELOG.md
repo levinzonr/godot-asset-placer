@@ -1,5 +1,13 @@
 # Godot Asset Placer Changelog
 
+## 1.1.0-alpha1
+### Added
+- Support for `obj` files #9
+
+### Fixed
+- Fixed issue when user is able to placed asset that was removed from the library #10
+- Fixed issue with assets still being presented in the library after the folder was removed #8
+
 ## 1.0.0
 First stable release of the Godot Asset Placer plugin 🚀. This version includes all the features and fixes from the beta and alpha releases, providing a robust tool for asset management and placement in Godot.
 
