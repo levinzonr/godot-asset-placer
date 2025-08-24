@@ -4,6 +4,8 @@ class_name AssetLibraryWindow
 
 @onready var presenter = AssetLibraryPresenter.new()
 @onready var folder_presenter = FolderPresenter.new()
+
+@onready var placer_presenter := AssetPlacerPresenter._instance
 @onready var grid_container: Container = %GridContainer
 @onready var preview_resource = preload("res://addons/asset_placer/ui/components/asset_resource_preview.tscn")
 @onready var add_folder_button: Button = %AddFolderButton
@@ -19,6 +21,7 @@ class_name AssetLibraryWindow
 @onready var scroll_container = %ScrollContainer
 @onready var empty_search_content = %EmptySearchContent
 @onready var empty_view_add_folder_btn = %EmptyViewAddFolderBtn
+
 signal asset_selected(asset: AssetResource)
 
 
@@ -70,7 +73,10 @@ func show_asset_menu(asset: AssetResource, control: Control):
 			1: 
 				EditorInterface.open_scene_from_path(asset.scene.resource_path)
 				EditorInterface.set_main_screen_editor("3D")
-			2: presenter.delete_asset(asset)
+			2: 
+				if placer_presenter._selected_asset == asset:
+					placer_presenter.clear_selection()
+				presenter.delete_asset(asset)
 			_: pass
 	)
 	EditorInterface.popup_dialog(options_menu, Rect2(mouse_pos, options_menu.get_contents_minimum_size()))

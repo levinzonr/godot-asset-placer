@@ -41,17 +41,16 @@ func update(asset: AssetResource):
 		call_deferred("emit_signal", "assets_changed")
 	
 
-func add_asset(scene_path: String, tags: Array[String] = []) -> bool:
+func add_asset(scene_path: String, tags: Array[String] = [], folder_path: String = "") -> bool:
 	
 	if not is_file_supported(scene_path.get_file()):
 		return false
 	
 	var library = data_source.get_library()
 	var id = ResourceIdCompat.path_to_uid(scene_path)
-	var asset = AssetResource.new(id, scene_path.get_file())
 	if exists(id):
 		return false
-		
+	var asset = AssetResource.new(id, scene_path.get_file(), tags, folder_path)	
 	var duplicated_items = library.items.duplicate()
 	duplicated_items.append(asset)
 	library.items = duplicated_items
@@ -61,4 +60,6 @@ func add_asset(scene_path: String, tags: Array[String] = []) -> bool:
 
 
 func is_file_supported(file: String)	->  bool:
-	return file.ends_with(".tscn") || file.ends_with(".glb") || file.ends_with(".fbx")
+	var extension = file.get_extension()
+	var supported_extensions = ["tscn", "glb", "fbx", "obj"]
+	return extension in supported_extensions

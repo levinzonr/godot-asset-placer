@@ -5,8 +5,8 @@ class_name AssetResource
 var name: String
 var id: String
 var tags: Array[String]
-
-var _scene: PackedScene = null
+var folder_path: String
+var _scene: Resource = null
 
 
 var shallow_collections: Array[AssetCollection]:
@@ -16,13 +16,14 @@ var shallow_collections: Array[AssetCollection]:
 			shallow.push_back(AssetCollection.new(name, Color.TRANSPARENT))
 		return shallow
 
-func _init(resId: String, name: String, tags: Array[String] = []):
+func _init(resId: String, name: String, tags: Array[String] = [], folder_path: String = ""):
 	self.name = name
 	self.id = resId
 	self.tags = tags
+	self.folder_path = folder_path
 
 
-var scene: PackedScene:
+var scene: Resource:
 	get(): 
 		if _scene == null:
 			_scene = load(id)

@@ -22,9 +22,11 @@ func _ready():
 	)
 
 
-
 func delete_folder(folder: AssetFolder):
 	folder_repository.delete(folder.path)
+	for asset in asset_repository.get_all_assets():
+		if asset.folder_path == folder.path:
+			asset_repository.delete(asset.id)
 
 func sync_folder(folder: AssetFolder):
 	sync.sync_folder(folder)
