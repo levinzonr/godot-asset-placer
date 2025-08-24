@@ -27,6 +27,11 @@ func start_placement(root: Window, asset: AssetResource):
 		self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
 func _apply_preview_material(node: Node3D):
+	
+	if node is MeshInstance3D:
+		for i in node.get_surface_override_material_count():
+			node.set_surface_override_material(i, preview_material)
+	
 	for child in node.get_children():
 		if child is MeshInstance3D:
 			for i in child.get_surface_override_material_count():
