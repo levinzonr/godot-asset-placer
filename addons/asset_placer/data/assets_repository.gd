@@ -41,17 +41,16 @@ func update(asset: AssetResource):
 		call_deferred("emit_signal", "assets_changed")
 	
 
-func add_asset(scene_path: String, tags: Array[String] = []) -> bool:
+func add_asset(scene_path: String, tags: Array[String] = [], folder_path: String = "") -> bool:
 	
 	if not is_file_supported(scene_path.get_file()):
 		return false
 	
 	var library = data_source.get_library()
 	var id = ResourceIdCompat.path_to_uid(scene_path)
-	var asset = AssetResource.new(id, scene_path.get_file())
 	if exists(id):
 		return false
-		
+	var asset = AssetResource.new(id, scene_path.get_file(), tags, folder_path)	
 	var duplicated_items = library.items.duplicate()
 	duplicated_items.append(asset)
 	library.items = duplicated_items

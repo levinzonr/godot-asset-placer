@@ -112,18 +112,18 @@ metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.993513, 1.0443072, -14.065937)
 metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
 
-[node name="AnotherCube" type="Node3D" parent="." instance=ExtResource("7_s1s6j")]
+[node name="AnotherCube" parent="." instance=ExtResource("7_s1s6j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.736467, 0.9687023, -10.779144)
 metadata/asset_placer_res_id = "uid://ukx3omtlce8n"
 
-[node name="small_fraactures" type="Node3D" parent="." instance=ExtResource("8_onvmd")]
+[node name="small_fraactures" parent="." instance=ExtResource("8_onvmd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.916828, 0.51153874, -13.027579)
 metadata/asset_placer_res_id = "uid://ec1dfcde5g6n"
 
-[node name="AnotherCube (1)" type="Node3D" parent="." instance=ExtResource("7_s1s6j")]
+[node name="AnotherCube (1)" parent="." instance=ExtResource("7_s1s6j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.87246, 0.9687028, -2.4421425)
 metadata/asset_placer_res_id = "uid://ukx3omtlce8n"
 
-[node name="AnotherCube (2)" type="Node3D" parent="." instance=ExtResource("7_s1s6j")]
+[node name="AnotherCube (2)" parent="." instance=ExtResource("7_s1s6j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.266507, 0.96870327, -6.973961)
 metadata/asset_placer_res_id = "uid://ukx3omtlce8n"

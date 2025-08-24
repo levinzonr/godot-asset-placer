@@ -40,13 +40,13 @@ func add_asset_folder(path: String):
 	folder_repository.add(path)
 	var dir_access = DirAccess.open(path)
 	for file in dir_access.get_files():
-		add_asset(path + file)
+		add_asset(path + file, path)
 
 func on_query_change(query: String):
 	self._current_query = query
 	_filter_by_collections_and_query()
 
-func add_asset(path: String):
+func add_asset(path: String, folder_path: String):
 	var tags: Array[String] = []
 	for collection in _active_collections:
 		tags.push_back(collection.name)
@@ -66,7 +66,7 @@ func add_asset(path: String):
 		existing.tags.append_array(new_tags)
 		assets_repository.update(existing)
 	else:
-		assets_repository.add_asset(path, tags)
+		assets_repository.add_asset(path, tags, folder_path)
 	
 
 func delete_asset(asset: AssetResource):
@@ -78,7 +78,7 @@ func add_assets_or_folders(files: PackedStringArray):
 		if file.get_extension().is_empty():
 			add_asset_folder(file)
 		else:
-			add_asset(file)
+			add_asset(file, "")
 		
 		_filter_by_collections_and_query()
 

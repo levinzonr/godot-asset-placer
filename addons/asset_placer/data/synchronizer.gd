@@ -64,13 +64,12 @@ func add_assets_from_folder(folder_path: String, recursive: bool):
 	for file in dir.get_files():
 		_scanned += 1
 		var path = folder_path + "/" + file
-		if asset_repository.add_asset(path):
+		if asset_repository.add_asset(path, [], folder_path):
 			_added += 1
 		
 	if recursive:
 		for sub_dir in dir.get_directories():
 			var path: String = folder_path + "/" + sub_dir
-			
 			add_assets_from_folder(path, true)
 
 
