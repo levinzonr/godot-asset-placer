@@ -58,6 +58,23 @@ To place an asset, follow these steps:
 5. Press `Left Mouse Button` to place the asset at the location of the mouse cursor
 6. If you want to modify the asset after placement, you can press `Shift` + `Left Mouse Button` to Place And Focus on the Placed Asset. This allows you to move, rotate, or scale the asset using the standard Godot Editor tools.
 
+#### Transforming Assets Before Placement
+1.1.0 introduces the ability to modify the preview of the asset before placement. This includes options for rotation and scaling, allowing users to visualize how the asset will appear in the scene prior to placement, do quick and precise adjustment modifications.
+![addon_viewport_controls.png](docs/addon_viewport_controls.png)
+Specific transformation mode can be enabled by pressing button while in placement mode (Asset is selected) and transformations can be applied by Mouse Wheel:
+- `Mouse Wheel Up`: "Positive" transformation
+- `Mouse Wheel Down`: "Negative" transformation
+
+Following transformations are supported:
+- `E` to rotate (Default axis is Y)
+- `R` to scale (Uniform Scale by default, All axis at once)
+- `W` to translate (Default axis is Z)
+
+This also requires an ability to select active Axis for the transformation. This can be done by pressing following keys:
+- `X` to select X axis
+- `Y` to select Y axis
+- `Z` to select Z axis
+
 ### Organizing Assets
 You can organize your assets into Collections. Collections is a simple way to "group" assets together by some criteria. For example, you can create a collection for all the trees in your scene, or all the rocks, etc.
 To create a collection navigate to the Collections tab, choose a name and color. Then you can assing assets into one or more collections, either by using a options menu or draggin and dropping assets into the window while Collection Filter is activee

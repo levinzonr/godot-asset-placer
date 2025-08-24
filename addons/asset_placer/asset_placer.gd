@@ -7,6 +7,8 @@ var node_history: Array[String] = []
 var preview_rids = []
 var asset: AssetResource
 
+var preview_transform_step : float = 0.1
+
 var undo_redo: EditorUndoRedoManager
 var meta_asset_id = &"asset_placer_res_id"
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
@@ -39,55 +41,68 @@ func _apply_preview_material(node: Node3D):
 		_apply_preview_material(child)
 		
 
-func handle_3d_input(camera: Camera3D, event: InputEvent) -> bool:
+func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
+	if preview_node:
+		var ray_origin = camera.project_ray_origin(mouse_position)
+		var	ray_dir = camera.project_ray_normal(mouse_position)
+		var space_state = camera.get_world_3d().direct_space_state
 
-	if EditorInterface.get_edited_scene_root() is not Node3D:
-			pass
+		var params = PhysicsRayQueryParameters3D.new()
+		params.from = ray_origin
+		params.exclude = preview_rids
+		params.to = ray_origin + ray_dir * 1000
+		var result = space_state.intersect_ray(params)
+		if result:
+			var snapped_pos = _snap_position(result.position)
+			preview_node.global_transform.origin = snapped_pos
+			preview_node.force_update_transform()
+			preview_aabb = AABBProvider.provide_aabb(preview_node)
 
-	if  preview_node:
-		if event is InputEventMouseMotion:
-			var ray_origin = camera.project_ray_origin(event.position)
-			var	 ray_dir = camera.project_ray_normal(event.position)
-			var space_state = camera.get_world_3d().direct_space_state
+			var bottom_y = preview_aabb.position.y
+			var y_offset = snapped_pos.y - bottom_y
 
-			var params = PhysicsRayQueryParameters3D.new()
-			params.from = ray_origin
-			params.exclude = preview_rids
-			params.to = ray_origin + ray_dir * 1000
-			var result = space_state.intersect_ray(params)
-			if result:
-				var snapped_pos = _snap_position(result.position)
-
-				preview_node.global_transform.origin = snapped_pos
-				preview_node.force_update_transform()
-				preview_aabb = AABBProvider.provide_aabb(preview_node)
-
-				var bottom_y = preview_aabb.position.y
-
-				var y_offset = snapped_pos.y - bottom_y
-
-				var new_origin = preview_node.global_transform.origin
-				new_origin.y += y_offset
-				preview_node.global_transform.origin = new_origin
+			var new_origin = preview_node.global_transform.origin
+			new_origin.y += y_offset
+			preview_node.global_transform.origin = new_origin
+			return true
+		else:
+			return false
+	else:
+		return false
+	
+func place_asset(focus_on_placement: bool):
+	if preview_node:
+		_place_instance(preview_node.global_transform, focus_on_placement)
+		return true
+	else:
+		return false	
 
 
-
-		elif event is InputEventMouseButton and event.pressed:
-			if event.button_index == MOUSE_BUTTON_LEFT:
-				var focus_on_placement = Input.is_key_pressed(KEY_SHIFT)
-				_place_instance(preview_node.global_transform, focus_on_placement)
-				return true
-			else:
-				return false
-		
-		elif event is InputEventKey and event.is_pressed():
-			if event.as_text() == "Escape":
-				AssetPlacerPresenter._instance.clear_selection()
-				return true
-			else: 
-				return false		
-				
-	return false
+func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, direction: int) -> bool:
+	match mode:
+		AssetPlacerPresenter.TransformMode.None:
+			return false
+		AssetPlacerPresenter.TransformMode.Scale:
+			var factor := 1.0 + preview_transform_step * direction
+			var min_scale := 0.01
+			var new_scale := preview_node.scale
+			if axis.x != 0:
+				new_scale.x = max(preview_node.scale.x * factor, min_scale)
+			if axis.y != 0:
+				new_scale.y = max(preview_node.scale.y * factor, min_scale)
+			if axis.z != 0:
+				new_scale.z = max(preview_node.scale.z * factor, min_scale)
+			preview_node.scale = new_scale
+			return true
+		AssetPlacerPresenter.TransformMode.Rotate:
+			preview_node.rotate(axis.normalized() * direction, preview_transform_step)
+			return true
+			
+		AssetPlacerPresenter.TransformMode.Move:
+			preview_node.translate(axis.normalized() * direction * preview_transform_step)
+			return true
+		_:
+			return false
 
 func get_collision_rids(node: Node) -> Array:
 	var rids = []
