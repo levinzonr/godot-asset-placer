@@ -1,6 +1,29 @@
 # Godot Asset Placer Changelog
 
 ## 1.1.0-alpha1
+First major Alpha release after the stable 1.0.0 version 🚀.
+
+This release introduces a new feature that allows users to transform the preview of the asset before placement, including rotation and scaling options, as well as support for `obj` files and some bug fixes.
+### Preview Transformation
+1.1.0 introduces the ability to modify the preview of the asset before placement. This includes options for rotation and scaling, allowing users to visualize how the asset will appear in the scene prior to placement, do quick and precise adjustment modifications.
+
+Specific transformation mode can be enabled by pressing button while in placement mode (Asset is selected) and transformations can be applied by Mouse Wheel:
+- `Mouse Wheel Up`: "Positive" transformation
+- `Mouse Wheel Down`: "Negative" transformation
+
+Following transformations are supported:
+- `E` to rotate (Default axis is Y)
+- `R` to scale (Uniform Scale by default, All axis at once)
+- `W` to translate (Default axis is Z)
+
+This also requires an ability to select active Axis for the transformation. This can be done by pressing following keys:
+- `X` to select X axis
+- `Y` to select Y axis
+- `Z` to select Z axis
+
+#### UI Updates
+To support this feature a 3D View Port Overlay has been added to show the current transformation mode and active axis
+![addon_viewport_controls.png](docs/addon_viewport_controls.png)
 ### Added
 - Support for `obj` files #9
 

@@ -78,7 +78,7 @@ func _select_default_axis(mode: TransformMode):
 		TransformMode.Scale:
 			select_axis(Vector3.ONE)
 		TransformMode.Move:
-			select_axis(Vector3.FORWARD)
+			select_axis(Vector3.BACK)
 		_: pass
 
 func uniformV3(value: float) -> Vector3:

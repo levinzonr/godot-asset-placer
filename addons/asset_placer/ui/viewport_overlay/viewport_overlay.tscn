@@ -84,7 +84,7 @@ theme_override_colors/font_color = Color(0.9411765, 0.23529412, 0.37254903, 1)
 theme_override_font_sizes/font_size = 20
 text = "X"
 
-[node name="ZCheckButton" type="CheckButton" parent="VBoxContainer/HBoxContainer2"]
+[node name="YCheckButton" type="CheckButton" parent="VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.6627451, 0.9607843, 1)
@@ -92,9 +92,25 @@ theme_override_font_sizes/font_size = 20
 text = "Y
 "
 
-[node name="YCheckButton" type="CheckButton" parent="VBoxContainer/HBoxContainer2"]
+[node name="ZCheckButton" type="CheckButton" parent="VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.85490197, 0.047058824, 1)
 theme_override_font_sizes/font_size = 20
 text = "Z"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "LMB - Place Assset
+SHIFT + LMB: Place And Focus"
+horizontal_alignment = 2
