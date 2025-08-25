@@ -15,7 +15,7 @@ Any Features and Suggestions are welcome as well
 
 ## Features
 - One-Click Asset Placement with Snapping to Ground and other Collision shapes
-- (Quick Preview Node Transformations Before Placement)[#### Transforming Assets Before Placement]
+- (Quick Preview Node Transformations Before Placement)[####Transforming Assets Before Placement]
 - Organize Assets into collections for quick access and filtering
 - Filter Assets by their name and collection
 - Grid snapping when placing assets
