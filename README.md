@@ -15,7 +15,7 @@ Any Features and Suggestions are welcome as well
 
 ## Features
 - One-Click Asset Placement with Snapping to Ground and other Collision shapes
-- (Quick Preview Node Transformations Before Placement)[https://github.com/levinzonr/godot-asset-placer/blob/main/README.md#transforming-assets-before-placement]
+- [Quick Preview Node Transformations Before Placement](https://github.com/levinzonr/godot-asset-placer/blob/main/README.md#transforming-assets-before-placement)
 - Organize Assets into collections for quick access and filtering
 - Filter Assets by their name and collection
 - Grid snapping when placing assets
