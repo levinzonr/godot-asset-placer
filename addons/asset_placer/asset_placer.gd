@@ -24,7 +24,7 @@ func start_placement(root: Window, asset: AssetResource):
 	preview_node = _instantiate_asset_resource(asset)
 	root.add_child(preview_node)
 	preview_rids = get_collision_rids(preview_node)
-	_strategy = SurfaceAssetPlacementStrategy.new(preview_rids)
+	_strategy = PlanePlacementStrategy.new(Plane.PLANE_XZ)
 	_apply_preview_material(preview_node)
 	var scene = EditorInterface.get_selection().get_selected_nodes()[0]
 	if scene is Node3D:
