@@ -61,7 +61,7 @@ func show_assets(assets: Array[AssetResource]):
 
 func show_asset_menu(asset: AssetResource, control: Control):
 	var options_menu := PopupMenu.new()
-	var mouse_pos = EditorInterface.get_base_control().get_global_mouse_position()
+	var mouse_pos = DisplayServer.mouse_get_position()
 	options_menu.add_icon_item(EditorIconTexture2D.new("Groups"), "Manage collections")
 	options_menu.add_icon_item(EditorIconTexture2D.new("File"), "Open")
 	options_menu.add_icon_item(EditorIconTexture2D.new("Remove"), "Remove")
