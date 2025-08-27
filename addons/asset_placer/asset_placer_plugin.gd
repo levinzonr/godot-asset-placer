@@ -12,7 +12,7 @@ var _async: AssetPlacerAsync
 var _asset_placer_window: AssetLibraryPanel
 var _file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
 var _viewport_overlay_res = preload("res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.tscn")
-
+var _plane_preview: MeshInstance3D
 var overlay: Control
 
 var plugin_path: String:
@@ -42,8 +42,27 @@ func _enter_tree():
 	_asset_placer_window = load("res://addons/asset_placer/ui/asset_library_panel.tscn").instantiate()
 	add_control_to_bottom_panel(_asset_placer_window, "Asset Placer")
 	
-	_presenter.placement_mode_changed.connect(func(p):
+	_presenter.placement_mode_changed.connect(func(p: PlacementMode):
 		_asset_placer.set_placement_mode(p)
+		if p is PlacementMode.PlanePlacement:
+			if _plane_preview:
+				_plane_preview.queue_free()
+				
+			_plane_preview = MeshInstance3D.new()
+			var plane_mesh = PlaneMesh.new()
+			var normal = p.plane.normal.normalized()  # The normal you want
+			var forward = normal.cross(Vector3.UP).normalized() if (abs(normal.dot(Vector3.UP)) < 0.99) else normal.cross(Vector3.FORWARD).normalized()
+			var right = forward.cross(normal).normalized()
+			var basis = Basis(right, normal, forward)
+			plane_mesh.material = load("res://addons/asset_placer/utils/preview_material.tres")
+			plane_mesh.size = Vector2(1000, 1000)
+			_plane_preview.mesh = plane_mesh
+			_plane_preview.transform.basis = basis.orthonormalized()
+			get_tree().root.add_child(_plane_preview)
+		else:
+			if _plane_preview:
+				_plane_preview.queue_free()
+				_plane_preview = null
 	)
 	
 	synchronizer.sync_complete.connect(func(added, removed, scanned):
@@ -61,6 +80,8 @@ func _enter_tree():
 	
 func _exit_tree():
 	overlay.queue_free()
+	if _plane_preview:
+		_plane_preview.queue_free()
 	_file_system.resources_reimported.disconnect(_react_to_reimorted_files)
 	_presenter.asset_selected.disconnect(start_placement)
 	_presenter.asset_deselected.disconnect(_asset_placer.stop_placement)

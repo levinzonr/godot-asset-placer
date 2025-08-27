@@ -14,11 +14,16 @@ var presenter: AssetPlacerPresenter
 @onready var placement_mode_options_button: OptionButton = %PlacementModeOptionsButton
 @onready var plane_axis_spin_box: SpinBoxVector3 = %PlaneAxisSpinBox
 func _ready():
-	_populate_placment_options()
 	presenter = AssetPlacerPresenter._instance
 	presenter.options_changed.connect(set_options)
 	presenter.parent_changed.connect(show_parent)
 	presenter.ready()
+	
+	placement_mode_options_button.item_selected.connect(func(id):
+		match id:
+			0: presenter.placement_mode = PlacementMode.SurfacePlacement.new()
+			1: presenter.placement_mode = PlacementMode.PlanePlacement.new()
+	)
 	
 	grid_snapping_checkbox.toggled.connect(presenter.set_grid_snapping_enabled)
 	grid_snap_value_spin_box.value_changed.connect(presenter.set_grid_snap_value)
@@ -35,7 +40,6 @@ func _ready():
 	)	
 	
 	presenter.placement_mode_changed.connect(func(mode: PlacementMode):
-		plane_axis_spin_box.visible = mode is PlacementMode.PlanePlacement
 		if mode is PlacementMode.PlanePlacement:
 			plane_axis_spin_box.show()
 			plane_axis_spin_box.set_value_no_signal(mode.plane.normal)
@@ -69,14 +73,3 @@ func set_options(options: AssetPlacerOptions):
 	min_scale_selector.uniform = options.uniform_scaling
 	max_scale_selector.uniform = options.uniform_scaling
 	uniform_scale_check_box.set_pressed_no_signal(options.uniform_scaling)
-
-	
-func _populate_placment_options():
-	placement_mode_options_button.add_item("Surface Collisions")
-	placement_mode_options_button.add_item("Plane Collision")
-	placement_mode_options_button.item_selected.connect(func(id):
-		match id:
-			0: presenter.placement_mode = PlacementMode.SurfacePlacement.new()
-			1: presenter.placement_mode = PlacementMode.PlanePlacement.new()
-	)
-	

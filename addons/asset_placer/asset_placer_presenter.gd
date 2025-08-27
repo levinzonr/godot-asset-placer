@@ -21,7 +21,7 @@ var transform_mode: TransformMode = TransformMode.None
 var placement_mode: PlacementMode = PlacementMode.SurfacePlacement.new():
 	set(value):
 		placement_mode = value
-		placement_mode_changed.emit(placement_mode)
+		placement_mode_changed.emit(value)
 		
 var preview_transform_axis: Vector3 = Vector3.UP
 
