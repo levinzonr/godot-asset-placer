@@ -9,6 +9,7 @@ signal asset_deselected
 signal parent_changed(parent: NodePath)
 signal options_changed(options: AssetPlacerOptions)
 signal transform_mode_changed(mode: TransformMode)
+signal placement_mode_changed(mode: PlacementMode)
 signal preview_transform_axis_changed(axis: Vector3)
 signal asset_selected(asset: AssetResource)
 
@@ -16,9 +17,15 @@ var _selected_asset: AssetResource
 var options: AssetPlacerOptions
 var _parent: NodePath = NodePath("")
 var transform_mode: TransformMode = TransformMode.None
+
+var placement_mode: PlacementMode = PlacementMode.SurfacePlacement.new():
+	set(value):
+		placement_mode = value
+		placement_mode_changed.emit(placement_mode)
+		
 var preview_transform_axis: Vector3 = Vector3.UP
 
-
+var plane := Plane.PLANE_XZ
 
 enum TransformMode {
 	None,
@@ -35,6 +42,9 @@ func _init():
 func ready():
 	options_changed.emit(options)
 	
+
+func select_placement_mode(mode: PlacementMode):
+	self.placement_mode = mode
 
 func select_parent(node: NodePath):
 	self._parent = node

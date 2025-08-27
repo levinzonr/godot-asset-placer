@@ -13,18 +13,19 @@ var undo_redo: EditorUndoRedoManager
 var meta_asset_id = &"asset_placer_res_id"
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
 
-var _strategy: AssetPlacementStrategy
+var _strategy: AssetPlacementStrategy 
 
 func _init(undo_redo: EditorUndoRedoManager):
 	self.undo_redo = undo_redo
 
-func start_placement(root: Window, asset: AssetResource):
+
+func start_placement(root: Window, asset: AssetResource, placement: PlacementMode):
 	stop_placement()
 	self.asset = asset
 	preview_node = _instantiate_asset_resource(asset)
 	root.add_child(preview_node)
 	preview_rids = get_collision_rids(preview_node)
-	_strategy = PlanePlacementStrategy.new(Plane.PLANE_XZ)
+	set_placement_mode(placement)
 	_apply_preview_material(preview_node)
 	var scene = EditorInterface.get_selection().get_selected_nodes()[0]
 	if scene is Node3D:
@@ -174,6 +175,14 @@ func _instantiate_asset_resource(asset: AssetResource) -> Node3D:
 	
 	return _preview_node
 
+func set_placement_mode(placement_mode: PlacementMode):
+	if placement_mode is PlacementMode.SurfacePlacement:
+		_strategy = SurfaceAssetPlacementStrategy.new(preview_rids)
+	elif placement_mode is PlacementMode.PlanePlacement:
+		_strategy = PlanePlacementStrategy.new(placement_mode.plane)
+	else:
+		push_error("Placement mode %s is not supported" % str(placement_mode))
+		
 func _pick_name(node: Node3D, parent: Node3D) -> String:
 	var number_of_same_scenes = 0
 	for child in parent.get_children():

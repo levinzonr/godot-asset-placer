@@ -42,6 +42,10 @@ func _enter_tree():
 	_asset_placer_window = load("res://addons/asset_placer/ui/asset_library_panel.tscn").instantiate()
 	add_control_to_bottom_panel(_asset_placer_window, "Asset Placer")
 	
+	_presenter.placement_mode_changed.connect(func(p):
+		_asset_placer.set_placement_mode(p)
+	)
+	
 	synchronizer.sync_complete.connect(func(added, removed, scanned):
 		var message = "Asset Placer Sync complete\nAdded: %d Removed: %d Scanned total: %d" % [added, removed, scanned]
 		EditorToasterCompat.toast(message)
@@ -83,7 +87,7 @@ func _react_to_reimorted_files(files: PackedStringArray):
 func start_placement(asset: AssetResource):
 	EditorInterface.set_main_screen_editor("3D")
 	AssetPlacerContextUtil.select_context()
-	_asset_placer.start_placement(get_tree().root, asset)
+	_asset_placer.start_placement(get_tree().root, asset, _presenter.placement_mode)
 
 func _forward_3d_gui_input(viewport_camera, event):	
 	if event is InputEventMouseMotion:

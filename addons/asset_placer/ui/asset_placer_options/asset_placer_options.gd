@@ -11,7 +11,10 @@ var presenter: AssetPlacerPresenter
 @onready var max_scale_selector: SpinBoxVector3 = %MaxScaleSelector
 @onready var uniform_scale_check_box: CheckBox = %UniformScaleCheckBox
 @onready var parent_button: Button = %ParentButton
+@onready var placement_mode_options_button: OptionButton = %PlacementModeOptionsButton
+@onready var plane_axis_spin_box: SpinBoxVector3 = %PlaneAxisSpinBox
 func _ready():
+	_populate_placment_options()
 	presenter = AssetPlacerPresenter._instance
 	presenter.options_changed.connect(set_options)
 	presenter.parent_changed.connect(show_parent)
@@ -25,6 +28,20 @@ func _ready():
 	min_scale_selector.value_changed.connect(presenter.set_min_scale)
 	max_scale_selector.value_changed.connect(presenter.set_max_scale)
 	uniform_scale_check_box.toggled.connect(presenter.set_unform_scaling)
+	
+	plane_axis_spin_box.value_changed.connect(func(normal: Vector3):
+		var plane = Plane(normal)
+		presenter.placement_mode = PlacementMode.PlanePlacement.new(plane)
+	)	
+	
+	presenter.placement_mode_changed.connect(func(mode: PlacementMode):
+		plane_axis_spin_box.visible = mode is PlacementMode.PlanePlacement
+		if mode is PlacementMode.PlanePlacement:
+			plane_axis_spin_box.show()
+			plane_axis_spin_box.set_value_no_signal(mode.plane.normal)
+		else:
+			plane_axis_spin_box.hide()
+	)
 	
 	parent_button.pressed.connect(func():
 		EditorInterface.popup_node_selector(presenter.select_parent, [&"Node3D"])
@@ -52,4 +69,14 @@ func set_options(options: AssetPlacerOptions):
 	min_scale_selector.uniform = options.uniform_scaling
 	max_scale_selector.uniform = options.uniform_scaling
 	uniform_scale_check_box.set_pressed_no_signal(options.uniform_scaling)
+
+	
+func _populate_placment_options():
+	placement_mode_options_button.add_item("Surface Collisions")
+	placement_mode_options_button.add_item("Plane Collision")
+	placement_mode_options_button.item_selected.connect(func(id):
+		match id:
+			0: presenter.placement_mode = PlacementMode.SurfacePlacement.new()
+			1: presenter.placement_mode = PlacementMode.PlanePlacement.new()
+	)
 	

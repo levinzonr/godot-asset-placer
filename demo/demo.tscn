@@ -188,7 +188,3 @@ metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
 [node name="Node3D" type="Node3D" parent="." instance=ExtResource("9_oeqrt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.683012, 1.1687033, -19.817293)
 metadata/asset_placer_res_id = "uid://cl7k7m7lh8sxn"
-
-[node name="AnotherCube (3)" type="Node3D" parent="." instance=ExtResource("7_s1s6j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4867587, 0)
-metadata/asset_placer_res_id = "uid://ukx3omtlce8n"

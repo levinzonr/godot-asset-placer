@@ -57,7 +57,7 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -83,6 +83,29 @@ size_flags_horizontal = 0
 text = "Demo"
 icon = SubResource("Texture2D_5hqbk")
 alignment = 0
+
+[node name="PlacementMode" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode"]
+layout_mode = 2
+
+[node name="PlacementModeLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/HBoxContainer"]
+layout_mode = 2
+text = "Placement Mode: "
+
+[node name="PlacementModeOptionsButton" type="OptionButton" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PlaneAxisSpinBox" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+script = ExtResource("2_k4pj7")
+min = Vector3(-1, -1, -1)
+max = Vector3(1, 1, 1)
+metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
 [node name="Snapping" type="BoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
