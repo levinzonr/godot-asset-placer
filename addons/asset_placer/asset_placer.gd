@@ -13,6 +13,8 @@ var undo_redo: EditorUndoRedoManager
 var meta_asset_id = &"asset_placer_res_id"
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
 
+var _strategy: AssetPlacementStrategy
+
 func _init(undo_redo: EditorUndoRedoManager):
 	self.undo_redo = undo_redo
 
@@ -22,6 +24,7 @@ func start_placement(root: Window, asset: AssetResource):
 	preview_node = _instantiate_asset_resource(asset)
 	root.add_child(preview_node)
 	preview_rids = get_collision_rids(preview_node)
+	_strategy = SurfaceAssetPlacementStrategy.new(preview_rids)
 	_apply_preview_material(preview_node)
 	var scene = EditorInterface.get_selection().get_selected_nodes()[0]
 	if scene is Node3D:
@@ -43,30 +46,31 @@ func _apply_preview_material(node: Node3D):
 
 func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 	if preview_node:
-		var ray_origin = camera.project_ray_origin(mouse_position)
-		var	ray_dir = camera.project_ray_normal(mouse_position)
-		var space_state = camera.get_world_3d().direct_space_state
-
-		var params = PhysicsRayQueryParameters3D.new()
-		params.from = ray_origin
-		params.exclude = preview_rids
-		params.to = ray_origin + ray_dir * 1000
-		var result = space_state.intersect_ray(params)
-		if result:
-			var snapped_pos = _snap_position(result.position)
-			preview_node.global_transform.origin = snapped_pos
-			preview_node.force_update_transform()
-			preview_aabb = AABBProvider.provide_aabb(preview_node)
-
-			var bottom_y = preview_aabb.position.y
-			var y_offset = snapped_pos.y - bottom_y
-
-			var new_origin = preview_node.global_transform.origin
-			new_origin.y += y_offset
-			preview_node.global_transform.origin = new_origin
-			return true
-		else:
-			return false
+		var hit = _strategy.get_placement_point(camera, mouse_position)
+		var snapped_pos = _snap_position(hit.position)
+		
+		var up = hit.normal.normalized()
+		var forward = preview_node.global_transform.basis.z
+		
+		if abs(up.dot(forward)) > 0.99:
+			forward = Vector3.FORWARD  # safe fallback
+		
+		var right = up.cross(forward).normalized()
+		forward = right.cross(up).normalized()
+		var new_basis = Basis(right, up, forward)
+		
+		var new_transform = Transform3D(new_basis, snapped_pos)
+		preview_node.global_transform = new_transform
+		
+		preview_aabb = AABBProvider.provide_aabb(preview_node)
+		var bottom_y = preview_aabb.position.y
+		var y_offset = snapped_pos.y - bottom_y
+		
+		var new_origin = snapped_pos
+		new_origin.y += y_offset
+		preview_node.global_transform.origin = new_origin
+		
+		return true
 	else:
 		return false
 	
