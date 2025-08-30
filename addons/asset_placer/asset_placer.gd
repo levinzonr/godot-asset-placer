@@ -179,7 +179,7 @@ func set_placement_mode(placement_mode: PlacementMode):
 	if placement_mode is PlacementMode.SurfacePlacement:
 		_strategy = SurfaceAssetPlacementStrategy.new(preview_rids)
 	elif placement_mode is PlacementMode.PlanePlacement:
-		_strategy = PlanePlacementStrategy.new(placement_mode.plane)
+		_strategy = PlanePlacementStrategy.new(placement_mode.plane_options)
 	else:
 		push_error("Placement mode %s is not supported" % str(placement_mode))
 		

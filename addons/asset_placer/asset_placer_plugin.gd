@@ -50,7 +50,7 @@ func _enter_tree():
 				
 			_plane_preview = MeshInstance3D.new()
 			var plane_mesh = PlaneMesh.new()
-			var normal = p.plane.normal.normalized()  # The normal you want
+			var normal = p.plane_options.normal.normalized()
 			var forward = normal.cross(Vector3.UP).normalized() if (abs(normal.dot(Vector3.UP)) < 0.99) else normal.cross(Vector3.FORWARD).normalized()
 			var right = forward.cross(normal).normalized()
 			var basis = Basis(right, normal, forward)
@@ -58,6 +58,7 @@ func _enter_tree():
 			plane_mesh.size = Vector2(1000, 1000)
 			_plane_preview.mesh = plane_mesh
 			_plane_preview.transform.basis = basis.orthonormalized()
+			_plane_preview.global_transform = Transform3D(basis.orthonormalized(), p.plane_options.origin)
 			get_tree().root.add_child(_plane_preview)
 		else:
 			if _plane_preview:

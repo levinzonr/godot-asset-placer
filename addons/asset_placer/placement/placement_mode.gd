@@ -6,6 +6,7 @@ class SurfacePlacement extends PlacementMode:
 	pass
 	
 class PlanePlacement extends PlacementMode:
-	var plane: Plane
-	func _init(plane: Plane = Plane.PLANE_XZ):
-		self.plane = plane
+	var plane_options: PlaneOptions
+	
+	func _init(options: PlaneOptions = PlaneOptions.new(Vector3.UP, Vector3.ZERO)):
+		self.plane_options = options

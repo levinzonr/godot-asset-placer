@@ -25,7 +25,6 @@ var placement_mode: PlacementMode = PlacementMode.SurfacePlacement.new():
 		
 var preview_transform_axis: Vector3 = Vector3.UP
 
-var plane := Plane.PLANE_XZ
 
 enum TransformMode {
 	None,
@@ -41,6 +40,8 @@ func _init():
 
 func ready():
 	options_changed.emit(options)
+	placement_mode_changed.emit(placement_mode)
+
 	
 
 func select_placement_mode(mode: PlacementMode):
