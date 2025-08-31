@@ -61,5 +61,5 @@ func add_asset(scene_path: String, tags: Array[String] = [], folder_path: String
 
 func is_file_supported(file: String)	->  bool:
 	var extension = file.get_extension()
-	var supported_extensions = ["tscn", "glb", "fbx", "obj"]
+	var supported_extensions = ["tscn", "glb", "fbx", "obj", "gltf"]
 	return extension in supported_extensions
