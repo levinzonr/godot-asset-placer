@@ -49,28 +49,12 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 	if preview_node:
 		var hit = _strategy.get_placement_point(camera, mouse_position)
 		var snapped_pos = _snap_position(hit.position)
+		var up = hit.normal
+		var forward_hint = preview_node.global_transform.basis.z
 		
-		var up = hit.normal.normalized()
-		var forward = preview_node.global_transform.basis.z
-		
-		if abs(up.dot(forward)) > 0.99:
-			forward = Vector3.FORWARD  # safe fallback
-		
-		var right = up.cross(forward).normalized()
-		forward = right.cross(up).normalized()
-		var new_basis = Basis(right, up, forward)
-		
+		var new_basis = get_safe_basis(up, forward_hint)
 		var new_transform = Transform3D(new_basis, snapped_pos)
 		preview_node.global_transform = new_transform
-		
-		preview_aabb = AABBProvider.provide_aabb(preview_node)
-		var bottom_y = preview_aabb.position.y
-		var y_offset = snapped_pos.y - bottom_y
-		
-		var new_origin = snapped_pos
-		new_origin.y += y_offset
-		preview_node.global_transform.origin = new_origin
-		
 		return true
 	else:
 		return false
@@ -82,6 +66,7 @@ func place_asset(focus_on_placement: bool):
 	else:
 		return false	
 
+		
 
 func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, direction: int) -> bool:
 	match mode:
@@ -189,3 +174,25 @@ func _pick_name(node: Node3D, parent: Node3D) -> String:
 		if child.has_meta(meta_asset_id) && child.get_meta(meta_asset_id) == asset.id:
 			number_of_same_scenes += 1
 	return node.name if number_of_same_scenes == 0 else node.name + " (%s)" % number_of_same_scenes		
+
+
+func get_safe_basis(up: Vector3, forward_hint: Vector3) -> Basis:
+	up = up.normalized()
+	var forward = forward_hint.normalized()
+
+	if abs(up.dot(forward)) > 0.99:
+		if abs(up.dot(Vector3.UP)) < 0.9:
+			forward = Vector3.UP
+		else:
+			forward = Vector3.FORWARD
+
+	var right = up.cross(forward).normalized()
+
+	if right.length() < 0.001:
+		right = up.cross(Vector3.FORWARD).normalized()
+		if right.length() < 0.001:
+			right = up.cross(Vector3.RIGHT).normalized()
+
+	forward = right.cross(up).normalized()
+
+	return Basis(right, up, forward).orthonormalized()
