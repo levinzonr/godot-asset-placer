@@ -17,6 +17,7 @@ This is  default placement mode and it is almost indentical to the approach used
 #### Plane Collisions (New)
 This mode does not require any collision objects to be present in your scene. Instead it uses a virtual plane that has a configurable point of origin and normal direction. The RayCast will then try and hit this virtual plane creating a placement point for your collision.
 
+> Plane Options Configuration (Normals and Origin) are not perfect as it kind of takes away from the placement flow - Right now, you need to manually change Vector3 in UI. If anyone has a idea about how to improve this please let me know.
 
 ### Added
 - Added GLTF Assets Support #15
