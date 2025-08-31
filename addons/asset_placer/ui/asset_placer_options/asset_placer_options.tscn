@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://dmicn3kmr620j"
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_o45xf")
-icon_name = &"Node3D"
+icon_name = &"NodeWarning"
 
 [sub_resource type="Texture2D" id="Texture2D_ik2kd"]
 resource_local_to_scene = false
@@ -57,7 +57,7 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -80,9 +80,65 @@ text = "Assets Parent: "
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Demo"
+text = "No parent selected"
 icon = SubResource("Texture2D_5hqbk")
 alignment = 0
+
+[node name="PlacementMode" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlacementModeLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Placement Mode: "
+
+[node name="PlacementModeOptionsButton" type="OptionButton" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Surface Collisions"
+popup/item_0/id = 0
+popup/item_1/text = "Plane Collision"
+popup/item_1/id = 1
+
+[node name="PlaneOriginContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer/PlaneOriginContainer"]
+layout_mode = 2
+text = "Plane Origin:   "
+
+[node name="PlaneOriginSpinBox" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer/PlaneOriginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2_k4pj7")
+min = Vector3(-100, -100, -100)
+max = Vector3(100, 100, 100)
+metadata/_custom_type_script = "uid://btqju8qjrlawq"
+
+[node name="PlaneAxisContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer/PlaneAxisContainer"]
+layout_mode = 2
+text = "Plane Normal: "
+
+[node name="PlaneAxisSpinBox" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer/PlaneAxisContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("2_k4pj7")
+min = Vector3(-1, -1, -1)
+max = Vector3(1, 1, 1)
+normalized = true
+metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
 [node name="Snapping" type="BoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2

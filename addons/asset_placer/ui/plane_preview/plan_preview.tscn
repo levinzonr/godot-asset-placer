@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://btg3diy1if28d"]
+
+[ext_resource type="Script" uid="uid://ctjnj8oc85upu" path="res://addons/asset_placer/ui/plane_preview/plan_preview.gd" id="1_ldq3v"]
+[ext_resource type="Texture2D" uid="uid://dago1cpuysosa" path="res://addons/asset_placer/ui/plane_preview/plane_texture.svg" id="2_u3prx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aho0j"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h6n2v"]
+material = SubResource("StandardMaterial3D_aho0j")
+size = Vector2(1000, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wnofv"]
+transparency = 1
+albedo_color = Color(0, 1, 1, 0.62352943)
+albedo_texture = ExtResource("2_u3prx")
+uv1_scale = Vector3(500, 500, 500)
+
+[node name="PlanPreview" type="Node3D"]
+script = ExtResource("1_ldq3v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_h6n2v")
+surface_material_override/0 = SubResource("StandardMaterial3D_wnofv")

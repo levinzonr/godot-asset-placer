@@ -12,7 +12,7 @@ var _async: AssetPlacerAsync
 var _asset_placer_window: AssetLibraryPanel
 var _file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
 var _viewport_overlay_res = preload("res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.tscn")
-
+var _plane_preview: Node3D
 var overlay: Control
 
 var plugin_path: String:
@@ -42,6 +42,10 @@ func _enter_tree():
 	_asset_placer_window = load("res://addons/asset_placer/ui/asset_library_panel.tscn").instantiate()
 	add_control_to_bottom_panel(_asset_placer_window, "Asset Placer")
 	
+
+	_plane_preview = load("res://addons/asset_placer/ui/plane_preview/plan_preview.tscn").instantiate()
+	get_tree().root.add_child(_plane_preview)
+	
 	synchronizer.sync_complete.connect(func(added, removed, scanned):
 		var message = "Asset Placer Sync complete\nAdded: %d Removed: %d Scanned total: %d" % [added, removed, scanned]
 		EditorToasterCompat.toast(message)
@@ -57,6 +61,7 @@ func _enter_tree():
 	
 func _exit_tree():
 	overlay.queue_free()
+	_plane_preview.queue_free()
 	_file_system.resources_reimported.disconnect(_react_to_reimorted_files)
 	_presenter.asset_selected.disconnect(start_placement)
 	_presenter.asset_deselected.disconnect(_asset_placer.stop_placement)
@@ -65,7 +70,7 @@ func _exit_tree():
 	remove_control_from_bottom_panel(_asset_placer_window)
 	_asset_placer_window.queue_free()
 	_async.await_completion()
-
+	
 
 func _handles(object):
 	return object is Node3D
@@ -83,7 +88,7 @@ func _react_to_reimorted_files(files: PackedStringArray):
 func start_placement(asset: AssetResource):
 	EditorInterface.set_main_screen_editor("3D")
 	AssetPlacerContextUtil.select_context()
-	_asset_placer.start_placement(get_tree().root, asset)
+	_asset_placer.start_placement(get_tree().root, asset, _presenter.placement_mode)
 
 func _forward_3d_gui_input(viewport_camera, event):	
 	if event is InputEventMouseMotion:
@@ -93,7 +98,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			return _asset_placer.place_asset(Input.is_key_pressed(KEY_SHIFT))
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN or event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			var direction := 1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else -1
+			var direction := -1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1
 			var axis := _presenter.preview_transform_axis
 			return _asset_placer.transform_preview(_presenter.transform_mode, axis, direction)
 	

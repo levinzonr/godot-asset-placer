@@ -48,5 +48,5 @@ static func show_in(context: Control, selected: Array[AssetCollection], on_selec
 	picker.collection_selected.connect(on_select)
 	picker.pre_selected = selected
 	var size = picker.get_contents_minimum_size()
-	var position = context.global_position + Vector2(context.size.x + 12,0)
+	var position = DisplayServer.mouse_get_position()
 	EditorInterface.popup_dialog(picker, Rect2(position, size))
