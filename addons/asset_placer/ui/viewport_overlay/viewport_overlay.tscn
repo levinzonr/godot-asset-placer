@@ -25,6 +25,7 @@ icon_name = &"KeyTrackPosition"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [node name="ViewportOverlay" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,6 +90,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.6627451, 0.9607843, 1)
 theme_override_font_sizes/font_size = 20
+button_pressed = true
 text = "Y
 "
 

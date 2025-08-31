@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://sas7j2dyfkr3"]
+[gd_scene load_steps=17 format=3 uid="uid://sas7j2dyfkr3"]
 
 [ext_resource type="PackedScene" uid="uid://b8p1iy52py3xm" path="res://demo/assets/ForestRock2.glb" id="3_s1s6j"]
 [ext_resource type="PackedScene" uid="uid://7u1qc3y84jbe" path="res://demo/assets/pillar.glb" id="5_oeqrt"]
@@ -7,7 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://ukx3omtlce8n" path="res://demo/assets/subfloder/another_cube.tscn" id="7_s1s6j"]
 [ext_resource type="PackedScene" uid="uid://ec1dfcde5g6n" path="res://demo/assets/small_fraactures.glb" id="8_onvmd"]
 [ext_resource type="PackedScene" uid="uid://cl7k7m7lh8sxn" path="res://demo/assets/ramp.tscn" id="9_oeqrt"]
+[ext_resource type="PackedScene" uid="uid://csh67skstdhqw" path="res://demo/assets/JaggedRock4.glb" id="10_ykvhj"]
+[ext_resource type="PackedScene" uid="uid://b1nm40p57ntoa" path="res://demo/assets/ForestRock3.glb" id="11_1rqa4"]
 [ext_resource type="PackedScene" uid="uid://cqa7ue7ivlklj" path="res://demo/assets/thin_wall_fractured.glb" id="14_svvho"]
+[ext_resource type="PackedScene" uid="uid://dk831mrcik0rw" path="res://demo/assets/JaggedRock3.glb" id="15_x31ta"]
 [ext_resource type="PackedScene" uid="uid://carqrst2o7odc" path="res://demo/assets/pillar (2).glb" id="16_d1m6b"]
 [ext_resource type="PackedScene" uid="uid://cd3ekr61iqju3" path="res://demo/assets/pillar_fractured.glb" id="17_k1rqu"]
 
@@ -346,18 +349,94 @@ metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93643, 0.46870327, -23.96972)
 metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
 
-[node name="thin_wall_fractured (16)" type="Node3D" parent="." instance=ExtResource("14_svvho")]
-transform = Transform3D(0.7210756, -0.5593013, 0.4089402, 0.48650885, 0.8289645, 0.27591142, -0.4933145, 1.4701918e-08, 0.86985105, 2.8957782, 1.337558, -16.795286)
-metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
+[node name="pillar_fractured (1)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.8289645, 0.5593013, 0, 0.5593013, 0.8289645, 0, 0, 0, -1, 4.1397653, 1.5605338, -20.043789)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
 
-[node name="thin_wall_fractured (17)" type="Node3D" parent="." instance=ExtResource("14_svvho")]
-transform = Transform3D(0.9049796, 0, 0.42545503, 0, 1, 0, -0.42545503, 0, 0.9049796, 1.1940763, 0.46870327, -11.051009)
-metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
+[node name="pillar_fractured (2)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.8289645, -0.5593013, 0, -0.5593013, 0.8289645, 0, 0, 0, -1, 3.0821748, 1.4633219, -19.780537)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
 
-[node name="thin_wall_fractured (18)" type="Node3D" parent="." instance=ExtResource("14_svvho")]
-transform = Transform3D(0.9049796, 0, 0.42545503, 0, 1, 0, -0.42545503, 0, 0.9049796, -1.057865, 0.46870327, -11.926688)
-metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
+[node name="pillar_fractured (3)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.8289645, 0.5593013, 0, 0.5593013, 0.8289645, 0, 0, 0, -1, 3.9879758, 1.662945, -20.842419)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
 
-[node name="thin_wall_fractured (19)" type="Node3D" parent="." instance=ExtResource("14_svvho")]
-transform = Transform3D(0.9049796, 0, 0.42545503, 0, 1, 0, -0.42545503, 0, 0.9049796, -3.2258394, 0.46870327, -12.857272)
-metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
+[node name="pillar_fractured (4)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.8289645, -0.5593013, 0, -0.5593013, 0.8289645, 0, 0, 0, -1, 3.1177962, 1.4873545, -20.65266)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="pillar_fractured (5)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.425455, 0, 0.90497965, 0, 1, 0, -0.90497965, 0, -0.425455, -6.4630947, 0.46870232, -22.442537)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="pillar_fractured (6)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.425455, 0, 0.90497965, 0, 1, 0, -0.90497965, 0, -0.425455, -5.2369366, 0.46870232, -23.640053)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="pillar_fractured (7)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(0, 0.8289645, -0.5593013, 0, 0.5593013, 0.8289645, 1, 0, 0, 2.5606744, 1.1149426, -21.464483)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="pillar_fractured (8)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.8289645, -0.5593013, 0, -0.5593013, 0.8289645, 0, 0, 0, -1, 3.18473, 1.5325148, -21.410149)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="pillar_fractured (9)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.8289645, 0.5593013, 0, 0.5593013, 0.8289645, 0, 0, 0, -1, 4.8261585, 1.0974238, -19.651129)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="pillar_fractured (10)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.767252, 0.5593013, -0.3138574, 0.517664, 0.8289645, 0.21175921, 0.37861383, 0, -0.9255548, 5.0861263, 0.9220259, -17.339668)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="pillar_fractured (11)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.767252, 0.5593013, -0.3138574, 0.517664, 0.8289645, 0.21175921, 0.37861383, 0, -0.9255548, 4.0975914, 1.5889876, -17.293089)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="pillar_fractured (12)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.767252, 0.5593013, -0.3138574, 0.517664, 0.8289645, 0.21175921, 0.37861383, 0, -0.9255548, 4.9805775, 0.9932406, -18.137344)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="pillar_fractured (13)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.767252, 0.5593013, -0.3138574, 0.517664, 0.8289645, 0.21175921, 0.37861383, 0, -0.9255548, 4.2279778, 1.501013, -18.09304)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="pillar_fractured (14)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.767252, 0.5593013, -0.3138574, 0.517664, 0.8289645, 0.21175921, 0.37861383, 0, -0.9255548, 5.235668, 0.821131, -18.786978)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="pillar_fractured (15)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.767252, 0.5593013, -0.3138574, 0.517664, 0.8289645, 0.21175921, 0.37861383, 0, -0.9255548, 4.3770866, 1.4004157, -18.8108)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="pillar_fractured (16)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.9470317, 0, -0.32114026, 0, 1, 0, 0.32114026, 0, -0.9470317, 10.43244, 0.46870232, 0.7066479)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="pillar_fractured (17)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(-0.9470317, 0, -0.32114026, 0, 1, 0, 0.32114026, 0, -0.9470317, 10.057998, 0.46870232, -6.9896135)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="pillar_fractured (18)" type="Node3D" parent="." instance=ExtResource("17_k1rqu")]
+transform = Transform3D(0.5279094, 0, -0.84930074, 0, 1, 0, 0.84930074, 0, 0.5279094, 6.7416735, 0.46870327, 4.374941)
+metadata/asset_placer_res_id = "uid://cd3ekr61iqju3"
+
+[node name="ForestRock32" type="Node3D" parent="." instance=ExtResource("11_1rqa4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.371471, 0.46870232, -33.34841)
+metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
+
+[node name="JaggedRock32" type="Node3D" parent="." instance=ExtResource("15_x31ta")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.343779, 0, -29.848003)
+metadata/asset_placer_res_id = "uid://dk831mrcik0rw"
+
+[node name="JaggedRock42" type="Node3D" parent="." instance=ExtResource("10_ykvhj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.377594, 2, -20.328882)
+metadata/asset_placer_res_id = "uid://csh67skstdhqw"
+
+[node name="JaggedRock42 (1)" type="Node3D" parent="." instance=ExtResource("10_ykvhj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.49207, 2, -24.894503)
+metadata/asset_placer_res_id = "uid://csh67skstdhqw"
+
+[node name="JaggedRock42 (2)" type="Node3D" parent="." instance=ExtResource("10_ykvhj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.731728, 2, -22.959826)
+metadata/asset_placer_res_id = "uid://csh67skstdhqw"
