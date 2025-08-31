@@ -18,7 +18,7 @@ func preview_resource(resource: AssetResource):
 		previewer.queue_edited_resource_preview(resource.scene, self, "_on_preview_generated", null)
 
 func _process(_delta):
-	if resource and Engine.is_editor_hint():
+	if Engine.is_editor_hint() and resource and resource.scene:
 		var new_time_modified = FileAccess.get_modified_time(resource.scene.resource_path)
 		if new_time_modified != last_time_modified:
 			preview_resource(resource)
