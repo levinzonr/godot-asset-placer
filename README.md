@@ -50,14 +50,23 @@ You can folders to sync by either Drag And Droping the folder or  using "Add fol
 
 
 ### Placing Assets
-Godot Asset Placer is using RayCasting to determine where to place the asset. This means that you can place assets on any surface that has a CollisionShape attached to it.
+Godot Asset Placer provides various placement modes. All methods rely on RayCasting to determine where to place the asset.
+
+#### Surface Collisions (Default)
+This mode requires your scene to have Collision Objects (StaticBody3D, CollisionShape3D, etc.) in order to place assets on surfaces. This mode is useful when your scene already has some kind of physical floor and you want your assets placed directly onto it.
+
+#### Plane Collisions
+This mode allows you to place assets on an infinite plane at a specified height. This is useful for quickly placing assets in an empty scene or when you want to place assets at a specific height without relying on existing geometry. This plane has a configurable Normal and Point Of origin.
+
+#### Placement Steps
 To place an asset, follow these steps:
 1. Navigate to the 3D Scene of your choice
-2. Open Asset Placer Dock window and select the asset you want to place from the Assets tab
-3. Optional: Change Parent Node. By default, the Plugin will select as Root Node3D as the parent, you can change it withing Options Sub View
-4. At this point you will see a preview of the asset in the 3D viewport
-5. Press `Left Mouse Button` to place the asset at the location of the mouse cursor
-6. If you want to modify the asset after placement, you can press `Shift` + `Left Mouse Button` to Place And Focus on the Placed Asset. This allows you to move, rotate, or scale the asset using the standard Godot Editor tools.
+2. Optional: Change Placement Mode. By default, the Plugin uses Surface Collision mode, you can change it within Options Sub View
+3. Open Asset Placer Dock window and select the asset you want to place from the Assets tab
+4. Optional: Change Parent Node. By default, the Plugin will select as Root Node3D as the parent, you can change it withing Options Sub View
+5. At this point you will see a preview of the asset in the 3D viewport
+6. Press `Left Mouse Button` to place the asset at the location of the mouse cursor
+7. If you want to modify the asset after placement, you can press `Shift` + `Left Mouse Button` to Place And Focus on the Placed Asset. This allows you to move, rotate, or scale the asset using the standard Godot Editor tools.
 
 #### Transforming Assets Before Placement
 1.1.0 introduces the ability to modify the preview of the asset before placement. This includes options for rotation and scaling, allowing users to visualize how the asset will appear in the scene prior to placement, do quick and precise adjustment modifications.
@@ -81,7 +90,7 @@ You can organize your assets into Collections. Collections is a simple way to "g
 To create a collection navigate to the Collections tab, choose a name and color. Then you can assing assets into one or more collections, either by using a options menu or draggin and dropping assets into the window while Collection Filter is activee
 
 ## Known Issues
-- So far plugin only supports `tscn` files, `glb`, `obj` and `fbx` models. If you have any other formats you would like to see supported, please let me know.
+- So far plugin only supports `tscn` files, `glb`, `gltf` `obj` and `fbx` models. If you have any other formats you would like to see supported, please let me know.
 - Sometimes Previews for the Assets are not perfect - but they are directly take from the Godot Previews system
 - The UI is work in progress..
 

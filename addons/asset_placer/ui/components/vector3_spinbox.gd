@@ -14,6 +14,7 @@ signal value_changed(vector: Vector3)
 
 
 @export var uniform: bool = false
+@export var normalized: bool = false
 
 func _ready():
 	_add_spinbox("X", spin_x, min.x, max.y)
@@ -44,7 +45,12 @@ func _add_spinbox(axis: String, spinbox: SpinBox, min: float, max: float) -> voi
 func react_to_value_change(v: float):
 	if uniform:
 		set_value_no_signal(Vector3(v, v,v))
+	
+	if normalized:
+		set_value_no_signal(get_vector().normalized())
+	
 	value_changed.emit(get_vector())
+	
 
 func get_vector() -> Vector3:
 	return Vector3(spin_x.value, spin_y.value, spin_z.value)

@@ -2,4 +2,5 @@
 
 [resource]
 transparency = 1
+cull_mode = 2
 albedo_color = Color(0.117647, 1, 1, 0.431373)

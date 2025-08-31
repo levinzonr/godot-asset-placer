@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl7k7m7lh8sxn"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_ekv8p"]
+size = Vector3(4.15, 1.4, 6.76)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ekv8p"]
+albedo_color = Color(0.9764706, 0.73333335, 0.5764706, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8uodv"]
+data = PackedVector3Array(0, 0.7, 3.3799999, 2.075, -0.7, 3.3799999, -2.075, -0.7, 3.3799999, 0, 0.7, -3.3799999, -2.075, -0.7, -3.3799999, 2.075, -0.7, -3.3799999, 0, 0.7, 3.3799999, 0, 0.7, -3.3799999, 2.075, -0.7, 3.3799999, 0, 0.7, -3.3799999, 2.075, -0.7, -3.3799999, 2.075, -0.7, 3.3799999, 0, 0.7, -3.3799999, 0, 0.7, 3.3799999, -2.075, -0.7, -3.3799999, 0, 0.7, 3.3799999, -2.075, -0.7, 3.3799999, -2.075, -0.7, -3.3799999, -2.075, -0.7, 3.3799999, 2.075, -0.7, 3.3799999, -2.075, -0.7, -3.3799999, 2.075, -0.7, 3.3799999, 2.075, -0.7, -3.3799999, -2.075, -0.7, -3.3799999)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PrismMesh_ekv8p")
+surface_material_override/0 = SubResource("StandardMaterial3D_ekv8p")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_8uodv")

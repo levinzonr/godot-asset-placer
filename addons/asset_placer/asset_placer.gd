@@ -13,15 +13,19 @@ var undo_redo: EditorUndoRedoManager
 var meta_asset_id = &"asset_placer_res_id"
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
 
+var _strategy: AssetPlacementStrategy 
+
 func _init(undo_redo: EditorUndoRedoManager):
 	self.undo_redo = undo_redo
 
-func start_placement(root: Window, asset: AssetResource):
+
+func start_placement(root: Window, asset: AssetResource, placement: PlacementMode):
 	stop_placement()
 	self.asset = asset
 	preview_node = _instantiate_asset_resource(asset)
 	root.add_child(preview_node)
 	preview_rids = get_collision_rids(preview_node)
+	set_placement_mode(placement)
 	_apply_preview_material(preview_node)
 	var scene = EditorInterface.get_selection().get_selected_nodes()[0]
 	if scene is Node3D:
@@ -43,30 +47,15 @@ func _apply_preview_material(node: Node3D):
 
 func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 	if preview_node:
-		var ray_origin = camera.project_ray_origin(mouse_position)
-		var	ray_dir = camera.project_ray_normal(mouse_position)
-		var space_state = camera.get_world_3d().direct_space_state
-
-		var params = PhysicsRayQueryParameters3D.new()
-		params.from = ray_origin
-		params.exclude = preview_rids
-		params.to = ray_origin + ray_dir * 1000
-		var result = space_state.intersect_ray(params)
-		if result:
-			var snapped_pos = _snap_position(result.position)
-			preview_node.global_transform.origin = snapped_pos
-			preview_node.force_update_transform()
-			preview_aabb = AABBProvider.provide_aabb(preview_node)
-
-			var bottom_y = preview_aabb.position.y
-			var y_offset = snapped_pos.y - bottom_y
-
-			var new_origin = preview_node.global_transform.origin
-			new_origin.y += y_offset
-			preview_node.global_transform.origin = new_origin
-			return true
-		else:
-			return false
+		var hit = _strategy.get_placement_point(camera, mouse_position)
+		var snapped_pos = _snap_position(hit.position)
+		var up = hit.normal
+		var forward_hint = preview_node.global_transform.basis.z
+		
+		var new_basis = get_safe_basis(up, forward_hint)
+		var new_transform = Transform3D(new_basis, snapped_pos)
+		preview_node.global_transform = new_transform
+		return true
 	else:
 		return false
 	
@@ -77,6 +66,7 @@ func place_asset(focus_on_placement: bool):
 	else:
 		return false	
 
+		
 
 func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, direction: int) -> bool:
 	match mode:
@@ -170,9 +160,42 @@ func _instantiate_asset_resource(asset: AssetResource) -> Node3D:
 	
 	return _preview_node
 
+func set_placement_mode(placement_mode: PlacementMode):
+	if placement_mode is PlacementMode.SurfacePlacement:
+		_strategy = SurfaceAssetPlacementStrategy.new(preview_rids)
+	elif placement_mode is PlacementMode.PlanePlacement:
+		_strategy = PlanePlacementStrategy.new(placement_mode.plane_options)
+	else:
+		push_error("Placement mode %s is not supported" % str(placement_mode))
+		
 func _pick_name(node: Node3D, parent: Node3D) -> String:
 	var number_of_same_scenes = 0
 	for child in parent.get_children():
 		if child.has_meta(meta_asset_id) && child.get_meta(meta_asset_id) == asset.id:
 			number_of_same_scenes += 1
 	return node.name if number_of_same_scenes == 0 else node.name + " (%s)" % number_of_same_scenes		
+
+
+func get_safe_basis(up: Vector3, forward_hint: Vector3) -> Basis:
+	up = up.normalized()
+	var forward = forward_hint.normalized()
+
+	if abs(up.dot(forward)) > 0.99:
+		if abs(up.dot(Vector3.UP)) < 0.9:
+			forward = Vector3.UP
+		else:
+			forward = Vector3.FORWARD
+
+	var right = up.cross(forward).normalized()
+
+	if right.length() < 0.001:
+		right = up.cross(Vector3.FORWARD).normalized()
+		if right.length() < 0.001:
+			right = up.cross(Vector3.RIGHT).normalized()
+
+	forward = right.cross(up).normalized()
+	
+	if up.length() < 0.001 or right.length() < 0.001 or forward.length() < 0.001:
+		return Basis()
+
+	return Basis(right, up, forward).orthonormalized()
