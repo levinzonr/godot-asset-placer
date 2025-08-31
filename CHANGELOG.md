@@ -1,5 +1,32 @@
 # Godot Asset Placer Changelog
 
+
+## 1.1.0-alpha2
+Alpha2 introduces a new Placement feature: Placement Modes and some bug fixes.
+
+### Normal Alignment - Slopes and Vertical Surfaces
+When placing assets on sloped or vertical surfaces, the asset will now align with the surface normal, providing a more natural placement.
+
+### Placement Modes
+1.1.0-alpha2 introduces the ability to choose between different placement modes
+
+#### Surface Collision
+This is  default placement mode and it is almost indentical to the approach used in previous version. This mode requires your scene to have a Collision Objects present in your scene. The RayCast will then try and hit any collision objects creating a placement point for your collision.
+
+
+#### Plane Collisions (New)
+This mode does not require any collision objects to be present in your scene. Instead it uses a virtual plane that has a configurable point of origin and normal direction. The RayCast will then try and hit this virtual plane creating a placement point for your collision.
+
+
+### Added
+- Added GLTF Assets Support #15
+
+### Fixed
+- Added more sanity checks for thumbnail generation
+- Preview Transforms: Flipped Negative and Positive transformation directions to be more intuitive
+- Add Minimum Height for the Asset Placer Dock Panel #16
+- 
+
 ## 1.1.0-alpha1
 First major Alpha release after the stable 1.0.0 version 🚀.
 
