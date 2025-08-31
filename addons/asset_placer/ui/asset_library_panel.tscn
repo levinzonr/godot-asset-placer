@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dynyrwa38r5ag" path="res://addons/asset_placer/ui/about/about_window.tscn" id="5_rgwf1"]
 
 [node name="AssetLibraryPanel" type="Control"]
-custom_minimum_size = Vector2(0, 500)
+custom_minimum_size = Vector2(0, 600)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
