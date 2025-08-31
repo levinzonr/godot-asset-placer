@@ -47,7 +47,6 @@ func _ready():
 	)
 	
 	presenter.placement_mode_changed.connect(func(mode: PlacementMode):
-		print(str(mode))
 		if mode is PlacementMode.PlanePlacement:
 			plane_axis_container.show()
 			plane_origin_container.show()

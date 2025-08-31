@@ -98,7 +98,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			return _asset_placer.place_asset(Input.is_key_pressed(KEY_SHIFT))
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN or event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			var direction := 1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else -1
+			var direction := -1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1
 			var axis := _presenter.preview_transform_axis
 			return _asset_placer.transform_preview(_presenter.transform_mode, axis, direction)
 	

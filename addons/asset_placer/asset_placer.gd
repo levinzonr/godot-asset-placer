@@ -194,5 +194,8 @@ func get_safe_basis(up: Vector3, forward_hint: Vector3) -> Basis:
 			right = up.cross(Vector3.RIGHT).normalized()
 
 	forward = right.cross(up).normalized()
+	
+	if up.length() < 0.001 or right.length() < 0.001 or forward.length() < 0.001:
+		return Basis()
 
 	return Basis(right, up, forward).orthonormalized()
