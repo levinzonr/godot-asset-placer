@@ -16,10 +16,9 @@ func get_placement_point(camera: Camera3D, mouse_position: Vector2) -> Collision
 	params.exclude = exclude_rids
 	params.to = ray_origin + ray_dir * 1000
 	var result = space_state.intersect_ray(params)
+	if not result.has('position') or not result.has('normal'):
+		return AssetPlacementStrategy.CollisionHit.zero()
+
 	var position: Vector3 = result.position
 	var normal: Vector3 = result.normal
-	if position and normal:
-		return AssetPlacementStrategy.CollisionHit.new(position, normal)
-	else:
-		return AssetPlacementStrategy.CollisionHit.ZERO
-	
+	return AssetPlacementStrategy.CollisionHit.new(position, normal)
