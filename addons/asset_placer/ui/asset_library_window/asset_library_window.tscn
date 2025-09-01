@@ -128,7 +128,7 @@ placeholder_text = "Filter assets by name"
 [node name="FilterButton" type="Button" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Edit"
+tooltip_text = "Filter by Collection"
 icon = SubResource("Texture2D_yvyyx")
 
 [node name="FiltersLabel" type="Label" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer/FilterButton"]

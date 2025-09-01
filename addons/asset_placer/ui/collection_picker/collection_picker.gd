@@ -12,21 +12,27 @@ func _ready():
 	hide_on_checkable_item_selection = false
 	presenter.show_collections.connect(show_collections)
 	presenter.ready()
-	
+
 
 func show_collections(collections: Array[AssetCollection]):
+	if collections.size() == 0:
+		add_check_item("All")
+		set_item_checked(0, true)
+		set_item_icon(0, make_circle_icon(16, Color.WHITE))
+		set_item_disabled(0, true)
+
 	for i in collections.size():
 		var collection_name = collections[i].name
 		var selected = pre_selected.any(func(c): return c.name == collection_name)
 		add_check_item(collection_name)
 		set_item_checked(i, selected)
 		set_item_icon(i, make_circle_icon(16, collections[i].backgroundColor))
-	
+
 	index_pressed.connect(func(index):
 		toggle_item_checked(index)
 		collection_selected.emit(collections[index], is_item_checked(index))
 	)
-	
+
 func make_circle_icon(radius: int, color: Color) -> Texture2D:
 	var size = radius * 2
 	var img := Image.create(size, size, false, Image.FORMAT_RGBA8)
