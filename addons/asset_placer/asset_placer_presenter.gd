@@ -17,6 +17,7 @@ var _selected_asset: AssetResource
 var options: AssetPlacerOptions
 var _parent: NodePath = NodePath("")
 var transform_mode: TransformMode = TransformMode.None
+var _last_plane_options := PlaneOptions.new(Vector3.UP, Vector3.ZERO)
 
 var placement_mode: PlacementMode = PlacementMode.SurfacePlacement.new():
 	set(value):
@@ -42,7 +43,19 @@ func ready():
 	options_changed.emit(options)
 	placement_mode_changed.emit(placement_mode)
 
-	
+
+func toggle_plane_placement():
+	placement_mode = PlacementMode.PlanePlacement.new(_last_plane_options)	
+
+
+func cycle_placement_mode():
+	if placement_mode is PlacementMode.SurfacePlacement:
+		toggle_plane_placement()
+	elif placement_mode is PlacementMode.PlanePlacement:
+		toggle_surface_placement()
+
+func toggle_surface_placement():
+	placement_mode = PlacementMode.SurfacePlacement.new()	
 
 func select_placement_mode(mode: PlacementMode):
 	self.placement_mode = mode
@@ -57,6 +70,10 @@ func toggle_transformation_mode(mode: TransformMode):
 	else:
 		transform_mode = mode
 	transform_mode_changed.emit(transform_mode)
+	
+	if transform_mode == TransformMode.Move:
+		select_placement_mode(PlacementMode.PlanePlacement.new(_last_plane_options))
+	
 	_select_default_axis(transform_mode)
 	
 func clear_parent():
@@ -89,7 +106,7 @@ func _select_default_axis(mode: TransformMode):
 		TransformMode.Scale:
 			select_axis(Vector3.ONE)
 		TransformMode.Move:
-			select_axis(Vector3.BACK)
+			select_axis(Vector3.UP)
 		_: pass
 
 func uniformV3(value: float) -> Vector3:

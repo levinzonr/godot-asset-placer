@@ -14,9 +14,11 @@ var meta_asset_id = &"asset_placer_res_id"
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
 
 var _strategy: AssetPlacementStrategy 
+var _plane_placer: PlanePlacer
 
-func _init(undo_redo: EditorUndoRedoManager):
+func _init(undo_redo: EditorUndoRedoManager, plane_placer: PlanePlacer):
 	self.undo_redo = undo_redo
+	self._plane_placer = plane_placer
 
 
 func start_placement(root: Window, asset: AssetResource, placement: PlacementMode):
@@ -95,7 +97,7 @@ func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, 
 			return true
 			
 		AssetPlacerPresenter.TransformMode.Move:
-			preview_node.translate(axis.normalized() * direction * preview_transform_step)
+			_plane_placer.move_plane_up(direction * 0.2)
 			return true
 		_:
 			return false

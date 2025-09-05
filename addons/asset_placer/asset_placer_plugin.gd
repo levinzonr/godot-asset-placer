@@ -14,6 +14,7 @@ var _file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
 var _viewport_overlay_res = preload("res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.tscn")
 var _plane_preview: Node3D
 var overlay: Control
+var plane_placer: PlanePlacer
 
 var plugin_path: String:
 	get(): return get_script().resource_path.get_base_dir()
@@ -30,22 +31,25 @@ func _disable_plugin():
 	
 func _enter_tree():
 	_async = AssetPlacerAsync.new()
+	_presenter = AssetPlacerPresenter.new()
+
 	_updater = PluginUpdater.new(ADDON_PATH +  "/plugin.cfg", "")
-	_asset_placer = AssetPlacer.new(get_undo_redo())
+	_plane_preview = load("res://addons/asset_placer/ui/plane_preview/plan_preview.tscn").instantiate()
+	get_tree().root.add_child(_plane_preview)
+	plane_placer = PlanePlacer.new(_presenter, _plane_preview)
+	
+	_asset_placer = AssetPlacer.new(get_undo_redo(), plane_placer)
 	_folder_repository = FolderRepository.new()
 	_assets_repository = AssetsRepository.new()
 	synchronizer = Synchronize.new(_folder_repository, _assets_repository)
-	_presenter = AssetPlacerPresenter.new()
 	scene_changed.connect(_handle_scene_changed)
 	_presenter.asset_selected.connect(start_placement)
 	_presenter.asset_deselected.connect(_asset_placer.stop_placement)
 	_asset_placer_window = load("res://addons/asset_placer/ui/asset_library_panel.tscn").instantiate()
 	add_control_to_bottom_panel(_asset_placer_window, "Asset Placer")
 	
+	_presenter.placement_mode_changed.connect(_asset_placer.set_placement_mode)
 
-	_plane_preview = load("res://addons/asset_placer/ui/plane_preview/plan_preview.tscn").instantiate()
-	get_tree().root.add_child(_plane_preview)
-	
 	synchronizer.sync_complete.connect(func(added, removed, scanned):
 		var message = "Asset Placer Sync complete\nAdded: %d Removed: %d Scanned total: %d" % [added, removed, scanned]
 		EditorToasterCompat.toast(message)
@@ -117,6 +121,10 @@ func _forward_3d_gui_input(viewport_camera, event):
 			return true
 		if event.keycode == KEY_Y:
 			_presenter.toggle_axis(Vector3.UP)	
+			return true
+		
+		if event.keycode == KEY_Q:
+			_presenter.cycle_placement_mode()
 			return true
 			
 		if event.keycode == KEY_Z:

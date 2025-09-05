@@ -20,11 +20,17 @@ func _ready():
 	presenter = AssetPlacerPresenter._instance
 	presenter.options_changed.connect(set_options)
 	presenter.parent_changed.connect(show_parent)
+	presenter.placement_mode_changed.connect(func(m):
+		if m is PlacementMode.PlanePlacement:
+			placement_mode_options_button.select(1)
+		if m is PlacementMode.SurfacePlacement:
+			placement_mode_options_button.select(0)
+	)
 	
 	placement_mode_options_button.item_selected.connect(func(id):
 		match id:
-			0: presenter.placement_mode = PlacementMode.SurfacePlacement.new()
-			1: presenter.placement_mode = PlacementMode.PlanePlacement.new()
+			0: presenter.toggle_surface_placement()
+			1: presenter.toggle_plane_placement()
 	)
 	
 	grid_snapping_checkbox.toggled.connect(presenter.set_grid_snapping_enabled)

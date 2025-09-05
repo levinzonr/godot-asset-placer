@@ -6,6 +6,8 @@ extends Control
 @onready var x_check_button: CheckButton = %XCheckButton
 @onready var z_check_button: CheckButton = %ZCheckButton
 @onready var y_check_button: CheckButton = %YCheckButton
+@onready var placement_mode_label: Label = %PlacementModeLabel
+
 func _ready():
 	hide()
 	var presenter = AssetPlacerPresenter._instance
@@ -13,6 +15,7 @@ func _ready():
 	presenter.preview_transform_axis_changed.connect(set_axis)
 	presenter.asset_selected.connect(func(a): show())
 	presenter.asset_deselected.connect(func(): hide())
+	presenter.placement_mode_changed.connect(set_placement_mode)
 	
 	set_mode(presenter.transform_mode)
 	set_axis(presenter.preview_transform_axis)
@@ -23,6 +26,11 @@ func set_mode(mode: AssetPlacerPresenter.TransformMode):
 	scale_check_button.button_pressed = mode == AssetPlacerPresenter.TransformMode.Scale
 	translate_check_button.button_pressed = mode == AssetPlacerPresenter.TransformMode.Move
 
+func set_placement_mode(mode: PlacementMode):
+	if mode is PlacementMode.PlanePlacement:
+		placement_mode_label.text = "Plane Placement"
+	if mode is PlacementMode.SurfacePlacement:
+		placement_mode_label.text = "Surface Placement"
 
 func set_axis(vector: Vector3):
 	x_check_button.button_pressed = vector.x == 1
