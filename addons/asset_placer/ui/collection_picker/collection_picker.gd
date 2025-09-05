@@ -11,8 +11,17 @@ var pre_selected: Array[AssetCollection]
 func _ready():
 	hide_on_checkable_item_selection = false
 	presenter.show_collections.connect(show_collections)
+	presenter.show_empty_view.connect(show_empty_view)
 	presenter.ready()
 	
+
+func show_empty_view():
+	add_item("No Collections added yet")
+	index_pressed.connect(func(i):
+		AssetPlacerDockPresenter.instance.show_tab.emit(
+			AssetPlacerDockPresenter.Tab.Collections
+		)
+	)
 
 func show_collections(collections: Array[AssetCollection]):
 	for i in collections.size():

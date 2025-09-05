@@ -32,7 +32,7 @@ func _disable_plugin():
 func _enter_tree():
 	_async = AssetPlacerAsync.new()
 	_presenter = AssetPlacerPresenter.new()
-
+	AssetPlacerDockPresenter.new()
 	_updater = PluginUpdater.new(ADDON_PATH +  "/plugin.cfg", "")
 	_plane_preview = load("res://addons/asset_placer/ui/plane_preview/plan_preview.tscn").instantiate()
 	get_tree().root.add_child(_plane_preview)
