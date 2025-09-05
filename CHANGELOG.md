@@ -1,6 +1,17 @@
 # Godot Asset Placer Changelog
 
 
+## 1.1.0-alpha3
+
+## Added
+- Q Shortcut to cycle through Placement Modes
+- W (Translate shortcut) preview transform now toggles `Plane Placement Mode`. This provides a way to continiously place assets on a plane with configurable point of origin
+- Empty View for the Collections Picker that can navigate to the collections tab
+
+## Fixed
+- Fixed an Issue where Scale Preview transform would get reset after moving an asset
+- #11 Plugins Dock now has a minimum height to avoid UI issues when collapsing it too much
+
 ## 1.1.0-alpha2
 Alpha2 introduces a new Placement feature: Placement Modes and some bug fixes.
 

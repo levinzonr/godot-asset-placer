@@ -52,6 +52,8 @@ You can folders to sync by either Drag And Droping the folder or  using "Add fol
 ### Placing Assets
 Godot Asset Placer provides various placement modes. All methods rely on RayCasting to determine where to place the asset.
 
+Placement Modes can be cycled using `Q` Shortcut
+
 #### Surface Collisions (Default)
 This mode requires your scene to have Collision Objects (StaticBody3D, CollisionShape3D, etc.) in order to place assets on surfaces. This mode is useful when your scene already has some kind of physical floor and you want your assets placed directly onto it.
 
