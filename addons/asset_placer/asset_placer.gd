@@ -52,8 +52,14 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 		var up = hit.normal
 		var forward_hint = preview_node.global_transform.basis.z
 		
-		var new_basis = get_safe_basis(up, forward_hint)
+		var new_basis = get_safe_basis(up, forward_hint).scaled(preview_node.scale)
 		var new_transform = Transform3D(new_basis, snapped_pos)
+		
+		var local_bottom = Vector3(0, preview_aabb.position.y, 0)
+		var bottom_world = new_transform * local_bottom
+		var adjust = hit.position - bottom_world
+		new_transform.origin += adjust
+		
 		preview_node.global_transform = new_transform
 		return true
 	else:

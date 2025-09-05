@@ -7,17 +7,17 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_h6n2v"]
 material = SubResource("StandardMaterial3D_aho0j")
-size = Vector2(1000, 1000)
+size = Vector2(200, 200)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wnofv"]
 transparency = 1
 albedo_color = Color(0, 1, 1, 0.62352943)
 albedo_texture = ExtResource("2_u3prx")
-uv1_scale = Vector3(500, 500, 500)
 
 [node name="PlanPreview" type="Node3D"]
 script = ExtResource("1_ldq3v")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, 0, -1, 0, 1, 0, -1, 0, 0, 0, 0, 0)
 mesh = SubResource("PlaneMesh_h6n2v")
 surface_material_override/0 = SubResource("StandardMaterial3D_wnofv")

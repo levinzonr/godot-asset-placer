@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://sas7j2dyfkr3"]
+[gd_scene load_steps=22 format=3 uid="uid://sas7j2dyfkr3"]
 
 [ext_resource type="PackedScene" uid="uid://dig47ichuqflf" path="res://demo/assets/ForestRockCluster1.glb" id="1_u10mr"]
 [ext_resource type="PackedScene" uid="uid://b8p1iy52py3xm" path="res://demo/assets/ForestRock2.glb" id="3_s1s6j"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://carqrst2o7odc" path="res://demo/assets/pillar (2).glb" id="16_d1m6b"]
 [ext_resource type="PackedScene" uid="uid://i8qv802uro30" path="res://demo/assets/LandscapeRock2.glb" id="16_k1rqu"]
 [ext_resource type="PackedScene" uid="uid://cd3ekr61iqju3" path="res://demo/assets/pillar_fractured.glb" id="17_k1rqu"]
+[ext_resource type="PackedScene" uid="uid://c55qvy8fdcxsd" path="res://demo/assets/sphere.tscn" id="18_d1m6b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hjng"]
 size = Vector3(100, 0.1, 100)
@@ -992,3 +993,19 @@ metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
 [node name="ForestRock22 (29)" parent="." instance=ExtResource("3_s1s6j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.857792, 0, -58.42802)
 metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
+
+[node name="Sphere" type="Node3D" parent="." instance=ExtResource("18_d1m6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.40766, 1.0687032, -19.814762)
+metadata/asset_placer_res_id = "uid://c55qvy8fdcxsd"
+
+[node name="Sphere (1)" type="Node3D" parent="." instance=ExtResource("18_d1m6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.460934, 0.46870303, -18.634264)
+metadata/asset_placer_res_id = "uid://c55qvy8fdcxsd"
+
+[node name="thin_wall_fractured (16)" type="Node3D" parent="." instance=ExtResource("14_svvho")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.468117, 0.46870303, -17.521889)
+metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
+
+[node name="thin_wall_fractured (17)" type="Node3D" parent="." instance=ExtResource("14_svvho")]
+transform = Transform3D(0.8253356, 0, -0.56464255, 0, 1, 0, 0.56464255, 0, 0.8253356, -47.875614, 0.46870303, -13.949518)
+metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
