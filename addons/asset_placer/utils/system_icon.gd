@@ -15,7 +15,10 @@ func _resolve():
 
 	var theme := EditorInterface.get_editor_theme()
 	if theme and icon_name != "":
-		_resolved_icon = theme.get_icon(icon_name, "EditorIcons")
+		if theme.has_icon(icon_name, "EditorIcons"):
+			_resolved_icon = theme.get_icon(icon_name, "EditorIcons")
+		else:
+			_resolved_icon = theme.get_icon(&"Node3D", "EditorIcons")
 
 # Called automatically by Control.draw() and other systems
 func _draw(to_canvas_item: RID, pos: Vector2, modulate: Color, transpose: bool) -> void:
