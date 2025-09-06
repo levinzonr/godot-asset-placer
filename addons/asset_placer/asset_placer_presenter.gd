@@ -58,6 +58,10 @@ func cycle_placement_mode():
 func toggle_surface_placement():
 	placement_mode = PlacementMode.SurfacePlacement.new()	
 
+func toggle_terrain_3d_placement(node_path: NodePath):
+	var node = EditorInterface.get_edited_scene_root().get_node(node_path)
+	self.placement_mode = PlacementMode.Terrain3DPlacement.new(node)
+
 func select_placement_mode(mode: PlacementMode):
 	self.placement_mode = mode
 

@@ -31,6 +31,7 @@ func _ready():
 		match id:
 			0: presenter.toggle_surface_placement()
 			1: presenter.toggle_plane_placement()
+			2: _show_terrain_3d_selector()
 	)
 	
 	grid_snapping_checkbox.toggled.connect(presenter.set_grid_snapping_enabled)
@@ -69,7 +70,8 @@ func _ready():
 	
 	presenter.ready()
 
-
+func _show_terrain_3d_selector():
+	EditorInterface.popup_node_selector(presenter.toggle_terrain_3d_placement, [&"Terrain3D"])
 
 func show_parent(parent: NodePath):
 	if not parent.is_empty():

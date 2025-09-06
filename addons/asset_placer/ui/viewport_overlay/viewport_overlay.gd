@@ -35,7 +35,8 @@ func set_placement_mode(mode: PlacementMode):
 		placement_mode_label.text = "Plane Placement"
 	if mode is PlacementMode.SurfacePlacement:
 		placement_mode_label.text = "Surface Placement"
-	
+	if mode is PlacementMode.Terrain3DPlacement:
+		placement_mode_label.text = "Terrain3D"
 func show_error(message: String):
 	error_container.show()
 	error_label.text = message
