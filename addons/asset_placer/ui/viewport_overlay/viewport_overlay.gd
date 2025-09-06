@@ -10,15 +10,19 @@ extends Control
 @onready var error_label: Label = %ErrorLabel
 @onready var error_container = %ErrorContainer
 @onready var error_timer: Timer = %ErrorTimer
+@onready var snapping_switch: CheckButton = %SnappingSwitch
+
 
 func _ready():
 	hide()
+	error_container.hide()
 	var presenter = AssetPlacerPresenter._instance
 	presenter.transform_mode_changed.connect(set_mode)
 	presenter.preview_transform_axis_changed.connect(set_axis)
 	presenter.asset_selected.connect(func(a): show())
 	presenter.asset_deselected.connect(func(): hide())
 	presenter.placement_mode_changed.connect(set_placement_mode)
+	presenter.options_changed.connect(show_options)
 	presenter.show_error.connect(show_error)
 	error_timer.timeout.connect(hide_error)
 	set_mode(presenter.transform_mode)
@@ -36,7 +40,9 @@ func set_placement_mode(mode: PlacementMode):
 	if mode is PlacementMode.SurfacePlacement:
 		placement_mode_label.text = "Surface Placement"
 	if mode is PlacementMode.Terrain3DPlacement:
-		placement_mode_label.text = "Terrain3D"
+		placement_mode_label.text = "Terrain3D Placement"
+		
+		 
 func show_error(message: String):
 	error_container.show()
 	error_label.text = message
@@ -44,6 +50,10 @@ func show_error(message: String):
 
 func hide_error():
 	error_container.hide()
+
+
+func show_options(options: AssetPlacerOptions):
+	snapping_switch.button_pressed = options.snapping_enabled	
 		
 func set_axis(vector: Vector3):
 	x_check_button.button_pressed = vector.x == 1

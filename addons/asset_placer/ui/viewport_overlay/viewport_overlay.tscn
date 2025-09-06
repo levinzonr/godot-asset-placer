@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://y4168twxqqwr"]
+[gd_scene load_steps=9 format=3 uid="uid://y4168twxqqwr"]
 
 [ext_resource type="Script" uid="uid://e3l8cnd506a1" path="res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.gd" id="1_3e3nf"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_1410h"]
@@ -23,6 +23,13 @@ resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_1410h")
 icon_name = &"KeyTrackPosition"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_luwev"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_1410h")
+icon_name = &"Snap"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [sub_resource type="Texture2D" id="Texture2D_bu8qk"]
@@ -154,6 +161,16 @@ theme_override_constants/margin_bottom = 16
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer3"]
 layout_mode = 2
 
+[node name="SnappingSwitch" type="CheckButton" parent="MarginContainer3/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "S: Grid Snapping"
+icon = SubResource("Texture2D_luwev")
+
+[node name="Control" type="Control" parent="MarginContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer3/VBoxContainer"]
 layout_mode = 2
 
@@ -176,6 +193,7 @@ text = "Q: Cycle Placement Mode"
 
 [node name="ErrorContainer" type="MarginContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5

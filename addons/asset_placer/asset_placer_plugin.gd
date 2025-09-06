@@ -127,6 +127,9 @@ func _forward_3d_gui_input(viewport_camera, event):
 			_presenter.cycle_placement_mode()
 			return true
 			
+		if event.keycode == KEY_S:
+			_presenter.toggle_grid_snapping()
+			
 		if event.keycode == KEY_Z:
 			_presenter.toggle_axis(Vector3.BACK)
 			return true

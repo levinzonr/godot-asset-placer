@@ -121,6 +121,9 @@ func set_grid_snapping_enabled(value: bool):
 	options.snapping_enabled = value
 	options_changed.emit(options)
 	
+func toggle_grid_snapping():
+	set_grid_snapping_enabled(!options.snapping_enabled)
+	
 func set_min_rotation(vector: Vector3):
 	options.min_rotation = vector
 	options_changed.emit(options)
