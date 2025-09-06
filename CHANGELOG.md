@@ -1,5 +1,8 @@
 # Godot Asset Placer Changelog
 
+## 1.1.0-alpha4
+### Fixed
+- Fixed an Issue where Snapping would not work when placing assets (#26)
 
 ## 1.1.0-alpha3
 
