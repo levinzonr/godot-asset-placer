@@ -12,6 +12,7 @@ signal transform_mode_changed(mode: TransformMode)
 signal placement_mode_changed(mode: PlacementMode)
 signal preview_transform_axis_changed(axis: Vector3)
 signal asset_selected(asset: AssetResource)
+signal show_error(message: String)
 
 var _selected_asset: AssetResource
 var options: AssetPlacerOptions

@@ -17,4 +17,3 @@ func get_placement_point(camera: Camera3D, mouse_position: Vector2) -> AssetPlac
 		return AssetPlacementStrategy.CollisionHit.new(intersection, plane.normal)
 	else:
 		return AssetPlacementStrategy.CollisionHit.zero()
-

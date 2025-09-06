@@ -7,6 +7,9 @@ extends Control
 @onready var z_check_button: CheckButton = %ZCheckButton
 @onready var y_check_button: CheckButton = %YCheckButton
 @onready var placement_mode_label: Label = %PlacementModeLabel
+@onready var error_label: Label = %ErrorLabel
+@onready var error_container = %ErrorContainer
+@onready var error_timer: Timer = %ErrorTimer
 
 func _ready():
 	hide()
@@ -16,7 +19,8 @@ func _ready():
 	presenter.asset_selected.connect(func(a): show())
 	presenter.asset_deselected.connect(func(): hide())
 	presenter.placement_mode_changed.connect(set_placement_mode)
-	
+	presenter.show_error.connect(show_error)
+	error_timer.timeout.connect(hide_error)
 	set_mode(presenter.transform_mode)
 	set_axis(presenter.preview_transform_axis)
 
@@ -31,7 +35,15 @@ func set_placement_mode(mode: PlacementMode):
 		placement_mode_label.text = "Plane Placement"
 	if mode is PlacementMode.SurfacePlacement:
 		placement_mode_label.text = "Surface Placement"
+	
+func show_error(message: String):
+	error_container.show()
+	error_label.text = message
+	error_timer.start()
 
+func hide_error():
+	error_container.hide()
+		
 func set_axis(vector: Vector3):
 	x_check_button.button_pressed = vector.x == 1
 	y_check_button.button_pressed = vector.y == 1

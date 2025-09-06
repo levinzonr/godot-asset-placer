@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://y4168twxqqwr"]
+[gd_scene load_steps=8 format=3 uid="uid://y4168twxqqwr"]
 
 [ext_resource type="Script" uid="uid://e3l8cnd506a1" path="res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.gd" id="1_3e3nf"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_1410h"]
@@ -23,6 +23,13 @@ resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_1410h")
 icon_name = &"KeyTrackPosition"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_bu8qk"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_1410h")
+icon_name = &"Error"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [node name="ViewportOverlay" type="Control"]
@@ -155,6 +162,8 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("3_h3uaa")
 expand_mode = 1
+stretch_mode = 5
+flip_h = true
 
 [node name="PlacementModeLabel" type="Label" parent="MarginContainer3/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -164,3 +173,36 @@ text = "Placement Mode"
 [node name="TextureRect" type="Label" parent="MarginContainer3/VBoxContainer"]
 layout_mode = 2
 text = "Q: Cycle Placement Mode"
+
+[node name="ErrorContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ErrorContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="ErrorContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("Texture2D_bu8qk")
+stretch_mode = 3
+
+[node name="ErrorLabel" type="Label" parent="ErrorContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Error test"
+
+[node name="ErrorTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
