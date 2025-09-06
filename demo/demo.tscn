@@ -206,87 +206,87 @@ shape = SubResource("BoxShape3D_5hjng")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00016975403, 0, 0)
 mesh = SubResource("PlaneMesh_d6po2")
 
-[node name="LandscapeRock32" type="Node3D" parent="." instance=ExtResource("1_onu7k")]
+[node name="LandscapeRock32" parent="." instance=ExtResource("1_onu7k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.27555, 0.73019135, -7.1525106)
 metadata/asset_placer_res_id = "uid://lmaf0pnsx1oc"
 
-[node name="Node3D" type="Node3D" parent="." instance=ExtResource("9_oeqrt")]
+[node name="Node3D" parent="." instance=ExtResource("9_oeqrt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.559148, 1.1687033, -6.1299396)
 metadata/asset_placer_res_id = "uid://cl7k7m7lh8sxn"
 
-[node name="rock" type="Node3D" parent="." instance=ExtResource("3_s1s6j")]
+[node name="rock" parent="." instance=ExtResource("3_s1s6j")]
 transform = Transform3D(0.8289645, -0.5593013, 0, 0.5593013, 0.8289645, 0, 0, 0, 1, -16.743721, 1.4450426, -6.8882036)
 metadata/asset_placer_res_id = "uid://1hx47t5c3wpf"
 
-[node name="thin_wall_fractured" type="Node3D" parent="." instance=ExtResource("14_svvho")]
+[node name="thin_wall_fractured" parent="." instance=ExtResource("14_svvho")]
 transform = Transform3D(-0.3031818, 0, -0.95293343, 0, 1.0000001, 0, 0.95293343, 0, -0.3031818, -14.20322, 0.50827754, -11.180258)
 metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
 
-[node name="thin_wall_fractured (1)" type="Node3D" parent="." instance=ExtResource("14_svvho")]
+[node name="thin_wall_fractured (1)" parent="." instance=ExtResource("14_svvho")]
 transform = Transform3D(-0.9968054, 0, -0.079868406, 0, 1, 0, 0.079868406, 0, -0.9968054, -12.611258, 0.50827754, -7.951261)
 metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
 
-[node name="thin_wall_fractured (2)" type="Node3D" parent="." instance=ExtResource("14_svvho")]
+[node name="thin_wall_fractured (2)" parent="." instance=ExtResource("14_svvho")]
 transform = Transform3D(-0.9492209, 0, 0.3146107, 0, 1, 0, -0.3146107, 0, -0.9492209, -12.721568, 0.50827754, -3.6671274)
 metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
 
-[node name="thin_wall_fractured (3)" type="Node3D" parent="." instance=ExtResource("14_svvho")]
+[node name="thin_wall_fractured (3)" parent="." instance=ExtResource("14_svvho")]
 transform = Transform3D(-0.6057833, 0, 0.79563, 0, 1, 0, -0.79563, 0, -0.6057833, -15.355446, 0.50827754, -0.39385417)
 metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
 
-[node name="thin_wall_fractured (4)" type="Node3D" parent="." instance=ExtResource("14_svvho")]
+[node name="thin_wall_fractured (4)" parent="." instance=ExtResource("14_svvho")]
 transform = Transform3D(0.7802021, 0, -0.6255284, 0, 1, 0, 0.6255284, 0, 0.7802021, -18.379347, 0.50827754, -10.244996)
 metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
 
-[node name="thin_wall_fractured (5)" type="Node3D" parent="." instance=ExtResource("14_svvho")]
+[node name="thin_wall_fractured (5)" parent="." instance=ExtResource("14_svvho")]
 transform = Transform3D(0.99229884, 0, 0.12387296, 0, 1, 0, -0.12387296, 0, 0.99229884, -19.653698, 0.50827754, -5.8871126)
 metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
 
-[node name="thin_wall_fractured (6)" type="Node3D" parent="." instance=ExtResource("14_svvho")]
+[node name="thin_wall_fractured (6)" parent="." instance=ExtResource("14_svvho")]
 transform = Transform3D(0.86572933, 0, 0.50051373, 0, 1, 0, -0.50051373, 0, 0.86572933, -18.376604, 0.50827754, -1.4109263)
 metadata/asset_placer_res_id = "uid://cqa7ue7ivlklj"
 
-[node name="pillar" type="Node3D" parent="." instance=ExtResource("5_oeqrt")]
+[node name="pillar" parent="." instance=ExtResource("5_oeqrt")]
 transform = Transform3D(0.8289645, 0.5593013, 0, -0.5593013, 0.8289645, 0, 0, 0, 1, -14.829901, 1.5268164, -8.329456)
 metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
 
-[node name="pillar (1)" type="Node3D" parent="." instance=ExtResource("5_oeqrt")]
+[node name="pillar (1)" parent="." instance=ExtResource("5_oeqrt")]
 transform = Transform3D(0.8289645, 0.5593013, 0, -0.5593013, 0.8289645, 0, 0, 0, 1, -15.171518, 1.7573061, -4.157394)
 metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
 
-[node name="pillar (2)" type="Node3D" parent="." instance=ExtResource("5_oeqrt")]
+[node name="pillar (2)" parent="." instance=ExtResource("5_oeqrt")]
 transform = Transform3D(0.8289645, -0.5593013, 0, 0.5593013, 0.8289645, 0, 0, 0, 1, -16.431437, 1.4303064, -8.387517)
 metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
 
-[node name="pillar (3)" type="Node3D" parent="." instance=ExtResource("5_oeqrt")]
+[node name="pillar (3)" parent="." instance=ExtResource("5_oeqrt")]
 transform = Transform3D(0.8289645, -0.5593013, 0, 0.5593013, 0.8289645, 0, 0, 0, 1, -16.464108, 1.4082623, -4.156376)
 metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
 
-[node name="pillar (4)" type="Node3D" parent="." instance=ExtResource("5_oeqrt")]
+[node name="pillar (4)" parent="." instance=ExtResource("5_oeqrt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.598925, 0.5931599, -3.2768347)
 metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
 
-[node name="pillar (5)" type="Node3D" parent="." instance=ExtResource("5_oeqrt")]
+[node name="pillar (5)" parent="." instance=ExtResource("5_oeqrt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.378258, 0.5931599, -8.013472)
 metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
 
-[node name="pillar (6)" type="Node3D" parent="." instance=ExtResource("5_oeqrt")]
+[node name="pillar (6)" parent="." instance=ExtResource("5_oeqrt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.418518, 0.5931599, -11.650337)
 metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
 
-[node name="pillar (7)" type="Node3D" parent="." instance=ExtResource("5_oeqrt")]
+[node name="pillar (7)" parent="." instance=ExtResource("5_oeqrt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.628034, 0.5931599, -9.695645)
 metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
 
-[node name="pillar (8)" type="Node3D" parent="." instance=ExtResource("5_oeqrt")]
+[node name="pillar (8)" parent="." instance=ExtResource("5_oeqrt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.895587, 0.5931599, -5.604585)
 metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
 
-[node name="pillar (9)" type="Node3D" parent="." instance=ExtResource("5_oeqrt")]
+[node name="pillar (9)" parent="." instance=ExtResource("5_oeqrt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.408738, 0.5931599, -1.4854174)
 metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
 
-[node name="pillar (10)" type="Node3D" parent="." instance=ExtResource("5_oeqrt")]
+[node name="pillar (10)" parent="." instance=ExtResource("5_oeqrt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.321201, 0.5931599, 1.0478678)
 metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
 
@@ -300,70 +300,70 @@ transform = Transform3D(9.849734, 0, 0, 0, 9.849734, 0, 0, 0, 9.849734, -4.90329
 mesh = SubResource("ArrayMesh_oeqrt")
 metadata/asset_placer_res_id = "uid://mmp022kqmvdk"
 
-[node name="ForestRockCluster22" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.745268, 2.745315, 4.8816586)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (1)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (1)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.19634, 2.745315, 10.550502)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (2)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (2)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.636763, 2.745315, 11.098658)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (3)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (3)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.21542358, 2.745315, 13.0281105)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (4)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (4)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.584936, 2.7453141, -12.219895)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (5)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (5)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.087526, 2.745315, -16.266201)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (6)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (6)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2171593, 2.7453141, -17.934124)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (7)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (7)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4163065, 2.745315, -16.676182)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (8)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (8)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4138546, 2.7453141, -18.200459)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (9)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (9)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7064223, 2.7453141, -8.111181)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (10)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (10)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8009338, 2.7453141, -11.214092)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (11)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (11)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1370263, 2.7453141, -1.9399396)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (12)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (12)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6394644, 2.7453141, 5.3482857)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (13)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (13)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(0.6967069, 0, -0.7173563, 0, 1, 0, 0.7173563, 0, 0.6967069, -12.804475, 2.7453141, -3.670582)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (14)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (14)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(0.6967067, 0, -0.71735615, 0, 1, 0, 0.71735615, 0, 0.6967067, -12.131898, 2.7453141, 6.405192)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (15)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (15)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(0.6967067, 0, -0.71735615, 0, 1, 0, 0.71735615, 0, 0.6967067, -12.562549, 2.7453141, 0.6397983)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="ForestRockCluster22 (16)" type="Node3D" parent="." instance=ExtResource("20_wwhtr")]
+[node name="ForestRockCluster22 (16)" parent="." instance=ExtResource("20_wwhtr")]
 transform = Transform3D(0.16996719, 0, -0.98545, 0, 1, 0, 0.98545, 0, 0.16996719, -1.5142803, 2.7453141, 9.834426)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
