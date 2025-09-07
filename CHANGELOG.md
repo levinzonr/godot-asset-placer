@@ -1,5 +1,15 @@
 # Godot Asset Placer Changelog
 
+### 1.1.0-alpha5
+### Terrain 3D Placement Mode
+Another addition to the Placement Modes is the Terrain 3D Placement Mode. This mode is specifically designed to work with [Terrain3D Plugin](https://github.com/TokisanGames/Terrain3D), allowing for accurate placement of assets on terrain surfaces.
+
+Terrain3D Placement mode requires users to choose Terrain3D Node when activated. After that node is selected, Placement should work as usual
+
+### Added
+- Added Shortcut `S` to toggle Snapping On/Off
+- Added UI Indicator for Snapping State to the Viewport Overlay
+
 ## 1.1.0-alpha4
 ### Fixed
 - Fixed an Issue where Snapping would not work when placing assets (#26)

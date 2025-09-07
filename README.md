@@ -14,7 +14,7 @@ This is Godot Editor plugin that allows for quick asset placement and management
 Any Features and Suggestions are welcome as well
 
 ## Features
-- One-Click Asset Placement with Snapping to Ground and other Collision shapes
+- One-Click Asset Placement with Snapping to Ground, Collision shapes and Terrain3D Surfaces
 - [Quick Preview Node Transformations Before Placement](https://github.com/levinzonr/godot-asset-placer/blob/main/README.md#transforming-assets-before-placement)
 - Organize Assets into collections for quick access and filtering
 - Filter Assets by their name and collection
@@ -59,6 +59,10 @@ This mode requires your scene to have Collision Objects (StaticBody3D, Collision
 
 #### Plane Collisions
 This mode allows you to place assets on an infinite plane at a specified height. This is useful for quickly placing assets in an empty scene or when you want to place assets at a specific height without relying on existing geometry. This plane has a configurable Normal and Point Of origin.
+You can quickly enter this mode by pressing `W` while in placement mode. At this point you can configure the Y - position of the plane
+
+#### Terrain 3d Placement
+This mode allows you to place assets directly onto a Terrain3D surface. When selected you will be prompted to select your Terrain3D node. After that the plugin will user Terrain3D surfaces to resolve placement location.
 
 #### Placement Steps
 To place an asset, follow these steps:

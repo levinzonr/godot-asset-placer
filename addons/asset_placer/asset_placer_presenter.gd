@@ -59,8 +59,11 @@ func toggle_surface_placement():
 	placement_mode = PlacementMode.SurfacePlacement.new()	
 
 func toggle_terrain_3d_placement(node_path: NodePath):
-	var node = EditorInterface.get_edited_scene_root().get_node(node_path)
-	self.placement_mode = PlacementMode.Terrain3DPlacement.new(node)
+	if not node_path.is_empty():
+		var node = EditorInterface.get_edited_scene_root().get_node(node_path)
+		self.placement_mode = PlacementMode.Terrain3DPlacement.new(node)
+	else:
+		placement_mode_changed.emit(placement_mode)
 
 func select_placement_mode(mode: PlacementMode):
 	self.placement_mode = mode

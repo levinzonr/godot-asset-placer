@@ -25,6 +25,8 @@ func _ready():
 			placement_mode_options_button.select(1)
 		if m is PlacementMode.SurfacePlacement:
 			placement_mode_options_button.select(0)
+		if m is PlacementMode.Terrain3DPlacement:
+			placement_mode_options_button.select(2)
 	)
 	
 	placement_mode_options_button.item_selected.connect(func(id):
