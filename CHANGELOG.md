@@ -1,5 +1,13 @@
 # Godot Asset Placer Changelog
 
+### 1.1.0-beta1
+### Changed
+- Error toast from ViewPort overlay is now a bit smaller and positioned lower so it is less intrusive
+- `W` Translate Mode is now fully relies on Plane Placement Mode. Activating Translate Mode Activates Plane Placement Mode. This provides a way to continiously place assets on a plane with configurable point of origin. Translate Mode now translates that plane instead of asset itself
+- Plane in PlanePlacementMode now can detect collisions from both sides
+- Update ViewPort Overlay UI to be more readable on different backgrounds
+- Made Plane Preview Material Unshaded so it consistent across environments 
+
 ### 1.1.0-alpha5
 ### Terrain 3D Placement Mode
 Another addition to the Placement Modes is the Terrain 3D Placement Mode. This mode is specifically designed to work with [Terrain3D Plugin](https://github.com/TokisanGames/Terrain3D), allowing for accurate placement of assets on terrain surfaces.
