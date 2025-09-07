@@ -112,7 +112,9 @@ func select_axis(axis: Vector3):
 	preview_transform_axis_changed.emit(preview_transform_axis)
 	
 	var movement_mode = transform_mode == TransformMode.Move
-	if placement_mode is PlacementMode.PlanePlacement and movement_mode:
+	var idle_mode = transform_mode == TransformMode.None
+	var plane_placement = placement_mode is PlacementMode.PlanePlacement
+	if plane_placement and (idle_mode || movement_mode):
 		_last_plane_options.normal = axis.normalized()
 		placement_mode = PlacementMode.PlanePlacement.new(_last_plane_options)
 
