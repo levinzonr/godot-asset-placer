@@ -59,7 +59,10 @@ This mode requires your scene to have Collision Objects (StaticBody3D, Collision
 
 #### Plane Collisions
 This mode allows you to place assets on an infinite plane at a specified height. This is useful for quickly placing assets in an empty scene or when you want to place assets at a specific height without relying on existing geometry. This plane has a configurable Normal and Point Of origin.
-You can quickly enter this mode by pressing `W` while in placement mode. At this point you can configure the Y - position of the plane
+You can quickly enter this mode by pressing `Q` while in placement mode.
+
+If you want to configure Plane Options (Normal and Origin) you can do so within Options Sub View or with `W` Translate Mode
+This will allow to move the plane origin using Mouse Wheel along selected Axis
 
 #### Terrain 3d Placement
 This mode allows you to place assets directly onto a Terrain3D surface. When selected you will be prompted to select your Terrain3D node. After that the plugin will user Terrain3D surfaces to resolve placement location.
