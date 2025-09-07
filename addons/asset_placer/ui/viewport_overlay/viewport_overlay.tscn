@@ -1,8 +1,67 @@
-[gd_scene load_steps=9 format=3 uid="uid://y4168twxqqwr"]
+[gd_scene load_steps=13 format=3 uid="uid://y4168twxqqwr"]
 
 [ext_resource type="Script" uid="uid://e3l8cnd506a1" path="res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.gd" id="1_3e3nf"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_1410h"]
 [ext_resource type="Texture2D" uid="uid://btqtv2stkxtdk" path="res://docs/logo.png" id="3_h3uaa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epucf"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.17334509, 0.17334506, 0.17334506, 0.6)
+corner_radius_top_left = 16
+corner_detail = 5
+
+[sub_resource type="Texture2D" id="Texture2D_luwev"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_1410h")
+icon_name = &"Snap"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bu8qk"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.2061438, 0.2061438, 0.2061438, 0.6)
+corner_radius_top_right = 16
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_luwev"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.2370227, 0.23702267, 0.23702267, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.64565563, 0.1252135, 0.21010175, 1)
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_detail = 5
+
+[sub_resource type="Texture2D" id="Texture2D_bu8qk"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_1410h")
+icon_name = &"StatusError"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h3uaa"]
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.20819679, 0.20819682, 0.20819679, 0.6)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [sub_resource type="Texture2D" id="Texture2D_h3uaa"]
 resource_local_to_scene = false
@@ -25,20 +84,6 @@ script = ExtResource("2_1410h")
 icon_name = &"KeyTrackPosition"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
-[sub_resource type="Texture2D" id="Texture2D_luwev"]
-resource_local_to_scene = false
-resource_name = ""
-script = ExtResource("2_1410h")
-icon_name = &"Snap"
-metadata/_custom_type_script = "uid://dmicn3kmr620j"
-
-[sub_resource type="Texture2D" id="Texture2D_bu8qk"]
-resource_local_to_scene = false
-resource_name = ""
-script = ExtResource("2_1410h")
-icon_name = &"Error"
-metadata/_custom_type_script = "uid://dmicn3kmr620j"
-
 [node name="ViewportOverlay" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -49,163 +94,70 @@ grow_vertical = 2
 focus_mode = 2
 script = ExtResource("1_3e3nf")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -191.5
-offset_top = -71.0
-offset_right = 191.5
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="RotateCheckButton" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "E: Rotate"
-icon = SubResource("Texture2D_h3uaa")
-
-[node name="ScaleCheckButton" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "R: Scale"
-icon = SubResource("Texture2D_1410h")
-
-[node name="TranslateCheckButton" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "W: Translate"
-icon = SubResource("Texture2D_epucf")
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Active Axis"
-
-[node name="XCheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.9411765, 0.23529412, 0.37254903, 1)
-theme_override_font_sizes/font_size = 20
-text = "X"
-
-[node name="YCheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.6627451, 0.9607843, 1)
-theme_override_font_sizes/font_size = 20
-button_pressed = true
-text = "Y
-"
-
-[node name="ZCheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.6, 0.85490197, 0.047058824, 1)
-theme_override_font_sizes/font_size = 20
-text = "Z"
-
-[node name="MarginContainer2" type="MarginContainer" parent="."]
+[node name="MarginContainer2" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -171.0
-offset_top = -40.0
+offset_left = -203.0
+offset_top = -69.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_styles/panel = SubResource("StyleBoxFlat_epucf")
 
-[node name="Label" type="Label" parent="MarginContainer2"]
+[node name="SnappingSwitch" type="CheckButton" parent="MarginContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "LMB - Place Assset
-SHIFT + LMB: Place And Focus"
-horizontal_alignment = 2
+button_pressed = true
+text = "S: Grid Snapping"
+icon = SubResource("Texture2D_luwev")
 
-[node name="MarginContainer3" type="MarginContainer" parent="."]
+[node name="MarginContainer3" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 40.0
+offset_top = -64.0
+offset_right = 239.0
 grow_vertical = 0
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_styles/panel = SubResource("StyleBoxFlat_bu8qk")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer3"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="SnappingSwitch" type="CheckButton" parent="MarginContainer3/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "S: Grid Snapping"
-icon = SubResource("Texture2D_luwev")
-
-[node name="Control" type="Control" parent="MarginContainer3/VBoxContainer"]
-custom_minimum_size = Vector2(0, 16)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer3/VBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer3/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer3/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture = ExtResource("3_h3uaa")
 expand_mode = 1
 stretch_mode = 5
-flip_h = true
 
-[node name="PlacementModeLabel" type="Label" parent="MarginContainer3/VBoxContainer/HBoxContainer"]
+[node name="PlacementModeLabel" type="Label" parent="MarginContainer3/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Placement Mode"
+text = "Surface Placement"
 
-[node name="TextureRect" type="Label" parent="MarginContainer3/VBoxContainer"]
+[node name="TextureRect2" type="Label" parent="MarginContainer3/HBoxContainer"]
 layout_mode = 2
-text = "Q: Cycle Placement Mode"
+text = "(Q)"
 
-[node name="ErrorContainer" type="MarginContainer" parent="."]
+[node name="ErrorContainer" type="PanelContainer" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -20.0
-offset_right = 40.0
-offset_bottom = 20.0
+offset_top = -27.5
+offset_right = 260.0
+offset_bottom = 27.5
 grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_styles/panel = SubResource("StyleBoxFlat_luwev")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ErrorContainer"]
 layout_mode = 2
@@ -219,8 +171,78 @@ stretch_mode = 3
 [node name="ErrorLabel" type="Label" parent="ErrorContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Error test"
+text = "No Surface to Collide With"
 
 [node name="ErrorTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -191.5
+offset_top = -71.0
+offset_right = 191.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_h3uaa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="RotateCheckButton" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "E: Rotate"
+icon = SubResource("Texture2D_h3uaa")
+
+[node name="ScaleCheckButton" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "R: Scale"
+icon = SubResource("Texture2D_1410h")
+
+[node name="TranslateCheckButton" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "W: Translate"
+icon = SubResource("Texture2D_epucf")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Active Axis"
+
+[node name="XCheckButton" type="CheckButton" parent="Panel/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9411765, 0.23529412, 0.37254903, 1)
+theme_override_font_sizes/font_size = 20
+text = "X"
+
+[node name="YCheckButton" type="CheckButton" parent="Panel/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.6627451, 0.9607843, 1)
+theme_override_font_sizes/font_size = 20
+button_pressed = true
+text = "Y
+"
+
+[node name="ZCheckButton" type="CheckButton" parent="Panel/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.85490197, 0.047058824, 1)
+theme_override_font_sizes/font_size = 20
+text = "Z"
