@@ -14,7 +14,7 @@ func _init(presenter: AssetPlacerPresenter, plane: Node3D):
 	)
 
 func move_plane_up(value: float):
-	_new_plane_options.origin.y += value
+	_new_plane_options.origin += _new_plane_options.normal * value
 	presenter.placement_mode = PlacementMode.PlanePlacement.new(_new_plane_options)
 	
 

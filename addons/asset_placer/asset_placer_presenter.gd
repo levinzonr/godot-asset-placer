@@ -106,6 +106,10 @@ func toggle_axis(axis: Vector3):
 func select_axis(axis: Vector3):	
 	preview_transform_axis = axis
 	preview_transform_axis_changed.emit(preview_transform_axis)
+	
+	if placement_mode is PlacementMode.PlanePlacement:
+		_last_plane_options.normal = axis.normalized()
+		placement_mode = PlacementMode.PlanePlacement.new(_last_plane_options)
 
 func _select_default_axis(mode: TransformMode):
 	match mode:
@@ -114,7 +118,7 @@ func _select_default_axis(mode: TransformMode):
 		TransformMode.Scale:
 			select_axis(Vector3.ONE)
 		TransformMode.Move:
-			select_axis(Vector3.UP)
+			select_axis(_last_plane_options.normal)
 		_: pass
 
 func uniformV3(value: float) -> Vector3:
