@@ -118,6 +118,7 @@ popup/item_2/id = 2
 
 [node name="PlaneOriginContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer/PlaneOriginContainer"]
@@ -134,6 +135,7 @@ metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
 [node name="PlaneAxisContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer/PlaneAxisContainer"]
@@ -158,6 +160,7 @@ layout_mode = 2
 [node name="GridSnappingCheckbox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+button_pressed = true
 text = "Grid Snapping"
 icon = SubResource("Texture2D_5lmt4")
 
@@ -173,7 +176,6 @@ unique_name_in_owner = true
 layout_mode = 2
 step = 0.1
 value = 1.0
-editable = false
 
 [node name="FoldableContainer" type="BoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2

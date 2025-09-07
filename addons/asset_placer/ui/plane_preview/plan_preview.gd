@@ -4,9 +4,20 @@ extends Node3D
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 
 func _ready():
+	var presenter := AssetPlacerPresenter._instance
 	var mode = AssetPlacerPresenter._instance.placement_mode
 	_react_placement_mode_change(mode)
-	AssetPlacerPresenter._instance.placement_mode_changed.connect(_react_placement_mode_change)
+	presenter.placement_mode_changed.connect(_react_placement_mode_change)
+	presenter.asset_deselected.connect(func():
+		hide()
+	)
+	
+	presenter.asset_selected.connect(func(a):
+		if presenter.placement_mode is PlacementMode.PlanePlacement:
+			show()
+	)
+	
+	AssetPlacerPresenter
 	
 func _react_placement_mode_change(placement_mode: PlacementMode):
 	if placement_mode is PlacementMode.PlanePlacement:

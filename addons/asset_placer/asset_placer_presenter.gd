@@ -53,6 +53,7 @@ func cycle_placement_mode():
 	if placement_mode is PlacementMode.SurfacePlacement:
 		toggle_plane_placement()
 	elif placement_mode is PlacementMode.PlanePlacement:
+		toggle_transformation_mode(TransformMode.None)
 		toggle_surface_placement()
 
 func toggle_surface_placement():
@@ -110,7 +111,8 @@ func select_axis(axis: Vector3):
 	preview_transform_axis = axis
 	preview_transform_axis_changed.emit(preview_transform_axis)
 	
-	if placement_mode is PlacementMode.PlanePlacement:
+	var movement_mode = transform_mode == TransformMode.Move
+	if placement_mode is PlacementMode.PlanePlacement and movement_mode:
 		_last_plane_options.normal = axis.normalized()
 		placement_mode = PlacementMode.PlanePlacement.new(_last_plane_options)
 
