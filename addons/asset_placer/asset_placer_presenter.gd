@@ -104,6 +104,9 @@ func toggle_axis(axis: Vector3):
 	select_axis(new)
 
 func select_axis(axis: Vector3):	
+	if axis == Vector3.ZERO:
+		show_error.emit("Ignoring Axis selection because it is zero")
+		return
 	preview_transform_axis = axis
 	preview_transform_axis_changed.emit(preview_transform_axis)
 	

@@ -8,14 +8,20 @@ extends Control
 @onready var y_check_button: CheckButton = %YCheckButton
 @onready var placement_mode_label: Label = %PlacementModeLabel
 @onready var error_label: Label = %ErrorLabel
-@onready var error_container = %ErrorContainer
+@onready var error_container: Container = %ErrorContainer
 @onready var error_timer: Timer = %ErrorTimer
 @onready var snapping_switch: CheckButton = %SnappingSwitch
 
 
+var _error_position: Vector2
+var _error_hidden_position: Vector2
+
 func _ready():
 	hide()
-	error_container.hide()
+	_error_position = error_container.position
+	var viewport_size = get_viewport_rect().size
+	_error_hidden_position = Vector2(-viewport_size.x, _error_position.y)
+	error_container.position = _error_hidden_position
 	var presenter = AssetPlacerPresenter._instance
 	presenter.transform_mode_changed.connect(set_mode)
 	presenter.preview_transform_axis_changed.connect(set_axis)
@@ -44,12 +50,14 @@ func set_placement_mode(mode: PlacementMode):
 		
 		 
 func show_error(message: String):
-	error_container.show()
+	var tween = create_tween()
+	tween.tween_property(error_container, "position", _error_position, 0.3)
 	error_label.text = message
 	error_timer.start()
 
 func hide_error():
-	error_container.hide()
+	var tween = create_tween()
+	tween.tween_property(error_container, "position", _error_hidden_position, 0.3)
 
 
 func show_options(options: AssetPlacerOptions):
