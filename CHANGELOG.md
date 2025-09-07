@@ -1,6 +1,7 @@
 # Godot Asset Placer Changelog
 
 ### 1.1.0-beta1
+With this release I believe new features are more or less stable and no more major changes expected, other than bug fixes
 ### Changed
 - Error toast from ViewPort overlay is now a bit smaller and positioned lower so it is less intrusive
 - `W` Translate Mode is now fully relies on Plane Placement Mode. Activating Translate Mode Activates Plane Placement Mode. This provides a way to continiously place assets on a plane with configurable point of origin. Translate Mode now translates that plane instead of asset itself
