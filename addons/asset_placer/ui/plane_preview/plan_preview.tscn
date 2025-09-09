@@ -13,7 +13,7 @@ size = Vector2(200, 200)
 transparency = 1
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(0, 1, 1, 0.62352943)
+albedo_color = Color(0, 1.598561, 1.598561, 0.62352943)
 albedo_texture = ExtResource("2_u3prx")
 uv1_scale = Vector3(20, 20, 20)
 

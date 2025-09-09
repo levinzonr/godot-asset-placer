@@ -29,6 +29,7 @@ func _ready():
 	presenter.asset_deselected.connect(func(): hide())
 	presenter.placement_mode_changed.connect(set_placement_mode)
 	presenter.options_changed.connect(show_options)
+	presenter.ready()
 	presenter.show_error.connect(show_error)
 	error_timer.timeout.connect(hide_error)
 	set_mode(presenter.transform_mode)
