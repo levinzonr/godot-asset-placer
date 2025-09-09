@@ -50,7 +50,7 @@ func _apply_preview_material(node: Node3D):
 func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 	if preview_node:
 		var hit = _strategy.get_placement_point(camera, mouse_position)
-		var snapped_pos = _snap_position(hit.position)
+		var snapped_pos = _snap_position(hit.position, hit.normal)
 		var up = hit.normal
 		var forward_hint = preview_node.global_transform.basis.z
 		
@@ -111,11 +111,32 @@ func get_collision_rids(node: Node) -> Array:
 		rids += get_collision_rids(child)
 	return rids
 
-func _snap_position(pos: Vector3):
+func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
 	if !AssetPlacerPresenter._instance.options.snapping_enabled:
-		return pos
+		return hit_pos
+
 	var grid_step: float = AssetPlacerPresenter._instance.options.snapping_grid_step
-	return pos.snapped(Vector3(grid_step, grid_step, grid_step))
+
+	# Build tangent basis aligned to the surface normal
+	var n := normal.normalized()
+	var tangent := Vector3.UP.cross(n).normalized()
+	if tangent.length() < 0.001:
+		tangent = Vector3.RIGHT.cross(n).normalized()
+	var bitangent := n.cross(tangent).normalized()
+
+	var local_tangent := tangent.dot(hit_pos)
+	var local_bitangent := bitangent.dot(hit_pos)
+	var local_height := n.dot(hit_pos)
+
+	var snapped_tangent = round(local_tangent / grid_step) * grid_step
+	var snapped_bitangent = round(local_bitangent / grid_step) * grid_step
+
+	var snapped = tangent * snapped_tangent \
+				   + bitangent * snapped_bitangent \
+				   + n * local_height
+
+	return snapped
+
 
 func _place_instance(transform: Transform3D, select_after_placement: bool):
 	var selection = EditorInterface.get_selection()
