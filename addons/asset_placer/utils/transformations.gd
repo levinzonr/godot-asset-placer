@@ -7,6 +7,11 @@ static func apply_transforms(node: Node3D, options: AssetPlacerOptions):
 	node.global_transform = transform_scale(node.global_transform, options)
 
 static func transform_rotation(transform: Transform3D, options: AssetPlacerOptions) -> Transform3D:
+	
+	if not options.rotate_on_placement:
+		return transform
+		
+	
 	var rx = randf_range(options.min_rotation.x, options.max_rotation.x)
 	transform = transform.rotated(Vector3(1, 0, 0), deg_to_rad(rx))
 	var ry = randf_range(options.min_rotation.y, options.max_rotation.y)
@@ -17,6 +22,9 @@ static func transform_rotation(transform: Transform3D, options: AssetPlacerOptio
 
 
 static func transform_scale(transform: Transform3D, options: AssetPlacerOptions) -> Transform3D:
+	if not options.scale_on_placement:
+		return transform
+		
 	if options.uniform_scaling:
 		var scale = randf_range(options.min_scale.x, options.max_scale.x)
 		var basiz = transform.basis.orthonormalized().scaled(Vector3(scale, scale, scale))

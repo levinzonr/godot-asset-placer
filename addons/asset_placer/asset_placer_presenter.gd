@@ -82,6 +82,12 @@ func toggle_transformation_mode(mode: TransformMode):
 	
 	if transform_mode == TransformMode.Move:
 		select_placement_mode(PlacementMode.PlanePlacement.new(_last_plane_options))
+		
+	if transform_mode == TransformMode.Rotate:
+		set_random_rotation_enabled(false)
+		
+	if transform_mode == TransformMode.Scale:
+		set_random_scale_enabled(false)		
 	
 	_select_default_axis(transform_mode)
 	
@@ -117,6 +123,21 @@ func select_axis(axis: Vector3):
 	if plane_placement and (idle_mode || movement_mode):
 		_last_plane_options.normal = axis.normalized()
 		placement_mode = PlacementMode.PlanePlacement.new(_last_plane_options)
+
+
+func set_random_scale_enabled(value: bool):
+	options.scale_on_placement = value
+	options_changed.emit(options)
+	
+	if value and transform_mode == TransformMode.Scale:
+		toggle_transformation_mode(TransformMode.None)
+	
+func set_random_rotation_enabled(value: bool):
+	options.rotate_on_placement = value
+	options_changed.emit(options)
+	
+	if value and transform_mode == TransformMode.Rotate:
+		toggle_transformation_mode(TransformMode.None)	
 
 func _select_default_axis(mode: TransformMode):
 	match mode:
