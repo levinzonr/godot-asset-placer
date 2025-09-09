@@ -21,6 +21,5 @@ uv1_scale = Vector3(20, 20, 20)
 script = ExtResource("1_ldq3v")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.7071068, 0.7071068, 0, 0.7071068, 0.7071068, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("PlaneMesh_h6n2v")
 surface_material_override/0 = SubResource("StandardMaterial3D_wnofv")
