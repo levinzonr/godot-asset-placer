@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=4 uid="uid://sas7j2dyfkr3"]
+[gd_scene load_steps=15 format=4 uid="uid://sas7j2dyfkr3"]
 
 [ext_resource type="PackedScene" uid="uid://cqa7ue7ivlklj" path="res://demo/assets/thin_wall_fractured.glb" id="1_d6po2"]
 [ext_resource type="PackedScene" uid="uid://gwihxo1nnefo" path="res://demo/assets/ForestRock1.glb" id="1_j5lb4"]
+[ext_resource type="PackedScene" uid="uid://7u1qc3y84jbe" path="res://demo/assets/pillar.glb" id="4_j5lb4"]
 [ext_resource type="PackedScene" uid="uid://b5cskstxopmxr" path="res://demo/assets/ForestRockCluster2.glb" id="5_onu7k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hjng"]
@@ -259,3 +260,103 @@ metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 [node name="ForestRockCluster22 (3)" type="Node3D" parent="." instance=ExtResource("5_onu7k")]
 transform = Transform3D(0.7742462, 0, 1.361166, 0, 1.5659598, 0, -1.361166, 0, 0.7742462, 41.831226, 4.2851076, -39.52361)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
+
+[node name="pillar" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0.5931599, -3.0000005)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (1)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0.5931599, 0)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (2)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0.5931599, 3.0000005)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (3)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0.5931599, 6.000001)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (4)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0.5931599, 9.000001)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (5)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0.5931599, -3.0000005)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (6)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0.5931599, 0)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (7)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0.5931599, 3.0000005)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (8)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0.5931599, 6.000001)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (9)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0.5931599, 9.000001)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (10)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 3.4676964, -3.0000005)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (11)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 3.467697, 0)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (12)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 3.4676964, 3.0000005)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (13)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 3.4676964, 6.000001)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (14)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 3.4676964, 9.000001)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (15)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 3.4676964, -3.0000005)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (16)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 3.4676964, 0)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (17)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 3.4676964, 3.0000005)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (18)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 3.4676964, 6.000001)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (19)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 3.4676964, 9.000001)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (20)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 6.2676945, -3.0000005)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (21)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 6.2676945, 0)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (22)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 6.2676945, 3.0000005)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (23)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 6.2676945, 6.000001)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
+
+[node name="pillar (24)" type="Node3D" parent="." instance=ExtResource("4_j5lb4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 6.2676945, 9.000001)
+metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"

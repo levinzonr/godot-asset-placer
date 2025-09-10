@@ -1,5 +1,57 @@
 # Godot Asset Placer Changelog
 
+## 1.1.0
+
+Version **1.1.0** is a major feature update building on the stable 1.0.0 release.  
+This update focuses on giving creators more flexibility when placing assets in 3D scenes, with brand-new placement modes, transform previews, and better workflow tools.
+
+### ✨ New Features
+1.1.0 Introduce Placement Modes and Preview Transformations that allow for more flexible and intuitive asset placement in 3D scenes.
+
+#### Placement Modes
+A new system for controlling how assets are placed in your scene:
+- **Surface Collision** – Default placement mode, using collision objects in the scene (same as before).
+- **Plane Collision** – Place assets on a configurable infinite plane without needing collision objects.
+    - Plane can now detect collisions from both sides.
+    - Plane preview material is now **unshaded** for consistent visibility across environments.
+- **Terrain3D Placement** – Dedicated support for [Terrain3D plugin](https://github.com/TokisanGames/Terrain3D), ensuring assets align properly with terrain surfaces.
+
+#### Preview Transformations
+You can now adjust asset transforms before placement:
+- **Rotate (`E`)** – Default rotation axis is Y.
+- **Scale (`R`)** – Uniform scaling by default.
+- **Translate (`W`)** – Tied to Plane Placement Mode for continuous placement.
+- **Axis Selection** – Switch between X, Y, Z with hotkeys.
+- Mouse Wheel applies transformations ("positive" / "negative" values).
+- A **viewport overlay** displays the current mode and active axis.
+
+#### Random Transformations
+Random Transformations are now mutually exclusive with Manual Preview Transformations to avoid conflicts.
+This means if you enable manual transformations, random transformations will be disabled automatically and vice versa.
+
+
+#### Shortcuts & UI Improvements
+- `Q` – Cycle through placement modes.
+- `W` – Translate Mode now works with Plane Placement Mode.
+- `S` – Toggle snapping on/off.
+- Viewport overlay updated for better readability on all backgrounds.
+- Added **snapping state indicator** in the overlay.
+- Added **empty view** for collection picker with navigation shortcut.
+---
+### 🛠️ Fixes & Improvements
+- Assets now properly align with **slopes and vertical surfaces** using surface normals.
+- Fixed snapping not working correctly during placement.
+- Fixed scale preview resetting after moving an asset.
+- Dock panel now has a **minimum height** to prevent UI collapse issues.
+- Improved thumbnail generation with additional checks.
+- Transformation directions flipped for more intuitive behavior.
+- Numerous UI polish updates across overlays, pickers, and collections.
+---
+### 📂 Format Support
+- Added support for **GLTF** assets.
+- Added support for **OBJ** assets.
+---
+
 ### 1.1.0-beta1
 With this release I believe new features are more or less stable and no more major changes expected, other than bug fixes
 ### Changed
