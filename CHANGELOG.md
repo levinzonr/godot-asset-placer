@@ -2,8 +2,7 @@
 
 ## 1.1.0
 
-Version **1.1.0** is a major feature update building on the stable 1.0.0 release.  
-This update focuses on giving creators more flexibility when placing assets in 3D scenes, with brand-new placement modes, transform previews, and better workflow tools.
+Version **1.1.0** is a major feature update that introduces new placement modes, preview transformations, and various improvements and fixes to enhance the asset placement experience in Godot.
 
 ### ✨ New Features
 1.1.0 Introduce Placement Modes and Preview Transformations that allow for more flexible and intuitive asset placement in 3D scenes.
