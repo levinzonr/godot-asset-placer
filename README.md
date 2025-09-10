@@ -24,8 +24,8 @@ Any Features and Suggestions are welcome as well
 - In Editor Update when new release is published on GitHub
 
 <p align="center">
-  <a href="https://youtu.be/EpFXZa5MfDA" target="_blank">
-	<img src="https://img.youtube.com/vi/EpFXZa5MfDA/0.jpg" alt="YouTube Video" />
+  <a href="https://youtu.be/Go2pvRrgrRc" target="_blank">
+	<img src="https://img.youtube.com/vi/Go2pvRrgrRc/0.jpg" alt="YouTube Video" />
   </a>
 </p>
 
@@ -87,7 +87,7 @@ Specific transformation mode can be enabled by pressing button while in placemen
 Following transformations are supported:
 - `E` to rotate (Default axis is Y)
 - `R` to scale (Uniform Scale by default, All axis at once)
-- `W` to translate (Default axis is Z)
+- `W` to translate (Default axis is Y) - Activates `Plane Placement Mode`
 
 This also requires an ability to select active Axis for the transformation. This can be done by pressing following keys:
 - `X` to select X axis
