@@ -11,8 +11,8 @@ Version **1.1.0** is a major feature update that introduces new placement modes,
 A new system for controlling how assets are placed in your scene:
 - **Surface Collision** – Default placement mode, using collision objects in the scene (same as before).
 - **Plane Collision** – Place assets on a configurable infinite plane without needing collision objects.
-    - Plane can now detect collisions from both sides.
-    - Plane preview material is now **unshaded** for consistent visibility across environments.
+	- Plane can now detect collisions from both sides.
+	- Plane preview material is now **unshaded** for consistent visibility across environments.
 - **Terrain3D Placement** – Dedicated support for [Terrain3D plugin](https://github.com/TokisanGames/Terrain3D), ensuring assets align properly with terrain surfaces.
 
 #### Preview Transformations
