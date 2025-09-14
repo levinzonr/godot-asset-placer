@@ -7,6 +7,9 @@
 - terrain_3d addon used for demo purposes is now removed from the plugin when exporting as zip
 - Decrease min height of dock panel window
 
+### Changed
+- Bring back Editor Restart when updating the plugin. Disabling and Enabling the plugin does not fully reload all the resources and may lead to unexpected behaviour
+
 ## 1.1.0
 
 Version **1.1.0** is a major feature update that introduces new placement modes, preview transformations, and various improvements and fixes to enhance the asset placement experience in Godot.
