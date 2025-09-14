@@ -102,19 +102,22 @@ func start_placement(asset: AssetResource):
 	AssetPlacerContextUtil.select_context()
 	_asset_placer.start_placement(get_tree().root, asset, _presenter.placement_mode)
 
-func _forward_3d_gui_input(viewport_camera, event):	
-	if event is InputEventMouseMotion:
-		if event.button_mask == 0:
-			return _asset_placer.move_preview(event.position, viewport_camera)
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			return _asset_placer.place_asset(Input.is_key_pressed(KEY_SHIFT))
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN or event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			var direction := -1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1
-			var axis := _presenter.preview_transform_axis
-			return _asset_placer.transform_preview(_presenter.transform_mode, axis, direction)
+func _forward_3d_gui_input(viewport_camera, event):
+
+	# Filter out RMB which enables free-look mode
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		return false
+
+	# Filter out Camera Move events
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
+		return false
 	
+	# Filter out shortcuts - only handle single-key inputs
 	if event is InputEventKey and event.is_pressed():
+		if event.shift_pressed or event.ctrl_pressed or event.alt_pressed or event.meta_pressed:
+			return false
+		
+		# Only process single-key inputs
 		if event.keycode == KEY_E:
 			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Rotate)
 			return true
@@ -130,19 +133,32 @@ func _forward_3d_gui_input(viewport_camera, event):
 		if event.keycode == KEY_Y:
 			_presenter.toggle_axis(Vector3.UP)	
 			return true
-		
 		if event.keycode == KEY_Q:
 			_presenter.cycle_placement_mode()
 			return true
-			
 		if event.keycode == KEY_S:
 			_presenter.toggle_grid_snapping()
-			
+			return true
 		if event.keycode == KEY_Z:
 			_presenter.toggle_axis(Vector3.BACK)
 			return true
 		if event.keycode == KEY_X:
 			_presenter.toggle_axis(Vector3.RIGHT)
 			return true
+	
+	if event is InputEventMouseMotion:
+		if event.button_mask == 0:
+			return _asset_placer.move_preview(event.position, viewport_camera)
+	
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			return false
+			
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			return _asset_placer.place_asset(Input.is_key_pressed(KEY_SHIFT))
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN or event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			var direction := -1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1
+			var axis := _presenter.preview_transform_axis
+			return _asset_placer.transform_preview(_presenter.transform_mode, axis, direction)
 			
 	return false
