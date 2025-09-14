@@ -116,18 +116,21 @@ text = "Assets"
 
 [node name="TextureRect" type="TextureRect" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 texture = SubResource("Texture2D_gvdec")
-stretch_mode = 3
+stretch_mode = 5
 
 [node name="SearchField" type="LineEdit" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_vertical = 4
 placeholder_text = "Filter assets by name"
 
 [node name="FilterButton" type="Button" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 4
 tooltip_text = "Edit"
 icon = SubResource("Texture2D_yvyyx")
 
@@ -154,12 +157,14 @@ vertical_alignment = 1
 [node name="AddFolderButton" type="Button" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 4
 tooltip_text = "FolderCreate"
 icon = SubResource("Texture2D_5cqey")
 
 [node name="ReloadButton" type="Button" parent="Panel/MainContent/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 4
 text = "Sync Assets"
 icon = SubResource("Texture2D_qx6qk")
 
