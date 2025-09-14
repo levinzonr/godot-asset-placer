@@ -47,6 +47,7 @@ func _enter_tree():
 	_presenter.asset_deselected.connect(_asset_placer.stop_placement)
 	_asset_placer_window = load("res://addons/asset_placer/ui/asset_library_panel.tscn").instantiate()
 	add_control_to_bottom_panel(_asset_placer_window, "Asset Placer")
+	_asset_placer_window.visibility_changed.connect(_on_dock_visibility_changed)
 	
 	_presenter.placement_mode_changed.connect(_asset_placer.set_placement_mode)
 
@@ -69,6 +70,7 @@ func _exit_tree():
 	_file_system.resources_reimported.disconnect(_react_to_reimorted_files)
 	_presenter.asset_selected.disconnect(start_placement)
 	_presenter.asset_deselected.disconnect(_asset_placer.stop_placement)
+	_asset_placer_window.visibility_changed.disconnect(_on_dock_visibility_changed)
 	_asset_placer.stop_placement()
 	scene_changed.disconnect(_handle_scene_changed)
 	remove_control_from_bottom_panel(_asset_placer_window)
@@ -88,6 +90,12 @@ func _handle_scene_changed(scene: Node):
 
 func _react_to_reimorted_files(files: PackedStringArray):
 	synchronizer.sync_all()
+
+func _on_dock_visibility_changed():
+	if not _asset_placer_window.visible:
+		_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.None)
+		_presenter.clear_selection()
+	
 
 func start_placement(asset: AssetResource):
 	EditorInterface.set_main_screen_editor("3D")
