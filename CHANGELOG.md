@@ -1,5 +1,12 @@
 # Godot Asset Placer Changelog
 
+## 1.1.1
+### Fixed
+- Fixed and Issue when Asset Placer still remains active after dock panel is closed/changed (#31)
+- Fixed an Issue with Asset Placer shortcuts interfering with Existing Godot shortcuts #27. 
+- terrain_3d addon used for demo purposes is now removed from the plugin when exporting as zip
+- Decrease min height of dock panel window
+
 ## 1.1.0
 
 Version **1.1.0** is a major feature update that introduces new placement modes, preview transformations, and various improvements and fixes to enhance the asset placement experience in Godot.
