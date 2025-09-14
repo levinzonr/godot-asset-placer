@@ -91,7 +91,7 @@ editor_preview_indeterminate = true
 [node name="UpdateAndRestartBtn" type="Button" parent="UpdatePopup/MarginContainer/Vbox"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Update"
+text = "Restart and Update"
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
