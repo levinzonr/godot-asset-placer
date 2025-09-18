@@ -1,5 +1,9 @@
 # Godot Asset Placer Changelog
 
+## 1.1.2
+### Fixed
+- Fixed an Issue when Asset Placer would react to Inputs inside 3D Viewport while plugin is inactive (asset is not selected)
+
 ## 1.1.1
 ### Fixed
 - Fixed and Issue when Asset Placer still remains active after dock panel is closed/changed (#31)
