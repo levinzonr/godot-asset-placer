@@ -15,9 +15,22 @@ run/main_scene="uid://3qun24bndqll"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[asset_placer]
+
+bindings/rotate_mode=69
+bindings/scale_mode=82
+bindings/move_mode=87
+bindings/cancel=4194305
+bindings/y_axis=89
+bindings/cycle_placement_mode=81
+bindings/toggle_grid_snapping=83
+bindings/z_axis=90
+bindings/x_axis=88
+bindings/focus_placement=4194325
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg")
+enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
 [input]
 

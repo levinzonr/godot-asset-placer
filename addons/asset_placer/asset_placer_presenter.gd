@@ -45,6 +45,9 @@ func ready():
 	placement_mode_changed.emit(placement_mode)
 
 
+func plugin_is_active() -> bool:
+	return _selected_asset != null
+
 func toggle_plane_placement():
 	placement_mode = PlacementMode.PlanePlacement.new(_last_plane_options)	
 

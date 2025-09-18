@@ -103,6 +103,8 @@ func start_placement(asset: AssetResource):
 	_asset_placer.start_placement(get_tree().root, asset, _presenter.placement_mode)
 
 func _forward_3d_gui_input(viewport_camera, event):
+	if not _presenter.plugin_is_active():
+		return false
 
 	# Filter out RMB which enables free-look mode
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
