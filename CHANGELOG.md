@@ -1,5 +1,9 @@
 # Godot Asset Placer Changelog
 
+## 1.1.3
+### Fixed
+- Fixed an Icon not being exported for the ViewPortOverlay
+
 ## 1.1.2
 ### Fixed
 - Fixed an Issue when Asset Placer would react to Inputs inside 3D Viewport while plugin is inactive (asset is not selected)
