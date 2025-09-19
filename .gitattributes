@@ -5,5 +5,5 @@ project.godot export-ignore
 docs export-ignore
 demo export-ignore
 .github/ export-ignore
-icon* export-ignore
+icon.svg* export-ignore
 addons/terrain_3d/ export-ignore
