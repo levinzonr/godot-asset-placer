@@ -1,5 +1,9 @@
 # Godot Asset Placer Changelog
 
+## 1.1.4
+### Fixed
+- Moved the icon outside of the root package (#35)
+
 ## 1.1.3
 ### Fixed
 - Fixed an Icon not being exported for the ViewPortOverlay
