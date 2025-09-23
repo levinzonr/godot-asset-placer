@@ -1,5 +1,19 @@
 # Godot Asset Placer Changelog
 
+## 1.1.5
+### Changed
+chore: Tweak export-ignore configuration to exclude top-level LICENSE and dotfiles (#36) by @akien-mga
+
+    The LICENSE is already included in `addons/asset_placer/` to ship in user
+    projects. The top-level one could conflict with user projects, or appear
+    to define their license terms.
+    
+    Ensure we don't export dotfiles like `.gitignore` or `.gitattributes`
+    in archives either, and remove stray `.DS_Store` files.
+    
+    Remove usage of top-level `icon.svg` as placeholder in the plugin, replace it
+    by in-plugin icon.png with the same size (128x128).
+
 ## 1.1.4
 ### Fixed
 - Moved the icon outside of the root package (#35)
