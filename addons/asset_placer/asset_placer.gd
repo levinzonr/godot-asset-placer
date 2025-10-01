@@ -153,7 +153,7 @@ func _place_instance(transform: Transform3D, select_after_placement: bool):
 func _do_placement(root: Node3D, transform: Transform3D, select_after_placement: bool):
 	var new_node: Node3D =  _instantiate_asset_resource(asset)
 	new_node.global_transform = transform
-	new_node.position = root.to_local(transform.origin)
+	new_node.transform = root.global_transform.affine_inverse() * transform
 	new_node.set_meta(meta_asset_id, asset.id)
 	new_node.name = _pick_name(new_node, root)
 	root.add_child(new_node)
