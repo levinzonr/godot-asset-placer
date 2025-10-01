@@ -1,14 +1,20 @@
 # Godot Asset Placer Changelog
 
+## 1.1.6
+### Fixed
+- Fixed an Issue when Placed Asset rotation would not correspond to the Preview Node rotation. Was happening when Root Node had non-default rotation transform
+### Changed
+- Another small update to the "Update Flow". The Update now is split into 2 steps instead of one: Download and Apply. Goal is to make it more consistent
+
 ## 1.1.5
 ### Changed
 chore: Tweak export-ignore configuration to exclude top-level LICENSE and dotfiles (#36) by @akien-mga
 
-    The LICENSE is already included in `addons/asset_placer/` to ship in user
-    projects. The top-level one could conflict with user projects, or appear
-    to define their license terms.
-    
-    Ensure we don't export dotfiles like `.gitignore` or `.gitattributes`
+	The LICENSE is already included in `addons/asset_placer/` to ship in user
+	projects. The top-level one could conflict with user projects, or appear
+	to define their license terms.
+	
+	Ensure we don't export dotfiles like `.gitignore` or `.gitattributes`
     in archives either, and remove stray `.DS_Store` files.
     
     Remove usage of top-level `icon.svg` as placeholder in the plugin, replace it
