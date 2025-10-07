@@ -1,5 +1,16 @@
 # Godot Asset Placer Changelog
 
+## 1.1.7
+### Added
+- Added AlignNormals checkbox to AssetPlacement options (#40). The checkbox is enabled by default and can be changed via Asset Placement Options UI
+  - Provides users with control over whether assets should align with surface normals during placement
+  - Enhances flexibility for different placement scenarios
+
+### Fixed
+- Fixed rotation transforms to use degrees instead of radians (#41) by @Mewlkor
+  - Improves user experience by using more intuitive degree values for rotation
+  - Ensures consistency with Godot's rotation system
+
 ## 1.1.6
 ### Fixed
 - Fixed an Issue when Placed Asset rotation would not correspond to the Preview Node rotation. Was happening when Root Node had non-default rotation transform

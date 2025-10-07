@@ -17,9 +17,6 @@ config/icon="res://icon.svg"
 
 [asset_placer]
 
-bindings/rotate_mode=69
-bindings/scale_mode=82
-bindings/move_mode=87
 bindings/cancel=4194305
 bindings/y_axis=89
 bindings/cycle_placement_mode=81
