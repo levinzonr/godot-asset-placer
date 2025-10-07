@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dua2vx4bi1gmf"]
+[gd_scene load_steps=10 format=3 uid="uid://dua2vx4bi1gmf"]
 
 [ext_resource type="Script" uid="uid://b4q0diu63qlg8" path="res://addons/asset_placer/ui/asset_placer_options/asset_placer_options.gd" id="1_7uy5w"]
 [ext_resource type="Script" uid="uid://btqju8qjrlawq" path="res://addons/asset_placer/ui/components/vector3_spinbox.gd" id="2_k4pj7"]
@@ -22,6 +22,13 @@ resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_o45xf")
 icon_name = &"Snap"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_5hqbk"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_o45xf")
+icon_name = &"ArrowUp"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [sub_resource type="Texture2D" id="Texture2D_nfir2"]
@@ -176,6 +183,15 @@ layout_mode = 2
 step = 0.1
 value = 1.0
 editable = false
+
+[node name="BoxContainer" type="BoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AlignNormalsCheckbox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/BoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Align Normals"
+icon = SubResource("Texture2D_5hqbk")
 
 [node name="FoldableContainer" type="BoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2

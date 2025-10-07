@@ -18,6 +18,7 @@ var presenter: AssetPlacerPresenter
 @onready var plane_axis_container: Container = %PlaneAxisContainer
 @onready var random_rotation_check_box: CheckBox = %RandomRotationCheckBox
 @onready var random_scale_check_box: CheckBox = %RandomScaleCheckBox
+@onready var align_normals_checkbox: CheckBox = %AlignNormalsCheckbox
 
 func _ready():
 	presenter = AssetPlacerPresenter._instance
@@ -75,7 +76,7 @@ func _ready():
 	
 	random_rotation_check_box.toggled.connect(presenter.set_random_rotation_enabled)
 	random_scale_check_box.toggled.connect(presenter.set_random_scale_enabled)
-	
+	align_normals_checkbox.toggled.connect(presenter.set_align_normals)
 	presenter.ready()
 
 func _show_terrain_3d_selector():
@@ -102,6 +103,6 @@ func set_options(options: AssetPlacerOptions):
 	min_scale_selector.uniform = options.uniform_scaling
 	max_scale_selector.uniform = options.uniform_scaling
 	uniform_scale_check_box.set_pressed_no_signal(options.uniform_scaling)
-	
 	random_rotation_check_box.set_pressed_no_signal(options.rotate_on_placement)
 	random_scale_check_box.set_pressed_no_signal(options.scale_on_placement)
+	align_normals_checkbox.set_pressed_no_signal(options.align_normals)

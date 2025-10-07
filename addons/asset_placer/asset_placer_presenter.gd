@@ -142,6 +142,10 @@ func set_random_rotation_enabled(value: bool):
 	if value and transform_mode == TransformMode.Rotate:
 		toggle_transformation_mode(TransformMode.None)	
 
+func set_align_normals(value: bool):
+	options.align_normals = value
+	options_changed.emit(options)		
+
 func _select_default_axis(mode: TransformMode):
 	match mode:
 		TransformMode.Rotate:

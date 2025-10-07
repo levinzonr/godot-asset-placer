@@ -50,11 +50,15 @@ func _apply_preview_material(node: Node3D):
 func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 	if preview_node:
 		var hit = _strategy.get_placement_point(camera, mouse_position)
-		var snapped_pos = _snap_position(hit.position, hit.normal)
-		var up = hit.normal
+		var normal = Vector3.UP
+		
+		if AssetPlacerPresenter._instance.options.align_normals and hit:
+			normal = hit.normal
+			
+		var snapped_pos = _snap_position(hit.position, normal)
 		var forward_hint = preview_node.global_transform.basis.z
 		
-		var new_basis = get_safe_basis(up, forward_hint).scaled(preview_node.scale)
+		var new_basis = get_safe_basis(normal, forward_hint).scaled(preview_node.scale)
 		var new_transform = Transform3D(new_basis, snapped_pos)
 		
 		var local_bottom = Vector3(0, preview_aabb.position.y, 0)

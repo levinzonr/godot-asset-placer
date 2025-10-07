@@ -4,7 +4,9 @@ class_name AssetPlacerOptions
 var snapping_enabled: bool = false
 var snapping_grid_step: float = 1.0
 
-var rotate_on_placement: bool = false
+var align_normals: bool = false
+
+var rotate_on_placement: bool = true
 var max_rotation: Vector3 = Vector3.UP * 180
 var min_rotation: Vector3 = Vector3.ZERO
 
