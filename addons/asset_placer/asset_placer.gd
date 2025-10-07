@@ -94,7 +94,7 @@ func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, 
 			preview_node.scale = new_scale
 			return true
 		AssetPlacerPresenter.TransformMode.Rotate:
-			preview_node.rotate(axis.normalized() * direction, preview_transform_step)
+			preview_node.rotate(axis.normalized() * direction, deg_to_rad(5)) # Can be replaced with deg_to_rad(preview_transform_step) however 0.1 deg is realy low. 
 			return true
 			
 		AssetPlacerPresenter.TransformMode.Move:

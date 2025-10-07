@@ -11,7 +11,7 @@ script = ExtResource("2_o45xf")
 icon_name = &"Node3D"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
-[sub_resource type="Texture2D" id="Texture2D_5hqbk"]
+[sub_resource type="Texture2D" id="Texture2D_o45xf"]
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_o45xf")
@@ -88,7 +88,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 text = "No parent selected"
-icon = SubResource("Texture2D_5hqbk")
+icon = SubResource("Texture2D_o45xf")
 alignment = 0
 
 [node name="PlacementMode" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
