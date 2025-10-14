@@ -1,5 +1,11 @@
 # Godot Asset Placer Changelog
 
+## 1.1.8
+### Added
+Added support of Using Asset Origin for Placement (Addressing issue #42)
+With this feature enabled, the asset will be placed with its local origin point aligned to the placement surface,
+rather than using Assets Actual bottom. This is particularly useful for assets that have a defined base or origin point that should remain "under" the surface, such as Trees
+
 ## 1.1.7
 ### Added
 - Added AlignNormals checkbox to AssetPlacement options (#40). The checkbox is enabled by default and can be changed via Asset Placement Options UI
