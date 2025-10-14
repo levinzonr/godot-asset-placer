@@ -11,14 +11,17 @@ extends Control
 @onready var error_container: Container = %ErrorContainer
 @onready var error_timer: Timer = %ErrorTimer
 @onready var snapping_switch: CheckButton = %SnappingSwitch
-
+@onready var placement_shortcut_label: Label = %PlacementShortcutLabel
 
 var _error_position: Vector2
 var _error_hidden_position: Vector2
+@onready var _settings_repository := AssetPlacerSettingsRepository.instance
 
 func _ready():
 	hide()
 	_error_position = error_container.position
+	show_settings(_settings_repository.get_settings())
+	_settings_repository.settings_changed.connect(show_settings)
 	var viewport_size = get_viewport_rect().size
 	_error_hidden_position = Vector2(-viewport_size.x, _error_position.y)
 	error_container.position = _error_hidden_position
@@ -60,6 +63,12 @@ func hide_error():
 	var tween = create_tween()
 	tween.tween_property(error_container, "position", _error_hidden_position, 0.3)
 
+func show_settings(settings: AssetPlacerSettings):
+	rotate_check_button.text = "%s: To Rotate" % OS.get_keycode_string(settings.binding_rotate)
+	scale_check_button.text = "%s: To Scale" % OS.get_keycode_string(settings.binding_scale)
+	translate_check_button.text = "%s: To Translate" % OS.get_keycode_string(settings.binding_translate)
+	snapping_switch.text = "%s: Grid Snapping" % OS.get_keycode_string(settings.binding_grid_snap)
+	
 
 func show_options(options: AssetPlacerOptions):
 	snapping_switch.button_pressed = options.snapping_enabled	

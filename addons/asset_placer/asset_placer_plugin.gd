@@ -16,6 +16,9 @@ var _plane_preview: Node3D
 var overlay: Control
 var plane_placer: PlanePlacer
 
+var settings_repository: AssetPlacerSettingsRepository
+var current_settings: AssetPlacerSettings
+
 var plugin_path: String:
 	get(): return get_script().resource_path.get_base_dir()
 	
@@ -32,6 +35,9 @@ func _disable_plugin():
 func _enter_tree():
 	_async = AssetPlacerAsync.new()
 	_presenter = AssetPlacerPresenter.new()
+	settings_repository = AssetPlacerSettingsRepository.new()
+	current_settings = settings_repository.get_settings()
+	settings_repository.settings_changed.connect(_react_to_settings_change)
 	AssetPlacerDockPresenter.new()
 	_updater = PluginUpdater.new(ADDON_PATH +  "/plugin.cfg", "")
 	_plane_preview = load("res://addons/asset_placer/ui/plane_preview/plan_preview.tscn").instantiate()
@@ -67,6 +73,7 @@ func _enter_tree():
 func _exit_tree():
 	overlay.queue_free()
 	_plane_preview.queue_free()
+	settings_repository.settings_changed.disconnect(_react_to_settings_change)
 	_file_system.resources_reimported.disconnect(_react_to_reimorted_files)
 	_presenter.asset_selected.disconnect(start_placement)
 	_presenter.asset_deselected.disconnect(_asset_placer.stop_placement)
@@ -87,6 +94,8 @@ func _handle_scene_changed(scene: Node):
 	else:
 		_presenter.clear_parent()
 	
+func _react_to_settings_change(settings: AssetPlacerSettings):
+	self.current_settings = settings	
 
 func _react_to_reimorted_files(files: PackedStringArray):
 	synchronizer.sync_all()
@@ -120,13 +129,13 @@ func _forward_3d_gui_input(viewport_camera, event):
 			return false
 		
 		# Only process single-key inputs
-		if event.keycode == KEY_E:
+		if event.keycode == current_settings.binding_rotate:
 			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Rotate)
 			return true
-		if event.keycode == KEY_R:
+		if event.keycode == current_settings.binding_scale:
 			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Scale)
 			return true
-		if event.keycode == KEY_W:
+		if event.keycode == current_settings.binding_translate:
 			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Move)
 			return true
 		if event.keycode == KEY_ESCAPE:
@@ -138,7 +147,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 		if event.keycode == KEY_Q:
 			_presenter.cycle_placement_mode()
 			return true
-		if event.keycode == KEY_S:
+		if event.keycode == current_settings.binding_grid_snap:
 			_presenter.toggle_grid_snapping()
 			return true
 		if event.keycode == KEY_Z:

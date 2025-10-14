@@ -1,0 +1,108 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckokuu85fua3"]
+
+[ext_resource type="Script" uid="uid://ckohy5300ciba" path="res://addons/asset_placer/ui/settings/settings_panel.gd" id="1_cqn4c"]
+[ext_resource type="PackedScene" uid="uid://bjgh4jo3pc65i" path="res://addons/asset_placer/ui/settings/components/keybinding_option.tscn" id="1_gi0tg"]
+[ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="1_si2q2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cqn4c"]
+
+[sub_resource type="Texture2D" id="Texture2D_l6bix"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_si2q2")
+icon_name = &"Reload"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_cqn4c"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_si2q2")
+icon_name = &"KeyboardPhysical"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[node name="SettingsPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cqn4c")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cqn4c")
+text = "Reset To Defaults"
+icon = SubResource("Texture2D_l6bix")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("Texture2D_cqn4c")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Key Bindings"
+
+[node name="KeyBindingsOptions" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="KeybindingOptionRotate" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "Rotate Asset"
+
+[node name="KeybindingOptionScale" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "Scale Asset"
+
+[node name="KeybindingOptionTranslate" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "Translate Asset / Plane Placement"
+
+[node name="KeybindingOptionGridSnap" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "Grid Snapping "
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3

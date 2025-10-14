@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjgh4jo3pc65i"]
+
+[ext_resource type="Script" uid="uid://cuktm42swvhsn" path="res://addons/asset_placer/ui/settings/components/keybinding_option.gd" id="1_xnfus"]
+[ext_resource type="Script" uid="uid://gh7lhadj2xqn" path="res://addons/asset_placer/ui/settings/components/keybinding_button.gd" id="2_nqwub"]
+
+[node name="KeybindingOption" type="HBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+script = ExtResource("1_xnfus")
+label = "Laasbelasdas "
+
+[node name="KeyBindLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Laasbelasdas "
+
+[node name="KeyBindButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "None"
+script = ExtResource("2_nqwub")

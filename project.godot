@@ -27,7 +27,7 @@ bindings/focus_placement=4194325
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg")
+enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
 [input]
 
