@@ -26,10 +26,10 @@ chore: Tweak export-ignore configuration to exclude top-level LICENSE and dotfil
 	to define their license terms.
 	
 	Ensure we don't export dotfiles like `.gitignore` or `.gitattributes`
-    in archives either, and remove stray `.DS_Store` files.
-    
-    Remove usage of top-level `icon.svg` as placeholder in the plugin, replace it
-    by in-plugin icon.png with the same size (128x128).
+	in archives either, and remove stray `.DS_Store` files.
+	
+	Remove usage of top-level `icon.svg` as placeholder in the plugin, replace it
+	by in-plugin icon.png with the same size (128x128).
 
 ## 1.1.4
 ### Fixed

@@ -19,6 +19,7 @@ var presenter: AssetPlacerPresenter
 @onready var random_rotation_check_box: CheckBox = %RandomRotationCheckBox
 @onready var random_scale_check_box: CheckBox = %RandomScaleCheckBox
 @onready var align_normals_checkbox: CheckBox = %AlignNormalsCheckbox
+@onready var use_assets_origin_checkbox: CheckBox = %UseAssetsOriginCheckbox
 
 func _ready():
 	presenter = AssetPlacerPresenter._instance
@@ -48,6 +49,7 @@ func _ready():
 	min_scale_selector.value_changed.connect(presenter.set_min_scale)
 	max_scale_selector.value_changed.connect(presenter.set_max_scale)
 	uniform_scale_check_box.toggled.connect(presenter.set_unform_scaling)
+	use_assets_origin_checkbox.toggled.connect(presenter.set_use_asset_origin)
 	
 	plane_axis_spin_box.value_changed.connect(func(normal: Vector3):
 		var plane = PlaneOptions.new(normal, plane_origin_spin_box.get_vector())
@@ -106,3 +108,4 @@ func set_options(options: AssetPlacerOptions):
 	random_rotation_check_box.set_pressed_no_signal(options.rotate_on_placement)
 	random_scale_check_box.set_pressed_no_signal(options.scale_on_placement)
 	align_normals_checkbox.set_pressed_no_signal(options.align_normals)
+	use_assets_origin_checkbox.set_pressed_no_signal(options.use_asset_origin)

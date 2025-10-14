@@ -146,6 +146,10 @@ func set_align_normals(value: bool):
 	options.align_normals = value
 	options_changed.emit(options)		
 
+func set_use_asset_origin(value: bool):
+	options.use_asset_origin = value
+	options_changed.emit(options)
+
 func _select_default_axis(mode: TransformMode):
 	match mode:
 		TransformMode.Rotate:

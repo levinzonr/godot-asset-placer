@@ -15,6 +15,8 @@ var preview_material = load("res://addons/asset_placer/utils/preview_material.tr
 
 var _strategy: AssetPlacementStrategy 
 var _plane_placer: PlanePlacer
+var _presenter: AssetPlacerPresenter: 
+	get: return AssetPlacerPresenter._instance
 
 func _init(undo_redo: EditorUndoRedoManager, plane_placer: PlanePlacer):
 	self.undo_redo = undo_redo
@@ -62,6 +64,10 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 		var new_transform = Transform3D(new_basis, snapped_pos)
 		
 		var local_bottom = Vector3(0, preview_aabb.position.y, 0)
+		
+		if _presenter.options.use_asset_origin:
+			local_bottom = Vector3.ZERO
+		
 		var bottom_world = new_transform * local_bottom
 		var adjust = snapped_pos - bottom_world
 		new_transform.origin += adjust
