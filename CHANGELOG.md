@@ -1,5 +1,24 @@
 # Godot Asset Placer Changelog
 
+## 1.2.0
+### ⚙︎ Settings Panel ⚙︎
+This Release introduces a dedicated Settings Panel for the Asset Placer. This allows you to further more customize your experience and tweak the plugin to your needs
+
+#### General Settings
+Previously hardcoded settings are now exposed in the Settings Panel:
+- Preview Material (#43) - You can disable, or choose your own Material3D resource to be used as a preview material for Asset Placement
+
+#### Key Bindings
+You can now customize the key bindings for various actions within the Asset Placer plugin. This includes
+- Rotate (Default: E)
+- Scale (Default: R)
+- Translate (Default: W)
+- Cycle Placement Modes (Default: Q)
+- Toggle Snapping (Default: S)
+
+All The changes made will be persisted across Godot sessions within EditorSettings, and as such, across all your Projects
+
+
 ## 1.1.8
 ### Added
 Added support of Using Asset Origin for Placement (Addressing issue #42)
