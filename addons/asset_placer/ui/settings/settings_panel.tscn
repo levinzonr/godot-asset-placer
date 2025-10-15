@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckokuu85fua3"]
+[gd_scene load_steps=9 format=3 uid="uid://ckokuu85fua3"]
 
 [ext_resource type="Script" uid="uid://ckohy5300ciba" path="res://addons/asset_placer/ui/settings/settings_panel.gd" id="1_cqn4c"]
 [ext_resource type="PackedScene" uid="uid://bjgh4jo3pc65i" path="res://addons/asset_placer/ui/settings/components/keybinding_option.tscn" id="1_gi0tg"]
@@ -11,6 +11,20 @@ resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("1_si2q2")
 icon_name = &"Reload"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_a1e85"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_si2q2")
+icon_name = &"Tools"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_y61cc"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_si2q2")
+icon_name = &"Close"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [sub_resource type="Texture2D" id="Texture2D_cqn4c"]
@@ -62,6 +76,44 @@ icon = SubResource("Texture2D_l6bix")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+texture = SubResource("Texture2D_a1e85")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+text = "Settings"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Preview Material Resource"
+
+[node name="MaterialPickerButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Material Preview"
+alignment = 2
+autowrap_trim_flags = 0
+icon_alignment = 2
+
+[node name="MaterialClearButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+icon = SubResource("Texture2D_y61cc")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -73,8 +125,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("Texture2D_cqn4c")
-expand_mode = 3
-stretch_mode = 4
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -102,7 +153,3 @@ label = "Translate Asset / Plane Placement"
 unique_name_in_owner = true
 layout_mode = 2
 label = "Grid Snapping "
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3

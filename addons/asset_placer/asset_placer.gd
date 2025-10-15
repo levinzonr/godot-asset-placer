@@ -37,7 +37,8 @@ func start_placement(root: Window, asset: AssetResource, placement: PlacementMod
 		self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
 func _apply_preview_material(node: Node3D):
-	
+	if not preview_material:
+		return
 	if node is MeshInstance3D:
 		for i in node.get_surface_override_material_count():
 			node.set_surface_override_material(i, preview_material)
@@ -85,7 +86,11 @@ func place_asset(focus_on_placement: bool):
 	else:
 		return false	
 
-		
+func set_plugin_settings(settings: AssetPlacerSettings):
+	if settings.preview_material_resource.is_empty():
+		preview_material = null
+	else:
+		preview_material = load(settings.preview_material_resource)	
 
 func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, direction: int) -> bool:
 	match mode:

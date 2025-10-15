@@ -15,6 +15,19 @@ func ready():
 
 func reset_to_defaults():
 	_repository.set_settings(AssetPlacerSettings.default())
+	
+
+func set_preview_material(material: String):
+	if material.is_empty():
+		return
+	var current = _repository.get_settings()
+	current.preview_material_resource = material
+	_repository.set_settings(current)	
+
+func clear_preivew_material():
+	var current = _repository.get_settings()
+	current.preview_material_resource = ""
+	_repository.set_settings(current)	
 
 func set_rotate_binding(key: Key):
 	var current = _repository.get_settings()

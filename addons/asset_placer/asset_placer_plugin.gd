@@ -95,7 +95,8 @@ func _handle_scene_changed(scene: Node):
 		_presenter.clear_parent()
 	
 func _react_to_settings_change(settings: AssetPlacerSettings):
-	self.current_settings = settings	
+	self.current_settings = settings
+	_asset_placer.set_plugin_settings(settings)	
 
 func _react_to_reimorted_files(files: PackedStringArray):
 	synchronizer.sync_all()

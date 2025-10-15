@@ -15,6 +15,7 @@ const KEY_BINDING_SCALE: String = "bindings/scale_asset"
 const KEY_BINDING_ROTATE: String = "bindings/rotate_asset"	
 const KEY_BINDING_TRANSLATE: String = "bindings/translate_asset"
 const KEY_BINDING_GRID_SNAP: String = "bindings/grid_snapping"
+const KEY_GENERAL_PREVIEW_MATERIAL: String = "general/preview_material"
 
 func set_settings(settings: AssetPlacerSettings):
 	var current = get_settings()
@@ -22,6 +23,7 @@ func set_settings(settings: AssetPlacerSettings):
 	_set_editor_setting(KEY_BINDING_SCALE, settings.binding_scale)
 	_set_editor_setting(KEY_BINDING_TRANSLATE, settings.binding_translate)
 	_set_editor_setting(KEY_BINDING_GRID_SNAP, settings.binding_grid_snap)
+	_set_editor_setting(KEY_GENERAL_PREVIEW_MATERIAL, settings.preview_material_resource)
 	settings_changed.emit(get_settings())
 	
 func get_settings() -> AssetPlacerSettings:
@@ -30,6 +32,7 @@ func get_settings() -> AssetPlacerSettings:
 	settings.binding_translate = _get_editor_setting(KEY_BINDING_TRANSLATE, settings.binding_translate)
 	settings.binding_rotate = _get_editor_setting(KEY_BINDING_ROTATE, settings.binding_rotate)
 	settings.binding_grid_snap = _get_editor_setting(KEY_BINDING_GRID_SNAP, settings.binding_grid_snap)
+	settings.preview_material_resource = _get_editor_setting(KEY_GENERAL_PREVIEW_MATERIAL, settings.preview_material_resource)
 	return settings
 		
 
