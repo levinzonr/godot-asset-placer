@@ -4,6 +4,7 @@ class_name SettingsPresenter
 var _repository: AssetPlacerSettingsRepository
 
 signal show_settings(settings: AssetPlacerSettings)
+signal show_conflict_dialog(conflicting_key: Key, action: AssetPlacerSettings.SettingsKey)
 
 func _init():
 	_repository = AssetPlacerSettingsRepository.instance
