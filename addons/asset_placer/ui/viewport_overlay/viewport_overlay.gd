@@ -28,8 +28,7 @@ func _ready():
 	var presenter = AssetPlacerPresenter._instance
 	presenter.transform_mode_changed.connect(set_mode)
 	presenter.preview_transform_axis_changed.connect(set_axis)
-	presenter.asset_selected.connect(func(a): show())
-	presenter.asset_deselected.connect(func(): hide())
+	presenter.placer_active.connect(func(a): if a: show() else: hide())
 	presenter.placement_mode_changed.connect(set_placement_mode)
 	presenter.options_changed.connect(show_options)
 	presenter.ready()

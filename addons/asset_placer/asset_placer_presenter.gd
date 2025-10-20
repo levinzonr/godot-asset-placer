@@ -13,12 +13,14 @@ signal placement_mode_changed(mode: PlacementMode)
 signal preview_transform_axis_changed(axis: Vector3)
 signal asset_selected(asset: AssetResource)
 signal show_error(message: String)
+signal placer_active(value: bool)
 
 var _selected_asset: AssetResource
 var options: AssetPlacerOptions
 var _parent: NodePath = NodePath("")
 var transform_mode: TransformMode = TransformMode.None
 var _last_plane_options := PlaneOptions.new(Vector3.UP, Vector3.ZERO)
+var _selected_node: Node3D
 
 var placement_mode: PlacementMode = PlacementMode.SurfacePlacement.new():
 	set(value):
@@ -46,7 +48,10 @@ func ready():
 
 
 func plugin_is_active() -> bool:
-	return _selected_asset != null
+	if _selected_asset != null or _selected_node != null:
+		return true
+	else:
+		return false
 
 func toggle_plane_placement():
 	placement_mode = PlacementMode.PlanePlacement.new(_last_plane_options)	
@@ -190,17 +195,36 @@ func set_max_rotation(vector: Vector3):
 func cancel():
 	if transform_mode != TransformMode.None:
 		toggle_transformation_mode(TransformMode.None)
+	elif _selected_node != null:
+		end_node_transform_mode()
 	else:
 		clear_selection()
 	
 func clear_selection():
 	_selected_asset = null
-	asset_deselected.emit()	
+	asset_deselected.emit()
+	placer_active.emit(false)
 
 func select_asset(asset: AssetResource):
 	if asset == _selected_asset:
 		_selected_asset = null
 		asset_deselected.emit()
+		placer_active.emit(false)
 	else:
 		_selected_asset = asset
 		asset_selected.emit(asset)
+		placer_active.emit(true)
+
+func start_node_transform_mode(node: Node3D):
+	_selected_node = node
+	placer_active.emit(true)
+
+func end_node_transform_mode():
+	_selected_node = null
+	placer_active.emit(false)
+
+func is_node_transform_mode() -> bool:
+	return _selected_node != null
+
+func get_selected_node() -> Node3D:
+	return _selected_node

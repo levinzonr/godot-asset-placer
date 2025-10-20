@@ -6,6 +6,8 @@ var preview_aabb: AABB
 var node_history: Array[String] = []
 var preview_rids = []
 var asset: AssetResource
+var _is_node_transform_mode: bool = false
+var _original_transform: Transform3D
 
 var preview_transform_step : float = 0.1
 
@@ -26,6 +28,7 @@ func _init(undo_redo: EditorUndoRedoManager, plane_placer: PlanePlacer):
 func start_placement(root: Window, asset: AssetResource, placement: PlacementMode):
 	stop_placement()
 	self.asset = asset
+	_is_node_transform_mode = false
 	preview_node = _instantiate_asset_resource(asset)
 	root.add_child(preview_node)
 	preview_rids = get_collision_rids(preview_node)
@@ -35,6 +38,15 @@ func start_placement(root: Window, asset: AssetResource, placement: PlacementMod
 	if scene is Node3D:
 		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
 		self.preview_aabb = AABBProvider.provide_aabb(preview_node)
+
+func start_node_transform(node: Node3D, placement: PlacementMode):
+	stop_placement()
+	_is_node_transform_mode = true
+	preview_node = node
+	_original_transform = node.global_transform
+	preview_rids = get_collision_rids(preview_node)
+	set_placement_mode(placement)
+	self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
 func _apply_preview_material(node: Node3D):
 	if not preview_material:
@@ -74,15 +86,18 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 		new_transform.origin += adjust
 		preview_node.global_transform = new_transform
 		
-		
 		return true
 	else:
 		return false
 	
 func place_asset(focus_on_placement: bool):
 	if preview_node:
-		_place_instance(preview_node.global_transform, focus_on_placement)
-		return true
+		if _is_node_transform_mode:
+			_confirm_node_transform()
+			return true
+		else:
+			_place_instance(preview_node.global_transform, focus_on_placement)
+			return true
 	else:
 		return false	
 
@@ -93,6 +108,9 @@ func set_plugin_settings(settings: AssetPlacerSettings):
 		preview_material = load(settings.preview_material_resource)	
 
 func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, direction: int) -> bool:
+	if not preview_node:
+		return false
+		
 	match mode:
 		AssetPlacerPresenter.TransformMode.None:
 			return false
@@ -113,7 +131,12 @@ func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, 
 			return true
 			
 		AssetPlacerPresenter.TransformMode.Move:
-			_plane_placer.move_plane_up(direction * 0.2)
+			if _is_node_transform_mode:
+				# For node transform mode, move the node directly
+				var move_amount = axis.normalized() * direction * 0.2
+				preview_node.global_position += move_amount
+			else:
+				_plane_placer.move_plane_up(direction * 0.2)
 			return true
 		_:
 			return false
@@ -185,11 +208,31 @@ func _undo_placement(root: Node3D):
 	var node = root.get_child(node_index)
 	node.queue_free()
 
+func _confirm_node_transform():
+	if _is_node_transform_mode and preview_node:
+		# Create undo action for the node transformation
+		undo_redo.create_action("Transform Node: %s" % preview_node.name)
+		undo_redo.add_do_method(self, "_do_node_transform", preview_node, preview_node.global_transform)
+		undo_redo.add_undo_method(self, "_undo_node_transform", preview_node, _original_transform)
+		undo_redo.commit_action()
+		
+		# Exit node transform mode
+		_presenter.end_node_transform_mode()
+		stop_placement()
+
+func _do_node_transform(node: Node3D, new_transform: Transform3D):
+	node.global_transform = new_transform
+
+func _undo_node_transform(node: Node3D, original_transform: Transform3D):
+	node.global_transform = original_transform
+
 func stop_placement():
 	self.asset = null
-	if preview_node:
+	var was_node_transform_mode = _is_node_transform_mode
+	_is_node_transform_mode = false
+	if preview_node and not was_node_transform_mode:
 		preview_node.queue_free()
-		preview_node = null
+	preview_node = null
 		
 
 func _instantiate_asset_resource(asset: AssetResource) -> Node3D:

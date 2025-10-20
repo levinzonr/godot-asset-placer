@@ -112,7 +112,33 @@ func start_placement(asset: AssetResource):
 	AssetPlacerContextUtil.select_context()
 	_asset_placer.start_placement(get_tree().root, asset, _presenter.placement_mode)
 
+func _on_node_transform_mode_ended():
+	# Node transform mode ended, no special action needed
+	pass
+
+func _handle_tab_key():
+	if _presenter.is_node_transform_mode():
+		_presenter.end_node_transform_mode()
+		_asset_placer.stop_placement()
+	# Check if a Node3D is selected and we're not already in asset placement mode
+	elif AssetPlacerContextUtil.is_current_selection_node3d() and not _presenter.plugin_is_active():
+		var selection = EditorInterface.get_selection()
+		var selected_nodes = selection.get_selected_nodes()
+		if selected_nodes.size() == 1 and selected_nodes[0] is Node3D:
+			_presenter.start_node_transform_mode(selected_nodes[0])
+			_asset_placer.start_node_transform(selected_nodes[0], _presenter.placement_mode)
+	# If we're in asset placement mode, Tab should also exit it
+	elif _presenter.plugin_is_active() and not _presenter.is_node_transform_mode():
+		_presenter.clear_selection()
+		_asset_placer.stop_placement()
+
 func _forward_3d_gui_input(viewport_camera, event):
+	# Handle Tab key regardless of plugin state - this is how we activate the plugin
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		_handle_tab_key()
+		return true
+	
+	# Only process other inputs when plugin is active
 	if not _presenter.plugin_is_active():
 		return false
 
