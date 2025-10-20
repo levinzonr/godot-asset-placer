@@ -18,27 +18,33 @@ const KEY_BINDING_TRANSLATE: String = "bindings/translate_asset"
 const KEY_BINDING_GRID_SNAP: String = "bindings/grid_snapping"
 const KEY_GENERAL_PREVIEW_MATERIAL: String = "general/preview_material"
 const KEY_GENERAL_PLANE_MATERIAL: String = "general/plane_material"
+const KEY_BINDING_IN_PLACE_TRANSFORM: String = "bindings/in_place_transform"
 
 func set_settings(settings: AssetPlacerSettings):
 	var current = get_settings()
-	_set_editor_setting(KEY_BINDING_ROTATE, settings.binding_rotate)
-	_set_editor_setting(KEY_BINDING_SCALE, settings.binding_scale)
-	_set_editor_setting(KEY_BINDING_TRANSLATE, settings.binding_translate)
-	_set_editor_setting(KEY_BINDING_GRID_SNAP, settings.binding_grid_snap)
+	_set_editor_setting(KEY_BINDING_ROTATE, settings.binding_rotate.serialize())
+	_set_editor_setting(KEY_BINDING_SCALE, settings.binding_scale.serialize())
+	_set_editor_setting(KEY_BINDING_TRANSLATE, settings.binding_translate.serialize())
+	_set_editor_setting(KEY_BINDING_GRID_SNAP, settings.binding_grid_snap.serialize())
 	_set_project_setting(KEY_GENERAL_PREVIEW_MATERIAL, settings.preview_material_resource)
 	_set_project_setting(KEY_GENERAL_PLANE_MATERIAL, settings.plane_material_resource)
+	_set_editor_setting(KEY_BINDING_IN_PLACE_TRANSFORM, settings.binding_in_place_transform.serialize())
 	settings_changed.emit(get_settings())
 	
 func get_settings() -> AssetPlacerSettings:
 	var settings := AssetPlacerSettings.default()
-	settings.binding_scale = _get_editor_setting(KEY_BINDING_SCALE, settings.binding_scale)
-	settings.binding_translate = _get_editor_setting(KEY_BINDING_TRANSLATE, settings.binding_translate)
-	settings.binding_rotate = _get_editor_setting(KEY_BINDING_ROTATE, settings.binding_rotate)
-	settings.binding_grid_snap = _get_editor_setting(KEY_BINDING_GRID_SNAP, settings.binding_grid_snap)
+	settings.binding_scale = _get_binding_settings(KEY_BINDING_SCALE, settings.binding_scale)
+	settings.binding_translate = _get_binding_settings(KEY_BINDING_TRANSLATE, settings.binding_translate)
+	settings.binding_rotate = _get_binding_settings(KEY_BINDING_ROTATE, settings.binding_rotate)
+	settings.binding_grid_snap = _get_binding_settings(KEY_BINDING_GRID_SNAP, settings.binding_grid_snap)
 	settings.preview_material_resource = _get_project_setting(KEY_GENERAL_PREVIEW_MATERIAL, settings.preview_material_resource)
 	settings.plane_material_resource = _get_project_setting(KEY_GENERAL_PLANE_MATERIAL, settings.plane_material_resource)
+	settings.binding_in_place_transform = _get_binding_settings(KEY_BINDING_IN_PLACE_TRANSFORM, settings.binding_in_place_transform)
 	return settings
-		
+
+func _get_binding_settings(key: String, default: APInputOption) -> APInputOption:
+	var raw = _get_editor_setting(key, default.serialize())
+	return APInputOption.desirialize(raw)
 
 func _set_project_setting(key: String, value: Variant):
 	ProjectSettings.set_setting(KEY_BASE % key, value)

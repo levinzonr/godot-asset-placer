@@ -78,30 +78,30 @@ icon = SubResource("Texture2D_l6bix")
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="General" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/General"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/General/HBoxContainer2"]
 layout_mode = 2
 texture = SubResource("Texture2D_a1e85")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/General/HBoxContainer2"]
 layout_mode = 2
 text = "Settings"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/General"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/General/HBoxContainer"]
 layout_mode = 2
 text = "Preview Material Resource"
 
-[node name="MaterialPickerButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="MaterialPickerButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/General/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -110,60 +110,70 @@ alignment = 2
 autowrap_trim_flags = 0
 icon_alignment = 2
 
-[node name="MaterialClearButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="MaterialClearButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/General/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 icon = SubResource("Texture2D_y61cc")
 
-[node name="PlaneMaterialOption" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="PlaneMaterialOption" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/General"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlaneMaterialOption"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/General/PlaneMaterialOption"]
 layout_mode = 2
 text = "Plane Mode Material Resource"
 
-[node name="PlaneMaterialPickerButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PlaneMaterialOption"]
+[node name="PlaneMaterialPickerButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/General/PlaneMaterialOption"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 text = "lreview material "
 alignment = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="KeyBindings" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("Texture2D_cqn4c")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings/HBoxContainer"]
 layout_mode = 2
 text = "Key Bindings"
 
-[node name="KeyBindingsOptions" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="KeyBindingsOptions" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings"]
 layout_mode = 2
 
-[node name="KeybindingOptionRotate" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionRotate" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
+allow_mouse_buttons = false
 label = "Rotate Asset"
 
-[node name="KeybindingOptionScale" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionScale" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
+allow_mouse_buttons = false
 label = "Scale Asset"
 
-[node name="KeybindingOptionTranslate" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionTranslate" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
+allow_mouse_buttons = false
 label = "Translate Asset / Plane Placement"
 
-[node name="KeybindingOptionGridSnap" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionGridSnap" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
+allow_mouse_buttons = false
 label = "Grid Snapping "
+
+[node name="KeybindingOptionInPlaceTransform" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+allow_mouse_buttons = true
+label = "In-Place Transform Mode "

@@ -134,7 +134,7 @@ func _handle_tab_key():
 
 func _forward_3d_gui_input(viewport_camera, event):
 	# Handle Tab key regardless of plugin state - this is how we activate the plugin
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+	if current_settings.binding_in_place_transform.is_pressed(event):
 		_handle_tab_key()
 		return true
 	
@@ -156,13 +156,13 @@ func _forward_3d_gui_input(viewport_camera, event):
 			return false
 		
 		# Only process single-key inputs
-		if event.keycode == current_settings.binding_rotate:
+		if current_settings.binding_rotate.is_pressed(event):
 			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Rotate)
 			return true
-		if event.keycode == current_settings.binding_scale:
+		if current_settings.binding_scale.is_pressed(event):
 			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Scale)
 			return true
-		if event.keycode == current_settings.binding_translate:
+		if current_settings.binding_translate.is_pressed(event):
 			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Move)
 			return true
 		if event.keycode == KEY_ESCAPE:
@@ -174,7 +174,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 		if event.keycode == KEY_Q:
 			_presenter.cycle_placement_mode()
 			return true
-		if event.keycode == current_settings.binding_grid_snap:
+		if current_settings.binding_grid_snap.is_pressed(event):
 			_presenter.toggle_grid_snapping()
 			return true
 		if event.keycode == KEY_Z:

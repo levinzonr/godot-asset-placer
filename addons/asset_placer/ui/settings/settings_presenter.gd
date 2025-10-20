@@ -36,22 +36,27 @@ func clear_preivew_material():
 	current.preview_material_resource = ""
 	_repository.set_settings(current)	
 
-func set_rotate_binding(key: Key):
+func set_rotate_binding(key: APInputOption):
 	var current = _repository.get_settings()
 	current.binding_rotate = key
 	_repository.set_settings(current)
 	
-func set_grid_snap_binding(key: Key):
+func set_grid_snap_binding(key: APInputOption):
 	var current = _repository.get_settings()
 	current.binding_grid_snap = key
 	_repository.set_settings(current)	
 	
-func set_scale_binding(key: Key):
+func set_scale_binding(key: APInputOption):
 	var current = _repository.get_settings()
 	current.binding_scale = key
 	_repository.set_settings(current)
 	
-func set_translate_binding(key: Key):
+func set_binding_in_place_transform(key: APInputOption):	
+	var current = _repository.get_settings()
+	current.binding_in_place_transform = key
+	_repository.set_settings(current)
+	
+func set_translate_binding(key: APInputOption):
 	var current = _repository.get_settings()
 	current.binding_translate = key
 	_repository.set_settings(current)	

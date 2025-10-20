@@ -63,10 +63,10 @@ func hide_error():
 	tween.tween_property(error_container, "position", _error_hidden_position, 0.3)
 
 func show_settings(settings: AssetPlacerSettings):
-	rotate_check_button.text = "%s: To Rotate" % OS.get_keycode_string(settings.binding_rotate)
-	scale_check_button.text = "%s: To Scale" % OS.get_keycode_string(settings.binding_scale)
-	translate_check_button.text = "%s: To Translate" % OS.get_keycode_string(settings.binding_translate)
-	snapping_switch.text = "%s: Grid Snapping" % OS.get_keycode_string(settings.binding_grid_snap)
+	rotate_check_button.text = "%s: To Rotate" % settings.binding_rotate.get_display_name()
+	scale_check_button.text = "%s: To Scale" % settings.binding_scale.get_display_name()
+	translate_check_button.text = "%s: To Translate" % settings.binding_translate.get_display_name()
+	snapping_switch.text = "%s: Grid Snapping" % settings.binding_grid_snap.get_display_name()
 	
 
 func show_options(options: AssetPlacerOptions):

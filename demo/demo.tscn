@@ -230,7 +230,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41870308, 0)
 shape = SubResource("BoxShape3D_5hjng")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00016975403, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.0000116, 14.259521, 0.05000019, -12.824538)
 mesh = SubResource("PlaneMesh_d6po2")
 
 [node name="thin_wall_fractured" parent="." instance=ExtResource("1_d6po2")]
@@ -363,7 +363,7 @@ transform = Transform3D(0.14071536, 0, -1.1717484, 0, 1.1801674, 0, 1.1717484, 0
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
 [node name="ForestRockCluster22 (3)" parent="." instance=ExtResource("5_onu7k")]
-transform = Transform3D(-0.92918634, 0, -0.00595902, 0, 0.929186, 0, 0.0059591704, 0, -0.92920977, 14.917755, 0, -0.8931734)
+transform = Transform3D(-2.3835785, 0, -0.0145998, 0, 2.383362, 0, 0.014600037, 0, -2.3836172, 0.7477913, 4.3999996, 6.2700205)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
 [node name="pillar" parent="." instance=ExtResource("4_j5lb4")]
@@ -650,3 +650,7 @@ metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
 [node name="ForestRock32 (15)" parent="." instance=ExtResource("5_u10mr")]
 transform = Transform3D(-0.66772664, 0, -0.74440753, 0, 1, 0, 0.7444076, 0, -0.6677267, -9.916192, 0.7999997, -15.769772)
 metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
+
+[node name="ForestRock12 (17)" type="Node3D" parent="." instance=ExtResource("1_j5lb4")]
+transform = Transform3D(0.7283801, 0, 0.6851744, 0, 1, 0, -0.68517447, 0, 0.72838014, 9.820091, 0.46870232, 18.27945)
+metadata/asset_placer_res_id = "uid://gwihxo1nnefo"

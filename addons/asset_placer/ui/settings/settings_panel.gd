@@ -11,6 +11,7 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 @onready var material_picker_button = %MaterialPickerButton
 @onready var material_clear_button = %MaterialClearButton
 @onready var plane_material_picker_button: Button = %PlaneMaterialPickerButton
+@onready var keybinding_option_in_place_transform = %KeybindingOptionInPlaceTransform
 
 
 func _ready():
@@ -18,6 +19,7 @@ func _ready():
 	keybinding_option_rotate.keybind_changed.connect(_presenter.set_rotate_binding)
 	keybinding_option_translate.keybind_changed.connect(_presenter.set_translate_binding)
 	keybinding_option_scale.keybind_changed.connect(_presenter.set_scale_binding)
+	keybinding_option_in_place_transform.keybind_changed.connect(_presenter.set_binding_in_place_transform)
 	keybinding_option_grid_snap.keybind_changed.connect(_presenter.set_grid_snap_binding)
 	reset_button.pressed.connect(_presenter.reset_to_defaults)
 	material_clear_button.pressed.connect(_presenter.clear_preivew_material)
@@ -32,6 +34,7 @@ func _show_settings(setting: AssetPlacerSettings):
 	keybinding_option_translate.set_keybind(setting.binding_translate)
 	keybinding_option_scale.set_keybind(setting.binding_scale)
 	keybinding_option_grid_snap.set_keybind(setting.binding_grid_snap)
+	keybinding_option_in_place_transform.set_keybind(setting.binding_in_place_transform)
 	plane_material_picker_button.text = setting.plane_material_resource.get_file()
 	if setting.preview_material_resource.is_empty():
 		material_picker_button.text = "No Preview Material"
