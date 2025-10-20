@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c7je2oxif285m"]
+
+[ext_resource type="Texture2D" uid="uid://dago1cpuysosa" path="res://addons/asset_placer/ui/plane_preview/plane_texture.svg" id="1_655gw"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0, 1.598561, 1.598561, 0.62352943)
+albedo_texture = ExtResource("1_655gw")
+uv1_scale = Vector3(20, 20, 20)

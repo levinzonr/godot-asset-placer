@@ -2,6 +2,7 @@ extends RefCounted
 class_name AssetPlacerSettings
 
 var preview_material_resource: String
+var plane_material_resource: String
 var binding_rotate: Key:
 	set(key):
 		var conflict = get_conflicting_action_for_key(key, SettingsKey.Rotate)
@@ -85,4 +86,5 @@ static func default() -> AssetPlacerSettings:
 	settings.binding_translate = Key.KEY_W
 	settings.binding_grid_snap = Key.KEY_S
 	settings.preview_material_resource = "res://addons/asset_placer/utils/preview_material.tres"
+	settings.plane_material_resource = "res://addons/asset_placer/ui/plane_preview/plane_preview_material.tres"
 	return settings

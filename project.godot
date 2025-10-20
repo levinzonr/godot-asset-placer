@@ -28,6 +28,7 @@ general/preview_material="res://addons/asset_placer/utils/preview_material.tres"
 bindings/rotate_asset=69
 bindings/scale_asset=82
 bindings/translate_asset=87
+general/plane_material="res://addons/asset_placer/utils/preview_material.tres"
 
 [editor_plugins]
 

@@ -24,6 +24,13 @@ func set_preview_material(material: String):
 	current.preview_material_resource = material
 	_repository.set_settings(current)	
 
+func set_plane_material(material: String):
+	if not material.is_empty():
+		var current = _repository.get_settings()
+		current.plane_material_resource = material
+		_repository.set_settings(current)
+		
+
 func clear_preivew_material():
 	var current = _repository.get_settings()
 	current.preview_material_resource = ""

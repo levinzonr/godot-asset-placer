@@ -131,12 +131,7 @@ func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, 
 			return true
 			
 		AssetPlacerPresenter.TransformMode.Move:
-			if _is_node_transform_mode:
-				# For node transform mode, move the node directly
-				var move_amount = axis.normalized() * direction * 0.2
-				preview_node.global_position += move_amount
-			else:
-				_plane_placer.move_plane_up(direction * 0.2)
+			_plane_placer.move_plane_up(direction * 0.2)
 			return true
 		_:
 			return false
