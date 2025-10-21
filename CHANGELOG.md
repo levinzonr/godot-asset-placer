@@ -2,6 +2,7 @@
 
 ## 1.2.0-alpha2
 ### Added
+- **In Place Transform Mode** allows users to apply transformations using Asset Placer flow to the existing Nodes that are already present in the scene tree. To Enter this mode select a Node3D in the scene tree and press the "Shift+E" (Default Shortcut and Configurable in Settings). After that, you can use the same Preview Transform shortcuts to modify the selected Node3D.
 - Added Transform Step to the Settings Panel. This allows users to configure the amount of rotation/scale applied per Mouse Wheel step when in Preview Transform mode.
   - Rotation Step Default: 5 degrees
   - Scale/Translate Step Default: 0.1 Units
