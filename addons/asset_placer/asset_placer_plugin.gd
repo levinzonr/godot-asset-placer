@@ -116,7 +116,7 @@ func _on_node_transform_mode_ended():
 	# Node transform mode ended, no special action needed
 	pass
 
-func _handle_tab_key():
+func _handle_in_place_transform():
 	if _presenter.is_node_transform_mode():
 		_presenter.end_node_transform_mode()
 		_asset_placer.stop_placement()
@@ -134,8 +134,8 @@ func _handle_tab_key():
 
 func _forward_3d_gui_input(viewport_camera, event):
 	# Handle Tab key regardless of plugin state - this is how we activate the plugin
-	if current_settings.binding_in_place_transform.is_pressed(event):
-		_handle_tab_key()
+	if current_settings.bindings[AssetPlacerSettings.Bindings.InPlaceTransform].is_pressed(event):
+		_handle_in_place_transform()
 		return true
 	
 	# Only process other inputs when plugin is active
@@ -154,13 +154,13 @@ func _forward_3d_gui_input(viewport_camera, event):
 	if event is InputEventKey and event.is_pressed():
 		
 		# Only process single-key inputs
-		if current_settings.binding_rotate.is_pressed(event):
+		if current_settings.bindings[AssetPlacerSettings.Bindings.Rotate].is_pressed(event):
 			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Rotate)
 			return true
-		if current_settings.binding_scale.is_pressed(event):
+		if current_settings.bindings[AssetPlacerSettings.Bindings.Scale].is_pressed(event):
 			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Scale)
 			return true
-		if current_settings.binding_translate.is_pressed(event):
+		if current_settings.bindings[AssetPlacerSettings.Bindings.Translate].is_pressed(event):
 			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Move)
 			return true
 		if event.keycode == KEY_ESCAPE:
@@ -172,7 +172,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 		if event.keycode == KEY_Q:
 			_presenter.cycle_placement_mode()
 			return true
-		if current_settings.binding_grid_snap.is_pressed(event):
+		if current_settings.bindings[AssetPlacerSettings.Bindings.GridSnapping].is_pressed(event):
 			_presenter.toggle_grid_snapping()
 			return true
 		if event.keycode == KEY_Z:

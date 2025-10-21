@@ -20,26 +20,45 @@ const KEY_GENERAL_PREVIEW_MATERIAL: String = "general/preview_material"
 const KEY_GENERAL_PLANE_MATERIAL: String = "general/plane_material"
 const KEY_BINDING_IN_PLACE_TRANSFORM: String = "bindings/in_place_transform"
 
+func _get_binding_storage_key(binding: AssetPlacerSettings.Bindings) -> String:
+	match binding:
+		AssetPlacerSettings.Bindings.Rotate:
+			return KEY_BINDING_ROTATE
+		AssetPlacerSettings.Bindings.Scale:
+			return KEY_BINDING_SCALE
+		AssetPlacerSettings.Bindings.Translate:
+			return KEY_BINDING_TRANSLATE
+		AssetPlacerSettings.Bindings.GridSnapping:
+			return KEY_BINDING_GRID_SNAP
+		AssetPlacerSettings.Bindings.InPlaceTransform:
+			return KEY_BINDING_IN_PLACE_TRANSFORM
+		_:
+			push_error("Unknown binding type: " + str(binding))
+			return ""
+
 func set_settings(settings: AssetPlacerSettings):
 	var current = get_settings()
-	_set_editor_setting(KEY_BINDING_ROTATE, settings.binding_rotate.serialize())
-	_set_editor_setting(KEY_BINDING_SCALE, settings.binding_scale.serialize())
-	_set_editor_setting(KEY_BINDING_TRANSLATE, settings.binding_translate.serialize())
-	_set_editor_setting(KEY_BINDING_GRID_SNAP, settings.binding_grid_snap.serialize())
+	# Save all bindings using the mapping function
+	for binding in settings.bindings.keys():
+		var storage_key = _get_binding_storage_key(binding)
+		if not storage_key.is_empty():
+			_set_editor_setting(storage_key, settings.bindings[binding].serialize())
+	
 	_set_project_setting(KEY_GENERAL_PREVIEW_MATERIAL, settings.preview_material_resource)
 	_set_project_setting(KEY_GENERAL_PLANE_MATERIAL, settings.plane_material_resource)
-	_set_editor_setting(KEY_BINDING_IN_PLACE_TRANSFORM, settings.binding_in_place_transform.serialize())
 	settings_changed.emit(get_settings())
 	
 func get_settings() -> AssetPlacerSettings:
 	var settings := AssetPlacerSettings.default()
-	settings.binding_scale = _get_binding_settings(KEY_BINDING_SCALE, settings.binding_scale)
-	settings.binding_translate = _get_binding_settings(KEY_BINDING_TRANSLATE, settings.binding_translate)
-	settings.binding_rotate = _get_binding_settings(KEY_BINDING_ROTATE, settings.binding_rotate)
-	settings.binding_grid_snap = _get_binding_settings(KEY_BINDING_GRID_SNAP, settings.binding_grid_snap)
+	
+	# Load all bindings using the mapping function
+	for binding in settings.bindings.keys():
+		var storage_key = _get_binding_storage_key(binding)
+		if not storage_key.is_empty():
+			settings.bindings[binding] = _get_binding_settings(storage_key, settings.bindings[binding])
+	
 	settings.preview_material_resource = _get_project_setting(KEY_GENERAL_PREVIEW_MATERIAL, settings.preview_material_resource)
 	settings.plane_material_resource = _get_project_setting(KEY_GENERAL_PLANE_MATERIAL, settings.plane_material_resource)
-	settings.binding_in_place_transform = _get_binding_settings(KEY_BINDING_IN_PLACE_TRANSFORM, settings.binding_in_place_transform)
 	return settings
 
 func _get_binding_settings(key: String, default: APInputOption) -> APInputOption:
