@@ -13,10 +13,12 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 @onready var plane_material_picker_button: Button = %PlaneMaterialPickerButton
 @onready var keybinding_option_in_place_transform = %KeybindingOptionInPlaceTransform
 @onready var trasform_step_spin_box: SpinBox = %TrasformStepSpinBox
+@onready var rotation_step_spin_box: SpinBox = %RotationStepSpinBox
 
 
 func _ready():
 	trasform_step_spin_box.value_changed.connect(_presenter.set_default_transform_step)
+	rotation_step_spin_box.value_changed.connect(_presenter.set_rotation_step)
 	_presenter.show_settings.connect(_show_settings)
 	keybinding_option_rotate.keybind_changed.connect(func(key):
 		_presenter.set_binding(AssetPlacerSettings.Bindings.Rotate, key)
@@ -43,6 +45,7 @@ func _ready():
 
 func _show_settings(setting: AssetPlacerSettings):
 	trasform_step_spin_box.set_value_no_signal(setting.transform_step)
+	rotation_step_spin_box.set_value_no_signal(setting.rotation_step)
 	keybinding_option_rotate.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.Rotate])
 	keybinding_option_translate.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.Translate])
 	keybinding_option_scale.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.Scale])

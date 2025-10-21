@@ -1,7 +1,8 @@
 extends RefCounted
 class_name AssetPlacerSettings
 
-var transform_step: float 
+var transform_step: float
+var rotation_step: float 
 var preview_material_resource: String
 var plane_material_resource: String
 var bindings: Dictionary
@@ -22,4 +23,5 @@ static func default() -> AssetPlacerSettings:
 	settings.preview_material_resource = "res://addons/asset_placer/utils/preview_material.tres"
 	settings.plane_material_resource = "res://addons/asset_placer/ui/plane_preview/plane_preview_material.tres"
 	settings.transform_step = 0.1
+	settings.rotation_step = 5
 	return settings

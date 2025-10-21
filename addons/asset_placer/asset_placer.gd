@@ -10,6 +10,7 @@ var _is_node_transform_mode: bool = false
 var _original_transform: Transform3D
 
 var preview_transform_step : float = 0.1
+var preview_rotate_step: float = 5
 
 var undo_redo: EditorUndoRedoManager
 var meta_asset_id = &"asset_placer_res_id"
@@ -102,6 +103,7 @@ func place_asset(focus_on_placement: bool):
 		return false	
 
 func set_plugin_settings(settings: AssetPlacerSettings):
+	preview_rotate_step = settings.rotation_step
 	preview_transform_step = settings.transform_step
 	if settings.preview_material_resource.is_empty():
 		preview_material = null
@@ -128,7 +130,7 @@ func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, 
 			preview_node.scale = new_scale
 			return true
 		AssetPlacerPresenter.TransformMode.Rotate:
-			preview_node.rotate(axis.normalized() * direction, deg_to_rad(5)) # Can be replaced with deg_to_rad(preview_transform_step) however 0.1 deg is realy low. 
+			preview_node.rotate(axis.normalized() * direction, deg_to_rad(preview_rotate_step)) # Can be replaced with deg_to_rad(preview_transform_step) however 0.1 deg is realy low. 
 			return true
 			
 		AssetPlacerPresenter.TransformMode.Move:

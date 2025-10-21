@@ -1,6 +1,17 @@
 # Godot Asset Placer Changelog
 
-## 1.2.0
+## 1.2.0-alpha2
+### Added
+- Added Transform Step to the Settings Panel. This allows users to configure the amount of rotation/scale applied per Mouse Wheel step when in Preview Transform mode.
+  - Rotation Step Default: 5 degrees
+  - Scale/Translate Step Default: 0.1 Units
+- Added the ability to modify the material of the Plane used in Plane Placement Mode. This allows users to customize the appearance of the placement plane to better suit their scene and preferences. (Project level settings)
+
+### Changed
+- Key Bindings now can also allow for Mouse Button and Modifiers Combinations (Ctrl, Shift, Alt). This provides more flexibility when choosing key bindings and allows to avoid conflicts with existing Godot shortcuts.
+- Preview Material is now a Project Level Setting. This allows different projects to have different preview materials without affecting each other.
+
+## 1.2.0-alpha1
 ### ⚙︎ Settings Panel ⚙︎
 This Release introduces a dedicated Settings Panel for the Asset Placer. This allows you to further more customize your experience and tweak the plugin to your needs
 

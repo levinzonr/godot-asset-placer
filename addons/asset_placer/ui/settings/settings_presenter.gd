@@ -20,6 +20,11 @@ func set_default_transform_step(value: float):
 	settings.transform_step = value
 	_repository.set_settings(settings)
 
+func set_rotation_step(value: float):	
+	var settings = _repository.get_settings()
+	settings.rotation_step = value
+	_repository.set_settings(settings)
+
 func set_preview_material(material: String):
 	if material.is_empty():
 		return
