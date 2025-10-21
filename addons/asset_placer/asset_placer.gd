@@ -185,6 +185,7 @@ func _place_instance(transform: Transform3D, select_after_placement: bool):
 		undo_redo.add_undo_method(self, "_undo_placement", scene_root)
 		undo_redo.commit_action()
 		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
+		_presenter.on_asset_placed()
 
 func _do_placement(root: Node3D, transform: Transform3D, select_after_placement: bool):
 	var new_node: Node3D =  _instantiate_asset_resource(asset)

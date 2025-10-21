@@ -42,16 +42,19 @@ func _ready():
 	filter_button.pressed.connect(func ():
 		CollectionPicker.show_in(filter_button, presenter._active_collections, presenter.toggle_collection_filter)
 	)
+	
+	
 
 	
 func show_assets(assets: Array[AssetResource]):
+	placer_presenter.current_assets = assets
 	empty_collection_content.hide()
 	scroll_container.show()
 	for child in grid_container.get_children():
 		child.queue_free()
 	for asset in assets:
 		var child: AssetResourcePreview = preview_resource.instantiate()
-		child.left_clicked.connect(AssetPlacerPresenter._instance.select_asset)
+		child.left_clicked.connect(AssetPlacerPresenter._instance.toggle_asset)
 		child.right_clicked.connect(func(asset):
 			show_asset_menu(asset, child)
 		)

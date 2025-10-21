@@ -14,6 +14,7 @@ signal preview_transform_axis_changed(axis: Vector3)
 signal asset_selected(asset: AssetResource)
 signal show_error(message: String)
 signal placer_active(value: bool)
+signal asset_placed
 
 var _selected_asset: AssetResource
 var options: AssetPlacerOptions
@@ -21,6 +22,7 @@ var _parent: NodePath = NodePath("")
 var transform_mode: TransformMode = TransformMode.None
 var _last_plane_options := PlaneOptions.new(Vector3.UP, Vector3.ZERO)
 var _selected_node: Node3D
+var current_assets: Array[AssetResource]
 
 var placement_mode: PlacementMode = PlacementMode.SurfacePlacement.new():
 	set(value):
@@ -114,6 +116,10 @@ func set_grid_snap_value(value: float):
 	options.snapping_grid_step = value
 	options_changed.emit(options)
 
+func set_random_asset_enabled(value: bool):
+	options.enable_random_placement = value
+	options_changed.emit(options)
+
 func toggle_axis(axis: Vector3):
 	var new := (preview_transform_axis - axis).abs()
 	select_axis(new)
@@ -204,8 +210,8 @@ func clear_selection():
 	_selected_asset = null
 	asset_deselected.emit()
 	placer_active.emit(false)
-
-func select_asset(asset: AssetResource):
+	
+func toggle_asset(asset: AssetResource):
 	if asset == _selected_asset:
 		_selected_asset = null
 		asset_deselected.emit()
@@ -214,6 +220,11 @@ func select_asset(asset: AssetResource):
 		_selected_asset = asset
 		asset_selected.emit(asset)
 		placer_active.emit(true)
+		
+func select_asset(asset: AssetResource):
+	_selected_asset = asset
+	asset_selected.emit(asset)
+	placer_active.emit(true)		
 
 func start_node_transform_mode(node: Node3D):
 	_selected_node = node
@@ -222,6 +233,13 @@ func start_node_transform_mode(node: Node3D):
 func end_node_transform_mode():
 	_selected_node = null
 	placer_active.emit(false)
+	
+	
+func on_asset_placed():
+	if options.enable_random_placement:
+		var random = current_assets.pick_random()
+		select_asset(random)
+		
 
 func is_node_transform_mode() -> bool:
 	return _selected_node != null

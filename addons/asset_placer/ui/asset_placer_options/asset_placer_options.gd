@@ -20,6 +20,7 @@ var presenter: AssetPlacerPresenter
 @onready var random_scale_check_box: CheckBox = %RandomScaleCheckBox
 @onready var align_normals_checkbox: CheckBox = %AlignNormalsCheckbox
 @onready var use_assets_origin_checkbox: CheckBox = %UseAssetsOriginCheckbox
+@onready var random_asset_check_box = %RandomAssetCheckBox
 
 func _ready():
 	presenter = AssetPlacerPresenter._instance
@@ -43,7 +44,7 @@ func _ready():
 	
 	grid_snapping_checkbox.toggled.connect(presenter.set_grid_snapping_enabled)
 	grid_snap_value_spin_box.value_changed.connect(presenter.set_grid_snap_value)
-	
+	random_asset_check_box.toggled.connect(presenter.set_random_asset_enabled)
 	max_rotation_selector.value_changed.connect(presenter.set_max_rotation)
 	min_rotation_selector.value_changed.connect(presenter.set_min_rotation)
 	min_scale_selector.value_changed.connect(presenter.set_min_scale)
@@ -95,6 +96,7 @@ func show_parent(parent: NodePath):
 		parent_button.icon = EditorIconTexture2D.new("NodeWarning")
 
 func set_options(options: AssetPlacerOptions):
+	random_asset_check_box.set_pressed_no_signal(options.enable_random_placement)
 	grid_snapping_checkbox.set_pressed_no_signal(options.snapping_enabled)
 	grid_snap_value_spin_box.editable = options.snapping_enabled
 	grid_snap_value_spin_box.set_value_no_signal(options.snapping_grid_step)

@@ -6,6 +6,7 @@ var snapping_grid_step: float = 1.0
 
 var use_asset_origin: bool = true
 var align_normals: bool = false
+var enable_random_placement = false
 
 var rotate_on_placement: bool = true
 var max_rotation: Vector3 = Vector3.UP * 180

@@ -7,6 +7,7 @@ var assets_repository: AssetsRepository
 var synchronizer: Synchronize
 
 var _active_collections: Array[AssetCollection] = []
+var _filtered_assets: Array[AssetResource] = []
 var _current_assets: Array[AssetResource]
 var _current_query: String
 
@@ -45,6 +46,7 @@ func add_asset_folder(path: String):
 func on_query_change(query: String):
 	self._current_query = query
 	_filter_by_collections_and_query()
+
 
 func add_asset(path: String, folder_path: String):
 	var tags: Array[String] = []
@@ -125,6 +127,8 @@ func _filter_by_collections_and_query():
 	else:
 		assets_loaded.emit(filtered)
 		show_empty_view.emit(EmptyType.None)
+		
+	_filtered_assets = filtered
 
 
 func sync():

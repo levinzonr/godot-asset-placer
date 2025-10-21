@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dua2vx4bi1gmf"]
+[gd_scene load_steps=13 format=3 uid="uid://dua2vx4bi1gmf"]
 
 [ext_resource type="Script" uid="uid://b4q0diu63qlg8" path="res://addons/asset_placer/ui/asset_placer_options/asset_placer_options.gd" id="1_7uy5w"]
 [ext_resource type="Script" uid="uid://btqju8qjrlawq" path="res://addons/asset_placer/ui/components/vector3_spinbox.gd" id="2_k4pj7"]
@@ -16,6 +16,16 @@ resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_o45xf")
 icon_name = &"Node3D"
+
+[sub_resource type="Texture2D" id="Texture2D_br0rc"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_o45xf")
+icon_name = &"RandomNumberGenerator"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="LabelSettings" id="LabelSettings_o45xf"]
+font_size = 14
 
 [sub_resource type="Texture2D" id="Texture2D_5lmt4"]
 resource_local_to_scene = false
@@ -165,6 +175,21 @@ max = Vector3(1, 1, 1)
 normalized = true
 metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="RandomAssetCheckBox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Enable Random Asset Placement"
+icon = SubResource("Texture2D_br0rc")
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Experimental: This option will pick item from the currently visible assets  after each placement"
+label_settings = SubResource("LabelSettings_o45xf")
+autowrap_mode = 2
+
 [node name="Snapping" type="BoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -220,6 +245,7 @@ layout_mode = 2
 [node name="RandomRotationCheckBox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+button_pressed = true
 text = "Randomize Rotation On Placement"
 icon = SubResource("Texture2D_nfir2")
 
