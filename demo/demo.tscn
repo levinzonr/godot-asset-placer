@@ -230,7 +230,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41870308, 0)
 shape = SubResource("BoxShape3D_5hjng")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.0000116, 14.259521, 0.05000019, -12.824538)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.0000471, 11.251199, 0.049999237, 4.9442296)
 mesh = SubResource("PlaneMesh_d6po2")
 
 [node name="thin_wall_fractured" parent="." instance=ExtResource("1_d6po2")]
@@ -351,7 +351,7 @@ transform = Transform3D(-0.7677745, 0, -0.68624884, 0, 1.0297647, 0, 0.68624884,
 metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
 
 [node name="ForestRockCluster22" parent="." instance=ExtResource("5_onu7k")]
-transform = Transform3D(-0.9657957, 0, 0.4617349, 0, 1.0704954, 0, -0.4617349, 0, -0.9657957, 38.700184, 3.07761, -42.90584)
+transform = Transform3D(-0.96580905, 0, 0.46172968, 0, 1.0704954, 0, -0.46172988, 0, -0.9658094, 10.102756, 0.4687004, -42.455925)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
 [node name="ForestRockCluster22 (1)" parent="." instance=ExtResource("5_onu7k")]
@@ -363,7 +363,7 @@ transform = Transform3D(0.14071536, 0, -1.1717484, 0, 1.1801674, 0, 1.1717484, 0
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
 [node name="ForestRockCluster22 (3)" parent="." instance=ExtResource("5_onu7k")]
-transform = Transform3D(-2.3835785, 0, -0.0145998, 0, 2.383362, 0, 0.014600037, 0, -2.3836172, 0.7477913, 4.3999996, 6.2700205)
+transform = Transform3D(-0.92919576, 0, -0.005617702, 0, 0.929186, 0, 0.005618417, 0, -0.9293142, -1.3096132, 0.46870232, 11.6049)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
 [node name="pillar" parent="." instance=ExtResource("4_j5lb4")]
@@ -371,7 +371,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0.5931599, -3.0000005)
 metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
 
 [node name="pillar (1)" parent="." instance=ExtResource("4_j5lb4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0.5931599, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.0000235, 26.188633, 0.46870232, -0.69294834)
 metadata/asset_placer_res_id = "uid://7u1qc3y84jbe"
 
 [node name="pillar (2)" parent="." instance=ExtResource("4_j5lb4")]
@@ -499,7 +499,7 @@ transform = Transform3D(-0.5000353, 0, -0.8661124, 0, 1, 0, 0.86611265, 0, -0.50
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
 [node name="ForestRockCluster22 (5)" parent="." instance=ExtResource("5_onu7k")]
-transform = Transform3D(0.16996717, 0, -0.9854607, 0, 1, 0, 0.9854609, 0, 0.16996719, 9.923841, 0, -35.373737)
+transform = Transform3D(0.16996716, 0, -0.9854607, 0, 1, 0, 0.9854608, 0, 0.16996717, 18.030201, 0.46870232, -36.82207)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
 [node name="ForestRockCluster22 (6)" parent="." instance=ExtResource("5_onu7k")]
@@ -507,7 +507,7 @@ transform = Transform3D(0.9211422, 0, -0.3893684, 0, 1, 0, 0.38936856, 0, 0.9211
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
 [node name="ForestRockCluster22 (7)" parent="." instance=ExtResource("5_onu7k")]
-transform = Transform3D(-0.34583008, 0, -0.5342912, 0, 0.6363991, 0, 0.53429127, 0, -0.3458301, 13.235978, 0.46870232, -15.2533865)
+transform = Transform3D(-0.34583008, 0, -0.5342912, 0, 0.6363991, 0, 0.53429127, 0, -0.3458301, 13.235978, 0.46870232, -15.253387)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
 [node name="Node3D" parent="." instance=ExtResource("7_onvmd")]
@@ -651,6 +651,6 @@ metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
 transform = Transform3D(-0.66772664, 0, -0.74440753, 0, 1, 0, 0.7444076, 0, -0.6677267, -9.916192, 0.7999997, -15.769772)
 metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
 
-[node name="ForestRock12 (17)" type="Node3D" parent="." instance=ExtResource("1_j5lb4")]
+[node name="ForestRock12 (17)" parent="." instance=ExtResource("1_j5lb4")]
 transform = Transform3D(0.7283801, 0, 0.6851744, 0, 1, 0, -0.68517447, 0, 0.72838014, 9.820091, 0.46870232, 18.27945)
 metadata/asset_placer_res_id = "uid://gwihxo1nnefo"

@@ -1,62 +1,127 @@
 @tool
+class_name APInputOptionButton
 extends Button
 
 signal key_binding_changed(option: APInputOption)
 
-enum State {
-	IDLE,
-	BINDING_SELECT
-}
-
-var _current_key: APInputOption = APInputOption.none()
 @export var allow_modifiers: bool = true
 @export var allow_mouse_buttons: bool = false
 
-var current_key: APInputOption:
-	get:
-		return _current_key
-	set(value):
-		_current_key = value
-		_update_display()
-		key_binding_changed.emit(_current_key)
+enum State {
+	Bind, Idle
+}
 
-var _state: State = State.IDLE
+var _current_key: APInputOption = APInputOption.none()
+var _pending_key: APInputOption = null
+var _pending_modifier: KeyModifierMask = 0
+var _pressed: int = 0
 
-func _ready() -> void:
-	_update_display()
-	pressed.connect(_start_binding)
+var _modifier_keys: Dictionary[Key, KeyModifierMask] = {
+	Key.KEY_META: KeyModifierMask.KEY_MASK_META,
+	Key.KEY_SHIFT: KeyModifierMask.KEY_MASK_SHIFT,
+	Key.KEY_ALT: KeyModifierMask.KEY_MASK_ALT,
+	Key.KEY_CTRL: KeyModifierMask.KEY_MASK_CTRL
+}
 
-func _input(event: InputEvent) -> void:
-	if _state == State.BINDING_SELECT:
-		if event is InputEventKey and event.pressed:
-			get_viewport().set_input_as_handled()
-			if event.keycode == Key.KEY_ESCAPE:
-				_stop_binding()
-				return
-			_current_key = APInputOption.key_press(event.keycode)
-			_stop_binding()
-		if allow_mouse_buttons and event is InputEventMouseButton:
-			get_viewport().set_input_as_handled()
-			current_key = APInputOption.mouse_press(event.button_index)
-			_stop_binding()
-
-
-func set_key_binding(key: APInputOption) -> void:
-	_current_key = key
-	_update_display()
+var _state: = State.Idle:
+	set(state):
+		_state = state
+		match _state:
+			State.Idle: on_idle()
+			State.Bind: on_bind()
 	
-func _start_binding() -> void:
-	_state = State.BINDING_SELECT
-	if allow_mouse_buttons:
-		text = "Press Any key or Mouse, ESC To Cancel"
-	else:
-		text = "Press Any Key, ESC to Cancel"
-	modulate = Color(1.0, 1.0, 0.5)  # Slightly yellow tint to indicate listening state
 
-func _stop_binding() -> void:
-	_state = State.IDLE
-	_update_display()
+func _ready():
+	pressed.connect(func():
+		get_viewport().set_input_as_handled()
+		if _state == State.Idle:
+			_state = State.Bind
+	)
+
+func on_idle():
+	text = _current_key.get_display_name()
 	modulate = Color.WHITE
 
-func _update_display() -> void:
-	text = _current_key.get_display_name()
+func on_bind():
+	text = "Press stuff"
+	modulate = Color(0.945, 1.0, 0.353, 1.0)
+	
+func _process(delta):
+	match _state:
+		State.Idle:
+			pass
+		State.Bind:
+			text = _get_pending_text()
+			if text.is_empty():
+				text = "Press Stuff"
+
+func set_keybind_no_signal(key: APInputOption) -> void:
+	_current_key = key
+	text = key.get_display_name()
+	
+
+func _input(event: InputEvent):
+	match _state:
+		State.Bind: _process_bind_input(event)
+		State.Idle: pass
+			
+
+func _process_bind_input(event: InputEvent):
+	if event is InputEventKey:
+		if event.is_pressed():
+			_process_input_key_event_pressed(event)
+		if event.is_released():
+			_process_input_key_event_released(event)
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			_pending_key = APInputOption.mouse_press(event.button_index)
+			_pressed += 1
+		else:
+			_pressed -= 1
+			if _pressed == 0:
+				_stop_binding()
+			
+	
+	
+func _process_input_key_event_pressed(event: InputEventKey):
+	var key_code = event.keycode
+	if key_code in _modifier_keys.keys() and allow_modifiers:
+		_pending_modifier = _pending_modifier | _modifier_keys[key_code]
+	else:
+		_pending_key = APInputOption.key_press(key_code)
+		
+	_pressed += 1
+	
+
+func _process_input_key_event_released(event: InputEventKey):
+	_pressed -= 1
+	if _pressed == 0:
+		_stop_binding()
+
+
+func _stop_binding():
+	if allow_modifiers and _pending_modifier != Key.KEY_NONE:
+		var final_keybind = _pending_key
+		_pending_key.modifiers = _pending_modifier
+		_current_key = final_keybind
+		key_binding_changed.emit(_current_key)
+		_state = State.Idle
+	else:
+		_current_key = _pending_key
+		key_binding_changed.emit(_current_key)
+		_state = State.Idle
+
+	_pending_key = null
+	_pending_modifier = 0
+		
+
+	
+func _get_pending_text() -> String:
+	var final_text = ""
+	if _pending_key != null:
+		final_text += _pending_key.get_display_name()
+		
+	if _pending_modifier != 0:
+		final_text = OS.get_keycode_string(Key.KEY_NONE | _pending_modifier) + final_text
+
+	return final_text

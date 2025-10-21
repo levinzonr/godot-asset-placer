@@ -27,4 +27,4 @@ func _ready():
 	key_bind_button.allow_mouse_buttons = allow_mouse_buttons
 
 func set_keybind(key: APInputOption):
-	key_bind_button.set_key_binding(key)
+	key_bind_button.set_keybind_no_signal(key)

@@ -10,7 +10,6 @@ offset_bottom = 23.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 script = ExtResource("1_xnfus")
-allow_mouse_buttons = null
 label = "Laasbelasdas "
 
 [node name="KeyBindLabel" type="Label" parent="."]
@@ -25,4 +24,3 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "None"
 script = ExtResource("2_nqwub")
-allow_mouse_buttons = null

@@ -152,8 +152,6 @@ func _forward_3d_gui_input(viewport_camera, event):
 	
 	# Filter out shortcuts - only handle single-key inputs
 	if event is InputEventKey and event.is_pressed():
-		if event.shift_pressed or event.ctrl_pressed or event.alt_pressed or event.meta_pressed:
-			return false
 		
 		# Only process single-key inputs
 		if current_settings.binding_rotate.is_pressed(event):
