@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://ckokuu85fua3"]
+[gd_scene load_steps=10 format=3 uid="uid://ckokuu85fua3"]
 
 [ext_resource type="Script" uid="uid://ckohy5300ciba" path="res://addons/asset_placer/ui/settings/settings_panel.gd" id="1_cqn4c"]
 [ext_resource type="PackedScene" uid="uid://bjgh4jo3pc65i" path="res://addons/asset_placer/ui/settings/components/keybinding_option.tscn" id="1_gi0tg"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="1_si2q2"]
+[ext_resource type="Script" uid="uid://c4ms6t1dhy278" path="res://addons/asset_placer/ui/settings/components/keybinding_group.gd" id="3_l6bix"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cqn4c"]
 
@@ -126,7 +127,7 @@ text = "Plane Mode Material Resource"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
-text = "lreview material "
+text = "plane_preview_material.tres"
 alignment = 2
 
 [node name="KeyBindings" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -147,29 +148,26 @@ text = "Key Bindings"
 
 [node name="KeyBindingsOptions" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings"]
 layout_mode = 2
+script = ExtResource("3_l6bix")
 
 [node name="KeybindingOptionRotate" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
-allow_mouse_buttons = false
 label = "Rotate Asset"
 
 [node name="KeybindingOptionScale" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
-allow_mouse_buttons = false
 label = "Scale Asset"
 
 [node name="KeybindingOptionTranslate" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
-allow_mouse_buttons = false
 label = "Translate Asset / Plane Placement"
 
 [node name="KeybindingOptionGridSnap" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
-allow_mouse_buttons = false
 label = "Grid Snapping "
 
 [node name="KeybindingOptionInPlaceTransform" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
