@@ -24,8 +24,6 @@ class KeyPress extends APInputOption:
 	
 	func is_pressed(event: InputEvent) -> bool:
 		if event is InputEventKey and event.is_pressed():
-			print(str(event.as_text()))
-			var e : InputEventKey = event
 			var event_mask = event.get_modifiers_mask()
 			var with_mask = key | modifiers
 			var event_combined = event.keycode | event_mask
