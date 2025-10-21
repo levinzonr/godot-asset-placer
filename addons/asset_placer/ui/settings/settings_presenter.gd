@@ -14,7 +14,11 @@ func ready():
 
 func reset_to_defaults():
 	_repository.set_settings(AssetPlacerSettings.default())
-	
+
+func set_default_transform_step(value: float):
+	var settings = _repository.get_settings()
+	settings.transform_step = value
+	_repository.set_settings(settings)
 
 func set_preview_material(material: String):
 	if material.is_empty():

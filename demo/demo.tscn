@@ -363,7 +363,7 @@ transform = Transform3D(0.14071536, 0, -1.1717484, 0, 1.1801674, 0, 1.1717484, 0
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
 [node name="ForestRockCluster22 (3)" parent="." instance=ExtResource("5_onu7k")]
-transform = Transform3D(-0.92919576, 0, -0.005617702, 0, 0.929186, 0, 0.005618417, 0, -0.9293142, -1.3096132, 0.46870232, 11.6049)
+transform = Transform3D(-0.1676248, 0, -0.0009843964, 0, 0.16762231, 0, 0.0009845451, 0, -0.1676501, -7, 0.46870327, -10.000001)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
 [node name="pillar" parent="." instance=ExtResource("4_j5lb4")]

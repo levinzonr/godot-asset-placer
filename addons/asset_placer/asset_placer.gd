@@ -102,6 +102,7 @@ func place_asset(focus_on_placement: bool):
 		return false	
 
 func set_plugin_settings(settings: AssetPlacerSettings):
+	preview_transform_step = settings.transform_step
 	if settings.preview_material_resource.is_empty():
 		preview_material = null
 	else:

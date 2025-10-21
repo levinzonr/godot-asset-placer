@@ -95,6 +95,19 @@ stretch_mode = 5
 layout_mode = 2
 text = "Settings"
 
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/General"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/General/HBoxContainer3"]
+layout_mode = 2
+text = "Transform Step"
+
+[node name="TrasformStepSpinBox" type="SpinBox" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/General/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+step = 0.01
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/General"]
 layout_mode = 2
 
