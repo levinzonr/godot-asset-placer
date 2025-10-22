@@ -69,6 +69,17 @@ text = "Add"
 icon = SubResource("Texture2D_x040h")
 icon_alignment = 2
 
-[node name="ChipsContainer" type="HFlowContainer" parent="Panel/MarginContainer/VBoxContainer2"]
+[node name="EmptyView" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer2/EmptyView"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "No collections yet"
+horizontal_alignment = 1
+
+[node name="CollectionsContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3

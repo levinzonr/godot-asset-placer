@@ -15,6 +15,18 @@ func get_collections() -> Array[AssetCollection]:
 	return _data_source.get_library().collections
 
 
+func update_collection(collection: AssetCollection):
+	var lib = _data_source.get_library()
+	var collections = lib.collections
+	for item in collections:
+		if item.id == collection.id:
+			item.name = collection.name
+			item.backgroundColor = collection.backgroundColor
+			break
+	lib.collections = collections		
+	_data_source.save_libray(lib)
+	collections_changed.emit()
+
 func add_collection(name: String, color: Color):
 	var lib = _data_source.get_library()
 	var collection = AssetCollection.new(name, color, _id_generator.next_int())
