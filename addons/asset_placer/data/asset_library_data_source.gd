@@ -30,11 +30,11 @@ func get_library() -> AssetLibrary:
 			if asset_dict.has("folder_path"): 
 				folder_path = asset_dict["folder_path"]
 			var dict = asset_dict as Dictionary
-			var tags: Array[String] = []
+			var tags: Array[int] = []
 			if dict.has("tags"):
 				var raw_tags = dict["tags"]
 				for tag in raw_tags:
-					tags.append(tag)
+					tags.append(int(tag))
 			var asset = AssetResource.new(id, name, tags, folder_path)
 			assets.append(asset)
 		
@@ -42,7 +42,8 @@ func get_library() -> AssetLibrary:
 			var name = collection_dict["name"]
 			var color_string: String = collection_dict["color"]
 			var color = Color.from_string(color_string, Color.AQUA)
-			collections.append(AssetCollection.new(name, color))
+			var id: int = collection_dict["id"]
+			collections.append(AssetCollection.new(name, color, id))
 			
 		file.close()
 		return AssetLibrary.new(assets, folders, collections)
@@ -71,7 +72,8 @@ func save_libray(library: AssetLibrary):
 		for collection in library.collections:
 			collections_dict.append({
 				"name": collection.name,
-				"color": collection.backgroundColor.to_html()
+				"color": collection.backgroundColor.to_html(),
+				"id": collection.id
 			})	
 		
 		var lib_dict = {

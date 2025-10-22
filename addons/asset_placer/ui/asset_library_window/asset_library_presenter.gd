@@ -49,9 +49,9 @@ func on_query_change(query: String):
 
 
 func add_asset(path: String, folder_path: String):
-	var tags: Array[String] = []
+	var tags: Array[int] = []
 	for collection in _active_collections:
-		tags.push_back(collection.name)
+		tags.push_back(collection.id)
 		
 	var id = ResourceIdCompat.path_to_uid(path)
 	if !id:
@@ -60,7 +60,7 @@ func add_asset(path: String, folder_path: String):
 		
 	var existing = assets_repository.find_by_uid(id)
 	if existing:
-		var new_tags: Array[String] = []
+		var new_tags: Array[int] = []
 		for tag in tags:
 			if tag not in existing.tags:
 				new_tags.push_back(tag)
@@ -86,10 +86,10 @@ func add_assets_or_folders(files: PackedStringArray):
 
 func toggle_asset_collection(asset: AssetResource, collection: AssetCollection, add: bool):
 	if add:
-		asset.tags.append(collection.name)
+		asset.tags.append(collection.id)
 		assets_repository.update(asset)
 	else:
-		asset.tags.erase(collection.name)
+		asset.tags.erase(collection.id)
 		assets_repository.update(asset)
 	
 	_filter_by_collections_and_query()
@@ -99,7 +99,7 @@ func toggle_collection_filter(collection: AssetCollection, enabled: bool):
 		_active_collections.push_back(collection)
 	else:
 		_active_collections = _active_collections.filter(func(a):
-			return a.name != collection.name
+			return a.id != collection.id
 		)
 	show_filter_info.emit(_active_collections.size())
 	_filter_by_collections_and_query()

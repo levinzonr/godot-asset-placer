@@ -31,8 +31,7 @@ func set_name(name: String):
 	_update_state_new_collection_state()
 
 func create_collection():
-	var collection = AssetCollection.new(_new_collection_name, _new_collection_color)
-	_repository.add_collection(collection)
+	_repository.add_collection(_new_collection_name, _new_collection_color)
 	clear_text_field.emit()
 	enable_create_button.emit(false)
 
@@ -50,10 +49,6 @@ func _load_collections():
 	
 	
 func delete_collection(collection: AssetCollection):
-	_repository.delete_collection(collection.name)
-	for asset in _assets_repository.get_all_assets():
-		var updated_tags = asset.tags.filter(func(f): return f != collection.name)
-		if updated_tags != asset.tags:
-			asset.tags = updated_tags
-			_assets_repository.update(asset)
+	_repository.delete_collection(collection.id)
+	
 		

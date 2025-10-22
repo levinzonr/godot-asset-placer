@@ -16,6 +16,8 @@ var _plane_preview: Node3D
 var overlay: Control
 var plane_placer: PlanePlacer
 
+var _migration_collection_id = load("res://addons/asset_placer/data/migrations/collection_id_migration.gd")
+
 var settings_repository: AssetPlacerSettingsRepository
 var current_settings: AssetPlacerSettings
 
@@ -33,6 +35,7 @@ func _disable_plugin():
 	pass
 	
 func _enter_tree():
+	_run_migrations()
 	_async = AssetPlacerAsync.new()
 	_presenter = AssetPlacerPresenter.new()
 	settings_repository = AssetPlacerSettingsRepository.new()
@@ -93,6 +96,9 @@ func _handle_scene_changed(scene: Node):
 		_presenter.select_parent(scene.get_path())
 	else:
 		_presenter.clear_parent()
+
+func _run_migrations():
+	_migration_collection_id.new().run()	
 	
 func _react_to_settings_change(settings: AssetPlacerSettings):
 	self.current_settings = settings

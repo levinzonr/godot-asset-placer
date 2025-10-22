@@ -41,8 +41,7 @@ func update(asset: AssetResource):
 		call_deferred("emit_signal", "assets_changed")
 	
 
-func add_asset(scene_path: String, tags: Array[String] = [], folder_path: String = "") -> bool:
-	
+func add_asset(scene_path: String, tags: Array[int] = [], folder_path: String = "") -> bool:
 	if not is_file_supported(scene_path.get_file()):
 		return false
 	
