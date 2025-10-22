@@ -6,6 +6,7 @@ var rotation_step: float
 var preview_material_resource: String
 var plane_material_resource: String
 var bindings: Dictionary
+var ui_scale: float
 
 enum Bindings {
 	Rotate, Scale, Translate, GridSnapping, InPlaceTransform
@@ -24,4 +25,5 @@ static func default() -> AssetPlacerSettings:
 	settings.plane_material_resource = "res://addons/asset_placer/ui/plane_preview/plane_preview_material.tres"
 	settings.transform_step = 0.1
 	settings.rotation_step = 5
+	settings.ui_scale = 1.0
 	return settings

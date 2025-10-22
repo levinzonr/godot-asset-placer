@@ -160,6 +160,31 @@ size_flags_horizontal = 10
 text = "plane_preview_material.tres"
 alignment = 2
 
+[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5"]
+layout_mode = 2
+text = "UI Scale"
+
+[node name="SliderValue" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.1"
+horizontal_alignment = 2
+
+[node name="UIScaleHSlider" type="HSlider" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.2
+max_value = 2.0
+step = 0.1
+value = 0.2
+ticks_position = 3
+
 [node name="KeyBindings" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3

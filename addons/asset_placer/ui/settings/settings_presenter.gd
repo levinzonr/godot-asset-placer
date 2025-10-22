@@ -19,6 +19,11 @@ func set_default_transform_step(value: float):
 	var settings = _repository.get_settings()
 	settings.transform_step = value
 	_repository.set_settings(settings)
+	
+func set_ui_scale(value: float):	
+	var settings = _repository.get_settings()
+	settings.ui_scale = value
+	_repository.set_settings(settings)
 
 func set_rotation_step(value: float):	
 	var settings = _repository.get_settings()

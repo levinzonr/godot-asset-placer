@@ -21,6 +21,7 @@ const KEY_BINDING_GRID_SNAP: String = "bindings/grid_snapping"
 const KEY_GENERAL_PREVIEW_MATERIAL: String = "general/preview_material"
 const KEY_GENERAL_PLANE_MATERIAL: String = "general/plane_material"
 const KEY_BINDING_IN_PLACE_TRANSFORM: String = "bindings/in_place_transform"
+const KEY_UI_SCALE: String = "general/ui_scale"
 
 func _get_binding_storage_key(binding: AssetPlacerSettings.Bindings) -> String:
 	match binding:
@@ -50,6 +51,7 @@ func set_settings(settings: AssetPlacerSettings):
 	_set_project_setting(KEY_GENERAL_PLANE_MATERIAL, settings.plane_material_resource)
 	_set_editor_setting(KEY_TRANSFORM_STEP, settings.transform_step)
 	_set_editor_setting(KEY_ROTATION_STEP, settings.rotation_step)
+	_set_editor_setting(KEY_UI_SCALE, settings.ui_scale)
 	settings_changed.emit(get_settings())
 	
 func get_settings() -> AssetPlacerSettings:
@@ -65,6 +67,7 @@ func get_settings() -> AssetPlacerSettings:
 	settings.plane_material_resource = _get_project_setting(KEY_GENERAL_PLANE_MATERIAL, settings.plane_material_resource)
 	settings.transform_step = _get_editor_setting(KEY_TRANSFORM_STEP, settings.transform_step)
 	settings.rotation_step = _get_editor_setting(KEY_ROTATION_STEP, settings.rotation_step)
+	settings.ui_scale = _get_editor_setting(KEY_UI_SCALE, settings.ui_scale)
 	return settings
 
 func _get_binding_settings(key: String, default: APInputOption) -> APInputOption:
