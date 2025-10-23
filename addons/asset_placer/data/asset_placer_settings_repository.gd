@@ -23,6 +23,9 @@ const KEY_GENERAL_PLANE_MATERIAL: String = "general/plane_material"
 const KEY_BINDING_IN_PLACE_TRANSFORM: String = "bindings/in_place_transform"
 const KEY_BINDING_TRANSFORM_POSITIVE: String = "bindings/positive_transform"
 const KEY_BINDING_TRANSFORM_NEGATIVE: String = "bindings/negative_transform"
+const KEY_BINDING_TOGGLE_AXIS_X: String = "bindings/toggle_axis_x"
+const KEY_BINDING_TOGGLE_AXIS_Y: String = "bindings/toggle_axis_y"
+const KEY_BINDING_TOGGLE_AXIS_Z: String = "bindings/toggle_axis_z"
 const KEY_UI_SCALE: String = "general/ui_scale"
 
 func _get_binding_storage_key(binding: AssetPlacerSettings.Bindings) -> String:
@@ -41,6 +44,12 @@ func _get_binding_storage_key(binding: AssetPlacerSettings.Bindings) -> String:
 			return KEY_BINDING_TRANSFORM_POSITIVE
 		AssetPlacerSettings.Bindings.TransformNegative:
 			return KEY_BINDING_TRANSFORM_NEGATIVE
+		AssetPlacerSettings.Bindings.ToggleAxisX:
+			return KEY_BINDING_TOGGLE_AXIS_X
+		AssetPlacerSettings.Bindings.ToggleAxisY:
+			return KEY_BINDING_TOGGLE_AXIS_Y
+		AssetPlacerSettings.Bindings.ToggleAxisZ:
+			return KEY_BINDING_TOGGLE_AXIS_Z
 		_:
 			push_error("Unknown binding type: " + str(binding))
 			return ""

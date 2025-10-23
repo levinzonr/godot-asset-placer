@@ -242,3 +242,18 @@ label = "Apply Positive Transfrom "
 unique_name_in_owner = true
 layout_mode = 2
 label = "Apply Negative Transform "
+
+[node name="KeybindingOptionAxisX" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "Toggle X Axis"
+
+[node name="KeybindingOptionAxisY" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "Toggle Y Axis"
+
+[node name="KeybindingOptionAxisZ" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "Toggle Z Axis"

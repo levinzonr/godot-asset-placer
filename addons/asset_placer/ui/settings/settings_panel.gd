@@ -18,6 +18,9 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 @onready var slider_value = %SliderValue
 @onready var keybinding_option_positive_transform = %KeybindingOptionPositiveTransform
 @onready var keybinding_option_negative_transform = %KeybindingOptionNegativeTransform
+@onready var keybinding_option_axis_x = %KeybindingOptionAxisX
+@onready var keybinding_option_axis_y = %KeybindingOptionAxisY
+@onready var keybinding_option_axis_z = %KeybindingOptionAxisZ
 
 
 func _ready():
@@ -49,6 +52,15 @@ func _ready():
 	keybinding_option_grid_snap.keybind_changed.connect(func(key): 
 		_presenter.set_binding(AssetPlacerSettings.Bindings.GridSnapping, key)
 	)
+	keybinding_option_axis_x.keybind_changed.connect(func(key):
+		_presenter.set_binding(AssetPlacerSettings.Bindings.ToggleAxisX, key)
+	)
+	keybinding_option_axis_y.keybind_changed.connect(func(key):
+		_presenter.set_binding(AssetPlacerSettings.Bindings.ToggleAxisY, key)
+	)
+	keybinding_option_axis_z.keybind_changed.connect(func(key):
+		_presenter.set_binding(AssetPlacerSettings.Bindings.ToggleAxisZ, key)
+	)
 	reset_button.pressed.connect(_presenter.reset_to_defaults)
 	material_clear_button.pressed.connect(_presenter.clear_preivew_material)
 	material_picker_button.pressed.connect(_show_preview_material_picker)
@@ -69,6 +81,9 @@ func _show_settings(setting: AssetPlacerSettings):
 	keybinding_option_in_place_transform.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.InPlaceTransform])
 	keybinding_option_negative_transform.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.TransformNegative])
 	keybinding_option_positive_transform.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.TransformPositive])
+	keybinding_option_axis_x.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.ToggleAxisX])
+	keybinding_option_axis_y.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.ToggleAxisY])
+	keybinding_option_axis_z.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.ToggleAxisZ])
 
 	plane_material_picker_button.text = setting.plane_material_resource.get_file()
 	if setting.preview_material_resource.is_empty():

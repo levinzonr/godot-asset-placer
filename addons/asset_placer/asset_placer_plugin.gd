@@ -179,23 +179,23 @@ func _forward_3d_gui_input(viewport_camera, event):
 		if _asset_placer.transform_preview(_presenter.transform_mode, axis, -1):
 			return _handled()
 
+	if current_settings.bindings[AssetPlacerSettings.Bindings.ToggleAxisX].is_pressed(event):
+		_presenter.toggle_axis(Vector3.RIGHT)
+		return _handled()
+	if current_settings.bindings[AssetPlacerSettings.Bindings.ToggleAxisY].is_pressed(event):
+		_presenter.toggle_axis(Vector3.UP)
+		return _handled()
+	if current_settings.bindings[AssetPlacerSettings.Bindings.ToggleAxisZ].is_pressed(event):
+		_presenter.toggle_axis(Vector3.BACK)
+		return _handled()
+	
 	if event is InputEventKey and event.is_pressed():
 		if event.keycode == KEY_ESCAPE:
 			_presenter.cancel()
-			return _handled()
-		if event.keycode == KEY_Y:
-			_presenter.toggle_axis(Vector3.UP)	
-			return _handled()
+			handled = true
 		if event.keycode == KEY_Q:
 			_presenter.cycle_placement_mode()
-			return _handled()
-		
-		if event.keycode == KEY_Z:
-			_presenter.toggle_axis(Vector3.BACK)
-			return _handled()
-		if event.keycode == KEY_X:
-			_presenter.toggle_axis(Vector3.RIGHT)
-			return _handled()
+			handled = true
 
 	if event is InputEventMouseMotion:
 		if event.button_mask == 0:
