@@ -995,3 +995,11 @@ metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
 [node name="ForestRock32 (27)" type="Node3D" parent="." instance=ExtResource("5_u10mr")]
 transform = Transform3D(0.8612362, 0, 0.6028028, 0, 1.0511825, 0, -0.6028028, 0, 0.8612362, 22.893518, 0.46870327, 10.77357)
 metadata/asset_placer_res_id = "uid://b1nm40p57ntoa"
+
+[node name="ForestRock22 (9)" type="Node3D" parent="." instance=ExtResource("6_onu7k")]
+transform = Transform3D(0.76604474, 0, 0.6427877, 0, 1, 0, -0.64278775, 0, 0.76604486, 22.28551, 0.46870327, 18.071253)
+metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"
+
+[node name="ForestRock22 (10)" type="Node3D" parent="." instance=ExtResource("6_onu7k")]
+transform = Transform3D(0.76604474, 0, 0.6427877, 0, 1, 0, -0.64278775, 0, 0.76604486, 20.865086, 0.46870327, 15.338508)
+metadata/asset_placer_res_id = "uid://b8p1iy52py3xm"

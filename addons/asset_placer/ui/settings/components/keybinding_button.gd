@@ -35,6 +35,9 @@ var _state: = State.Idle:
 func on_idle():
 	text = _current_key.get_display_name()
 	modulate = Color.WHITE
+	
+	if _current_key.equals(APInputOption.none()):
+		modulate = Color.RED	
 
 func on_bind():
 	text = _get_helper_text()
@@ -65,6 +68,10 @@ func _process(delta):
 func set_keybind_no_signal(key: APInputOption) -> void:
 	_current_key = key
 	text = key.get_display_name()
+	if _current_key.equals(APInputOption.none()):
+		modulate = Color.RED
+	else:
+		modulate = Color.WHITE
 	
 
 func _input(event: InputEvent):

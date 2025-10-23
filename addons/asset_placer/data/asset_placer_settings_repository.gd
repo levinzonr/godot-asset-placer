@@ -54,8 +54,15 @@ func _get_binding_storage_key(binding: AssetPlacerSettings.Bindings) -> String:
 			push_error("Unknown binding type: " + str(binding))
 			return ""
 
+
+
+
 func set_settings(settings: AssetPlacerSettings):
 	var current = get_settings()
+	
+	# Validate and resolve keybind conflicts
+	_validate_and_resolve_conflicts(settings, current)
+	
 	# Save all bindings using the mapping function
 	for binding in settings.bindings.keys():
 		var storage_key = _get_binding_storage_key(binding)
@@ -103,3 +110,24 @@ func _get_editor_setting(key: String, default: Variant) -> Variant:
 		return _editor_settings.get(KEY_BASE % key)
 	else:
 		return default
+
+func _validate_and_resolve_conflicts(new_settings: AssetPlacerSettings, old_settings: AssetPlacerSettings):
+	for binding in AssetPlacerSettings.Bindings.values():
+		var new : APInputOption = new_settings.bindings[binding]
+		
+		if new == null:
+			continue
+			
+		if new.equals(APInputOption.none()):
+			continue
+		
+		
+		for old_binding in AssetPlacerSettings.Bindings.values():
+			if binding == old_binding:
+				continue
+				
+			var old = old_settings.bindings[old_binding]
+			if new.equals(old):
+				new_settings.bindings[old_binding] = APInputOption.none()
+				
+				
