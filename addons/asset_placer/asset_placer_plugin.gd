@@ -139,68 +139,79 @@ func _handle_in_place_transform():
 		_asset_placer.stop_placement()
 
 func _forward_3d_gui_input(viewport_camera, event):
-	# Handle Tab key regardless of plugin state - this is how we activate the plugin
+	var handled = false
+	
+	
+	
 	if current_settings.bindings[AssetPlacerSettings.Bindings.InPlaceTransform].is_pressed(event):
 		_handle_in_place_transform()
-		return true
+		return _handled()
 	
 	# Only process other inputs when plugin is active
 	if not _presenter.plugin_is_active():
-		return false
+		return EditorPlugin.AFTER_GUI_INPUT_PASS
 
-	# Filter out RMB which enables free-look mode
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		return false
 
-	# Filter out Camera Move events
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
-		return false
-	
-	# Filter out shortcuts - only handle single-key inputs
-	if event is InputEventKey and event.is_pressed():
+	if current_settings.bindings[AssetPlacerSettings.Bindings.Rotate].is_pressed(event):
+		_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Rotate)
+		return _handled()
 		
-		# Only process single-key inputs
-		if current_settings.bindings[AssetPlacerSettings.Bindings.Rotate].is_pressed(event):
-			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Rotate)
-			return true
-		if current_settings.bindings[AssetPlacerSettings.Bindings.Scale].is_pressed(event):
-			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Scale)
-			return true
-		if current_settings.bindings[AssetPlacerSettings.Bindings.Translate].is_pressed(event):
-			_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Move)
-			return true
+	if current_settings.bindings[AssetPlacerSettings.Bindings.Scale].is_pressed(event):
+		_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Scale)
+		return _handled()
+	if current_settings.bindings[AssetPlacerSettings.Bindings.Translate].is_pressed(event):
+		_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Move)
+		return _handled()	
+	if current_settings.bindings[AssetPlacerSettings.Bindings.GridSnapping].is_pressed(event):
+		_presenter.toggle_grid_snapping()
+		return _handled()
+		
+	
+	if current_settings.binding_positive_transform.is_pressed(event):
+		var axis := _presenter.preview_transform_axis
+		if _asset_placer.transform_preview(_presenter.transform_mode, axis, 1):
+			return _handled()
+			
+	elif current_settings.binding_negative_transform.is_pressed(event):	
+		var axis := _presenter.preview_transform_axis
+		if _asset_placer.transform_preview(_presenter.transform_mode, axis, -1):
+			return _handled()
+
+	if event is InputEventKey and event.is_pressed():
 		if event.keycode == KEY_ESCAPE:
 			_presenter.cancel()
-			return true
+			return _handled()
 		if event.keycode == KEY_Y:
 			_presenter.toggle_axis(Vector3.UP)	
-			return true
+			return _handled()
 		if event.keycode == KEY_Q:
 			_presenter.cycle_placement_mode()
-			return true
-		if current_settings.bindings[AssetPlacerSettings.Bindings.GridSnapping].is_pressed(event):
-			_presenter.toggle_grid_snapping()
-			return true
+			return _handled()
+		
 		if event.keycode == KEY_Z:
 			_presenter.toggle_axis(Vector3.BACK)
-			return true
+			return _handled()
 		if event.keycode == KEY_X:
 			_presenter.toggle_axis(Vector3.RIGHT)
-			return true
-	
+			return _handled()
+
 	if event is InputEventMouseMotion:
 		if event.button_mask == 0:
-			return _asset_placer.move_preview(event.position, viewport_camera)
-	
+			if _asset_placer.move_preview(event.position, viewport_camera):
+				return _handled()
+
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
-			return false
-			
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			return _asset_placer.place_asset(Input.is_key_pressed(KEY_SHIFT))
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN or event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			var direction := -1 if event.button_index == MOUSE_BUTTON_WHEEL_UP else 1
-			var axis := _presenter.preview_transform_axis
-			return _asset_placer.transform_preview(_presenter.transform_mode, axis, direction)
-			
-	return false
+			# Don't handle RMB, let it pass through
+			pass
+		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			handled = _asset_placer.place_asset(Input.is_key_pressed(KEY_SHIFT))
+		
+	return EditorPlugin.AFTER_GUI_INPUT_PASS
+
+
+func _handled():
+	get_viewport().set_input_as_handled()
+	return EditorPlugin.AFTER_GUI_INPUT_STOP

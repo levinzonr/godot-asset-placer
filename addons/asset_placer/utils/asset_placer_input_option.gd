@@ -24,9 +24,17 @@ class KeyPress extends APInputOption:
 	
 	func is_pressed(event: InputEvent) -> bool:
 		if event is InputEventKey and event.is_pressed():
-			var event_mask = event.get_modifiers_mask()
+			var event_modifiers: KeyModifierMask = 0
+			if Input.is_key_pressed(Key.KEY_SHIFT):
+				event_modifiers |= KeyModifierMask.KEY_MASK_SHIFT
+			if Input.is_key_pressed(Key.KEY_CTRL):
+				event_modifiers |= KeyModifierMask.KEY_MASK_CTRL
+			if Input.is_key_pressed(Key.KEY_ALT):
+				event_modifiers |= KeyModifierMask.KEY_MASK_ALT
+			if Input.is_key_pressed(Key.KEY_META):
+				event_modifiers |= KeyModifierMask.KEY_MASK_META
 			var with_mask = key | modifiers
-			var event_combined = event.keycode | event_mask
+			var event_combined = event.keycode | event_modifiers
 			return event_combined == with_mask
 		else:
 			return false
@@ -45,15 +53,15 @@ class MousePress extends  APInputOption:
 		return "mouse_%s_%s" % [str(mouse_index), str(modifiers)]	
 		
 	func is_pressed(event: InputEvent) -> bool:
-		if event is InputEventMouseButton and event.is_pressed():
+		if event is InputEventMouseButton:
 			var event_modifiers: KeyModifierMask = 0
-			if event.shift_pressed:
+			if Input.is_key_pressed(Key.KEY_SHIFT):
 				event_modifiers |= KeyModifierMask.KEY_MASK_SHIFT
-			if event.ctrl_pressed:
+			if Input.is_key_pressed(Key.KEY_CTRL):
 				event_modifiers |= KeyModifierMask.KEY_MASK_CTRL
-			if event.alt_pressed:
+			if Input.is_key_pressed(Key.KEY_ALT):
 				event_modifiers |= KeyModifierMask.KEY_MASK_ALT
-			if event.meta_pressed:
+			if Input.is_key_pressed(Key.KEY_META):
 				event_modifiers |= KeyModifierMask.KEY_MASK_META
 			
 			return event.button_index == mouse_index and event_modifiers == modifiers
@@ -73,8 +81,12 @@ class MousePress extends  APInputOption:
 				button_name = "Extra 1"
 			MouseButton.MOUSE_BUTTON_XBUTTON2:
 				button_name = "Extra 2"
+			MouseButton.MOUSE_BUTTON_WHEEL_DOWN:
+				button_name = "Mouse Wheel Down"
+			MouseButton.MOUSE_BUTTON_WHEEL_UP:
+				button_name = "Mouse Wheel Up"
 			_:
-				button_name = "Not supported"
+				button_name = "Not supported %s" % mouse_index
 		
 		if modifiers == 0:
 			return button_name

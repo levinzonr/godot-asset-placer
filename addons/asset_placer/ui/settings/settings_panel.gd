@@ -16,6 +16,8 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 @onready var rotation_step_spin_box: SpinBox = %RotationStepSpinBox
 @onready var ui_scale_h_slider: HSlider = %UIScaleHSlider
 @onready var slider_value = %SliderValue
+@onready var keybinding_option_positive_transform = %KeybindingOptionPositiveTransform
+@onready var keybinding_option_negative_transform = %KeybindingOptionNegativeTransform
 
 
 func _ready():
@@ -26,8 +28,17 @@ func _ready():
 	keybinding_option_rotate.keybind_changed.connect(func(key):
 		_presenter.set_binding(AssetPlacerSettings.Bindings.Rotate, key)
 	)
+	
+	keybinding_option_positive_transform.keybind_changed.connect(func(key):
+		_presenter.set_binding(AssetPlacerSettings.Bindings.TransformPositive, key)
+	)
+	
 	keybinding_option_translate.keybind_changed.connect(func(key): 
 		_presenter.set_binding(AssetPlacerSettings.Bindings.Translate, key)
+	)
+	
+	keybinding_option_negative_transform.keybind_changed.connect(func(key): 
+		_presenter.set_binding(AssetPlacerSettings.Bindings.TransformNegative, key)
 	)
 	keybinding_option_scale.keybind_changed.connect(func(key):
 		_presenter.set_binding(AssetPlacerSettings.Bindings.Scale, key)
@@ -56,6 +67,9 @@ func _show_settings(setting: AssetPlacerSettings):
 	keybinding_option_scale.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.Scale])
 	keybinding_option_grid_snap.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.GridSnapping])
 	keybinding_option_in_place_transform.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.InPlaceTransform])
+	keybinding_option_negative_transform.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.TransformNegative])
+	keybinding_option_positive_transform.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.TransformPositive])
+
 	plane_material_picker_button.text = setting.plane_material_resource.get_file()
 	if setting.preview_material_resource.is_empty():
 		material_picker_button.text = "No Preview Material"

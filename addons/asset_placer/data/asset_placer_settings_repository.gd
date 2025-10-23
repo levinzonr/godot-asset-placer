@@ -21,6 +21,8 @@ const KEY_BINDING_GRID_SNAP: String = "bindings/grid_snapping"
 const KEY_GENERAL_PREVIEW_MATERIAL: String = "general/preview_material"
 const KEY_GENERAL_PLANE_MATERIAL: String = "general/plane_material"
 const KEY_BINDING_IN_PLACE_TRANSFORM: String = "bindings/in_place_transform"
+const KEY_BINDING_TRANSFORM_POSITIVE: String = "bindings/positive_transform"
+const KEY_BINDING_TRANSFORM_NEGATIVE: String = "bindings/negative_transform"
 const KEY_UI_SCALE: String = "general/ui_scale"
 
 func _get_binding_storage_key(binding: AssetPlacerSettings.Bindings) -> String:
@@ -35,6 +37,10 @@ func _get_binding_storage_key(binding: AssetPlacerSettings.Bindings) -> String:
 			return KEY_BINDING_GRID_SNAP
 		AssetPlacerSettings.Bindings.InPlaceTransform:
 			return KEY_BINDING_IN_PLACE_TRANSFORM
+		AssetPlacerSettings.Bindings.TransformPositive:
+			return KEY_BINDING_TRANSFORM_POSITIVE
+		AssetPlacerSettings.Bindings.TransformNegative:
+			return KEY_BINDING_TRANSFORM_NEGATIVE
 		_:
 			push_error("Unknown binding type: " + str(binding))
 			return ""

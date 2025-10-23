@@ -8,14 +8,24 @@ var plane_material_resource: String
 var bindings: Dictionary
 var ui_scale: float
 
+var binding_positive_transform: APInputOption:
+	get(): return bindings[Bindings.TransformPositive]
+	
+var binding_negative_transform: APInputOption:
+	get(): return bindings[Bindings.TransformNegative]	
+	
+	
+
 enum Bindings {
-	Rotate, Scale, Translate, GridSnapping, InPlaceTransform
+	Rotate, Scale, Translate, GridSnapping, InPlaceTransform, TransformPositive, TransformNegative
 }
 
 
 
 static func default() -> AssetPlacerSettings:
 	var settings = AssetPlacerSettings.new()
+	settings.bindings[Bindings.TransformNegative] = APInputOption.mouse_press(MouseButton.MOUSE_BUTTON_WHEEL_UP)
+	settings.bindings[Bindings.TransformPositive] = APInputOption.mouse_press(MouseButton.MOUSE_BUTTON_WHEEL_DOWN)
 	settings.bindings[Bindings.Rotate] = APInputOption.key_press(Key.KEY_E)
 	settings.bindings[Bindings.Scale] = APInputOption.key_press(Key.KEY_R)
 	settings.bindings[Bindings.Translate] = APInputOption.key_press(Key.KEY_W)
