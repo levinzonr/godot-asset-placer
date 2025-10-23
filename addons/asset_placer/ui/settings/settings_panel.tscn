@@ -167,7 +167,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5"]
 layout_mode = 2
-text = "UI Scale"
+text = "Thumbnails UI Scale"
 
 [node name="SliderValue" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5"]
 unique_name_in_owner = true

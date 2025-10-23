@@ -1,5 +1,28 @@
 # Godot Asset Placer Changelog
 
+## 1.2.0-alpha3
+
+> ⚠️ Contains Breaking changes for the Collections System. Please read the notes below before updating.
+
+### Collections Improvements
+- It is now possible to Edit Collections (Color, Name) from the Collections Tab
+- Collections UI has been updated to be more consistent with the rest of the plugin
+- ⚠️ Breaking Change: Collections are now identified by a unique ID instead of Name. The Migration is part of the plugin update and should run automatically and ideally should not cause any issues.
+  However, if you have any issues with collections after updating please reach out. It is recommended to backup your `asset_library.json` (https://github.com/levinzonr/godot-asset-placer/issues/44) before updating the plugin to this version.
+
+### Random Asset Placement
+This release introduces a new check box in the Asset Placement Options UI that allows users to enable/disable random placement of assets.
+When enabled, new asset will be selected randomly from the current filtered list of assets in the Assets Panel. This will happen after each placement.
+
+> While this feature does work I do consider this feature to be experimental and might require further improvements in the future
+
+### Additions to the Settings Panel
+- Added Option to configure Toggling X, Y and Z Axis (Default: X, Y, Z keys respectively)
+- Added Key Binding Conflict Detection: The conflicting key will be unasigned and highlighted in red in the Settings Panel
+- Added Option to configure shortcut for Transform Apply (Default: Mouse Wheel Up/Down)
+- Added `Thumbnail US Scale` option. This scales up/down the size of the items inside Assets Panel (Default: 1.0). This is partially addessing issues like #28 and #38
+
+
 ## 1.2.0-alpha2
 ### Added
 - **In Place Transform Mode** allows users to apply transformations using Asset Placer flow to the existing Nodes that are already present in the scene tree. To Enter this mode select a Node3D in the scene tree and press the "Shift+E" (Default Shortcut and Configurable in Settings). After that, you can use the same Preview Transform shortcuts to modify the selected Node3D.
