@@ -139,9 +139,6 @@ func _handle_in_place_transform():
 		_asset_placer.stop_placement()
 
 func _forward_3d_gui_input(viewport_camera, event):
-	var handled = false
-	
-	
 	
 	if current_settings.bindings[AssetPlacerSettings.Bindings.InPlaceTransform].is_pressed(event):
 		_handle_in_place_transform()
@@ -192,10 +189,10 @@ func _forward_3d_gui_input(viewport_camera, event):
 	if event is InputEventKey and event.is_pressed():
 		if event.keycode == KEY_ESCAPE:
 			_presenter.cancel()
-			handled = true
+			return _handled()
 		if event.keycode == KEY_Q:
 			_presenter.cycle_placement_mode()
-			handled = true
+			return _handled()
 
 	if event is InputEventMouseMotion:
 		if event.button_mask == 0:
@@ -207,7 +204,9 @@ func _forward_3d_gui_input(viewport_camera, event):
 			# Don't handle RMB, let it pass through
 			pass
 		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			handled = _asset_placer.place_asset(Input.is_key_pressed(KEY_SHIFT))
+			var handled = _asset_placer.place_asset(Input.is_key_pressed(KEY_SHIFT))
+			if handled:
+				return _handled()
 		
 	return EditorPlugin.AFTER_GUI_INPUT_PASS
 
