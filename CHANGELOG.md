@@ -1,5 +1,9 @@
 # Godot Asset Placer Changelog
 
+## 1.2.0-alpha4
+### Fixed
+- Fixed an Issue with when Placing Asset on a Plane in Plane Placement Mode breaks the placement flow. This was due the input handling and event being propagated to the Editor
+
 ## 1.2.0-alpha3
 
 > ⚠️ Contains Breaking changes for the Collections System. Please read the notes below before updating.
