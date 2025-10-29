@@ -4,11 +4,14 @@ class_name AssetCollectionRepository
 var _data_source: AssetLibraryDataSource
 var _id_generator: AssetPlacerIdGenerator
 
+static var instance: AssetCollectionRepository
+
 signal collections_changed
 
-func _init():
+func _init(data_source: AssetLibraryDataSource):
 	self._id_generator = AssetPlacerIdGenerator.new()
-	self._data_source = AssetLibraryDataSource.new()
+	self._data_source = data_source
+	instance = self
 
 
 func get_collections() -> Array[AssetCollection]:

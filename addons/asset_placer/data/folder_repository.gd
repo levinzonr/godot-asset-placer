@@ -8,8 +8,8 @@ static var instance: FolderRepository
 	
 signal folder_changed
 
-func _init():
-	self.data_source = AssetLibraryDataSource.new()
+func _init(data_source: AssetLibraryDataSource):
+	self.data_source = data_source
 	instance = self
 
 func get_all() -> Array[AssetFolder]:

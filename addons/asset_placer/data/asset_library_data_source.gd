@@ -1,7 +1,10 @@
 extends RefCounted
 class_name AssetLibraryDataSource
 
-var _asset_lib_json := "user://asset_library.json"
+var _asset_lib_json: String
+
+func _init(asset_lib_path: String = "user://asset_library.json"):
+	_asset_lib_json = asset_lib_path
 
 func get_library() -> AssetLibrary:
 	var file = FileAccess.open(_asset_lib_json, FileAccess.READ)

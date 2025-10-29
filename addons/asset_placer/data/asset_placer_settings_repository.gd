@@ -28,6 +28,7 @@ const KEY_BINDING_TOGGLE_AXIS_Y: String = "bindings/toggle_axis_y"
 const KEY_BINDING_TOGGLE_AXIS_Z: String = "bindings/toggle_axis_z"
 const KEY_BINDING_TOGGLE_PLANE_MODE: String = "bindings/toggle_plane_mode"
 const KEY_UI_SCALE: String = "general/ui_scale"
+const KEY_ASSET_LIBRARY_PATH: String = "general/asset_library_path"
 
 func _get_binding_storage_key(binding: AssetPlacerSettings.Bindings) -> String:
 	match binding:
@@ -77,6 +78,7 @@ func set_settings(settings: AssetPlacerSettings):
 	_set_editor_setting(KEY_TRANSFORM_STEP, settings.transform_step)
 	_set_editor_setting(KEY_ROTATION_STEP, settings.rotation_step)
 	_set_editor_setting(KEY_UI_SCALE, settings.ui_scale)
+	_set_project_setting(KEY_ASSET_LIBRARY_PATH, settings.asset_library_path)
 	settings_changed.emit(get_settings())
 	
 func get_settings() -> AssetPlacerSettings:
@@ -93,6 +95,7 @@ func get_settings() -> AssetPlacerSettings:
 	settings.transform_step = _get_editor_setting(KEY_TRANSFORM_STEP, settings.transform_step)
 	settings.rotation_step = _get_editor_setting(KEY_ROTATION_STEP, settings.rotation_step)
 	settings.ui_scale = _get_editor_setting(KEY_UI_SCALE, settings.ui_scale)
+	settings.asset_library_path = _get_project_setting(KEY_ASSET_LIBRARY_PATH, settings.asset_library_path)
 	return settings
 
 func _get_binding_settings(key: String, default: APInputOption) -> APInputOption:

@@ -5,6 +5,7 @@ var _folder_repository: FolderRepository
 var _presenter: AssetPlacerPresenter
 var  _asset_placer: AssetPlacer
 var _assets_repository: AssetsRepository
+var _collection_repository: AssetCollectionRepository
 var synchronizer: Synchronize
 var _updater: PluginUpdater
 var _async: AssetPlacerAsync
@@ -20,6 +21,7 @@ var _migration_collection_id = load("res://addons/asset_placer/data/migrations/c
 
 var settings_repository: AssetPlacerSettingsRepository
 var current_settings: AssetPlacerSettings
+var _data_source: AssetLibraryDataSource
 
 var plugin_path: String:
 	get(): return get_script().resource_path.get_base_dir()
@@ -36,11 +38,9 @@ func _disable_plugin():
 	
 func _enter_tree():
 	_run_migrations()
+	_initialize_data_layer()
 	_async = AssetPlacerAsync.new()
 	_presenter = AssetPlacerPresenter.new()
-	settings_repository = AssetPlacerSettingsRepository.new()
-	current_settings = settings_repository.get_settings()
-	settings_repository.settings_changed.connect(_react_to_settings_change)
 	AssetPlacerDockPresenter.new()
 	_updater = PluginUpdater.new(ADDON_PATH +  "/plugin.cfg", "")
 	_plane_preview = load("res://addons/asset_placer/ui/plane_preview/plan_preview.tscn").instantiate()
@@ -48,8 +48,6 @@ func _enter_tree():
 	plane_placer = PlanePlacer.new(_presenter, _plane_preview)
 	
 	_asset_placer = AssetPlacer.new(get_undo_redo(), plane_placer)
-	_folder_repository = FolderRepository.new()
-	_assets_repository = AssetsRepository.new()
 	synchronizer = Synchronize.new(_folder_repository, _assets_repository)
 	scene_changed.connect(_handle_scene_changed)
 	_presenter.asset_selected.connect(start_placement)
@@ -100,9 +98,18 @@ func _handle_scene_changed(scene: Node):
 func _run_migrations():
 	_migration_collection_id.new().run()	
 	
+func _initialize_data_layer():
+	settings_repository = AssetPlacerSettingsRepository.new()
+	current_settings = settings_repository.get_settings()
+	settings_repository.settings_changed.connect(_react_to_settings_change)
+	_data_source = AssetLibraryDataSource.new(current_settings.asset_library_path)
+	_folder_repository = FolderRepository.new(_data_source)
+	_assets_repository = AssetsRepository.new(_data_source)
+	_collection_repository = AssetCollectionRepository.new(_data_source)
+
 func _react_to_settings_change(settings: AssetPlacerSettings):
 	self.current_settings = settings
-	_asset_placer.set_plugin_settings(settings)	
+	_asset_placer.set_plugin_settings(settings)
 
 func _react_to_reimorted_files(files: PackedStringArray):
 	synchronizer.sync_all()

@@ -14,7 +14,7 @@ signal clear_text_field()
 
 
 func _init():
-	self._repository = AssetCollectionRepository.new()
+	self._repository = AssetCollectionRepository.instance
 	self._repository.collections_changed.connect(_load_collections)
 	self._assets_repository = AssetsRepository.instance
 

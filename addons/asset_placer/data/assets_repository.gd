@@ -7,8 +7,8 @@ static var instance: AssetsRepository
 
 signal assets_changed
 
-func _init():
-	data_source = AssetLibraryDataSource.new()
+func _init(data_source: AssetLibraryDataSource):
+	self.data_source = data_source
 	instance = self
 	
 func get_all_assets() -> Array[AssetResource]:

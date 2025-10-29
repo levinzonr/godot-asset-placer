@@ -29,7 +29,8 @@ bindings/rotate_asset=69
 bindings/scale_asset=82
 bindings/translate_asset=87
 general/plane_material="res://addons/asset_placer/ui/plane_preview/plane_preview_material.tres"
-internal/last_int=58
+internal/last_int=59
+general/asset_library_path="user://asset_library.json"
 
 [editor_plugins]
 
