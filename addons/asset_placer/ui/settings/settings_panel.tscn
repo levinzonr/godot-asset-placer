@@ -244,7 +244,7 @@ label = "In-Place Transform Mode "
 [node name="KeybindingOptionPositiveTransform" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
-label = "Apply Positive Transfrom "
+label = "Apply Positive Transform "
 
 [node name="KeybindingOptionNegativeTransform" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
