@@ -9,3 +9,4 @@
 /icon.svg* export-ignore
 /LICENSE export-ignore
 /project.godot export-ignore
+/mkdocs.yml export-ignore
