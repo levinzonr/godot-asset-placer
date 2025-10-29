@@ -110,7 +110,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_epucf")
 [node name="SnappingSwitch" type="CheckButton" parent="MarginContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "%s:  Grid Snapping"
+text = "S: Grid Snapping"
 icon = SubResource("Texture2D_luwev")
 
 [node name="MarginContainer3" type="PanelContainer" parent="."]
@@ -203,19 +203,19 @@ layout_mode = 2
 [node name="RotateCheckButton" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "%s: Rotate"
+text = "E: To Rotate"
 icon = SubResource("Texture2D_h3uaa")
 
 [node name="ScaleCheckButton" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "%s: Scale"
+text = "R: To Scale"
 icon = SubResource("Texture2D_1410h")
 
 [node name="TranslateCheckButton" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "%s: Translate"
+text = "W: To Translate"
 icon = SubResource("Texture2D_epucf")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]

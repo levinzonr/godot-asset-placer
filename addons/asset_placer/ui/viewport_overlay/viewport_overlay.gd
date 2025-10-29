@@ -67,7 +67,8 @@ func show_settings(settings: AssetPlacerSettings):
 	scale_check_button.text = "%s: To Scale" % settings.bindings[AssetPlacerSettings.Bindings.Scale].get_display_name()
 	translate_check_button.text = "%s: To Translate" % settings.bindings[AssetPlacerSettings.Bindings.Translate].get_display_name()
 	snapping_switch.text = "%s: Grid Snapping" % settings.bindings[AssetPlacerSettings.Bindings.GridSnapping].get_display_name()
-	
+	placement_shortcut_label.text = "(%s)" % settings.bindings[AssetPlacerSettings.Bindings.TogglePlaneMode].get_display_name()
+
 
 func show_options(options: AssetPlacerOptions):
 	snapping_switch.button_pressed = options.snapping_enabled	

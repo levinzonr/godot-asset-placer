@@ -21,6 +21,7 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 @onready var keybinding_option_axis_x = %KeybindingOptionAxisX
 @onready var keybinding_option_axis_y = %KeybindingOptionAxisY
 @onready var keybinding_option_axis_z = %KeybindingOptionAxisZ
+@onready var keybinding_option_plane_mode = $Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions/KeybindingOptionPlaneMode
 
 
 func _ready():
@@ -38,6 +39,10 @@ func _ready():
 	
 	keybinding_option_translate.keybind_changed.connect(func(key): 
 		_presenter.set_binding(AssetPlacerSettings.Bindings.Translate, key)
+	)
+	
+	keybinding_option_plane_mode.keybind_changed.connect(func(key): 
+		_presenter.set_binding(AssetPlacerSettings.Bindings.TogglePlaneMode, key)
 	)
 	
 	keybinding_option_negative_transform.keybind_changed.connect(func(key): 
@@ -84,6 +89,7 @@ func _show_settings(setting: AssetPlacerSettings):
 	keybinding_option_axis_x.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.ToggleAxisX])
 	keybinding_option_axis_y.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.ToggleAxisY])
 	keybinding_option_axis_z.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.ToggleAxisZ])
+	keybinding_option_plane_mode.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.TogglePlaneMode])
 
 	plane_material_picker_button.text = setting.plane_material_resource.get_file()
 	if setting.preview_material_resource.is_empty():

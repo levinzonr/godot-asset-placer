@@ -185,13 +185,14 @@ func _forward_3d_gui_input(viewport_camera, event):
 	if current_settings.bindings[AssetPlacerSettings.Bindings.ToggleAxisZ].is_pressed(event):
 		_presenter.toggle_axis(Vector3.BACK)
 		return _handled()
+		
+	if current_settings.bindings[AssetPlacerSettings.Bindings.TogglePlaneMode].is_pressed(event):
+		_presenter.cycle_placement_mode()
+		return _handled()	
 	
 	if event is InputEventKey and event.is_pressed():
 		if event.keycode == KEY_ESCAPE:
 			_presenter.cancel()
-			return _handled()
-		if event.keycode == KEY_Q:
-			_presenter.cycle_placement_mode()
 			return _handled()
 
 	if event is InputEventMouseMotion:

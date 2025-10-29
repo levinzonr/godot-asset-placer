@@ -227,6 +227,10 @@ unique_name_in_owner = true
 layout_mode = 2
 label = "Grid Snapping "
 
+[node name="KeybindingOptionPlaneMode" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+layout_mode = 2
+label = "Toggle Plane Mode"
+
 [node name="KeybindingOptionInPlaceTransform" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
