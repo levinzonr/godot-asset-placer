@@ -7,27 +7,31 @@ func _init():
 
 
 func run():
-	print("Starting collection ID migration...")
-	
 	# Read the raw JSON data directly
 	var file_path = "user://asset_library.json"
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	if file == null || file.get_as_text().is_empty():
-		print("No existing library data found, migration not needed")
 		return
 	
 	var json_text = file.get_as_text()
 	file.close()
 	
+
 	var data: Dictionary = JSON.parse_string(json_text)
 	if data == null:
-		print("Failed to parse JSON data")
+		push_error("Failed to parse JSON data")
 		return
 	
 	if data.has("version") and data["version"] == 2:
-		print("Library is already at version 2, migration not needed")
 		return
-	
+
+	# Create backup copy before migration
+	var backup_path := "user://asset_library_backup_v1.json"
+	var backup_file = FileAccess.open(backup_path, FileAccess.WRITE)
+	if backup_file != null:
+		backup_file.store_string(json_text)
+		backup_file.close()
+		
 	# Create mapping from collection names to IDs
 	var collection_name_to_id = {}
 	

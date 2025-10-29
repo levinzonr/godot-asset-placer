@@ -79,7 +79,8 @@ func save_libray(library: AssetLibrary):
 		var lib_dict = {
 			"assets": assets_dict,
 			"folders": folders_dict,
-			"collections": collections_dict
+			"collections": collections_dict,
+			"version": 2
 		}
 		
 		var json = JSON.stringify(lib_dict)
