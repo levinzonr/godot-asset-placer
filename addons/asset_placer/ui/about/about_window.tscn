@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dynyrwa38r5ag"]
+[gd_scene load_steps=8 format=3 uid="uid://dynyrwa38r5ag"]
 
 [ext_resource type="Script" uid="uid://43kdnn7nr2ch" path="res://addons/asset_placer/ui/about/about_window.gd" id="1_namxt"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_r5xs8"]
+[ext_resource type="Texture2D" uid="uid://btqtv2stkxtdk" path="res://docs/logo.png" id="3_vijnu"]
 
 [sub_resource type="Texture2D" id="Texture2D_4v60v"]
 resource_local_to_scene = false
@@ -128,10 +129,11 @@ text = "Asset Placer"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Version 1.1.4"
+text = "Version 1.2.0-beta2"
 
 [node name="UpdateButton" type="Button" parent="Panel/CenterContainer/HBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 4
@@ -146,6 +148,24 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("3_vijnu")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="DiscordLinkButton" type="LinkButton" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+text = "Join our Discord"
+uri = "https://discord.gg/UyYCp53Hym"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -199,3 +219,16 @@ layout_mode = 2
 text = "Spotted Bug / Issue?"
 icon = SubResource("Texture2D_tt7kp")
 alignment = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -123.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
