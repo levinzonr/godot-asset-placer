@@ -32,10 +32,6 @@ general/plane_material="res://addons/asset_placer/ui/plane_preview/plane_preview
 internal/last_int=59
 general/asset_library_path="user://asset_library.json"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg")
-
 [input]
 
 test={
