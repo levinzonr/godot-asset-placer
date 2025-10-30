@@ -1,5 +1,10 @@
 # Godot Asset Placer Changelog
 
+## 1.2.0-beta2
+### Fixed
+- Collection Picker not showing current status of the Assigned collections
+- 
+
 ## 1.2.0-beta1
 ### Added
 - Added a Plane Mode Toggle Configuration option
