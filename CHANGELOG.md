@@ -1,5 +1,13 @@
 # Godot Asset Placer Changelog
 
+## 1.2.0-beta1
+### Added
+- Added a Plane Mode Toggle Configuration option
+- Asset Library .json file can now be changed. This allows you set custom location of the library data source file which is helpful if you want this file to be version controlled and shared between all developers with the access to the project. By default the path will be an internal Godot user folder. This can be changed through Project Settings -> Advanced -> Godot Asset Placer.
+
+### Fixed
+- Remove unneeded logs from the Collection Migration Code, Made sure migration only runs when is needed
+
 ## 1.2.0-alpha4
 ### Fixed
 - Fixed an Issue with when Placing Asset on a Plane in Plane Placement Mode breaks the placement flow. This was due the input handling and event being propagated to the Editor

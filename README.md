@@ -1,3 +1,4 @@
+[![](https://dcbadge.limes.pink/api/server/https://discord.gg/JCuh48bBCF)](https://discord.gg/JCuh48bBCF)
 ![GitHub Release](https://img.shields.io/github/v/release/levinzonr/godot-asset-placer)
 ![Godot4](https://img.shields.io/badge/Godot-4.5-blue)
 ![Godot4](https://img.shields.io/badge/Godot-4.4-blue)
