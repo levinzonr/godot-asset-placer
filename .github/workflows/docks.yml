@@ -15,6 +15,9 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+      - name: Copy Root Files
+        run: |
+          cp ./CHANGELOG.md ./docs/changelog.md
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x
