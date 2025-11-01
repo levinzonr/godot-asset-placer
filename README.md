@@ -34,9 +34,14 @@ Any Features and Suggestions are welcome as well
 	<img src="https://img.youtube.com/vi/Go2pvRrgrRc/0.jpg" alt="YouTube Video" />
   </a>
 </p>
+<p align="center">
+  <a href="https://youtu.be/WAWQmslarm4" target="_blank">
+	<img src="https://img.youtube.com/vi/WAWQmslarm4/0.jpg" alt="YouTube Video" />
+  </a>
+</p>
 
 
-![addon_preview.png](docs/addon_preview.png)
+![addon_preview.png](docs/assets/addon_preview.png)
 
 ## Installation
 1. There are several ways to install the addon: 
@@ -124,9 +129,11 @@ The viewport overlay will display the current transformation mode and active axi
 You can organize your assets into Collections. Collections is a simple way to "group" assets together by some criteria. For example, you can create a collection for all the trees in your scene, or all the rocks, etc.
 To create a collection navigate to the Collections tab, choose a name and color. Then you can assing assets into one or more collections, either by using a options menu or draggin and dropping assets into the window while Collection Filter is activee
 
+![](docs/assets/collections_panel.png)
 
 ### Settings Panel
-Version 1.2.0 introduced a dedicated Settings Panel for comprehensive customization of the Asset Placer plugin. Access it through `Project` -> `Project Settings` -> `Plugins` -> `Asset Placer` -> `Settings Panel`.
+Version 1.2.0 introduced a dedicated Settings Panel for comprehensive customization of the Asset Placer plugin.
+![](docs/assets/settings_panel.png)
 
 #### General Settings
 - **Preview Material** - Choose your own Material3D resource or disable preview materials entirely
