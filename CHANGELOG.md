@@ -1,5 +1,61 @@
 # Godot Asset Placer Changelog
 
+## 1.2.0
+
+Version **1.2.0** is a major feature release that introduces a comprehensive Settings Panel, In Place Transform Mode, Random Asset Placement, and enhanced Placer options for more flexible asset placement workflows.
+
+### ✨ New Features
+
+#### ⚙️ Settings Panel ⚙️
+This release introduces a dedicated Settings Panel for the Asset Placer, allowing you to customize and tweak the plugin to your needs.
+
+**General Settings:**
+- Preview Material configuration - You can disable or choose your own Material3D resource to be used as a preview material for Asset Placement
+- Plane Material customization - Modify the material of the Plane used in Plane Placement Mode to better suit your scene (Project level settings)
+- Transform Step configuration - Configure the amount of rotation/scale applied per Mouse Wheel step when in Preview Transform mode
+  - Rotation Step Default: 5 degrees
+  - Scale/Translate Step Default: 0.1 Units
+- Thumbnail UI Scale option - Scales up/down the size of the items inside Assets Panel (Default: 1.0). This partially addresses issues like #28 and #38
+- Asset Library .json file path configuration - Set custom location of the library data source file. This is helpful if you want this file to be version controlled and shared between all developers with access to the project. By default the path will be an internal Godot user folder. This can be changed through Project Settings -> Advanced -> Godot Asset Placer.
+
+**Key Bindings:**
+You can now customize the key bindings for various actions within the Asset Placer plugin:
+- Rotate (Default: E)
+- Scale (Default: R)
+- Translate (Default: W)
+- Cycle Placement Modes (Default: Q)
+- Toggle Snapping (Default: S)
+- Toggle X, Y, Z Axis (Default: X, Y, Z keys respectively)
+- Transform Apply (Default: Mouse Wheel Up/Down)
+- In Place Transform Mode (Default: Shift+E)
+
+Key Bindings support Mouse Button and Modifiers Combinations (Ctrl/CMD, Shift, Alt/Options), providing more flexibility when choosing key bindings and allowing you to avoid conflicts with existing Godot shortcuts.
+
+The conflicting key will be unassigned and highlighted in red in the Settings Panel
+
+
+#### In Place Transform Mode
+**In Place Transform Mode** allows users to apply transformations using Asset Placer flow to existing Nodes that are already present in the scene tree. To enter this mode, select a Node3D in the scene tree and press "Shift+E" (Default Shortcut and configurable in Settings). After that, you can use the same Preview Transform shortcuts to modify the selected Node3D.
+
+#### Random Asset Placement
+This release introduces a new checkbox in the Asset Placement Options UI that allows users to enable/disable random placement of assets. When enabled, a new asset will be selected randomly from the current filtered list of assets in the Assets Panel. This will happen after each placement.
+
+> ⚠️ While this feature does work, we consider this feature to be experimental and might require further improvements in the future
+
+#### New Placer Options
+Two new placement alignment options have been added to the Asset Placement Options:
+
+- **Align Normals** - When enabled, assets will align with surface normals during placement, providing more natural placement on sloped or vertical surfaces
+- **Use Assets Origin** / **Scene Bottom Alignment** - Control whether assets should be placed using their local origin point (Use Assets Origin enabled) or their actual bottom (Use Assets Origin disabled). Using Asset Origin is particularly useful for assets that have a defined base or origin point that should remain "under" the surface, such as Trees
+
+### Collections Improvements
+- It is now possible to Edit Collections (Color, Name) from the Collections Tab
+- Collections UI has been updated to be more consistent with the rest of the plugin
+- ⚠️ **Breaking Change:** Collections are now identified by a unique ID instead of Name. The Migration is part of the plugin update and should run automatically and ideally should not cause any issues. However, if you have any issues with collections after updating please reach out. Your `asset_library.json` (https://github.com/levinzonr/godot-asset-placer/issues/44) will be backed-up automatically just in case.
+
+
+---
+
 ## 1.2.0-beta2
 ### Fixed
 - Collection Picker not showing current status of the Assigned collections
