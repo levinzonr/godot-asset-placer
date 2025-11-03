@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://43kdnn7nr2ch" path="res://addons/asset_placer/ui/about/about_window.gd" id="1_namxt"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_r5xs8"]
-[ext_resource type="Texture2D" uid="uid://btqtv2stkxtdk" path="res://docs/logo.png" id="3_vijnu"]
+[ext_resource type="Texture2D" uid="uid://be61c5ff55gfo" path="res://addons/asset_placer/icon.png" id="3_vijnu"]
 
 [sub_resource type="Texture2D" id="Texture2D_4v60v"]
 resource_local_to_scene = false
@@ -129,7 +129,7 @@ text = "Asset Placer"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Version 1.2.0-beta2"
+text = "Version 1.2.0"
 
 [node name="UpdateButton" type="Button" parent="Panel/CenterContainer/HBoxContainer"]
 unique_name_in_owner = true
