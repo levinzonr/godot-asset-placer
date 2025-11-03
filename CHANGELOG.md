@@ -1,5 +1,10 @@
 # Godot Asset Placer Changelog
 
+## 1.2.1
+### Fixed
+- Made Asset Collections Scrollable
+- Fix Icon in About Window
+
 ## 1.2.0
 
 Version **1.2.0** is a major feature release that introduces a comprehensive Settings Panel, In Place Transform Mode, Random Asset Placement, and enhanced Placer options for more flexible asset placement workflows.
