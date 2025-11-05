@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgjwhq5jvc58n"]
+
+[ext_resource type="Script" uid="uid://b6ywapljcr4hk" path="res://addons/asset_placer/ui/manage_collections/component/checkable_asset_item.gd" id="1_ojfhq"]
+[ext_resource type="Texture2D" uid="uid://be61c5ff55gfo" path="res://addons/asset_placer/icon.png" id="2_j4lj8"]
+
+[node name="CheckableAssetItem" type="Button"]
+custom_minimum_size = Vector2(0, 64)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 24.0
+grow_horizontal = 2
+toggle_mode = true
+action_mode = 0
+text = "Asset Preview "
+icon = ExtResource("2_j4lj8")
+alignment = 0
+expand_icon = true
+script = ExtResource("1_ojfhq")

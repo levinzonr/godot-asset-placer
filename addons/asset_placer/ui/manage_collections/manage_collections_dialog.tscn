@@ -1,0 +1,208 @@
+[gd_scene load_steps=5 format=3 uid="uid://cevixw6eclyvv"]
+
+[ext_resource type="Script" uid="uid://btxnvk6gmwvm4" path="res://addons/asset_placer/ui/manage_collections/manage_collections_dialog.gd" id="1_e6jak"]
+[ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_sjisq"]
+
+[sub_resource type="Texture2D" id="Texture2D_sjisq"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_sjisq")
+icon_name = &"Search"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="LabelSettings" id="LabelSettings_sjisq"]
+font_size = 28
+
+[node name="PopupPanel" type="PopupPanel"]
+oversampling_override = 1.0
+title = "Manage Collections"
+position = Vector2i(0, 36)
+size = Vector2i(1870, 829)
+visible = true
+transient_to_focused = true
+unresizable = false
+borderless = false
+script = ExtResource("1_e6jak")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Assets"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+texture = SubResource("Texture2D_sjisq")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="FilterAssetsLineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(193.45, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+placeholder_text = "Filter by name     "
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="AssetsContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="EmptyAssetsEmptyView" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/MarginContainer/EmptyAssetsEmptyView"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/MarginContainer/EmptyAssetsEmptyView/HBoxContainer"]
+layout_mode = 2
+text = "No assets"
+label_settings = SubResource("LabelSettings_sjisq")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/MarginContainer/EmptyAssetsEmptyView/HBoxContainer"]
+layout_mode = 2
+text = "No assets found"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Belongs to Collections"
+horizontal_alignment = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="ActiveCollectionsContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NoActiveCollectionsEmptyView" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/MarginContainer/NoActiveCollectionsEmptyView"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/MarginContainer/NoActiveCollectionsEmptyView/HBoxContainer"]
+layout_mode = 2
+text = "No Active Collections"
+label_settings = SubResource("LabelSettings_sjisq")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/MarginContainer/NoActiveCollectionsEmptyView/HBoxContainer"]
+layout_mode = 2
+text = "This asset currently does not belong to any collection"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Other available collections"
+horizontal_alignment = 2
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="InactiveCollectionsContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer2/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NoInActiveCollectionsEmptyView" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer2/MarginContainer2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer2/MarginContainer2/NoInActiveCollectionsEmptyView"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer2/MarginContainer2/NoInActiveCollectionsEmptyView/HBoxContainer"]
+layout_mode = 2
+text = "No collections"
+label_settings = SubResource("LabelSettings_sjisq")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer2/MarginContainer2/NoInActiveCollectionsEmptyView/HBoxContainer"]
+layout_mode = 2
+text = "This asset either already belongs to every collection
+ or there are no collections at all"
+horizontal_alignment = 1
+vertical_alignment = 1

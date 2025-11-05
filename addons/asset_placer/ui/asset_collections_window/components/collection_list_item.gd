@@ -16,22 +16,5 @@ func _ready():
 
 func set_collection(collection: AssetCollection):
 	name_label.text = collection.name
-	texture_rect.texture = make_circle_icon(32, collection.backgroundColor)
+	texture_rect.texture = collection.make_circle_icon(32)
 	
-	
-
-func make_circle_icon(radius: int, color: Color) -> Texture2D:
-	var size = radius * 2
-	var img := Image.create(size, size, false, Image.FORMAT_RGBA8)
-	img.fill(Color(0, 0, 0, 0))  # Transparent background
-
-	for y in size:
-		for x in size:
-			var dist = Vector2(x, y).distance_to(Vector2(radius, radius))
-			if dist <= radius:
-				img.set_pixel(x, y, color)
-
-	img.generate_mipmaps()
-
-	var tex := ImageTexture.create_from_image(img)
-	return tex
