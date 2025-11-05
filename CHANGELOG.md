@@ -1,5 +1,15 @@
 # Godot Asset Placer Changelog
 
+
+## 1.3.0-alpha1
+### Collections Management
+This release introduces `Collections Management` dialog which is accessible from the collections window. The purpose is to streamline Collections and Asset management.
+
+The dialog provide a more intuitive and convenient way to assign and remove assets to/from the collections
+
+![](./docs/assets/manage_collections.png)
+
+
 ## 1.2.1
 ### Fixed
 - Made Asset Collections Scrollable
