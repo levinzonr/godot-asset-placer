@@ -23,6 +23,7 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 @onready var keybinding_option_axis_z = %KeybindingOptionAxisZ
 @onready var keybinding_option_plane_mode = $Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions/KeybindingOptionPlaneMode
 @onready var update_channel_option_button: OptionButton = %UpdateChannelOptionButton
+@onready var update_channel_info_button: Button = %UpdateChannelInfoButton
 
 
 func _ready():
@@ -71,6 +72,11 @@ func _ready():
 	reset_button.pressed.connect(_presenter.reset_to_defaults)
 	material_clear_button.pressed.connect(_presenter.clear_preivew_material)
 	material_picker_button.pressed.connect(_show_preview_material_picker)
+	
+	update_channel_info_button.pressed.connect(func():
+		OS.shell_open("https://levinzonr.github.io/godot-asset-placer/development-lifecycle/")
+	)
+	
 	plane_material_picker_button.pressed.connect(func():
 		EditorInterface.popup_quick_open(_presenter.set_plane_material, ["BaseMaterial3D"])
 	)
