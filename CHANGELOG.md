@@ -1,5 +1,16 @@
 # Godot Asset Placer Changelog
 
+## 1.2.2
+
+### Added
+- Plugin Updater Stable Chanel Setting. This option allows to select between various update channels (Stable, Beta an Alpha)
+- More visibility about the available Plugin Updates. Small Icon will be visible next to the Asset Placer tab indicating the availability of the new version based on selected update channel
+
+### Changed
+- Minor UI updates to the Update Dialog
+- View Changelog button now points to the Release on GitHub instead of Changelog.Md
+
+
 ## 1.2.1
 ### Fixed
 - Made Asset Collections Scrollable
