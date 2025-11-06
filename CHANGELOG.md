@@ -1,5 +1,7 @@
 # Godot Asset Placer Changelog
 
+## 1.3.0-alpha2
+Merge changes from 1.2.2
 
 ## 1.3.0-alpha1
 ### Collections Management
