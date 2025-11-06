@@ -24,8 +24,8 @@ func _init(local_config_path: String, remote_config_path: String):
 	instance = self
 	
 	
-func check_for_updates():
-	_latest_update = await _get_latest_update()
+func check_for_updates(channel: AssetPlacerSettings.UpdateChannel = AssetPlacerSettings.UpdateChannel.Stable):
+	_latest_update = await _get_latest_update(channel)
 	if !_latest_update:
 		return
 		
@@ -119,16 +119,63 @@ func _is_update_downloaded() -> bool:
 	tmp_file.close()
 	return true
 
-func _get_latest_update() -> PluginUpdate:
-	_client.client_get("https://api.github.com/repos/levinzonr/godot-asset-placer/releases/latest")
-	var response: PackedByteArray = await  _client.client_response
+func _get_latest_update(channel: AssetPlacerSettings.UpdateChannel = AssetPlacerSettings.UpdateChannel.Stable) -> PluginUpdate:
+	# Fetch all releases
+	_client.client_get("https://api.github.com/repos/levinzonr/godot-asset-placer/releases")
+	var response: PackedByteArray = await _client.client_response
 	if response.is_empty():
 		return null
 		
-	var dict = JSON.parse_string(response.get_string_from_utf8())
-	var tag_name = dict["tag_name"]
-	var change_log = dict["body"]
-	var download_url = dict["zipball_url"]
+	var json_string = response.get_string_from_utf8()
+	var json = JSON.new()
+	var parse_result = json.parse(json_string)
+	if parse_result != OK:
+		return null
+		
+	var releases = json.data
+	if not releases is Array:
+		return null
+	
+	var latest_release = null
+	var latest_version: Version = null
+	
+	for release in releases:
+		var release_dict = release as Dictionary
+		if not release_dict:
+			continue
+			
+		var tag_name = release_dict.get("tag_name", "")
+		if tag_name.is_empty():
+			continue
+		
+		# Parse version to check channel compatibility
+		var version = Version.new(tag_name)
+		
+		# Filter releases based on channel using Version class
+		var matches_channel = false
+		match channel:
+			AssetPlacerSettings.UpdateChannel.Stable:
+				matches_channel = version.identifier == null
+			AssetPlacerSettings.UpdateChannel.Beta:
+				matches_channel = version.identifier == null or version.identifier.track != Version.Track.Alpha
+			AssetPlacerSettings.UpdateChannel.Alpha:
+				# For alpha channel, include all releases (no filtering)
+				matches_channel = true
+		
+		if not matches_channel:
+			continue
+		
+		# Check if this is the latest version for this channel
+		if latest_version == null or version.compare_to(latest_version) > 0:
+			latest_version = version
+			latest_release = release_dict
+	
+	if not latest_release:
+		return null
+	
+	var tag_name = latest_release["tag_name"]
+	var change_log = latest_release["body"]
+	var download_url = latest_release["zipball_url"]
 	return PluginUpdate.new(tag_name, change_log, download_url)
 	
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ckokuu85fua3"]
+[gd_scene load_steps=11 format=3 uid="uid://ckokuu85fua3"]
 
 [ext_resource type="Script" uid="uid://ckohy5300ciba" path="res://addons/asset_placer/ui/settings/settings_panel.gd" id="1_cqn4c"]
 [ext_resource type="PackedScene" uid="uid://bjgh4jo3pc65i" path="res://addons/asset_placer/ui/settings/components/keybinding_option.tscn" id="1_gi0tg"]
@@ -26,6 +26,13 @@ resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("1_si2q2")
 icon_name = &"Close"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_altf5"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_si2q2")
+icon_name = &"Info"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [sub_resource type="Texture2D" id="Texture2D_cqn4c"]
@@ -173,7 +180,7 @@ text = "Thumbnails UI Scale"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "1.0"
+text = "0.8"
 horizontal_alignment = 2
 
 [node name="UIScaleHSlider" type="HSlider" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5"]
@@ -184,12 +191,39 @@ size_flags_vertical = 1
 min_value = 0.2
 max_value = 2.0
 step = 0.1
-value = 1.0
+value = 0.8
 ticks_position = 3
 
-[node name="Control2" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General"]
-custom_minimum_size = Vector2(0, 12)
+[node name="Spacing" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+
+[node name="UpdateChannelContainer" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/UpdateChannelContainer"]
+layout_mode = 2
+text = "Plugin Update Channel"
+
+[node name="UpdateChannelInfoButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/UpdateChannelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+icon = SubResource("Texture2D_altf5")
+flat = true
+
+[node name="UpdateChannelOptionButton" type="OptionButton" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/UpdateChannelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+alignment = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Stable"
+popup/item_0/id = 0
+popup/item_1/text = "Beta"
+popup/item_1/id = 1
+popup/item_2/text = "Alpha"
+popup/item_2/id = 2
 
 [node name="KeyBindings" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2

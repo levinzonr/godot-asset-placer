@@ -8,6 +8,7 @@ var plane_material_resource: String
 var bindings: Dictionary
 var ui_scale: float
 var asset_library_path: String
+var update_channel: UpdateChannel
 
 var binding_positive_transform: APInputOption:
 	get(): return bindings[Bindings.TransformPositive]
@@ -31,6 +32,12 @@ enum Bindings {
 	TogglePlaneMode
 }
 
+enum UpdateChannel {
+	Stable,
+	Beta,
+	Alpha
+}
+
 
 
 static func default() -> AssetPlacerSettings:
@@ -52,4 +59,5 @@ static func default() -> AssetPlacerSettings:
 	settings.rotation_step = 5
 	settings.ui_scale = 1.0
 	settings.asset_library_path = "user://asset_library.json"
+	settings.update_channel = UpdateChannel.Stable
 	return settings
