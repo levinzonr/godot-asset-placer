@@ -7,18 +7,9 @@ repo_name: levinzonr/godot-asset-placer
 theme:
   name: material
   palette:
-    - scheme: default
-      primary: pink
-      accent: cyan
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
     - scheme: slate
       primary: pink
       accent: cyan
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
   features:
     - navigation.tabs
     - navigation.sections
@@ -32,6 +23,7 @@ theme:
 
 nav:
   - Home: index.md
+  - Development Lifecycle: development-lifecycle.md
   - Changelog: changelog.md
 
 markdown_extensions:
