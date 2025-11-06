@@ -22,6 +22,7 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 @onready var keybinding_option_axis_y = %KeybindingOptionAxisY
 @onready var keybinding_option_axis_z = %KeybindingOptionAxisZ
 @onready var keybinding_option_plane_mode = $Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions/KeybindingOptionPlaneMode
+@onready var update_channel_option_button: OptionButton = %UpdateChannelOptionButton
 
 
 func _ready():
@@ -29,6 +30,7 @@ func _ready():
 	trasform_step_spin_box.value_changed.connect(_presenter.set_default_transform_step)
 	rotation_step_spin_box.value_changed.connect(_presenter.set_rotation_step)
 	_presenter.show_settings.connect(_show_settings)
+	update_channel_option_button.item_selected.connect(_presenter.set_update_channel)
 	keybinding_option_rotate.keybind_changed.connect(func(key):
 		_presenter.set_binding(AssetPlacerSettings.Bindings.Rotate, key)
 	)
@@ -90,7 +92,7 @@ func _show_settings(setting: AssetPlacerSettings):
 	keybinding_option_axis_y.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.ToggleAxisY])
 	keybinding_option_axis_z.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.ToggleAxisZ])
 	keybinding_option_plane_mode.set_keybind(setting.bindings[AssetPlacerSettings.Bindings.TogglePlaneMode])
-
+	update_channel_option_button.select(setting.update_channel)
 	plane_material_picker_button.text = setting.plane_material_resource.get_file()
 	if setting.preview_material_resource.is_empty():
 		material_picker_button.text = "No Preview Material"
