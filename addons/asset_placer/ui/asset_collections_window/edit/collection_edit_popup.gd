@@ -9,6 +9,8 @@ var collection_to_edit: AssetCollection
 @onready var text_edit: TextEdit= %TextEdit
 
 func _ready():
+	if not collection_to_edit:
+		return
 	color_picker_button.color = collection_to_edit.backgroundColor
 	text_edit.text = collection_to_edit.name
 	text_edit.grab_focus()

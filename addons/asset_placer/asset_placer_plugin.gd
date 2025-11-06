@@ -14,6 +14,7 @@ var _asset_placer_window: AssetLibraryPanel
 var _file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
 var _viewport_overlay_res = preload("res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.tscn")
 var _plane_preview: Node3D
+var _asset_placer_button: Button
 var overlay: Control
 var plane_placer: PlanePlacer
 
@@ -53,7 +54,7 @@ func _enter_tree():
 	_presenter.asset_selected.connect(start_placement)
 	_presenter.asset_deselected.connect(_asset_placer.stop_placement)
 	_asset_placer_window = load("res://addons/asset_placer/ui/asset_library_panel.tscn").instantiate()
-	add_control_to_bottom_panel(_asset_placer_window, "Asset Placer")
+	_asset_placer_button = add_control_to_bottom_panel(_asset_placer_window, "Asset Placer")
 	_asset_placer_window.visibility_changed.connect(_on_dock_visibility_changed)
 	
 	_presenter.placement_mode_changed.connect(_asset_placer.set_placement_mode)
@@ -70,8 +71,14 @@ func _enter_tree():
 	if !_file_system.is_scanning():
 		synchronizer.sync_all()
 		
-	
+	_updater.updater_update_available.connect(_show_update_available)
+	_updater.updater_up_to_date.connect(_show_plugin_up_to_date)
+	_updater.update_ready.connect(_show_update_available)
+
 func _exit_tree():
+	_updater.updater_up_to_date.disconnect(_show_plugin_up_to_date)
+	_updater.updater_update_available.disconnect(_show_update_available)
+	_updater.update_ready.disconnect(_show_update_available)
 	overlay.queue_free()
 	_plane_preview.queue_free()
 	settings_repository.settings_changed.disconnect(_react_to_settings_change)
@@ -218,6 +225,12 @@ func _forward_3d_gui_input(viewport_camera, event):
 		
 	return EditorPlugin.AFTER_GUI_INPUT_PASS
 
+func _show_plugin_up_to_date():
+	_asset_placer_button.icon = null
+
+func _show_update_available(update: PluginUpdate):
+	_asset_placer_button.icon = EditorIconTexture2D.new("ArrowUp")
+	_asset_placer_button.icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 
 func _handled():
 	get_viewport().set_input_as_handled()
