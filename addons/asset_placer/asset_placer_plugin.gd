@@ -229,7 +229,7 @@ func _show_plugin_up_to_date():
 	_asset_placer_button.icon = null
 
 func _show_update_available(update: PluginUpdate):
-	_asset_placer_button.icon = EditorIconTexture2D.new("ArrowUp")
+	_asset_placer_button.icon = EditorIconTexture2D.new("MoveUp")
 	_asset_placer_button.icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 
 func _handled():

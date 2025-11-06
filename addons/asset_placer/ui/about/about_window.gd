@@ -48,7 +48,7 @@ func _show_update_available_for_download(update: PluginUpdate):
 		update_button.show()
 		apply_update_button.hide()
 		update_version_label.text = update.version._to_string()
-		changelog_link_button.uri = "https://github.com/levinzonr/godot-asset-placer/blob/main/CHANGELOG.md#" +  update.version.changelog_version()
+		changelog_link_button.uri = "https://github.com/levinzonr/godot-asset-placer/releases/tag/" +  update.version.to_string()
 
 
 func _show_update_loading(loading: bool):
@@ -60,6 +60,8 @@ func _show_update_loading(loading: bool):
 		progress_bar.hide()
 
 func _show_update_ready_to_apply(update: PluginUpdate):
+		update_button.text = "Version %s Availalbe" % update.version
+		update_button.show()
 		download_update_button.hide()
 		apply_update_button.show()
 		update_version_label.text = update.version._to_string()

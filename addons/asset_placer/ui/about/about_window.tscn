@@ -43,14 +43,16 @@ script = ExtResource("1_namxt")
 
 [node name="UpdatePopup" type="PopupPanel" parent="."]
 oversampling_override = 1.0
+title = "Update"
 initial_position = 1
-size = Vector2i(499, 217)
+size = Vector2i(552, 475)
+borderless = false
 
 [node name="MarginContainer" type="MarginContainer" parent="UpdatePopup"]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 495.0
-offset_bottom = 213.0
+offset_right = 548.0
+offset_bottom = 471.0
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
@@ -60,14 +62,27 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 theme_override_constants/separation = 12
 
+[node name="TextureRect" type="TextureRect" parent="UpdatePopup/MarginContainer/Vbox"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+texture = ExtResource("3_vijnu")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="Label" type="Label" parent="UpdatePopup/MarginContainer/Vbox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "Update Available"
+text = "New Version is Available"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UpdatePopup/MarginContainer/Vbox"]
+[node name="Spacing" type="Control" parent="UpdatePopup/MarginContainer/Vbox"]
+custom_minimum_size = Vector2(0, 32.14)
 layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="UpdatePopup/MarginContainer/Vbox"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
 
 [node name="UpdateVersionLabel" type="Label" parent="UpdatePopup/MarginContainer/Vbox/HBoxContainer"]
 unique_name_in_owner = true
@@ -75,13 +90,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "1.1.5"
+horizontal_alignment = 1
 
 [node name="ChangelogLinkButton" type="LinkButton" parent="UpdatePopup/MarginContainer/Vbox/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 24
 text = "View Changelog"
 uri = "https://github.com/levinzonr/godot-asset-placer/blob/main/CHANGELOG.md#115"
+
+[node name="Spacing2" type="Control" parent="UpdatePopup/MarginContainer/Vbox"]
+custom_minimum_size = Vector2(0, 32.14)
+layout_mode = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="UpdatePopup/MarginContainer/Vbox"]
 visible = false
@@ -129,7 +150,7 @@ text = "Asset Placer"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Version 1.2.0"
+text = "Version 1.2.1"
 
 [node name="UpdateButton" type="Button" parent="Panel/CenterContainer/HBoxContainer"]
 unique_name_in_owner = true
