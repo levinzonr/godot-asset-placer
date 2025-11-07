@@ -8,6 +8,7 @@ extends Control
 @onready var add_button: Button = %AddButton
 @onready var collections_container = %CollectionsContainer
 @onready var empty_view = %EmptyView
+@onready var manage_collections_button: Button = %ManageCollectionsButton
 
 
 var _collection_item_list_resource: PackedScene = preload("res://addons/asset_placer/ui/asset_collections_window/components/collection_list_item.tscn")
@@ -26,6 +27,10 @@ func _ready():
 	name_text_field.text_changed.connect(presenter.set_name)
 	color_picker_button.color_changed.connect(presenter.set_color)
 
+	manage_collections_button.pressed.connect(func():
+		var panel = load("res://addons/asset_placer/ui/manage_collections/manage_collections_dialog.tscn")
+		EditorInterface.popup_dialog_centered(panel.instantiate())
+	)
 
 func _show_empty_view():
 	empty_view.show()

@@ -178,13 +178,15 @@ func _place_instance(transform: Transform3D, select_after_placement: bool):
 	var selection = EditorInterface.get_selection()
 	var scene = EditorInterface.get_edited_scene_root()
 	var scene_root = scene.get_node(AssetPlacerPresenter._instance._parent)
+	var options = AssetPlacerPresenter._instance.options
+	var parent = AssetParentSelector.pick_parent(scene_root, asset, options.group_automatically)
 	
-	if scene_root and asset.scene:
+	if parent and asset.scene:
 		undo_redo.create_action("Place Asset: %s" % asset.name)
-		undo_redo.add_do_method(self, "_do_placement", scene_root, transform, select_after_placement)
-		undo_redo.add_undo_method(self, "_undo_placement", scene_root)
+		undo_redo.add_do_method(self, "_do_placement", parent, transform, select_after_placement)
+		undo_redo.add_undo_method(self, "_undo_placement", parent)
 		undo_redo.commit_action()
-		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
+		AssetTransformations.apply_transforms(preview_node, options)
 		_presenter.on_asset_placed()
 
 func _do_placement(root: Node3D, transform: Transform3D, select_after_placement: bool):

@@ -240,6 +240,9 @@ func on_asset_placed():
 		var random = current_assets.pick_random()
 		select_asset(random)
 		
+func set_automatic_grouping(value: bool):
+	options.group_automatically = value
+	options_changed.emit(options)
 
 func is_node_transform_mode() -> bool:
 	return _selected_node != null

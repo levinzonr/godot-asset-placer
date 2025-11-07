@@ -1,5 +1,36 @@
 # Godot Asset Placer Changelog
 
+## 1.3.0-alpha3
+
+### Automatic Collections Grouping
+This release features a new option called to Group placed Assets Automatically based on theirs assigned collections
+
+When enabled, every all Assets will automatically grouped under Node3D named after the **primary collection** (First collection that is assigned to the asset)
+
+For example: Assets that is assigned to collections: Trees and Flamable or Rocks
+```
+- Parent (Root parent remains the same and will be used as default in case Asset does not belong to any collection or option is disable)
+    - Trees (Primary collection from the assets)
+        - Tree(1)
+        - Tree(2)
+    - Rocks
+        - Rock (1)
+        - Rock (2)
+```
+### Assigned Collections Order Matters
+To support previous feature, `Asset Management Dialog` now supports Collections re-ordering to make it possible to make sure all assets have proper **Primary Collection** assigned to them
+
+## 1.3.0-alpha2
+Merge changes from 1.2.2
+
+## 1.3.0-alpha1
+### Collections Management
+This release introduces `Collections Management` dialog which is accessible from the collections window. The purpose is to streamline Collections and Asset management.
+
+The dialog provide a more intuitive and convenient way to assign and remove assets to/from the collections
+
+![](./docs/assets/manage_collections.png)
+=======
 ## 1.2.2
 
 ### Added
