@@ -1,8 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://br5p4t6lmerlb"]
+[gd_scene load_steps=7 format=3 uid="uid://br5p4t6lmerlb"]
 
 [ext_resource type="Script" uid="uid://b4c5hlcpl1sor" path="res://addons/asset_placer/ui/manage_collections/component/checkable_collection_item.gd" id="1_s7tli"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_0clrp"]
 [ext_resource type="Texture2D" uid="uid://be61c5ff55gfo" path="res://addons/asset_placer/icon.png" id="2_oap7o"]
+
+[sub_resource type="Texture2D" id="Texture2D_injr6"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_0clrp")
+icon_name = &"MoveUp"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_0clrp"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_0clrp")
+icon_name = &"MoveDown"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [sub_resource type="Texture2D" id="Texture2D_j2h3m"]
 resource_local_to_scene = false
@@ -40,9 +54,24 @@ layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("1_s7tli")
 
-[node name="Button" type="Button" parent="."]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 10
+
+[node name="MoveUpButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+icon = SubResource("Texture2D_injr6")
+
+[node name="MoveDownButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+icon = SubResource("Texture2D_0clrp")
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
 text = "Add"
 icon = SubResource("Texture2D_j2h3m")

@@ -20,6 +20,17 @@ func ready():
 	var collections = collections_repository.get_collections()
 	show_assets.emit(assets)
 	show_inactive_collections.emit(collections)	
+	
+
+func move_collection(collection: AssetCollection, up: bool):
+	var current_index = active_asset.tags.find_custom(func(id): return id == collection.id)
+	if current_index != -1:
+		var new_index = current_index - 1 if up else current_index + 1
+		var old_tag = active_asset.tags[new_index]
+		active_asset.tags[current_index] = old_tag
+		active_asset.tags[new_index] = collection.id
+		assets_repository.update(active_asset)
+		select_asset(active_asset)
 
 func select_asset(asset: AssetResource):
 	self.active_asset = asset
@@ -33,6 +44,11 @@ func select_asset(asset: AssetResource):
 		else:
 			inactive_collections.push_back(collection)
 			
+	active_collections.sort_custom(func(first, second):
+		var first_order = active_asset.tags.find(first.id)
+		var second_order = active_asset.tags.find(second.id)
+		return first_order < second_order
+	)		
 			
 	show_active_collections.emit(active_collections)		
 	show_inactive_collections.emit(inactive_collections)

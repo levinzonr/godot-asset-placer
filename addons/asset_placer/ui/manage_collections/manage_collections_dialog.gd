@@ -58,8 +58,10 @@ func show_inactive_collections(collections: Array[AssetCollection]):
 		var control := collection_item_res.instantiate() as Control
 		inactive_collections_container.add_child(control)
 		control.set_collection(item)
-		control.button.icon = EditorIconTexture2D.new("ArrowUp")
+		control.button.icon = EditorIconTexture2D.new("Add")
 		control.button.text = "Add"
+		control.move_up_button.hide()
+		control.move_down_button.hide()
 		control.button.pressed.connect(func():
 			presenter.add_to_collection(item)
 		)
@@ -75,7 +77,18 @@ func show_active_collections(collections: Array[AssetCollection]):
 		active_collections_container.add_child(control)
 		control.set_collection(item)
 		control.button.text = "Remove"
-		control.button.icon = EditorIconTexture2D.new("ArrowDown")
+		control.move_up_button.disabled = collections.find(item) == 0
+		control.move_down_button.disabled  = collections.find(item) == collections.size() - 1
+		
+		control.move_up_button.pressed.connect(func():
+			presenter.move_collection(item, true)
+		)
+		
+		control.move_down_button.pressed.connect(func():
+			presenter.move_collection(item, false)
+		)
+
+		control.button.icon = EditorIconTexture2D.new("Clear")
 		control.button.pressed.connect(func():
 			presenter.remove_from_collection(item)
 		)

@@ -5,6 +5,8 @@ extends Control
 @onready var collection_icon = %CollectionIcon
 @onready var label = %Label
 
+@onready var move_up_button = %MoveUpButton
+@onready var move_down_button = %MoveDownButton
 
 func set_collection(collection: AssetCollection):
 	collection_icon.texture = collection.make_circle_icon(24)
