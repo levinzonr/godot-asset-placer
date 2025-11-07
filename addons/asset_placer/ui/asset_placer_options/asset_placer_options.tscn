@@ -136,7 +136,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
-text = "Group Automatically"
+text = "Auto-Group by Collections"
 icon = SubResource("Texture2D_h8tp4")
 
 [node name="Button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
