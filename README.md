@@ -23,6 +23,7 @@ Any Features and Suggestions are welcome as well
 - **Random Asset Placement** - Automatically select random assets from filtered list after each placement
 - **Advanced Placement Options** - Normal alignment and scene bottom alignment controls
 - Organize Assets into collections for quick access and filtering
+- Automatically group placed assets based on collections
 - Filter Assets by their name and collection
 - Grid snapping when placing assets
 - Randomize asset Rotation and Scale on placement
