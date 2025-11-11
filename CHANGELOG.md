@@ -30,7 +30,10 @@ This release introduces `Collections Management` dialog which is accessible from
 The dialog provide a more intuitive and convenient way to assign and remove assets to/from the collections
 
 ![](./docs/assets/manage_collections.png)
-=======
+## 1.2.3
+### Fixed
+The default Parent Node is now properly initialized on plugin startup
+
 ## 1.2.2
 
 ### Added
