@@ -1,5 +1,9 @@
 # Godot Asset Placer Changelog
 
+## 1.2.3
+### Fixed
+The default Parent Node is now properly initialized on plugin startup
+
 ## 1.2.2
 
 ### Added
