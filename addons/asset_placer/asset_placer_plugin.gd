@@ -51,6 +51,7 @@ func _enter_tree():
 	_asset_placer = AssetPlacer.new(get_undo_redo(), plane_placer)
 	synchronizer = Synchronize.new(_folder_repository, _assets_repository)
 	scene_changed.connect(_handle_scene_changed)
+	_init_parent_scene.call_deferred()
 	_presenter.asset_selected.connect(start_placement)
 	_presenter.asset_deselected.connect(_asset_placer.stop_placement)
 	_asset_placer_window = load("res://addons/asset_placer/ui/asset_library_panel.tscn").instantiate()
@@ -91,7 +92,11 @@ func _exit_tree():
 	remove_control_from_bottom_panel(_asset_placer_window)
 	_asset_placer_window.queue_free()
 	_async.await_completion()
-	
+
+func _init_parent_scene():
+	var current_scene = get_tree().edited_scene_root
+	if current_scene and current_scene is Node3D:
+		_handle_scene_changed(current_scene)
 
 func _handles(object):
 	return object is Node3D
