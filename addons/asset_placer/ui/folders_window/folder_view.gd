@@ -12,9 +12,7 @@ signal folder_sync_clicked
 signal folder_include_subfloders_change(bool)
 
 func _ready():
-	delete_button.pressed.connect(func():
-		folder_delete_clicked.emit()
-	)
+	
 	
 	sync_button.pressed.connect(func():
 		folder_sync_clicked.emit()

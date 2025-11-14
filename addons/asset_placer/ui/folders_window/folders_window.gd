@@ -43,7 +43,7 @@ func show_folders(folders: Array[AssetFolder]):
 			presenter.include_subfolders(include, folder)
 		)
 		instance.folder_sync_clicked.connect(func():
-			presenter.sync_folder(folder)
+			EditFolderDialog.present(folder)
 		)
 		
 		

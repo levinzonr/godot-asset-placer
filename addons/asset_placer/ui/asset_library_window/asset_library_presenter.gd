@@ -38,10 +38,9 @@ func on_ready():
 	)
 
 func add_asset_folder(path: String):
-	folder_repository.add(path)
-	var dir_access = DirAccess.open(path)
-	for file in dir_access.get_files():
-		add_asset(path + file, path)
+	var folder = folder_repository.add(path)
+	if folder:
+		Synchronize.instance.sync_folder(folder)
 
 func on_query_change(query: String):
 	self._current_query = query

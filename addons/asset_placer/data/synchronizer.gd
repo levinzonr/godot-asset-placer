@@ -53,7 +53,7 @@ func sync_folder(folder: AssetFolder):
 func _sync_folder(folder: AssetFolder):
 	_clear_invalid_assets()
 	_clear_unreachable_assets()
-	add_assets_from_folder(folder.path, folder.include_subfolders)
+	add_assets_from_folder(folder.path, folder.include_subfolders, folder.rules)
 
 func _sync_all():
 	_clear_unreachable_assets()
@@ -61,19 +61,33 @@ func _sync_all():
 	for folder in folder_repository.get_all():
 		_sync_folder(folder)
 
-func add_assets_from_folder(folder_path: String, recursive: bool):
+func add_assets_from_folder(
+	folder_path: String,
+	recursive: bool,
+	rules: Array[AssetPlacerFolderRule]
+):
 	var dir = DirAccess.open(folder_path)
 	var tags : Array[int] = []
 	for file in dir.get_files():
 		_scanned += 1
 		var path = folder_path + "/" + file
-		if asset_repository.add_asset(path, tags, folder_path):
-			_added += 1
+		var add = true
+		
+		for rule in rules:
+			add = rule.do_file_match(file)
+		
+		if add:
+			var asset = asset_repository.add_asset(path, tags, folder_path)
+			if asset:
+				for rule in rules:
+					asset = rule.do_after_asset_added(asset)
+					asset_repository.update(asset)
+				_added += 1
 		
 	if recursive:
 		for sub_dir in dir.get_directories():
 			var path: String = folder_path + "/" + sub_dir
-			add_assets_from_folder(path, true)
+			add_assets_from_folder(path, true, rules)
 
 
 func _notify_scan_complete():

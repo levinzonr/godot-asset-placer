@@ -2,8 +2,8 @@
 extends Control
 class_name AssetLibraryWindow
 
-@onready var presenter = AssetLibraryPresenter.new()
-@onready var folder_presenter = FolderPresenter.new()
+@onready var presenter: AssetLibraryPresenter = AssetLibraryPresenter.new()
+@onready var folder_presenter: FolderPresenter = FolderPresenter.new()
 
 @onready var placer_presenter := AssetPlacerPresenter._instance
 @onready var grid_container: Container = %GridContainer

@@ -62,29 +62,32 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 2
 
-[node name="PathLabel" type="Label" parent="Panel/MarginContainer/HBoxContainer"]
+[node name="PathLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Folder path"
 
-[node name="SubfoldersCheckbox" type="CheckBox" parent="Panel/MarginContainer/HBoxContainer"]
+[node name="SubfoldersCheckbox" type="CheckBox" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Include sub folders"
 
-[node name="SyncButton" type="Button" parent="Panel/MarginContainer/HBoxContainer"]
+[node name="SyncButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Reload"
 icon = SubResource("Texture2D_q40po")
 
-[node name="DeleteButton" type="Button" parent="Panel/MarginContainer/HBoxContainer"]
+[node name="DeleteButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Remove"
