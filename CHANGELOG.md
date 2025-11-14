@@ -1,5 +1,9 @@
 # Godot Asset Placer Changelog
 
+## 1.2.4
+### Fixed
+- Fix an Engine crash happening when using Slider to Change the Thumbnails Scale (#47)
+
 ## 1.2.3
 ### Fixed
 The default Parent Node is now properly initialized on plugin startup
