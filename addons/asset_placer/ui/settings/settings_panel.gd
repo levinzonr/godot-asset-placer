@@ -27,7 +27,12 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 
 
 func _ready():
-	ui_scale_h_slider.value_changed.connect(_presenter.set_ui_scale)
+	ui_scale_h_slider.drag_ended.connect(func(changed):
+		_presenter.set_ui_scale(ui_scale_h_slider.value)
+	)
+	ui_scale_h_slider.value_changed.connect(func(value):
+		slider_value.text = str(value)
+	)
 	trasform_step_spin_box.value_changed.connect(_presenter.set_default_transform_step)
 	rotation_step_spin_box.value_changed.connect(_presenter.set_rotation_step)
 	_presenter.show_settings.connect(_show_settings)

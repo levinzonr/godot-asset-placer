@@ -30,6 +30,11 @@ This release introduces `Collections Management` dialog which is accessible from
 The dialog provide a more intuitive and convenient way to assign and remove assets to/from the collections
 
 ![](./docs/assets/manage_collections.png)
+
+## 1.2.4
+### Fixed
+- Fix an Engine crash happening when using Slider to Change the Thumbnails Scale (#47)
+
 ## 1.2.3
 ### Fixed
 The default Parent Node is now properly initialized on plugin startup
