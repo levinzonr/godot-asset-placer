@@ -41,7 +41,7 @@ func add_asset_folder(path: String):
 	folder_repository.add(path)
 	var dir_access = DirAccess.open(path)
 	for file in dir_access.get_files():
-		add_asset(path + file, path)
+		add_asset(path.path_join(file), path)
 
 func on_query_change(query: String):
 	self._current_query = query
