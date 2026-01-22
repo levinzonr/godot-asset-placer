@@ -54,7 +54,10 @@ func show_assets(assets: Array[AssetResource]):
 		child.queue_free()
 	for asset in assets:
 		var child: AssetResourcePreview = preview_resource.instantiate()
-		child.left_clicked.connect(AssetPlacerPresenter._instance.toggle_asset)
+		child.left_clicked.connect(func(asset):
+			if is_instance_valid(asset.get_resource()):
+				AssetPlacerPresenter._instance.toggle_asset
+		)
 		child.right_clicked.connect(func(asset):
 			show_asset_menu(asset, child)
 		)
