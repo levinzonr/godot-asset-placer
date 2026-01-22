@@ -24,11 +24,11 @@ func _init(folders_repository: FolderRepository, assets_repository: AssetsReposi
 	instance = self
 
 func sync_all():
-	
+
 	if sync_running:
 		push_error("Sync is already running")
 		return
-	
+
 	AssetPlacerAsync.instance.enqueue(func():
 		sync_running = true
 		_sync_all()
@@ -37,11 +37,11 @@ func sync_all():
 	)
 
 func sync_folder(folder: AssetFolder):
-	
+
 	if sync_running:
 		push_error("Sync is already running")
 		return
-	
+
 	AssetPlacerAsync.instance.enqueue(func():
 		sync_running = true
 		_sync_folder(folder)
@@ -69,7 +69,7 @@ func add_assets_from_folder(folder_path: String, recursive: bool):
 		var path = folder_path + "/" + file
 		if asset_repository.add_asset(path, tags, folder_path):
 			_added += 1
-		
+
 	if recursive:
 		for sub_dir in dir.get_directories():
 			var path: String = folder_path + "/" + sub_dir
@@ -92,7 +92,7 @@ func _clear_unreachable_assets():
 				asset_repository.delete(asset.id)
 			elif not _is_asset_reachable_from_folder(asset, folder):
 				asset_repository.delete(asset.id)
-			
+
 func _is_asset_reachable_from_folder(asset: AssetResource, folder: AssetFolder) -> bool:
 	var asset_folder_path := asset.folder_path
 	var folder_path := folder.path
@@ -101,18 +101,18 @@ func _is_asset_reachable_from_folder(asset: AssetResource, folder: AssetFolder) 
 
 	if folder.include_subfolders and asset_folder_path.begins_with(folder_path + "/"):
 		return true
-	
+
 	return false
-				
-			
+
+
 func _clear_invalid_assets():
 	for asset in asset_repository.get_all_assets():
-		if asset.scene == null:
-			_removed += 1 
+		if not asset.has_resource():
+			_removed += 1
 			asset_repository.delete(asset.id)
 
 func _clear_data():
 	_removed = 0
 	_added = 0
-	_scanned = 0		
-			
+	_scanned = 0
+

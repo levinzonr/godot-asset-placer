@@ -42,10 +42,10 @@ func _ready():
 	filter_button.pressed.connect(func ():
 		CollectionPicker.show_in(filter_button, presenter._active_collections, presenter.toggle_collection_filter)
 	)
-	
-	
 
-	
+
+
+
 func show_assets(assets: Array[AssetResource]):
 	placer_presenter.current_assets = assets
 	empty_collection_content.hide()
@@ -73,10 +73,10 @@ func show_asset_menu(asset: AssetResource, control: Control):
 			0: CollectionPicker.show_in(control, asset.shallow_collections, func(collection, add):
 				presenter.toggle_asset_collection(asset, collection, add)
 			)
-			1: 
-				EditorInterface.open_scene_from_path(asset.scene.resource_path)
+			1:
+				EditorInterface.open_scene_from_path(asset.get_path())
 				EditorInterface.set_main_screen_editor("3D")
-			2: 
+			2:
 				if placer_presenter._selected_asset == asset:
 					placer_presenter.clear_selection()
 				presenter.delete_asset(asset)
@@ -96,14 +96,14 @@ func clear_selected_asset():
 	for child in grid_container.get_children():
 		if child is Button:
 			child.set_pressed_no_signal(false)
-			
+
 func _can_drop_data(at_position, data):
 	if data is Dictionary:
 		var type = data["type"]
 		var files_or_dirs = type == "files_and_dirs" || type == "files"
 		return files_or_dirs and data.has("files")
-	return false	
-	
+	return false
+
 func _drop_data(at_position, data):
 	var dirs: PackedStringArray = data["files"]
 	presenter.add_assets_or_folders(dirs)
@@ -113,7 +113,7 @@ func show_filter_info(size: int):
 		filters_label.hide()
 	else:
 		filters_label.show()
-		filters_label.text = str(size)	
+		filters_label.text = str(size)
 
 func set_selected_asset(asset: AssetResource):
 	for child in grid_container.get_children():
@@ -122,7 +122,7 @@ func set_selected_asset(asset: AssetResource):
 
 
 
-	
+
 func show_empty_view(type: AssetLibraryPresenter.EmptyType):
 	match type:
 		AssetLibraryPresenter.EmptyType.Search:
@@ -140,25 +140,25 @@ func show_main_content():
 	scroll_container.show()
 	empty_collection_content.hide()
 	empty_search_content.hide()
-	
+
 func show_onboarding():
 	main_content.hide()
-	empty_collection_content.hide()	
+	empty_collection_content.hide()
 	empty_search_content.hide()
 	empty_content.show()
-			
+
 func show_empty_collection_view():
 	main_content.show()
 	scroll_container.hide()
 	empty_collection_content.hide()
 	empty_collection_content.show()
 	empty_content.hide()
-	
+
 func show_empty_search_content():
 	main_content.show()
 	scroll_container.hide()
-	empty_collection_content.hide()	
-	empty_search_content.show()			
+	empty_collection_content.hide()
+	empty_search_content.show()
 
 func show_sync_in_progress(active: bool):
 	if active:
