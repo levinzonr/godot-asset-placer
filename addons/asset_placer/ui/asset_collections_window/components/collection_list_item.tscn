@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="1_q0bvl"]
 [ext_resource type="Script" uid="uid://bf5fmwafbhhb0" path="res://addons/asset_placer/ui/asset_collections_window/components/collection_list_item.gd" id="1_xjg5v"]
-[ext_resource type="Texture2D" uid="uid://btqtv2stkxtdk" path="res://docs/logo.png" id="2_ligpx"]
+[ext_resource type="Texture2D" uid="uid://be61c5ff55gfo" path="res://addons/asset_placer/icon.png" id="2_ligpx"]
 
 [sub_resource type="Texture2D" id="Texture2D_xjg5v"]
 resource_local_to_scene = false
