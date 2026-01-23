@@ -1,5 +1,9 @@
 # Godot Asset Placer Changelog
 
+## 1.2.5
+### Fixed
+- #50 Wrong Icon resource was being used causing issues with plugin startup by @Sr3qt
+
 ## 1.2.4
 ### Fixed
 - Fix an Engine crash happening when using Slider to Change the Thumbnails Scale (#47)
