@@ -35,7 +35,6 @@ func get_resource() -> Resource:
 	if not is_resource_loaded() and has_resource() and not _failed_load:
 		_resource = load(id)
 		if not is_instance_valid(_resource):
-			printerr("Godot Asset Placer: Asset with id: %s, failed to load." % id)
 			_failed_load = true
 	return _resource
 
