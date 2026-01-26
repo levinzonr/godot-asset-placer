@@ -1,5 +1,10 @@
 # Godot Asset Placer Changelog
 
+## 1.2.6
+### Added
+- #51 Add another floating point configuration for the grid-step
+
+
 ## 1.2.5
 ### Fixed
 - #50 Wrong Icon resource was being used causing issues with plugin startup by @Sr3qt
