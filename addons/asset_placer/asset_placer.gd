@@ -236,8 +236,7 @@ func _instantiate_asset_resource(asset: AssetResource) -> Node3D:
 	var _preview_node: Node3D
 	var resource := asset.get_resource()
 	if resource is PackedScene:
-		# Why are we duplicating a brand new instance?
-		_preview_node = (resource.instantiate() as Node3D).duplicate()
+		_preview_node = (resource.instantiate() as Node3D)
 	elif resource is ArrayMesh:
 		_preview_node = MeshInstance3D.new()
 		_preview_node.name = asset.name
