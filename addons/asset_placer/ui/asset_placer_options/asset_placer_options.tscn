@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://dmicn3kmr620j"
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_o45xf")
-icon_name = &"Node3D"
+icon_name = &"NodeWarning"
 
 [sub_resource type="Texture2D" id="Texture2D_br0rc"]
 resource_local_to_scene = false
@@ -111,7 +111,7 @@ text = "Assets Parent: "
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Demo"
+text = "No parent selected"
 icon = SubResource("Texture2D_o45xf")
 alignment = 0
 
@@ -212,7 +212,7 @@ text = "Grid Step"
 [node name="GridSnapValueSpinBox" type="SpinBox" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-step = 0.1
+step = 0.01
 value = 1.0
 editable = false
 
