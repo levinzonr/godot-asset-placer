@@ -16,9 +16,9 @@ var undo_redo: EditorUndoRedoManager
 var meta_asset_id = &"asset_placer_res_id"
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
 
-var _strategy: AssetPlacementStrategy 
+var _strategy: AssetPlacementStrategy
 var _plane_placer: PlanePlacer
-var _presenter: AssetPlacerPresenter: 
+var _presenter: AssetPlacerPresenter:
 	get: return AssetPlacerPresenter._instance
 
 func _init(undo_redo: EditorUndoRedoManager, plane_placer: PlanePlacer):
@@ -55,42 +55,42 @@ func _apply_preview_material(node: Node3D):
 	if node is MeshInstance3D:
 		for i in node.get_surface_override_material_count():
 			node.set_surface_override_material(i, preview_material)
-	
+
 	for child in node.get_children():
 		if child is MeshInstance3D:
 			for i in child.get_surface_override_material_count():
 				child.set_surface_override_material(i, preview_material)
 		_apply_preview_material(child)
-		
+
 
 func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 	if preview_node:
 		var hit = _strategy.get_placement_point(camera, mouse_position)
 		var normal = Vector3.UP
-		
+
 		if AssetPlacerPresenter._instance.options.align_normals and hit:
 			normal = hit.normal
-			
+
 		var snapped_pos = _snap_position(hit.position, normal)
 		var forward_hint = preview_node.global_transform.basis.z
-		
+
 		var new_basis = get_safe_basis(normal, forward_hint).scaled(preview_node.scale)
 		var new_transform = Transform3D(new_basis, snapped_pos)
-		
+
 		var local_bottom = Vector3(0, preview_aabb.position.y, 0)
-		
+
 		if _presenter.options.use_asset_origin:
 			local_bottom = Vector3.ZERO
-		
+
 		var bottom_world = new_transform * local_bottom
 		var adjust = snapped_pos - bottom_world
 		new_transform.origin += adjust
 		preview_node.global_transform = new_transform
-		
+
 		return true
 	else:
 		return false
-	
+
 func place_asset(focus_on_placement: bool):
 	if preview_node:
 		if _is_node_transform_mode:
@@ -100,7 +100,7 @@ func place_asset(focus_on_placement: bool):
 			_place_instance(preview_node.global_transform, focus_on_placement)
 			return true
 	else:
-		return false	
+		return false
 
 func set_plugin_settings(settings: AssetPlacerSettings):
 	preview_rotate_step = settings.rotation_step
@@ -108,12 +108,12 @@ func set_plugin_settings(settings: AssetPlacerSettings):
 	if settings.preview_material_resource.is_empty():
 		preview_material = null
 	else:
-		preview_material = load(settings.preview_material_resource)	
+		preview_material = load(settings.preview_material_resource)
 
 func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, direction: int) -> bool:
 	if not preview_node:
 		return false
-		
+
 	match mode:
 		AssetPlacerPresenter.TransformMode.None:
 			return false
@@ -130,9 +130,9 @@ func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, 
 			preview_node.scale = new_scale
 			return true
 		AssetPlacerPresenter.TransformMode.Rotate:
-			preview_node.rotate(axis.normalized() * direction, deg_to_rad(preview_rotate_step)) # Can be replaced with deg_to_rad(preview_transform_step) however 0.1 deg is realy low. 
+			preview_node.rotate(axis.normalized() * direction, deg_to_rad(preview_rotate_step)) # Can be replaced with deg_to_rad(preview_transform_step) however 0.1 deg is realy low.
 			return true
-			
+
 		AssetPlacerPresenter.TransformMode.Move:
 			_plane_placer.move_plane_up(direction * 0.2)
 			return true
@@ -175,11 +175,10 @@ func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
 
 
 func _place_instance(transform: Transform3D, select_after_placement: bool):
-	var selection = EditorInterface.get_selection()
-	var scene = EditorInterface.get_edited_scene_root()
-	var scene_root = scene.get_node(AssetPlacerPresenter._instance._parent)
-	
-	if scene_root and asset.scene:
+	var scene := EditorInterface.get_edited_scene_root()
+	var scene_root := scene.get_node(AssetPlacerPresenter._instance._parent)
+
+	if is_instance_valid(scene_root) and is_instance_valid(asset.get_resource()):
 		undo_redo.create_action("Place Asset: %s" % asset.name)
 		undo_redo.add_do_method(self, "_do_placement", scene_root, transform, select_after_placement)
 		undo_redo.add_undo_method(self, "_undo_placement", scene_root)
@@ -214,7 +213,7 @@ func _confirm_node_transform():
 		undo_redo.add_do_method(self, "_do_node_transform", preview_node, preview_node.global_transform)
 		undo_redo.add_undo_method(self, "_undo_node_transform", preview_node, _original_transform)
 		undo_redo.commit_action()
-		
+
 		# Exit node transform mode
 		_presenter.end_node_transform_mode()
 		stop_placement()
@@ -232,19 +231,19 @@ func stop_placement():
 	if preview_node and not was_node_transform_mode:
 		preview_node.queue_free()
 	preview_node = null
-		
 
 func _instantiate_asset_resource(asset: AssetResource) -> Node3D:
 	var _preview_node: Node3D
-	if asset.scene is PackedScene:
-		_preview_node = (asset.scene.instantiate() as Node3D).duplicate()
-	elif asset.scene is ArrayMesh:
+	var resource := asset.get_resource()
+	if resource is PackedScene:
+		_preview_node = (resource.instantiate() as Node3D)
+	elif resource is ArrayMesh:
 		_preview_node = MeshInstance3D.new()
 		_preview_node.name = asset.name
-		_preview_node.mesh = asset.scene.duplicate()
+		_preview_node.mesh = resource.duplicate()
 	else:
-		push_error("Not supported resource type %s" % str(asset.scene))
-	
+		push_error("Not supported resource type %s" % str(resource))
+
 	return _preview_node
 
 func set_placement_mode(placement_mode: PlacementMode):
@@ -256,13 +255,13 @@ func set_placement_mode(placement_mode: PlacementMode):
 		_strategy = Terrain3DAssetPlacementStrategy.new(placement_mode.terrain3dNode)
 	else:
 		push_error("Placement mode %s is not supported" % str(placement_mode))
-		
+
 func _pick_name(node: Node3D, parent: Node3D) -> String:
 	var number_of_same_scenes = 0
 	for child in parent.get_children():
 		if child.has_meta(meta_asset_id) && child.get_meta(meta_asset_id) == asset.id:
 			number_of_same_scenes += 1
-	return node.name if number_of_same_scenes == 0 else node.name + " (%s)" % number_of_same_scenes		
+	return node.name if number_of_same_scenes == 0 else node.name + " (%s)" % number_of_same_scenes
 
 
 func get_safe_basis(up: Vector3, forward_hint: Vector3) -> Basis:
@@ -283,7 +282,7 @@ func get_safe_basis(up: Vector3, forward_hint: Vector3) -> Basis:
 			right = up.cross(Vector3.RIGHT).normalized()
 
 	forward = right.cross(up).normalized()
-	
+
 	if up.length() < 0.001 or right.length() < 0.001 or forward.length() < 0.001:
 		return Basis()
 
