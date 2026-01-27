@@ -30,7 +30,6 @@ var _last_plane_options := PlaneOptions.new(Vector3.UP, Vector3.ZERO)
 var _selected_node: Node3D
 
 
-
 func _init():
 	options = AssetPlacerOptions.new()
 	self._selected_asset = null

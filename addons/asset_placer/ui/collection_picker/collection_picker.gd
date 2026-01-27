@@ -44,7 +44,7 @@ func show_collections(collections: Array[AssetCollection]):
 	)
 
 
-static func show_in(context: Control, selected: Array[AssetCollection], on_select: Callable):
+static func show_in(_context: Control, selected: Array[AssetCollection], on_select: Callable):
 	var picker: CollectionPicker = CollectionPicker.new()
 	picker.collection_selected.connect(on_select)
 	picker.pre_selected = selected

@@ -8,7 +8,7 @@ var _new_plane_options: PlaneOptions = PlaneOptions.new(Vector3.UP, Vector3.ZERO
 var _last_mouse_position: Vector2
 
 
-func _init(presenter: AssetPlacerPresenter, plane: Node3D):
+func _init(presenter: AssetPlacerPresenter, _plane: Node3D):
 	self.presenter = presenter
 	presenter.placement_mode_changed.connect(
 		func(mode: PlacementMode):

@@ -4,7 +4,7 @@ extends RefCounted
 var modifiers: KeyModifierMask
 
 
-func is_pressed(event: InputEvent) -> bool:
+func is_pressed(_event: InputEvent) -> bool:
 	return false
 
 
@@ -16,7 +16,7 @@ func serialize() -> String:
 	return ""
 
 
-func equals(other: APInputOption) -> bool:
+func equals(_other: APInputOption) -> bool:
 	return false
 
 

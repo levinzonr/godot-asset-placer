@@ -112,7 +112,7 @@ func clear_selected_asset():
 			child.set_pressed_no_signal(false)
 
 
-func _can_drop_data(at_position, data):
+func _can_drop_data(_at_position, data):
 	if data is Dictionary:
 		var type = data["type"]
 		var files_or_dirs = type == "files_and_dirs" || type == "files"
@@ -120,7 +120,7 @@ func _can_drop_data(at_position, data):
 	return false
 
 
-func _drop_data(at_position, data):
+func _drop_data(_at_position, data):
 	var dirs: PackedStringArray = data["files"]
 	presenter.add_assets_or_folders(dirs)
 

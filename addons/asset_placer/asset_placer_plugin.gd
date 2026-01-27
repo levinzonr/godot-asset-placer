@@ -142,7 +142,7 @@ func _react_to_settings_change(settings: AssetPlacerSettings):
 	_asset_placer.set_plugin_settings(settings)
 
 
-func _react_to_reimorted_files(files: PackedStringArray):
+func _react_to_reimorted_files(_files: PackedStringArray):
 	synchronizer.sync_all()
 
 
@@ -256,7 +256,7 @@ func _show_plugin_up_to_date():
 	_asset_placer_button.icon = null
 
 
-func _show_update_available(update: PluginUpdate):
+func _show_update_available(_update: PluginUpdate):
 	_asset_placer_button.icon = EditorIconTexture2D.new("MoveUp")
 	_asset_placer_button.icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 

@@ -60,7 +60,7 @@ func cancel():
 	_pressed = 0
 
 
-func _process(delta):
+func _process(_delta):
 	match _state:
 		State.Idle:
 			pass
@@ -118,7 +118,7 @@ func _process_input_key_event_pressed(event: InputEventKey):
 	_pressed += 1
 
 
-func _process_input_key_event_released(event: InputEventKey):
+func _process_input_key_event_released(_event: InputEventKey):
 	_pressed -= 1
 	if _pressed == 0:
 		_stop_binding()
