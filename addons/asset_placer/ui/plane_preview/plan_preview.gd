@@ -21,7 +21,7 @@ func _ready():
 				show()
 	)
 
-	AssetPlacerPresenter
+	var _presenter = AssetPlacerPresenter._instance
 
 
 func _set_plane_material(settings: AssetPlacerSettings):

@@ -17,13 +17,13 @@ func get_all_assets() -> Array[AssetResource]:
 	return data_source.get_library().items
 
 
-func exists(assetId: String):
-	return get_all_assets().any(func(item: AssetResource): return item.id == assetId)
+func exists(asset_id: String):
+	return get_all_assets().any(func(item: AssetResource): return item.id == asset_id)
 
 
-func delete(assetId: String):
+func delete(asset_id: String):
 	var lib = data_source.get_library()
-	var assets = lib.items.filter(func(a): return a.id != assetId)
+	var assets = lib.items.filter(func(a): return a.id != asset_id)
 	lib.items = assets
 	data_source.save_libray(lib)
 	call_deferred("emit_signal", "assets_changed")

@@ -108,8 +108,8 @@ func clear_parent():
 func set_unform_scaling(value: bool):
 	options.uniform_scaling = value
 	if value:
-		options.min_scale = uniformV3(options.min_scale.x)
-		options.max_scale = uniformV3(options.max_scale.x)
+		options.min_scale = uniform_v3(options.min_scale.x)
+		options.max_scale = uniform_v3(options.max_scale.x)
 	options_changed.emit(options)
 
 
@@ -181,7 +181,7 @@ func _select_default_axis(mode: TransformMode):
 			pass
 
 
-func uniformV3(value: float) -> Vector3:
+func uniform_v3(value: float) -> Vector3:
 	return Vector3(value, value, value)
 
 

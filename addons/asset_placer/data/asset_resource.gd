@@ -17,9 +17,9 @@ var _resource: Resource = null
 var _failed_load := false
 
 
-func _init(resId: String, name: String, tags: Array[int] = [], folder_path: String = ""):
+func _init(res_id: String, name: String, tags: Array[int] = [], folder_path: String = ""):
 	self.name = name
-	self.id = resId
+	self.id = res_id
 	self.tags = tags
 	self.folder_path = folder_path
 
