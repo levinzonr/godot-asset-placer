@@ -35,7 +35,7 @@ func show_collections(collections: Array[AssetCollection]):
 		set_item_checked(i, selected)
 
 		set_item_icon(i, circle_tex)
-		set_item_icon_modulate(i, collections[i].backgroundColor)
+		set_item_icon_modulate(i, collections[i].background_color)
 
 	index_pressed.connect(
 		func(index):

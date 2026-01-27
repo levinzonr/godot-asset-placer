@@ -25,7 +25,7 @@ func update_collection(collection: AssetCollection):
 	for item in collections:
 		if item.id == collection.id:
 			item.name = collection.name
-			item.backgroundColor = collection.backgroundColor
+			item.background_color = collection.background_color
 			break
 	lib.collections = collections
 	_data_source.save_libray(lib)

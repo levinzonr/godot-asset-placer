@@ -79,7 +79,7 @@ func save_libray(library: AssetLibrary):
 			collections_dict.append(
 				{
 					"name": collection.name,
-					"color": collection.backgroundColor.to_html(),
+					"color": collection.background_color.to_html(),
 					"id": collection.id
 				}
 			)

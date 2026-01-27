@@ -18,4 +18,4 @@ func _ready():
 
 func set_collection(collection: AssetCollection):
 	name_label.text = collection.name
-	texture_rect.modulate = collection.backgroundColor
+	texture_rect.modulate = collection.background_color

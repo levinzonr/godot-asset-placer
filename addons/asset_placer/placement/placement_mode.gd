@@ -4,7 +4,6 @@ extends RefCounted
 
 class SurfacePlacement:
 	extends PlacementMode
-	pass
 
 
 class PlanePlacement:

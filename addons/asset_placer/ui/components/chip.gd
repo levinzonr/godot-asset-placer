@@ -2,7 +2,7 @@
 class_name Chip
 extends Button
 
-@export var backgroundColor: Color = Color(0, 0, 0, 0.5):
+@export var background_color: Color = Color(0, 0, 0, 0.5):
 	set = set_background_color
 @export var corner_radius: int = 32:
 	set = set_corner_radius
@@ -22,7 +22,7 @@ func _ready():
 
 
 func set_background_color(color: Color):
-	backgroundColor = color
+	background_color = color
 	_update_stylebox()
 
 

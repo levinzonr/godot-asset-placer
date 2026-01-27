@@ -14,7 +14,7 @@ var collection_to_edit: AssetCollection
 func _ready():
 	if not collection_to_edit:
 		return
-	color_picker_button.color = collection_to_edit.backgroundColor
+	color_picker_button.color = collection_to_edit.background_color
 	text_edit.text = collection_to_edit.name
 	text_edit.grab_focus()
 	text_edit.text_changed.connect(
@@ -24,7 +24,7 @@ func _ready():
 	)
 
 	color_picker_button.color_changed.connect(
-		func(color): collection_to_edit.backgroundColor = color
+		func(color): collection_to_edit.background_color = color
 	)
 
 	save_button.pressed.connect(

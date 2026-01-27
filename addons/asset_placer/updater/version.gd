@@ -18,15 +18,15 @@ class Identifier:
 	var number: int
 
 	func _to_string() -> String:
-		var _track: String
+		var track: String
 		match track:
 			Track.Alpha:
-				_track = "alpha"
+				track = "alpha"
 			Track.Beta:
-				_track = "beta"
+				track = "beta"
 			Track.ReleaseCandidate:
-				_track = "rc"
-		return "%s%d" % [_track, number]
+				track = "rc"
+		return "%s%d" % [track, number]
 
 
 func _init(version: String):
@@ -43,10 +43,10 @@ func _init(version: String):
 		major = int(result.get_string("major"))
 		minor = int(result.get_string("minor"))
 		patch = int(result.get_string("patch"))
-		var _identifier = (
+		var identifier = (
 			result.get_string("prerelease") if result.get_string("prerelease") != "" else ""
 		)
-		self.identifier = _parse_identifier(_identifier)
+		self.identifier = _parse_identifier(identifier)
 
 
 func _to_string():
