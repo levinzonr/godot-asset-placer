@@ -45,8 +45,8 @@ func add(folder: String, incldude_subfolders: bool = true):
 		push_warning("Folder with this path already exists")
 		return
 
-	var _folder = AssetFolder.new(folder, incldude_subfolders)
-	duplicated_folders.append(_folder)
+	var new_folder = AssetFolder.new(folder, incldude_subfolders)
+	duplicated_folders.append(new_folder)
 	library.folders = duplicated_folders
 	data_source.save_libray(library)
 	folder_changed.emit()

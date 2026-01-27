@@ -256,18 +256,18 @@ func stop_placement():
 
 
 func _instantiate_asset_resource(asset: AssetResource) -> Node3D:
-	var _preview_node: Node3D
+	var new_node: Node3D
 	var resource := asset.get_resource()
 	if resource is PackedScene:
-		_preview_node = (resource.instantiate() as Node3D)
+		new_node = (resource.instantiate() as Node3D)
 	elif resource is ArrayMesh:
-		_preview_node = MeshInstance3D.new()
-		_preview_node.name = asset.name
-		_preview_node.mesh = resource.duplicate()
+		new_node = MeshInstance3D.new()
+		new_node.name = asset.name
+		new_node.mesh = resource.duplicate()
 	else:
 		push_error("Not supported resource type %s" % str(resource))
 
-	return _preview_node
+	return new_node
 
 
 func set_placement_mode(placement_mode: PlacementMode):
