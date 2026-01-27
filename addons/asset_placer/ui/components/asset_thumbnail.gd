@@ -23,4 +23,5 @@ func preview_resource():
 		previewer.queue_resource_preview(_resource.get_path(), self, "_on_preview_generated", null)
 
 func _on_preview_generated(path: String, texture: Texture2D,  thumbnail, data):
-	self.texture = texture
+	if is_instance_valid(texture):
+		self.texture = texture
