@@ -1,21 +1,19 @@
-extends RefCounted
 class_name AssetPlacer
+extends RefCounted
 
 var preview_node: Node3D
 var preview_aabb: AABB
 var node_history: Array[String] = []
 var preview_rids = []
 var asset: AssetResource
-var _is_node_transform_mode: bool = false
-var _original_transform: Transform3D
-
 var preview_transform_step: float = 0.1
 var preview_rotate_step: float = 5
-
 var undo_redo: EditorUndoRedoManager
 var meta_asset_id = &"asset_placer_res_id"
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
 
+var _is_node_transform_mode: bool = false
+var _original_transform: Transform3D
 var _strategy: AssetPlacementStrategy
 var _plane_placer: PlanePlacer
 var _presenter: AssetPlacerPresenter:

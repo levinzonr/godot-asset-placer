@@ -5,10 +5,10 @@ extends Button
 signal key_binding_changed(option: APInputOption)
 signal key_binding_active
 
+enum State { Bind, Idle }
+
 @export var allow_modifiers: bool = true
 @export var allow_mouse_buttons: bool = false
-
-enum State { Bind, Idle }
 
 var _current_key: APInputOption = APInputOption.none()
 var _pending_key: APInputOption = null

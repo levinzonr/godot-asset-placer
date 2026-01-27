@@ -1,5 +1,5 @@
-extends RefCounted
 class_name AssetFolder
+extends RefCounted
 
 var path: String
 var include_subfolders: bool

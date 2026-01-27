@@ -1,5 +1,5 @@
-extends RefCounted
 class_name AssetCollection
+extends RefCounted
 
 var name: String
 var backgroundColor: Color

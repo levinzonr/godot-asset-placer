@@ -1,5 +1,5 @@
-extends AssetPlacementStrategy
 class_name PlanePlacementStrategy
+extends AssetPlacementStrategy
 
 var plane_options: PlaneOptions
 

@@ -1,5 +1,5 @@
-extends RefCounted
 class_name APInputOption
+extends RefCounted
 
 var modifiers: KeyModifierMask
 

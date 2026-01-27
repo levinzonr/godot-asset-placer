@@ -1,6 +1,6 @@
 @tool
-extends Texture2D
 class_name EditorIconTexture2D
+extends Texture2D
 
 @export var icon_name: StringName = &"Node2D"
 

@@ -1,6 +1,6 @@
 @tool
-extends RefCounted
 class_name AssetLibrary
+extends RefCounted
 
 var folders: Array[AssetFolder] = []
 var items: Array[AssetResource] = []

@@ -1,5 +1,5 @@
-extends AssetPlacementStrategy
 class_name Terrain3DAssetPlacementStrategy
+extends AssetPlacementStrategy
 
 var terrain_3d_node: Node3D
 

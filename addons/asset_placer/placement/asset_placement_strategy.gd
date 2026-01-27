@@ -1,5 +1,5 @@
-extends RefCounted
 class_name AssetPlacementStrategy
+extends RefCounted
 
 
 class CollisionHit:

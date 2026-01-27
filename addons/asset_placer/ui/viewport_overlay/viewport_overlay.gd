@@ -1,5 +1,9 @@
 @tool
 extends Control
+
+var _error_position: Vector2
+var _error_hidden_position: Vector2
+
 @onready var rotate_check_button: CheckBox = %RotateCheckButton
 @onready var scale_check_button: CheckBox = %ScaleCheckButton
 @onready var translate_check_button: CheckBox = %TranslateCheckButton
@@ -12,9 +16,6 @@ extends Control
 @onready var error_timer: Timer = %ErrorTimer
 @onready var snapping_switch: CheckButton = %SnappingSwitch
 @onready var placement_shortcut_label: Label = %PlacementShortcutLabel
-
-var _error_position: Vector2
-var _error_hidden_position: Vector2
 @onready var _settings_repository := AssetPlacerSettingsRepository.instance
 
 

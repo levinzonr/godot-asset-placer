@@ -1,12 +1,12 @@
-extends RefCounted
 class_name AssetCollectionRepository
+extends RefCounted
 
-var _data_source: AssetLibraryDataSource
-var _id_generator: AssetPlacerIdGenerator
+signal collections_changed
 
 static var instance: AssetCollectionRepository
 
-signal collections_changed
+var _data_source: AssetLibraryDataSource
+var _id_generator: AssetPlacerIdGenerator
 
 
 func _init(data_source: AssetLibraryDataSource):

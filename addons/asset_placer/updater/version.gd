@@ -1,16 +1,16 @@
-extends RefCounted
 class_name Version
-
-var major: int
-var minor: int
-var patch: int
-var identifier: Identifier
+extends RefCounted
 
 enum Track {
 	Alpha = 0,
 	Beta = 1,
 	ReleaseCandidate = 2,
 }
+
+var major: int
+var minor: int
+var patch: int
+var identifier: Identifier
 
 
 class Identifier:

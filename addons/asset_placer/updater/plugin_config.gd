@@ -1,5 +1,5 @@
-extends RefCounted
 class_name PluginConfiguration
+extends RefCounted
 
 var version: Version
 

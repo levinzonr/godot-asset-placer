@@ -1,5 +1,13 @@
-extends RefCounted
 class_name AssetLibraryPresenter
+extends RefCounted
+
+signal assets_loaded(assets: Array[AssetResource])
+signal asset_selection_change
+signal show_filter_info(size: int)
+signal show_sync_active(bool)
+signal show_empty_view(type: EmptyType)
+
+enum EmptyType { Search, Collection, All, None }
 
 var library: AssetLibrary
 var folder_repository: FolderRepository
@@ -10,14 +18,6 @@ var _active_collections: Array[AssetCollection] = []
 var _filtered_assets: Array[AssetResource] = []
 var _current_assets: Array[AssetResource]
 var _current_query: String
-
-enum EmptyType { Search, Collection, All, None }
-
-signal assets_loaded(assets: Array[AssetResource])
-signal asset_selection_change
-signal show_filter_info(size: int)
-signal show_sync_active(bool)
-signal show_empty_view(type: EmptyType)
 
 
 func _init():

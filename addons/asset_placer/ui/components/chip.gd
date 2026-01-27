@@ -1,6 +1,6 @@
 @tool
-extends Button
 class_name Chip
+extends Button
 
 @export var backgroundColor: Color = Color(0, 0, 0, 0.5):
 	set = set_background_color

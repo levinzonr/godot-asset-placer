@@ -1,5 +1,5 @@
-extends Object
 class_name AssetTransformations
+extends Object
 
 
 static func apply_transforms(node: Node3D, options: AssetPlacerOptions):

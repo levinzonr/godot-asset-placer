@@ -1,22 +1,5 @@
-extends RefCounted
 class_name AssetPlacerSettings
-
-var transform_step: float
-var rotation_step: float
-var preview_material_resource: String
-var plane_material_resource: String
-var bindings: Dictionary
-var ui_scale: float
-var asset_library_path: String
-var update_channel: UpdateChannel
-
-var binding_positive_transform: APInputOption:
-	get():
-		return bindings[Bindings.TransformPositive]
-
-var binding_negative_transform: APInputOption:
-	get():
-		return bindings[Bindings.TransformNegative]
+extends RefCounted
 
 enum Bindings {
 	Rotate,
@@ -33,6 +16,21 @@ enum Bindings {
 }
 
 enum UpdateChannel { Stable, Beta, Alpha }
+
+var transform_step: float
+var rotation_step: float
+var preview_material_resource: String
+var plane_material_resource: String
+var bindings: Dictionary
+var ui_scale: float
+var asset_library_path: String
+var update_channel: UpdateChannel
+var binding_positive_transform: APInputOption:
+	get():
+		return bindings[Bindings.TransformPositive]
+var binding_negative_transform: APInputOption:
+	get():
+		return bindings[Bindings.TransformNegative]
 
 
 static func default() -> AssetPlacerSettings:

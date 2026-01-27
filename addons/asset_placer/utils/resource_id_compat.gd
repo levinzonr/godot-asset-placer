@@ -1,5 +1,5 @@
-extends RefCounted
 class_name ResourceIdCompat
+extends RefCounted
 
 
 static func path_to_uid(path: String):

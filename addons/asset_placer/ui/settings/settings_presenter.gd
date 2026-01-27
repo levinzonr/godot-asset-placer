@@ -1,9 +1,9 @@
-extends RefCounted
 class_name SettingsPresenter
-
-var _repository: AssetPlacerSettingsRepository
+extends RefCounted
 
 signal show_settings(settings: AssetPlacerSettings)
+
+var _repository: AssetPlacerSettingsRepository
 
 
 func _init():

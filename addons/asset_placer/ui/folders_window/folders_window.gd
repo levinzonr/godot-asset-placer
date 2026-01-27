@@ -1,11 +1,10 @@
 @tool
-extends Control
 class_name FoldersWindow
+extends Control
 
 @onready var v_box_container = %VBoxContainer
 @onready var presenter: FolderPresenter = FolderPresenter.new()
 @onready var add_folder_button: Button = %AddFolderButton
-
 @onready var folder_res = preload("res://addons/asset_placer/ui/folders_window/folder_view.tscn")
 
 

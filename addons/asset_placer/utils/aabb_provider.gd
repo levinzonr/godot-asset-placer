@@ -1,5 +1,5 @@
-extends RefCounted
 class_name AABBProvider
+extends RefCounted
 
 
 static func provide_aabb(node: Node3D) -> AABB:

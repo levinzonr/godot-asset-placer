@@ -1,12 +1,12 @@
 @tool
-extends PopupMenu
 class_name CollectionPicker
+extends PopupMenu
 
 signal collection_selected(collection: AssetCollection, selected: bool)
 
-@onready var presenter := AssetCollectionsPresenter.new()
-
 var pre_selected: Array[AssetCollection]
+
+@onready var presenter := AssetCollectionsPresenter.new()
 
 
 func _ready():

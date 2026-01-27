@@ -1,5 +1,7 @@
-extends RefCounted
 class_name AssetPlacerSettingsRepository
+extends RefCounted
+
+signal settings_changed(settings: AssetPlacerSettings)
 
 const KEY_BASE = "asset_placer/%s"
 const KEY_BINDING_SCALE: String = "bindings/scale_asset"
@@ -21,10 +23,9 @@ const KEY_UI_SCALE: String = "general/ui_scale"
 const KEY_ASSET_LIBRARY_PATH: String = "general/asset_library_path"
 const KEY_UPDATE_CHANNEL: String = "general/update_channel"
 
-signal settings_changed(settings: AssetPlacerSettings)
+static var instance: AssetPlacerSettingsRepository
 
 var _editor_settings: EditorSettings
-static var instance: AssetPlacerSettingsRepository
 
 
 func _init():

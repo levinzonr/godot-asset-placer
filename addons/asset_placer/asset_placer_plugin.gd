@@ -1,15 +1,24 @@
 @tool
 extends EditorPlugin
 
+const ADDON_PATH = "res://addons/asset_placer"
+
+var synchronizer: Synchronize
+var overlay: Control
+var plane_placer: PlanePlacer
+var settings_repository: AssetPlacerSettingsRepository
+var current_settings: AssetPlacerSettings
+var plugin_path: String:
+	get():
+		return get_script().resource_path.get_base_dir()
+
 var _folder_repository: FolderRepository
 var _presenter: AssetPlacerPresenter
 var _asset_placer: AssetPlacer
 var _assets_repository: AssetsRepository
 var _collection_repository: AssetCollectionRepository
-var synchronizer: Synchronize
 var _updater: PluginUpdater
 var _async: AssetPlacerAsync
-
 var _asset_placer_window: AssetLibraryPanel
 var _file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
 var _viewport_overlay_res = preload(
@@ -17,22 +26,10 @@ var _viewport_overlay_res = preload(
 )
 var _plane_preview: Node3D
 var _asset_placer_button: Button
-var overlay: Control
-var plane_placer: PlanePlacer
-
 var _migration_collection_id = load(
 	"res://addons/asset_placer/data/migrations/collection_id_migration.gd"
 )
-
-var settings_repository: AssetPlacerSettingsRepository
-var current_settings: AssetPlacerSettings
 var _data_source: AssetLibraryDataSource
-
-var plugin_path: String:
-	get():
-		return get_script().resource_path.get_base_dir()
-
-const ADDON_PATH = "res://addons/asset_placer"
 
 
 func _enable_plugin():

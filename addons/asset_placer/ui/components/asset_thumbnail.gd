@@ -1,9 +1,10 @@
 @tool
-extends TextureRect
 class_name AssetThumbnail
+extends TextureRect
+
+var last_time_modified = 0
 
 var _resource: AssetResource
-var last_time_modified = 0
 
 
 func _process(_delta):

@@ -1,9 +1,9 @@
-extends RefCounted
 class_name PluginUpdaterHttpClient
-
-var _client = HTTPClient.new()
+extends RefCounted
 
 signal client_response(body: PackedByteArray)
+
+var _client = HTTPClient.new()
 
 
 func client_get(url: String):

@@ -1,11 +1,11 @@
-extends RefCounted
 class_name AssetsRepository
+extends RefCounted
 
-var data_source: AssetLibraryDataSource
+signal assets_changed
 
 static var instance: AssetsRepository
 
-signal assets_changed
+var data_source: AssetLibraryDataSource
 
 
 func _init(data_source: AssetLibraryDataSource):

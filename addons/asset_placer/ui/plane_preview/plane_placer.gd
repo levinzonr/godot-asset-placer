@@ -1,7 +1,8 @@
-extends RefCounted
 class_name PlanePlacer
+extends RefCounted
 
 var presenter: AssetPlacerPresenter
+
 var _current_plane_options = PlaneOptions.new(Vector3.UP, Vector3.ZERO)
 var _new_plane_options: PlaneOptions = PlaneOptions.new(Vector3.UP, Vector3.ZERO)
 var _last_mouse_position: Vector2

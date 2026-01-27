@@ -1,9 +1,9 @@
-extends RefCounted
 class_name AssetPlacerAsync
-
-var _job_ids: Array[int] = []
+extends RefCounted
 
 static var instance: AssetPlacerAsync
+
+var _job_ids: Array[int] = []
 
 
 func _init():

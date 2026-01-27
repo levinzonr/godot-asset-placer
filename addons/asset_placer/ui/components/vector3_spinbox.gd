@@ -1,19 +1,18 @@
 @tool
-extends HBoxContainer
 class_name SpinBoxVector3
+extends HBoxContainer
 
 signal value_changed(vector: Vector3)
 
 @export var min: Vector3
 @export var max: Vector3
 @export var label: String
+@export var uniform: bool = false
+@export var normalized: bool = false
 
 @onready var spin_x := SpinBox.new()
 @onready var spin_y := SpinBox.new()
 @onready var spin_z := SpinBox.new()
-
-@export var uniform: bool = false
-@export var normalized: bool = false
 
 
 func _ready():

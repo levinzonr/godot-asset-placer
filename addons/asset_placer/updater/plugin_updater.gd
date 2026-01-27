@@ -1,5 +1,5 @@
-extends RefCounted
 class_name PluginUpdater
+extends RefCounted
 
 signal updater_up_to_date
 signal updater_update_available(update: PluginUpdate)

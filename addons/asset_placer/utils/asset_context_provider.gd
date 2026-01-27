@@ -1,5 +1,5 @@
-extends RefCounted
 class_name AssetPlacerContextUtil
+extends RefCounted
 
 
 static func select_context():

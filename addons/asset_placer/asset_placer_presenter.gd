@@ -1,9 +1,5 @@
-extends RefCounted
 class_name AssetPlacerPresenter
-
-static var _instance: AssetPlacerPresenter
-
-static var TRANSFORM_STEP: float = 0.1
+extends RefCounted
 
 signal asset_deselected
 signal parent_changed(parent: NodePath)
@@ -16,22 +12,23 @@ signal show_error(message: String)
 signal placer_active(value: bool)
 signal asset_placed
 
-var _selected_asset: AssetResource
-var options: AssetPlacerOptions
-var _parent: NodePath = NodePath("")
-var transform_mode: TransformMode = TransformMode.None
-var _last_plane_options := PlaneOptions.new(Vector3.UP, Vector3.ZERO)
-var _selected_node: Node3D
-var current_assets: Array[AssetResource]
+static var _instance: AssetPlacerPresenter
+static var TRANSFORM_STEP: float = 0.1
 
+var options: AssetPlacerOptions
+var transform_mode: TransformMode = TransformMode.None
+var current_assets: Array[AssetResource]
 var placement_mode: PlacementMode = PlacementMode.SurfacePlacement.new():
 	set(value):
 		placement_mode = value
 		placement_mode_changed.emit(value)
-
 var preview_transform_axis: Vector3 = Vector3.UP
 
-enum TransformMode { None, Rotate, Scale, Move }
+var _selected_asset: AssetResource
+var _parent: NodePath = NodePath("")
+var _last_plane_options := PlaneOptions.new(Vector3.UP, Vector3.ZERO)
+var _selected_node: Node3D
+
 
 
 func _init():

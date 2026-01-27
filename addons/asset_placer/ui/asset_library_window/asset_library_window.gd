@@ -1,10 +1,11 @@
 @tool
-extends Control
 class_name AssetLibraryWindow
+extends Control
+
+signal asset_selected(asset: AssetResource)
 
 @onready var presenter = AssetLibraryPresenter.new()
 @onready var folder_presenter = FolderPresenter.new()
-
 @onready var placer_presenter := AssetPlacerPresenter._instance
 @onready var grid_container: Container = %GridContainer
 @onready var preview_resource = preload(
@@ -23,8 +24,6 @@ class_name AssetLibraryWindow
 @onready var scroll_container = %ScrollContainer
 @onready var empty_search_content = %EmptySearchContent
 @onready var empty_view_add_folder_btn = %EmptyViewAddFolderBtn
-
-signal asset_selected(asset: AssetResource)
 
 
 func _ready():

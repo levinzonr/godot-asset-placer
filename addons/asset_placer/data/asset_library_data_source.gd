@@ -1,5 +1,5 @@
-extends RefCounted
 class_name AssetLibraryDataSource
+extends RefCounted
 
 var _asset_lib_json: String
 

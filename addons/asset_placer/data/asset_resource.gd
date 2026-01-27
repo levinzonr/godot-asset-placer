@@ -1,21 +1,20 @@
-extends RefCounted
 class_name AssetResource
+extends RefCounted
 
 var name: String
 var id: String
 var tags: Array[int]
 var folder_path: String
-var _resource: Resource = null
-
-## If _resource fails to load, don't try to load it anymore
-var _failed_load := false
-
 var shallow_collections: Array[AssetCollection]:
 	get():
 		var shallow: Array[AssetCollection] = []
 		for id in tags:
 			shallow.push_back(AssetCollection.new("name", Color.TRANSPARENT, id))
 		return shallow
+
+var _resource: Resource = null
+## If _resource fails to load, don't try to load it anymore
+var _failed_load := false
 
 
 func _init(resId: String, name: String, tags: Array[int] = [], folder_path: String = ""):

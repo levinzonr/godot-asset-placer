@@ -1,5 +1,5 @@
-extends AssetPlacementStrategy
 class_name SurfaceAssetPlacementStrategy
+extends AssetPlacementStrategy
 
 var exclude_rids = []
 

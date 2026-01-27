@@ -1,9 +1,11 @@
 @tool
-extends Popup
 class_name CollectionEditPopupMenu
+extends Popup
 
 signal on_save(collection: AssetCollection)
+
 var collection_to_edit: AssetCollection
+
 @onready var color_picker_button: ColorPickerButton = %ColorPickerButton
 @onready var save_button: Button = %SaveButton
 @onready var text_edit: TextEdit = %TextEdit

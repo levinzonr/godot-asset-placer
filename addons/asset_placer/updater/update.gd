@@ -1,5 +1,5 @@
-extends RefCounted
 class_name PluginUpdate
+extends RefCounted
 
 var version: Version
 var change_log: String

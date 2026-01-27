@@ -1,8 +1,12 @@
 @tool
 extends Control
 
-@onready var version_label: Label = %VersionLabel
+const FEATURE_TEMPLATE = "https://github.com/levinzonr/godot-asset-placer/issues/new?template=feature_request.md&labels=enhancement&title=%5BFeature%5D%20"
+const ISSUE_TEMPLATE = "https://github.com/levinzonr/godot-asset-placer/issues/new?template=bug_report.md&labels=bug&title=%5BBUG%5D%20"
 
+var updater: PluginUpdater = PluginUpdater.instance
+
+@onready var version_label: Label = %VersionLabel
 @onready var feature_request_button: Button = %FeatureRequestButton
 @onready var issue_button: Button = %IssueButton
 @onready var update_button: Button = %UpdateButton
@@ -12,13 +16,7 @@ extends Control
 @onready var download_update_button: Button = %DownloadUpdateBtn
 @onready var progress_bar: ProgressBar = $UpdatePopup/MarginContainer/Vbox/ProgressBar
 @onready var update_popup: Popup = $UpdatePopup
-
 @onready var settings_repository := AssetPlacerSettingsRepository.instance
-
-const FEATURE_TEMPLATE = "https://github.com/levinzonr/godot-asset-placer/issues/new?template=feature_request.md&labels=enhancement&title=%5BFeature%5D%20"
-const ISSUE_TEMPLATE = "https://github.com/levinzonr/godot-asset-placer/issues/new?template=bug_report.md&labels=bug&title=%5BBUG%5D%20"
-
-var updater: PluginUpdater = PluginUpdater.instance
 
 
 func _ready():

@@ -1,15 +1,15 @@
 @tool
-extends Control
 class_name FolderView
+extends Control
+
+signal folder_delete_clicked
+signal folder_sync_clicked
+signal folder_include_subfloders_change(bool)
 
 @onready var path_label: Label = %PathLabel
 @onready var subfolders_checkbox: CheckBox = %SubfoldersCheckbox
 @onready var delete_button: Button = %DeleteButton
 @onready var sync_button: Button = %SyncButton
-
-signal folder_delete_clicked
-signal folder_sync_clicked
-signal folder_include_subfloders_change(bool)
 
 
 func _ready():

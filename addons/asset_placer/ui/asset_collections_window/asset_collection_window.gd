@@ -1,16 +1,16 @@
 @tool
 extends Control
 
+var _collection_item_list_resource: PackedScene = preload(
+	"res://addons/asset_placer/ui/asset_collections_window/components/collection_list_item.tscn"
+)
+
 @onready var presenter := AssetCollectionsPresenter.new()
 @onready var name_text_field: LineEdit = %NameTextField
 @onready var color_picker_button: ColorPickerButton = %ColorPickerButton
 @onready var add_button: Button = %AddButton
 @onready var collections_container = %CollectionsContainer
 @onready var empty_view = %EmptyView
-
-var _collection_item_list_resource: PackedScene = preload(
-	"res://addons/asset_placer/ui/asset_collections_window/components/collection_list_item.tscn"
-)
 
 
 func _ready():

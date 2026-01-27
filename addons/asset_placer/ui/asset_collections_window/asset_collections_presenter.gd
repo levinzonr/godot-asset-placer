@@ -1,16 +1,15 @@
-extends RefCounted
 class_name AssetCollectionsPresenter
-
-var _repository: AssetCollectionRepository
-var _assets_repository: AssetsRepository
-
-var _new_collection_name: String = ""
-var _new_collection_color: Color
+extends RefCounted
 
 signal show_collections(items: Array[AssetCollection])
 signal enable_create_button(enable: bool)
 signal show_empty_view
 signal clear_text_field
+
+var _repository: AssetCollectionRepository
+var _assets_repository: AssetsRepository
+var _new_collection_name: String = ""
+var _new_collection_color: Color
 
 
 func _init():

@@ -1,5 +1,5 @@
-extends RefCounted
 class_name FolderPresenter
+extends RefCounted
 
 signal folders_loaded(folder: Array[AssetFolder])
 

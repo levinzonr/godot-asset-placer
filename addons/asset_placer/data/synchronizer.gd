@@ -1,22 +1,21 @@
-extends RefCounted
 class_name Synchronize
-
-var folder_repository: FolderRepository
-var asset_repository: AssetsRepository
-
-static var instance: Synchronize
+extends RefCounted
 
 signal sync_state_change(running: bool)
 signal sync_complete(added: int, removed: int, scanned: int)
 
-var _added = 0
-var _removed = 0
-var _scanned = 0
+static var instance: Synchronize
 
+var folder_repository: FolderRepository
+var asset_repository: AssetsRepository
 var sync_running = false:
 	set(value):
 		sync_running = value
 		call_deferred("emit_signal", "sync_state_change", value)
+
+var _added = 0
+var _removed = 0
+var _scanned = 0
 
 
 func _init(folders_repository: FolderRepository, assets_repository: AssetsRepository):

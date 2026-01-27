@@ -1,5 +1,5 @@
-extends RefCounted
 class_name AssetPlacerIdGenerator
+extends RefCounted
 
 const KEY: String = "asset_placer/internal/last_int"
 

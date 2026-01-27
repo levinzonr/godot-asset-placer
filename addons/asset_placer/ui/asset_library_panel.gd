@@ -1,6 +1,6 @@
 @tool
-extends Control
 class_name AssetLibraryPanel
+extends Control
 
 @onready var asset_library_window: AssetLibraryWindow = $Panel/TabContainer/Assets
 @onready var tab_container: TabContainer = $Panel/TabContainer

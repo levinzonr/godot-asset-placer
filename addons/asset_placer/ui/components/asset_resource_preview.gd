@@ -1,17 +1,17 @@
 @tool
-extends Container
 class_name AssetResourcePreview
+extends Container
 
 signal left_clicked(asset: AssetResource)
 signal right_clicked(asset: AssetResource)
 
-@onready var button = %Button
-@onready var label = %Label
-@onready var asset_thumbnail = %AssetThumbnail
-
 var resource: AssetResource
 var settings_repo = AssetPlacerSettingsRepository.instance
 var default_size: Vector2
+
+@onready var button = %Button
+@onready var label = %Label
+@onready var asset_thumbnail = %AssetThumbnail
 
 
 func _ready():
