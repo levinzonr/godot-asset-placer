@@ -24,4 +24,5 @@ func _process(_delta):
 			preview_resource(resource)
 
 func _on_preview_generated(path: String, texture: Texture2D,  thumbnail, data):
-	self.texture = texture
+	if is_instance_valid(texture):
+		self.texture = texture
