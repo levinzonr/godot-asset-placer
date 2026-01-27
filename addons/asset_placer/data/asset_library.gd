@@ -8,7 +8,9 @@ var collections: Array[AssetCollection] = []
 
 
 func _init(
-	items: Array[AssetResource], folders: Array[AssetFolder], collections: Array[AssetCollection]
+	items: Array[AssetResource], 
+	folders: Array[AssetFolder], 
+	collections: Array[AssetCollection]
 ):
 	self.folders = folders
 	self.items = items
@@ -19,6 +21,6 @@ func index_of_asset(asset: AssetResource):
 	var idx: int = -1
 	for a in len(items):
 		if items[a].id == asset.id:
-		idx = a
+			idx = a
 		break
 	return idx

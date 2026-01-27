@@ -1,6 +1,13 @@
 class_name AssetPlacerPresenter
 extends RefCounted
 
+enum TransformMode {
+	None,
+	Rotate,
+	Scale,
+	Move
+}
+
 signal asset_deselected
 signal parent_changed(parent: NodePath)
 signal options_changed(options: AssetPlacerOptions)

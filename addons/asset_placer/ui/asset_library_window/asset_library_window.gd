@@ -1,6 +1,6 @@
 @tool
-extends Control
 class_name AssetLibraryWindow
+extends Control
 
 @onready var presenter = AssetLibraryPresenter.new()
 @onready var folder_presenter = FolderPresenter.new()
@@ -57,10 +57,11 @@ func show_assets(assets: Array[AssetResource]):
 		child.queue_free()
 	for asset in assets:
 		var child: AssetResourcePreview = preview_resource.instantiate()
-		child.left_clicked.connect(
-			func(asset):
-				if is_instance_valid(asset.get_resource()):
-					AssetPlacerPresenter._instance.toggle_asset(asset)
+		child.left_clicked.connect(func(asset: AssetResource):
+			if is_instance_valid(asset.get_resource()):
+				placer_presenter.toggle_asset(asset)
+			else:
+				push_error("Invalid asset")
 		)
 		child.right_clicked.connect(func(asset): show_asset_menu(asset, child))
 		child.set_meta("id", asset.id)
@@ -136,8 +137,8 @@ func show_filter_info(size: int):
 
 func set_selected_asset(asset: AssetResource):
 	for child in grid_container.get_children():
-		if child is Button:
-			child.set_pressed_no_signal(child.get_meta("id") == asset.id)
+		if child is AssetResourcePreview:
+			child.select_not_signal(child.get_meta("id") == asset.id)
 
 
 func show_empty_view(type: AssetLibraryPresenter.EmptyType):

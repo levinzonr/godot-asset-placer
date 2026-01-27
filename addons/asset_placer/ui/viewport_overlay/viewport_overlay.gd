@@ -30,13 +30,7 @@ func _ready():
 	var presenter = AssetPlacerPresenter._instance
 	presenter.transform_mode_changed.connect(set_mode)
 	presenter.preview_transform_axis_changed.connect(set_axis)
-	presenter.placer_active.connect(
-		func(visible):
-			if visible:
-				show()
-			else:
-				hide()
-	)
+	presenter.placer_active.connect(_set_overlay_visible)
 	presenter.placement_mode_changed.connect(set_placement_mode)
 	presenter.options_changed.connect(show_options)
 	presenter.ready()
@@ -101,3 +95,7 @@ func set_axis(vector: Vector3):
 	x_check_button.button_pressed = vector.x == 1
 	y_check_button.button_pressed = vector.y == 1
 	z_check_button.button_pressed = vector.z == 1
+
+
+func _set_overlay_visible(visible: bool):
+	self.visible = visible
