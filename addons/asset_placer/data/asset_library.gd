@@ -8,9 +8,7 @@ var collections: Array[AssetCollection] = []
 
 
 func _init(
-	items: Array[AssetResource], 
-	folders: Array[AssetFolder], 
-	collections: Array[AssetCollection]
+	items: Array[AssetResource], folders: Array[AssetFolder], collections: Array[AssetCollection]
 ):
 	self.folders = folders
 	self.items = items

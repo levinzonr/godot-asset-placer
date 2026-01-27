@@ -22,7 +22,6 @@ func _ready():
 	)
 
 
-
 func _set_plane_material(settings: AssetPlacerSettings):
 	mesh_instance.set_surface_override_material(0, load(settings.plane_material_resource))
 

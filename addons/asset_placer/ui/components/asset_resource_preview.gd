@@ -31,9 +31,10 @@ func set_asset(asset: AssetResource):
 func set_settings(settings: AssetPlacerSettings):
 	custom_minimum_size = default_size * settings.ui_scale
 
+
 func select_not_signal(selected: bool):
 	button.set_pressed_no_signal(selected)
-	
+
 
 func _gui_input(event):
 	if event is InputEventMouseButton:
