@@ -32,9 +32,6 @@ func _init():
 	instance = self
 
 
-
-
-
 func _get_binding_storage_key(binding: AssetPlacerSettings.Bindings) -> String:
 	match binding:
 		AssetPlacerSettings.Bindings.Rotate:

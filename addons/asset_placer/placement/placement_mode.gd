@@ -21,6 +21,6 @@ class Terrain3DPlacement:
 
 	func _init(node: Node3D):
 		self._terrain_3d_node = node
-		
+
 	func get_terrain_3d_node() -> Node3D:
 		return _terrain_3d_node
