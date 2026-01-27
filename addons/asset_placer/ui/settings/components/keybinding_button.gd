@@ -5,12 +5,10 @@ extends Button
 signal key_binding_changed(option: APInputOption)
 signal key_binding_active
 
+enum State { Bind, Idle }
+
 @export var allow_modifiers: bool = true
 @export var allow_mouse_buttons: bool = false
-
-enum State {
-	Bind, Idle
-}
 
 var _current_key: APInputOption = APInputOption.none()
 var _pending_key: APInputOption = null
@@ -24,39 +22,45 @@ var _modifier_keys: Dictionary[Key, KeyModifierMask] = {
 	Key.KEY_CTRL: KeyModifierMask.KEY_MASK_CTRL
 }
 
-var _state: = State.Idle:
+var _state := State.Idle:
 	set(state):
 		_state = state
 		match _state:
-			State.Idle: on_idle()
-			State.Bind: on_bind()
-	
+			State.Idle:
+				on_idle()
+			State.Bind:
+				on_bind()
+
 
 func on_idle():
 	text = _current_key.get_display_name()
 	modulate = Color.WHITE
-	
+
 	if _current_key.equals(APInputOption.none()):
-		modulate = Color.RED	
+		modulate = Color.RED
+
 
 func on_bind():
 	text = _get_helper_text()
 	modulate = Color(0.945, 1.0, 0.353, 1.0)
 	key_binding_active.emit()
 
+
 func bind():
-	_state = State.Bind	
+	_state = State.Bind
 	_pending_key = null
 	_pending_modifier = 0
 	_pressed = 0
-	
+
+
 func cancel():
-	_state = State.Idle	
+	_state = State.Idle
 	_pending_key = null
 	_pending_modifier = 0
 	_pressed = 0
-	
-func _process(delta):
+
+
+func _process(_delta):
 	match _state:
 		State.Idle:
 			pass
@@ -64,7 +68,8 @@ func _process(delta):
 			text = _get_pending_text()
 			if text.is_empty():
 				text = _get_helper_text()
-				
+
+
 func set_keybind_no_signal(key: APInputOption) -> void:
 	_current_key = key
 	text = key.get_display_name()
@@ -72,20 +77,21 @@ func set_keybind_no_signal(key: APInputOption) -> void:
 		modulate = Color.RED
 	else:
 		modulate = Color.WHITE
-	
+
 
 func _input(event: InputEvent):
 	match _state:
-		State.Bind: _process_bind_input(event)
-		State.Idle: pass
-			
+		State.Bind:
+			_process_bind_input(event)
+		State.Idle:
+			pass
+
 
 func _process_bind_input(event: InputEvent):
-	
 	if Input.is_key_pressed(Key.KEY_ESCAPE):
 		cancel()
 		return
-	
+
 	get_viewport().set_input_as_handled()
 	if event is InputEventKey:
 		if event.is_pressed():
@@ -100,20 +106,19 @@ func _process_bind_input(event: InputEvent):
 			_pressed -= 1
 			if _pressed == 0:
 				_stop_binding()
-			
-	
-	
+
+
 func _process_input_key_event_pressed(event: InputEventKey):
 	var key_code = event.keycode
 	if key_code in _modifier_keys.keys() and allow_modifiers:
 		_pending_modifier = _pending_modifier | _modifier_keys[key_code]
 	else:
 		_pending_key = APInputOption.key_press(key_code)
-		
-	_pressed += 1
-	
 
-func _process_input_key_event_released(event: InputEventKey):
+	_pressed += 1
+
+
+func _process_input_key_event_released(_event: InputEventKey):
 	_pressed -= 1
 	if _pressed == 0:
 		_stop_binding()
@@ -133,16 +138,17 @@ func _stop_binding():
 
 	_pending_key = null
 	_pending_modifier = 0
-		
+
 
 func _get_helper_text() -> String:
 	return "Press Any Key, ESC to Cancel"
-	
+
+
 func _get_pending_text() -> String:
 	var final_text := ""
 	if _pending_key != null:
 		final_text += _pending_key.get_display_name()
-		
+
 	if _pending_modifier != 0:
 		final_text = OS.get_keycode_string(Key.KEY_NONE | _pending_modifier) + final_text
 

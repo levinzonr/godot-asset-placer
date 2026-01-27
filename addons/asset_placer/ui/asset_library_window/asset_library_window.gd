@@ -1,13 +1,17 @@
 @tool
-extends Control
 class_name AssetLibraryWindow
+extends Control
+
+signal asset_selected(asset: AssetResource)
 
 @onready var presenter = AssetLibraryPresenter.new()
 @onready var folder_presenter = FolderPresenter.new()
 
 @onready var placer_presenter := AssetPlacerPresenter._instance
 @onready var grid_container: Container = %GridContainer
-@onready var preview_resource = preload("res://addons/asset_placer/ui/components/asset_resource_preview.tscn")
+@onready var preview_resource = preload(
+	"res://addons/asset_placer/ui/components/asset_resource_preview.tscn"
+)
 @onready var add_folder_button: Button = %AddFolderButton
 @onready var search_field: LineEdit = %SearchField
 @onready var filter_button: Button = %FilterButton
@@ -21,8 +25,6 @@ class_name AssetLibraryWindow
 @onready var scroll_container = %ScrollContainer
 @onready var empty_search_content = %EmptySearchContent
 @onready var empty_view_add_folder_btn = %EmptyViewAddFolderBtn
-
-signal asset_selected(asset: AssetResource)
 
 
 func _ready():
@@ -39,11 +41,12 @@ func _ready():
 	add_folder_button.pressed.connect(show_folder_dialog)
 	search_field.text_changed.connect(presenter.on_query_change)
 	reload_button.pressed.connect(presenter.sync)
-	filter_button.pressed.connect(func ():
-		CollectionPicker.show_in(filter_button, presenter._active_collections, presenter.toggle_collection_filter)
+	filter_button.pressed.connect(
+		func():
+			CollectionPicker.show_in(
+				filter_button, presenter._active_collections, presenter.toggle_collection_filter
+			)
 	)
-
-
 
 
 func show_assets(assets: Array[AssetResource]):
@@ -54,16 +57,18 @@ func show_assets(assets: Array[AssetResource]):
 		child.queue_free()
 	for asset in assets:
 		var child: AssetResourcePreview = preview_resource.instantiate()
-		child.left_clicked.connect(func(asset):
-			if is_instance_valid(asset.get_resource()):
-				AssetPlacerPresenter._instance.toggle_asset
+		child.left_clicked.connect(
+			func(asset: AssetResource):
+				if is_instance_valid(asset.get_resource()):
+					placer_presenter.toggle_asset(asset)
+				else:
+					push_error("Invalid asset")
 		)
-		child.right_clicked.connect(func(asset):
-			show_asset_menu(asset, child)
-		)
+		child.right_clicked.connect(func(asset): show_asset_menu(asset, child))
 		child.set_meta("id", asset.id)
 		grid_container.add_child(child)
 		child.set_asset(asset)
+
 
 func show_asset_menu(asset: AssetResource, control: Control):
 	var options_menu := PopupMenu.new()
@@ -71,21 +76,30 @@ func show_asset_menu(asset: AssetResource, control: Control):
 	options_menu.add_icon_item(EditorIconTexture2D.new("Groups"), "Manage collections")
 	options_menu.add_icon_item(EditorIconTexture2D.new("File"), "Open")
 	options_menu.add_icon_item(EditorIconTexture2D.new("Remove"), "Remove")
-	options_menu.index_pressed.connect(func(index):
-		match index:
-			0: CollectionPicker.show_in(control, asset.shallow_collections, func(collection, add):
-				presenter.toggle_asset_collection(asset, collection, add)
-			)
-			1:
-				EditorInterface.open_scene_from_path(asset.get_path())
-				EditorInterface.set_main_screen_editor("3D")
-			2:
-				if placer_presenter._selected_asset == asset:
-					placer_presenter.clear_selection()
-				presenter.delete_asset(asset)
-			_: pass
+	options_menu.index_pressed.connect(
+		func(index):
+			match index:
+				0:
+					CollectionPicker.show_in(
+						control,
+						asset.shallow_collections,
+						func(collection, add):
+							presenter.toggle_asset_collection(asset, collection, add)
+					)
+				1:
+					EditorInterface.open_scene_from_path(asset.get_path())
+					EditorInterface.set_main_screen_editor("3D")
+				2:
+					if placer_presenter._selected_asset == asset:
+						placer_presenter.clear_selection()
+					presenter.delete_asset(asset)
+				_:
+					pass
 	)
-	EditorInterface.popup_dialog(options_menu, Rect2(mouse_pos, options_menu.get_contents_minimum_size()))
+	EditorInterface.popup_dialog(
+		options_menu, Rect2(mouse_pos, options_menu.get_contents_minimum_size())
+	)
+
 
 func show_folder_dialog():
 	var folder_dialog = EditorFileDialog.new()
@@ -100,16 +114,19 @@ func clear_selected_asset():
 		if child is Button:
 			child.set_pressed_no_signal(false)
 
-func _can_drop_data(at_position, data):
+
+func _can_drop_data(_at_position, data):
 	if data is Dictionary:
 		var type = data["type"]
 		var files_or_dirs = type == "files_and_dirs" || type == "files"
 		return files_or_dirs and data.has("files")
 	return false
 
-func _drop_data(at_position, data):
+
+func _drop_data(_at_position, data):
 	var dirs: PackedStringArray = data["files"]
 	presenter.add_assets_or_folders(dirs)
+
 
 func show_filter_info(size: int):
 	if size == 0:
@@ -118,12 +135,11 @@ func show_filter_info(size: int):
 		filters_label.show()
 		filters_label.text = str(size)
 
+
 func set_selected_asset(asset: AssetResource):
 	for child in grid_container.get_children():
-		if child is Button:
-			child.set_pressed_no_signal(child.get_meta("id") == asset.id)
-
-
+		if child is AssetResourcePreview:
+			child.select_not_signal(child.get_meta("id") == asset.id)
 
 
 func show_empty_view(type: AssetLibraryPresenter.EmptyType):
@@ -137,6 +153,7 @@ func show_empty_view(type: AssetLibraryPresenter.EmptyType):
 		AssetLibraryPresenter.EmptyType.None:
 			show_main_content()
 
+
 func show_main_content():
 	main_content.show()
 	empty_content.hide()
@@ -144,11 +161,13 @@ func show_main_content():
 	empty_collection_content.hide()
 	empty_search_content.hide()
 
+
 func show_onboarding():
 	main_content.hide()
 	empty_collection_content.hide()
 	empty_search_content.hide()
 	empty_content.show()
+
 
 func show_empty_collection_view():
 	main_content.show()
@@ -157,11 +176,13 @@ func show_empty_collection_view():
 	empty_collection_content.show()
 	empty_content.hide()
 
+
 func show_empty_search_content():
 	main_content.show()
 	scroll_container.hide()
 	empty_collection_content.hide()
 	empty_search_content.show()
+
 
 func show_sync_in_progress(active: bool):
 	if active:

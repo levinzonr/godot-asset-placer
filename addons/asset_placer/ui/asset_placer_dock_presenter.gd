@@ -1,14 +1,12 @@
-extends RefCounted
 class_name AssetPlacerDockPresenter
-
-enum Tab {
-	Assets, Folders, Collections, About
-}
-
+extends RefCounted
 
 signal show_tab(tab: Tab)
 
-func _init():
-	instance = self
+enum Tab { Assets, Folders, Collections, About }
 
 static var instance: AssetPlacerDockPresenter
+
+
+func _init():
+	instance = self

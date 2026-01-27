@@ -1,7 +1,8 @@
-extends RefCounted
 class_name PluginConfiguration
+extends RefCounted
 
 var version: Version
+
 
 func _init(file_path: String):
 	var config = ConfigFile.new()

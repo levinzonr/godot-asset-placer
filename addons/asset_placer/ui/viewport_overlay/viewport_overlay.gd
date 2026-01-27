@@ -1,5 +1,9 @@
 @tool
 extends Control
+
+var _error_position: Vector2
+var _error_hidden_position: Vector2
+
 @onready var rotate_check_button: CheckBox = %RotateCheckButton
 @onready var scale_check_button: CheckBox = %ScaleCheckButton
 @onready var translate_check_button: CheckBox = %TranslateCheckButton
@@ -12,10 +16,8 @@ extends Control
 @onready var error_timer: Timer = %ErrorTimer
 @onready var snapping_switch: CheckButton = %SnappingSwitch
 @onready var placement_shortcut_label: Label = %PlacementShortcutLabel
-
-var _error_position: Vector2
-var _error_hidden_position: Vector2
 @onready var _settings_repository := AssetPlacerSettingsRepository.instance
+
 
 func _ready():
 	hide()
@@ -28,7 +30,7 @@ func _ready():
 	var presenter = AssetPlacerPresenter._instance
 	presenter.transform_mode_changed.connect(set_mode)
 	presenter.preview_transform_axis_changed.connect(set_axis)
-	presenter.placer_active.connect(func(a): if a: show() else: hide())
+	presenter.placer_active.connect(_set_overlay_visible)
 	presenter.placement_mode_changed.connect(set_placement_mode)
 	presenter.options_changed.connect(show_options)
 	presenter.ready()
@@ -43,6 +45,7 @@ func set_mode(mode: AssetPlacerPresenter.TransformMode):
 	scale_check_button.button_pressed = mode == AssetPlacerPresenter.TransformMode.Scale
 	translate_check_button.button_pressed = mode == AssetPlacerPresenter.TransformMode.Move
 
+
 func set_placement_mode(mode: PlacementMode):
 	if mode is PlacementMode.PlanePlacement:
 		placement_mode_label.text = "Plane Placement"
@@ -50,30 +53,49 @@ func set_placement_mode(mode: PlacementMode):
 		placement_mode_label.text = "Surface Placement"
 	if mode is PlacementMode.Terrain3DPlacement:
 		placement_mode_label.text = "Terrain3D Placement"
-		
-		 
+
+
 func show_error(message: String):
 	var tween = create_tween()
 	tween.tween_property(error_container, "position", _error_position, 0.3)
 	error_label.text = message
 	error_timer.start()
 
+
 func hide_error():
 	var tween = create_tween()
 	tween.tween_property(error_container, "position", _error_hidden_position, 0.3)
 
+
 func show_settings(settings: AssetPlacerSettings):
-	rotate_check_button.text = "%s: To Rotate" % settings.bindings[AssetPlacerSettings.Bindings.Rotate].get_display_name()
-	scale_check_button.text = "%s: To Scale" % settings.bindings[AssetPlacerSettings.Bindings.Scale].get_display_name()
-	translate_check_button.text = "%s: To Translate" % settings.bindings[AssetPlacerSettings.Bindings.Translate].get_display_name()
-	snapping_switch.text = "%s: Grid Snapping" % settings.bindings[AssetPlacerSettings.Bindings.GridSnapping].get_display_name()
-	placement_shortcut_label.text = "(%s)" % settings.bindings[AssetPlacerSettings.Bindings.TogglePlaneMode].get_display_name()
+	rotate_check_button.text = (
+		"%s: To Rotate" % settings.bindings[AssetPlacerSettings.Bindings.Rotate].get_display_name()
+	)
+	scale_check_button.text = (
+		"%s: To Scale" % settings.bindings[AssetPlacerSettings.Bindings.Scale].get_display_name()
+	)
+	translate_check_button.text = (
+		"%s: To Translate"
+		% settings.bindings[AssetPlacerSettings.Bindings.Translate].get_display_name()
+	)
+	snapping_switch.text = (
+		"%s: Grid Snapping"
+		% settings.bindings[AssetPlacerSettings.Bindings.GridSnapping].get_display_name()
+	)
+	placement_shortcut_label.text = (
+		"(%s)" % settings.bindings[AssetPlacerSettings.Bindings.TogglePlaneMode].get_display_name()
+	)
 
 
 func show_options(options: AssetPlacerOptions):
-	snapping_switch.button_pressed = options.snapping_enabled	
-		
+	snapping_switch.button_pressed = options.snapping_enabled
+
+
 func set_axis(vector: Vector3):
 	x_check_button.button_pressed = vector.x == 1
 	y_check_button.button_pressed = vector.y == 1
 	z_check_button.button_pressed = vector.z == 1
+
+
+func _set_overlay_visible(visible: bool):
+	self.visible = visible

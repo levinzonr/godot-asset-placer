@@ -1,32 +1,38 @@
-extends RefCounted
 class_name APInputOption
+extends RefCounted
 
 var modifiers: KeyModifierMask
 
-func is_pressed(event: InputEvent) -> bool:
+
+func is_pressed(_event: InputEvent) -> bool:
 	return false
+
 
 func get_display_name() -> String:
 	return ""
-	
+
+
 func serialize() -> String:
 	return ""
 
-func equals(other: APInputOption) -> bool:
+
+func equals(_other: APInputOption) -> bool:
 	return false
-	
-class KeyPress extends APInputOption:
+
+
+class KeyPress:
+	extends APInputOption
 	var key: Key
-	
+
 	func _init(keys: Key, modifiers: KeyModifierMask = 0):
 		self.key = keys
 		self.modifiers = modifiers
-	
+
 	func get_display_name() -> String:
 		if key == Key.KEY_NONE:
 			return "Unassigned"
 		return OS.get_keycode_string(key | modifiers)
-	
+
 	func is_pressed(event: InputEvent) -> bool:
 		if event is InputEventKey and event.is_pressed():
 			var event_modifiers: KeyModifierMask = 0
@@ -43,32 +49,37 @@ class KeyPress extends APInputOption:
 			return event_combined == with_mask
 		else:
 			return false
-			
+
 	func serialize() -> String:
 		return "key_%s_%s" % [str(key), str(modifiers)]
-	
+
 	func equals(other: APInputOption) -> bool:
 		if not other is KeyPress:
 			return false
 		var other_key_press = other as KeyPress
 		return key == other_key_press.key and modifiers == other_key_press.modifiers
 
-class MousePress extends  APInputOption:
+
+class MousePress:
+	extends APInputOption
 	var mouse_index: MouseButton
-	
+
 	func _init(mouse_index: MouseButton, modifiers: KeyModifierMask = 0):
 		self.mouse_index = mouse_index
 		self.modifiers = modifiers
-	
+
 	func serialize() -> String:
 		return "mouse_%s_%s" % [str(mouse_index), str(modifiers)]
-	
+
 	func equals(other: APInputOption) -> bool:
 		if not other is MousePress:
 			return false
 		var other_mouse_press = other as MousePress
-		return mouse_index == other_mouse_press.mouse_index and modifiers == other_mouse_press.modifiers
-		
+		return (
+			mouse_index == other_mouse_press.mouse_index
+			and modifiers == other_mouse_press.modifiers
+		)
+
 	func is_pressed(event: InputEvent) -> bool:
 		if event is InputEventMouseButton:
 			var event_modifiers: KeyModifierMask = 0
@@ -80,11 +91,11 @@ class MousePress extends  APInputOption:
 				event_modifiers |= KeyModifierMask.KEY_MASK_ALT
 			if Input.is_key_pressed(Key.KEY_META):
 				event_modifiers |= KeyModifierMask.KEY_MASK_META
-			
+
 			return event.button_index == mouse_index and event_modifiers == modifiers
 		else:
-			return false	
-		
+			return false
+
 	func get_display_name() -> String:
 		var button_name: String
 		match mouse_index:
@@ -104,11 +115,11 @@ class MousePress extends  APInputOption:
 				button_name = "Mouse Wheel Up"
 			_:
 				button_name = "Not supported %s" % mouse_index
-		
+
 		if modifiers == 0:
 			return button_name
 		else:
-			return OS.get_keycode_string(Key.KEY_NONE | modifiers)  + button_name
+			return OS.get_keycode_string(Key.KEY_NONE | modifiers) + button_name
 
 
 static func desirialize(raw: String) -> APInputOption:
@@ -123,12 +134,14 @@ static func desirialize(raw: String) -> APInputOption:
 		var modifiers = parts[2].to_int() if parts.size() > 2 else 0
 		return key_press(key, modifiers)
 
+
 static func none() -> APInputOption:
 	return APInputOption.KeyPress.new(Key.KEY_NONE)
-	
-	
+
+
 static func key_press(key: Key, modifiers: KeyModifierMask = 0) -> APInputOption:
 	return APInputOption.KeyPress.new(key, modifiers)
-	
+
+
 static func mouse_press(mouse_button: MouseButton, modifiers: KeyModifierMask = 0) -> APInputOption:
 	return APInputOption.MousePress.new(mouse_button, modifiers)

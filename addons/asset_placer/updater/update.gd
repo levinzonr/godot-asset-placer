@@ -1,10 +1,9 @@
-extends RefCounted
 class_name PluginUpdate
+extends RefCounted
 
 var version: Version
 var change_log: String
 var download_url: String
-
 
 
 func _init(version: String, change_log: String, download_url: String):

@@ -1,7 +1,8 @@
-extends RefCounted
 class_name ResourceIdCompat
+extends RefCounted
 
-static func path_to_uid(path:String):
+
+static func path_to_uid(path: String):
 	if ResourceUID.has_method("path_to_uid"):
 		return ResourceUID["path_to_uid"].call(path)
 	if path.begins_with("uid://"):

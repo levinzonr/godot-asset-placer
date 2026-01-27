@@ -1,5 +1,5 @@
-extends RefCounted
 class_name AssetPlacerOptions
+extends RefCounted
 
 var snapping_enabled: bool = false
 var snapping_grid_step: float = 1.0

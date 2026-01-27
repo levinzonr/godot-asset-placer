@@ -19,8 +19,14 @@ To contribute code:
 - Create a branch: Work on your changes in a dedicated branch.
 - Follow coding standards: Adhere to the existing code style and conventions.
 - Use [conventional commit messages](https://www.conventionalcommits.org/en/v1.0.0/): Use clear and descriptive commit messages that explain your changes.
+- Run linting checks: Ensure your code passes all linting checks (see below).
 - Test thoroughly: Ensure your changes work as expected and don't introduce new issues.
 - Submit a pull request: Provide a clear description of your changes and reference any related issues.
+
+### Code Quality Checks
+This project uses [GDScript Toolkit](https://github.com/Scony/godot-gdscript-toolkit) for linting and formatting. All contributions must pass:
+- `gdlint addons/asset_placer` - linting (rules defined in `gdlintrc`)
+- `gdformat addons/asset_placer` - formatting
 
 ### Documentation Improvements
 Help us improve the documentation:
