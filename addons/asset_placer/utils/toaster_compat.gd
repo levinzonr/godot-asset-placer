@@ -1,5 +1,5 @@
-extends RefCounted
 class_name EditorToasterCompat
+extends RefCounted
 
 
 static func toast(message: String):

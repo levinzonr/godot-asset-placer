@@ -1,5 +1,5 @@
-extends RefCounted
 class_name PlaneOptions
+extends RefCounted
 
 var normal: Vector3
 var origin: Vector3
