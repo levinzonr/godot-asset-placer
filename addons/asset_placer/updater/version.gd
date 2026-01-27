@@ -60,25 +60,17 @@ func changelog_version() -> String:
 
 
 func compare_to(other: Version) -> int:
-	# Compare MAJOR
-	if major < other.major:
-		return -1
-	if major > other.major:
-		return 1
+	var comparisons = [
+		[major, other.major],
+		[minor, other.minor],
+		[patch, other.patch],
+	]
 
-	# Compare MINOR
-	if minor < other.minor:
-		return -1
-	if minor > other.minor:
-		return 1
+	for pair in comparisons:
+		var cmp = signi(pair[0] - pair[1])
+		if cmp != 0:
+			return cmp
 
-	# Compare PATCH
-	if patch < other.patch:
-		return -1
-	if patch > other.patch:
-		return 1
-
-	# Compare prerelease identifiers
 	return compare_prerelease(identifier, other.identifier)
 
 

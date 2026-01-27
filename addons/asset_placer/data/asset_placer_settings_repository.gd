@@ -22,6 +22,19 @@ const KEY_BINDING_TOGGLE_PLANE_MODE: String = "bindings/toggle_plane_mode"
 const KEY_UI_SCALE: String = "general/ui_scale"
 const KEY_ASSET_LIBRARY_PATH: String = "general/asset_library_path"
 const KEY_UPDATE_CHANNEL: String = "general/update_channel"
+const _BINDING_KEYS := {
+	AssetPlacerSettings.Bindings.Rotate: KEY_BINDING_ROTATE,
+	AssetPlacerSettings.Bindings.Scale: KEY_BINDING_SCALE,
+	AssetPlacerSettings.Bindings.Translate: KEY_BINDING_TRANSLATE,
+	AssetPlacerSettings.Bindings.GridSnapping: KEY_BINDING_GRID_SNAP,
+	AssetPlacerSettings.Bindings.InPlaceTransform: KEY_BINDING_IN_PLACE_TRANSFORM,
+	AssetPlacerSettings.Bindings.TransformPositive: KEY_BINDING_TRANSFORM_POSITIVE,
+	AssetPlacerSettings.Bindings.TransformNegative: KEY_BINDING_TRANSFORM_NEGATIVE,
+	AssetPlacerSettings.Bindings.ToggleAxisX: KEY_BINDING_TOGGLE_AXIS_X,
+	AssetPlacerSettings.Bindings.ToggleAxisY: KEY_BINDING_TOGGLE_AXIS_Y,
+	AssetPlacerSettings.Bindings.ToggleAxisZ: KEY_BINDING_TOGGLE_AXIS_Z,
+	AssetPlacerSettings.Bindings.TogglePlaneMode: KEY_BINDING_TOGGLE_PLANE_MODE,
+}
 
 static var instance: AssetPlacerSettingsRepository
 
@@ -34,32 +47,10 @@ func _init():
 
 
 func _get_binding_storage_key(binding: AssetPlacerSettings.Bindings) -> String:
-	match binding:
-		AssetPlacerSettings.Bindings.Rotate:
-			return KEY_BINDING_ROTATE
-		AssetPlacerSettings.Bindings.Scale:
-			return KEY_BINDING_SCALE
-		AssetPlacerSettings.Bindings.Translate:
-			return KEY_BINDING_TRANSLATE
-		AssetPlacerSettings.Bindings.GridSnapping:
-			return KEY_BINDING_GRID_SNAP
-		AssetPlacerSettings.Bindings.InPlaceTransform:
-			return KEY_BINDING_IN_PLACE_TRANSFORM
-		AssetPlacerSettings.Bindings.TransformPositive:
-			return KEY_BINDING_TRANSFORM_POSITIVE
-		AssetPlacerSettings.Bindings.TransformNegative:
-			return KEY_BINDING_TRANSFORM_NEGATIVE
-		AssetPlacerSettings.Bindings.ToggleAxisX:
-			return KEY_BINDING_TOGGLE_AXIS_X
-		AssetPlacerSettings.Bindings.ToggleAxisY:
-			return KEY_BINDING_TOGGLE_AXIS_Y
-		AssetPlacerSettings.Bindings.ToggleAxisZ:
-			return KEY_BINDING_TOGGLE_AXIS_Z
-		AssetPlacerSettings.Bindings.TogglePlaneMode:
-			return KEY_BINDING_TOGGLE_PLANE_MODE
-		_:
-			push_error("Unknown binding type: " + str(binding))
-			return ""
+	if _BINDING_KEYS.has(binding):
+		return _BINDING_KEYS[binding]
+	push_error("Unknown binding type: " + str(binding))
+	return ""
 
 
 func set_settings(settings: AssetPlacerSettings):

@@ -72,7 +72,7 @@ func toggle_terrain_3d_placement(node_path: NodePath):
 		placement_mode_changed.emit(placement_mode)
 
 
-func select_placement_mode(mode: PlacementMode):
+func _select_placement_mode(mode: PlacementMode):
 	self.placement_mode = mode
 
 
@@ -89,7 +89,7 @@ func toggle_transformation_mode(mode: TransformMode):
 	transform_mode_changed.emit(transform_mode)
 
 	if transform_mode == TransformMode.Move:
-		select_placement_mode(PlacementMode.PlanePlacement.new(_last_plane_options))
+		_select_placement_mode(PlacementMode.PlanePlacement.new(_last_plane_options))
 
 	if transform_mode == TransformMode.Rotate:
 		set_random_rotation_enabled(false)
@@ -108,8 +108,8 @@ func clear_parent():
 func set_unform_scaling(value: bool):
 	options.uniform_scaling = value
 	if value:
-		options.min_scale = uniform_v3(options.min_scale.x)
-		options.max_scale = uniform_v3(options.max_scale.x)
+		options.min_scale = _uniform_v3(options.min_scale.x)
+		options.max_scale = _uniform_v3(options.max_scale.x)
 	options_changed.emit(options)
 
 
@@ -125,10 +125,10 @@ func set_random_asset_enabled(value: bool):
 
 func toggle_axis(axis: Vector3):
 	var new := (preview_transform_axis - axis).abs()
-	select_axis(new)
+	_select_axis(new)
 
 
-func select_axis(axis: Vector3):
+func _select_axis(axis: Vector3):
 	if axis == Vector3.ZERO:
 		show_error.emit("Ignoring Axis selection because it is zero")
 		return
@@ -172,16 +172,16 @@ func set_use_asset_origin(value: bool):
 func _select_default_axis(mode: TransformMode):
 	match mode:
 		TransformMode.Rotate:
-			select_axis(Vector3.UP)
+			_select_axis(Vector3.UP)
 		TransformMode.Scale:
-			select_axis(Vector3.ONE)
+			_select_axis(Vector3.ONE)
 		TransformMode.Move:
-			select_axis(_last_plane_options.normal)
+			_select_axis(_last_plane_options.normal)
 		_:
 			pass
 
 
-func uniform_v3(value: float) -> Vector3:
+func _uniform_v3(value: float) -> Vector3:
 	return Vector3(value, value, value)
 
 
