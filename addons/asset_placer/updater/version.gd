@@ -63,19 +63,19 @@ func compare_to(other: Version) -> int:
 	# Compare MAJOR
 	if major < other.major:
 		return -1
-	elif major > other.major:
+	if major > other.major:
 		return 1
 
 	# Compare MINOR
 	if minor < other.minor:
 		return -1
-	elif minor > other.minor:
+	if minor > other.minor:
 		return 1
 
 	# Compare PATCH
 	if patch < other.patch:
 		return -1
-	elif patch > other.patch:
+	if patch > other.patch:
 		return 1
 
 	# Compare prerelease identifiers

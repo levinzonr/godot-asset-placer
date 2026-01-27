@@ -277,7 +277,7 @@ func set_placement_mode(placement_mode: PlacementMode):
 	elif placement_mode is PlacementMode.PlanePlacement:
 		_strategy = PlanePlacementStrategy.new(placement_mode.plane_options)
 	elif placement_mode is PlacementMode.Terrain3DPlacement:
-		_strategy = Terrain3DAssetPlacementStrategy.new(placement_mode.terrain3dNode)
+		_strategy = Terrain3DAssetPlacementStrategy.new(placement_mode.get_terrain_3d_node())
 	else:
 		push_error("Placement mode %s is not supported" % str(placement_mode))
 

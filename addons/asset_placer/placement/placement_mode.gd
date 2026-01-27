@@ -17,7 +17,10 @@ class PlanePlacement:
 
 class Terrain3DPlacement:
 	extends PlacementMode
-	var terrain3dNode: Node3D
+	var _terrain_3d_node: Node3D
 
 	func _init(node: Node3D):
-		self.terrain3dNode = node
+		self._terrain_3d_node = node
+		
+	func get_terrain_3d_node() -> Node3D:
+		return _terrain_3d_node

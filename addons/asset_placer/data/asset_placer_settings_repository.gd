@@ -1,17 +1,6 @@
 extends RefCounted
 class_name AssetPlacerSettingsRepository
 
-signal settings_changed(settings: AssetPlacerSettings)
-
-var _editor_settings: EditorSettings
-static var instance: AssetPlacerSettingsRepository
-
-
-func _init():
-	_editor_settings = EditorInterface.get_editor_settings()
-	instance = self
-
-
 const KEY_BASE = "asset_placer/%s"
 const KEY_BINDING_SCALE: String = "bindings/scale_asset"
 const KEY_TRANSFORM_STEP: String = "general/transform_step_normal"
@@ -31,6 +20,19 @@ const KEY_BINDING_TOGGLE_PLANE_MODE: String = "bindings/toggle_plane_mode"
 const KEY_UI_SCALE: String = "general/ui_scale"
 const KEY_ASSET_LIBRARY_PATH: String = "general/asset_library_path"
 const KEY_UPDATE_CHANNEL: String = "general/update_channel"
+
+signal settings_changed(settings: AssetPlacerSettings)
+
+var _editor_settings: EditorSettings
+static var instance: AssetPlacerSettingsRepository
+
+
+func _init():
+	_editor_settings = EditorInterface.get_editor_settings()
+	instance = self
+
+
+
 
 
 func _get_binding_storage_key(binding: AssetPlacerSettings.Bindings) -> String:

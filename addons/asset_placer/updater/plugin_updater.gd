@@ -1,19 +1,22 @@
 extends RefCounted
 class_name PluginUpdater
 
-static var instance: PluginUpdater
 
 signal updater_up_to_date
 signal updater_update_available(update: PluginUpdate)
 signal update_ready(update: PluginUpdate)
 signal show_update_loading(bool)
 
+const TMP_ZIP_TEMPLATE = "user://asset-placer-{version}.zip"
+
+
+static var instance: PluginUpdater
+
 var _local_plugin_path: String
 var _remote_plugin_path: String
 var _client: PluginUpdaterHttpClient
 var _latest_update: PluginUpdate
 
-const TMP_ZIP_TEMPLATE = "user://asset-placer-{version}.zip"
 
 
 func _init(local_config_path: String, remote_config_path: String):
