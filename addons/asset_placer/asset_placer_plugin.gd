@@ -180,6 +180,7 @@ func _handle_in_place_transform():
 		_asset_placer.stop_placement()
 
 
+# gdlint: disable=max-returns
 func _forward_3d_gui_input(viewport_camera, event):
 	if current_settings.bindings[AssetPlacerSettings.Bindings.InPlaceTransform].is_pressed(event):
 		_handle_in_place_transform()

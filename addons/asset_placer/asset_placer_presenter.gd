@@ -1,3 +1,5 @@
+# gdlint: disable=max-public-methods
+# Temporary - needs refactoring in the future
 class_name AssetPlacerPresenter
 extends RefCounted
 
