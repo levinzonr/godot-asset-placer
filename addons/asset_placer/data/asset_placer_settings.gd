@@ -53,7 +53,9 @@ static func default() -> AssetPlacerSettings:
 	settings.bindings[Bindings.ToggleAxisZ] = APInputOption.key_press(Key.KEY_Z)
 	settings.bindings[Bindings.TogglePlaneMode] = APInputOption.key_press(Key.KEY_Q)
 	settings.preview_material_resource = "res://addons/asset_placer/utils/preview_material.tres"
-	settings.plane_material_resource = "res://addons/asset_placer/ui/plane_preview/plane_preview_material.tres"
+	settings.plane_material_resource = (
+		"res://addons/asset_placer/ui/plane_preview/plane_preview_material.tres"
+	)
 	settings.transform_step = 0.1
 	settings.rotation_step = 5
 	settings.ui_scale = 1.0

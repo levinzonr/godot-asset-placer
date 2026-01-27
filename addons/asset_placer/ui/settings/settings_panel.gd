@@ -21,8 +21,7 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 @onready var keybinding_option_axis_x = %KeybindingOptionAxisX
 @onready var keybinding_option_axis_y = %KeybindingOptionAxisY
 @onready var keybinding_option_axis_z = %KeybindingOptionAxisZ
-@onready
-var keybinding_option_plane_mode = $Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions/KeybindingOptionPlaneMode
+@onready var keybinding_option_plane_mode = %KeybindingOptionPlaneMode
 @onready var update_channel_option_button: OptionButton = %UpdateChannelOptionButton
 @onready var update_channel_info_button: Button = %UpdateChannelInfoButton
 

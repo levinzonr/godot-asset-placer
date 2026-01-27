@@ -13,7 +13,7 @@ signal placer_active(value: bool)
 signal asset_placed
 
 static var _instance: AssetPlacerPresenter
-static var TRANSFORM_STEP: float = 0.1
+static var transform_step: float = 0.1
 
 var options: AssetPlacerOptions
 var transform_mode: TransformMode = TransformMode.None

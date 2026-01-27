@@ -1,8 +1,14 @@
 @tool
 extends Control
 
-const FEATURE_TEMPLATE = "https://github.com/levinzonr/godot-asset-placer/issues/new?template=feature_request.md&labels=enhancement&title=%5BFeature%5D%20"
-const ISSUE_TEMPLATE = "https://github.com/levinzonr/godot-asset-placer/issues/new?template=bug_report.md&labels=bug&title=%5BBUG%5D%20"
+const FEATURE_TEMPLATE = (
+	"https://github.com/levinzonr/godot-asset-placer/issues/new"
+	+ "?template=feature_request.md&labels=enhancement&title=%5BFeature%5D%20"
+)
+const ISSUE_TEMPLATE = (
+	"https://github.com/levinzonr/godot-asset-placer/issues/new"
+	+ "?template=bug_report.md&labels=bug&title=%5BBUG%5D%20"
+)
 
 var updater: PluginUpdater = PluginUpdater.instance
 
