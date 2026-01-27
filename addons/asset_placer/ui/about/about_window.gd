@@ -1,7 +1,6 @@
 @tool
 extends Control
 
-
 @onready var version_label: Label = %VersionLabel
 
 @onready var feature_request_button: Button = %FeatureRequestButton
@@ -19,13 +18,13 @@ extends Control
 const FEATURE_TEMPLATE = "https://github.com/levinzonr/godot-asset-placer/issues/new?template=feature_request.md&labels=enhancement&title=%5BFeature%5D%20"
 const ISSUE_TEMPLATE = "https://github.com/levinzonr/godot-asset-placer/issues/new?template=bug_report.md&labels=bug&title=%5BBUG%5D%20"
 
-
 var updater: PluginUpdater = PluginUpdater.instance
+
 
 func _ready():
 	var settings = settings_repository.get_settings()
-	settings_repository.settings_changed.connect(func(s): 
-		updater.check_for_updates(s.update_channel)
+	settings_repository.settings_changed.connect(
+		func(s): updater.check_for_updates(s.update_channel)
 	)
 	updater.show_update_loading.connect(_show_update_loading)
 	updater.updater_update_available.connect(_show_update_available_for_download)
@@ -36,19 +35,18 @@ func _ready():
 	download_update_button.pressed.connect(updater.do_update)
 	apply_update_button.pressed.connect(updater.apply_update)
 	version_label.text = "Version %s" % get_plugin_version()
-	issue_button.pressed.connect(func():
-		OS.shell_open(ISSUE_TEMPLATE)
-	)
-	feature_request_button.pressed.connect(func():
-		OS.shell_open(FEATURE_TEMPLATE)
-	)
-	
+	issue_button.pressed.connect(func(): OS.shell_open(ISSUE_TEMPLATE))
+	feature_request_button.pressed.connect(func(): OS.shell_open(FEATURE_TEMPLATE))
+
+
 func _show_update_available_for_download(update: PluginUpdate):
-		update_button.text = "Version %s Availalbe" % update.version
-		update_button.show()
-		apply_update_button.hide()
-		update_version_label.text = update.version._to_string()
-		changelog_link_button.uri = "https://github.com/levinzonr/godot-asset-placer/releases/tag/" +  update.version.to_string()
+	update_button.text = "Version %s Availalbe" % update.version
+	update_button.show()
+	apply_update_button.hide()
+	update_version_label.text = update.version._to_string()
+	changelog_link_button.uri = (
+		"https://github.com/levinzonr/godot-asset-placer/releases/tag/" + update.version.to_string()
+	)
 
 
 func _show_update_loading(loading: bool):
@@ -59,13 +57,18 @@ func _show_update_loading(loading: bool):
 		download_update_button.disabled = false
 		progress_bar.hide()
 
+
 func _show_update_ready_to_apply(update: PluginUpdate):
-		update_button.text = "Version %s Availalbe" % update.version
-		update_button.show()
-		download_update_button.hide()
-		apply_update_button.show()
-		update_version_label.text = update.version._to_string()
-		changelog_link_button.uri = "https://github.com/levinzonr/godot-asset-placer/blob/main/CHANGELOG.md#" +  update.version.changelog_version()
+	update_button.text = "Version %s Availalbe" % update.version
+	update_button.show()
+	download_update_button.hide()
+	apply_update_button.show()
+	update_version_label.text = update.version._to_string()
+	changelog_link_button.uri = (
+		"https://github.com/levinzonr/godot-asset-placer/blob/main/CHANGELOG.md#"
+		+ update.version.changelog_version()
+	)
+
 
 func get_plugin_version() -> String:
 	return PluginConfiguration.new("res://addons/asset_placer/plugin.cfg").version.to_string()

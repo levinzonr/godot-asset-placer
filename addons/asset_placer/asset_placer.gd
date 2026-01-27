@@ -9,7 +9,7 @@ var asset: AssetResource
 var _is_node_transform_mode: bool = false
 var _original_transform: Transform3D
 
-var preview_transform_step : float = 0.1
+var preview_transform_step: float = 0.1
 var preview_rotate_step: float = 5
 
 var undo_redo: EditorUndoRedoManager
@@ -19,7 +19,9 @@ var preview_material = load("res://addons/asset_placer/utils/preview_material.tr
 var _strategy: AssetPlacementStrategy
 var _plane_placer: PlanePlacer
 var _presenter: AssetPlacerPresenter:
-	get: return AssetPlacerPresenter._instance
+	get:
+		return AssetPlacerPresenter._instance
+
 
 func _init(undo_redo: EditorUndoRedoManager, plane_placer: PlanePlacer):
 	self.undo_redo = undo_redo
@@ -40,6 +42,7 @@ func start_placement(root: Window, asset: AssetResource, placement: PlacementMod
 		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
 		self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
+
 func start_node_transform(node: Node3D, placement: PlacementMode):
 	stop_placement()
 	_is_node_transform_mode = true
@@ -48,6 +51,7 @@ func start_node_transform(node: Node3D, placement: PlacementMode):
 	preview_rids = get_collision_rids(preview_node)
 	set_placement_mode(placement)
 	self.preview_aabb = AABBProvider.provide_aabb(preview_node)
+
 
 func _apply_preview_material(node: Node3D):
 	if not preview_material:
@@ -91,6 +95,7 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 	else:
 		return false
 
+
 func place_asset(focus_on_placement: bool):
 	if preview_node:
 		if _is_node_transform_mode:
@@ -102,6 +107,7 @@ func place_asset(focus_on_placement: bool):
 	else:
 		return false
 
+
 func set_plugin_settings(settings: AssetPlacerSettings):
 	preview_rotate_step = settings.rotation_step
 	preview_transform_step = settings.transform_step
@@ -110,7 +116,10 @@ func set_plugin_settings(settings: AssetPlacerSettings):
 	else:
 		preview_material = load(settings.preview_material_resource)
 
-func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, direction: int) -> bool:
+
+func transform_preview(
+	mode: AssetPlacerPresenter.TransformMode, axis: Vector3, direction: int
+) -> bool:
 	if not preview_node:
 		return false
 
@@ -130,7 +139,7 @@ func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, 
 			preview_node.scale = new_scale
 			return true
 		AssetPlacerPresenter.TransformMode.Rotate:
-			preview_node.rotate(axis.normalized() * direction, deg_to_rad(preview_rotate_step)) # Can be replaced with deg_to_rad(preview_transform_step) however 0.1 deg is realy low.
+			preview_node.rotate(axis.normalized() * direction, deg_to_rad(preview_rotate_step))  # Can be replaced with deg_to_rad(preview_transform_step) however 0.1 deg is realy low.
 			return true
 
 		AssetPlacerPresenter.TransformMode.Move:
@@ -139,6 +148,7 @@ func transform_preview(mode: AssetPlacerPresenter.TransformMode, axis: Vector3, 
 		_:
 			return false
 
+
 func get_collision_rids(node: Node) -> Array:
 	var rids = []
 	if node is CollisionObject3D:
@@ -146,6 +156,7 @@ func get_collision_rids(node: Node) -> Array:
 	for child in node.get_children():
 		rids += get_collision_rids(child)
 	return rids
+
 
 func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
 	if !AssetPlacerPresenter._instance.options.snapping_enabled:
@@ -167,9 +178,7 @@ func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
 	var snapped_tangent = round(local_tangent / grid_step) * grid_step
 	var snapped_bitangent = round(local_bitangent / grid_step) * grid_step
 
-	var snapped = tangent * snapped_tangent \
-				   + bitangent * snapped_bitangent \
-				   + n * local_height
+	var snapped = tangent * snapped_tangent + bitangent * snapped_bitangent + n * local_height
 
 	return snapped
 
@@ -180,14 +189,17 @@ func _place_instance(transform: Transform3D, select_after_placement: bool):
 
 	if is_instance_valid(scene_root) and is_instance_valid(asset.get_resource()):
 		undo_redo.create_action("Place Asset: %s" % asset.name)
-		undo_redo.add_do_method(self, "_do_placement", scene_root, transform, select_after_placement)
+		undo_redo.add_do_method(
+			self, "_do_placement", scene_root, transform, select_after_placement
+		)
 		undo_redo.add_undo_method(self, "_undo_placement", scene_root)
 		undo_redo.commit_action()
 		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
 		_presenter.on_asset_placed()
 
+
 func _do_placement(root: Node3D, transform: Transform3D, select_after_placement: bool):
-	var new_node: Node3D =  _instantiate_asset_resource(asset)
+	var new_node: Node3D = _instantiate_asset_resource(asset)
 	new_node.global_transform = transform
 	new_node.transform = root.global_transform.affine_inverse() * transform
 	new_node.set_meta(meta_asset_id, asset.id)
@@ -199,18 +211,26 @@ func _do_placement(root: Node3D, transform: Transform3D, select_after_placement:
 		AssetPlacerPresenter._instance.clear_selection()
 		EditorInterface.edit_node(new_node)
 
+
 func _undo_placement(root: Node3D):
 	var last_added = node_history.pop_front()
 	var children = root.get_children()
-	var node_index = -1; for a in root.get_child_count(): if children[a].name == last_added: node_index = a; break
+	var node_index = -1
+	for a in root.get_child_count():
+		if children[a].name == last_added:
+			node_index = a
+			break
 	var node = root.get_child(node_index)
 	node.queue_free()
+
 
 func _confirm_node_transform():
 	if _is_node_transform_mode and preview_node:
 		# Create undo action for the node transformation
 		undo_redo.create_action("Transform Node: %s" % preview_node.name)
-		undo_redo.add_do_method(self, "_do_node_transform", preview_node, preview_node.global_transform)
+		undo_redo.add_do_method(
+			self, "_do_node_transform", preview_node, preview_node.global_transform
+		)
 		undo_redo.add_undo_method(self, "_undo_node_transform", preview_node, _original_transform)
 		undo_redo.commit_action()
 
@@ -218,11 +238,14 @@ func _confirm_node_transform():
 		_presenter.end_node_transform_mode()
 		stop_placement()
 
+
 func _do_node_transform(node: Node3D, new_transform: Transform3D):
 	node.global_transform = new_transform
 
+
 func _undo_node_transform(node: Node3D, original_transform: Transform3D):
 	node.global_transform = original_transform
+
 
 func stop_placement():
 	self.asset = null
@@ -231,6 +254,7 @@ func stop_placement():
 	if preview_node and not was_node_transform_mode:
 		preview_node.queue_free()
 	preview_node = null
+
 
 func _instantiate_asset_resource(asset: AssetResource) -> Node3D:
 	var _preview_node: Node3D
@@ -246,6 +270,7 @@ func _instantiate_asset_resource(asset: AssetResource) -> Node3D:
 
 	return _preview_node
 
+
 func set_placement_mode(placement_mode: PlacementMode):
 	if placement_mode is PlacementMode.SurfacePlacement:
 		_strategy = SurfaceAssetPlacementStrategy.new(preview_rids)
@@ -255,6 +280,7 @@ func set_placement_mode(placement_mode: PlacementMode):
 		_strategy = Terrain3DAssetPlacementStrategy.new(placement_mode.terrain3dNode)
 	else:
 		push_error("Placement mode %s is not supported" % str(placement_mode))
+
 
 func _pick_name(node: Node3D, parent: Node3D) -> String:
 	var number_of_same_scenes = 0

@@ -3,13 +3,12 @@ class_name Terrain3DAssetPlacementStrategy
 
 var terrain_3d_node: Node3D
 
+
 func _init(node: Node3D):
 	self.terrain_3d_node = node
 
-func get_placement_point(
-	camera: Camera3D, 
-	mouse_position: Vector2
-) -> CollisionHit:
+
+func get_placement_point(camera: Camera3D, mouse_position: Vector2) -> CollisionHit:
 	if terrain_3d_node.has_method("get_intersection"):
 		var from := camera.project_ray_origin(mouse_position)
 		var to := from + camera.project_ray_normal(mouse_position) * 1000

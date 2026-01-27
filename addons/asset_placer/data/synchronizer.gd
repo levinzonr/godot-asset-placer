@@ -18,35 +18,38 @@ var sync_running = false:
 		sync_running = value
 		call_deferred("emit_signal", "sync_state_change", value)
 
+
 func _init(folders_repository: FolderRepository, assets_repository: AssetsRepository):
 	self.asset_repository = assets_repository
 	self.folder_repository = folders_repository
 	instance = self
 
-func sync_all():
 
+func sync_all():
 	if sync_running:
 		push_error("Sync is already running")
 		return
 
-	AssetPlacerAsync.instance.enqueue(func():
-		sync_running = true
-		_sync_all()
-		_notify_scan_complete()
-		sync_running = false
+	AssetPlacerAsync.instance.enqueue(
+		func():
+			sync_running = true
+			_sync_all()
+			_notify_scan_complete()
+			sync_running = false
 	)
 
-func sync_folder(folder: AssetFolder):
 
+func sync_folder(folder: AssetFolder):
 	if sync_running:
 		push_error("Sync is already running")
 		return
 
-	AssetPlacerAsync.instance.enqueue(func():
-		sync_running = true
-		_sync_folder(folder)
-		_notify_scan_complete()
-		sync_running = false
+	AssetPlacerAsync.instance.enqueue(
+		func():
+			sync_running = true
+			_sync_folder(folder)
+			_notify_scan_complete()
+			sync_running = false
 	)
 
 
@@ -55,15 +58,17 @@ func _sync_folder(folder: AssetFolder):
 	_clear_unreachable_assets()
 	add_assets_from_folder(folder.path, folder.include_subfolders)
 
+
 func _sync_all():
 	_clear_unreachable_assets()
 	_clear_invalid_assets()
 	for folder in folder_repository.get_all():
 		_sync_folder(folder)
 
+
 func add_assets_from_folder(folder_path: String, recursive: bool):
 	var dir = DirAccess.open(folder_path)
-	var tags : Array[int] = []
+	var tags: Array[int] = []
 	for file in dir.get_files():
 		_scanned += 1
 		var path = folder_path.path_join(file)
@@ -93,6 +98,7 @@ func _clear_unreachable_assets():
 			elif not _is_asset_reachable_from_folder(asset, folder):
 				asset_repository.delete(asset.id)
 
+
 func _is_asset_reachable_from_folder(asset: AssetResource, folder: AssetFolder) -> bool:
 	var asset_folder_path := asset.folder_path
 	var folder_path := folder.path
@@ -111,8 +117,8 @@ func _clear_invalid_assets():
 			_removed += 1
 			asset_repository.delete(asset.id)
 
+
 func _clear_data():
 	_removed = 0
 	_added = 0
 	_scanned = 0
-

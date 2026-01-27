@@ -8,22 +8,26 @@ signal collection_selected(collection: AssetCollection, selected: bool)
 
 var pre_selected: Array[AssetCollection]
 
+
 func _ready():
 	hide_on_checkable_item_selection = false
 	presenter.show_collections.connect(show_collections)
 	presenter.show_empty_view.connect(show_empty_view)
 	presenter.ready()
 
+
 func show_empty_view():
 	add_item("No Collections added yet")
-	index_pressed.connect(func(i):
-		AssetPlacerDockPresenter.instance.show_tab.emit(
-			AssetPlacerDockPresenter.Tab.Collections
-		)
+	index_pressed.connect(
+		func(i):
+			AssetPlacerDockPresenter.instance.show_tab.emit(
+				AssetPlacerDockPresenter.Tab.Collections
+			)
 	)
 
+
 func show_collections(collections: Array[AssetCollection]):
-	var circle_tex := load("uid://btht44hiygnmq") # colection_circle.svg
+	var circle_tex := load("uid://btht44hiygnmq")  # colection_circle.svg
 	for i in collections.size():
 		var collection_id = collections[i].id
 		var selected = pre_selected.any(func(c): return c.id == collection_id)
@@ -33,10 +37,12 @@ func show_collections(collections: Array[AssetCollection]):
 		set_item_icon(i, circle_tex)
 		set_item_icon_modulate(i, collections[i].backgroundColor)
 
-	index_pressed.connect(func(index):
-		toggle_item_checked(index)
-		collection_selected.emit(collections[index], is_item_checked(index))
+	index_pressed.connect(
+		func(index):
+			toggle_item_checked(index)
+			collection_selected.emit(collections[index], is_item_checked(index))
 	)
+
 
 static func show_in(context: Control, selected: Array[AssetCollection], on_select: Callable):
 	var picker: CollectionPicker = CollectionPicker.new()
