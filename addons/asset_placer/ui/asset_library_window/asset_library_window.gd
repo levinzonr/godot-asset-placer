@@ -2,6 +2,8 @@
 class_name AssetLibraryWindow
 extends Control
 
+signal asset_selected(asset: AssetResource)
+
 @onready var presenter = AssetLibraryPresenter.new()
 @onready var folder_presenter = FolderPresenter.new()
 
@@ -23,8 +25,6 @@ extends Control
 @onready var scroll_container = %ScrollContainer
 @onready var empty_search_content = %EmptySearchContent
 @onready var empty_view_add_folder_btn = %EmptyViewAddFolderBtn
-
-signal asset_selected(asset: AssetResource)
 
 
 func _ready():
@@ -115,7 +115,7 @@ func clear_selected_asset():
 			child.set_pressed_no_signal(false)
 
 
-func _can_drop_data(at_position, data):
+func _can_drop_data(_at_position, data):
 	if data is Dictionary:
 		var type = data["type"]
 		var files_or_dirs = type == "files_and_dirs" || type == "files"
@@ -123,7 +123,7 @@ func _can_drop_data(at_position, data):
 	return false
 
 
-func _drop_data(at_position, data):
+func _drop_data(_at_position, data):
 	var dirs: PackedStringArray = data["files"]
 	presenter.add_assets_or_folders(dirs)
 

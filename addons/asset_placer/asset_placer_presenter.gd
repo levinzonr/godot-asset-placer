@@ -1,8 +1,6 @@
 class_name AssetPlacerPresenter
 extends RefCounted
 
-enum TransformMode { None, Rotate, Scale, Move }
-
 signal asset_deselected
 signal parent_changed(parent: NodePath)
 signal options_changed(options: AssetPlacerOptions)
@@ -13,6 +11,8 @@ signal asset_selected(asset: AssetResource)
 signal show_error(message: String)
 signal placer_active(value: bool)
 signal asset_placed
+
+enum TransformMode { None, Rotate, Scale, Move }
 
 static var _instance: AssetPlacerPresenter
 static var transform_step: float = 0.1
