@@ -20,5 +20,5 @@ func index_of_asset(asset: AssetResource):
 	for a in len(items):
 		if items[a].id == asset.id:
 			idx = a
-		break
+			break
 	return idx

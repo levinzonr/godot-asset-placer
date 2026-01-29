@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1tso1ibex52i"]
+[gd_scene load_steps=3 format=3 uid="uid://d1tso1ibex52i"]
+
+[ext_resource type="PackedScene" uid="uid://b2htw2xvffvye" path="res://demo/assets/test/earth_impact.glb" id="1_hyddh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l0vgp"]
 size = Vector3(20, 1, 20)
@@ -9,3 +11,7 @@ size = Vector3(20, 1, 20)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_l0vgp")
+
+[node name="earth_impact" type="Node3D" parent="." instance=ExtResource("1_hyddh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36830616, 0.5, 0.5563195)
+metadata/asset_placer_res_id = "uid://b2htw2xvffvye"

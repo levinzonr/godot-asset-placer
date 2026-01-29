@@ -10,5 +10,6 @@ extends Control
 
 
 func set_collection(collection: AssetCollection):
-	collection_icon.texture = collection.make_circle_icon(24)
+	collection_icon.texture = load("uid://btht44hiygnmq")  # colection_circle.svg
+	collection_icon.modulate = collection.background_color
 	label.text = collection.name

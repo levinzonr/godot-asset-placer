@@ -9,9 +9,9 @@ var _previewer: EditorResourcePreview
 var _last_time_modified = 0
 
 
-func _init(resource: Resource = null):
-	if resource:
-		self.resource = resource
+func _init(res: Resource = null):
+	if res:
+		self.resource = res
 		_preview_resource()
 
 
@@ -19,7 +19,10 @@ func _preview_resource():
 	if not Engine.is_editor_hint():
 		return
 
-	if not resource:
+	if not is_instance_valid(resource):
+		return
+
+	if resource.resource_path.is_empty():
 		return
 
 	_last_time_modified = FileAccess.get_modified_time(resource.resource_path)
@@ -28,14 +31,16 @@ func _preview_resource():
 
 
 func _on_preview_generated(_path: String, texture: Texture2D, _thumbnail, _data):
-	_resolved_texture = texture
+	if is_instance_valid(texture):
+		_resolved_texture = texture
+		emit_changed()
 
 
 func _resolve():
 	if not Engine.is_editor_hint():
 		return
 
-	if resource:
+	if is_instance_valid(resource) and not resource.resource_path.is_empty():
 		var new_time_modified = FileAccess.get_modified_time(resource.resource_path)
 		if new_time_modified != _last_time_modified:
 			_preview_resource()
