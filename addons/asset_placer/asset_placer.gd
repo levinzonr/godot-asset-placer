@@ -190,9 +190,7 @@ func _place_instance(transform: Transform3D, select_after_placement: bool):
 
 	if is_instance_valid(parent) and is_instance_valid(asset.get_resource()):
 		undo_redo.create_action("Place Asset: %s" % asset.name)
-		undo_redo.add_do_method(
-			self, "_do_placement", parent, transform, select_after_placement
-		)
+		undo_redo.add_do_method(self, "_do_placement", parent, transform, select_after_placement)
 		undo_redo.add_undo_method(self, "_undo_placement", parent)
 		undo_redo.commit_action()
 		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)

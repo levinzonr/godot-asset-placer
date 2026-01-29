@@ -45,13 +45,7 @@ func get_resource() -> Resource:
 ## Whether the AssetResource id points to a valid resource.
 ## Always false after failing to load.
 func has_resource() -> bool:
-	if _failed_load:
-		return false
-	# If id is a UID, check if it exists in ResourceUID
-	if id.begins_with("uid://"):
-		return ResourceUID.has_id(ResourceUID.text_to_id(id))
-	# If id is a path, check if the file exists
-	return ResourceLoader.exists(id)
+	return ResourceUID.has_id(ResourceUID.text_to_id(id)) and not _failed_load
 
 
 func is_resource_loaded() -> bool:
