@@ -1,5 +1,5 @@
-extends AssetPlacerFolderRule
 class_name AddToCollectionRule
+extends AssetPlacerFolderRule
 
 var collections: Array[int]
 

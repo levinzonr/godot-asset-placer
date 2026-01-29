@@ -1,24 +1,23 @@
 @tool
-extends PopupPanel
 class_name ManageCollectionsDialog
-@onready var assets_container: Container = %AssetsContainer
+extends PopupPanel
 
-@onready var presenter: ManageCollectionsPresenter = ManageCollectionsPresenter.new()
-@onready var inactive_collections_container: Container = %InactiveCollectionsContainer
-@onready var active_collections_container: Container = %ActiveCollectionsContainer
 var collection_item_res = preload(
 	"res://addons/asset_placer/ui/manage_collections/component/checkable_collection_item.tscn"
 )
 var asset_item_res = preload(
 	"res://addons/asset_placer/ui/manage_collections/component/checkable_asset_item.tscn"
 )
-@onready var filter_assets_line_edit: LineEdit = %FilterAssetsLineEdit
+var _active_collection: AssetCollection = null
 
+@onready var assets_container: Container = %AssetsContainer
+@onready var presenter: ManageCollectionsPresenter = ManageCollectionsPresenter.new()
+@onready var inactive_collections_container: Container = %InactiveCollectionsContainer
+@onready var active_collections_container: Container = %ActiveCollectionsContainer
+@onready var filter_assets_line_edit: LineEdit = %FilterAssetsLineEdit
 @onready var no_active_collections_empty_view = %NoActiveCollectionsEmptyView
 @onready var no_in_active_collections_empty_view = %NoInActiveCollectionsEmptyView
 @onready var empty_assets_empty_view = %EmptyAssetsEmptyView
-
-var _active_collection: AssetCollection = null
 
 
 func _ready():

@@ -1,6 +1,6 @@
 @tool
-extends Texture2D
 class_name AssetThumbnailTexture2D
+extends Texture2D
 
 @export var resource: Resource
 
@@ -27,7 +27,7 @@ func _preview_resource():
 	_previewer.queue_edited_resource_preview(resource, self, "_on_preview_generated", null)
 
 
-func _on_preview_generated(path: String, texture: Texture2D, thumbnail, data):
+func _on_preview_generated(_path: String, texture: Texture2D, _thumbnail, _data):
 	_resolved_texture = texture
 
 

@@ -1,13 +1,12 @@
-extends RefCounted
 class_name ManageCollectionsPresenter
-
-var assets_repository: AssetsRepository
-var collections_repository: AssetCollectionRepository
+extends RefCounted
 
 signal show_active_collections(collections: Array[AssetCollection])
 signal show_inactive_collections(collections: Array[AssetCollection])
 signal show_assets(assets: Array[AssetResource])
 
+var assets_repository: AssetsRepository
+var collections_repository: AssetCollectionRepository
 var active_asset: AssetResource
 
 

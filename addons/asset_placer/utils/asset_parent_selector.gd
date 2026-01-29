@@ -1,5 +1,5 @@
-extends RefCounted
 class_name AssetParentSelector
+extends RefCounted
 
 
 static func pick_parent(root: Node3D, asset: AssetResource, auto_group: bool) -> Node3D:

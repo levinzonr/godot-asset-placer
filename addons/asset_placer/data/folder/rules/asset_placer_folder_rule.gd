@@ -1,8 +1,8 @@
-extends RefCounted
 class_name AssetPlacerFolderRule
+extends RefCounted
 
 
-func do_file_match(file: String) -> bool:
+func do_file_match(_file: String) -> bool:
 	return true
 
 
