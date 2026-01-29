@@ -39,6 +39,7 @@ func _init():
 	self._selected_asset = null
 	self._instance = self
 
+
 func ready():
 	options_changed.emit(options)
 	placement_mode_changed.emit(placement_mode)
@@ -50,8 +51,9 @@ func plugin_is_active() -> bool:
 	else:
 		return false
 
+
 func toggle_plane_placement():
-	placement_mode = PlacementMode.PlanePlacement.new(_last_plane_options)	
+	placement_mode = PlacementMode.PlanePlacement.new(_last_plane_options)
 
 
 func cycle_placement_mode():
@@ -61,8 +63,10 @@ func cycle_placement_mode():
 		toggle_transformation_mode(TransformMode.None)
 		toggle_surface_placement()
 
+
 func toggle_surface_placement():
-	placement_mode = PlacementMode.SurfacePlacement.new()	
+	placement_mode = PlacementMode.SurfacePlacement.new()
+
 
 func toggle_terrain_3d_placement(node_path: NodePath):
 	if not node_path.is_empty():
@@ -71,12 +75,15 @@ func toggle_terrain_3d_placement(node_path: NodePath):
 	else:
 		placement_mode_changed.emit(placement_mode)
 
+
 func select_placement_mode(mode: PlacementMode):
 	self.placement_mode = mode
+
 
 func select_parent(node: NodePath):
 	self._parent = node
 	parent_changed.emit(node)
+
 
 func toggle_transformation_mode(mode: TransformMode):
 	if transform_mode == mode:
@@ -84,22 +91,24 @@ func toggle_transformation_mode(mode: TransformMode):
 	else:
 		transform_mode = mode
 	transform_mode_changed.emit(transform_mode)
-	
+
 	if transform_mode == TransformMode.Move:
 		select_placement_mode(PlacementMode.PlanePlacement.new(_last_plane_options))
-		
+
 	if transform_mode == TransformMode.Rotate:
 		set_random_rotation_enabled(false)
-		
+
 	if transform_mode == TransformMode.Scale:
-		set_random_scale_enabled(false)		
-	
+		set_random_scale_enabled(false)
+
 	_select_default_axis(transform_mode)
-	
+
+
 func clear_parent():
 	self._parent = NodePath("")
-	parent_changed.emit(_parent)	
-	
+	parent_changed.emit(_parent)
+
+
 func set_unform_scaling(value: bool):
 	options.uniform_scaling = value
 	if value:
@@ -255,10 +264,12 @@ func on_asset_placed():
 	if options.enable_random_placement:
 		var random = current_assets.pick_random()
 		select_asset(random)
-		
+
+
 func set_automatic_grouping(value: bool):
 	options.group_automatically = value
 	options_changed.emit(options)
+
 
 func is_node_transform_mode() -> bool:
 	return _selected_node != null

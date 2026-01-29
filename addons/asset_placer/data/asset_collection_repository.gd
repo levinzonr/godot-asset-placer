@@ -18,13 +18,15 @@ func _init(data_source: AssetLibraryDataSource):
 func get_collections() -> Array[AssetCollection]:
 	return _data_source.get_library().collections
 
+
 func find_by_id(id: int) -> AssetCollection:
 	var collections = get_collections()
 	var index = collections.find_custom(func(c): return c.id == id)
 	if index == -1:
-		return null;
+		return null
 	else:
 		return collections[index]
+
 
 func update_collection(collection: AssetCollection):
 	var lib = _data_source.get_library()

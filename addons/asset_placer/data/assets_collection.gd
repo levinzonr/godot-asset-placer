@@ -12,7 +12,6 @@ func _init(name: String, background_color: Color, id: int):
 	self.id = id
 
 
-
 func make_circle_icon(radius: int) -> Texture2D:
 	var size = radius * 2
 	var img := Image.create(size, size, false, Image.FORMAT_RGBA8)

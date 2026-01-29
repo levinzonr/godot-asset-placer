@@ -3,6 +3,7 @@ class_name AddToCollectionRule
 
 var collections: Array[int]
 
+
 func _init(collections: Array[int]):
 	self.collections = collections
 

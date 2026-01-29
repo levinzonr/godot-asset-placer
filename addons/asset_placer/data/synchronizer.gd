@@ -64,21 +64,20 @@ func _sync_all():
 	for folder in folder_repository.get_all():
 		_sync_folder(folder)
 
+
 func add_assets_from_folder(
-	folder_path: String,
-	recursive: bool,
-	rules: Array[AssetPlacerFolderRule]
+	folder_path: String, recursive: bool, rules: Array[AssetPlacerFolderRule]
 ):
 	var dir = DirAccess.open(folder_path)
-	var tags : Array[int] = []
+	var tags: Array[int] = []
 	for file in dir.get_files():
 		_scanned += 1
 		var path = folder_path.path_join(file)
 		var add = true
-		
+
 		for rule in rules:
 			add = rule.do_file_match(file)
-		
+
 		if add:
 			var asset = asset_repository.add_asset(path, tags, folder_path)
 
