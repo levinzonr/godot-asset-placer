@@ -45,7 +45,7 @@ func set_content_margin_h(margin):
 
 func _update_stylebox():
 	var stylebox = StyleBoxFlat.new()
-	stylebox.bg_color = backgroundColor
+	stylebox.bg_color = background_color
 	stylebox.set_corner_radius_all(corner_radius)
 	stylebox.content_margin_left = content_margin_horizontal
 	stylebox.content_margin_right = content_margin_horizontal
