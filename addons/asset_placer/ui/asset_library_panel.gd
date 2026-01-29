@@ -1,24 +1,18 @@
 @tool
-extends Control
 class_name AssetLibraryPanel
+extends Control
 
 @onready var asset_library_window: AssetLibraryWindow = $Panel/TabContainer/Assets
 @onready var tab_container: TabContainer = $Panel/TabContainer
+
+
 func _ready():
-	PluginUpdater.instance.updater_update_available.connect(func(a):
-		show_update_available(true)
-	)
-	
-	PluginUpdater.instance.update_ready.connect(func(a):
-		show_update_available(true)
-	)
-	
-	PluginUpdater.instance.updater_up_to_date.connect(func():
-		show_update_available(false)
-	)
-	AssetPlacerDockPresenter.instance.show_tab.connect(func(tab):
-		tab_container.current_tab = tab
-	)
+	PluginUpdater.instance.updater_update_available.connect(func(a): show_update_available(true))
+
+	PluginUpdater.instance.update_ready.connect(func(a): show_update_available(true))
+
+	PluginUpdater.instance.updater_up_to_date.connect(func(): show_update_available(false))
+	AssetPlacerDockPresenter.instance.show_tab.connect(func(tab): tab_container.current_tab = tab)
 
 
 func show_update_available(avaialbe: bool):

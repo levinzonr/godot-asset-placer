@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dua2vx4bi1gmf"]
+[gd_scene load_steps=13 format=3 uid="uid://dua2vx4bi1gmf"]
 
 [ext_resource type="Script" uid="uid://b4q0diu63qlg8" path="res://addons/asset_placer/ui/asset_placer_options/asset_placer_options.gd" id="1_7uy5w"]
 [ext_resource type="Script" uid="uid://btqju8qjrlawq" path="res://addons/asset_placer/ui/components/vector3_spinbox.gd" id="2_k4pj7"]
@@ -16,20 +16,6 @@ resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_o45xf")
 icon_name = &"NodeWarning"
-
-[sub_resource type="Texture2D" id="Texture2D_h8tp4"]
-resource_local_to_scene = false
-resource_name = ""
-script = ExtResource("2_o45xf")
-icon_name = &"Group"
-metadata/_custom_type_script = "uid://dmicn3kmr620j"
-
-[sub_resource type="Texture2D" id="Texture2D_h1wu1"]
-resource_local_to_scene = false
-resource_name = ""
-script = ExtResource("2_o45xf")
-icon_name = &"Info"
-metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [sub_resource type="Texture2D" id="Texture2D_br0rc"]
 resource_local_to_scene = false
@@ -109,45 +95,25 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Options"
 
-[node name="ParentContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/ScrollContainer/VBoxContainer/ParentContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("Texture2D_rixd2")
 stretch_mode = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/ParentContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Assets Parent: "
 
-[node name="ParentButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/ParentContainer"]
+[node name="ParentButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 text = "No parent selected"
 icon = SubResource("Texture2D_o45xf")
 alignment = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="GroupAutomaticallyCheckBox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-button_pressed = true
-text = "Auto-Group by Collections"
-icon = SubResource("Texture2D_h8tp4")
-
-[node name="Button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-tooltip_text = "Automatically groups placed Assets based on their collections. 
-The first collection will be used as primary anchor.
-
-New Parent Node  will be created automatically and will have the same name as primary Collection"
-accessibility_description = "Hello"
-icon = SubResource("Texture2D_h1wu1")
-flat = true
 
 [node name="PlacementMode" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -246,7 +212,7 @@ text = "Grid Step"
 [node name="GridSnapValueSpinBox" type="SpinBox" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-step = 0.1
+step = 0.01
 value = 1.0
 editable = false
 

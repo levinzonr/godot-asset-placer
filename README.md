@@ -170,6 +170,7 @@ All settings are persisted across Godot sessions within EditorSettings and apply
 Found a problem or have an idea?
 - [🐛 Report a bug](https://github.com/levinzonr/godot-asset-placer/issues/new?template=bug_report.md&labels=bug&title=%5BBUG%5D%20)
 - [✨ Request a feature](https://github.com/levinzonr/godot-asset-placer/issues/new?template=feature_request.md&labels=enhancement&title=%5BFeature%5D%20)
+- [📖 Contributing guidelines](CONTRIBUTING.md)
 
 
 ## Changelog

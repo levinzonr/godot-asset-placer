@@ -1,5 +1,6 @@
-extends RefCounted
 class_name AssetPlacementStrategy
+extends RefCounted
+
 
 class CollisionHit:
 	var position: Vector3
@@ -12,5 +13,6 @@ class CollisionHit:
 	static func zero() -> CollisionHit:
 		return CollisionHit.new(Vector3.ZERO, Vector3.UP)
 
-func get_placement_point(camera: Camera3D, mouse_position: Vector2) -> CollisionHit:
+
+func get_placement_point(_camera: Camera3D, _mouse_position: Vector2) -> CollisionHit:
 	return CollisionHit.zero()

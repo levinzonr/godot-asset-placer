@@ -7,24 +7,17 @@
 [sub_resource type="LabelSettings" id="LabelSettings_55ohh"]
 font_size = 14
 
-[node name="AssetResourcePreview" type="Button"]
+[node name="AssetResourcePreview" type="MarginContainer"]
+custom_minimum_size = Vector2(150, 200)
 offset_right = 150.0
-offset_bottom = 194.33
-theme_type_variation = &"FlatButton"
-toggle_mode = true
+offset_bottom = 200.0
 script = ExtResource("1_q3676")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -39,10 +32,22 @@ metadata/_custom_type_script = "uid://dephufwlu765k"
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
-mouse_filter = 1
+size_flags_vertical = 3
 text = "Asset"
 label_settings = SubResource("LabelSettings_55ohh")
 horizontal_alignment = 1
 autowrap_mode = 1
 justification_flags = 227
+text_overrun_behavior = 3
+
+[node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme_type_variation = &"FlatButton"
+toggle_mode = true

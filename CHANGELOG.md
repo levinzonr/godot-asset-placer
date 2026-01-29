@@ -31,6 +31,39 @@ The dialog provide a more intuitive and convenient way to assign and remove asse
 
 ![](./docs/assets/manage_collections.png)
 
+## 1.2.8
+
+### Fixed
+- #63 Fixed typo in chip.gd by @VirtueOS
+
+
+## 1.2.7
+
+### Fixed
+- #54 Fixed invalid file paths when adding asset folders by using safer `path_join` by @Sr3qt
+- #53 Asset preview display improvements by @Sr3qt:
+  - File names now cutoff after 2 lines for better alignment
+  - Images are now always aligned properly
+  - Missing thumbnails show placeholder texture instead of blank
+  - Thumbnails now gracefully scale below 1.0 UI scale
+- #57 Make collection circles anti-aliased using SVG textures for improved visual quality by @Sr3qt
+
+### Changed
+- #60 Asset loading rework for improved safety and performance by @Sr3qt:
+  - Replaced unsafe asset scene access with safer getter methods
+  - Fixed CPU usage issue where failed assets would retry loading indefinitely
+  - Improved thumbnail generation to load without fully loading the asset scene
+
+
+## 1.2.6
+### Added
+- #51 Add another floating point configuration for the grid-step
+
+
+## 1.2.5
+### Fixed
+- #50 Wrong Icon resource was being used causing issues with plugin startup by @Sr3qt
+
 ## 1.2.4
 ### Fixed
 - Fix an Engine crash happening when using Slider to Change the Thumbnails Scale (#47)
