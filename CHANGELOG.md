@@ -1,5 +1,11 @@
 # Godot Asset Placer Changelog
 
+## 1.2.8
+
+### Fixed
+- #63 Fixed typo in chip.gd by @VirtueOS
+
+
 ## 1.2.7
 
 ### Fixed
