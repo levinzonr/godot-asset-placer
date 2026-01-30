@@ -9,7 +9,11 @@ extends Control
 @onready var move_down_button = %MoveDownButton
 
 
-func set_collection(collection: AssetCollection):
+func set_collection(collection: AssetCollection, is_partial: bool = false):
 	collection_icon.texture = load("uid://btht44hiygnmq")  # colection_circle.svg
 	collection_icon.modulate = collection.background_color
-	label.text = collection.name
+	if is_partial:
+		label.text = collection.name + " (partial)"
+		collection_icon.modulate.a = 0.5
+	else:
+		label.text = collection.name

@@ -1,13 +1,17 @@
 class_name ManageCollectionsPresenter
 extends RefCounted
 
+## Emitted with collections that ALL selected assets belong to
 signal show_active_collections(collections: Array[AssetCollection])
+## Emitted with collections that SOME (but not all) selected assets belong to
+signal show_partial_collections(collections: Array[AssetCollection])
+## Emitted with collections that NO selected assets belong to
 signal show_inactive_collections(collections: Array[AssetCollection])
 signal show_assets(assets: Array[AssetResource])
 
 var assets_repository: AssetsRepository
 var collections_repository: AssetCollectionRepository
-var active_asset: AssetResource
+var selected_assets: Array[AssetResource] = []
 
 
 func _init():
@@ -22,37 +26,59 @@ func ready():
 	show_inactive_collections.emit(collections)
 
 
-func move_collection(collection: AssetCollection, up: bool):
-	var current_index = active_asset.tags.find_custom(func(id): return id == collection.id)
-	if current_index != -1:
-		var new_index = current_index - 1 if up else current_index + 1
-		var old_tag = active_asset.tags[new_index]
-		active_asset.tags[current_index] = old_tag
-		active_asset.tags[new_index] = collection.id
-		assets_repository.update(active_asset)
-		select_asset(active_asset)
+func set_primary_collection(collection: AssetCollection):
+	for asset in selected_assets:
+		var current_index = asset.tags.find(collection.id)
+		if current_index > 0:
+			# Move to front
+			asset.tags.remove_at(current_index)
+			asset.tags.insert(0, collection.id)
+			assets_repository.update(asset)
+	select_assets(selected_assets)
 
 
-func select_asset(asset: AssetResource):
-	self.active_asset = asset
+func select_assets(assets: Array[AssetResource]):
+	self.selected_assets = assets
 	var all_collections = collections_repository.get_collections()
-	var active_collections: Array[AssetCollection] = []
+	var full_collections: Array[AssetCollection] = []
+	var partial_collections: Array[AssetCollection] = []
 	var inactive_collections: Array[AssetCollection] = []
 
+	if assets.is_empty():
+		show_active_collections.emit(full_collections)
+		show_partial_collections.emit(partial_collections)
+		show_inactive_collections.emit(all_collections)
+		return
+
 	for collection in all_collections:
-		if asset.belongs_to_collection(collection):
-			active_collections.push_back(collection)
+		var count = 0
+		for asset in assets:
+			if asset.belongs_to_collection(collection):
+				count += 1
+
+		if count == assets.size():
+			full_collections.push_back(collection)
+		elif count > 0:
+			partial_collections.push_back(collection)
 		else:
 			inactive_collections.push_back(collection)
 
-	active_collections.sort_custom(
-		func(first, second):
-			var first_order = active_asset.tags.find(first.id)
-			var second_order = active_asset.tags.find(second.id)
-			return first_order < second_order
-	)
+	# Sort full collections by order in first selected asset's tags
+	if not assets.is_empty():
+		var first_asset = assets[0]
+		full_collections.sort_custom(
+			func(a, b):
+				var a_order = first_asset.tags.find(a.id)
+				var b_order = first_asset.tags.find(b.id)
+				if a_order == -1:
+					a_order = 9999
+				if b_order == -1:
+					b_order = 9999
+				return a_order < b_order
+		)
 
-	show_active_collections.emit(active_collections)
+	show_active_collections.emit(full_collections)
+	show_partial_collections.emit(partial_collections)
 	show_inactive_collections.emit(inactive_collections)
 
 
@@ -68,14 +94,15 @@ func filter_assets(query: String):
 
 
 func add_to_collection(collection: AssetCollection):
-	if active_asset:
-		active_asset.tags.push_back(collection.id)
-		assets_repository.update(active_asset)
-		select_asset(active_asset)
+	for asset in selected_assets:
+		if not asset.tags.has(collection.id):
+			asset.tags.push_back(collection.id)
+			assets_repository.update(asset)
+	select_assets(selected_assets)
 
 
 func remove_from_collection(collection: AssetCollection):
-	if active_asset:
-		active_asset.tags = active_asset.tags.filter(func(id): return id != collection.id)
-		assets_repository.update(active_asset)
-		select_asset(active_asset)
+	for asset in selected_assets:
+		asset.tags = asset.tags.filter(func(id): return id != collection.id)
+		assets_repository.update(asset)
+	select_assets(selected_assets)

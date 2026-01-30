@@ -115,6 +115,12 @@ text = "No assets found"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="BatchSelectCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Hold Ctrl or Shift to select multiple"
+text = "Batch Select"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
