@@ -113,11 +113,8 @@ func filter_assets(query: String):
 func set_primary_collection(collection: AssetCollection):
 	for idx in _selected_indices:
 		var asset := _assets[idx]
-		var current_index := asset.tags.find(collection.id)
-		if current_index > 0:
-			asset.tags.remove_at(current_index)
-			asset.tags.insert(0, collection.id)
-			_assets_repository.update(asset)
+		asset.primary_collection = collection.id
+		_assets_repository.update(asset)
 	_emit_collections()
 
 
@@ -134,6 +131,8 @@ func remove_from_collection(collection: AssetCollection):
 	for idx in _selected_indices:
 		var asset := _assets[idx]
 		asset.tags = asset.tags.filter(func(id): return id != collection.id)
+		if asset.primary_collection == collection.id:
+			asset.primary_collection = -1
 		_assets_repository.update(asset)
 	_emit_collections()
 
@@ -179,9 +178,9 @@ func _emit_collections():
 		for tag in _assets[idx].tags:
 			collection_counts[tag] = collection_counts.get(tag, 0) + 1
 
-	var first_tags: Array[int] = []
+	var first_primary: int = -1
 	if total > 0:
-		first_tags = _assets[_selected_indices[0]].tags
+		first_primary = _assets[_selected_indices[0]].get_primary_collection()
 
 	for collection in all_collections:
 		var cs := CollectionState.new()
@@ -198,9 +197,10 @@ func _emit_collections():
 				return a_full
 
 			if a_full and b_full:
-				var a_idx := first_tags.find(a.collection.id)
-				var b_idx := first_tags.find(b.collection.id)
-				return (a_idx if a_idx >= 0 else 9999) < (b_idx if b_idx >= 0 else 9999)
+				var a_is_primary := a.collection.id == first_primary
+				var b_is_primary := b.collection.id == first_primary
+				if a_is_primary != b_is_primary:
+					return a_is_primary
 
 			var a_partial := a.is_partial()
 			var b_partial := b.is_partial()
