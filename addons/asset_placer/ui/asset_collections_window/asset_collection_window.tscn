@@ -62,7 +62,6 @@ placeholder_text = "New Collection Name"
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="Panel/MarginContainer/VBoxContainer2/HBoxContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 text = "Color"
 color = Color(0.6156863, 0, 0, 1)
