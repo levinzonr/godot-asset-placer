@@ -17,7 +17,7 @@ var _asset_item_res = preload(
 @onready var _empty_assets_view = %EmptyAssetsEmptyView
 @onready var _empty_active_view = %NoActiveCollectionsEmptyView
 @onready var _empty_available_view = %NoInActiveCollectionsEmptyView
-@onready var tip_label = %Label
+@onready var _tip_label = %Label
 
 
 func _ready():
@@ -35,9 +35,9 @@ func _ready():
 		MouseButton.MOUSE_BUTTON_LEFT, KeyModifierMask.KEY_MASK_META
 	)
 
-	tip_label.text = range_select_binding.get_display_name() + " for Range selection"
-	tip_label.text += " and "
-	tip_label.text += multi_select_binding.get_display_name() + " for Multi selection"
+	_tip_label.text = range_select_binding.get_display_name() + " for Range selection"
+	_tip_label.text += " and "
+	_tip_label.text += multi_select_binding.get_display_name() + " for Multi selection"
 
 
 func _input(event: InputEvent):
