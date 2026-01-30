@@ -1,5 +1,18 @@
 # Godot Asset Placer Changelog
 
+## 1.3.0-alpha4
+
+### Folder Rules
+This release introduces configurable rules for asset folders. Rules allow you to automate actions when syncing folders.
+
+![](./docs/assets/folder_rules_preview.png)
+
+**Available Rules:**
+- **Add to Collection** - Automatically assign synced assets to a specific collection
+- **Filter by Name** - Only include assets whose filename contains specified text
+
+Rules are configured per-folder and can be combined. Click the "Rules" button on any folder to expand the rules panel and add rules.
+
 ## 1.3.0-alpha3
 
 ### Automatic Collections Grouping
