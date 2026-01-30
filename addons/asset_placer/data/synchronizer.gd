@@ -55,7 +55,7 @@ func sync_folder(folder: AssetFolder):
 func _sync_folder(folder: AssetFolder):
 	_clear_invalid_assets()
 	_clear_unreachable_assets()
-	add_assets_from_folder(folder.path, folder.include_subfolders, folder.rules)
+	add_assets_from_folder(folder.path, folder.include_subfolders, folder.get_rules())
 
 
 func _sync_all():
@@ -69,23 +69,39 @@ func add_assets_from_folder(
 	folder_path: String, recursive: bool, rules: Array[AssetPlacerFolderRule]
 ):
 	var dir = DirAccess.open(folder_path)
+	if not dir:
+		push_warning("Could not open folder: %s" % folder_path)
+		return
+
 	var tags: Array[int] = []
 	for file in dir.get_files():
 		_scanned += 1
 		var path = folder_path.path_join(file)
 		var add = true
 
+		# Check all rules - if any rule returns false, skip the file
 		for rule in rules:
-			add = rule.do_file_match(file)
+			if not rule.do_file_match(file):
+				add = false
+				break
 
 		if add:
 			var asset = asset_repository.add_asset(path, tags, folder_path)
 
 			if asset:
+				# New asset - apply all rules
 				for rule in rules:
 					asset = rule.do_after_asset_added(asset)
-					asset_repository.update(asset)
+				asset_repository.update(asset)
 				_added += 1
+			elif rules.size() > 0:
+				# Existing asset - still apply rules if any are configured
+				var uid = ResourceIdCompat.path_to_uid(path)
+				var existing = asset_repository.find_by_uid(uid)
+				if existing:
+					for rule in rules:
+						existing = rule.do_after_asset_added(existing)
+					asset_repository.update(existing)
 
 	if recursive:
 		for sub_dir in dir.get_directories():
