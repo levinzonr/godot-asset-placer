@@ -3,10 +3,11 @@ extends RefCounted
 
 
 static func pick_parent(root: Node3D, asset: AssetResource, auto_group: bool) -> Node3D:
-	if not auto_group || asset.tags.is_empty():
+	var primary_id := asset.get_primary_collection()
+	if not auto_group or primary_id < 0:
 		return root
 
-	var id = asset.tags[0]
+	var id = primary_id
 	var repository = AssetCollectionRepository.instance
 	var collection = repository.find_by_id(id)
 	var expected_name = collection.name.capitalize()

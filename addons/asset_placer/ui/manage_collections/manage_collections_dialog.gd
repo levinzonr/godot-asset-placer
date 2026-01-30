@@ -2,103 +2,168 @@
 class_name ManageCollectionsDialog
 extends PopupPanel
 
-var collection_item_res = preload(
+var _collection_item_res = preload(
 	"res://addons/asset_placer/ui/manage_collections/component/checkable_collection_item.tscn"
 )
-var asset_item_res = preload(
+var _asset_item_res = preload(
 	"res://addons/asset_placer/ui/manage_collections/component/checkable_asset_item.tscn"
 )
-var _active_collection: AssetCollection = null
 
-@onready var assets_container: Container = %AssetsContainer
-@onready var presenter: ManageCollectionsPresenter = ManageCollectionsPresenter.new()
-@onready var inactive_collections_container: Container = %InactiveCollectionsContainer
-@onready var active_collections_container: Container = %ActiveCollectionsContainer
-@onready var filter_assets_line_edit: LineEdit = %FilterAssetsLineEdit
-@onready var no_active_collections_empty_view = %NoActiveCollectionsEmptyView
-@onready var no_in_active_collections_empty_view = %NoInActiveCollectionsEmptyView
-@onready var empty_assets_empty_view = %EmptyAssetsEmptyView
+@onready var _presenter: ManageCollectionsPresenter = ManageCollectionsPresenter.new()
+@onready var _assets_container: Container = %AssetsContainer
+@onready var _active_collections_container: Container = %ActiveCollectionsContainer
+@onready var _inactive_collections_container: Container = %InactiveCollectionsContainer
+@onready var _filter_line_edit: LineEdit = %FilterAssetsLineEdit
+@onready var _empty_assets_view = %EmptyAssetsEmptyView
+@onready var _empty_active_view = %NoActiveCollectionsEmptyView
+@onready var _empty_available_view = %NoInActiveCollectionsEmptyView
+@onready var _tip_label = %Label
 
 
 func _ready():
-	presenter.show_inactive_collections.connect(show_inactive_collections)
-	presenter.show_active_collections.connect(show_active_collections)
-	filter_assets_line_edit.text_changed.connect(func(text): presenter.filter_assets(text))
-	presenter.show_assets.connect(show_assets)
-	presenter.ready()
+	_presenter.assets_changed.connect(_on_assets_changed)
+	_presenter.selection_changed.connect(_on_selection_changed)
+	_presenter.collections_changed.connect(_on_collections_changed)
+	_filter_line_edit.text_changed.connect(_presenter.filter_assets)
+	_presenter.ready()
+
+	var range_select_binding = APInputOption.mouse_press(
+		MouseButton.MOUSE_BUTTON_LEFT, KeyModifierMask.KEY_MASK_SHIFT
+	)
+
+	var multi_select_binding = APInputOption.mouse_press(
+		MouseButton.MOUSE_BUTTON_LEFT, KeyModifierMask.KEY_MASK_META
+	)
+
+	_tip_label.text = range_select_binding.get_display_name() + " for Range selection"
+	_tip_label.text += " and "
+	_tip_label.text += multi_select_binding.get_display_name() + " for Multi selection"
 
 
-func show_assets(assets: Array[AssetResource]):
-	show_empty_assets_view(assets.is_empty())
-	for child: Control in assets_container.get_children():
+func _input(event: InputEvent):
+	if event is InputEventKey:
+		var key_event := event as InputEventKey
+		if key_event.pressed and key_event.keycode == KEY_A:
+			if key_event.ctrl_pressed or key_event.meta_pressed:
+				_presenter.select_all()
+
+
+func _on_assets_changed(assets: Array[AssetResource]):
+	var show_empty := assets.is_empty()
+	_empty_assets_view.visible = show_empty
+	_assets_container.visible = not show_empty
+
+	for child in _assets_container.get_children():
 		child.queue_free()
 
-	var button_group = ButtonGroup.new()
-	for item in assets:
-		var control := asset_item_res.instantiate() as Button
-		control.button_group = button_group
-		control.asset = item
-		assets_container.add_child(control)
-
-	if presenter.active_asset == null && not assets.is_empty():
-		var first_button = button_group.get_buttons()[0]
-		first_button.set_pressed_no_signal(true)
-		presenter.select_asset(first_button.asset)
-
-	button_group.pressed.connect(func(t): presenter.select_asset(t.asset))
+	for i in assets.size():
+		var asset := assets[i]
+		var button := _asset_item_res.instantiate() as Button
+		button.asset = asset
+		button.toggled.connect(_on_asset_pressed.bind(i))
+		_assets_container.add_child(button)
 
 
-func select_collection(collection: AssetCollection):
-	_active_collection = collection
+func _on_selection_changed(indices: PackedInt32Array, _batch_mode: bool):
+	var buttons := _assets_container.get_children()
+	for i in buttons.size():
+		var button := buttons[i] as Button
+		if button:
+			button.set_pressed_no_signal(indices.find(i) != -1)
 
 
-func show_inactive_collections(collections: Array[AssetCollection]):
-	show_empty_inactive_collections(collections.is_empty())
-	for child: Control in inactive_collections_container.get_children():
+func _on_collections_changed(
+	collections: Array[ManageCollectionsPresenter.CollectionState], batch_mode: bool
+):
+	for child in _active_collections_container.get_children():
+		child.queue_free()
+	for child in _inactive_collections_container.get_children():
 		child.queue_free()
 
-	for item in collections:
-		var control := collection_item_res.instantiate() as Control
-		inactive_collections_container.add_child(control)
-		control.set_collection(item)
-		control.button.icon = EditorIconTexture2D.new("Add")
-		control.button.text = "Add"
+	var first_full := true
+	var has_active := false
+	var has_available := false
+
+	for cs in collections:
+		if cs.is_full() or cs.is_partial():
+			has_active = true
+			var control := _collection_item_res.instantiate() as Control
+			_active_collections_container.add_child(control)
+			_configure_active_item(control, cs, batch_mode, first_full and cs.is_full())
+			if cs.is_full():
+				first_full = false
+
+		if cs.is_available():
+			has_available = true
+			var control := _collection_item_res.instantiate() as Control
+			_inactive_collections_container.add_child(control)
+			_configure_available_item(control, cs, batch_mode)
+
+	_active_collections_container.visible = has_active
+	_empty_active_view.visible = not has_active
+	_inactive_collections_container.visible = has_available
+	_empty_available_view.visible = not has_available
+
+
+func _configure_active_item(
+	control: Control,
+	cs: ManageCollectionsPresenter.CollectionState,
+	batch_mode: bool,
+	is_primary: bool
+):
+	var collection := cs.collection
+
+	control.set_collection(collection, cs.is_partial())
+	control.button.text = "Remove"
+	control.button.icon = EditorIconTexture2D.new("Clear")
+	control.button.pressed.connect(_presenter.remove_from_collection.bind(collection))
+
+	if cs.is_full():
+		control.move_up_button.icon = EditorIconTexture2D.new("Favorites")
+		control.move_up_button.disabled = is_primary
+		control.move_up_button.pressed.connect(_presenter.set_primary_collection.bind(collection))
+		control.move_down_button.hide()
+		if batch_mode and cs.total_selected > 1:
+			var count := cs.total_selected
+			control.move_up_button.tooltip_text = (
+				"Set as primary for %d asset%s" % [count, "" if count == 1 else "s"]
+			)
+		else:
+			control.move_up_button.tooltip_text = "Set as Primary"
+	else:
 		control.move_up_button.hide()
 		control.move_down_button.hide()
-		control.button.pressed.connect(func(): presenter.add_to_collection(item))
+
+	if batch_mode and cs.total_selected > 1:
+		var count := cs.assigned_count
+		control.button.text = "Remove from %d asset%s" % [count, "" if count == 1 else "s"]
 
 
-func show_active_collections(collections: Array[AssetCollection]):
-	show_empty_active_collections(collections.is_empty())
-	for child: Control in active_collections_container.get_children():
-		child.queue_free()
+func _configure_available_item(
+	control: Control, cs: ManageCollectionsPresenter.CollectionState, batch_mode: bool
+):
+	var collection := cs.collection
 
-	for item in collections:
-		var control := collection_item_res.instantiate() as Control
-		active_collections_container.add_child(control)
-		control.set_collection(item)
-		control.button.text = "Remove"
-		control.move_up_button.disabled = collections.find(item) == 0
-		control.move_down_button.disabled = collections.find(item) == collections.size() - 1
+	control.set_collection(collection)
+	control.button.icon = EditorIconTexture2D.new("Add")
+	control.button.text = "Add"
+	control.move_up_button.hide()
+	control.move_down_button.hide()
+	control.button.pressed.connect(_presenter.add_to_collection.bind(collection))
 
-		control.move_up_button.pressed.connect(func(): presenter.move_collection(item, true))
-
-		control.move_down_button.pressed.connect(func(): presenter.move_collection(item, false))
-
-		control.button.icon = EditorIconTexture2D.new("Clear")
-		control.button.pressed.connect(func(): presenter.remove_from_collection(item))
+	if batch_mode and cs.total_selected > 1:
+		var count := cs.total_selected - cs.assigned_count
+		control.button.text = "Add to %d asset%s" % [count, "" if count == 1 else "s"]
 
 
-func show_empty_assets_view(visible: bool):
-	empty_assets_empty_view.visible = visible
-	assets_container.visible = !visible
+func _on_asset_pressed(_pressed: bool, index: int):
+	var mode := _get_select_mode()
+	_presenter.toggle_asset(index, mode)
 
 
-func show_empty_active_collections(visible: bool):
-	active_collections_container.visible = !visible
-	no_active_collections_empty_view.visible = visible
-
-
-func show_empty_inactive_collections(visible: bool):
-	inactive_collections_container.visible = !visible
-	no_in_active_collections_empty_view.visible = visible
+func _get_select_mode() -> ManageCollectionsPresenter.SelectMode:
+	if Input.is_key_pressed(KEY_SHIFT):
+		return ManageCollectionsPresenter.SelectMode.RANGE
+	if Input.is_key_pressed(KEY_CTRL) or Input.is_key_pressed(KEY_META):
+		return ManageCollectionsPresenter.SelectMode.MULTI
+	return ManageCollectionsPresenter.SelectMode.SINGLE

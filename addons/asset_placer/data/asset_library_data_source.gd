@@ -49,7 +49,10 @@ func get_library() -> AssetLibrary:
 				var raw_tags = dict["tags"]
 				for tag in raw_tags:
 					tags.append(int(tag))
-			var asset = AssetResource.new(id, asset_name, tags, folder_path)
+			var p_collection: int = -1
+			if dict.has("primary_collection"):
+				p_collection = int(dict["primary_collection"])
+			var asset = AssetResource.new(id, asset_name, tags, folder_path, p_collection)
 			assets.append(asset)
 
 		for collection_dict in collections_dict:
@@ -89,7 +92,8 @@ func save_libray(library: AssetLibrary):
 					"name": asset.name,
 					"id": asset.id,
 					"tags": asset.tags,
-					"folder_path": asset.folder_path
+					"folder_path": asset.folder_path,
+					"primary_collection": asset.primary_collection
 				}
 			)
 
