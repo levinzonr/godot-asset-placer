@@ -35,9 +35,11 @@ func update_collection(collection: AssetCollection):
 func add_collection(name: String, color: Color):
 	var lib = _data_source.get_library()
 	_current_highest_id += 1
-	assert(_current_highest_id > lib.get_highest_id(),
-		"Cannot create collection with id %s as it already exists." % _current_highest_id)
-	var collection: = AssetCollection.new(name, color, _current_highest_id)
+	assert(
+		_current_highest_id > lib.get_highest_id(),
+		"Cannot create collection with id %s as it already exists." % _current_highest_id
+	)
+	var collection := AssetCollection.new(name, color, _current_highest_id)
 	lib.collections.append(collection)
 	_data_source.save_libray(lib)
 	collections_changed.emit()

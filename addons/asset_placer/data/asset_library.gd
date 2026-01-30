@@ -25,7 +25,7 @@ func index_of_asset(asset: AssetResource):
 
 
 func get_highest_id() -> int:
-	var highest: = 0
+	var highest := 0
 	for collection in collections:
 		if collection.id > highest:
 			highest = collection.id
