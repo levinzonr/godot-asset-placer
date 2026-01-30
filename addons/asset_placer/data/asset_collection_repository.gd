@@ -6,12 +6,12 @@ signal collections_changed
 static var instance: AssetCollectionRepository
 
 var _data_source: AssetLibraryDataSource
-var _id_generator: AssetPlacerIdGenerator
+var _current_highest_id: int
 
 
-func _init(data_source: AssetLibraryDataSource):
-	self._id_generator = AssetPlacerIdGenerator.new()
-	self._data_source = data_source
+func _init(source: AssetLibraryDataSource):
+	_current_highest_id = source.get_library().get_highest_id()
+	_data_source = source
 	instance = self
 
 
@@ -34,7 +34,12 @@ func update_collection(collection: AssetCollection):
 
 func add_collection(name: String, color: Color):
 	var lib = _data_source.get_library()
-	var collection = AssetCollection.new(name, color, _id_generator.next_int())
+	_current_highest_id += 1
+	assert(
+		_current_highest_id > lib.get_highest_id(),
+		"Cannot create collection with id %s as it already exists." % _current_highest_id
+	)
+	var collection := AssetCollection.new(name, color, _current_highest_id)
 	lib.collections.append(collection)
 	_data_source.save_libray(lib)
 	collections_changed.emit()

@@ -22,3 +22,11 @@ func index_of_asset(asset: AssetResource):
 			idx = a
 		break
 	return idx
+
+
+func get_highest_id() -> int:
+	var highest := 0
+	for collection in collections:
+		if collection.id > highest:
+			highest = collection.id
+	return highest
