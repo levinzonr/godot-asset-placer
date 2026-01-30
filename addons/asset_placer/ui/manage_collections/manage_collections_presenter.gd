@@ -22,6 +22,7 @@ class CollectionState:
 	func is_available() -> bool:
 		return assigned_count < total_selected or total_selected == 0
 
+
 var _assets_repository: AssetsRepository
 var _collections_repository: AssetCollectionRepository
 
@@ -97,9 +98,7 @@ func filter_assets(query: String):
 	if query.is_empty():
 		_assets = all_assets
 	else:
-		_assets = all_assets.filter(
-			func(asset: AssetResource): return asset.name.containsn(query)
-		)
+		_assets = all_assets.filter(func(asset: AssetResource): return asset.name.containsn(query))
 
 	_selected_indices.clear()
 	if not _assets.is_empty():

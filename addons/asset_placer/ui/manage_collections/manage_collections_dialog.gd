@@ -26,17 +26,18 @@ func _ready():
 	_presenter.collections_changed.connect(_on_collections_changed)
 	_filter_line_edit.text_changed.connect(_presenter.filter_assets)
 	_presenter.ready()
-	
-	var range_select_binding = APInputOption\
-		.mouse_press(MouseButton.MOUSE_BUTTON_LEFT, KeyModifierMask.KEY_MASK_SHIFT)
-		
-	var multi_select_binding = APInputOption\
-		.mouse_press(MouseButton.MOUSE_BUTTON_LEFT, KeyModifierMask.KEY_MASK_META)
-		
+
+	var range_select_binding = APInputOption.mouse_press(
+		MouseButton.MOUSE_BUTTON_LEFT, KeyModifierMask.KEY_MASK_SHIFT
+	)
+
+	var multi_select_binding = APInputOption.mouse_press(
+		MouseButton.MOUSE_BUTTON_LEFT, KeyModifierMask.KEY_MASK_META
+	)
+
 	tip_label.text = range_select_binding.get_display_name() + " for Range selection"
 	tip_label.text += " and "
 	tip_label.text += multi_select_binding.get_display_name() + " for Multi selection"
-	
 
 
 func _input(event: InputEvent):
@@ -124,7 +125,9 @@ func _configure_active_item(
 		control.move_down_button.hide()
 		if batch_mode and cs.total_selected > 1:
 			var count := cs.total_selected
-			control.move_up_button.tooltip_text = "Set as primary for %d asset%s" % [count, "" if count == 1 else "s"]
+			control.move_up_button.tooltip_text = (
+				"Set as primary for %d asset%s" % [count, "" if count == 1 else "s"]
+			)
 		else:
 			control.move_up_button.tooltip_text = "Set as Primary"
 	else:
@@ -137,9 +140,7 @@ func _configure_active_item(
 
 
 func _configure_available_item(
-	control: Control,
-	cs: ManageCollectionsPresenter.CollectionState,
-	batch_mode: bool
+	control: Control, cs: ManageCollectionsPresenter.CollectionState, batch_mode: bool
 ):
 	var collection := cs.collection
 
