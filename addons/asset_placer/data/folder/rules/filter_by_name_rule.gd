@@ -47,7 +47,7 @@ func _create_config_ui(container: Control, on_changed: Callable):
 	container.add_child(line_edit)
 
 
-func do_file_match(file: String) -> bool:
+func do_filter(file_name: String) -> bool:
 	if pattern.is_empty():
 		return true
-	return file.get_file().containsn(pattern)
+	return file_name.containsn(pattern)

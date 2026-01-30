@@ -38,20 +38,16 @@ func create_ui(on_changed: Callable, on_remove: Callable) -> HBoxContainer:
 	row.custom_minimum_size.y = 36
 	row.add_theme_constant_override("separation", 12)
 
-	# Rule name label
 	var name_label = Label.new()
 	name_label.text = get_rule_name()
 	row.add_child(name_label)
 
-	# Config container for rule-specific controls
 	var config_container = HBoxContainer.new()
 	config_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(config_container)
 
-	# Let subclass add its controls
 	_create_config_ui(config_container, on_changed)
 
-	# Remove button
 	var remove_button = Button.new()
 	remove_button.icon = EditorInterface.get_base_control().get_theme_icon("Remove", "EditorIcons")
 	remove_button.pressed.connect(on_remove)
@@ -65,8 +61,8 @@ func _create_config_ui(_container: Control, _on_changed: Callable):
 	pass
 
 
-## Called to determine if a file should be added. Return false to skip the file.
-func do_file_match(_file: String) -> bool:
+## Called to filter files. Return false to skip/remove.
+func do_filter(_file_name: String) -> bool:
 	return true
 
 

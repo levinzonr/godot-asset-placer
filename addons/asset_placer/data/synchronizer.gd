@@ -76,32 +76,40 @@ func add_assets_from_folder(
 	var tags: Array[int] = []
 	for file in dir.get_files():
 		_scanned += 1
-		var path = folder_path.path_join(file)
-		var add = true
+		var path := folder_path.path_join(file)
+		var file_name = file.get_file()
+		var passed_filter := true
 
-		# Check all rules - if any rule returns false, skip the file
+		# Check if file passes all filters
 		for rule in rules:
-			if not rule.do_file_match(file):
-				add = false
+			if not rule.do_filter(file_name):
+				passed_filter = false
 				break
 
-		if add:
+		if passed_filter:
 			var asset = asset_repository.add_asset(path, tags, folder_path)
 
 			if asset:
-				# New asset - apply all rules
+				# New asset - apply after_added rules
 				for rule in rules:
 					asset = rule.do_after_asset_added(asset)
 				asset_repository.update(asset)
 				_added += 1
 			elif rules.size() > 0:
-				# Existing asset - still apply rules if any are configured
+				# Existing asset - apply after_added rules
 				var uid = ResourceIdCompat.path_to_uid(path)
 				var existing = asset_repository.find_by_uid(uid)
 				if existing:
 					for rule in rules:
 						existing = rule.do_after_asset_added(existing)
 					asset_repository.update(existing)
+		else:
+			# File doesn't pass filter - delete if exists
+			var uid = ResourceIdCompat.path_to_uid(path)
+			var existing = asset_repository.find_by_uid(uid)
+			if existing:
+				asset_repository.delete(uid)
+				_removed += 1
 
 	if recursive:
 		for sub_dir in dir.get_directories():
