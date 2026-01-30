@@ -33,10 +33,12 @@ func from_dict(data: Dictionary):
 	if data.has("collection_id"):
 		collection_id = data["collection_id"]
 
+
 func do_after_asset_added(asset: AssetResource) -> AssetResource:
 	if collection_id >= 0 and not asset.tags.has(collection_id):
 		asset.tags.push_back(collection_id)
 	return asset
+
 
 func _create_config_ui(container: Control, on_changed: Callable):
 	var option_button = OptionButton.new()

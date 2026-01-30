@@ -14,8 +14,7 @@ func _ready():
 	folders_loaded.emit(folder_repository.get_all())
 
 	folder_repository.folder_changed.connect(
-		func():
-			folders_loaded.emit(folder_repository.get_all())
+		func(): folders_loaded.emit(folder_repository.get_all())
 	)
 
 

@@ -75,26 +75,32 @@ func save_libray(library: AssetLibrary):
 			for rule in folder.rules:
 				rules_data.append(rule.to_dict())
 
-			folders_dict.append({
-				"path": folder.path,
-				"include_subfolders": folder.include_subfolders,
-				"rules": rules_data
-			})
+			folders_dict.append(
+				{
+					"path": folder.path,
+					"include_subfolders": folder.include_subfolders,
+					"rules": rules_data
+				}
+			)
 
 		for asset in library.items:
-			assets_dict.append({
-				"name": asset.name,
-				"id": asset.id,
-				"tags": asset.tags,
-				"folder_path": asset.folder_path
-			})
+			assets_dict.append(
+				{
+					"name": asset.name,
+					"id": asset.id,
+					"tags": asset.tags,
+					"folder_path": asset.folder_path
+				}
+			)
 
 		for collection in library.collections:
-			collections_dict.append({
-				"name": collection.name,
-				"color": collection.background_color.to_html(),
-				"id": collection.id
-			})
+			collections_dict.append(
+				{
+					"name": collection.name,
+					"color": collection.background_color.to_html(),
+					"id": collection.id
+				}
+			)
 
 		var lib_dict = {
 			"assets": assets_dict,
