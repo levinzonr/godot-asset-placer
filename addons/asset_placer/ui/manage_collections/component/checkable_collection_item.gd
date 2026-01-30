@@ -10,7 +10,7 @@ extends Control
 
 
 func set_collection(collection: AssetCollection, is_partial: bool = false):
-	collection_icon.texture = load("uid://btht44hiygnmq")  # colection_circle.svg
+	collection_icon.texture = load("uid://btht44hiygnmq")
 	collection_icon.modulate = collection.background_color
 	if is_partial:
 		label.text = collection.name + " (partial)"

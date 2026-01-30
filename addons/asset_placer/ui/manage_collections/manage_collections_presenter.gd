@@ -1,11 +1,8 @@
 class_name ManageCollectionsPresenter
 extends RefCounted
 
-## Emitted with collections that ALL selected assets belong to
 signal show_active_collections(collections: Array[AssetCollection])
-## Emitted with collections that SOME (but not all) selected assets belong to
 signal show_partial_collections(collections: Array[AssetCollection])
-## Emitted with collections that NO selected assets belong to
 signal show_inactive_collections(collections: Array[AssetCollection])
 signal show_assets(assets: Array[AssetResource])
 

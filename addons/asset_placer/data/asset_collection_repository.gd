@@ -62,5 +62,14 @@ func delete_collection(id: int):
 
 	lib.items = assets
 
+	# Remove rules that reference this collection
+	for folder in lib.folders:
+		folder.rules = folder.rules.filter(
+			func(rule):
+				if rule is AddToCollectionRule:
+					return rule.collection_id != id
+				return true
+		)
+
 	_data_source.save_libray(lib)
 	collections_changed.emit()
