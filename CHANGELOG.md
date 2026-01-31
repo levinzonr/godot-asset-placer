@@ -1,5 +1,10 @@
 # Godot Asset Placer Changelog
 
+## 1.2.9
+
+### Fixed
+- #48 Fixed collection IDs not being unique when creating new collections by @Sr3qt
+
 ## 1.2.8
 
 ### Fixed
