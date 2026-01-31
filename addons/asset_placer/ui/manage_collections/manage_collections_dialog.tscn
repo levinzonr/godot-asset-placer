@@ -21,6 +21,7 @@ icon_name = &"NodeInfo"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [node name="PopupPanel" type="PopupPanel"]
+transparent_bg = false
 oversampling_override = 1.0
 title = "Manage Collections"
 position = Vector2i(0, 36)
@@ -29,6 +30,8 @@ visible = true
 transient_to_focused = true
 unresizable = false
 borderless = false
+always_on_top = true
+transparent = false
 extend_to_title = true
 minimize_disabled = false
 maximize_disabled = false
@@ -91,7 +94,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-scroll_vertical = 24
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer"]
 layout_mode = 2
@@ -104,13 +106,13 @@ theme_override_constants/margin_bottom = 12
 
 [node name="AssetsContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
 [node name="EmptyAssetsEmptyView" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/MarginContainer/EmptyAssetsEmptyView"]
@@ -152,13 +154,13 @@ theme_override_constants/margin_bottom = 12
 
 [node name="ActiveCollectionsContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="NoActiveCollectionsEmptyView" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/MarginContainer/NoActiveCollectionsEmptyView"]
