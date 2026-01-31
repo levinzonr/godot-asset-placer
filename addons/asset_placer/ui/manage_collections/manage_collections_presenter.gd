@@ -12,6 +12,7 @@ class CollectionState:
 	var collection: AssetCollection
 	var assigned_count: int = 0
 	var total_selected: int = 0
+	var is_primary: bool = false
 
 	func is_full() -> bool:
 		return assigned_count == total_selected and total_selected > 0
@@ -184,15 +185,16 @@ func _emit_collections():
 		for tag in _assets[idx].tags:
 			collection_counts[tag] = collection_counts.get(tag, 0) + 1
 
-	var first_primary: int = -1
-	if total > 0:
-		first_primary = _assets[_selected_indices[0]].get_primary_collection()
+	var primary_id: int = -1
+	if total == 1:
+		primary_id = _assets[_selected_indices[0]].get_primary_collection()
 
 	for collection in all_collections:
 		var cs := CollectionState.new()
 		cs.collection = collection
 		cs.assigned_count = collection_counts.get(collection.id, 0)
 		cs.total_selected = total
+		cs.is_primary = collection.id == primary_id
 		collections.push_back(cs)
 
 	collections.sort_custom(
@@ -201,12 +203,6 @@ func _emit_collections():
 			var b_full := b.is_full()
 			if a_full != b_full:
 				return a_full
-
-			if a_full and b_full:
-				var a_is_primary := a.collection.id == first_primary
-				var b_is_primary := b.collection.id == first_primary
-				if a_is_primary != b_is_primary:
-					return a_is_primary
 
 			var a_partial := a.is_partial()
 			var b_partial := b.is_partial()

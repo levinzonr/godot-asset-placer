@@ -25,16 +25,19 @@ script = ExtResource("2_0clrp")
 icon_name = &"ArrowUp"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
-[node name="HBoxContainer" type="HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 42.19)
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 32.0
 grow_horizontal = 2
-theme_override_constants/separation = 12
 script = ExtResource("1_s7tli")
 
-[node name="CollectionIcon" type="TextureRect" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CollectionIcon" type="TextureRect" parent="HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -42,34 +45,29 @@ texture = ExtResource("2_oap7o")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Label"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CheckabeCollectionItem" type="Control" parent="."]
-layout_mode = 2
-size_flags_vertical = 0
-script = ExtResource("1_s7tli")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="ButtonsContainer" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="MoveUpButton" type="Button" parent="HBoxContainer"]
+[node name="MoveUpButton" type="Button" parent="HBoxContainer/ButtonsContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 icon = SubResource("Texture2D_injr6")
 
-[node name="MoveDownButton" type="Button" parent="HBoxContainer"]
+[node name="MoveDownButton" type="Button" parent="HBoxContainer/ButtonsContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 icon = SubResource("Texture2D_0clrp")
 
-[node name="Button" type="Button" parent="HBoxContainer"]
+[node name="Button" type="Button" parent="HBoxContainer/ButtonsContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8

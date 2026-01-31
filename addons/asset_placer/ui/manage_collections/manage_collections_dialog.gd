@@ -87,7 +87,6 @@ func _on_collections_changed(
 	for child in _inactive_collections_container.get_children():
 		child.queue_free()
 
-	var first_full := true
 	var has_active := false
 	var has_available := false
 
@@ -96,9 +95,7 @@ func _on_collections_changed(
 			has_active = true
 			var control := _collection_item_res.instantiate() as Control
 			_active_collections_container.add_child(control)
-			_configure_active_item(control, cs, batch_mode, first_full and cs.is_full())
-			if cs.is_full():
-				first_full = false
+			_configure_active_item(control, cs, batch_mode)
 
 		if cs.is_available():
 			has_available = true
@@ -113,10 +110,7 @@ func _on_collections_changed(
 
 
 func _configure_active_item(
-	control: Control,
-	cs: ManageCollectionsPresenter.CollectionState,
-	batch_mode: bool,
-	is_primary: bool
+	control: Control, cs: ManageCollectionsPresenter.CollectionState, batch_mode: bool
 ):
 	var collection := cs.collection
 
@@ -126,8 +120,8 @@ func _configure_active_item(
 	control.button.pressed.connect(_presenter.remove_from_collection.bind(collection))
 
 	if cs.is_full():
+		control.set_primary(cs.is_primary)
 		control.move_up_button.icon = EditorIconTexture2D.new("Favorites")
-		control.move_up_button.disabled = is_primary
 		control.move_up_button.pressed.connect(_presenter.set_primary_collection.bind(collection))
 		control.move_down_button.hide()
 		if batch_mode and cs.total_selected > 1:
