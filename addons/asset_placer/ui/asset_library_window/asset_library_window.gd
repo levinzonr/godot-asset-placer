@@ -70,7 +70,7 @@ func show_assets(assets: Array[AssetResource]):
 		child.set_asset(asset)
 
 
-func show_asset_menu(asset: AssetResource, control: Control):
+func show_asset_menu(asset: AssetResource, _control: Control):
 	var options_menu := PopupMenu.new()
 	var mouse_pos = DisplayServer.mouse_get_position()
 	options_menu.add_icon_item(EditorIconTexture2D.new("Groups"), "Manage collections")
@@ -80,12 +80,11 @@ func show_asset_menu(asset: AssetResource, control: Control):
 		func(index):
 			match index:
 				0:
-					CollectionPicker.show_in(
-						control,
-						asset.shallow_collections,
-						func(collection, add):
-							presenter.toggle_asset_collection(asset, collection, add)
-					)
+					var dialog = load(
+						"res://addons/asset_placer/ui/manage_collections/manage_collections_dialog.tscn"
+					).instantiate()
+					dialog.initial_asset_id = asset.id
+					EditorInterface.popup_dialog_centered(dialog)
 				1:
 					EditorInterface.open_scene_from_path(asset.get_path())
 					EditorInterface.set_main_screen_editor("3D")

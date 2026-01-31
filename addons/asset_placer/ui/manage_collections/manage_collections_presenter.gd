@@ -37,9 +37,15 @@ func _init():
 	_collections_repository = AssetCollectionRepository.instance
 
 
-func ready():
+func ready(initial_asset_id: String = ""):
 	_assets = _assets_repository.get_all_assets()
-	if not _assets.is_empty():
+	if not initial_asset_id.is_empty():
+		for i in _assets.size():
+			if _assets[i].id == initial_asset_id:
+				_selected_indices = PackedInt32Array([i])
+				_last_toggled_index = i
+				break
+	elif not _assets.is_empty():
 		_selected_indices = PackedInt32Array([0])
 		_last_toggled_index = 0
 	_emit_assets()

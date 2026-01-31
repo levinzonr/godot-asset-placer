@@ -2,6 +2,8 @@
 class_name ManageCollectionsDialog
 extends PopupPanel
 
+var initial_asset_id: String = ""
+
 var _collection_item_res = preload(
 	"res://addons/asset_placer/ui/manage_collections/component/checkable_collection_item.tscn"
 )
@@ -11,6 +13,7 @@ var _asset_item_res = preload(
 
 @onready var _presenter: ManageCollectionsPresenter = ManageCollectionsPresenter.new()
 @onready var _assets_container: Container = %AssetsContainer
+@onready var _assets_scroll: ScrollContainer = %ScrollContainer
 @onready var _active_collections_container: Container = %ActiveCollectionsContainer
 @onready var _inactive_collections_container: Container = %InactiveCollectionsContainer
 @onready var _filter_line_edit: LineEdit = %FilterAssetsLineEdit
@@ -25,7 +28,7 @@ func _ready():
 	_presenter.selection_changed.connect(_on_selection_changed)
 	_presenter.collections_changed.connect(_on_collections_changed)
 	_filter_line_edit.text_changed.connect(_presenter.filter_assets)
-	_presenter.ready()
+	_presenter.ready(initial_asset_id)
 
 	var range_select_binding = APInputOption.mouse_press(
 		MouseButton.MOUSE_BUTTON_LEFT, KeyModifierMask.KEY_MASK_SHIFT
@@ -69,7 +72,11 @@ func _on_selection_changed(indices: PackedInt32Array, _batch_mode: bool):
 	for i in buttons.size():
 		var button := buttons[i] as Button
 		if button:
-			button.set_pressed_no_signal(indices.find(i) != -1)
+			var selected := indices.find(i) != -1
+			button.set_pressed_no_signal(selected)
+			if selected and indices.size() == 1:
+				await get_tree().process_frame
+				_assets_scroll.ensure_control_visible(button)
 
 
 func _on_collections_changed(
