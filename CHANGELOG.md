@@ -1,5 +1,15 @@
 # Godot Asset Placer Changelog
 
+## 1.3.0-alpha5
+
+### Collection Management Improvements
+This release introduces batch selection and UI improvements to the Collection Management workflow.
+
+![](./docs/assets/cm_preview.png)
+
+- **Batch Select in Collection Management** - You can now select multiple assets at once in the Collection Management dialog, making it easier to assign or remove collections from multiple assets simultaneously
+- **Unified Collection Assignment** - Asset collection assignment now uses the new Collection Management window instead of the old picker, providing a more consistent experience
+
 ## 1.3.0-alpha4
 
 ### Folder Rules
