@@ -3,6 +3,7 @@ class_name ManageCollectionsDialog
 extends PopupPanel
 
 var initial_asset_id: String = ""
+var _settings_repository: AssetPlacerSettingsRepository
 
 var _collection_item_res = preload(
 	"res://addons/asset_placer/ui/manage_collections/component/checkable_collection_item.tscn"
@@ -24,19 +25,21 @@ var _asset_item_res = preload(
 
 
 func _ready():
+	_settings_repository = AssetPlacerSettingsRepository.instance
 	_presenter.assets_changed.connect(_on_assets_changed)
 	_presenter.selection_changed.connect(_on_selection_changed)
 	_presenter.collections_changed.connect(_on_collections_changed)
 	_filter_line_edit.text_changed.connect(_presenter.filter_assets)
 	_presenter.ready(initial_asset_id)
+	size_changed.connect(_on_size_changed)
+	call_deferred("_restore_size")
 
 	var range_select_binding = APInputOption.mouse_press(
 		MouseButton.MOUSE_BUTTON_LEFT, KeyModifierMask.KEY_MASK_SHIFT
 	)
 
 	var multi_select_modifier = (
-		KeyModifierMask.KEY_MASK_META if OS.get_name() == "macOS"
-		else KeyModifierMask.KEY_MASK_CTRL
+		KeyModifierMask.KEY_MASK_META if OS.get_name() == "macOS" else KeyModifierMask.KEY_MASK_CTRL
 	)
 	var multi_select_binding = APInputOption.mouse_press(
 		MouseButton.MOUSE_BUTTON_LEFT, multi_select_modifier
@@ -172,3 +175,11 @@ func _get_select_mode() -> ManageCollectionsPresenter.SelectMode:
 	if Input.is_key_pressed(KEY_CTRL) or Input.is_key_pressed(KEY_META):
 		return ManageCollectionsPresenter.SelectMode.MULTI
 	return ManageCollectionsPresenter.SelectMode.SINGLE
+
+
+func _restore_size():
+	size = _settings_repository.get_manage_collections_dialog_size()
+
+
+func _on_size_changed():
+	_settings_repository.set_manage_collections_dialog_size(size)
