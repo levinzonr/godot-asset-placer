@@ -34,8 +34,12 @@ func _ready():
 		MouseButton.MOUSE_BUTTON_LEFT, KeyModifierMask.KEY_MASK_SHIFT
 	)
 
+	var multi_select_modifier = (
+		KeyModifierMask.KEY_MASK_META if OS.get_name() == "macOS"
+		else KeyModifierMask.KEY_MASK_CTRL
+	)
 	var multi_select_binding = APInputOption.mouse_press(
-		MouseButton.MOUSE_BUTTON_LEFT, KeyModifierMask.KEY_MASK_META
+		MouseButton.MOUSE_BUTTON_LEFT, multi_select_modifier
 	)
 
 	_tip_label.text = range_select_binding.get_display_name() + " for Range selection"
