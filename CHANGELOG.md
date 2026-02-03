@@ -53,6 +53,10 @@ This release introduces `Collections Management` dialog which is accessible from
 The dialog provide a more intuitive and convenient way to assign and remove assets to/from the collections
 
 ![](./docs/assets/manage_collections.png)
+## 1.2.9
+
+### Fixed
+- #48 Fixed collection IDs not being unique when creating new collections by @Sr3qt
 
 ## 1.2.8
 
