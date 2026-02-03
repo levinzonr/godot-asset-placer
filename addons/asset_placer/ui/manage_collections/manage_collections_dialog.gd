@@ -83,7 +83,8 @@ func _on_selection_changed(indices: PackedInt32Array, _batch_mode: bool):
 			button.set_pressed_no_signal(selected)
 			if selected and indices.size() == 1:
 				await get_tree().process_frame
-				_assets_scroll.ensure_control_visible(button)
+				if is_instance_valid(button) and button.is_inside_tree():
+					_assets_scroll.ensure_control_visible(button)
 
 
 func _on_collections_changed(
