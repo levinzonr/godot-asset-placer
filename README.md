@@ -23,7 +23,8 @@ Any Features and Suggestions are welcome as well
 - **Random Asset Placement** - Automatically select random assets from filtered list after each placement
 - **Advanced Placement Options** - Normal alignment and scene bottom alignment controls
 - Organize Assets into collections for quick access and filtering
-- Automatically group placed assets based on collections
+- **Auto-Grouping** - Automatically group placed assets under nodes named after their primary collection
+- **Folder Rules** - Configure rules to automatically assign collections when syncing asset folders
 - Filter Assets by their name and collection
 - Grid snapping when placing assets
 - Randomize asset Rotation and Scale on placement
@@ -60,6 +61,18 @@ Right now the plugin relies on user selecting the folders where your assets are 
 You can folders to sync by either Drag And Droping the folder or  using "Add folder button" within Folders Tab
 ![addon_folders.png](docs/addon_folders.png)
 
+### Folder Rules
+> Available since version 1.3.0
+
+Folder Rules allow you to automate actions when syncing asset folders. Rules are configured per-folder and can be combined to create powerful workflows.
+
+![](docs/assets/folder_rules_preview.png)
+
+**Available Rules:**
+- **Add to Collection** - Automatically assign synced assets to a specific collection
+- **Filter by Name** - Only include assets whose filename contains specified text
+
+To configure rules, click the "Rules" button on any folder in the Folders tab to expand the rules panel.
 
 ### Placing Assets
 Godot Asset Placer provides various placement modes. All methods rely on RayCasting to determine where to place the asset.
@@ -97,6 +110,24 @@ You can enable random asset placement in the Asset Placement Options. When enabl
 
 > ⚠️ This feature is experimental and may require further improvements in the future.
 
+#### Auto-Grouping by Collection
+> Available since version 1.3.0
+
+When enabled in the Asset Placement Options, placed assets will automatically be grouped under Node3D nodes named after their **primary collection**. This keeps your scene tree organized without manual effort.
+
+For example, if you have assets assigned to "Trees" and "Rocks" collections:
+```
+- Parent (your selected parent node)
+    - Trees (auto-created group)
+        - Tree(1)
+        - Tree(2)
+    - Rocks (auto-created group)
+        - Rock(1)
+        - Rock(2)
+```
+
+Assets without a primary collection will be placed directly under the parent node. See [Primary Collections](#primary-collections) for how to set the primary collection for your assets.
+
 #### Transforming Assets Before Placement
 1.1.0 introduces the ability to modify the preview of the asset before placement. This includes options for rotation and scaling, allowing users to visualize how the asset will appear in the scene prior to placement, do quick and precise adjustment modifications.
 ![addon_viewport_controls.png](docs/addon_viewport_controls.png)
@@ -128,9 +159,38 @@ The viewport overlay will display the current transformation mode and active axi
 
 ### Organizing Assets
 You can organize your assets into Collections. Collections is a simple way to "group" assets together by some criteria. For example, you can create a collection for all the trees in your scene, or all the rocks, etc.
-To create a collection navigate to the Collections tab, choose a name and color. Then you can assing assets into one or more collections, either by using a options menu or draggin and dropping assets into the window while Collection Filter is activee
+To create a collection navigate to the Collections tab, choose a name and color. Then you can assign assets into one or more collections, either by using a options menu or dragging and dropping assets into the window while Collection Filter is active.
 
 ![](docs/assets/collections_panel.png)
+
+#### Collection Management
+> Available since version 1.3.0
+
+The Collection Management dialog provides a streamlined way to assign and remove collections from multiple assets at once.
+
+![](docs/assets/cm_preview.png)
+
+**Features:**
+- **Batch Selection** - Select multiple assets using Shift+Click (range) or Ctrl/Cmd+Click (multi-select)
+- **Quick Assignment** - Add or remove collections from all selected assets with one click
+- **Visual Feedback** - See which collections are fully assigned, partially assigned, or available
+
+To open the Collection Management dialog:
+- Click "Manage Collections" button in the Collections tab
+- Right-click an asset and select "Manage Collections"
+
+#### Primary Collections
+> Available since version 1.3.0
+
+Each asset can have one **primary collection** that determines how it's grouped when using [Auto-Grouping](#auto-grouping-by-collection).
+
+![](docs/assets/manage_collections.png)
+
+**Setting a Primary Collection:**
+- In the Collection Management dialog, assigned collections show a star icon
+- Click the star to set that collection as primary / Click Again to reset it 
+
+When multiple assets are selected, the star button is always visible for easy batch assignment of primary collections.
 
 ### Settings Panel
 Version 1.2.0 introduced a dedicated Settings Panel for comprehensive customization of the Asset Placer plugin.
