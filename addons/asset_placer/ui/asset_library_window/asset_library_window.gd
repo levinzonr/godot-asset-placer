@@ -80,14 +80,7 @@ func show_asset_menu(asset: AssetResource, _control: Control):
 		func(index):
 			match index:
 				0:
-					var dialog = (
-						load(
-							"res://addons/asset_placer/ui/manage_collections/manage_collections_dialog.tscn"
-						)
-						. instantiate()
-					)
-					dialog.initial_asset_id = asset.id
-					EditorInterface.popup_dialog_centered(dialog)
+					ManageCollectionsDialog.open(asset.id)
 				1:
 					EditorInterface.open_scene_from_path(asset.get_path())
 					EditorInterface.set_main_screen_editor("3D")

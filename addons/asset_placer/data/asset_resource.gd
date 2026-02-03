@@ -35,8 +35,6 @@ func _init(
 func get_primary_collection() -> int:
 	if primary_collection >= 0:
 		return primary_collection
-	if not tags.is_empty():
-		return tags[0]
 	return -1
 
 

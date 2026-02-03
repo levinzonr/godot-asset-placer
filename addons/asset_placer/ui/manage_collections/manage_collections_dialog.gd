@@ -100,68 +100,25 @@ func _on_collections_changed(
 	for cs in collections:
 		if cs.is_full() or cs.is_partial():
 			has_active = true
-			var control := _collection_item_res.instantiate() as Control
-			_active_collections_container.add_child(control)
-			_configure_active_item(control, cs, batch_mode)
+			var item := _collection_item_res.instantiate()
+			_active_collections_container.add_child(item)
+			var batch_count := cs.assigned_count if batch_mode else 1
+			item.configure_as_assigned(cs.collection, cs.is_partial(), cs.is_primary, batch_count)
+			item.action_pressed.connect(_presenter.remove_from_collection.bind(cs.collection))
+			item.set_primary_pressed.connect(_presenter.set_primary_collection.bind(cs.collection))
 
 		if cs.is_available():
 			has_available = true
-			var control := _collection_item_res.instantiate() as Control
-			_inactive_collections_container.add_child(control)
-			_configure_available_item(control, cs, batch_mode)
+			var item := _collection_item_res.instantiate()
+			_inactive_collections_container.add_child(item)
+			var batch_count := (cs.total_selected - cs.assigned_count) if batch_mode else 1
+			item.configure_as_available(cs.collection, batch_count)
+			item.action_pressed.connect(_presenter.add_to_collection.bind(cs.collection))
 
 	_active_collections_container.visible = has_active
 	_empty_active_view.visible = not has_active
 	_inactive_collections_container.visible = has_available
 	_empty_available_view.visible = not has_available
-
-
-func _configure_active_item(
-	control: Control, cs: ManageCollectionsPresenter.CollectionState, batch_mode: bool
-):
-	var collection := cs.collection
-
-	control.set_collection(collection, cs.is_partial())
-	control.button.text = "Remove"
-	control.button.icon = EditorIconTexture2D.new("Clear")
-	control.button.pressed.connect(_presenter.remove_from_collection.bind(collection))
-
-	if cs.is_full():
-		control.set_primary(cs.is_primary)
-		control.move_up_button.icon = EditorIconTexture2D.new("Favorites")
-		control.move_up_button.pressed.connect(_presenter.set_primary_collection.bind(collection))
-		control.move_down_button.hide()
-		if batch_mode and cs.total_selected > 1:
-			var count := cs.total_selected
-			control.move_up_button.tooltip_text = (
-				"Set as primary for %d asset%s" % [count, "" if count == 1 else "s"]
-			)
-		else:
-			control.move_up_button.tooltip_text = "Set as Primary"
-	else:
-		control.move_up_button.hide()
-		control.move_down_button.hide()
-
-	if batch_mode and cs.total_selected > 1:
-		var count := cs.assigned_count
-		control.button.text = "Remove from %d asset%s" % [count, "" if count == 1 else "s"]
-
-
-func _configure_available_item(
-	control: Control, cs: ManageCollectionsPresenter.CollectionState, batch_mode: bool
-):
-	var collection := cs.collection
-
-	control.set_collection(collection)
-	control.button.icon = EditorIconTexture2D.new("Add")
-	control.button.text = "Add"
-	control.move_up_button.hide()
-	control.move_down_button.hide()
-	control.button.pressed.connect(_presenter.add_to_collection.bind(collection))
-
-	if batch_mode and cs.total_selected > 1:
-		var count := cs.total_selected - cs.assigned_count
-		control.button.text = "Add to %d asset%s" % [count, "" if count == 1 else "s"]
 
 
 func _on_asset_pressed(_pressed: bool, index: int):
@@ -183,3 +140,11 @@ func _restore_size():
 
 func _on_size_changed():
 	_settings_repository.set_manage_collections_dialog_size(size)
+
+
+static func open(asset_id: String = ""):
+	var dialog: ManageCollectionsDialog = load(
+		"res://addons/asset_placer/ui/manage_collections/manage_collections_dialog.tscn"
+	).instantiate()
+	dialog.initial_asset_id = asset_id
+	EditorInterface.popup_dialog_centered(dialog)

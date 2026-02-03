@@ -120,7 +120,10 @@ func filter_assets(query: String):
 func set_primary_collection(collection: AssetCollection):
 	for idx in _selected_indices:
 		var asset := _assets[idx]
-		asset.primary_collection = collection.id
+		if asset.primary_collection == collection.id:
+			asset.primary_collection = -1
+		else:
+			asset.primary_collection = collection.id
 		_assets_repository.update(asset)
 	_emit_collections()
 

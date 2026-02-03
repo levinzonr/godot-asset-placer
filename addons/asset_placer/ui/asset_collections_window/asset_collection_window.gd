@@ -26,13 +26,7 @@ func _ready():
 	name_text_field.text_changed.connect(presenter.set_name)
 	color_picker_button.color_changed.connect(presenter.set_color)
 
-	manage_collections_button.pressed.connect(
-		func():
-			var panel = load(
-				"res://addons/asset_placer/ui/manage_collections/manage_collections_dialog.tscn"
-			)
-			EditorInterface.popup_dialog_centered(panel.instantiate())
-	)
+	manage_collections_button.pressed.connect(ManageCollectionsDialog.open)
 
 
 func _show_empty_view():
