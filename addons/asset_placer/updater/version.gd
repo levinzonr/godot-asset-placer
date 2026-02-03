@@ -18,15 +18,15 @@ class Identifier:
 	var number: int
 
 	func _to_string() -> String:
-		var track: String
+		var track_name: String
 		match track:
 			Track.Alpha:
-				track = "alpha"
+				track_name = "alpha"
 			Track.Beta:
-				track = "beta"
+				track_name = "beta"
 			Track.ReleaseCandidate:
-				track = "rc"
-		return "%s%d" % [track, number]
+				track_name = "rc"
+		return "%s%d" % [track_name, number]
 
 
 func _init(version: String):

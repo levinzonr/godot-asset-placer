@@ -4,8 +4,8 @@ extends Control
 
 signal asset_selected(asset: AssetResource)
 
-@onready var presenter = AssetLibraryPresenter.new()
-@onready var folder_presenter = FolderPresenter.new()
+@onready var presenter: AssetLibraryPresenter = AssetLibraryPresenter.new()
+@onready var folder_presenter: FolderPresenter = FolderPresenter.new()
 
 @onready var placer_presenter := AssetPlacerPresenter._instance
 @onready var grid_container: Container = %GridContainer
@@ -70,7 +70,7 @@ func show_assets(assets: Array[AssetResource]):
 		child.set_asset(asset)
 
 
-func show_asset_menu(asset: AssetResource, control: Control):
+func show_asset_menu(asset: AssetResource, _control: Control):
 	var options_menu := PopupMenu.new()
 	var mouse_pos = DisplayServer.mouse_get_position()
 	options_menu.add_icon_item(EditorIconTexture2D.new("Groups"), "Manage collections")
@@ -80,12 +80,7 @@ func show_asset_menu(asset: AssetResource, control: Control):
 		func(index):
 			match index:
 				0:
-					CollectionPicker.show_in(
-						control,
-						asset.shallow_collections,
-						func(collection, add):
-							presenter.toggle_asset_collection(asset, collection, add)
-					)
+					ManageCollectionsDialog.open(asset.id)
 				1:
 					EditorInterface.open_scene_from_path(asset.get_path())
 					EditorInterface.set_main_screen_editor("3D")

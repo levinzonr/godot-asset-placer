@@ -76,7 +76,7 @@ func toggle_terrain_3d_placement(node_path: NodePath):
 		placement_mode_changed.emit(placement_mode)
 
 
-func _select_placement_mode(mode: PlacementMode):
+func select_placement_mode(mode: PlacementMode):
 	self.placement_mode = mode
 
 
@@ -93,7 +93,7 @@ func toggle_transformation_mode(mode: TransformMode):
 	transform_mode_changed.emit(transform_mode)
 
 	if transform_mode == TransformMode.Move:
-		_select_placement_mode(PlacementMode.PlanePlacement.new(_last_plane_options))
+		select_placement_mode(PlacementMode.PlanePlacement.new(_last_plane_options))
 
 	if transform_mode == TransformMode.Rotate:
 		set_random_rotation_enabled(false)
@@ -264,6 +264,11 @@ func on_asset_placed():
 	if options.enable_random_placement:
 		var random = current_assets.pick_random()
 		select_asset(random)
+
+
+func set_automatic_grouping(value: bool):
+	options.group_automatically = value
+	options_changed.emit(options)
 
 
 func is_node_transform_mode() -> bool:

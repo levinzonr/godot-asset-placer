@@ -19,6 +19,15 @@ func get_collections() -> Array[AssetCollection]:
 	return _data_source.get_library().collections
 
 
+func find_by_id(id: int) -> AssetCollection:
+	var collections = get_collections()
+	var index = collections.find_custom(func(c): return c.id == id)
+	if index == -1:
+		return null
+	else:
+		return collections[index]
+
+
 func update_collection(collection: AssetCollection):
 	var lib = _data_source.get_library()
 	var collections = lib.collections
@@ -57,6 +66,15 @@ func delete_collection(id: int):
 			asset.tags = updated_tags
 
 	lib.items = assets
+
+	# Remove rules that reference this collection
+	for folder in lib.folders:
+		folder.rules = folder.rules.filter(
+			func(rule):
+				if rule is AddToCollectionRule:
+					return rule.collection_id != id
+				return true
+		)
 
 	_data_source.save_libray(lib)
 	collections_changed.emit()
