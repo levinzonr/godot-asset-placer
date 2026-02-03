@@ -36,7 +36,7 @@ func configure_as_assigned(
 	_move_down_button.hide()
 	
 	if is_partial:
-		_favorite_button.show()
+		_favorite_button.hide()
 	else:
 		_favorite_button.icon = EditorIconTexture2D.new("Favorites")
 		_favorite_button.theme_type_variation = &"FlatButton"
@@ -65,7 +65,6 @@ func _set_collection_info(collection: AssetCollection, is_partial: bool):
 	_collection_color = collection.background_color
 	_collection_icon.texture = CIRCLE_ICON
 	_collection_icon.modulate = _collection_color
-	_collection_icon.size = Vector2(32, 32)
 	
 	if is_partial:
 		_label.text = collection.name + " (partial)"
@@ -80,5 +79,4 @@ func _apply_primary_state(is_primary: bool):
 	if is_primary:
 		_collection_icon.texture = EditorIconTexture2D.new("Favorites")
 		_collection_icon.modulate = _collection_color
-		_collection_icon.size = Vector2(64, 64)
 		_label.add_theme_color_override("font_color", Color.YELLOW)
