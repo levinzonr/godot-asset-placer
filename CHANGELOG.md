@@ -1,5 +1,23 @@
 # Godot Asset Placer Changelog
 
+## 1.3.0-beta1
+
+### Primary Collection Improvements
+This release makes the primary collection feature more explicit and user-friendly.
+
+- **Primary Collection is now optional** - Assets no longer automatically use the first assigned collection as primary when auto-grouping. Primary collection must be explicitly set by the user.
+- **Primary Collection Indicator** - Collection Management dialog now shows a star icon to indicate and toggle the primary collection for assets. The icon is tinted with the collection's color for easy identification.
+- **Toggle Primary** - Clicking the star on an already-primary collection will unassign it, making it easy to remove primary status.
+
+### UI Improvements
+- **Dialog Size Persistence** - The Manage Collections dialog now remembers its size across sessions
+- **Batch Mode Favorite Button** - When multiple assets are selected, the favorite/star button is always visible for easier batch primary assignment
+
+### Fixed
+- Fixed freed object error when filtering assets while Collection Management dialog is open
+- Fixed primary collection button not hiding correctly for partial collection matches
+- Fixed tooltip text to use correct modifier key based on OS (Cmd on macOS, Ctrl on others)
+
 ## 1.3.0-alpha5
 
 ### Collection Management Improvements
