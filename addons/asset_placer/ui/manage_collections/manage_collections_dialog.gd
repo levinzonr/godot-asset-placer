@@ -143,8 +143,9 @@ func _on_size_changed():
 
 
 static func open(asset_id: String = ""):
-	var dialog: ManageCollectionsDialog = load(
-		"res://addons/asset_placer/ui/manage_collections/manage_collections_dialog.tscn"
-	).instantiate()
+	var dialog: ManageCollectionsDialog = (
+		load("res://addons/asset_placer/ui/manage_collections/manage_collections_dialog.tscn")
+		. instantiate()
+	)
 	dialog.initial_asset_id = asset_id
 	EditorInterface.popup_dialog_centered(dialog)
