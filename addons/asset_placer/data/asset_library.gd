@@ -124,6 +124,54 @@ func index_of_asset(asset: AssetResource):
 	return idx
 
 
+## Folders
+
+func get_folder(path: String) -> AssetFolder:
+	var folder: int = -1
+	for f in len(_folders):
+		if _folders[f].path == path:
+			folder = f
+			break
+	return _folders[folder]
+
+
+# TODO Should take in a AssetFolder
+func add_folder(folder: String, incldude_subfolders: bool = true):
+	if has_folder_path(folder):
+		push_warning("Folder with this path already exists")
+		return
+
+	var new_folder := AssetFolder.new(folder, incldude_subfolders)
+	_folders.append(new_folder)
+	_queue_emit_folders_changed()
+
+
+func remove_folder_by_path(folder_path: String):
+	_folders = _folders.filter(func(f): return f.path != folder_path)
+	_queue_emit_folders_changed()
+
+
+# TODO find_custom is not supported in 4.3. Change to normal loop.
+func update_folder(folder: AssetFolder):
+	var to_update_index = _folders.find_custom(func(f): return f.path == folder.path)
+	assert(
+		to_update_index != -1,
+		"Cannot update folder with path %s as it's not in the current AssetLibrary." % folder.path
+	)
+	_folders[to_update_index] = folder
+	_queue_emit_folders_changed()
+
+
+func has_folder_path(path: String) -> bool:
+	for folder in _folders:
+		if folder.path == path:
+			return true
+		if folder.include_subfolders && path.contains(folder.path):
+			return true
+
+	return false
+
+
 func get_highest_id() -> int:
 	var highest := 0
 	for collection in _collections:

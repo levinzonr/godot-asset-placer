@@ -3,28 +3,27 @@ extends RefCounted
 
 signal folders_loaded(folder: Array[AssetFolder])
 
-var folder_repository: FolderRepository
 var sync: Synchronize
 
 
 func _init():
-	self.folder_repository = FolderRepository.instance
-	self.sync = Synchronize.new(self.folder_repository)
+	self.sync = Synchronize.new()
 
 
 func _ready():
-	folders_loaded.emit(folder_repository.get_all())
+	var lib := AssetLibraryManager.get_asset_library()
+	folders_loaded.emit(lib.get_folders())
 
-	folder_repository.folder_changed.connect(
+	lib.folders_changed.connect(
 		func():
-			var folders = folder_repository.get_all()
-			folders_loaded.emit(folders)
+			# Safer to call get_asset_library, rather than bind the lib we have now
+			folders_loaded.emit(AssetLibraryManager.get_asset_library().get_folders())
 	)
 
 
 func delete_folder(folder: AssetFolder):
 	var lib := AssetLibraryManager.get_asset_library()
-	folder_repository.delete(folder.path)
+	lib.remove_folder_by_path(folder.path)
 	for asset in lib.get_assets():
 		if asset.folder_path == folder.path:
 			lib.remove_asset_by_id(asset.id)
@@ -36,12 +35,12 @@ func sync_folder(folder: AssetFolder):
 
 func include_subfolders(include: bool, folder: AssetFolder):
 	folder.include_subfolders = include
-	folder_repository.update(folder)
+	AssetLibraryManager.get_asset_library().update_folder(folder)
 
 
-func add_folder(folder: String):
-	if folder.get_extension().is_empty():
-		folder_repository.add(folder)
+func add_folder(folder_path: String):
+	if folder_path.get_extension().is_empty():
+		AssetLibraryManager.get_asset_library().add_folder(folder_path)
 
 
 func add_folders(folders: PackedStringArray):

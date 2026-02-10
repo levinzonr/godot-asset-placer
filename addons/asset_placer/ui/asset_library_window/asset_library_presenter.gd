@@ -10,7 +10,6 @@ signal show_empty_view(type: EmptyType)
 enum EmptyType { Search, Collection, All, None }
 
 var library: AssetLibrary
-var folder_repository: FolderRepository
 var synchronizer: Synchronize
 
 var _active_collections: Array[AssetCollection] = []
@@ -19,7 +18,6 @@ var _current_query: String
 
 
 func _init():
-	self.folder_repository = FolderRepository.instance
 	self.synchronizer = Synchronize.instance
 
 
@@ -31,8 +29,8 @@ func on_ready():
 
 
 func add_asset_folder(path: String):
-	folder_repository.add(path)
-	var dir_access = DirAccess.open(path)
+	AssetLibraryManager.get_asset_library().add_folder(path)
+	var dir_access := DirAccess.open(path)
 	for file in dir_access.get_files():
 		add_asset(path.path_join(file), path)
 

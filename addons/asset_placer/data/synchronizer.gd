@@ -6,7 +6,6 @@ signal sync_complete(added: int, removed: int, scanned: int)
 
 static var instance: Synchronize
 
-var folder_repository: FolderRepository
 var sync_running = false:
 	set(value):
 		sync_running = value
@@ -17,8 +16,7 @@ var _removed = 0
 var _scanned = 0
 
 
-func _init(folders_repository: FolderRepository):
-	self.folder_repository = folders_repository
+func _init():
 	instance = self
 
 
@@ -59,7 +57,7 @@ func _sync_folder(folder: AssetFolder):
 func _sync_all():
 	_clear_unreachable_assets()
 	_clear_invalid_assets()
-	for folder in folder_repository.get_all():
+	for folder in AssetLibraryManager.get_asset_library().get_folders():
 		_sync_folder(folder)
 
 
@@ -91,7 +89,7 @@ func _clear_unreachable_assets():
 		var path := asset.folder_path
 		if path.is_empty():
 			continue
-		var folder := folder_repository.find(path)
+		var folder := lib.get_folder(path)
 		if folder == null or not _is_asset_reachable_from_folder(asset, folder):
 			lib.remove_asset_by_id(asset.id)
 
