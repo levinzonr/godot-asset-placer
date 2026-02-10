@@ -5,16 +5,13 @@ signal folder_changed
 
 static var instance: FolderRepository
 
-var data_source: AssetLibraryDataSource
 
-
-func _init(data_source: AssetLibraryDataSource):
-	self.data_source = data_source
+func _init():
 	instance = self
 
 
 func get_all() -> Array[AssetFolder]:
-	return data_source.get_library().get_folders()
+	return AssetLibraryParser.load_library().get_folders()
 
 
 func find(path: String) -> AssetFolder:
@@ -28,17 +25,17 @@ func find(path: String) -> AssetFolder:
 
 
 func update(folder: AssetFolder):
-	var library = data_source.get_library()
+	var library := AssetLibraryParser.load_library()
 	var folders = library.get_folders().duplicate()
 	var to_update_index = folders.find_custom(func(f): return f.path == folder.path)
 	if to_update_index != -1:
 		folders[to_update_index] = folder
 		library._folders = folders
-		data_source.save_libray(library)
+		AssetLibraryParser.save_libray(library)
 
 
 func add(folder: String, incldude_subfolders: bool = true):
-	var library := data_source.get_library()
+	var library := AssetLibraryParser.load_library()
 	var duplicated_folders := library.get_folders().duplicate()
 
 	if exists(folder):
@@ -48,7 +45,7 @@ func add(folder: String, incldude_subfolders: bool = true):
 	var new_folder = AssetFolder.new(folder, incldude_subfolders)
 	duplicated_folders.append(new_folder)
 	library._folders = duplicated_folders
-	data_source.save_libray(library)
+	AssetLibraryParser.save_libray(library)
 	folder_changed.emit()
 
 
@@ -63,7 +60,7 @@ func exists(path: String) -> bool:
 
 
 func delete(folder: String):
-	var library := data_source.get_library()
+	var library := AssetLibraryParser.load_library()
 	library._folders = library.get_folders().filter(func(f): return f.path != folder)
-	data_source.save_libray(library)
+	AssetLibraryParser.save_libray(library)
 	folder_changed.emit()
