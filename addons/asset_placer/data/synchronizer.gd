@@ -7,7 +7,6 @@ signal sync_complete(added: int, removed: int, scanned: int)
 static var instance: Synchronize
 
 var folder_repository: FolderRepository
-var asset_repository: AssetsRepository
 var sync_running = false:
 	set(value):
 		sync_running = value
@@ -18,8 +17,7 @@ var _removed = 0
 var _scanned = 0
 
 
-func _init(folders_repository: FolderRepository, assets_repository: AssetsRepository):
-	self.asset_repository = assets_repository
+func _init(folders_repository: FolderRepository):
 	self.folder_repository = folders_repository
 	instance = self
 
@@ -68,7 +66,8 @@ func _sync_all():
 func add_assets_from_folder(
 	folder_path: String, recursive: bool, rules: Array[AssetPlacerFolderRule]
 ):
-	var dir = DirAccess.open(folder_path)
+	var lib := AssetLibraryManager.get_asset_library()
+	var dir := DirAccess.open(folder_path)
 	if not dir:
 		push_warning("Could not open folder: %s" % folder_path)
 		return
@@ -87,28 +86,28 @@ func add_assets_from_folder(
 				break
 
 		if passed_filter:
-			var asset = asset_repository.add_asset(path, tags, folder_path)
+			var asset = lib.add_asset(path, tags, folder_path)
 
 			if asset:
 				# New asset - apply after_added rules
 				for rule in rules:
 					asset = rule.do_after_asset_added(asset)
-				asset_repository.update(asset)
+				lib.update_asset(asset)
 				_added += 1
 			elif rules.size() > 0:
 				# Existing asset - apply after_added rules
 				var uid = ResourceIdCompat.path_to_uid(path)
-				var existing = asset_repository.find_by_uid(uid)
+				var existing = lib.get_asset(uid)
 				if existing:
 					for rule in rules:
 						existing = rule.do_after_asset_added(existing)
-					asset_repository.update(existing)
+					lib.update_asset(existing)
 		else:
 			# File doesn't pass filter - delete if exists
 			var uid = ResourceIdCompat.path_to_uid(path)
-			var existing = asset_repository.find_by_uid(uid)
+			var existing = lib.get_asset(uid)
 			if existing:
-				asset_repository.delete(uid)
+				lib.remove_asset(existing)
 				_removed += 1
 
 	if recursive:
@@ -124,15 +123,15 @@ func _notify_scan_complete():
 
 
 func _clear_unreachable_assets():
-	for asset in asset_repository.get_all_assets():
-		var path = asset.folder_path
-		if not path.is_empty():
-			var folder = folder_repository.find(path)
-			if folder == null:
-				# remove asset if folder associated with that asset no longer exists
-				asset_repository.delete(asset.id)
-			elif not _is_asset_reachable_from_folder(asset, folder):
-				asset_repository.delete(asset.id)
+	var lib := AssetLibraryManager.get_asset_library()
+	var assets: Array[AssetResource] = lib.get_assets().duplicate()
+	for asset in assets:
+		var path := asset.folder_path
+		if path.is_empty():
+			continue
+		var folder := folder_repository.find(path)
+		if folder == null or not _is_asset_reachable_from_folder(asset, folder):
+			lib.remove_asset(asset)
 
 
 func _is_asset_reachable_from_folder(asset: AssetResource, folder: AssetFolder) -> bool:
@@ -148,10 +147,12 @@ func _is_asset_reachable_from_folder(asset: AssetResource, folder: AssetFolder) 
 
 
 func _clear_invalid_assets():
-	for asset in asset_repository.get_all_assets():
+	var lib := AssetLibraryManager.get_asset_library()
+	var assets: Array[AssetResource] = lib.get_assets().duplicate()
+	for asset in assets:
 		if not asset.has_resource():
 			_removed += 1
-			asset_repository.delete(asset.id)
+			lib.remove_asset(asset)
 
 
 func _clear_data():

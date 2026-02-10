@@ -14,7 +14,6 @@ var plugin_path: String:
 var _folder_repository: FolderRepository
 var _presenter: AssetPlacerPresenter
 var _asset_placer: AssetPlacer
-var _assets_repository: AssetsRepository
 var _collection_repository: AssetCollectionRepository
 var _updater: PluginUpdater
 var _async: AssetPlacerAsync
@@ -51,7 +50,7 @@ func _enter_tree():
 	get_tree().root.add_child(_plane_preview)
 
 	_asset_placer = AssetPlacer.new(get_undo_redo())
-	synchronizer = Synchronize.new(_folder_repository, _assets_repository)
+	synchronizer = Synchronize.new(_folder_repository)
 	scene_changed.connect(_handle_scene_changed)
 	_init_parent_scene.call_deferred()
 	_presenter.asset_selected.connect(start_placement)

@@ -7,7 +7,6 @@ signal show_empty_view
 signal clear_text_field
 
 var _repository: AssetCollectionRepository
-var _assets_repository: AssetsRepository
 var _new_collection_name: String = ""
 var _new_collection_color: Color
 
@@ -15,7 +14,6 @@ var _new_collection_color: Color
 func _init():
 	self._repository = AssetCollectionRepository.instance
 	self._repository.collections_changed.connect(_load_collections)
-	self._assets_repository = AssetsRepository.instance
 
 
 func ready():
