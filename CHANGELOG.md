@@ -1,5 +1,13 @@
 # Godot Asset Placer Changelog
 
+## 1.2.10
+
+### Added
+- #72 Add support for `.blend` files (Blender files) by @Sr3qt
+
+### Fixed
+- #71 Fixed light mode text visibility issues by @Sr3qt
+
 ## 1.2.9
 
 ### Fixed
