@@ -14,7 +14,7 @@ func _init(data_source: AssetLibraryDataSource):
 
 
 func get_all() -> Array[AssetFolder]:
-	return data_source.get_library().folders
+	return data_source.get_library().get_folders()
 
 
 func find(path: String) -> AssetFolder:
@@ -29,17 +29,17 @@ func find(path: String) -> AssetFolder:
 
 func update(folder: AssetFolder):
 	var library = data_source.get_library()
-	var folders = library.folders.duplicate()
+	var folders = library.get_folders().duplicate()
 	var to_update_index = folders.find_custom(func(f): return f.path == folder.path)
 	if to_update_index != -1:
 		folders[to_update_index] = folder
-		library.folders = folders
+		library._folders = folders
 		data_source.save_libray(library)
 
 
 func add(folder: String, incldude_subfolders: bool = true):
 	var library := data_source.get_library()
-	var duplicated_folders := library.folders.duplicate()
+	var duplicated_folders := library.get_folders().duplicate()
 
 	if exists(folder):
 		push_warning("Folder with this path already exists")
@@ -47,7 +47,7 @@ func add(folder: String, incldude_subfolders: bool = true):
 
 	var new_folder = AssetFolder.new(folder, incldude_subfolders)
 	duplicated_folders.append(new_folder)
-	library.folders = duplicated_folders
+	library._folders = duplicated_folders
 	data_source.save_libray(library)
 	folder_changed.emit()
 
@@ -64,6 +64,6 @@ func exists(path: String) -> bool:
 
 func delete(folder: String):
 	var library := data_source.get_library()
-	library.folders = library.folders.filter(func(f): return f.path != folder)
+	library._folders = library.get_folders().filter(func(f): return f.path != folder)
 	data_source.save_libray(library)
 	folder_changed.emit()
