@@ -14,7 +14,7 @@ func _init(data_source: AssetLibraryDataSource):
 
 
 func get_all_assets() -> Array[AssetResource]:
-	return data_source.get_library().items
+	return data_source.get_library().get_assets()
 
 
 func exists(asset_id: String):
@@ -23,8 +23,8 @@ func exists(asset_id: String):
 
 func delete(asset_id: String):
 	var lib = data_source.get_library()
-	var assets = lib.items.filter(func(a): return a.id != asset_id)
-	lib.items = assets
+	var assets = lib.get_assets().filter(func(a): return a.id != asset_id)
+	lib._assets = assets
 	data_source.save_libray(lib)
 	call_deferred("emit_signal", "assets_changed")
 
@@ -40,7 +40,7 @@ func update(asset: AssetResource):
 	var lib = data_source.get_library()
 	var index = lib.index_of_asset(asset)
 	if index != -1:
-		lib.items[index] = asset
+		lib._assets[index] = asset
 		data_source.save_libray(lib)
 		call_deferred("emit_signal", "assets_changed")
 
@@ -54,9 +54,9 @@ func add_asset(scene_path: String, tags: Array[int] = [], folder_path: String = 
 	if exists(id):
 		return false
 	var asset = AssetResource.new(id, scene_path.get_file(), tags, folder_path)
-	var duplicated_items = library.items.duplicate()
+	var duplicated_items = library.get_assets().duplicate()
 	duplicated_items.append(asset)
-	library.items = duplicated_items
+	library._assets = duplicated_items
 	data_source.save_libray(library)
 	call_deferred("emit_signal", "assets_changed")
 	return true

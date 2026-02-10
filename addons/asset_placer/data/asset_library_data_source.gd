@@ -60,12 +60,12 @@ func save_libray(library: AssetLibrary):
 		var folders_dict: Array[Dictionary] = []
 		var collections_dict: Array[Dictionary] = []
 
-		for folder in library.folders:
+		for folder in library.get_folders():
 			folders_dict.append(
 				{"path": folder.path, "include_subfolders": folder.include_subfolders}
 			)
 
-		for asset in library.items:
+		for asset in library.get_assets():
 			assets_dict.append(
 				{
 					"name": asset.name,
@@ -75,7 +75,7 @@ func save_libray(library: AssetLibrary):
 				}
 			)
 
-		for collection in library.collections:
+		for collection in library.get_collections():
 			collections_dict.append(
 				{
 					"name": collection.name,

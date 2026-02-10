@@ -16,18 +16,18 @@ func _init(source: AssetLibraryDataSource):
 
 
 func get_collections() -> Array[AssetCollection]:
-	return _data_source.get_library().collections
+	return _data_source.get_library().get_collections()
 
 
 func update_collection(collection: AssetCollection):
 	var lib = _data_source.get_library()
-	var collections = lib.collections
+	var collections = lib.get_collections()
 	for item in collections:
 		if item.id == collection.id:
 			item.name = collection.name
 			item.background_color = collection.background_color
 			break
-	lib.collections = collections
+	lib._collections = collections
 	_data_source.save_libray(lib)
 	collections_changed.emit()
 
@@ -40,23 +40,23 @@ func add_collection(name: String, color: Color):
 		"Cannot create collection with id %s as it already exists." % _current_highest_id
 	)
 	var collection := AssetCollection.new(name, color, _current_highest_id)
-	lib.collections.append(collection)
+	lib._collections.append(collection)
 	_data_source.save_libray(lib)
 	collections_changed.emit()
 
 
 func delete_collection(id: int):
 	var lib = _data_source.get_library()
-	var new_collections = lib.collections.filter(func(c): return c.id != id)
-	lib.collections = new_collections
-	var assets = lib.items
+	var new_collections = lib.get_collections().filter(func(c): return c.id != id)
+	lib._collections = new_collections
+	var assets = lib.get_assets()
 
 	for asset in assets:
 		var updated_tags = asset.tags.filter(func(f): return f != id)
 		if updated_tags != asset.tags:
 			asset.tags = updated_tags
 
-	lib.items = assets
+	lib._assets = assets
 
 	_data_source.save_libray(lib)
 	collections_changed.emit()
