@@ -14,7 +14,6 @@ var plugin_path: String:
 
 var _presenter: AssetPlacerPresenter
 var _asset_placer: AssetPlacer
-var _collection_repository: AssetCollectionRepository
 var _updater: PluginUpdater
 var _async: AssetPlacerAsync
 var _asset_placer_window: AssetLibraryPanel
@@ -133,8 +132,6 @@ func _initialize_data_layer():
 	# TODO load library file save path setting
 	var path := AssetLibraryParser.DEFAULT_SAVE_PATH
 	AssetLibraryManager.load_asset_library(path)
-
-	_collection_repository = AssetCollectionRepository.new()
 
 
 func _react_to_settings_change(settings: AssetPlacerSettings):

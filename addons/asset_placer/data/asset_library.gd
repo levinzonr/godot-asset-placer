@@ -13,6 +13,8 @@ var _assets: Array[AssetResource] = []
 var _folders: Array[AssetFolder] = []
 var _collections: Array[AssetCollection] = []
 
+var _highest_collection_id: int
+
 var _is_assets_changed_queued := false
 var _is_folders_changed_queued := false
 var _is_collections_changed_queued := false
@@ -30,6 +32,7 @@ func _init(
 	_folders = folders
 	_collections = collections
 	save_path = load_path
+	_highest_collection_id = _get_highest_collection_id()
 
 
 func get_assets() -> Array[AssetResource]:
@@ -172,7 +175,41 @@ func has_folder_path(path: String) -> bool:
 	return false
 
 
-func get_highest_id() -> int:
+## Collections
+
+# TODO Should take in an AssetCollection
+func add_collection(name: String, color: Color):
+	_highest_collection_id += 1
+	assert(
+		_highest_collection_id > _get_highest_collection_id(),
+		"Cannot create collection with id %s as it already exists." % _highest_collection_id
+	)
+	var collection := AssetCollection.new(name, color, _highest_collection_id)
+	_collections.append(collection)
+	_queue_emit_collections_changed()
+
+
+func delete_collection(id: int):
+	var new_collections: Array[AssetCollection] = _collections.filter(func(c): return c.id != id)
+	_collections = new_collections
+
+	for asset in _assets:
+		var updated_tags: Array[int] = asset.tags.filter(func(f): return f != id)
+		if updated_tags != asset.tags:
+			asset.tags = updated_tags
+
+	_queue_emit_collections_changed()
+
+
+func update_collection(collection: AssetCollection):
+	for i in _collections.size():
+		if _collections[i].id == collection.id:
+			_collections[i] = collection
+	_queue_emit_collections_changed()
+
+
+# TODO Make private since its not needed anywhere else.
+func _get_highest_collection_id() -> int:
 	var highest := 0
 	for collection in _collections:
 		if collection.id > highest:

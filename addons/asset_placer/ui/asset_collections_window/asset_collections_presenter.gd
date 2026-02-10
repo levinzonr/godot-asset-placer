@@ -6,14 +6,12 @@ signal enable_create_button(enable: bool)
 signal show_empty_view
 signal clear_text_field
 
-var _repository: AssetCollectionRepository
 var _new_collection_name: String = ""
 var _new_collection_color: Color
 
 
 func _init():
-	self._repository = AssetCollectionRepository.instance
-	self._repository.collections_changed.connect(_load_collections)
+	AssetLibraryManager.get_asset_library().collections_changed.connect(_load_collections)
 
 
 func ready():
@@ -32,7 +30,8 @@ func set_name(name: String):
 
 
 func create_collection():
-	_repository.add_collection(_new_collection_name, _new_collection_color)
+	var lib := AssetLibraryManager.get_asset_library()
+	lib.add_collection(_new_collection_name, _new_collection_color)
 	clear_text_field.emit()
 	enable_create_button.emit(false)
 
@@ -44,7 +43,7 @@ func _update_state_new_collection_state():
 
 
 func _load_collections():
-	var collections := _repository.get_collections()
+	var collections := AssetLibraryManager.get_asset_library().get_collections()
 	if collections.size() == 0:
 		show_empty_view.emit()
 	else:
@@ -52,4 +51,4 @@ func _load_collections():
 
 
 func delete_collection(collection: AssetCollection):
-	_repository.delete_collection(collection.id)
+	AssetLibraryManager.get_asset_library().delete_collection(collection.id)
