@@ -42,3 +42,44 @@ func get_highest_id() -> int:
 		if collection.id > highest:
 			highest = collection.id
 	return highest
+
+
+## Signals
+
+
+func _emit_queued_signals():
+	if _is_assets_changed_queued:
+		assets_changed.emit()
+	if _is_folders_changed_queued:
+		folders_changed.emit()
+	if _is_collections_changed_queued:
+		collections_changed.emit()
+
+	_is_assets_changed_queued = false
+	_is_folders_changed_queued = false
+	_is_collections_changed_queued = false
+
+
+func _queue_emit_assets_changed():
+	if not _is_signal_queued:
+		_emit_queued_signals.call_deferred()
+	_is_assets_changed_queued = true
+
+
+func _queue_emit_folders_changed():
+	if not _is_signal_queued:
+		_emit_queued_signals.call_deferred()
+	_is_folders_changed_queued = true
+
+
+func _queue_emit_collections_changed():
+	if not _is_signal_queued:
+		_emit_queued_signals.call_deferred()
+	_is_collections_changed_queued = true
+
+
+## Only used by AssetLibraryManager
+func _emit_all_changed():
+	assets_changed.emit()
+	folders_changed.emit()
+	collections_changed.emit()

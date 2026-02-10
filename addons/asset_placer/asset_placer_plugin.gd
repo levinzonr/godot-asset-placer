@@ -40,6 +40,7 @@ func _disable_plugin():
 func _enter_tree():
 	_initialize_data_layer()
 	_run_migrations()
+
 	_async = AssetPlacerAsync.new()
 	_presenter = AssetPlacerPresenter.new()
 	AssetPlacerDockPresenter.new()
@@ -110,6 +111,9 @@ func _exit_tree():
 	_updater.update_ready.disconnect(_show_update_available)
 	overlay.queue_free()
 	_plane_preview.queue_free()
+
+	AssetLibraryManager.free_library()
+
 	settings_repository.settings_changed.disconnect(_react_to_settings_change)
 	_file_system.resources_reimported.disconnect(_react_to_reimorted_files)
 	_presenter.asset_selected.disconnect(start_placement)
@@ -147,8 +151,12 @@ func _initialize_data_layer():
 	settings_repository = AssetPlacerSettingsRepository.new()
 	current_settings = settings_repository.get_settings()
 	settings_repository.settings_changed.connect(_react_to_settings_change)
+
+	# TODO load library file save path setting
+	var path := AssetLibraryParser.DEFAULT_SAVE_PATH
+	AssetLibraryManager.load_asset_library(path)
+
 	_folder_repository = FolderRepository.new()
-	_assets_repository = AssetsRepository.new()
 	_collection_repository = AssetCollectionRepository.new()
 
 
