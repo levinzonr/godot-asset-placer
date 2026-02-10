@@ -1,11 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfnj2xve84rvc"]
+[gd_scene load_steps=4 format=3 uid="uid://bfnj2xve84rvc"]
 
 [ext_resource type="Script" uid="uid://dacpe4563g5x2" path="res://addons/asset_placer/ui/components/asset_resource_preview.gd" id="1_q3676"]
 [ext_resource type="Texture2D" uid="uid://be61c5ff55gfo" path="res://addons/asset_placer/icon.png" id="2_55ohh"]
 [ext_resource type="Script" uid="uid://dephufwlu765k" path="res://addons/asset_placer/ui/components/asset_thumbnail.gd" id="2_xdgah"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_55ohh"]
-font_size = 14
 
 [node name="AssetResourcePreview" type="MarginContainer"]
 custom_minimum_size = Vector2(150, 200)
@@ -35,8 +32,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 58)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 14
 text = "Asset"
-label_settings = SubResource("LabelSettings_55ohh")
 horizontal_alignment = 1
 autowrap_mode = 1
 justification_flags = 227
