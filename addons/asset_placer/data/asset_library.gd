@@ -2,17 +2,24 @@
 class_name AssetLibrary
 extends RefCounted
 
+## The path where the AssetLibrary will save itself. Is normally same as load path.
+var save_path: String
+
 var _assets: Array[AssetResource] = []
 var _folders: Array[AssetFolder] = []
 var _collections: Array[AssetCollection] = []
 
 
 func _init(
-	assets: Array[AssetResource], folders: Array[AssetFolder], collections: Array[AssetCollection]
+	assets: Array[AssetResource],
+	folders: Array[AssetFolder],
+	collections: Array[AssetCollection],
+	load_path : String
 ):
 	_assets = assets
 	_folders = folders
 	_collections = collections
+	save_path = load_path
 
 
 func get_assets() -> Array[AssetResource]:
@@ -42,3 +49,13 @@ func get_highest_id() -> int:
 		if collection.id > highest:
 			highest = collection.id
 	return highest
+
+
+## Save this AssetLibrary to save_path
+func save():
+	assert(
+		save_path.is_absolute_path(),
+		"Cannot save AssetLibrary to invalid path: '%s'" % save_path
+	)
+
+	AssetLibraryParser.save_libray(self, save_path)
