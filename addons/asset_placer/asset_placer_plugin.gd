@@ -42,6 +42,7 @@ func _disable_plugin():
 func _enter_tree():
 	_run_migrations()
 	_initialize_data_layer()
+
 	_async = AssetPlacerAsync.new()
 	_presenter = AssetPlacerPresenter.new()
 	AssetPlacerDockPresenter.new()
@@ -130,6 +131,11 @@ func _initialize_data_layer():
 	settings_repository = AssetPlacerSettingsRepository.new()
 	current_settings = settings_repository.get_settings()
 	settings_repository.settings_changed.connect(_react_to_settings_change)
+
+	# TODO load library file save path setting
+	var path := AssetLibraryParser.DEFAULT_SAVE_PATH
+	AssetLibraryManager.load_asset_library(path)
+
 	_folder_repository = FolderRepository.new()
 	_assets_repository = AssetsRepository.new()
 	_collection_repository = AssetCollectionRepository.new()
