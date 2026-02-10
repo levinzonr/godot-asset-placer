@@ -11,25 +11,21 @@ enum EmptyType { Search, Collection, All, None }
 
 var library: AssetLibrary
 var folder_repository: FolderRepository
-var assets_repository: AssetsRepository
 var synchronizer: Synchronize
 
 var _active_collections: Array[AssetCollection] = []
 var _filtered_assets: Array[AssetResource] = []
-var _current_assets: Array[AssetResource]
 var _current_query: String
 
 
 func _init():
 	self.folder_repository = FolderRepository.instance
-	self.assets_repository = AssetsRepository.instance
 	self.synchronizer = Synchronize.instance
 
 
 func on_ready():
-	_current_assets = assets_repository.get_all_assets()
 	show_filter_info.emit(0)
-	assets_repository.assets_changed.connect(_filter_by_collections_and_query)
+	AssetLibraryManager.get_asset_library().assets_changed.connect(_filter_by_collections_and_query)
 	_filter_by_collections_and_query()
 	synchronizer.sync_state_change.connect(func(v): show_sync_active.emit(v))
 
@@ -56,7 +52,9 @@ func add_asset(path: String, folder_path: String):
 		push_error("Error getting id from path %s" % path)
 		return
 
-	var existing = assets_repository.find_by_uid(id)
+	var lib := AssetLibraryManager.get_asset_library()
+
+	var existing = lib.find_asset_by_uid(id)
 	if existing:
 		var new_tags: Array[int] = []
 		for tag in tags:
@@ -64,13 +62,13 @@ func add_asset(path: String, folder_path: String):
 				new_tags.push_back(tag)
 
 		existing.tags.append_array(new_tags)
-		assets_repository.update(existing)
+		lib.update(existing)
 	else:
-		assets_repository.add_asset(path, tags, folder_path)
+		lib.add_asset(path, tags, folder_path)
 
 
 func delete_asset(asset: AssetResource):
-	assets_repository.delete(asset.id)
+	AssetLibraryManager.get_asset_library().remove_asset_by_id(asset.id)
 	_filter_by_collections_and_query()
 
 
@@ -87,10 +85,9 @@ func add_assets_or_folders(files: PackedStringArray):
 func toggle_asset_collection(asset: AssetResource, collection: AssetCollection, add: bool):
 	if add:
 		asset.tags.append(collection.id)
-		assets_repository.update(asset)
 	else:
 		asset.tags.erase(collection.id)
-		assets_repository.update(asset)
+	AssetLibraryManager.get_asset_library().update_asset(asset)
 
 	_filter_by_collections_and_query()
 
@@ -105,7 +102,7 @@ func toggle_collection_filter(collection: AssetCollection, enabled: bool):
 
 
 func _filter_by_collections_and_query():
-	var all = assets_repository.get_all_assets()
+	var all = AssetLibraryManager.get_asset_library().get_assets()
 	var filtered: Array[AssetResource] = []
 
 	for asset in all:

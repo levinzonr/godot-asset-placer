@@ -4,14 +4,12 @@ extends RefCounted
 signal folders_loaded(folder: Array[AssetFolder])
 
 var folder_repository: FolderRepository
-var asset_repository: AssetsRepository
 var sync: Synchronize
 
 
 func _init():
 	self.folder_repository = FolderRepository.instance
-	self.asset_repository = AssetsRepository.instance
-	self.sync = Synchronize.new(self.folder_repository, self.asset_repository)
+	self.sync = Synchronize.new(self.folder_repository)
 
 
 func _ready():
@@ -25,10 +23,11 @@ func _ready():
 
 
 func delete_folder(folder: AssetFolder):
+	var lib := AssetLibraryManager.get_asset_library()
 	folder_repository.delete(folder.path)
-	for asset in asset_repository.get_all_assets():
+	for asset in lib.get_assets():
 		if asset.folder_path == folder.path:
-			asset_repository.delete(asset.id)
+			lib.remove_asset_by_id(asset.id)
 
 
 func sync_folder(folder: AssetFolder):

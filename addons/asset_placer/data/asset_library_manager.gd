@@ -2,6 +2,9 @@
 class_name AssetLibraryManager
 extends RefCounted
 
+## Singleton class to manage a single active AssetLibrary
+
+
 static var _asset_library: AssetLibrary
 static var _is_save_queued := false
 
@@ -18,7 +21,11 @@ static func load_asset_library(load_path: String) -> void:
 	if _is_save_queued:
 		_save_asset_library()
 
-	_asset_library = AssetLibraryParser.load_library(load_path)
+	var new_asset_library = AssetLibraryParser.load_library(load_path)
+	_move_signal_connections(new_asset_library)
+	_asset_library = new_asset_library
+
+	# TODO Emit AssetLibrary signals to update UI
 
 	# TODO Setup signal to watch when asset library needs to be saved.
 
@@ -34,4 +41,8 @@ static func _save_asset_library():
 	)
 
 	_asset_library.save()
+
+
+static func _move_signal_connections(new_asset_library: AssetLibrary) -> void:
+	pass
 

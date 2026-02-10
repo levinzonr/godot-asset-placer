@@ -7,7 +7,6 @@ signal sync_complete(added: int, removed: int, scanned: int)
 static var instance: Synchronize
 
 var folder_repository: FolderRepository
-var asset_repository: AssetsRepository
 var sync_running = false:
 	set(value):
 		sync_running = value
@@ -18,8 +17,7 @@ var _removed = 0
 var _scanned = 0
 
 
-func _init(folders_repository: FolderRepository, assets_repository: AssetsRepository):
-	self.asset_repository = assets_repository
+func _init(folders_repository: FolderRepository):
 	self.folder_repository = folders_repository
 	instance = self
 
@@ -66,12 +64,13 @@ func _sync_all():
 
 
 func add_assets_from_folder(folder_path: String, recursive: bool):
-	var dir = DirAccess.open(folder_path)
+	var lib := AssetLibraryManager.get_asset_library()
+	var dir := DirAccess.open(folder_path)
 	var tags: Array[int] = []
 	for file in dir.get_files():
 		_scanned += 1
 		var path = folder_path.path_join(file)
-		if asset_repository.add_asset(path, tags, folder_path):
+		if lib.add_asset(path, tags, folder_path):
 			_added += 1
 
 	if recursive:
@@ -87,15 +86,14 @@ func _notify_scan_complete():
 
 
 func _clear_unreachable_assets():
-	for asset in asset_repository.get_all_assets():
-		var path = asset.folder_path
-		if not path.is_empty():
-			var folder = folder_repository.find(path)
-			if folder == null:
-				# remove asset if folder associated with that asset no longer exists
-				asset_repository.delete(asset.id)
-			elif not _is_asset_reachable_from_folder(asset, folder):
-				asset_repository.delete(asset.id)
+	var lib := AssetLibraryManager.get_asset_library()
+	for asset in lib.get_assets():
+		var path := asset.folder_path
+		if path.is_empty():
+			continue
+		var folder := folder_repository.find(path)
+		if folder == null or not _is_asset_reachable_from_folder(asset, folder):
+			lib.remove_asset_by_id(asset.id)
 
 
 func _is_asset_reachable_from_folder(asset: AssetResource, folder: AssetFolder) -> bool:
@@ -111,10 +109,11 @@ func _is_asset_reachable_from_folder(asset: AssetResource, folder: AssetFolder) 
 
 
 func _clear_invalid_assets():
-	for asset in asset_repository.get_all_assets():
+	var lib := AssetLibraryManager.get_asset_library()
+	for asset in lib.get_assets():
 		if not asset.has_resource():
 			_removed += 1
-			asset_repository.delete(asset.id)
+			lib.remove_asset_by_id(asset.id)
 
 
 func _clear_data():
