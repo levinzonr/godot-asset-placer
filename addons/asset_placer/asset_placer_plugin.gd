@@ -29,7 +29,6 @@ var _asset_placer_button: Button
 var _migration_collection_id = load(
 	"res://addons/asset_placer/data/migrations/collection_id_migration.gd"
 )
-var _data_source: AssetLibraryDataSource
 
 
 func _enable_plugin():
@@ -131,10 +130,9 @@ func _initialize_data_layer():
 	settings_repository = AssetPlacerSettingsRepository.new()
 	current_settings = settings_repository.get_settings()
 	settings_repository.settings_changed.connect(_react_to_settings_change)
-	_data_source = AssetLibraryDataSource.new(current_settings.asset_library_path)
-	_folder_repository = FolderRepository.new(_data_source)
-	_assets_repository = AssetsRepository.new(_data_source)
-	_collection_repository = AssetCollectionRepository.new(_data_source)
+	_folder_repository = FolderRepository.new()
+	_assets_repository = AssetsRepository.new()
+	_collection_repository = AssetCollectionRepository.new()
 
 
 func _react_to_settings_change(settings: AssetPlacerSettings):
