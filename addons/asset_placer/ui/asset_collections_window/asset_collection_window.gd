@@ -44,7 +44,9 @@ func show_collections(items: Array[AssetCollection]):
 		list_item.edit_collection_click.connect(
 			func():
 				CollectionEditPopupMenu.show_popup(
-					item, func(collection): presenter._repository.update_collection(collection)
+					item,
+					func(collection):
+						AssetLibraryManager.get_asset_library().update_collection(collection)
 				)
 		)
 		list_item.set_collection(item)
