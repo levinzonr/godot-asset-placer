@@ -91,6 +91,9 @@ func _exit_tree():
 	_updater.update_ready.disconnect(_show_update_available)
 	overlay.queue_free()
 	_plane_preview.queue_free()
+
+	AssetLibraryManager.free_library()
+
 	settings_repository.settings_changed.disconnect(_react_to_settings_change)
 	_file_system.resources_reimported.disconnect(_react_to_reimorted_files)
 	_presenter.asset_selected.disconnect(start_placement)

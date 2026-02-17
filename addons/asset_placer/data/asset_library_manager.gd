@@ -61,3 +61,11 @@ static func _queue_save():
 static func _move_signal_connections(new_asset_library: AssetLibrary) -> void:
 	pass
 
+
+static func free_library():
+	for connection in _asset_library.assets_changed.get_connections():
+		_asset_library.assets_changed.disconnect(connection["callable"])
+	for connection in _asset_library.folders_changed.get_connections():
+		_asset_library.folders_changed.disconnect(connection["callable"])
+	for connection in _asset_library.collections_changed.get_connections():
+		_asset_library.collections_changed.disconnect(connection["callable"])
