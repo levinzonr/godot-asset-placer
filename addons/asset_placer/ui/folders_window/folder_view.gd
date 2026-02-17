@@ -6,6 +6,8 @@ signal folder_delete_clicked
 signal folder_sync_clicked
 signal folder_include_subfloders_change(bool)
 
+var asset_folder: AssetFolder
+
 @onready var path_label: Label = %PathLabel
 @onready var subfolders_checkbox: CheckBox = %SubfoldersCheckbox
 @onready var delete_button: Button = %DeleteButton
@@ -21,7 +23,12 @@ func _ready():
 		func(toggled): folder_include_subfloders_change.emit(toggled)
 	)
 
+	if is_instance_valid(asset_folder):
+		set_folder(asset_folder)
+
 
 func set_folder(folder: AssetFolder):
-	path_label.text = folder.path
-	subfolders_checkbox.button_pressed = folder.include_subfolders
+	asset_folder = folder
+	if is_node_ready():
+		path_label.text = folder.path
+		subfolders_checkbox.button_pressed = folder.include_subfolders

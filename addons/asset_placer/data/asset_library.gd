@@ -130,6 +130,8 @@ func index_of_asset(asset: AssetResource):
 ## Folders
 
 func get_folder(path: String) -> AssetFolder:
+	if _folders.is_empty():
+		return null
 	var folder: int = -1
 	for f in len(_folders):
 		if _folders[f].path == path:
