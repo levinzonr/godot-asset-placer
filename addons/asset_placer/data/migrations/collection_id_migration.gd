@@ -1,11 +1,5 @@
 extends RefCounted
 
-var id_generator: AssetPlacerIdGenerator
-
-
-func _init():
-	id_generator = AssetPlacerIdGenerator.new()
-
 
 func run():
 	# Read the raw JSON data directly
@@ -37,10 +31,11 @@ func run():
 
 	# Process collections to add IDs
 	var collections_dict = data["collections"]
+	var id := 0
 	for collection_dict in collections_dict:
-		var id := id_generator.next_int()
 		collection_dict["id"] = id
 		collection_name_to_id[collection_dict["name"]] = id
+		id += 1
 
 	# Process assets to convert collection names to IDs in tags
 	var assets_dict = data["assets"]
