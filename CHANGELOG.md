@@ -1,5 +1,14 @@
 # Godot Asset Placer Changelog
 
+## 1.2.11
+
+### Changed
+- #73 Rename PlacementMode into GapPlacementMode to avoid conflicts with other plugins
+
+### Fixed
+- #74 Remove gdlint from export
+- #75 Remove old binding settings from project.godot
+
 ## 1.2.10
 
 ### Added
