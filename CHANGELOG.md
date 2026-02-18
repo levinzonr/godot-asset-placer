@@ -76,6 +76,15 @@ This release introduces `Collections Management` dialog which is accessible from
 The dialog provide a more intuitive and convenient way to assign and remove assets to/from the collections
 
 
+## 1.2.11
+
+### Changed
+- #73 Rename PlacementMode into GapPlacementMode to avoid conflicts with other plugins
+
+### Fixed
+- #74 Remove gdlint from export
+- #75 Remove old binding settings from project.godot
+
 ## 1.2.10
 
 ### Added

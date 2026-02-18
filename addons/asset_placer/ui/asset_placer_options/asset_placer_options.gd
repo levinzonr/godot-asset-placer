@@ -30,11 +30,11 @@ func _ready():
 	presenter.parent_changed.connect(show_parent)
 	presenter.placement_mode_changed.connect(
 		func(m):
-			if m is PlacementMode.PlanePlacement:
+			if m is GapPlacementMode.PlanePlacement:
 				placement_mode_options_button.select(1)
-			if m is PlacementMode.SurfacePlacement:
+			if m is GapPlacementMode.SurfacePlacement:
 				placement_mode_options_button.select(0)
-			if m is PlacementMode.Terrain3DPlacement:
+			if m is GapPlacementMode.Terrain3DPlacement:
 				placement_mode_options_button.select(2)
 	)
 
@@ -63,18 +63,18 @@ func _ready():
 	plane_axis_spin_box.value_changed.connect(
 		func(normal: Vector3):
 			var plane = PlaneOptions.new(normal, plane_origin_spin_box.get_vector())
-			presenter.placement_mode = PlacementMode.PlanePlacement.new(plane)
+			presenter.placement_mode = GapPlacementMode.PlanePlacement.new(plane)
 	)
 
 	plane_origin_spin_box.value_changed.connect(
 		func(origin: Vector3):
 			var plane = PlaneOptions.new(plane_axis_spin_box.get_vector(), origin)
-			presenter.placement_mode = PlacementMode.PlanePlacement.new(plane)
+			presenter.placement_mode = GapPlacementMode.PlanePlacement.new(plane)
 	)
 
 	presenter.placement_mode_changed.connect(
-		func(mode: PlacementMode):
-			if mode is PlacementMode.PlanePlacement:
+		func(mode: GapPlacementMode):
+			if mode is GapPlacementMode.PlanePlacement:
 				plane_axis_container.show()
 				plane_origin_container.show()
 				plane_axis_spin_box.set_value_no_signal(mode.plane_options.normal)
