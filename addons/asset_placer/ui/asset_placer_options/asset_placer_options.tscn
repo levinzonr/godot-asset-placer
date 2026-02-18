@@ -141,10 +141,9 @@ icon = SubResource("Texture2D_h8tp4")
 
 [node name="InfoButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/AutoGroupContainer"]
 layout_mode = 2
-tooltip_text = "Automatically groups placed Assets based on their collections. 
-The first collection will be used as primary anchor.
-
-New Parent Node will be created automatically and will have the same name as primary Collection"
+tooltip_text = "Automatically groups placed Assets based on their primary collection. 
+New Parent Node will be created automatically and will have the same name as primary Collection.
+Assets without Primary collection will be placed under currently selected root node"
 icon = SubResource("Texture2D_h1wu1")
 flat = true
 

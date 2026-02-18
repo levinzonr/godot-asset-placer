@@ -118,12 +118,12 @@ When enabled in the Asset Placement Options, placed assets will automatically be
 For example, if you have assets assigned to "Trees" and "Rocks" collections:
 ```
 - Parent (your selected parent node)
-    - Trees (auto-created group)
-        - Tree(1)
-        - Tree(2)
-    - Rocks (auto-created group)
-        - Rock(1)
-        - Rock(2)
+	- Trees (auto-created group)
+		- Tree(1)
+		- Tree(2)
+	- Rocks (auto-created group)
+		- Rock(1)
+		- Rock(2)
 ```
 
 Assets without a primary collection will be placed directly under the parent node. See [Primary Collections](#primary-collections) for how to set the primary collection for your assets.
