@@ -1,5 +1,9 @@
 # Godot Asset Placer Changelog
 
+## 1.3.0-beta2
+### Changed
+- Update tooltip for the auto-grouping
+- Changes from stable channel
 
 ## 1.3.0-beta1
 
