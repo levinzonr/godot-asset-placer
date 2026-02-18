@@ -1,5 +1,6 @@
 # Godot Asset Placer Changelog
 
+
 ## 1.3.0-beta1
 
 ### Primary Collection Improvements
@@ -69,6 +70,16 @@ Merge changes from 1.2.2
 This release introduces `Collections Management` dialog which is accessible from the collections window. The purpose is to streamline Collections and Asset management.
 
 The dialog provide a more intuitive and convenient way to assign and remove assets to/from the collections
+
+
+## 1.2.10
+
+### Added
+- #72 Add support for `.blend` files (Blender files) by @Sr3qt
+
+### Fixed
+- #71 Fixed light mode text visibility issues by @Sr3qt
+
 
 ![](./docs/assets/manage_collections.png)
 ## 1.2.9

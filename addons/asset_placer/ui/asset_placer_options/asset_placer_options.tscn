@@ -38,9 +38,6 @@ script = ExtResource("2_o45xf")
 icon_name = &"RandomNumberGenerator"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
-[sub_resource type="LabelSettings" id="LabelSettings_o45xf"]
-font_size = 14
-
 [sub_resource type="Texture2D" id="Texture2D_5lmt4"]
 resource_local_to_scene = false
 resource_name = ""
@@ -218,8 +215,8 @@ icon = SubResource("Texture2D_br0rc")
 
 [node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 14
 text = "Experimental: This option will pick item from the currently visible assets  after each placement"
-label_settings = SubResource("LabelSettings_o45xf")
 autowrap_mode = 2
 
 [node name="Snapping" type="BoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
