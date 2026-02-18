@@ -26,7 +26,7 @@ func _init(undo_redo: EditorUndoRedoManager, plane_placer: PlanePlacer):
 	self._plane_placer = plane_placer
 
 
-func start_placement(root: Window, asset: AssetResource, placement: PlacementMode):
+func start_placement(root: Window, asset: AssetResource, placement: GapPlacementMode):
 	stop_placement()
 	self.asset = asset
 	_is_node_transform_mode = false
@@ -41,7 +41,7 @@ func start_placement(root: Window, asset: AssetResource, placement: PlacementMod
 		self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
 
-func start_node_transform(node: Node3D, placement: PlacementMode):
+func start_node_transform(node: Node3D, placement: GapPlacementMode):
 	stop_placement()
 	_is_node_transform_mode = true
 	preview_node = node
@@ -270,12 +270,12 @@ func _instantiate_asset_resource(asset: AssetResource) -> Node3D:
 	return new_node
 
 
-func set_placement_mode(placement_mode: PlacementMode):
-	if placement_mode is PlacementMode.SurfacePlacement:
+func set_placement_mode(placement_mode: GapPlacementMode):
+	if placement_mode is GapPlacementMode.SurfacePlacement:
 		_strategy = SurfaceAssetPlacementStrategy.new(preview_rids)
-	elif placement_mode is PlacementMode.PlanePlacement:
+	elif placement_mode is GapPlacementMode.PlanePlacement:
 		_strategy = PlanePlacementStrategy.new(placement_mode.plane_options)
-	elif placement_mode is PlacementMode.Terrain3DPlacement:
+	elif placement_mode is GapPlacementMode.Terrain3DPlacement:
 		_strategy = Terrain3DAssetPlacementStrategy.new(placement_mode.get_terrain_3d_node())
 	else:
 		push_error("Placement mode %s is not supported" % str(placement_mode))

@@ -7,7 +7,7 @@ signal asset_deselected
 signal parent_changed(parent: NodePath)
 signal options_changed(options: AssetPlacerOptions)
 signal transform_mode_changed(mode: TransformMode)
-signal placement_mode_changed(mode: PlacementMode)
+signal placement_mode_changed(mode: GapPlacementMode)
 signal preview_transform_axis_changed(axis: Vector3)
 signal asset_selected(asset: AssetResource)
 signal show_error(message: String)
@@ -22,7 +22,7 @@ static var transform_step: float = 0.1
 var options: AssetPlacerOptions
 var transform_mode: TransformMode = TransformMode.None
 var current_assets: Array[AssetResource]
-var placement_mode: PlacementMode = PlacementMode.SurfacePlacement.new():
+var placement_mode: GapPlacementMode = GapPlacementMode.SurfacePlacement.new():
 	set(value):
 		placement_mode = value
 		placement_mode_changed.emit(value)
@@ -53,30 +53,30 @@ func plugin_is_active() -> bool:
 
 
 func toggle_plane_placement():
-	placement_mode = PlacementMode.PlanePlacement.new(_last_plane_options)
+	placement_mode = GapPlacementMode.PlanePlacement.new(_last_plane_options)
 
 
 func cycle_placement_mode():
-	if placement_mode is PlacementMode.SurfacePlacement:
+	if placement_mode is GapPlacementMode.SurfacePlacement:
 		toggle_plane_placement()
-	elif placement_mode is PlacementMode.PlanePlacement:
+	elif placement_mode is GapPlacementMode.PlanePlacement:
 		toggle_transformation_mode(TransformMode.None)
 		toggle_surface_placement()
 
 
 func toggle_surface_placement():
-	placement_mode = PlacementMode.SurfacePlacement.new()
+	placement_mode = GapPlacementMode.SurfacePlacement.new()
 
 
 func toggle_terrain_3d_placement(node_path: NodePath):
 	if not node_path.is_empty():
 		var node = EditorInterface.get_edited_scene_root().get_node(node_path)
-		self.placement_mode = PlacementMode.Terrain3DPlacement.new(node)
+		self.placement_mode = GapPlacementMode.Terrain3DPlacement.new(node)
 	else:
 		placement_mode_changed.emit(placement_mode)
 
 
-func _select_placement_mode(mode: PlacementMode):
+func _select_placement_mode(mode: GapPlacementMode):
 	self.placement_mode = mode
 
 
@@ -93,7 +93,7 @@ func toggle_transformation_mode(mode: TransformMode):
 	transform_mode_changed.emit(transform_mode)
 
 	if transform_mode == TransformMode.Move:
-		_select_placement_mode(PlacementMode.PlanePlacement.new(_last_plane_options))
+		_select_placement_mode(GapPlacementMode.PlanePlacement.new(_last_plane_options))
 
 	if transform_mode == TransformMode.Rotate:
 		set_random_rotation_enabled(false)
@@ -141,10 +141,10 @@ func _select_axis(axis: Vector3):
 
 	var movement_mode = transform_mode == TransformMode.Move
 	var idle_mode = transform_mode == TransformMode.None
-	var plane_placement = placement_mode is PlacementMode.PlanePlacement
+	var plane_placement = placement_mode is GapPlacementMode.PlanePlacement
 	if plane_placement and (idle_mode || movement_mode):
 		_last_plane_options.normal = axis.normalized()
-		placement_mode = PlacementMode.PlanePlacement.new(_last_plane_options)
+		placement_mode = GapPlacementMode.PlanePlacement.new(_last_plane_options)
 
 
 func set_random_scale_enabled(value: bool):

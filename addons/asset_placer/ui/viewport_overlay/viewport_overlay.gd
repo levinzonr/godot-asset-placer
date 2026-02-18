@@ -46,12 +46,12 @@ func set_mode(mode: AssetPlacerPresenter.TransformMode):
 	translate_check_button.button_pressed = mode == AssetPlacerPresenter.TransformMode.Move
 
 
-func set_placement_mode(mode: PlacementMode):
-	if mode is PlacementMode.PlanePlacement:
+func set_placement_mode(mode: GapPlacementMode):
+	if mode is GapPlacementMode.PlanePlacement:
 		placement_mode_label.text = "Plane Placement"
-	if mode is PlacementMode.SurfacePlacement:
+	if mode is GapPlacementMode.SurfacePlacement:
 		placement_mode_label.text = "Surface Placement"
-	if mode is PlacementMode.Terrain3DPlacement:
+	if mode is GapPlacementMode.Terrain3DPlacement:
 		placement_mode_label.text = "Terrain3D Placement"
 
 

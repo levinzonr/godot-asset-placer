@@ -428,14 +428,14 @@ metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 transform = Transform3D(-0.3437892, 0, 0.9390473, 0, 1, 0, -0.9390474, 0, -0.34378922, 13.668924, 0.46870327, -5.6635065)
 metadata/asset_placer_res_id = "uid://b5cskstxopmxr"
 
-[node name="tree" type="Node3D" parent="." instance=ExtResource("16_svvho")]
+[node name="tree" parent="." instance=ExtResource("16_svvho")]
 transform = Transform3D(0.44107756, 0, -0.8974777, 0, 1, 0, 0.897478, 0, 0.4410777, 0.14058876, 0.46870327, 10.661952)
 metadata/asset_placer_res_id = "uid://bc33e25gdc71n"
 
-[node name="tree (1)" type="Node3D" parent="." instance=ExtResource("16_svvho")]
+[node name="tree (1)" parent="." instance=ExtResource("16_svvho")]
 transform = Transform3D(-0.0856703, 0, 0.99632424, 0, 1, 0, -0.99632436, 0, -0.08567031, -9.652004, 0.46870327, 1.8666931)
 metadata/asset_placer_res_id = "uid://bc33e25gdc71n"
 
-[node name="tree (2)" type="Node3D" parent="." instance=ExtResource("16_svvho")]
+[node name="tree (2)" parent="." instance=ExtResource("16_svvho")]
 transform = Transform3D(-0.9069382, 0, -0.42126673, 0, 1, 0, 0.4212668, 0, -0.9069383, -10.497179, 0.46870327, -2.1419191)
 metadata/asset_placer_res_id = "uid://bc33e25gdc71n"

@@ -1,13 +1,13 @@
-class_name PlacementMode
+class_name GapPlacementMode
 extends RefCounted
 
 
 class SurfacePlacement:
-	extends PlacementMode
+	extends GapPlacementMode
 
 
 class PlanePlacement:
-	extends PlacementMode
+	extends GapPlacementMode
 	var plane_options: PlaneOptions
 
 	func _init(options: PlaneOptions = PlaneOptions.new(Vector3.UP, Vector3.ZERO)):
@@ -15,7 +15,7 @@ class PlanePlacement:
 
 
 class Terrain3DPlacement:
-	extends PlacementMode
+	extends GapPlacementMode
 	var _terrain_3d_node: Node3D
 
 	func _init(node: Node3D):
