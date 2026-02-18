@@ -27,7 +27,7 @@ func show_empty_view():
 
 
 func show_collections(collections: Array[AssetCollection]):
-	var circle_tex := load("uid://btht44hiygnmq")  # colection_circle.svg
+	var circle_tex := load("uid://btht44hiygnmq")  # collection_circle.svg
 	for i in collections.size():
 		var collection_id = collections[i].id
 		var selected = pre_selected.any(func(c): return c.id == collection_id)

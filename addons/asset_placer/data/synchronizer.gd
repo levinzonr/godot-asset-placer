@@ -55,7 +55,7 @@ func sync_folder(folder: AssetFolder):
 func _sync_folder(folder: AssetFolder):
 	_clear_invalid_assets()
 	_clear_unreachable_assets()
-	add_assets_from_folder(folder.path, folder.include_subfolders)
+	add_assets_from_folder(folder.path, folder.include_subfolders, folder.get_rules())
 
 
 func _sync_all():
@@ -65,19 +65,56 @@ func _sync_all():
 		_sync_folder(folder)
 
 
-func add_assets_from_folder(folder_path: String, recursive: bool):
+func add_assets_from_folder(
+	folder_path: String, recursive: bool, rules: Array[AssetPlacerFolderRule]
+):
 	var dir = DirAccess.open(folder_path)
+	if not dir:
+		push_warning("Could not open folder: %s" % folder_path)
+		return
+
 	var tags: Array[int] = []
 	for file in dir.get_files():
 		_scanned += 1
-		var path = folder_path.path_join(file)
-		if asset_repository.add_asset(path, tags, folder_path):
-			_added += 1
+		var path := folder_path.path_join(file)
+		var file_name = file.get_file()
+		var passed_filter := true
+
+		# Check if file passes all filters
+		for rule in rules:
+			if not rule.do_filter(file_name):
+				passed_filter = false
+				break
+
+		if passed_filter:
+			var asset = asset_repository.add_asset(path, tags, folder_path)
+
+			if asset:
+				# New asset - apply after_added rules
+				for rule in rules:
+					asset = rule.do_after_asset_added(asset)
+				asset_repository.update(asset)
+				_added += 1
+			elif rules.size() > 0:
+				# Existing asset - apply after_added rules
+				var uid = ResourceIdCompat.path_to_uid(path)
+				var existing = asset_repository.find_by_uid(uid)
+				if existing:
+					for rule in rules:
+						existing = rule.do_after_asset_added(existing)
+					asset_repository.update(existing)
+		else:
+			# File doesn't pass filter - delete if exists
+			var uid = ResourceIdCompat.path_to_uid(path)
+			var existing = asset_repository.find_by_uid(uid)
+			if existing:
+				asset_repository.delete(uid)
+				_removed += 1
 
 	if recursive:
 		for sub_dir in dir.get_directories():
 			var path: String = folder_path.path_join(sub_dir)
-			add_assets_from_folder(path, true)
+			add_assets_from_folder(path, true, rules)
 
 
 func _notify_scan_complete():
