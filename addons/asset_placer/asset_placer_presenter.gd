@@ -16,7 +16,7 @@ signal asset_placed
 
 enum TransformMode { None, Rotate, Scale, Move }
 
-static var _instance: AssetPlacerPresenter
+static var instance: AssetPlacerPresenter
 static var transform_step: float = 0.1
 
 var options: AssetPlacerOptions
@@ -36,8 +36,8 @@ var _selected_node: Node3D
 
 func _init():
 	options = AssetPlacerOptions.new()
-	self._selected_asset = null
-	self._instance = self
+	_selected_asset = null
+	instance = self
 
 
 func ready():

@@ -26,7 +26,7 @@ var presenter: AssetPlacerPresenter
 
 
 func _ready():
-	presenter = AssetPlacerPresenter._instance
+	presenter = AssetPlacerPresenter.instance
 	presenter.options_changed.connect(set_options)
 	presenter.parent_changed.connect(show_parent)
 	presenter.placement_mode_changed.connect(show_placement_mode)

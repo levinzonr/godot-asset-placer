@@ -21,7 +21,7 @@ func get_placement_point(camera: Camera3D, mouse_position: Vector2) -> Collision
 			return CollisionHit.new(hit_position, normal)
 		else:
 			var message := "No collision with Terrain3D"
-			AssetPlacerPresenter._instance.show_error.emit(message)
+			AssetPlacerPresenter.instance.show_error.emit(message)
 			return CollisionHit.zero()
 	else:
 		push_error("Provided Node is Not Terrain3D")
