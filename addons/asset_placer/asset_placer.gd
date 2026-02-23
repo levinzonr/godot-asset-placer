@@ -1,15 +1,15 @@
 class_name AssetPlacer
 extends RefCounted
 
+const META_ASSET_ID = &"asset_placer_res_id"
+
 var preview_node: Node3D
 var preview_aabb: AABB
-var node_history: Array[String] = []
 var preview_rids = []
 var asset: AssetResource
 var preview_transform_step: float = 0.1
 var preview_rotate_step: float = 5
 var undo_redo: EditorUndoRedoManager
-var meta_asset_id = &"asset_placer_res_id"
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
 
 var _is_node_transform_mode: bool = false
@@ -193,38 +193,34 @@ func _place_instance(transform: Transform3D, select_after_placement: bool):
 	var parent := AssetParentSelector.pick_parent(scene_root, asset, options.group_automatically)
 
 	if is_instance_valid(parent) and is_instance_valid(asset.get_resource()):
+		var new_node: Node3D = _instantiate_asset_resource(asset)
+		new_node.global_transform = transform
+		new_node.transform = parent.global_transform.affine_inverse() * transform
+		new_node.name = _pick_name(new_node, parent)
+		new_node.set_meta(META_ASSET_ID, asset.id)
+
 		undo_redo.create_action("Place Asset: %s" % asset.name, 0, parent)
-		undo_redo.add_do_method(self, "_do_placement", parent, transform, select_after_placement)
-		undo_redo.add_undo_method(self, "_undo_placement", parent)
+		undo_redo.add_do_reference(new_node)
+		undo_redo.add_do_method(self, "_do_placement", new_node, parent, select_after_placement)
+		undo_redo.add_undo_method(self, "_undo_placement", new_node, parent)
 		undo_redo.commit_action()
+
 		AssetTransformations.apply_transforms(preview_node, _presenter.options)
 		_presenter.on_asset_placed()
 
 
-func _do_placement(root: Node3D, transform: Transform3D, select_after_placement: bool):
-	var new_node: Node3D = _instantiate_asset_resource(asset)
-	new_node.global_transform = transform
-	new_node.transform = root.global_transform.affine_inverse() * transform
-	new_node.set_meta(meta_asset_id, asset.id)
-	new_node.name = _pick_name(new_node, root)
+func _do_placement(new_node: Node3D, root: Node3D, select_after_placement: bool):
+	var temp_name := new_node.name
 	root.add_child(new_node)
+	new_node.name = temp_name
 	new_node.owner = EditorInterface.get_edited_scene_root()
-	node_history.push_front(new_node.name)
 	if select_after_placement:
 		_presenter.clear_selection()
 		EditorInterface.edit_node(new_node)
 
 
-func _undo_placement(root: Node3D):
-	var last_added = node_history.pop_front()
-	var children = root.get_children()
-	var node_index = -1
-	for a in root.get_child_count():
-		if children[a].name == last_added:
-			node_index = a
-			break
-	var node = root.get_child(node_index)
-	node.queue_free()
+func _undo_placement(new_node: Node3D, root: Node3D):
+	root.remove_child(new_node)
 
 
 func _confirm_node_transform():
@@ -286,9 +282,9 @@ func set_placement_mode(placement_mode: GapPlacementMode):
 
 
 func _pick_name(node: Node3D, parent: Node3D) -> String:
-	var number_of_same_scenes = 0
+	var number_of_same_scenes := 0
 	for child in parent.get_children():
-		if child.has_meta(meta_asset_id) && child.get_meta(meta_asset_id) == asset.id:
+		if child.has_meta(META_ASSET_ID) && child.get_meta(META_ASSET_ID) == asset.id:
 			number_of_same_scenes += 1
 	return node.name if number_of_same_scenes == 0 else node.name + " (%s)" % number_of_same_scenes
 
