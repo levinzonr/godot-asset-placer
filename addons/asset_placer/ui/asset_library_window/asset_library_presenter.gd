@@ -20,7 +20,7 @@ var _asset_library: AssetLibrary:
 
 
 func _init():
-	self.synchronizer = Synchronize.instance
+	synchronizer = Synchronize.instance
 
 
 func on_ready():
@@ -35,7 +35,7 @@ func add_folder(path: String):
 
 
 func on_query_change(query: String):
-	self._current_query = query
+	_current_query = query
 	_filter_by_collections_and_query()
 
 
@@ -67,7 +67,6 @@ func add_asset(path: String, folder_path: String):
 
 func delete_asset(asset: AssetResource):
 	_asset_library.remove_asset(asset)
-	_filter_by_collections_and_query()
 
 
 func add_assets_or_folders(files: PackedStringArray):
@@ -77,8 +76,6 @@ func add_assets_or_folders(files: PackedStringArray):
 		elif AssetResource.is_file_supported(file):
 			add_asset(file, "")
 
-		_filter_by_collections_and_query()
-
 
 func toggle_asset_collection(asset: AssetResource, collection: AssetCollection, add: bool):
 	if add:
@@ -86,8 +83,6 @@ func toggle_asset_collection(asset: AssetResource, collection: AssetCollection, 
 	else:
 		asset.tags.erase(collection.id)
 	_asset_library.update_asset(asset)
-
-	_filter_by_collections_and_query()
 
 
 func toggle_collection_filter(collection: AssetCollection, enabled: bool):
