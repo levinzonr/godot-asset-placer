@@ -5,7 +5,6 @@ extends Control
 signal asset_selected(asset: AssetResource)
 
 @onready var presenter = AssetLibraryPresenter.new()
-@onready var folder_presenter = FolderPresenter.new()
 
 @onready var placer_presenter := AssetPlacerPresenter._instance
 @onready var grid_container: Container = %GridContainer
