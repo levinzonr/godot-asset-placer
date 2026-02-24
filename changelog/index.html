@@ -1,0 +1,1380 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Comprehensive documentation for the Godot Asset Placer plugin">
+      
+      
+      
+        <link rel="canonical" href="https://levinzonr.github.io/godot-asset-placer/changelog/">
+      
+      
+        <link rel="prev" href="../development-lifecycle/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Changelog - Godot Asset Placer Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#godot-asset-placer-changelog" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Godot Asset Placer Documentation" class="md-header__button md-logo" aria-label="Godot Asset Placer Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Godot Asset Placer Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Changelog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="cyan"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/levinzonr/godot-asset-placer" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    levinzonr/godot-asset-placer
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../development-lifecycle/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Development Lifecycle
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Godot Asset Placer Documentation" class="md-nav__button md-logo" aria-label="Godot Asset Placer Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Godot Asset Placer Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/levinzonr/godot-asset-placer" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    levinzonr/godot-asset-placer
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development-lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development Lifecycle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#130" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✨ New Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✨ New Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collection-management-dialog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collection Management Dialog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatic-collections-grouping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic Collections Grouping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primary-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Primary Collections
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#folder-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Folder Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1211" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.11
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#130" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✨ New Features
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✨ New Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collection-management-dialog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collection Management Dialog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatic-collections-grouping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatic Collections Grouping
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primary-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Primary Collections
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#folder-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Folder Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1211" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.11
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2.11">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="godot-asset-placer-changelog">Godot Asset Placer Changelog</h1>
+<h2 id="130">1.3.0</h2>
+<p>Version <strong>1.3.0</strong> is a feature release focused on improving collection workflows, introducing auto-grouping, and adding folder-level automation rules.</p>
+<h3 id="new-features">✨ New Features</h3>
+<h4 id="collection-management-dialog">Collection Management Dialog</h4>
+<p>A new streamlined dialog for managing asset collections, accessible from the Collections tab or by right-clicking an asset.</p>
+<p><img alt="" src="./docs/assets/cm_preview.png" /></p>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>Batch Selection</strong> - Select multiple assets using Shift+Click (range) or Ctrl/Cmd+Click (multi-select) to assign or remove collections from multiple assets simultaneously</li>
+<li><strong>Visual Feedback</strong> - See which collections are fully assigned, partially assigned, or available for each selection</li>
+<li><strong>Dialog Size Persistence</strong> - The dialog remembers its size across sessions</li>
+</ul>
+<h4 id="automatic-collections-grouping">Automatic Collections Grouping</h4>
+<p>A new option to automatically group placed assets under nodes named after their <strong>primary collection</strong>, keeping your scene tree organized without manual effort.</p>
+<p>When enabled in the Asset Placement Options, your scene tree will be organized like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>- Parent (your selected parent node)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    - Trees (auto-created group)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        - Tree(1)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        - Tree(2)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    - Rocks (auto-created group)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        - Rock(1)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        - Rock(2)
+</code></pre></div>
+<p>Assets without a primary collection are placed directly under the parent node.</p>
+<h4 id="primary-collections">Primary Collections</h4>
+<p>Each asset can now have an explicitly set <strong>primary collection</strong> that determines grouping behavior.</p>
+<p><img alt="" src="./docs/assets/manage_collections.png" /></p>
+<ul>
+<li><strong>Primary Collection Indicator</strong> - The Collection Management dialog shows a star icon (tinted with the collection's color) to indicate and toggle the primary collection</li>
+<li><strong>Explicit Assignment</strong> - Primary collection must be explicitly set by the user; it is not automatically assigned</li>
+<li><strong>Easy Toggle</strong> - Click the star on an already-primary collection to remove primary status</li>
+<li><strong>Batch Assignment</strong> - When multiple assets are selected, the star button is always visible for easier batch primary assignment</li>
+</ul>
+<h4 id="folder-rules">Folder Rules</h4>
+<p>Configurable rules for asset folders that automate actions when syncing.</p>
+<p><img alt="" src="./docs/assets/folder_rules_preview.png" /></p>
+<p><strong>Available Rules:</strong></p>
+<ul>
+<li><strong>Add to Collection</strong> - Automatically assign synced assets to a specific collection</li>
+<li><strong>Filter by Name</strong> - Only include assets whose filename contains specified text</li>
+</ul>
+<p>Rules are configured per-folder and can be combined. Click the "Rules" button on any folder to expand the rules panel.</p>
+<hr />
+<h2 id="1211">1.2.11</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>
+<h1 id="73-rename-placementmode-into-gapplacementmode-to-avoid-conflicts-with-other-plugins">73 Rename PlacementMode into GapPlacementMode to avoid conflicts with other plugins</h1>
+</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>
+<h1 id="74-remove-gdlint-from-export">74 Remove gdlint from export</h1>
+</li>
+<li>
+<h1 id="75-remove-old-binding-settings-from-projectgodot">75 Remove old binding settings from project.godot</h1>
+</li>
+</ul>
+<h2 id="1210">1.2.10</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>
+<h1 id="72-add-support-for-blend-files-blender-files-by-sr3qt">72 Add support for <code>.blend</code> files (Blender files) by @Sr3qt</h1>
+</li>
+</ul>
+<h3 id="fixed_1">Fixed</h3>
+<ul>
+<li>
+<h1 id="71-fixed-light-mode-text-visibility-issues-by-sr3qt">71 Fixed light mode text visibility issues by @Sr3qt</h1>
+</li>
+</ul>
+<p><img alt="" src="./docs/assets/manage_collections.png" /></p>
+<h2 id="129">1.2.9</h2>
+<h3 id="fixed_2">Fixed</h3>
+<ul>
+<li>
+<h1 id="48-fixed-collection-ids-not-being-unique-when-creating-new-collections-by-sr3qt">48 Fixed collection IDs not being unique when creating new collections by @Sr3qt</h1>
+</li>
+</ul>
+<h2 id="128">1.2.8</h2>
+<h3 id="fixed_3">Fixed</h3>
+<ul>
+<li>
+<h1 id="63-fixed-typo-in-chipgd-by-virtueos">63 Fixed typo in chip.gd by @VirtueOS</h1>
+</li>
+</ul>
+<h2 id="127">1.2.7</h2>
+<h3 id="fixed_4">Fixed</h3>
+<ul>
+<li>
+<h1 id="54-fixed-invalid-file-paths-when-adding-asset-folders-by-using-safer-path_join-by-sr3qt">54 Fixed invalid file paths when adding asset folders by using safer <code>path_join</code> by @Sr3qt</h1>
+</li>
+<li>
+<h1 id="53-asset-preview-display-improvements-by-sr3qt">53 Asset preview display improvements by @Sr3qt:</h1>
+</li>
+<li>File names now cutoff after 2 lines for better alignment</li>
+<li>Images are now always aligned properly</li>
+<li>Missing thumbnails show placeholder texture instead of blank</li>
+<li>Thumbnails now gracefully scale below 1.0 UI scale</li>
+<li>
+<h1 id="57-make-collection-circles-anti-aliased-using-svg-textures-for-improved-visual-quality-by-sr3qt">57 Make collection circles anti-aliased using SVG textures for improved visual quality by @Sr3qt</h1>
+</li>
+</ul>
+<h3 id="changed_1">Changed</h3>
+<ul>
+<li>
+<h1 id="60-asset-loading-rework-for-improved-safety-and-performance-by-sr3qt">60 Asset loading rework for improved safety and performance by @Sr3qt:</h1>
+</li>
+<li>Replaced unsafe asset scene access with safer getter methods</li>
+<li>Fixed CPU usage issue where failed assets would retry loading indefinitely</li>
+<li>Improved thumbnail generation to load without fully loading the asset scene</li>
+</ul>
+<h2 id="126">1.2.6</h2>
+<h3 id="added_1">Added</h3>
+<ul>
+<li>
+<h1 id="51-add-another-floating-point-configuration-for-the-grid-step">51 Add another floating point configuration for the grid-step</h1>
+</li>
+</ul>
+<h2 id="125">1.2.5</h2>
+<h3 id="fixed_5">Fixed</h3>
+<ul>
+<li>
+<h1 id="50-wrong-icon-resource-was-being-used-causing-issues-with-plugin-startup-by-sr3qt">50 Wrong Icon resource was being used causing issues with plugin startup by @Sr3qt</h1>
+</li>
+</ul>
+<h2 id="124">1.2.4</h2>
+<h3 id="fixed_6">Fixed</h3>
+<ul>
+<li>Fix an Engine crash happening when using Slider to Change the Thumbnails Scale (#47)</li>
+</ul>
+<h2 id="123">1.2.3</h2>
+<h3 id="fixed_7">Fixed</h3>
+<p>The default Parent Node is now properly initialized on plugin startup</p>
+<h2 id="122">1.2.2</h2>
+<h3 id="added_2">Added</h3>
+<ul>
+<li>Plugin Updater Stable Chanel Setting. This option allows to select between various update channels (Stable, Beta an Alpha)</li>
+<li>More visibility about the available Plugin Updates. Small Icon will be visible next to the Asset Placer tab indicating the availability of the new version based on selected update channel</li>
+</ul>
+<h3 id="changed_2">Changed</h3>
+<ul>
+<li>Minor UI updates to the Update Dialog</li>
+<li>View Changelog button now points to the Release on GitHub instead of Changelog.Md</li>
+</ul>
+<h2 id="121">1.2.1</h2>
+<h3 id="fixed_8">Fixed</h3>
+<ul>
+<li>Made Asset Collections Scrollable</li>
+<li>Fix Icon in About Window</li>
+</ul>
+<h2 id="120">1.2.0</h2>
+<p>Version <strong>1.2.0</strong> is a major feature release that introduces a comprehensive Settings Panel, In Place Transform Mode, Random Asset Placement, and enhanced Placer options for more flexible asset placement workflows.</p>
+<h3 id="new-features_1">✨ New Features</h3>
+<h4 id="settings-panel">⚙️ Settings Panel ⚙️</h4>
+<p>This release introduces a dedicated Settings Panel for the Asset Placer, allowing you to customize and tweak the plugin to your needs.</p>
+<p><strong>General Settings:</strong></p>
+<ul>
+<li>Preview Material configuration - You can disable or choose your own Material3D resource to be used as a preview material for Asset Placement</li>
+<li>Plane Material customization - Modify the material of the Plane used in Plane Placement Mode to better suit your scene (Project level settings)</li>
+<li>Transform Step configuration - Configure the amount of rotation/scale applied per Mouse Wheel step when in Preview Transform mode</li>
+<li>Rotation Step Default: 5 degrees</li>
+<li>Scale/Translate Step Default: 0.1 Units</li>
+<li>Thumbnail UI Scale option - Scales up/down the size of the items inside Assets Panel (Default: 1.0). This partially addresses issues like #28 and #38</li>
+<li>Asset Library .json file path configuration - Set custom location of the library data source file. This is helpful if you want this file to be version controlled and shared between all developers with access to the project. By default the path will be an internal Godot user folder. This can be changed through Project Settings -&gt; Advanced -&gt; Godot Asset Placer.</li>
+</ul>
+<p><strong>Key Bindings:</strong>
+You can now customize the key bindings for various actions within the Asset Placer plugin:</p>
+<ul>
+<li>Rotate (Default: E)</li>
+<li>Scale (Default: R)</li>
+<li>Translate (Default: W)</li>
+<li>Cycle Placement Modes (Default: Q)</li>
+<li>Toggle Snapping (Default: S)</li>
+<li>Toggle X, Y, Z Axis (Default: X, Y, Z keys respectively)</li>
+<li>Transform Apply (Default: Mouse Wheel Up/Down)</li>
+<li>In Place Transform Mode (Default: Shift+E)</li>
+</ul>
+<p>Key Bindings support Mouse Button and Modifiers Combinations (Ctrl/CMD, Shift, Alt/Options), providing more flexibility when choosing key bindings and allowing you to avoid conflicts with existing Godot shortcuts.</p>
+<p>The conflicting key will be unassigned and highlighted in red in the Settings Panel</p>
+<h4 id="in-place-transform-mode">In Place Transform Mode</h4>
+<p><strong>In Place Transform Mode</strong> allows users to apply transformations using Asset Placer flow to existing Nodes that are already present in the scene tree. To enter this mode, select a Node3D in the scene tree and press "Shift+E" (Default Shortcut and configurable in Settings). After that, you can use the same Preview Transform shortcuts to modify the selected Node3D.</p>
+<h4 id="random-asset-placement">Random Asset Placement</h4>
+<p>This release introduces a new checkbox in the Asset Placement Options UI that allows users to enable/disable random placement of assets. When enabled, a new asset will be selected randomly from the current filtered list of assets in the Assets Panel. This will happen after each placement.</p>
+<blockquote>
+<p>⚠️ While this feature does work, we consider this feature to be experimental and might require further improvements in the future</p>
+</blockquote>
+<h4 id="new-placer-options">New Placer Options</h4>
+<p>Two new placement alignment options have been added to the Asset Placement Options:</p>
+<ul>
+<li><strong>Align Normals</strong> - When enabled, assets will align with surface normals during placement, providing more natural placement on sloped or vertical surfaces</li>
+<li><strong>Use Assets Origin</strong> / <strong>Scene Bottom Alignment</strong> - Control whether assets should be placed using their local origin point (Use Assets Origin enabled) or their actual bottom (Use Assets Origin disabled). Using Asset Origin is particularly useful for assets that have a defined base or origin point that should remain "under" the surface, such as Trees</li>
+</ul>
+<h3 id="collections-improvements">Collections Improvements</h3>
+<ul>
+<li>It is now possible to Edit Collections (Color, Name) from the Collections Tab</li>
+<li>Collections UI has been updated to be more consistent with the rest of the plugin</li>
+<li>⚠️ <strong>Breaking Change:</strong> Collections are now identified by a unique ID instead of Name. The Migration is part of the plugin update and should run automatically and ideally should not cause any issues. However, if you have any issues with collections after updating please reach out. Your <code>asset_library.json</code> (https://github.com/levinzonr/godot-asset-placer/issues/44) will be backed-up automatically just in case.</li>
+</ul>
+<hr />
+<h2 id="120-beta2">1.2.0-beta2</h2>
+<h3 id="fixed_9">Fixed</h3>
+<ul>
+<li>Collection Picker not showing current status of the Assigned collections</li>
+</ul>
+<h2 id="120-beta1">1.2.0-beta1</h2>
+<h3 id="added_3">Added</h3>
+<ul>
+<li>Added a Plane Mode Toggle Configuration option</li>
+<li>Asset Library .json file can now be changed. This allows you set custom location of the library data source file which is helpful if you want this file to be version controlled and shared between all developers with the access to the project. By default the path will be an internal Godot user folder. This can be changed through Project Settings -&gt; Advanced -&gt; Godot Asset Placer.</li>
+</ul>
+<h3 id="fixed_10">Fixed</h3>
+<ul>
+<li>Remove unneeded logs from the Collection Migration Code, Made sure migration only runs when is needed</li>
+</ul>
+<h2 id="120-alpha4">1.2.0-alpha4</h2>
+<h3 id="fixed_11">Fixed</h3>
+<ul>
+<li>Fixed an Issue with when Placing Asset on a Plane in Plane Placement Mode breaks the placement flow. This was due the input handling and event being propagated to the Editor</li>
+</ul>
+<h2 id="120-alpha3">1.2.0-alpha3</h2>
+<blockquote>
+<p>⚠️ Contains Breaking changes for the Collections System. Please read the notes below before updating.</p>
+</blockquote>
+<h3 id="collections-improvements_1">Collections Improvements</h3>
+<ul>
+<li>It is now possible to Edit Collections (Color, Name) from the Collections Tab</li>
+<li>Collections UI has been updated to be more consistent with the rest of the plugin</li>
+<li>⚠️ Breaking Change: Collections are now identified by a unique ID instead of Name. The Migration is part of the plugin update and should run automatically and ideally should not cause any issues.
+  However, if you have any issues with collections after updating please reach out. It is recommended to backup your <code>asset_library.json</code> (https://github.com/levinzonr/godot-asset-placer/issues/44) before updating the plugin to this version.</li>
+</ul>
+<h3 id="random-asset-placement_1">Random Asset Placement</h3>
+<p>This release introduces a new check box in the Asset Placement Options UI that allows users to enable/disable random placement of assets.
+When enabled, new asset will be selected randomly from the current filtered list of assets in the Assets Panel. This will happen after each placement.</p>
+<blockquote>
+<p>While this feature does work I do consider this feature to be experimental and might require further improvements in the future</p>
+</blockquote>
+<h3 id="additions-to-the-settings-panel">Additions to the Settings Panel</h3>
+<ul>
+<li>Added Option to configure Toggling X, Y and Z Axis (Default: X, Y, Z keys respectively)</li>
+<li>Added Key Binding Conflict Detection: The conflicting key will be unasigned and highlighted in red in the Settings Panel</li>
+<li>Added Option to configure shortcut for Transform Apply (Default: Mouse Wheel Up/Down)</li>
+<li>Added <code>Thumbnail US Scale</code> option. This scales up/down the size of the items inside Assets Panel (Default: 1.0). This is partially addessing issues like #28 and #38</li>
+</ul>
+<h2 id="120-alpha2">1.2.0-alpha2</h2>
+<h3 id="added_4">Added</h3>
+<ul>
+<li><strong>In Place Transform Mode</strong> allows users to apply transformations using Asset Placer flow to the existing Nodes that are already present in the scene tree. To Enter this mode select a Node3D in the scene tree and press the "Shift+E" (Default Shortcut and Configurable in Settings). After that, you can use the same Preview Transform shortcuts to modify the selected Node3D.</li>
+<li>Added Transform Step to the Settings Panel. This allows users to configure the amount of rotation/scale applied per Mouse Wheel step when in Preview Transform mode.</li>
+<li>Rotation Step Default: 5 degrees</li>
+<li>Scale/Translate Step Default: 0.1 Units</li>
+<li>Added the ability to modify the material of the Plane used in Plane Placement Mode. This allows users to customize the appearance of the placement plane to better suit their scene and preferences. (Project level settings)</li>
+</ul>
+<h3 id="changed_3">Changed</h3>
+<ul>
+<li>Key Bindings now can also allow for Mouse Button and Modifiers Combinations (Ctrl, Shift, Alt). This provides more flexibility when choosing key bindings and allows to avoid conflicts with existing Godot shortcuts.</li>
+<li>Preview Material is now a Project Level Setting. This allows different projects to have different preview materials without affecting each other.</li>
+</ul>
+<h2 id="120-alpha1">1.2.0-alpha1</h2>
+<h3 id="settings-panel_1">⚙︎ Settings Panel ⚙︎</h3>
+<p>This Release introduces a dedicated Settings Panel for the Asset Placer. This allows you to further more customize your experience and tweak the plugin to your needs</p>
+<h4 id="general-settings">General Settings</h4>
+<p>Previously hardcoded settings are now exposed in the Settings Panel:</p>
+<ul>
+<li>Preview Material (#43) - You can disable, or choose your own Material3D resource to be used as a preview material for Asset Placement</li>
+</ul>
+<h4 id="key-bindings">Key Bindings</h4>
+<p>You can now customize the key bindings for various actions within the Asset Placer plugin. This includes</p>
+<ul>
+<li>Rotate (Default: E)</li>
+<li>Scale (Default: R)</li>
+<li>Translate (Default: W)</li>
+<li>Cycle Placement Modes (Default: Q)</li>
+<li>Toggle Snapping (Default: S)</li>
+</ul>
+<p>All The changes made will be persisted across Godot sessions within EditorSettings, and as such, across all your Projects</p>
+<h2 id="118">1.1.8</h2>
+<h3 id="added_5">Added</h3>
+<p>Added support of Using Asset Origin for Placement (Addressing issue #42)
+With this feature enabled, the asset will be placed with its local origin point aligned to the placement surface,
+rather than using Assets Actual bottom. This is particularly useful for assets that have a defined base or origin point that should remain "under" the surface, such as Trees</p>
+<h2 id="117">1.1.7</h2>
+<h3 id="added_6">Added</h3>
+<ul>
+<li>Added AlignNormals checkbox to AssetPlacement options (#40). The checkbox is enabled by default and can be changed via Asset Placement Options UI</li>
+<li>Provides users with control over whether assets should align with surface normals during placement</li>
+<li>Enhances flexibility for different placement scenarios</li>
+</ul>
+<h3 id="fixed_12">Fixed</h3>
+<ul>
+<li>Fixed rotation transforms to use degrees instead of radians (#41) by @Mewlkor</li>
+<li>Improves user experience by using more intuitive degree values for rotation</li>
+<li>Ensures consistency with Godot's rotation system</li>
+</ul>
+<h2 id="116">1.1.6</h2>
+<h3 id="fixed_13">Fixed</h3>
+<ul>
+<li>Fixed an Issue when Placed Asset rotation would not correspond to the Preview Node rotation. Was happening when Root Node had non-default rotation transform</li>
+</ul>
+<h3 id="changed_4">Changed</h3>
+<ul>
+<li>Another small update to the "Update Flow". The Update now is split into 2 steps instead of one: Download and Apply. Goal is to make it more consistent</li>
+</ul>
+<h2 id="115">1.1.5</h2>
+<h3 id="changed_5">Changed</h3>
+<p>chore: Tweak export-ignore configuration to exclude top-level LICENSE and dotfiles (#36) by @akien-mga</p>
+<p>The LICENSE is already included in <code>addons/asset_placer/</code> to ship in user
+projects. The top-level one could conflict with user projects, or appear
+to define their license terms.</p>
+<p>Ensure we don't export dotfiles like <code>.gitignore</code> or <code>.gitattributes</code>
+in archives either, and remove stray <code>.DS_Store</code> files.</p>
+<p>Remove usage of top-level <code>icon.svg</code> as placeholder in the plugin, replace it
+by in-plugin icon.png with the same size (128x128).</p>
+<h2 id="114">1.1.4</h2>
+<h3 id="fixed_14">Fixed</h3>
+<ul>
+<li>Moved the icon outside of the root package (#35)</li>
+</ul>
+<h2 id="113">1.1.3</h2>
+<h3 id="fixed_15">Fixed</h3>
+<ul>
+<li>Fixed an Icon not being exported for the ViewPortOverlay</li>
+</ul>
+<h2 id="112">1.1.2</h2>
+<h3 id="fixed_16">Fixed</h3>
+<ul>
+<li>Fixed an Issue when Asset Placer would react to Inputs inside 3D Viewport while plugin is inactive (asset is not selected)</li>
+</ul>
+<h2 id="111">1.1.1</h2>
+<h3 id="fixed_17">Fixed</h3>
+<ul>
+<li>Fixed and Issue when Asset Placer still remains active after dock panel is closed/changed (#31)</li>
+<li>Fixed an Issue with Asset Placer shortcuts interfering with Existing Godot shortcuts #27.</li>
+<li>terrain_3d addon used for demo purposes is now removed from the plugin when exporting as zip</li>
+<li>Decrease min height of dock panel window</li>
+</ul>
+<h3 id="changed_6">Changed</h3>
+<ul>
+<li>Bring back Editor Restart when updating the plugin. Disabling and Enabling the plugin does not fully reload all the resources and may lead to unexpected behaviour</li>
+</ul>
+<h2 id="110">1.1.0</h2>
+<p>Version <strong>1.1.0</strong> is a major feature update that introduces new placement modes, preview transformations, and various improvements and fixes to enhance the asset placement experience in Godot.</p>
+<h3 id="new-features_2">✨ New Features</h3>
+<p>1.1.0 Introduce Placement Modes and Preview Transformations that allow for more flexible and intuitive asset placement in 3D scenes.</p>
+<h4 id="placement-modes">Placement Modes</h4>
+<p>A new system for controlling how assets are placed in your scene:</p>
+<ul>
+<li><strong>Surface Collision</strong> – Default placement mode, using collision objects in the scene (same as before).</li>
+<li><strong>Plane Collision</strong> – Place assets on a configurable infinite plane without needing collision objects.</li>
+<li>Plane can now detect collisions from both sides.</li>
+<li>Plane preview material is now <strong>unshaded</strong> for consistent visibility across environments.</li>
+<li><strong>Terrain3D Placement</strong> – Dedicated support for <a href="https://github.com/TokisanGames/Terrain3D">Terrain3D plugin</a>, ensuring assets align properly with terrain surfaces.</li>
+</ul>
+<h4 id="preview-transformations">Preview Transformations</h4>
+<p>You can now adjust asset transforms before placement:</p>
+<ul>
+<li><strong>Rotate (<code>E</code>)</strong> – Default rotation axis is Y.</li>
+<li><strong>Scale (<code>R</code>)</strong> – Uniform scaling by default.</li>
+<li><strong>Translate (<code>W</code>)</strong> – Tied to Plane Placement Mode for continuous placement.</li>
+<li><strong>Axis Selection</strong> – Switch between X, Y, Z with hotkeys.</li>
+<li>Mouse Wheel applies transformations ("positive" / "negative" values).</li>
+<li>A <strong>viewport overlay</strong> displays the current mode and active axis.</li>
+</ul>
+<h4 id="random-transformations">Random Transformations</h4>
+<p>Random Transformations are now mutually exclusive with Manual Preview Transformations to avoid conflicts.
+This means if you enable manual transformations, random transformations will be disabled automatically and vice versa.</p>
+<h4 id="shortcuts-ui-improvements">Shortcuts &amp; UI Improvements</h4>
+<ul>
+<li><code>Q</code> – Cycle through placement modes.</li>
+<li><code>W</code> – Translate Mode now works with Plane Placement Mode.</li>
+<li><code>S</code> – Toggle snapping on/off.</li>
+<li>Viewport overlay updated for better readability on all backgrounds.</li>
+<li>Added <strong>snapping state indicator</strong> in the overlay.</li>
+<li>Added <strong>empty view</strong> for collection picker with navigation shortcut.</li>
+</ul>
+<hr />
+<h3 id="fixes-improvements">🛠️ Fixes &amp; Improvements</h3>
+<ul>
+<li>Assets now properly align with <strong>slopes and vertical surfaces</strong> using surface normals.</li>
+<li>Fixed snapping not working correctly during placement.</li>
+<li>Fixed scale preview resetting after moving an asset.</li>
+<li>Dock panel now has a <strong>minimum height</strong> to prevent UI collapse issues.</li>
+<li>Improved thumbnail generation with additional checks.</li>
+<li>Transformation directions flipped for more intuitive behavior.</li>
+<li>Numerous UI polish updates across overlays, pickers, and collections.</li>
+</ul>
+<hr />
+<h3 id="format-support">📂 Format Support</h3>
+<ul>
+<li>Added support for <strong>GLTF</strong> assets.</li>
+<li>Added support for <strong>OBJ</strong> assets.</li>
+</ul>
+<hr />
+<h3 id="110-beta1">1.1.0-beta1</h3>
+<p>With this release I believe new features are more or less stable and no more major changes expected, other than bug fixes</p>
+<h3 id="changed_7">Changed</h3>
+<ul>
+<li>Error toast from ViewPort overlay is now a bit smaller and positioned lower so it is less intrusive</li>
+<li><code>W</code> Translate Mode is now fully relies on Plane Placement Mode. Activating Translate Mode Activates Plane Placement Mode. This provides a way to continiously place assets on a plane with configurable point of origin. Translate Mode now translates that plane instead of asset itself</li>
+<li>Plane in PlanePlacementMode now can detect collisions from both sides</li>
+<li>Update ViewPort Overlay UI to be more readable on different backgrounds</li>
+<li>Made Plane Preview Material Unshaded so it consistent across environments</li>
+</ul>
+<h3 id="110-alpha5">1.1.0-alpha5</h3>
+<h3 id="terrain-3d-placement-mode">Terrain 3D Placement Mode</h3>
+<p>Another addition to the Placement Modes is the Terrain 3D Placement Mode. This mode is specifically designed to work with <a href="https://github.com/TokisanGames/Terrain3D">Terrain3D Plugin</a>, allowing for accurate placement of assets on terrain surfaces.</p>
+<p>Terrain3D Placement mode requires users to choose Terrain3D Node when activated. After that node is selected, Placement should work as usual</p>
+<h3 id="added_7">Added</h3>
+<ul>
+<li>Added Shortcut <code>S</code> to toggle Snapping On/Off</li>
+<li>Added UI Indicator for Snapping State to the Viewport Overlay</li>
+</ul>
+<h2 id="110-alpha4">1.1.0-alpha4</h2>
+<h3 id="fixed_18">Fixed</h3>
+<ul>
+<li>Fixed an Issue where Snapping would not work when placing assets (#26)</li>
+</ul>
+<h2 id="110-alpha3">1.1.0-alpha3</h2>
+<h2 id="added_8">Added</h2>
+<ul>
+<li>Q Shortcut to cycle through Placement Modes</li>
+<li>W (Translate shortcut) preview transform now toggles <code>Plane Placement Mode</code>. This provides a way to continiously place assets on a plane with configurable point of origin</li>
+<li>Empty View for the Collections Picker that can navigate to the collections tab</li>
+</ul>
+<h2 id="fixed_19">Fixed</h2>
+<ul>
+<li>Fixed an Issue where Scale Preview transform would get reset after moving an asset</li>
+<li>
+<h1 id="11-plugins-dock-now-has-a-minimum-height-to-avoid-ui-issues-when-collapsing-it-too-much">11 Plugins Dock now has a minimum height to avoid UI issues when collapsing it too much</h1>
+</li>
+</ul>
+<h2 id="110-alpha2">1.1.0-alpha2</h2>
+<p>Alpha2 introduces a new Placement feature: Placement Modes and some bug fixes.</p>
+<h3 id="normal-alignment-slopes-and-vertical-surfaces">Normal Alignment - Slopes and Vertical Surfaces</h3>
+<p>When placing assets on sloped or vertical surfaces, the asset will now align with the surface normal, providing a more natural placement.</p>
+<h3 id="placement-modes_1">Placement Modes</h3>
+<p>1.1.0-alpha2 introduces the ability to choose between different placement modes</p>
+<h4 id="surface-collision">Surface Collision</h4>
+<p>This is  default placement mode and it is almost indentical to the approach used in previous version. This mode requires your scene to have a Collision Objects present in your scene. The RayCast will then try and hit any collision objects creating a placement point for your collision.</p>
+<h4 id="plane-collisions-new">Plane Collisions (New)</h4>
+<p>This mode does not require any collision objects to be present in your scene. Instead it uses a virtual plane that has a configurable point of origin and normal direction. The RayCast will then try and hit this virtual plane creating a placement point for your collision.</p>
+<blockquote>
+<p>Plane Options Configuration (Normals and Origin) are not perfect as it kind of takes away from the placement flow - Right now, you need to manually change Vector3 in UI. If anyone has a idea about how to improve this please let me know.</p>
+</blockquote>
+<h3 id="added_9">Added</h3>
+<ul>
+<li>Added GLTF Assets Support #15</li>
+</ul>
+<h3 id="fixed_20">Fixed</h3>
+<ul>
+<li>Added more sanity checks for thumbnail generation</li>
+<li>Preview Transforms: Flipped Negative and Positive transformation directions to be more intuitive</li>
+<li>
+<h2 id="add-minimum-height-for-the-asset-placer-dock-panel-16">Add Minimum Height for the Asset Placer Dock Panel #16</h2>
+</li>
+</ul>
+<h2 id="110-alpha1">1.1.0-alpha1</h2>
+<p>First major Alpha release after the stable 1.0.0 version 🚀.</p>
+<p>This release introduces a new feature that allows users to transform the preview of the asset before placement, including rotation and scaling options, as well as support for <code>obj</code> files and some bug fixes.</p>
+<h3 id="preview-transformation">Preview Transformation</h3>
+<p>1.1.0 introduces the ability to modify the preview of the asset before placement. This includes options for rotation and scaling, allowing users to visualize how the asset will appear in the scene prior to placement, do quick and precise adjustment modifications.</p>
+<p>Specific transformation mode can be enabled by pressing button while in placement mode (Asset is selected) and transformations can be applied by Mouse Wheel:</p>
+<ul>
+<li><code>Mouse Wheel Up</code>: "Positive" transformation</li>
+<li><code>Mouse Wheel Down</code>: "Negative" transformation</li>
+</ul>
+<p>Following transformations are supported:</p>
+<ul>
+<li><code>E</code> to rotate (Default axis is Y)</li>
+<li><code>R</code> to scale (Uniform Scale by default, All axis at once)</li>
+<li><code>W</code> to translate (Default axis is Z)</li>
+</ul>
+<p>This also requires an ability to select active Axis for the transformation. This can be done by pressing following keys:</p>
+<ul>
+<li><code>X</code> to select X axis</li>
+<li><code>Y</code> to select Y axis</li>
+<li><code>Z</code> to select Z axis</li>
+</ul>
+<h4 id="ui-updates">UI Updates</h4>
+<p>To support this feature a 3D View Port Overlay has been added to show the current transformation mode and active axis
+<img alt="addon_viewport_controls.png" src="docs/addon_viewport_controls.png" /></p>
+<h3 id="added_10">Added</h3>
+<ul>
+<li>Support for <code>obj</code> files #9</li>
+</ul>
+<h3 id="fixed_21">Fixed</h3>
+<ul>
+<li>Fixed issue when user is able to placed asset that was removed from the library #10</li>
+<li>Fixed issue with assets still being presented in the library after the folder was removed #8</li>
+</ul>
+<h2 id="100">1.0.0</h2>
+<p>First stable release of the Godot Asset Placer plugin 🚀. This version includes all the features and fixes from the beta and alpha releases, providing a robust tool for asset management and placement in Godot.</p>
+<h3 id="documentation-update">Documentation Update</h3>
+<ul>
+<li>Updated Asset Placement Instructions in the README</li>
+</ul>
+<h2 id="100-beta4">1.0.0-beta4</h2>
+<h3 id="added_11">Added</h3>
+<ul>
+<li>Updated .gitattributes to ignore files and folder that are not needed by the plugin to work #2</li>
+</ul>
+<h3 id="changed_8">Changed</h3>
+<ul>
+<li>When doing an In Editor Update, the plugin will try to trigger the file scan so that the Editor is aware of the new files/changes to the existing files</li>
+</ul>
+<h3 id="fixed_22">Fixed</h3>
+<ul>
+<li>Fixed issue with Add Folder button not working on Onboarding screen</li>
+</ul>
+<h2 id="100-beta3">1.0.0-beta3</h2>
+<p>Added support for the Godot 4.4 and 4.3. Special thanks to @why-try313 for bringing it up, testing compatability and coming up with solutions</p>
+<h2 id="100-beta2">1.0.0-beta2</h2>
+<h3 id="fixed_23">Fixed</h3>
+<ul>
+<li>Limit Plugin Edit to Node3D to avoid undefined behaviour</li>
+</ul>
+<h2 id="100-beta1">1.0.0-beta1</h2>
+<h3 id="added_12">Added</h3>
+<ul>
+<li>Update collections UI to keep it consistent with picker</li>
+<li>Update the plugin without Restart -&gt; Replaced with Re-Enabling the plugin</li>
+<li>Option to delete collections</li>
+</ul>
+<h3 id="fixed_24">Fixed</h3>
+<ul>
+<li>Clean up Worker Threads on Exit</li>
+<li>Avoid adding duplicated folders when subfolders are included</li>
+<li>Fixed Grid Snapping</li>
+</ul>
+<h2 id="100-alpha06">1.0.0-alpha06</h2>
+<h3 id="added_13">Added</h3>
+<ul>
+<li>When placing assets it is now required to select a parent node where assets should placed under
+  By Default it will automatically select Root Node of the scene (if it is a Node3D)</li>
+<li>SHIFT + Mouse Click: Added to shortcut that allows to modify placed asset. This can be usefull if you want to apply additional transformations using standart editor waay</li>
+</ul>
+<h2 id="changed_9">Changed</h2>
+<ul>
+<li>Moved Updater GH API calls to the background thread to avoid UI blocking</li>
+</ul>
+<h2 id="fixed_25">Fixed</h2>
+<ul>
+<li>Avoid adding duplicated folders</li>
+<li>Fixed Preview node being stuck in window when changing assets</li>
+</ul>
+<h2 id="100-alpha05">1.0.0-alpha05</h2>
+<h3 id="added_14">Added</h3>
+<ul>
+<li>Added In Editor way to update the Plugin with the latest GitHub release</li>
+</ul>
+<h2 id="100-alpha04">1.0.0-alpha04</h2>
+<h3 id="added_15">Added</h3>
+<h3 id="synchronize-process">Synchronize Process.</h3>
+<p>During this process the plugin removes deleted assets
+from its internal memory and adds new assets that were added to the source folders.
+The process is done on the separate thread to avoid UI blocking</p>
+<p>This is triggered by following:</p>
+<ul>
+<li>Manual Trigger (Sync Assets Button or Sync Folder button)</li>
+<li>When Godot completes its ReImport process</li>
+<li>On Plugin Startup</li>
+</ul>
+<h3 id="changed_10">Changed</h3>
+<ul>
+<li>Minor UI Updates the AssetsPlacer main window</li>
+<li>Added asset now how more readable name when added to the tree</li>
+</ul>
+<h3 id="fixed_26">Fixed</h3>
+<ul>
+<li>Fixed Asset Placement when the Assst also has any CollisionObjects inside</li>
+</ul>
+<h2 id="100-alpha03">1.0.0-alpha03</h2>
+<h3 id="added_16">Added</h3>
+<ul>
+<li>Add Options To Randomly Scale placed assets</li>
+<li>Add more flexible options for Random Asset rotation</li>
+<li>Add UndoRedo Integration for asset placement</li>
+<li>Add Ability to Drag and Drop Folders and Assets into Assets and Folders window</li>
+</ul>
+<h3 id="changed_11">Changed</h3>
+<ul>
+<li>Adjust the Icons for most fo the Icon Buttons</li>
+<li>Update UI for the Collection Picker</li>
+</ul>
+<h3 id="fixed_27">Fixed</h3>
+<ul>
+<li>Align behavior of placement to place under currently selected node3d</li>
+<li>Fixed and Issue of Every Mouse click resulting in Asset Placement</li>
+<li>Fixed and Issue of Asset flying towards the camera when in placement mode</li>
+</ul>
+<h2 id="100-alpha-02">1.0.0-alpha-02</h2>
+<h3 id="added_17">Added</h3>
+<ul>
+<li>Added options for randomizing asset rotation on placement.</li>
+<li>Added support for grid snapping when placing assets.</li>
+<li>Allow for multiple collections to be selected at once for asset filtering.</li>
+<li>UI adjustments</li>
+<li>Allow asset to have multiple collections assigned to it.</li>
+</ul>
+<h2 id="100-alpha01">1.0.0-alpha01</h2>
+<p>Initial release of the Godot Asset Placer plugin.</p>
+<h3 id="added_18">Added</h3>
+<ul>
+<li>One-click asset placement with snapping to ground and other collision shapes.</li>
+<li>Organize assets into collections for quick access and filtering.</li>
+<li>Filter assets by their name and collection.</li>
+<li>Basic UI for asset management and placement.</li>
+<li>Support for adding asset folders and reloading them.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.highlight", "search.share", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
