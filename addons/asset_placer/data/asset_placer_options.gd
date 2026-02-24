@@ -16,3 +16,5 @@ var scale_on_placement: bool = false
 var min_scale: Vector3 = Vector3.ONE
 var max_scale: Vector3 = Vector3.ONE * 2
 var uniform_scaling: bool = true
+
+var group_automatically: bool = true

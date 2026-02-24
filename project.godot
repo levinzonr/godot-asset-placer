@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 general/preview_material="res://addons/asset_placer/utils/preview_material.tres"
 general/plane_material="res://addons/asset_placer/ui/plane_preview/plane_preview_material.tres"
-internal/last_int=70
+internal/last_int=96
 general/asset_library_path="user://asset_library.json"
 
 [editor_plugins]

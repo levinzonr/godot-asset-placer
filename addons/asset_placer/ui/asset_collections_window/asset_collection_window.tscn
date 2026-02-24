@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjk0aw5iw4qb6"]
+[gd_scene load_steps=5 format=3 uid="uid://cjk0aw5iw4qb6"]
 
 [ext_resource type="Script" uid="uid://1l3hqqsryn3j" path="res://addons/asset_placer/ui/asset_collections_window/asset_collection_window.gd" id="1_g1b7h"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_jdl0x"]
@@ -8,6 +8,13 @@ resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_jdl0x")
 icon_name = &"Add"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_jdl0x"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_jdl0x")
+icon_name = &"Edit"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [node name="AssetCollectionWindow" type="Control"]
@@ -69,6 +76,13 @@ text = "Add"
 icon = SubResource("Texture2D_x040h")
 icon_alignment = 2
 
+[node name="ManageCollectionsButton" type="Button" parent="Panel/MarginContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Manage"
+icon = SubResource("Texture2D_jdl0x")
+
 [node name="EmptyView" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer2"]
 unique_name_in_owner = true
 visible = false
@@ -84,7 +98,15 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CollectionsContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer2/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer2/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="CollectionsContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer2/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

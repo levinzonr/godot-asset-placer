@@ -11,6 +11,7 @@ var _collection_item_list_resource: PackedScene = preload(
 @onready var add_button: Button = %AddButton
 @onready var collections_container = %CollectionsContainer
 @onready var empty_view = %EmptyView
+@onready var manage_collections_button: Button = %ManageCollectionsButton
 
 
 func _ready():
@@ -24,6 +25,8 @@ func _ready():
 	add_button.pressed.connect(presenter.create_collection)
 	name_text_field.text_changed.connect(presenter.set_name)
 	color_picker_button.color_changed.connect(presenter.set_color)
+
+	manage_collections_button.pressed.connect(ManageCollectionsDialog.open)
 
 
 func _show_empty_view():

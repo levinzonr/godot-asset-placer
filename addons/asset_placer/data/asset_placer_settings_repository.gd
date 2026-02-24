@@ -22,6 +22,7 @@ const KEY_BINDING_TOGGLE_PLANE_MODE: String = "bindings/toggle_plane_mode"
 const KEY_UI_SCALE: String = "general/ui_scale"
 const KEY_ASSET_LIBRARY_PATH: String = "general/asset_library_path"
 const KEY_UPDATE_CHANNEL: String = "general/update_channel"
+const KEY_MANAGE_COLLECTIONS_DIALOG_SIZE: String = "ui/manage_collections_dialog_size"
 const _BINDING_KEYS := {
 	AssetPlacerSettings.Bindings.Rotate: KEY_BINDING_ROTATE,
 	AssetPlacerSettings.Bindings.Scale: KEY_BINDING_SCALE,
@@ -100,6 +101,14 @@ func get_settings() -> AssetPlacerSettings:
 		KEY_ASSET_LIBRARY_PATH, settings.asset_library_path
 	)
 	return settings
+
+
+func get_manage_collections_dialog_size() -> Vector2i:
+	return _get_editor_setting(KEY_MANAGE_COLLECTIONS_DIALOG_SIZE, Vector2i(1870, 829))
+
+
+func set_manage_collections_dialog_size(value: Vector2i):
+	_set_editor_setting(KEY_MANAGE_COLLECTIONS_DIALOG_SIZE, value)
 
 
 func _get_binding_settings(key: String, default: APInputOption) -> APInputOption:

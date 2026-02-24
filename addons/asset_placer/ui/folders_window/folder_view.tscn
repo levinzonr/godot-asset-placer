@@ -1,19 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://d7ay5upbgnx0"]
+[gd_scene load_steps=8 format=3 uid="uid://d7ay5upbgnx0"]
 
 [ext_resource type="Script" uid="uid://dclcoehldtdcd" path="res://addons/asset_placer/ui/folders_window/folder_view.gd" id="1_q40po"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_q40po"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q40po"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
 bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 corner_detail = 5
+
+[sub_resource type="Texture2D" id="Texture2D_rules"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_q40po")
+icon_name = &"Script"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [sub_resource type="Texture2D" id="Texture2D_q40po"]
 resource_local_to_scene = false
@@ -29,63 +36,91 @@ script = ExtResource("2_q40po")
 icon_name = &"Remove"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
-[node name="FolderView" type="Control"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 3
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rules"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.15, 0.15, 0.15, 0.5)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.3, 0.3, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="FolderView" type="PanelContainer"]
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_q40po")
 script = ExtResource("1_q40po")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_q40po")
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -18.0
-offset_bottom = 18.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 32
-alignment = 2
+theme_override_constants/separation = 8
 
-[node name="PathLabel" type="Label" parent="Panel/MarginContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PathLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Folder path"
 
-[node name="SubfoldersCheckbox" type="CheckBox" parent="Panel/MarginContainer/HBoxContainer"]
+[node name="SubfoldersCheckbox" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Include sub folders"
 
-[node name="SyncButton" type="Button" parent="Panel/MarginContainer/HBoxContainer"]
+[node name="RulesButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "No rules"
+icon = SubResource("Texture2D_rules")
+
+[node name="SyncButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Reload"
 icon = SubResource("Texture2D_q40po")
 
-[node name="DeleteButton" type="Button" parent="Panel/MarginContainer/HBoxContainer"]
+[node name="DeleteButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Remove"
 icon = SubResource("Texture2D_ojff7")
+
+[node name="RulesMargin" type="MarginContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+
+[node name="RulesContainer" type="PanelContainer" parent="VBoxContainer/RulesMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rules")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/RulesMargin/RulesContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RulesList" type="VBoxContainer" parent="VBoxContainer/RulesMargin/RulesContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="AddRuleButton" type="MenuButton" parent="VBoxContainer/RulesMargin/RulesContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "+ Add Rule"
+item_count = 2
+popup/item_0/text = "Add to Collection"
+popup/item_0/id = 0
+popup/item_1/text = "Filter by Name"
+popup/item_1/id = 1

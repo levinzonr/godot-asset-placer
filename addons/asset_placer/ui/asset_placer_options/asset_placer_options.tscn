@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dua2vx4bi1gmf"]
+[gd_scene load_steps=14 format=3 uid="uid://dua2vx4bi1gmf"]
 
 [ext_resource type="Script" uid="uid://b4q0diu63qlg8" path="res://addons/asset_placer/ui/asset_placer_options/asset_placer_options.gd" id="1_7uy5w"]
 [ext_resource type="Script" uid="uid://btqju8qjrlawq" path="res://addons/asset_placer/ui/components/vector3_spinbox.gd" id="2_k4pj7"]
@@ -16,6 +16,20 @@ resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_o45xf")
 icon_name = &"NodeWarning"
+
+[sub_resource type="Texture2D" id="Texture2D_h8tp4"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_o45xf")
+icon_name = &"Group"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_h1wu1"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_o45xf")
+icon_name = &"Info"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [sub_resource type="Texture2D" id="Texture2D_br0rc"]
 resource_local_to_scene = false
@@ -111,6 +125,24 @@ size_flags_horizontal = 0
 text = "No parent selected"
 icon = SubResource("Texture2D_o45xf")
 alignment = 0
+
+[node name="AutoGroupContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GroupAutomaticallyCheckBox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/AutoGroupContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "Auto-Group by Collections"
+icon = SubResource("Texture2D_h8tp4")
+
+[node name="InfoButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/AutoGroupContainer"]
+layout_mode = 2
+tooltip_text = "Automatically groups placed Assets based on their primary collection. 
+New Parent Node will be created automatically and will have the same name as primary Collection.
+Assets without Primary collection will be placed under currently selected root node"
+icon = SubResource("Texture2D_h1wu1")
+flat = true
 
 [node name="PlacementMode" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2

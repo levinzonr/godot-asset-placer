@@ -1,5 +1,81 @@
 # Godot Asset Placer Changelog
 
+## 1.3.0-beta2
+### Changed
+- Update tooltip for the auto-grouping
+- Changes from stable channel
+
+## 1.3.0-beta1
+
+### Primary Collection Improvements
+This release makes the primary collection feature more explicit and user-friendly.
+
+- **Primary Collection is now optional** - Assets no longer automatically use the first assigned collection as primary when auto-grouping. Primary collection must be explicitly set by the user.
+- **Primary Collection Indicator** - Collection Management dialog now shows a star icon to indicate and toggle the primary collection for assets. The icon is tinted with the collection's color for easy identification.
+- **Toggle Primary** - Clicking the star on an already-primary collection will unassign it, making it easy to remove primary status.
+
+### UI Improvements
+- **Dialog Size Persistence** - The Manage Collections dialog now remembers its size across sessions
+- **Batch Mode Favorite Button** - When multiple assets are selected, the favorite/star button is always visible for easier batch primary assignment
+
+### Fixed
+- Fixed freed object error when filtering assets while Collection Management dialog is open
+- Fixed primary collection button not hiding correctly for partial collection matches
+- Fixed tooltip text to use correct modifier key based on OS (Cmd on macOS, Ctrl on others)
+
+## 1.3.0-alpha5
+
+### Collection Management Improvements
+This release introduces batch selection and UI improvements to the Collection Management workflow.
+
+![](./docs/assets/cm_preview.png)
+
+- **Batch Select in Collection Management** - You can now select multiple assets at once in the Collection Management dialog, making it easier to assign or remove collections from multiple assets simultaneously
+- **Unified Collection Assignment** - Asset collection assignment now uses the new Collection Management window instead of the old picker, providing a more consistent experience
+
+## 1.3.0-alpha4
+
+### Folder Rules
+This release introduces configurable rules for asset folders. Rules allow you to automate actions when syncing folders.
+
+![](./docs/assets/folder_rules_preview.png)
+
+**Available Rules:**
+- **Add to Collection** - Automatically assign synced assets to a specific collection
+- **Filter by Name** - Only include assets whose filename contains specified text
+
+Rules are configured per-folder and can be combined. Click the "Rules" button on any folder to expand the rules panel and add rules.
+
+## 1.3.0-alpha3
+
+### Automatic Collections Grouping
+This release features a new option called to Group placed Assets Automatically based on theirs assigned collections
+
+When enabled, every all Assets will automatically grouped under Node3D named after the **primary collection** (First collection that is assigned to the asset)
+
+For example: Assets that is assigned to collections: Trees and Flamable or Rocks
+```
+- Parent (Root parent remains the same and will be used as default in case Asset does not belong to any collection or option is disable)
+	- Trees (Primary collection from the assets)
+		- Tree(1)
+		- Tree(2)
+	- Rocks
+		- Rock (1)
+		- Rock (2)
+```
+### Assigned Collections Order Matters
+To support previous feature, `Asset Management Dialog` now supports Collections re-ordering to make it possible to make sure all assets have proper **Primary Collection** assigned to them
+
+## 1.3.0-alpha2
+Merge changes from 1.2.2
+
+## 1.3.0-alpha1
+### Collections Management
+This release introduces `Collections Management` dialog which is accessible from the collections window. The purpose is to streamline Collections and Asset management.
+
+The dialog provide a more intuitive and convenient way to assign and remove assets to/from the collections
+
+
 ## 1.2.11
 
 ### Changed
@@ -17,6 +93,8 @@
 ### Fixed
 - #71 Fixed light mode text visibility issues by @Sr3qt
 
+
+![](./docs/assets/manage_collections.png)
 ## 1.2.9
 
 ### Fixed

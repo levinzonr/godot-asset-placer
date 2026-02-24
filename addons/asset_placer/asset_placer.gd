@@ -185,13 +185,13 @@ func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
 func _place_instance(transform: Transform3D, select_after_placement: bool):
 	var scene := EditorInterface.get_edited_scene_root()
 	var scene_root := scene.get_node(AssetPlacerPresenter._instance._parent)
+	var options := AssetPlacerPresenter._instance.options
+	var parent := AssetParentSelector.pick_parent(scene_root, asset, options.group_automatically)
 
-	if is_instance_valid(scene_root) and is_instance_valid(asset.get_resource()):
+	if is_instance_valid(parent) and is_instance_valid(asset.get_resource()):
 		undo_redo.create_action("Place Asset: %s" % asset.name)
-		undo_redo.add_do_method(
-			self, "_do_placement", scene_root, transform, select_after_placement
-		)
-		undo_redo.add_undo_method(self, "_undo_placement", scene_root)
+		undo_redo.add_do_method(self, "_do_placement", parent, transform, select_after_placement)
+		undo_redo.add_undo_method(self, "_undo_placement", parent)
 		undo_redo.commit_action()
 		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
 		_presenter.on_asset_placed()
