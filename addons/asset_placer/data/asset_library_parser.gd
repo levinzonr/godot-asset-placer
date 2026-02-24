@@ -4,10 +4,10 @@ extends RefCounted
 const DEFAULT_SAVE_PATH := "user://asset_library.json"
 
 
-static func load_library(load_path = DEFAULT_SAVE_PATH) -> AssetLibrary:
+static func load_library(load_path := DEFAULT_SAVE_PATH) -> AssetLibrary:
 	var file = FileAccess.open(load_path, FileAccess.READ)
 	if file == null || file.get_as_text().is_empty():
-		return AssetLibrary.new([], [], [], load_path)
+		return AssetLibrary.new([], [], [])
 
 	var data = JSON.parse_string(file.get_as_text())
 	var folders_dicts: Array = data["folders"]
@@ -47,13 +47,11 @@ static func load_library(load_path = DEFAULT_SAVE_PATH) -> AssetLibrary:
 		collections.append(AssetCollection.new(name, color, id))
 
 	file.close()
-	return AssetLibrary.new(assets, folders, collections, load_path)
+	return AssetLibrary.new(assets, folders, collections)
 
 
 ## Save library to a save_path.
-##
-## NOTE: Does not use AssetLibrary.save_path
-static func save_libray(library: AssetLibrary, save_path = DEFAULT_SAVE_PATH):
+static func save_library(library: AssetLibrary, save_path := DEFAULT_SAVE_PATH):
 	assert(
 		is_instance_valid(library),
 		"AssetLibraryParser: Cannot save null library."

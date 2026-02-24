@@ -8,14 +8,12 @@ extends RefCounted
 static var time_to_save: float = 1.0
 
 static var _asset_library: AssetLibrary
+static var _save_path: String
 static var _timer: SceneTreeTimer
 
 
 static func get_asset_library() -> AssetLibrary:
-	assert(
-		is_instance_valid(_asset_library),
-		"Cannot get AssetLibrary when none is loaded."
-	)
+	assert(is_instance_valid(_asset_library), "Cannot get AssetLibrary when none is loaded.")
 	return _asset_library
 
 
@@ -24,6 +22,7 @@ static func load_asset_library(load_path: String) -> void:
 		_save_asset_library()
 
 	var new_asset_library := AssetLibraryParser.load_library(load_path)
+	_save_path = load_path
 
 	var is_first_load := not is_instance_valid(_asset_library)
 	if is_first_load:
@@ -51,12 +50,9 @@ static func _save_asset_library():
 	_timer.timeout.disconnect(_save_asset_library)
 	_timer = null
 
-	assert(
-		is_instance_valid(_asset_library),
-		"Cannot save AssetLibrary when none is loaded."
-	)
+	assert(is_instance_valid(_asset_library), "Cannot save AssetLibrary when none is loaded.")
 
-	_asset_library.save()
+	AssetLibraryParser.save_library(_asset_library, _save_path)
 
 
 static func _queue_save():
