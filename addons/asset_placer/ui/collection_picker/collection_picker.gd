@@ -6,14 +6,12 @@ signal collection_selected(collection: AssetCollection, selected: bool)
 
 var pre_selected: Array[AssetCollection]
 
-@onready var presenter := AssetCollectionsPresenter.new()
-
 
 func _ready():
 	hide_on_checkable_item_selection = false
-	presenter.show_collections.connect(show_collections)
-	presenter.show_empty_view.connect(show_empty_view)
-	presenter.ready()
+
+	AssetLibraryManager.get_asset_library().collections_changed.connect(_load_collections)
+	_load_collections()
 
 
 func show_empty_view():
@@ -51,3 +49,11 @@ static func show_in(_context: Control, selected: Array[AssetCollection], on_sele
 	var size = picker.get_contents_minimum_size()
 	var position = DisplayServer.mouse_get_position()
 	EditorInterface.popup_dialog(picker, Rect2(position, size))
+
+
+func _load_collections():
+	var collections := AssetLibraryManager.get_asset_library().get_collections()
+	if collections.is_empty():
+		show_empty_view()
+	else:
+		show_collections(collections)
