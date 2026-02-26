@@ -5,11 +5,12 @@ var name: String
 var id: String
 var tags: Array[int]
 var folder_path: String
+var primary_collection: int = -1
 var shallow_collections: Array[AssetCollection]:
 	get():
 		var shallow: Array[AssetCollection] = []
-		for id in tags:
-			shallow.push_back(AssetCollection.new("name", Color.TRANSPARENT, id))
+		for tag_id in tags:
+			shallow.push_back(AssetCollection.new("name", Color.TRANSPARENT, tag_id))
 		return shallow
 
 var _resource: Resource = null
@@ -17,17 +18,33 @@ var _resource: Resource = null
 var _failed_load := false
 
 
-func _init(res_id: String, name: String, tags: Array[int] = [], folder_path: String = ""):
-	self.name = name
+func _init(
+	res_id: String,
+	p_name: String,
+	p_tags: Array[int] = [],
+	p_folder_path: String = "",
+	p_primary_collection: int = -1
+):
+	self.name = p_name
 	self.id = res_id
-	self.tags = tags
-	self.folder_path = folder_path
+	self.tags = p_tags
+	self.folder_path = p_folder_path
+	self.primary_collection = p_primary_collection
+
+
+func get_primary_collection() -> int:
+	if primary_collection >= 0:
+		return primary_collection
+	return -1
 
 
 ## Get the path to the resource if it exists
 func get_path() -> String:
 	if not has_resource():
 		return ""
+	# If id is already a path (not a UID), return it directly
+	if not id.begins_with("uid://"):
+		return id
 	return ResourceUID.get_id_path(ResourceUID.text_to_id(id))
 
 

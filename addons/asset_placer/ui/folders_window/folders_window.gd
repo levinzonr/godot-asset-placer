@@ -9,10 +9,10 @@ extends Control
 
 func _ready():
 	var lib := AssetLibraryManager.get_asset_library()
-	lib.folders_changed.connect(show_folders)
-	show_folders()
+	lib.folders_changed.connect(_show_folders)
+	_show_folders()
 
-	add_folder_button.pressed.connect(func(): show_folder_dialog())
+	add_folder_button.pressed.connect(_show_folder_dialog)
 
 
 func _can_drop_data(_at_position, data):
@@ -28,7 +28,7 @@ func _drop_data(_at_position, data):
 	add_folders(dirs)
 
 
-func show_folders():
+func _show_folders():
 	for child in v_box_container.get_children():
 		child.queue_free()
 
@@ -43,7 +43,7 @@ func show_folders():
 		)
 
 
-func show_folder_dialog():
+func _show_folder_dialog():
 	var folder_dialog := EditorFileDialog.new()
 	folder_dialog.file_mode = EditorFileDialog.FILE_MODE_OPEN_DIR
 	folder_dialog.access = EditorFileDialog.ACCESS_RESOURCES

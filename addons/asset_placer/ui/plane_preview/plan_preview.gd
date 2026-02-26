@@ -17,7 +17,7 @@ func _ready():
 
 	presenter.asset_selected.connect(
 		func(a):
-			if presenter.placement_mode is PlacementMode.PlanePlacement:
+			if presenter.placement_mode is GapPlacementMode.PlanePlacement:
 				show()
 	)
 
@@ -26,8 +26,8 @@ func _set_plane_material(settings: AssetPlacerSettings):
 	mesh_instance.set_surface_override_material(0, load(settings.plane_material_resource))
 
 
-func _react_placement_mode_change(placement_mode: PlacementMode):
-	if placement_mode is PlacementMode.PlanePlacement:
+func _react_placement_mode_change(placement_mode: GapPlacementMode):
+	if placement_mode is GapPlacementMode.PlanePlacement:
 		show()
 		_update_mes_per_plane_configuration(placement_mode.plane_options)
 	else:

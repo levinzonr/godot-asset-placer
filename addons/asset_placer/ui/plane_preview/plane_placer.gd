@@ -11,12 +11,12 @@ var _last_mouse_position: Vector2
 func _init(presenter: AssetPlacerPresenter, _plane: Node3D):
 	self.presenter = presenter
 	presenter.placement_mode_changed.connect(
-		func(mode: PlacementMode):
-			if mode is PlacementMode.PlanePlacement:
+		func(mode: GapPlacementMode):
+			if mode is GapPlacementMode.PlanePlacement:
 				_new_plane_options = mode.plane_options
 	)
 
 
 func move_plane_up(value: float):
 	_new_plane_options.origin += _new_plane_options.normal * value
-	presenter.placement_mode = PlacementMode.PlanePlacement.new(_new_plane_options)
+	presenter.placement_mode = GapPlacementMode.PlanePlacement.new(_new_plane_options)

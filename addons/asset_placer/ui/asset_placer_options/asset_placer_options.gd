@@ -21,6 +21,7 @@ var presenter: AssetPlacerPresenter
 @onready var align_normals_checkbox: CheckBox = %AlignNormalsCheckbox
 @onready var use_assets_origin_checkbox: CheckBox = %UseAssetsOriginCheckbox
 @onready var random_asset_check_box = %RandomAssetCheckBox
+@onready var group_automatically_check_box: CheckBox = %GroupAutomaticallyCheckBox
 
 
 func _ready():
@@ -29,11 +30,11 @@ func _ready():
 	presenter.parent_changed.connect(show_parent)
 	presenter.placement_mode_changed.connect(
 		func(m):
-			if m is PlacementMode.PlanePlacement:
+			if m is GapPlacementMode.PlanePlacement:
 				placement_mode_options_button.select(1)
-			if m is PlacementMode.SurfacePlacement:
+			if m is GapPlacementMode.SurfacePlacement:
 				placement_mode_options_button.select(0)
-			if m is PlacementMode.Terrain3DPlacement:
+			if m is GapPlacementMode.Terrain3DPlacement:
 				placement_mode_options_button.select(2)
 	)
 
@@ -57,22 +58,23 @@ func _ready():
 	max_scale_selector.value_changed.connect(presenter.set_max_scale)
 	uniform_scale_check_box.toggled.connect(presenter.set_unform_scaling)
 	use_assets_origin_checkbox.toggled.connect(presenter.set_use_asset_origin)
+	group_automatically_check_box.toggled.connect(presenter.set_automatic_grouping)
 
 	plane_axis_spin_box.value_changed.connect(
 		func(normal: Vector3):
 			var plane = PlaneOptions.new(normal, plane_origin_spin_box.get_vector())
-			presenter.placement_mode = PlacementMode.PlanePlacement.new(plane)
+			presenter.placement_mode = GapPlacementMode.PlanePlacement.new(plane)
 	)
 
 	plane_origin_spin_box.value_changed.connect(
 		func(origin: Vector3):
 			var plane = PlaneOptions.new(plane_axis_spin_box.get_vector(), origin)
-			presenter.placement_mode = PlacementMode.PlanePlacement.new(plane)
+			presenter.placement_mode = GapPlacementMode.PlanePlacement.new(plane)
 	)
 
 	presenter.placement_mode_changed.connect(
-		func(mode: PlacementMode):
-			if mode is PlacementMode.PlanePlacement:
+		func(mode: GapPlacementMode):
+			if mode is GapPlacementMode.PlanePlacement:
 				plane_axis_container.show()
 				plane_origin_container.show()
 				plane_axis_spin_box.set_value_no_signal(mode.plane_options.normal)
@@ -123,3 +125,4 @@ func set_options(options: AssetPlacerOptions):
 	random_scale_check_box.set_pressed_no_signal(options.scale_on_placement)
 	align_normals_checkbox.set_pressed_no_signal(options.align_normals)
 	use_assets_origin_checkbox.set_pressed_no_signal(options.use_asset_origin)
+	group_automatically_check_box.set_pressed_no_signal(options.group_automatically)

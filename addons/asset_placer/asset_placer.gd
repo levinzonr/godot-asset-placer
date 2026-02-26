@@ -26,7 +26,7 @@ func _init(undo_redo: EditorUndoRedoManager, plane_placer: PlanePlacer):
 	self._plane_placer = plane_placer
 
 
-func start_placement(root: Window, asset: AssetResource, placement: PlacementMode):
+func start_placement(root: Window, asset: AssetResource, placement: GapPlacementMode):
 	stop_placement()
 	self.asset = asset
 	_is_node_transform_mode = false
@@ -41,7 +41,7 @@ func start_placement(root: Window, asset: AssetResource, placement: PlacementMod
 		self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
 
-func start_node_transform(node: Node3D, placement: PlacementMode):
+func start_node_transform(node: Node3D, placement: GapPlacementMode):
 	stop_placement()
 	_is_node_transform_mode = true
 	preview_node = node
@@ -185,13 +185,13 @@ func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
 func _place_instance(transform: Transform3D, select_after_placement: bool):
 	var scene := EditorInterface.get_edited_scene_root()
 	var scene_root := scene.get_node(AssetPlacerPresenter._instance._parent)
+	var options := AssetPlacerPresenter._instance.options
+	var parent := AssetParentSelector.pick_parent(scene_root, asset, options.group_automatically)
 
-	if is_instance_valid(scene_root) and is_instance_valid(asset.get_resource()):
+	if is_instance_valid(parent) and is_instance_valid(asset.get_resource()):
 		undo_redo.create_action("Place Asset: %s" % asset.name)
-		undo_redo.add_do_method(
-			self, "_do_placement", scene_root, transform, select_after_placement
-		)
-		undo_redo.add_undo_method(self, "_undo_placement", scene_root)
+		undo_redo.add_do_method(self, "_do_placement", parent, transform, select_after_placement)
+		undo_redo.add_undo_method(self, "_undo_placement", parent)
 		undo_redo.commit_action()
 		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
 		_presenter.on_asset_placed()
@@ -270,12 +270,12 @@ func _instantiate_asset_resource(asset: AssetResource) -> Node3D:
 	return new_node
 
 
-func set_placement_mode(placement_mode: PlacementMode):
-	if placement_mode is PlacementMode.SurfacePlacement:
+func set_placement_mode(placement_mode: GapPlacementMode):
+	if placement_mode is GapPlacementMode.SurfacePlacement:
 		_strategy = SurfaceAssetPlacementStrategy.new(preview_rids)
-	elif placement_mode is PlacementMode.PlanePlacement:
+	elif placement_mode is GapPlacementMode.PlanePlacement:
 		_strategy = PlanePlacementStrategy.new(placement_mode.plane_options)
-	elif placement_mode is PlacementMode.Terrain3DPlacement:
+	elif placement_mode is GapPlacementMode.Terrain3DPlacement:
 		_strategy = Terrain3DAssetPlacementStrategy.new(placement_mode.get_terrain_3d_node())
 	else:
 		push_error("Placement mode %s is not supported" % str(placement_mode))

@@ -54,19 +54,21 @@ func has_asset_path(asset_path: String):
 
 # TODO change to accept AssetResource instead of its parameters
 # TODO Also change init parameters of AssetResource to be more lenient
-func add_asset(scene_path: String, tags: Array[int] = [], folder_path: String = "") -> bool:
+func add_asset(
+		scene_path: String, tags: Array[int] = [], folder_path: String = ""
+	) -> AssetResource:
 	if not is_scene_file_supported(scene_path):
-		return false
+		return null
 
 	var id = ResourceIdCompat.path_to_uid(scene_path)
 	if has_asset_id(id):
-		return false
+		return null
 
 	var asset := AssetResource.new(id, scene_path.get_file(), tags, folder_path)
 	_assets.append(asset)
 	_queue_emit_assets_changed()
 
-	return true
+	return asset
 
 
 # TODO find_custom is not supported in 4.3. Change to normal loop.
@@ -108,7 +110,7 @@ func index_of_asset(asset: AssetResource):
 	for a in len(_assets):
 		if _assets[a].id == asset.id:
 			idx = a
-		break
+			break
 	return idx
 
 
@@ -185,6 +187,15 @@ func delete_collection(id: int):
 		if updated_tags != asset.tags:
 			asset.tags = updated_tags
 
+	# Remove rules that reference this collection
+	for folder in _folders:
+		folder.rules = folder.rules.filter(
+			func(rule):
+				if rule is AddToCollectionRule:
+					return rule.collection_id != id
+				return true
+		)
+
 	_queue_emit_collections_changed()
 
 
@@ -193,6 +204,15 @@ func update_collection(collection: AssetCollection):
 		if _collections[i].id == collection.id:
 			_collections[i] = collection
 	_queue_emit_collections_changed()
+
+
+func find_collection_by_id(id: int) -> AssetCollection:
+	var collections = get_collections()
+	var index = collections.find_custom(func(c): return c.id == id)
+	if index == -1:
+		return null
+	else:
+		return collections[index]
 
 
 # TODO Make private since its not needed anywhere else.

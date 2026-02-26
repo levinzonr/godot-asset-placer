@@ -16,7 +16,7 @@ func run():
 		push_error("Failed to parse JSON data")
 		return
 
-	if data.has("version") and data["version"] == 2:
+	if data.has("version") and data["version"] >= 2:
 		return
 
 	# Create backup copy before migration
