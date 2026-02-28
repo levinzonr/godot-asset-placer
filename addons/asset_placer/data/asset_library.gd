@@ -10,8 +10,6 @@ var _assets: Array[AssetResource] = []
 var _folders: Array[AssetFolder] = []
 var _collections: Array[AssetCollection] = []
 
-var _highest_collection_id: int
-
 var _is_assets_changed_queued := false
 var _is_folders_changed_queued := false
 var _is_collections_changed_queued := false
@@ -27,7 +25,6 @@ func _init(
 	_assets = assets
 	_folders = folders
 	_collections = collections
-	_highest_collection_id = _get_highest_collection_id()
 
 
 func get_assets() -> Array[AssetResource]:
@@ -164,19 +161,17 @@ func has_folder_path(path: String) -> bool:
 
 ## Collections
 
-# TODO Should take in an AssetCollection
-func add_collection(name: String, color: Color):
-	_highest_collection_id += 1
-	assert(
-		_highest_collection_id > _get_highest_collection_id(),
-		"Cannot create collection with id %s as it already exists." % _highest_collection_id
-	)
-	var collection := AssetCollection.new(name, color, _highest_collection_id)
+func add_collection(collection: AssetCollection):
+	collection.id = _get_highest_collection_id() + 1
 	_collections.append(collection)
 	_queue_emit_collections_changed()
 
 
-func delete_collection(id: int):
+func delete_collection(collection: AssetCollection):
+	delete_collection_by_id(collection.id)
+
+
+func delete_collection_by_id(id: int):
 	var new_collections: Array[AssetCollection] = _collections.filter(func(c): return c.id != id)
 	_collections = new_collections
 
@@ -213,7 +208,6 @@ func find_collection_by_id(id: int) -> AssetCollection:
 		return collections[index]
 
 
-# TODO Make private since its not needed anywhere else.
 func _get_highest_collection_id() -> int:
 	var highest := 0
 	for collection in _collections:
