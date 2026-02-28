@@ -28,11 +28,9 @@ func on_ready():
 	synchronizer.sync_state_change.connect(func(v): show_sync_active.emit(v))
 
 
-func add_asset_folder(path: String):
-	AssetLibraryManager.get_asset_library().add_folder(path)
-	var dir_access := DirAccess.open(path)
-	for file in dir_access.get_files():
-		add_asset(path.path_join(file), path)
+func add_folder(path: String):
+	var new_folder := AssetFolder.new(path)
+	AssetLibraryManager.get_asset_library().add_folder(new_folder)
 
 
 func on_query_change(query: String):
@@ -72,7 +70,7 @@ func delete_asset(asset: AssetResource):
 func add_assets_or_folders(files: PackedStringArray):
 	for file in files:
 		if file.get_extension().is_empty():
-			add_asset_folder(file)
+			add_folder(file)
 		else:
 			add_asset(file, "")
 

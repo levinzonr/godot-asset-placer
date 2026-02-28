@@ -17,7 +17,7 @@ func save():
 
 func delete():
 	var lib := AssetLibraryManager.get_asset_library()
-	lib.remove_folder_by_path(folder.path)
+	lib.delete_folder(folder)
 	for asset in lib.get_assets():
 		if asset.folder_path == folder.path:
 			lib.remove_asset_by_id(asset.id)

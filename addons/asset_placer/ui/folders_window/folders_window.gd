@@ -53,7 +53,8 @@ func _show_folder_dialog():
 
 func add_folder(folder_path: String):
 	if folder_path.get_extension().is_empty():
-		AssetLibraryManager.get_asset_library().add_folder(folder_path)
+		var new_folder := AssetFolder.new(folder_path)
+		AssetLibraryManager.get_asset_library().add_folder(new_folder)
 
 
 func add_folders(folders: PackedStringArray):
@@ -63,7 +64,7 @@ func add_folders(folders: PackedStringArray):
 
 func delete_folder(folder: AssetFolder):
 	var lib := AssetLibraryManager.get_asset_library()
-	lib.remove_folder_by_path(folder.path)
+	lib.delete_folder(folder)
 
 	# TODO SHould be in asset library.
 	for asset in lib.get_assets():

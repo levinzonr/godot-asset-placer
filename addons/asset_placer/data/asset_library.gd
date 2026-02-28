@@ -117,28 +117,26 @@ func index_of_asset(asset: AssetResource):
 ## Folders
 
 func get_folder(path: String) -> AssetFolder:
-	if _folders.is_empty():
-		return null
-	var folder: int = -1
-	for f in len(_folders):
-		if _folders[f].path == path:
-			folder = f
-			break
-	return _folders[folder]
+	for _folder in _folders:
+		if _folder.path == path:
+			return _folder
+	return null
 
 
-# TODO Should take in a AssetFolder
-func add_folder(folder: String, incldude_subfolders: bool = true):
-	if has_folder_path(folder):
-		push_warning("Folder with this path already exists")
+func add_folder(folder: AssetFolder):
+	if has_folder_path(folder.path):
+		push_warning("Folder with path %s already exists in AssetLibrary" % folder.path)
 		return
 
-	var new_folder := AssetFolder.new(folder, incldude_subfolders)
-	_folders.append(new_folder)
+	_folders.append(folder)
 	_queue_emit_folders_changed()
 
 
-func remove_folder_by_path(folder_path: String):
+func delete_folder(folder: AssetFolder):
+	delete_folder_by_path(folder.path)
+
+
+func delete_folder_by_path(folder_path: String):
 	_folders = _folders.filter(func(f): return f.path != folder_path)
 	_queue_emit_folders_changed()
 
