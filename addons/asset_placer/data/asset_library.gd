@@ -121,14 +121,12 @@ func get_folder(path: String) -> AssetFolder:
 	return null
 
 
-# TODO Should take in a AssetFolder
-func add_folder(folder: String, incldude_subfolders: bool = true):
-	if has_folder_path(folder):
-		push_warning("Folder with this path already exists")
+func add_folder(folder: AssetFolder):
+	if has_folder_path(folder.path):
+		push_warning("Folder with path %s already exists in AssetLibrary" % folder.path)
 		return
 
-	var new_folder := AssetFolder.new(folder, incldude_subfolders)
-	_folders.append(new_folder)
+	_folders.append(folder)
 	_queue_emit_folders_changed()
 
 

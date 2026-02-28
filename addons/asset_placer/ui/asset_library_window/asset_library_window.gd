@@ -100,7 +100,7 @@ func show_folder_dialog():
 	var folder_dialog = EditorFileDialog.new()
 	folder_dialog.file_mode = EditorFileDialog.FILE_MODE_OPEN_DIR
 	folder_dialog.access = EditorFileDialog.ACCESS_RESOURCES
-	folder_dialog.dir_selected.connect(presenter.add_asset_folder)
+	folder_dialog.dir_selected.connect(presenter.add_folder)
 	EditorInterface.popup_dialog_centered(folder_dialog)
 
 

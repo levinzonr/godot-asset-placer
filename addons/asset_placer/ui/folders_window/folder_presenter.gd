@@ -18,7 +18,8 @@ func _reload_folders():
 
 func add_folder(path: String):
 	if path.get_extension().is_empty():
-		AssetLibraryManager.get_asset_library().add_folder(path)
+		var folder := AssetFolder.new(path)
+		AssetLibraryManager.get_asset_library().add_folder(folder)
 
 
 func add_folders(paths: PackedStringArray):
