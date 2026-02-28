@@ -31,7 +31,8 @@ func set_name(name: String):
 
 func create_collection():
 	var lib := AssetLibraryManager.get_asset_library()
-	lib.add_collection(_new_collection_name, _new_collection_color)
+	var collection := AssetCollection.new(_new_collection_name, _new_collection_color)
+	lib.add_collection(collection)
 	clear_text_field.emit()
 	enable_create_button.emit(false)
 

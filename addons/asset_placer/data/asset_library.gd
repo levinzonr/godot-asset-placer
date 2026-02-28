@@ -170,9 +170,8 @@ func get_collection(id: int) -> AssetCollection:
 	return null
 
 
-# TODO Should take in an AssetCollection
-func add_collection(name: String, color: Color):
-	var collection := AssetCollection.new(name, color, _get_highest_collection_id() + 1)
+func add_collection(collection: AssetCollection):
+	collection.id = _get_highest_collection_id() + 1
 	_collections.append(collection)
 	_queue_emit_collections_changed()
 
