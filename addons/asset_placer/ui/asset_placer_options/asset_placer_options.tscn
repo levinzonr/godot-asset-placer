@@ -73,52 +73,40 @@ script = ExtResource("2_o45xf")
 icon_name = &"KeyTrackScale"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
-[node name="AssetPlacerOptions" type="Control" unique_id=1666839685]
-layout_mode = 3
+[node name="AssetPlacerOptions" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_bottom = 12
 script = ExtResource("1_7uy5w")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2003363285]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=949490987]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer" unique_id=846697167]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=438276497]
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Options"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=841451730]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=562381505]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("Texture2D_rixd2")
 stretch_mode = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1032040985]
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Assets Parent: "
 
-[node name="ParentButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1858740301]
+[node name="ParentButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -126,43 +114,43 @@ text = "No parent selected"
 icon = SubResource("Texture2D_o45xf")
 alignment = 0
 
-[node name="UseSelectionForParentCheckBox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1530175407]
+[node name="UseSelectionForParentCheckBox" type="CheckBox" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Resolve Parent from Selected Nodes"
 
-[node name="AutoGroupContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=335466325]
+[node name="AutoGroupContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="GroupAutomaticallyCheckBox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/AutoGroupContainer" unique_id=1305167927]
+[node name="GroupAutomaticallyCheckBox" type="CheckBox" parent="VBoxContainer/AutoGroupContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 text = "Auto-Group by Collections"
 icon = SubResource("Texture2D_h8tp4")
 
-[node name="InfoButton" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer/AutoGroupContainer" unique_id=1432641978]
+[node name="InfoButton" type="Button" parent="VBoxContainer/AutoGroupContainer"]
 layout_mode = 2
-tooltip_text = "Automatically groups placed Assets based on their primary collection. 
+tooltip_text = "Automatically groups placed Assets based on their primary collection.
 New Parent Node will be created automatically and will have the same name as primary Collection.
 Assets without Primary collection will be placed under currently selected root node"
 icon = SubResource("Texture2D_h1wu1")
 flat = true
 
-[node name="PlacementMode" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1064773022]
+[node name="PlacementMode" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode" unique_id=738095851]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PlacementMode"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer" unique_id=582159956]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PlacementMode/VBoxContainer"]
 layout_mode = 2
 
-[node name="PlacementModeLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer/HBoxContainer" unique_id=807566098]
+[node name="PlacementModeLabel" type="Label" parent="VBoxContainer/PlacementMode/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Placement Mode: "
 
-[node name="PlacementModeOptionsButton" type="OptionButton" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer/HBoxContainer" unique_id=2009767270]
+[node name="PlacementModeOptionsButton" type="OptionButton" parent="VBoxContainer/PlacementMode/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
@@ -174,16 +162,16 @@ popup/item_1/id = 1
 popup/item_2/text = "Terrain3D"
 popup/item_2/id = 2
 
-[node name="PlaneOriginContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer" unique_id=1203253942]
+[node name="PlaneOriginContainer" type="HBoxContainer" parent="VBoxContainer/PlacementMode/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer/PlaneOriginContainer" unique_id=136130072]
+[node name="Label" type="Label" parent="VBoxContainer/PlacementMode/VBoxContainer/PlaneOriginContainer"]
 layout_mode = 2
 text = "Plane Origin:   "
 
-[node name="PlaneOriginSpinBox" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer/PlaneOriginContainer" unique_id=1895799156]
+[node name="PlaneOriginSpinBox" type="HBoxContainer" parent="VBoxContainer/PlacementMode/VBoxContainer/PlaneOriginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("2_k4pj7")
@@ -191,16 +179,16 @@ min = Vector3(-100, -100, -100)
 max = Vector3(100, 100, 100)
 metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
-[node name="PlaneAxisContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer" unique_id=448694089]
+[node name="PlaneAxisContainer" type="HBoxContainer" parent="VBoxContainer/PlacementMode/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer/PlaneAxisContainer" unique_id=1536985010]
+[node name="Label" type="Label" parent="VBoxContainer/PlacementMode/VBoxContainer/PlaneAxisContainer"]
 layout_mode = 2
 text = "Plane Normal: "
 
-[node name="PlaneAxisSpinBox" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/PlacementMode/VBoxContainer/PlaneAxisContainer" unique_id=943080668]
+[node name="PlaneAxisSpinBox" type="HBoxContainer" parent="VBoxContainer/PlacementMode/VBoxContainer/PlaneAxisContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("2_k4pj7")
@@ -209,89 +197,91 @@ max = Vector3(1, 1, 1)
 normalized = true
 metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=73176294]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="RandomAssetCheckBox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=1248668348]
+[node name="RandomAssetCheckBox" type="CheckBox" parent="VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Enable Random Asset Placement"
 icon = SubResource("Texture2D_br0rc")
 
-[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/VBoxContainer" unique_id=15321030]
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(315, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 14
 text = "Experimental: This option will pick item from the currently visible assets  after each placement"
 autowrap_mode = 2
 
-[node name="Snapping" type="BoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=2065658864]
+[node name="Snapping" type="BoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping" unique_id=875568453]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Snapping"]
 layout_mode = 2
 
-[node name="GridSnappingCheckbox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping/VBoxContainer" unique_id=317108675]
+[node name="GridSnappingCheckbox" type="CheckBox" parent="VBoxContainer/Snapping/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Grid Snapping"
 icon = SubResource("Texture2D_5lmt4")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping/VBoxContainer" unique_id=1162207188]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Snapping/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping/VBoxContainer/HBoxContainer" unique_id=1776988120]
+[node name="Label" type="Label" parent="VBoxContainer/Snapping/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Grid Step"
 
-[node name="GridSnapValueSpinBox" type="SpinBox" parent="MarginContainer/ScrollContainer/VBoxContainer/Snapping/VBoxContainer/HBoxContainer" unique_id=1759703727]
+[node name="GridSnapValueSpinBox" type="SpinBox" parent="VBoxContainer/Snapping/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 step = 0.01
 value = 1.0
 editable = false
 
-[node name="AlignNormalsCheckbox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1748892708]
+[node name="AlignNormalsCheckbox" type="CheckBox" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Align Normals"
 icon = SubResource("Texture2D_5hqbk")
 
-[node name="UseAssetsOriginCheckbox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1904909633]
+[node name="UseAssetsOriginCheckbox" type="CheckBox" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 text = "Use Assets Origin"
 icon = SubResource("Texture2D_dewax")
 
-[node name="FoldableContainer" type="BoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer" unique_id=1383293929]
+[node name="FoldableContainer" type="BoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer" unique_id=374078349]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/FoldableContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer" unique_id=1207437820]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/FoldableContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer" unique_id=1592214871]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="RandomRotationCheckBox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=153072207]
+[node name="RandomRotationCheckBox" type="CheckBox" parent="VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 text = "Randomize Rotation On Placement"
 icon = SubResource("Texture2D_nfir2")
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer" unique_id=717140374]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/FoldableContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer" unique_id=493457162]
+[node name="Label" type="Label" parent="VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Min"
 
-[node name="MinRotationSelector" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer" unique_id=357012014]
+[node name="MinRotationSelector" type="HBoxContainer" parent="VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("2_k4pj7")
@@ -299,11 +289,11 @@ min = Vector3(-180, -180, -180)
 max = Vector3(180, 180, 180)
 metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
-[node name="Label2" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer" unique_id=128182506]
+[node name="Label2" type="Label" parent="VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Max"
 
-[node name="MaxRotationSelector" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer" unique_id=1459005158]
+[node name="MaxRotationSelector" type="HBoxContainer" parent="VBoxContainer/FoldableContainer/VBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("2_k4pj7")
@@ -311,34 +301,34 @@ min = Vector3(-180, -180, -180)
 max = Vector3(180, 180, 180)
 metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer" unique_id=538807258]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/FoldableContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer2" unique_id=400273966]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 
-[node name="RandomScaleCheckBox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer2/HBoxContainer" unique_id=880488131]
+[node name="RandomScaleCheckBox" type="CheckBox" parent="VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Randomize Scale On Placement"
 icon = SubResource("Texture2D_ik2kd")
 
-[node name="UniformScaleCheckBox" type="CheckBox" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer" unique_id=1189370336]
+[node name="UniformScaleCheckBox" type="CheckBox" parent="VBoxContainer/FoldableContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 button_pressed = true
 text = "Unform Scaling"
 
-[node name="GridContainer2" type="GridContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer" unique_id=680221302]
+[node name="GridContainer2" type="GridContainer" parent="VBoxContainer/FoldableContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer2" unique_id=1458880303]
+[node name="Label" type="Label" parent="VBoxContainer/FoldableContainer/VBoxContainer/GridContainer2"]
 layout_mode = 2
 text = "Min"
 
-[node name="MinScaleSelector" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer2" unique_id=1934125411]
+[node name="MinScaleSelector" type="HBoxContainer" parent="VBoxContainer/FoldableContainer/VBoxContainer/GridContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("2_k4pj7")
@@ -347,11 +337,11 @@ max = Vector3(100, 100, 100)
 uniform = true
 metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
-[node name="Label2" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer2" unique_id=551398598]
+[node name="Label2" type="Label" parent="VBoxContainer/FoldableContainer/VBoxContainer/GridContainer2"]
 layout_mode = 2
 text = "Max"
 
-[node name="MaxScaleSelector" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer/GridContainer2" unique_id=1013378245]
+[node name="MaxScaleSelector" type="HBoxContainer" parent="VBoxContainer/FoldableContainer/VBoxContainer/GridContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("2_k4pj7")
