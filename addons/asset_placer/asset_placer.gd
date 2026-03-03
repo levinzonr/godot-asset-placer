@@ -74,6 +74,10 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 			normal = hit.normal
 
 		var snapped_pos = _snap_position(hit.position, normal)
+		# Use snapped position to get correct height of terrain.
+		if _strategy is Terrain3DAssetPlacementStrategy:
+			snapped_pos.y = _strategy.terrain_3d_node.data.get_height(snapped_pos)
+
 		var forward_hint = preview_node.global_transform.basis.z
 
 		var new_basis = get_safe_basis(normal, forward_hint).scaled(preview_node.scale)
