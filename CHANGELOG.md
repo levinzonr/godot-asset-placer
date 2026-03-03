@@ -1,5 +1,13 @@
 # Godot Asset Placer Changelog
 
+## 1.3.1
+
+### Fixed
+
+- #77 Fixed Terrain3D placement to snap correctly by @Sr3qt
+
+---
+
 ## 1.3.0
 
 Version **1.3.0** is a feature release focused on improving collection workflows, introducing auto-grouping, and adding folder-level automation rules.
