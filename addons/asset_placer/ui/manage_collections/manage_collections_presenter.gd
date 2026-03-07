@@ -129,7 +129,7 @@ func add_to_collection(collection: AssetCollection):
 	for idx in _selected_indices:
 		var asset := _assets[idx]
 		if not asset.tags.has(collection.id):
-			asset.tags.push_back(collection.id)
+			asset.add_tag(collection.id)
 			_asset_library.update_asset(asset)
 	_emit_collections()
 
@@ -137,7 +137,7 @@ func add_to_collection(collection: AssetCollection):
 func remove_from_collection(collection: AssetCollection):
 	for idx in _selected_indices:
 		var asset := _assets[idx]
-		asset.tags = asset.tags.filter(func(id): return id != collection.id)
+		asset.remove_tag(collection.id)
 		if asset.primary_collection == collection.id:
 			asset.primary_collection = -1
 		_asset_library.update_asset(asset)

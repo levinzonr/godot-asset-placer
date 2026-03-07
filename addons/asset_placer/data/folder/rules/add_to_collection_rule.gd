@@ -35,8 +35,8 @@ func from_dict(data: Dictionary):
 
 
 func do_after_asset_added(asset: AssetResource) -> AssetResource:
-	if collection_id >= 0 and not asset.tags.has(collection_id):
-		asset.tags.push_back(collection_id)
+	if collection_id >= 0:
+		asset.add_tag(collection_id)
 	return asset
 
 
