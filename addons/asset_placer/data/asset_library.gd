@@ -61,18 +61,22 @@ func add_asset(asset: AssetResource) -> bool:
 	return true
 
 
-# TODO find_custom is not supported in 4.3. Change to normal loop.
 func remove_asset_by_id(asset_id: String):
-	var index := _assets.find_custom((func(a: AssetResource): return a.id == asset_id))
+	var index := -1
+	for i in _assets.size():
+		if _assets[i].id == asset_id:
+			index = i
 	assert(index != -1, "Cannot remove asset with id %s as it doesn't exist" % asset_id)
 
 	_assets.remove_at(index)
 	_queue_emit_assets_changed()
 
 
-# TODO find_custom is not supported in 4.3. Change to normal loop.
 func update_asset(asset: AssetResource):
-	var index = _assets.find_custom((func(a: AssetResource): return a.id == asset.id))
+	var index := -1
+	for i in _assets.size():
+		if _assets[i].id == asset.id:
+			index = i
 	assert(
 		index != -1,
 		"Cannot update asset with with id %s, as it doesn't exist" % asset.id
@@ -115,14 +119,16 @@ func delete_folder_by_path(folder_path: String):
 	_queue_emit_folders_changed()
 
 
-# TODO find_custom is not supported in 4.3. Change to normal loop.
 func update_folder(folder: AssetFolder):
-	var to_update_index = _folders.find_custom(func(f): return f.path == folder.path)
+	var index := -1
+	for i in _folders.size():
+		if _folders[i].path == folder.path:
+			index = i
 	assert(
-		to_update_index != -1,
+		index != -1,
 		"Cannot update folder with path %s as it's not in the current AssetLibrary." % folder.path
 	)
-	_folders[to_update_index] = folder
+	_folders[index] = folder
 	_queue_emit_folders_changed()
 
 
@@ -175,12 +181,10 @@ func update_collection(collection: AssetCollection):
 
 
 func find_collection_by_id(id: int) -> AssetCollection:
-	var collections = get_collections()
-	var index = collections.find_custom(func(c): return c.id == id)
-	if index == -1:
-		return null
-	else:
-		return collections[index]
+	for i in _collections.size():
+		if _collections[i].id == id:
+			return _collections[i]
+	return null
 
 
 func _get_highest_collection_id() -> int:
