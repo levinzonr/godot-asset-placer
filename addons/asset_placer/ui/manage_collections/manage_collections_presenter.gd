@@ -34,7 +34,6 @@ var _batch_mode: bool = false
 var _last_toggled_index: int = -1
 
 
-
 func ready(initial_asset_id: String = ""):
 	_assets = _asset_library.get_assets()
 	if not initial_asset_id.is_empty():

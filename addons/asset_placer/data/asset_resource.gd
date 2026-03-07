@@ -24,7 +24,6 @@ static func from_path(
 	p_folder_path: String = "",
 	p_primary_collection: int = -1
 ) -> AssetResource:
-
 	assert(is_file_supported(p_path), "Given filepath %s is an unsupported resource type." % p_path)
 
 	var asset := AssetResource.new(

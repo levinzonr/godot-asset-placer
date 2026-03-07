@@ -15,7 +15,12 @@ var _is_folders_changed_queued := false
 var _is_collections_changed_queued := false
 var _is_signal_queued: bool:
 	get:
-		return _is_assets_changed_queued or _is_folders_changed_queued or _is_collections_changed_queued
+		return (
+			_is_assets_changed_queued
+			or _is_folders_changed_queued
+			or _is_collections_changed_queued
+		)
+
 
 func _init(
 	assets: Array[AssetResource],
@@ -40,6 +45,7 @@ func get_collections() -> Array[AssetCollection]:
 
 
 ## Assets
+
 
 func has_asset_id(asset_id: String):
 	return _assets.any(func(item: AssetResource): return item.id == asset_id)
@@ -77,10 +83,7 @@ func update_asset(asset: AssetResource):
 	for i in _assets.size():
 		if _assets[i].id == asset.id:
 			index = i
-	assert(
-		index != -1,
-		"Cannot update asset with with id %s, as it doesn't exist" % asset.id
-	)
+	assert(index != -1, "Cannot update asset with with id %s, as it doesn't exist" % asset.id)
 	_assets[index] = asset
 	_queue_emit_assets_changed()
 
@@ -93,6 +96,7 @@ func find_asset_by_uid(uid: String) -> AssetResource:
 
 
 ## Folders
+
 
 func get_folder(path: String) -> AssetFolder:
 	for _folder in _folders:
@@ -143,6 +147,7 @@ func has_folder_path(path: String) -> bool:
 
 
 ## Collections
+
 
 func add_collection(collection: AssetCollection):
 	collection.id = _get_highest_collection_id() + 1
@@ -199,7 +204,6 @@ func _get_highest_collection_id() -> int:
 
 
 func _emit_queued_signals():
-	print("Checking emit queue")
 	if _is_assets_changed_queued:
 		assets_changed.emit()
 	if _is_folders_changed_queued:

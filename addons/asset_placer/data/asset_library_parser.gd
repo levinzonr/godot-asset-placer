@@ -64,10 +64,7 @@ static func load_library(load_path := DEFAULT_SAVE_PATH) -> AssetLibrary:
 
 ## Save library to a save_path.
 static func save_library(library: AssetLibrary, save_path := DEFAULT_SAVE_PATH):
-	assert(
-		is_instance_valid(library),
-		"AssetLibraryParser: Cannot save null library."
-	)
+	assert(is_instance_valid(library), "AssetLibraryParser: Cannot save null library.")
 
 	var assets_dict: Array[Dictionary] = []
 	var folders_dict: Array[Dictionary] = []
@@ -79,12 +76,15 @@ static func save_library(library: AssetLibrary, save_path := DEFAULT_SAVE_PATH):
 		for rule in folder.rules:
 			rules_data.append(rule.to_dict())
 
-		folders_dict.append(
-			{
-				"path": folder.path,
-				"include_subfolders": folder.include_subfolders,
-				"rules": rules_data,
-			}
+		(
+			folders_dict
+			. append(
+				{
+					"path": folder.path,
+					"include_subfolders": folder.include_subfolders,
+					"rules": rules_data,
+				}
+			)
 		)
 
 	for asset in library.get_assets():
@@ -118,4 +118,3 @@ static func save_library(library: AssetLibrary, save_path := DEFAULT_SAVE_PATH):
 	var file = FileAccess.open(save_path, FileAccess.WRITE)
 	file.store_string(json)
 	file.close()
-

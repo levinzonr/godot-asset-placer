@@ -5,7 +5,7 @@ signal folders_loaded(folder: Array[AssetFolder])
 
 var sync: Synchronize
 
-var _asset_library : AssetLibrary:
+var _asset_library: AssetLibrary:
 	get:
 		return AssetLibraryManager.get_asset_library()
 
