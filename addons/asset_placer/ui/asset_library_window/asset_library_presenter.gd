@@ -53,12 +53,7 @@ func add_asset(path: String, folder_path: String):
 
 	var existing := _asset_library.get_asset(id)
 	if existing:
-		var new_tags: Array[int] = []
-		for tag in tags:
-			if tag not in existing.tags:
-				new_tags.push_back(tag)
-
-		existing.tags.append_array(new_tags)
+		existing.add_tags(tags)
 		_asset_library.update_asset(existing)
 	else:
 		var new_asset := AssetResource.new(id, path.get_file(), tags, folder_path)
@@ -79,9 +74,9 @@ func add_assets_or_folders(files: PackedStringArray):
 
 func toggle_asset_collection(asset: AssetResource, collection: AssetCollection, add: bool):
 	if add:
-		asset.tags.append(collection.id)
+		asset.add_tag(collection.id)
 	else:
-		asset.tags.erase(collection.id)
+		asset.remove_tag(collection.id)
 	_asset_library.update_asset(asset)
 
 

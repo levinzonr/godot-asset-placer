@@ -164,9 +164,7 @@ func remove_collection_by_id(id: int):
 	_collections = new_collections
 
 	for asset in _assets:
-		var updated_tags: Array[int] = asset.tags.filter(func(f): return f != id)
-		if updated_tags.size() != asset.tags.size():
-			asset.tags = updated_tags
+		asset.remove_tag(id)
 
 	_queue_emit_collections_changed()
 

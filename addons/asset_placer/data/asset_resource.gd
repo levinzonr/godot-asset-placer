@@ -73,3 +73,20 @@ func belongs_to_some_collection(collections: Array[AssetCollection]) -> bool:
 	return collections.any(
 		func(collection: AssetCollection): return self.belongs_to_collection(collection)
 	)
+
+
+## Adds a tag to this asset. Does nothing if it already has new_tag.
+func add_tag(new_tag: int):
+	if not new_tag in tags:
+		tags.append(new_tag)
+
+
+## Adds multiple new tags to this asset. Skips tags it already has.
+func add_tags(new_tags: Array[int]):
+	for new_tag in new_tags:
+		add_tag(new_tag)
+
+
+## Removes a tag from this asset. Does nothing if it doesn't have tag.
+func remove_tag(tag: int):
+	tags.erase(tag)
