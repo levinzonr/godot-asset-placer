@@ -69,7 +69,6 @@ func add_assets_from_folder(folder: AssetFolder, override_path := ""):
 		push_warning("Could not open folder: %s" % folder_path)
 		return
 
-	var tags: Array[int] = []
 	var rules := folder.get_rules()
 	for file in dir.get_files():
 		_scanned += 1
@@ -77,36 +76,39 @@ func add_assets_from_folder(folder: AssetFolder, override_path := ""):
 		var file_name := file.get_file()
 		var passed_filter := true
 
+		if not AssetResource.is_file_supported(file):
+			continue
+
 		# Check if file passes all filters
 		for rule in rules:
 			if not rule.do_filter(file_name):
 				passed_filter = false
 				break
 
-		if passed_filter:
-			var asset = lib.add_asset(path, tags, folder_path)
-
-			if asset:
-				# New asset - apply after_added rules
-				for rule in folder.get_rules():
-					asset = rule.do_after_asset_added(asset)
-				lib.update_asset(asset)
-				_added += 1
-			elif rules.size() > 0:
-				# Existing asset - apply after_added rules
-				var uid = ResourceIdCompat.path_to_uid(path)
-				var existing = lib.find_asset_by_uid(uid)
-				if existing:
-					for rule in rules:
-						existing = rule.do_after_asset_added(existing)
-					lib.update_asset(existing)
-		else:
+		if not passed_filter:
 			# File doesn't pass filter - delete if exists
 			var uid = ResourceIdCompat.path_to_uid(path)
 			var existing = lib.find_asset_by_uid(uid)
 			if existing:
 				lib.remove_asset_by_id(uid)
 				_removed += 1
+			continue
+
+		var uid = ResourceIdCompat.path_to_uid(path)
+		var existing := lib.find_asset_by_uid(uid)
+
+		if existing:
+			# Existing asset - apply after_added rules
+			for rule in rules:
+				existing = rule.do_after_asset_added(existing)
+			lib.update_asset(existing)
+		else:
+			# New asset - apply after_added rules
+			var asset := AssetResource.from_path(path, [], folder_path)
+			for rule in folder.get_rules():
+				asset = rule.do_after_asset_added(asset)
+			if lib.add_asset(asset):
+				_added += 1
 
 	if folder.include_subfolders:
 		for sub_dir in dir.get_directories():

@@ -49,7 +49,3 @@ func add_folder(folder_path: String):
 func add_folders(folders: PackedStringArray):
 	for folder in folders:
 		add_folder(folder)
-
-
-func is_file_supported(file: String) -> bool:
-	return file.ends_with(".tscn") || file.ends_with(".glb") || file.ends_with(".fbx")
