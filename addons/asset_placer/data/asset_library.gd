@@ -46,21 +46,16 @@ func get_asset(uid: String) -> AssetResource:
 			return asset
 	return null
 
-# TODO change to accept AssetResource instead of its parameters
-# TODO Also change init parameters of AssetResource to be more lenient
-func add_asset(scene_path: String, tags: Array[int] = [], folder_path: String = "") -> AssetResource:
-	if not is_scene_file_supported(scene_path):
-		return null
+func add_asset(asset: AssetResource) -> bool:
+	assert(is_instance_valid(asset), "Cannot add null as an AssetResource to AssetLibrary.")
 
-	var id = ResourceIdCompat.path_to_uid(scene_path)
-	if has_asset_id(id):
-		return null
+	if has_asset_id(asset.id):
+		return false
 
-	var asset := AssetResource.new(id, scene_path.get_file(), tags, folder_path)
 	_assets.append(asset)
 	_queue_emit_assets_changed()
 
-	return asset
+	return true
 
 
 func remove_asset(asset: AssetResource):
@@ -93,22 +88,6 @@ func has_asset_id(asset_id: String):
 
 func has_asset_path(asset_path: String):
 	return _assets.any(func(item: AssetResource): return item.get_path() == asset_path)
-
-
-# TODO Should be in AssetResource,
-func is_scene_file_supported(file: String) -> bool:
-	var extension := file.get_extension()
-	var supported_extensions := ["tscn", "glb", "fbx", "obj", "gltf", "blend"]
-	return extension in supported_extensions
-
-
-func index_of_asset(asset: AssetResource):
-	var idx: int = -1
-	for a in len(_assets):
-		if _assets[a].id == asset.id:
-			idx = a
-			break
-	return idx
 
 
 ## Folders

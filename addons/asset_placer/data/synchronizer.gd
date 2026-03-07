@@ -76,6 +76,10 @@ func add_assets_from_folder(
 		var path := folder_path.path_join(file)
 		var file_name = file.get_file()
 		var passed_filter := true
+		var uid = ResourceIdCompat.path_to_uid(path)
+
+		if not AssetResource.is_file_supported(file):
+			continue
 
 		# Check if file passes all filters
 		for rule in rules:
@@ -84,9 +88,10 @@ func add_assets_from_folder(
 				break
 
 		if passed_filter:
-			var asset = lib.add_asset(path, tags, folder_path)
+			var asset := AssetResource.new(uid, file.get_file(), [], folder_path)
+			var added = lib.add_asset(asset)
 
-			if asset:
+			if added:
 				# New asset - apply after_added rules
 				for rule in rules:
 					asset = rule.do_after_asset_added(asset)
@@ -94,7 +99,6 @@ func add_assets_from_folder(
 				_added += 1
 			elif rules.size() > 0:
 				# Existing asset - apply after_added rules
-				var uid = ResourceIdCompat.path_to_uid(path)
 				var existing = lib.get_asset(uid)
 				if existing:
 					for rule in rules:
@@ -102,7 +106,6 @@ func add_assets_from_folder(
 					lib.update_asset(existing)
 		else:
 			# File doesn't pass filter - delete if exists
-			var uid = ResourceIdCompat.path_to_uid(path)
 			var existing = lib.get_asset(uid)
 			if existing:
 				lib.remove_asset(existing)
