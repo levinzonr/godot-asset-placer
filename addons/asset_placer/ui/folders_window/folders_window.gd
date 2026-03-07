@@ -9,8 +9,8 @@ extends Control
 
 
 func _ready():
-	presenter.folders_loaded.connect(show_folders)
-	presenter._ready()
+	presenter.folders_loaded.connect(_show_folders)
+	presenter.ready()
 
 	add_folder_button.pressed.connect(_show_folder_dialog)
 

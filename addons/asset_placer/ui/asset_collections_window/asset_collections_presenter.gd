@@ -31,7 +31,8 @@ func set_name(name: String):
 
 func create_collection():
 	var lib := AssetLibraryManager.get_asset_library()
-	lib.add_collection(_new_collection_name, _new_collection_color)
+	var new_collection := AssetCollection.new(_new_collection_name, _new_collection_color)
+	lib.add_collection(new_collection)
 	clear_text_field.emit()
 	enable_create_button.emit(false)
 
@@ -51,4 +52,4 @@ func _load_collections():
 
 
 func delete_collection(collection: AssetCollection):
-	AssetLibraryManager.get_asset_library().delete_collection(collection.id)
+	AssetLibraryManager.get_asset_library().delete_collection_by_id(collection.id)
