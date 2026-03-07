@@ -20,12 +20,15 @@ func _ready():
 	button.toggled.connect(func(_a): left_clicked.emit(resource))
 	set_settings(settings_repo.get_settings())
 	settings_repo.settings_changed.connect(set_settings)
+	if is_instance_valid(resource):
+		set_asset(resource)
 
 
 func set_asset(asset: AssetResource):
-	self.resource = asset
-	label.text = asset.name
-	asset_thumbnail.set_resource(asset)
+	resource = asset
+	if is_node_ready():
+		label.text = asset.name
+		asset_thumbnail.set_resource(asset)
 
 
 func set_settings(settings: AssetPlacerSettings):

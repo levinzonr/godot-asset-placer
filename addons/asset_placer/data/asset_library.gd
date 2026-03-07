@@ -2,31 +2,240 @@
 class_name AssetLibrary
 extends RefCounted
 
-var folders: Array[AssetFolder] = []
-var items: Array[AssetResource] = []
-var collections: Array[AssetCollection] = []
+signal assets_changed
+signal folders_changed
+signal collections_changed
+
+var _assets: Array[AssetResource] = []
+var _folders: Array[AssetFolder] = []
+var _collections: Array[AssetCollection] = []
+
+var _is_assets_changed_queued := false
+var _is_folders_changed_queued := false
+var _is_collections_changed_queued := false
+var _is_signal_queued: bool:
+	get:
+		return (
+			_is_assets_changed_queued
+			or _is_folders_changed_queued
+			or _is_collections_changed_queued
+		)
 
 
 func _init(
-	items: Array[AssetResource], folders: Array[AssetFolder], collections: Array[AssetCollection]
+	assets: Array[AssetResource],
+	folders: Array[AssetFolder],
+	collections: Array[AssetCollection],
 ):
-	self.folders = folders
-	self.items = items
-	self.collections = collections
+	_assets = assets
+	_folders = folders
+	_collections = collections
 
 
-func index_of_asset(asset: AssetResource):
-	var idx: int = -1
-	for a in len(items):
-		if items[a].id == asset.id:
-			idx = a
-			break
-	return idx
+func get_assets() -> Array[AssetResource]:
+	return _assets
 
 
-func get_highest_id() -> int:
+func get_folders() -> Array[AssetFolder]:
+	return _folders
+
+
+func get_collections() -> Array[AssetCollection]:
+	return _collections
+
+
+## Assets
+
+
+func has_asset_id(asset_id: String):
+	return _assets.any(func(item: AssetResource): return item.id == asset_id)
+
+
+func has_asset_path(asset_path: String):
+	return _assets.any(func(item: AssetResource): return item.get_path() == asset_path)
+
+
+func add_asset(asset: AssetResource) -> bool:
+	assert(is_instance_valid(asset), "Cannot add null as an AssetResource to AssetLibrary.")
+
+	if has_asset_id(asset.id):
+		return false
+
+	_assets.append(asset)
+	_queue_emit_assets_changed()
+
+	return true
+
+
+func remove_asset_by_id(asset_id: String):
+	var index := -1
+	for i in _assets.size():
+		if _assets[i].id == asset_id:
+			index = i
+	assert(index != -1, "Cannot remove asset with id %s as it doesn't exist" % asset_id)
+
+	_assets.remove_at(index)
+	_queue_emit_assets_changed()
+
+
+func update_asset(asset: AssetResource):
+	var index := -1
+	for i in _assets.size():
+		if _assets[i].id == asset.id:
+			index = i
+	assert(index != -1, "Cannot update asset with with id %s, as it doesn't exist" % asset.id)
+	_assets[index] = asset
+	_queue_emit_assets_changed()
+
+
+func find_asset_by_uid(uid: String) -> AssetResource:
+	for asset in _assets:
+		if asset.id == uid:
+			return asset
+	return null
+
+
+## Folders
+
+
+func get_folder(path: String) -> AssetFolder:
+	for _folder in _folders:
+		if _folder.path == path:
+			return _folder
+	return null
+
+
+func add_folder(folder: AssetFolder):
+	if has_folder_path(folder.path):
+		push_warning("Folder with path %s already exists in AssetLibrary" % folder.path)
+		return
+
+	_folders.append(folder)
+	_queue_emit_folders_changed()
+
+
+func delete_folder(folder: AssetFolder):
+	delete_folder_by_path(folder.path)
+
+
+func delete_folder_by_path(folder_path: String):
+	_folders = _folders.filter(func(f): return f.path != folder_path)
+	_queue_emit_folders_changed()
+
+
+func update_folder(folder: AssetFolder):
+	var index := -1
+	for i in _folders.size():
+		if _folders[i].path == folder.path:
+			index = i
+	assert(
+		index != -1,
+		"Cannot update folder with path %s as it's not in the current AssetLibrary." % folder.path
+	)
+	_folders[index] = folder
+	_queue_emit_folders_changed()
+
+
+func has_folder_path(path: String) -> bool:
+	for folder in _folders:
+		if folder.path == path:
+			return true
+		if folder.include_subfolders && path.contains(folder.path):
+			return true
+
+	return false
+
+
+## Collections
+
+
+func add_collection(collection: AssetCollection):
+	collection.id = _get_highest_collection_id() + 1
+	_collections.append(collection)
+	_queue_emit_collections_changed()
+
+
+func delete_collection(collection: AssetCollection):
+	delete_collection_by_id(collection.id)
+
+
+func delete_collection_by_id(id: int):
+	var new_collections: Array[AssetCollection] = _collections.filter(func(c): return c.id != id)
+	_collections = new_collections
+
+	for asset in _assets:
+		asset.remove_tag(id)
+
+	# Remove rules that reference this collection
+	for folder in _folders:
+		folder.rules = folder.rules.filter(
+			func(rule):
+				if rule is AddToCollectionRule:
+					return rule.collection_id != id
+				return true
+		)
+
+	_queue_emit_collections_changed()
+
+
+func update_collection(collection: AssetCollection):
+	for i in _collections.size():
+		if _collections[i].id == collection.id:
+			_collections[i] = collection
+	_queue_emit_collections_changed()
+
+
+func find_collection_by_id(id: int) -> AssetCollection:
+	for i in _collections.size():
+		if _collections[i].id == id:
+			return _collections[i]
+	return null
+
+
+func _get_highest_collection_id() -> int:
 	var highest := 0
-	for collection in collections:
+	for collection in _collections:
 		if collection.id > highest:
 			highest = collection.id
 	return highest
+
+
+## Signals
+
+
+func _emit_queued_signals():
+	if _is_assets_changed_queued:
+		assets_changed.emit()
+	if _is_folders_changed_queued:
+		folders_changed.emit()
+	if _is_collections_changed_queued:
+		collections_changed.emit()
+
+	_is_assets_changed_queued = false
+	_is_folders_changed_queued = false
+	_is_collections_changed_queued = false
+
+
+func _queue_emit_assets_changed():
+	if not _is_signal_queued:
+		_emit_queued_signals.call_deferred()
+	_is_assets_changed_queued = true
+
+
+func _queue_emit_folders_changed():
+	if not _is_signal_queued:
+		_emit_queued_signals.call_deferred()
+	_is_folders_changed_queued = true
+
+
+func _queue_emit_collections_changed():
+	if not _is_signal_queued:
+		_emit_queued_signals.call_deferred()
+	_is_collections_changed_queued = true
+
+
+## Only used by AssetLibraryManager
+func _emit_all_changed():
+	assets_changed.emit()
+	folders_changed.emit()
+	collections_changed.emit()

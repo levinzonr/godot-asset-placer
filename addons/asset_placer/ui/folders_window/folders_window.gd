@@ -10,7 +10,8 @@ extends Control
 
 func _ready():
 	presenter.folders_loaded.connect(_show_folders)
-	presenter._ready()
+	presenter.ready()
+
 	add_folder_button.pressed.connect(_show_folder_dialog)
 
 
@@ -35,10 +36,15 @@ func _show_folders(folders: Array[AssetFolder]):
 		var instance: FolderView = folder_res.instantiate()
 		v_box_container.add_child(instance)
 		instance.set_folder(folder)
+		instance.folder_delete_clicked.connect(func(): presenter.delete_folder(folder))
+		instance.folder_include_subfloders_change.connect(
+			func(include): presenter.include_subfolders(include, folder)
+		)
+		instance.folder_sync_clicked.connect(func(): presenter.sync_folder(folder))
 
 
 func _show_folder_dialog():
-	var folder_dialog = EditorFileDialog.new()
+	var folder_dialog := EditorFileDialog.new()
 	folder_dialog.file_mode = EditorFileDialog.FILE_MODE_OPEN_DIR
 	folder_dialog.access = EditorFileDialog.ACCESS_RESOURCES
 	folder_dialog.dir_selected.connect(presenter.add_folder)

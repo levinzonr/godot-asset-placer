@@ -2,6 +2,11 @@
 class_name FolderView
 extends PanelContainer
 
+signal folder_delete_clicked
+signal folder_sync_clicked
+signal folder_include_subfloders_change(bool)
+
+var asset_folder: AssetFolder
 var _presenter: FolderItemPresenter
 
 @onready var path_label: Label = %PathLabel
@@ -15,8 +20,18 @@ var _presenter: FolderItemPresenter
 
 
 func _ready():
+	delete_button.pressed.connect(func(): folder_delete_clicked.emit())
+
+	sync_button.pressed.connect(func(): folder_sync_clicked.emit())
+
+	subfolders_checkbox.toggled.connect(
+		func(toggled): folder_include_subfloders_change.emit(toggled)
+	)
 	rules_button.pressed.connect(_toggle_rules)
 	_setup_add_rule_menu()
+
+	if is_instance_valid(asset_folder):
+		set_folder(asset_folder)
 
 
 func _setup_add_rule_menu():
@@ -45,13 +60,16 @@ func _on_rule_type_selected(index: int):
 			_update_rules_button()
 			_refresh_rules()
 
+	if is_instance_valid(asset_folder):
+		set_folder(asset_folder)
+
 
 func set_folder(folder: AssetFolder):
-	_presenter = FolderItemPresenter.new(folder)
+	asset_folder = folder
+	if not is_node_ready():
+		return
 
-	delete_button.pressed.connect(_presenter.delete)
-	sync_button.pressed.connect(_presenter.sync)
-	subfolders_checkbox.toggled.connect(_presenter.set_include_subfolders)
+	_presenter = FolderItemPresenter.new(folder)
 
 	path_label.text = folder.path
 	subfolders_checkbox.button_pressed = folder.include_subfolders

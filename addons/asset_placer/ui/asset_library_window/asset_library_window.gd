@@ -4,8 +4,8 @@ extends Control
 
 signal asset_selected(asset: AssetResource)
 
-@onready var presenter: AssetLibraryPresenter = AssetLibraryPresenter.new()
-@onready var folder_presenter: FolderPresenter = FolderPresenter.new()
+@onready var presenter := AssetLibraryPresenter.new()
+@onready var folder_presenter = FolderPresenter.new()
 
 @onready var placer_presenter := AssetPlacerPresenter._instance
 @onready var grid_container: Container = %GridContainer
@@ -29,13 +29,15 @@ signal asset_selected(asset: AssetResource)
 
 func _ready():
 	presenter.assets_loaded.connect(show_assets)
+	presenter.show_empty_view.connect(show_empty_view)
 	presenter.show_filter_info.connect(show_filter_info)
 	presenter.show_sync_active.connect(show_sync_in_progress)
-	AssetPlacerPresenter._instance.asset_selected.connect(set_selected_asset)
-	AssetPlacerPresenter._instance.asset_deselected.connect(clear_selected_asset)
+
+	placer_presenter.asset_selected.connect(set_selected_asset)
+	placer_presenter.asset_deselected.connect(clear_selected_asset)
+
 	empty_collection_view_add_folder_btn.pressed.connect(show_folder_dialog)
 	empty_view_add_folder_btn.pressed.connect(show_folder_dialog)
-	presenter.show_empty_view.connect(show_empty_view)
 
 	presenter.on_ready()
 	add_folder_button.pressed.connect(show_folder_dialog)
@@ -100,7 +102,7 @@ func show_folder_dialog():
 	var folder_dialog = EditorFileDialog.new()
 	folder_dialog.file_mode = EditorFileDialog.FILE_MODE_OPEN_DIR
 	folder_dialog.access = EditorFileDialog.ACCESS_RESOURCES
-	folder_dialog.dir_selected.connect(presenter.add_asset_folder)
+	folder_dialog.dir_selected.connect(presenter.add_folder)
 	EditorInterface.popup_dialog_centered(folder_dialog)
 
 

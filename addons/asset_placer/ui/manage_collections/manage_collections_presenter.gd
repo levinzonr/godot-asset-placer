@@ -24,8 +24,9 @@ class CollectionState:
 		return assigned_count < total_selected or total_selected == 0
 
 
-var _assets_repository: AssetsRepository
-var _collections_repository: AssetCollectionRepository
+var _asset_library: AssetLibrary:
+	get:
+		return AssetLibraryManager.get_asset_library()
 
 var _assets: Array[AssetResource] = []
 var _selected_indices: PackedInt32Array = []
@@ -33,13 +34,8 @@ var _batch_mode: bool = false
 var _last_toggled_index: int = -1
 
 
-func _init():
-	_assets_repository = AssetsRepository.instance
-	_collections_repository = AssetCollectionRepository.instance
-
-
 func ready(initial_asset_id: String = ""):
-	_assets = _assets_repository.get_all_assets()
+	_assets = _asset_library.get_assets()
 	if not initial_asset_id.is_empty():
 		for i in _assets.size():
 			if _assets[i].id == initial_asset_id:
@@ -100,7 +96,7 @@ func select_all():
 
 
 func filter_assets(query: String):
-	var all_assets := _assets_repository.get_all_assets()
+	var all_assets := _asset_library.get_assets()
 
 	if query.is_empty():
 		_assets = all_assets
@@ -124,7 +120,7 @@ func set_primary_collection(collection: AssetCollection):
 			asset.primary_collection = -1
 		else:
 			asset.primary_collection = collection.id
-		_assets_repository.update(asset)
+		_asset_library.update_asset(asset)
 	_emit_collections()
 
 
@@ -132,18 +128,18 @@ func add_to_collection(collection: AssetCollection):
 	for idx in _selected_indices:
 		var asset := _assets[idx]
 		if not asset.tags.has(collection.id):
-			asset.tags.push_back(collection.id)
-			_assets_repository.update(asset)
+			asset.add_tag(collection.id)
+			_asset_library.update_asset(asset)
 	_emit_collections()
 
 
 func remove_from_collection(collection: AssetCollection):
 	for idx in _selected_indices:
 		var asset := _assets[idx]
-		asset.tags = asset.tags.filter(func(id): return id != collection.id)
+		asset.remove_tag(collection.id)
 		if asset.primary_collection == collection.id:
 			asset.primary_collection = -1
-		_assets_repository.update(asset)
+		_asset_library.update_asset(asset)
 	_emit_collections()
 
 
@@ -180,7 +176,7 @@ func _emit_selection():
 
 func _emit_collections():
 	var collections: Array[CollectionState] = []
-	var all_collections := _collections_repository.get_collections()
+	var all_collections := _asset_library.get_collections()
 	var total := _selected_indices.size()
 
 	var collection_counts: Dictionary = {}
