@@ -25,7 +25,11 @@ var _viewport_overlay_res = preload(
 	"res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.tscn"
 )
 var _plane_preview: Node3D
+
+# Actual type is EditorDock
+var _dock: MarginContainer
 var _asset_placer_button: Button
+
 var _migration_collection_id = load(
 	"res://addons/asset_placer/data/migrations/collection_id_migration.gd"
 )
@@ -62,7 +66,21 @@ func _enter_tree():
 	_asset_placer_window = (
 		load("res://addons/asset_placer/ui/asset_library_panel.tscn").instantiate()
 	)
-	_asset_placer_button = add_control_to_bottom_panel(_asset_placer_window, "Asset Placer")
+
+	# Use new dock class in 4.6+
+	if ClassDB.class_exists(&"EditorDock"):
+		_dock = ClassDB.instantiate(&"EditorDock")
+		_dock.title = "Asset Placer"
+		_dock.available_layouts = 6  # Allow bottom and floating modes.
+		_dock.default_slot = 8  # Same value as EditorDock.DOCK_SLOT_BOTTOM
+		_dock.force_show_icon = true
+		_dock.global = false
+		_dock.closable = false
+		_dock.add_child(_asset_placer_window)
+		call("add_dock", _dock)
+	else:
+		_asset_placer_button = add_control_to_bottom_panel(_asset_placer_window, "Asset Placer")
+
 	_asset_placer_window.visibility_changed.connect(_on_dock_visibility_changed)
 
 	_presenter.placement_mode_changed.connect(_asset_placer.set_placement_mode)
@@ -89,6 +107,13 @@ func _enter_tree():
 
 
 func _exit_tree():
+	if ClassDB.class_exists(&"EditorDock"):
+		call("remove_dock", _dock)
+		_dock.queue_free()
+		_dock = null
+	else:
+		remove_control_from_bottom_panel(_asset_placer_window)
+
 	_updater.updater_up_to_date.disconnect(_show_plugin_up_to_date)
 	_updater.updater_update_available.disconnect(_show_update_available)
 	_updater.update_ready.disconnect(_show_update_available)
@@ -101,7 +126,6 @@ func _exit_tree():
 	_asset_placer_window.visibility_changed.disconnect(_on_dock_visibility_changed)
 	_asset_placer.stop_placement()
 	scene_changed.disconnect(_handle_scene_changed)
-	remove_control_from_bottom_panel(_asset_placer_window)
 	_asset_placer_window.queue_free()
 	_async.await_completion()
 
@@ -254,12 +278,18 @@ func _forward_3d_gui_input(viewport_camera, event):
 
 
 func _show_plugin_up_to_date():
-	_asset_placer_button.icon = null
+	if ClassDB.class_exists(&"EditorDock"):
+		_dock.icon_name = &""
+	else:
+		_asset_placer_button.icon = null
 
 
 func _show_update_available(_update: PluginUpdate):
-	_asset_placer_button.icon = EditorIconTexture2D.new("MoveUp")
-	_asset_placer_button.icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	if ClassDB.class_exists(&"EditorDock"):
+		_dock.icon_name = &"MoveUp"
+	else:
+		_asset_placer_button.icon = EditorIconTexture2D.new("MoveUp")
+		_asset_placer_button.icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 
 
 func _handled():
