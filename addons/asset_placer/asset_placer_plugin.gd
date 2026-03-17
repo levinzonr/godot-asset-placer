@@ -21,18 +21,13 @@ var _updater: PluginUpdater
 var _async: AssetPlacerAsync
 var _asset_placer_window: AssetLibraryPanel
 var _file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
-var _viewport_overlay_res = preload(
-	"res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.tscn"
-)
 var _plane_preview: Node3D
 
 # Actual type is EditorDock
 var _dock: MarginContainer
 var _asset_placer_button: Button
 
-var _migration_collection_id = load(
-	"res://addons/asset_placer/data/migrations/collection_id_migration.gd"
-)
+var _migration_collection_id = null
 var _data_source: AssetLibraryDataSource
 
 
@@ -45,8 +40,8 @@ func _disable_plugin():
 
 
 func _enter_tree():
-	_run_migrations()
 	_initialize_data_layer()
+	_run_migrations()
 	_async = AssetPlacerAsync.new()
 	_presenter = AssetPlacerPresenter.new()
 	AssetPlacerDockPresenter.new()
@@ -94,7 +89,7 @@ func _enter_tree():
 			EditorToasterCompat.toast(message)
 	)
 
-	self.overlay = _viewport_overlay_res.instantiate()
+	self.overlay = load("res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.tscn").instantiate()
 	get_editor_interface().get_editor_viewport_3d().add_child(overlay)
 
 	_file_system.resources_reimported.connect(_react_to_reimorted_files)
@@ -113,7 +108,6 @@ func _exit_tree():
 		_dock = null
 	else:
 		remove_control_from_bottom_panel(_asset_placer_window)
-
 	_updater.updater_up_to_date.disconnect(_show_plugin_up_to_date)
 	_updater.updater_update_available.disconnect(_show_update_available)
 	_updater.update_ready.disconnect(_show_update_available)
@@ -148,6 +142,7 @@ func _handle_scene_changed(scene: Node):
 
 
 func _run_migrations():
+	_migration_collection_id = load("res://addons/asset_placer/data/migrations/collection_id_migration.gd")
 	_migration_collection_id.new().run()
 
 
