@@ -34,12 +34,12 @@ When enabled in the Asset Placement Options, your scene tree will be organized l
 
 ```
 - Parent (your selected parent node)
-    - Trees (auto-created group)
-        - Tree(1)
-        - Tree(2)
-    - Rocks (auto-created group)
-        - Rock(1)
-        - Rock(2)
+	- Trees (auto-created group)
+		- Tree(1)
+		- Tree(2)
+	- Rocks (auto-created group)
+		- Rock(1)
+		- Rock(2)
 ```
 
 Assets without a primary collection are placed directly under the parent node.

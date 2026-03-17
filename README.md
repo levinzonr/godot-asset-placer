@@ -270,4 +270,3 @@ Found a problem or have an idea?
 ## Changelog
 
 See the [CHANGELOG.md](CHANGELOG.md) for a full list of changes and updates.
-
