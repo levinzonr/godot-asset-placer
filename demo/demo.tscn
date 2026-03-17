@@ -456,3 +456,27 @@ metadata/asset_placer_res_id = "uid://cf2g0vrset11o"
 [node name="CapsuleScn (3)" parent="." unique_id=682909540 instance=ExtResource("17_x31ta")]
 transform = Transform3D(0.1792508, 0, 0.9838034, 0, 1, 0, -0.9838035, 0, 0.17925082, -3.4571228, 0.46870327, 5.913846)
 metadata/asset_placer_res_id = "uid://cf2g0vrset11o"
+
+[node name="tree (3)" type="Node3D" parent="." unique_id=1044693225 instance=ExtResource("16_svvho")]
+transform = Transform3D(0.3560242, 0, 0.93447673, 0, 1, 0, -0.93447685, 0, 0.35602424, -1.9511099, -1.9073486e-06, 16.709824)
+metadata/asset_placer_res_id = "uid://bc33e25gdc71n"
+
+[node name="tree (4)" type="Node3D" parent="." unique_id=1499357871 instance=ExtResource("16_svvho")]
+transform = Transform3D(-0.7578714, 0, -0.652404, 0, 1, 0, 0.65240407, 0, -0.7578715, 3.4714527, 5.599999, 13.899717)
+metadata/asset_placer_res_id = "uid://bc33e25gdc71n"
+
+[node name="Cube (2)" type="Node3D" parent="." unique_id=334593637 instance=ExtResource("7_ykvhj")]
+transform = Transform3D(-0.009185739, 0, 0.99995804, 0, 1, 0, -0.99995816, 0, -0.00918574, -10, 2, 29.000004)
+metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
+
+[node name="Cube (3)" type="Node3D" parent="." unique_id=1591770173 instance=ExtResource("7_ykvhj")]
+transform = Transform3D(-0.009185739, 0, 0.99995804, 0, 1, 0, -0.99995816, 0, -0.00918574, -10, 4, 29.000004)
+metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
+
+[node name="Cube (4)" type="Node3D" parent="." unique_id=371491774 instance=ExtResource("7_ykvhj")]
+transform = Transform3D(-0.009185739, 0, 0.99995804, 0, 1, 0, -0.99995816, 0, -0.00918574, -10, 6, 29.000004)
+metadata/asset_placer_res_id = "uid://dnjrvjljdl02"
+
+[node name="Cube (5)" type="Node3D" parent="." unique_id=846451221 instance=ExtResource("7_ykvhj")]
+transform = Transform3D(-0.009185739, 0, 0.99995804, 0, 1, 0, -0.99995816, 0, -0.00918574, -10, 8, 29.000004)
+metadata/asset_placer_res_id = "uid://dnjrvjljdl02"

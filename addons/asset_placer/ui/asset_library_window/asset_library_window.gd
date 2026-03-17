@@ -35,7 +35,7 @@ func _ready():
 	empty_collection_view_add_folder_btn.pressed.connect(show_folder_dialog)
 	empty_view_add_folder_btn.pressed.connect(show_folder_dialog)
 	presenter.show_empty_view.connect(show_empty_view)
-	presenter.sync_state_change.connect(func(v): show_sync_in_progress(v))
+	presenter.synchronizer.sync_state_change.connect(func(v): show_sync_in_progress(v))
 
 	presenter.on_ready()
 	add_folder_button.pressed.connect(show_folder_dialog)

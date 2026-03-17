@@ -144,7 +144,7 @@ func transform_preview(
 			return true
 
 		AssetPlacerPresenter.TransformMode.Move:
-			_presenter.move_plane_up(direction * 0.2)
+			_presenter.move_plane_up(direction)
 			return true
 		_:
 			return false

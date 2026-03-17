@@ -279,8 +279,18 @@ func get_selected_node() -> Node3D:
 	return _selected_node
 
 
-func move_plane_up(value: float):
+func move_plane_up(direction: int):
 	if placement_mode is GapPlacementMode.PlanePlacement:
 		var plane_options = placement_mode.plane_options
-		plane_options.origin += plane_options.normal * value
+		var step = options.snapping_grid_step if options.snapping_enabled else 0.2
+		var new_origin = plane_options.origin + plane_options.normal * (direction * step)
+		
+		# Apply grid snapping if enabled
+		if options.snapping_enabled:
+			var normal = plane_options.normal.normalized()
+			var distance_along_normal = normal.dot(new_origin)
+			var snapped_distance = round(distance_along_normal / options.snapping_grid_step) * options.snapping_grid_step
+			new_origin = normal * snapped_distance
+		
+		plane_options.origin = new_origin
 		placement_mode = GapPlacementMode.PlanePlacement.new(plane_options)
