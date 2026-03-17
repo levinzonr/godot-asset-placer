@@ -1,5 +1,23 @@
 # Godot Asset Placer Changelog
 
+## 1.4.0
+
+### ✨ New Features
+
+- **#85** - Added floating dock support for Godot 4.6+ - The Asset Placer dock can now float and be positioned freely in the editor by @Sr3qt
+- **#84** - Added support for `.scn` files - Legacy Godot scene files are now recognized and can be placed
+- **#78** - Plane placement now honors grid snapping settings - When moving the plane vertically in translation mode, it respects the configured grid snap value instead of using arbitrary increments
+
+### 🐛 Fixed
+
+- **#83** - Fixed resource leaks on editor exit:
+  - Fixed viewport overlay resource leakage
+  - Refactored and removed `PlanePlacer` class to eliminate circular references
+  - Removed orphaned Label node creation in `SpinBoxVector3` component
+  - Improved cleanup of static singleton references and signal connections
+
+---
+
 ## 1.3.1
 
 ### Fixed
