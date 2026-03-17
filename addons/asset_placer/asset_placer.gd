@@ -15,15 +15,13 @@ var preview_material = load("res://addons/asset_placer/utils/preview_material.tr
 var _is_node_transform_mode: bool = false
 var _original_transform: Transform3D
 var _strategy: AssetPlacementStrategy
-var _plane_placer: PlanePlacer
 var _presenter: AssetPlacerPresenter:
 	get:
 		return AssetPlacerPresenter._instance
 
 
-func _init(undo_redo: EditorUndoRedoManager, plane_placer: PlanePlacer):
+func _init(undo_redo: EditorUndoRedoManager):
 	self.undo_redo = undo_redo
-	self._plane_placer = plane_placer
 
 
 func start_placement(root: Window, asset: AssetResource, placement: GapPlacementMode):
@@ -146,7 +144,7 @@ func transform_preview(
 			return true
 
 		AssetPlacerPresenter.TransformMode.Move:
-			_plane_placer.move_plane_up(direction * 0.2)
+			_presenter.move_plane_up(direction * 0.2)
 			return true
 		_:
 			return false

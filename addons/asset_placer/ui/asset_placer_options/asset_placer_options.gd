@@ -28,15 +28,7 @@ func _ready():
 	presenter = AssetPlacerPresenter._instance
 	presenter.options_changed.connect(set_options)
 	presenter.parent_changed.connect(show_parent)
-	presenter.placement_mode_changed.connect(
-		func(m):
-			if m is GapPlacementMode.PlanePlacement:
-				placement_mode_options_button.select(1)
-			if m is GapPlacementMode.SurfacePlacement:
-				placement_mode_options_button.select(0)
-			if m is GapPlacementMode.Terrain3DPlacement:
-				placement_mode_options_button.select(2)
-	)
+	presenter.placement_mode_changed.connect(show_placement_mode)
 
 	placement_mode_options_button.item_selected.connect(
 		func(id):
@@ -72,17 +64,7 @@ func _ready():
 			presenter.placement_mode = GapPlacementMode.PlanePlacement.new(plane)
 	)
 
-	presenter.placement_mode_changed.connect(
-		func(mode: GapPlacementMode):
-			if mode is GapPlacementMode.PlanePlacement:
-				plane_axis_container.show()
-				plane_origin_container.show()
-				plane_axis_spin_box.set_value_no_signal(mode.plane_options.normal)
-				plane_origin_spin_box.set_value_no_signal(mode.plane_options.origin)
-			else:
-				plane_axis_container.hide()
-				plane_origin_container.hide()
-	)
+	
 
 	parent_button.pressed.connect(
 		func(): EditorInterface.popup_node_selector(presenter.select_parent, [&"Node3D"])
@@ -108,6 +90,23 @@ func show_parent(parent: NodePath):
 		parent_button.text = "No parent selected"
 		parent_button.icon = EditorIconTexture2D.new("NodeWarning")
 
+
+func show_placement_mode(mode: GapPlacementMode):
+	if mode is GapPlacementMode.PlanePlacement:
+		placement_mode_options_button.select(1)
+		plane_axis_container.show()
+		plane_origin_container.show()
+		plane_axis_spin_box.set_value_no_signal(mode.plane_options.normal)
+		plane_origin_spin_box.set_value_no_signal(mode.plane_options.origin)
+		
+	else:
+		plane_axis_container.hide()
+		plane_origin_container.hide()
+	if mode is GapPlacementMode.SurfacePlacement:
+		placement_mode_options_button.select(0)
+	if mode is GapPlacementMode.Terrain3DPlacement:
+		placement_mode_options_button.select(2)
+	
 
 func set_options(options: AssetPlacerOptions):
 	random_asset_check_box.set_pressed_no_signal(options.enable_random_placement)

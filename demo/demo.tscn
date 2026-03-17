@@ -441,18 +441,18 @@ metadata/asset_placer_res_id = "uid://bc33e25gdc71n"
 transform = Transform3D(-0.9069382, 0, -0.42126673, 0, 1, 0, 0.4212668, 0, -0.9069383, -10.497179, 0.46870327, -2.1419191)
 metadata/asset_placer_res_id = "uid://bc33e25gdc71n"
 
-[node name="CapsuleScn" type="Node3D" parent="." unique_id=1755364706 instance=ExtResource("17_x31ta")]
+[node name="CapsuleScn" parent="." unique_id=1755364706 instance=ExtResource("17_x31ta")]
 transform = Transform3D(0.5093596, 0, 0.86055374, 0, 1, 0, -0.86055386, 0, 0.50935966, -2.5120087, 0.46870327, 7.5792737)
 metadata/asset_placer_res_id = "uid://cf2g0vrset11o"
 
-[node name="CapsuleScn (1)" type="Node3D" parent="." unique_id=264897845 instance=ExtResource("17_x31ta")]
+[node name="CapsuleScn (1)" parent="." unique_id=264897845 instance=ExtResource("17_x31ta")]
 transform = Transform3D(-0.70984375, 0, 0.7043591, 0, 1, 0, -0.7043592, 0, -0.7098438, 5.3466005, 0.46870327, 5.9007626)
 metadata/asset_placer_res_id = "uid://cf2g0vrset11o"
 
-[node name="CapsuleScn (2)" type="Node3D" parent="." unique_id=542007933 instance=ExtResource("17_x31ta")]
+[node name="CapsuleScn (2)" parent="." unique_id=542007933 instance=ExtResource("17_x31ta")]
 transform = Transform3D(0.5779706, 0, -0.81605756, 0, 1, 0, 0.8160577, 0, 0.5779707, -6.2885227, 0.46870327, 4.0512977)
 metadata/asset_placer_res_id = "uid://cf2g0vrset11o"
 
-[node name="CapsuleScn (3)" type="Node3D" parent="." unique_id=682909540 instance=ExtResource("17_x31ta")]
+[node name="CapsuleScn (3)" parent="." unique_id=682909540 instance=ExtResource("17_x31ta")]
 transform = Transform3D(0.1792508, 0, 0.9838034, 0, 1, 0, -0.9838035, 0, 0.17925082, -3.4571228, 0.46870327, 5.913846)
 metadata/asset_placer_res_id = "uid://cf2g0vrset11o"

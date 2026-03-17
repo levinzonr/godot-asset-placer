@@ -32,9 +32,6 @@ func set_value_no_signal(vector: Vector3):
 
 
 func _add_spinbox(axis: String, spinbox: SpinBox, min: float, max: float) -> void:
-	var label := Label.new()
-	label.text = "%s:" % axis
-	label.size = Vector2(10, 0)
 	spinbox.prefix = "%s:" % axis
 	spinbox.min_value = min
 	spinbox.max_value = max

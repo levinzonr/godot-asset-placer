@@ -5,7 +5,6 @@ const ADDON_PATH = "res://addons/asset_placer"
 
 var synchronizer: Synchronize
 var overlay: Control
-var plane_placer: PlanePlacer
 var settings_repository: AssetPlacerSettingsRepository
 var current_settings: AssetPlacerSettings
 var plugin_path: String:
@@ -50,9 +49,8 @@ func _enter_tree():
 		load("res://addons/asset_placer/ui/plane_preview/plan_preview.tscn").instantiate()
 	)
 	get_tree().root.add_child(_plane_preview)
-	plane_placer = PlanePlacer.new(_presenter, _plane_preview)
 
-	_asset_placer = AssetPlacer.new(get_undo_redo(), plane_placer)
+	_asset_placer = AssetPlacer.new(get_undo_redo())
 	synchronizer = Synchronize.new(_folder_repository, _assets_repository)
 	scene_changed.connect(_handle_scene_changed)
 	_init_parent_scene.call_deferred()

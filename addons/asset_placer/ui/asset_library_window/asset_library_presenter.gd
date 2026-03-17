@@ -4,7 +4,6 @@ extends RefCounted
 signal assets_loaded(assets: Array[AssetResource])
 signal asset_selection_change
 signal show_filter_info(size: int)
-signal show_sync_active(bool)
 signal show_empty_view(type: EmptyType)
 
 enum EmptyType { Search, Collection, All, None }
@@ -31,7 +30,6 @@ func on_ready():
 	show_filter_info.emit(0)
 	assets_repository.assets_changed.connect(_filter_by_collections_and_query)
 	_filter_by_collections_and_query()
-	synchronizer.sync_state_change.connect(func(v): show_sync_active.emit(v))
 
 
 func add_asset_folder(path: String):

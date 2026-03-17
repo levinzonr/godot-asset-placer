@@ -277,3 +277,10 @@ func is_node_transform_mode() -> bool:
 
 func get_selected_node() -> Node3D:
 	return _selected_node
+
+
+func move_plane_up(value: float):
+	if placement_mode is GapPlacementMode.PlanePlacement:
+		var plane_options = placement_mode.plane_options
+		plane_options.origin += plane_options.normal * value
+		placement_mode = GapPlacementMode.PlanePlacement.new(plane_options)
