@@ -12,11 +12,13 @@ var library: AssetLibrary
 var folder_repository: FolderRepository
 var assets_repository: AssetsRepository
 var synchronizer: Synchronize
+var is_sort_ascending := true
 
 var _active_collections: Array[AssetCollection] = []
 var _filtered_assets: Array[AssetResource] = []
 var _current_assets: Array[AssetResource]
 var _current_query: String
+var _current_sort_method: AssetSortBy.SortMethod
 
 
 func _init():
@@ -102,6 +104,11 @@ func toggle_collection_filter(collection: AssetCollection, enabled: bool):
 	_filter_by_collections_and_query()
 
 
+func on_sort_method_change(method: AssetSortBy.SortMethod):
+	_current_sort_method = method
+	_filter_by_collections_and_query()
+
+
 func _filter_by_collections_and_query():
 	var all = assets_repository.get_all_assets()
 	var filtered: Array[AssetResource] = []
@@ -115,6 +122,7 @@ func _filter_by_collections_and_query():
 		if matches_query and belongs_to_collection:
 			filtered.push_back(asset)
 
+	filtered.sort_custom(AssetSortBy.get_sort_function(_current_sort_method, is_sort_ascending))
 	if filtered.is_empty():
 		if _active_collections.is_empty() && _current_query.is_empty():
 			show_empty_view.emit(EmptyType.All)
