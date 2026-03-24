@@ -18,7 +18,9 @@ enum TransformMode { None, Rotate, Scale, Move }
 static var instance: AssetPlacerPresenter
 static var transform_step: float = 0.1
 
-var options: AssetPlacerOptions
+var options: AssetPlacerOptions:
+	get:
+		return AssetPlacerOptionsManager.get_options()
 var transform_mode: TransformMode = TransformMode.None
 var current_assets: Array[AssetResource]
 var placement_mode: GapPlacementMode = GapPlacementMode.SurfacePlacement.new():
@@ -34,7 +36,6 @@ var _selected_node: Node3D
 
 
 func _init():
-	options = AssetPlacerOptions.new()
 	options.changed.connect(_on_options_changed)
 
 	_selected_asset = null

@@ -153,6 +153,8 @@ func _initialize_data_layer():
 	current_settings = settings_repository.get_settings()
 	settings_repository.settings_changed.connect(_react_to_settings_change)
 
+	AssetPlacerOptionsManager.load_options()
+
 	# TODO load library file save path setting
 	var path := AssetLibraryParser.DEFAULT_SAVE_PATH
 	AssetLibraryManager.load_asset_library(path)

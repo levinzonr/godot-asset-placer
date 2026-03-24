@@ -21,7 +21,7 @@ var _presenter: AssetPlacerPresenter:
 
 var _options: AssetPlacerOptions:
 	get:
-		return AssetPlacerPresenter.instance.options
+		return AssetPlacerOptionsManager.get_options()
 
 
 func _init(undo_redo: EditorUndoRedoManager):
