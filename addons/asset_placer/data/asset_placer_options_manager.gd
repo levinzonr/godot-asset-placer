@@ -2,7 +2,6 @@
 class_name AssetPlacerOptionsManager
 extends RefCounted
 
-
 const USER_DATA_SAVE_PATH := "user://asset_placer_options.tres"
 ## Time between AssetPlacerOptions change and save to disk in seconds.
 const TIME_TO_SAVE: float = 1.0

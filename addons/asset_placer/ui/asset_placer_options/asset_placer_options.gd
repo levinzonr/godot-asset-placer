@@ -76,8 +76,6 @@ func _ready():
 			presenter.placement_mode = GapPlacementMode.PlanePlacement.new(plane)
 	)
 
-
-
 	parent_button.pressed.connect(
 		func(): EditorInterface.popup_node_selector(presenter.select_parent, [&"Node3D"])
 	)

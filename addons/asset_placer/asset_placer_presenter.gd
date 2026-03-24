@@ -257,7 +257,6 @@ func move_plane_up(direction: int):
 		var step = options.snapping_grid_step if options.snapping_enabled else 0.2
 		var new_origin = plane_options.origin + plane_options.normal * (direction * step)
 
-
 		# Apply grid snapping if enabled
 		if options.snapping_enabled:
 			var normal = plane_options.normal.normalized()
@@ -267,7 +266,6 @@ func move_plane_up(direction: int):
 				* options.snapping_grid_step
 			)
 			new_origin = normal * snapped_distance
-
 
 		plane_options.origin = new_origin
 		placement_mode = GapPlacementMode.PlanePlacement.new(plane_options)
