@@ -4,7 +4,8 @@ extends Control
 var presenter: AssetPlacerPresenter
 var options: AssetPlacerOptions:
 	get:
-		return presenter.options
+		return AssetPlacerOptionsManager.get_options()
+
 @onready var grid_snapping_checkbox = %GridSnappingCheckbox
 @onready var grid_snap_value_spin_box: SpinBox = %GridSnapValueSpinBox
 @onready var min_rotation_selector: SpinBoxVector3 = %MinRotationSelector
