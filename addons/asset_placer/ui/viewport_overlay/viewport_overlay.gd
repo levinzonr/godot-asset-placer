@@ -38,7 +38,7 @@ func _ready():
 	presenter.show_error.connect(show_error)
 	presenter.ready()
 
-	presenter.options.changed.connect(show_options)
+	AssetPlacerOptionsManager.get_options().changed.connect(show_options)
 	show_options()
 
 	set_mode(presenter.transform_mode)
@@ -93,8 +93,7 @@ func show_settings(settings: AssetPlacerSettings):
 
 
 func show_options():
-	var options := AssetPlacerPresenter._instance.options
-	snapping_switch.button_pressed = options.grid_snap_enabled
+	snapping_switch.button_pressed = AssetPlacerOptionsManager.get_options().grid_snap_enabled
 
 
 func set_axis(vector: Vector3):

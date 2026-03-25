@@ -89,7 +89,7 @@ func _show_terrain_3d_selector():
 
 
 func show_parent(parent: NodePath):
-	if presenter.options.use_selected_as_parent:
+	if options.use_selected_as_parent:
 		parent_button.disabled = true
 		parent_button.text = "From selection"
 		parent_button.icon = EditorIconTexture2D.new("Node3D")

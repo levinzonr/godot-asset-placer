@@ -87,7 +87,7 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 
 		var local_bottom = Vector3(0, preview_aabb.position.y, 0)
 
-		if _presenter.options.use_asset_origin:
+		if _options.use_asset_origin:
 			local_bottom = Vector3.ZERO
 
 		var bottom_world = new_transform * local_bottom
