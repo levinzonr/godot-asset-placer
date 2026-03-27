@@ -15,12 +15,25 @@ static func get_options():
 
 
 static func load_options():
-	if ResourceLoader.exists(USER_DATA_SAVE_PATH, "AssetPlacerOptions"):
-		_loaded_options = load(USER_DATA_SAVE_PATH)
-	else:
-		_loaded_options = AssetPlacerOptions.new()
+	var is_first_load := not is_instance_valid(_loaded_options)
+	if not is_first_load and is_instance_valid(_save_timer):
+		_save_options()
 
-	_loaded_options.changed.connect(_queue_save)
+	var new_options := AssetPlacerOptions.new()
+	if ResourceLoader.exists(USER_DATA_SAVE_PATH, "AssetPlacerOptions"):
+		new_options = load(USER_DATA_SAVE_PATH)
+
+	if is_first_load:
+		_loaded_options = new_options
+		_loaded_options.changed.connect(_queue_save)
+	else:
+		_loaded_options.changed.disconnect(_queue_save)
+		_move_signal_connections(new_options)
+
+		_loaded_options = new_options
+		_loaded_options.emit_changed()
+
+		_loaded_options.changed.connect(_queue_save)
 
 
 static func _queue_save():
@@ -40,3 +53,11 @@ static func _save_options():
 	_save_timer = null
 
 	ResourceSaver.save(_loaded_options, USER_DATA_SAVE_PATH)
+
+
+static func _move_signal_connections(other: AssetPlacerOptions):
+	for _signal in _loaded_options.get_signal_list():
+		for connection in _loaded_options.get_signal_connection_list(_signal["name"]):
+			_loaded_options.disconnect(_signal["name"], connection["callable"])
+			if is_instance_valid(other):
+				other.connect(_signal["name"], connection["callable"])
