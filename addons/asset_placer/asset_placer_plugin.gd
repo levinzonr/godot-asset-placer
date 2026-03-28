@@ -11,7 +11,6 @@ var plugin_path: String:
 	get():
 		return get_script().resource_path.get_base_dir()
 
-var _folder_repository: FolderRepository
 var _presenter: AssetPlacerPresenter
 var _asset_placer: AssetPlacer
 var _collection_repository: AssetCollectionRepository
@@ -50,7 +49,7 @@ func _enter_tree():
 	get_tree().root.add_child(_plane_preview)
 
 	_asset_placer = AssetPlacer.new(get_undo_redo())
-	synchronizer = Synchronize.new(_folder_repository)
+	synchronizer = Synchronize.new()
 	scene_changed.connect(_handle_scene_changed)
 	_init_parent_scene.call_deferred()
 	_presenter.asset_selected.connect(start_placement)
@@ -155,7 +154,6 @@ func _initialize_data_layer():
 	var path := AssetLibraryParser.DEFAULT_SAVE_PATH
 	AssetLibraryManager.load_asset_library(path)
 
-	_folder_repository = FolderRepository.new()
 	_collection_repository = AssetCollectionRepository.new()
 
 

@@ -2,23 +2,21 @@ class_name FolderItemPresenter
 extends RefCounted
 
 var folder: AssetFolder
-var folder_repository: FolderRepository
 var synchronizer: Synchronize
 
 
 func _init(target_folder: AssetFolder):
 	folder = target_folder
-	folder_repository = FolderRepository.instance
-	synchronizer = Synchronize.new(folder_repository)
+	synchronizer = Synchronize.new()
 
 
 func save():
-	folder_repository.update(folder)
+	AssetLibraryManager.get_asset_library().update_folder(folder)
 
 
-func delete_folder():
+func delete():
 	var lib := AssetLibraryManager.get_asset_library()
-	folder_repository.delete(folder.path)
+	lib.remove_folder_by_path(folder.path)
 	for asset in lib.get_assets():
 		if asset.folder_path == folder.path:
 			lib.remove_asset(asset)

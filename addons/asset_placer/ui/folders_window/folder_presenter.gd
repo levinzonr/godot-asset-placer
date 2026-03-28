@@ -3,29 +3,28 @@ extends RefCounted
 
 signal folders_loaded(folders: Array[AssetFolder])
 
-var folder_repository: FolderRepository
 var collection_repository: AssetCollectionRepository
 
 
 func _init():
-	folder_repository = FolderRepository.instance
 	collection_repository = AssetCollectionRepository.instance
 
 
 func _ready():
-	folders_loaded.emit(folder_repository.get_all())
+	var lib := AssetLibraryManager.get_asset_library()
+	folders_loaded.emit(lib.get_folders())
 
-	folder_repository.folder_changed.connect(_reload_folders)
+	lib.folders_changed.connect(_reload_folders)
 	collection_repository.collections_changed.connect(_reload_folders)
 
 
 func _reload_folders():
-	folders_loaded.emit(folder_repository.get_all())
+	folders_loaded.emit(AssetLibraryManager.get_asset_library().get_folders())
 
 
 func add_folder(path: String):
 	if path.get_extension().is_empty():
-		folder_repository.add(path)
+		AssetLibraryManager.get_asset_library().add_folder(path)
 
 
 func add_folders(paths: PackedStringArray):
