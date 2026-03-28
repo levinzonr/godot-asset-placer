@@ -3,19 +3,13 @@ extends RefCounted
 
 signal folders_loaded(folders: Array[AssetFolder])
 
-var collection_repository: AssetCollectionRepository
-
-
-func _init():
-	collection_repository = AssetCollectionRepository.instance
-
 
 func _ready():
 	var lib := AssetLibraryManager.get_asset_library()
 	folders_loaded.emit(lib.get_folders())
 
 	lib.folders_changed.connect(_reload_folders)
-	collection_repository.collections_changed.connect(_reload_folders)
+	lib.collections_changed.connect(_reload_folders)
 
 
 func _reload_folders():

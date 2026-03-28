@@ -7,9 +7,8 @@ static func pick_parent(root: Node3D, asset: AssetResource, auto_group: bool) ->
 	if not auto_group or primary_id < 0:
 		return root
 
-	var id = primary_id
-	var repository = AssetCollectionRepository.instance
-	var collection = repository.find_by_id(id)
+	var lib := AssetLibraryManager.get_asset_library()
+	var collection = lib.get_collection(primary_id)
 	var expected_name = collection.name.capitalize()
 	var existing_chidren = root.find_children(expected_name, "Node3D", true)
 	var group_parent: Node3D

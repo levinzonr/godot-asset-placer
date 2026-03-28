@@ -28,16 +28,10 @@ var _asset_library: AssetLibrary:
 	get:
 		return AssetLibraryManager.get_asset_library()
 
-var _collections_repository: AssetCollectionRepository
-
 var _assets: Array[AssetResource] = []
 var _selected_indices: PackedInt32Array = []
 var _batch_mode: bool = false
 var _last_toggled_index: int = -1
-
-
-func _init():
-	_collections_repository = AssetCollectionRepository.instance
 
 
 func ready(initial_asset_id: String = ""):
@@ -182,7 +176,7 @@ func _emit_selection():
 
 func _emit_collections():
 	var collections: Array[CollectionState] = []
-	var all_collections := _collections_repository.get_collections()
+	var all_collections := _asset_library.get_collections()
 	var total := _selected_indices.size()
 
 	var collection_counts: Dictionary = {}

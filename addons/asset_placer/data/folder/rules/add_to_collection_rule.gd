@@ -14,9 +14,9 @@ func get_rule_name() -> String:
 
 
 func get_rule_description() -> String:
-	var repo = AssetCollectionRepository.instance
-	if repo and collection_id >= 0:
-		var col = repo.find_by_id(collection_id)
+	var lib := AssetLibraryManager.get_asset_library()
+	if lib and collection_id >= 0:
+		var col := lib.get_collection(collection_id)
 		if col:
 			return "Add to: " + col.name
 	return "No collection selected"
@@ -47,13 +47,13 @@ func _create_config_ui(container: Control, on_changed: Callable):
 	option_button.add_item("-- Select Collection --")
 	option_button.set_item_metadata(0, -1)
 
-	var repo = AssetCollectionRepository.instance
-	if repo:
-		var collections = repo.get_collections()
-		var selected_index = 0
+	var lib := AssetLibraryManager.get_asset_library()
+	if lib:
+		var collections := lib.get_collections()
+		var selected_index := 0
 
 		for i in collections.size():
-			var collection = collections[i]
+			var collection := collections[i]
 			option_button.add_item(collection.name)
 			option_button.set_item_metadata(i + 1, collection.id)
 			option_button.set_item_icon(i + 1, _create_color_icon(collection.background_color))

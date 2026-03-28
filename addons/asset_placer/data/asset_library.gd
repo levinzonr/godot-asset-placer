@@ -162,7 +162,47 @@ func has_folder_path(path: String) -> bool:
 	return false
 
 
-func get_highest_id() -> int:
+## Collections
+
+
+func get_collection(id: int) -> AssetCollection:
+	for col in _collections:
+		if col.id == id:
+			return col
+	return null
+
+
+# TODO Should take in an AssetCollection
+func add_collection(name: String, color: Color):
+	var collection := AssetCollection.new(name, color, _get_highest_collection_id() + 1)
+	_collections.append(collection)
+	_queue_emit_collections_changed()
+
+
+func remove_collection(collection: AssetCollection):
+	remove_collection_by_id(collection.id)
+
+
+func remove_collection_by_id(id: int):
+	var new_collections: Array[AssetCollection] = _collections.filter(func(c): return c.id != id)
+	_collections = new_collections
+
+	for asset in _assets:
+		var updated_tags: Array[int] = asset.tags.filter(func(f): return f != id)
+		if updated_tags.size() != asset.tags.size():
+			asset.tags = updated_tags
+
+	_queue_emit_collections_changed()
+
+
+func update_collection(collection: AssetCollection):
+	for i in _collections.size():
+		if _collections[i].id == collection.id:
+			_collections[i] = collection
+	_queue_emit_collections_changed()
+
+
+func _get_highest_collection_id() -> int:
 	var highest := 0
 	for collection in _collections:
 		if collection.id > highest:
