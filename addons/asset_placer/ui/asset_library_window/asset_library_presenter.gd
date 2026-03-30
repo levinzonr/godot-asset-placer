@@ -26,6 +26,7 @@ func _init():
 func on_ready():
 	show_filter_info.emit(0)
 	_asset_library.assets_changed.connect(_filter_by_collections_and_query)
+	_asset_library.folders_changed.connect(sync)
 	_filter_by_collections_and_query()
 
 

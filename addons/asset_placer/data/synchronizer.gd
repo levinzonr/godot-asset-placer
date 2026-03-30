@@ -120,6 +120,8 @@ func add_assets_from_folder(
 func _notify_scan_complete():
 	if _added != 0 || _removed != 0:
 		call_deferred("emit_signal", "sync_complete", _added, _removed, _scanned)
+		# Since Synchronize can run on another thread we need to assure UI has latest updates.
+		AssetLibraryManager.get_asset_library()._queue_emit_assets_changed.call_deferred()
 	_clear_data()
 
 

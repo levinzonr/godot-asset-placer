@@ -16,10 +16,7 @@ func save():
 
 func delete():
 	var lib := AssetLibraryManager.get_asset_library()
-	lib.remove_folder_by_path(folder.path)
-	for asset in lib.get_assets():
-		if asset.folder_path == folder.path:
-			lib.remove_asset(asset)
+	lib.remove_folder(folder)
 
 
 func sync():
