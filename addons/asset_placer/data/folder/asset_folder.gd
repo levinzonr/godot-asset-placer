@@ -1,9 +1,16 @@
 class_name AssetFolder
 extends RefCounted
 
+# Data
+
 var path: String
 var include_subfolders: bool
 var rules: Array[AssetPlacerFolderRule] = []
+
+# UI
+
+## Intended to be read on UI creation. Don't call AssetLibrary.update_folder after changing.
+var is_rules_visible := false
 
 
 func _init(folder_path: String = "", include_subs: bool = false):

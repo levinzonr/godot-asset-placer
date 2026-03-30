@@ -55,12 +55,15 @@ func set_folder(folder: AssetFolder):
 
 	path_label.text = folder.path
 	subfolders_checkbox.button_pressed = folder.include_subfolders
+	rules_margin.visible = folder.is_rules_visible
 	_update_rules_button()
 	_refresh_rules()
 
 
 func _toggle_rules():
 	rules_margin.visible = not rules_margin.visible
+	if _presenter:
+		_presenter.toggle_rules_visibility()
 	_update_rules_button()
 
 

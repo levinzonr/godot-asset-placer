@@ -28,6 +28,10 @@ func set_include_subfolders(include: bool):
 	save()
 
 
+func toggle_rules_visibility():
+	folder.is_rules_visible = not folder.is_rules_visible
+
+
 func add_rule(rule: AssetPlacerFolderRule):
 	folder.add_rule(rule)
 	save()
