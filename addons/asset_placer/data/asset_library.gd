@@ -94,6 +94,14 @@ func has_asset_path(asset_path: String):
 	return _assets.any(func(item: AssetResource): return item.get_path() == asset_path)
 
 
+## Returns true if there is an AssetsFolder that adds the given asset.
+func asset_has_folder(asset: AssetResource) -> bool:
+	for folder in _folders:
+		if folder.has_asset(asset):
+			return true
+	return false
+
+
 ## Folders
 
 
@@ -135,13 +143,11 @@ func update_folder(folder: AssetFolder):
 	_queue_emit_folders_changed()
 
 
+## Returns true if AssetLibrary has an AssetFolder with the given path.
 func has_folder_path(path: String) -> bool:
 	for folder in _folders:
 		if folder.path == path:
 			return true
-		if folder.include_subfolders && path.contains(folder.path):
-			return true
-
 	return false
 
 

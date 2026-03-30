@@ -49,72 +49,41 @@ func sync_folder(folder: AssetFolder):
 
 
 func _sync_folder(folder: AssetFolder):
-	_clear_invalid_assets()
-	_clear_unreachable_assets()
-	add_assets_from_folder(folder.path, folder.include_subfolders, folder.get_rules())
+	_update_assets()
+	add_assets_from_folder(folder)
 
 
 func _sync_all():
-	_clear_unreachable_assets()
-	_clear_invalid_assets()
+	_update_assets()
 	for folder in AssetLibraryManager.get_asset_library().get_folders():
-		_sync_folder(folder)
+		add_assets_from_folder(folder)
 
 
-func add_assets_from_folder(
-	folder_path: String, recursive: bool, rules: Array[AssetPlacerFolderRule]
-):
+func add_assets_from_folder(folder: AssetFolder, override_path := ""):
+	var folder_path := folder.path if override_path.is_empty() else override_path
 	var lib := AssetLibraryManager.get_asset_library()
 	var dir := DirAccess.open(folder_path)
 	if not dir:
 		push_warning("Could not open folder: %s" % folder_path)
 		return
 
-	var tags: Array[int] = []
 	for file in dir.get_files():
 		_scanned += 1
-		var path := folder_path.path_join(file)
-		var file_name = file.get_file()
-		var passed_filter := true
-		var uid = ResourceIdCompat.path_to_uid(path)
-
-		if not AssetResource.is_file_supported(file):
+		if not AssetResource.is_file_supported(file) or not folder.name_passes_filters(file.get_file()):
 			continue
 
-		# Check if file passes all filters
-		for rule in rules:
-			if not rule.do_filter(file_name):
-				passed_filter = false
-				break
-
-		if passed_filter:
-			var asset := AssetResource.new(uid, file.get_file(), [], folder_path)
-			var added = lib.add_asset(asset)
-
-			if added:
-				# New asset - apply after_added rules
-				for rule in rules:
-					asset = rule.do_after_asset_added(asset)
-				lib.update_asset(asset)
+		var uid = ResourceIdCompat.path_to_uid(folder_path.path_join(file))
+		if not lib.has_asset_id(uid):
+			var asset := AssetResource.new(uid, file, [], folder_path)
+			for rule in folder.get_rules():
+				asset = rule.do_after_asset_added(asset)
+			if lib.add_asset(asset):
 				_added += 1
-			elif rules.size() > 0:
-				# Existing asset - apply after_added rules
-				var existing = lib.get_asset(uid)
-				if existing:
-					for rule in rules:
-						existing = rule.do_after_asset_added(existing)
-					lib.update_asset(existing)
-		else:
-			# File doesn't pass filter - delete if exists
-			var existing = lib.get_asset(uid)
-			if existing:
-				lib.remove_asset(existing)
-				_removed += 1
 
-	if recursive:
+	if folder.include_subfolders:
 		for sub_dir in dir.get_directories():
 			var path: String = folder_path.path_join(sub_dir)
-			add_assets_from_folder(path, true, rules)
+			add_assets_from_folder(folder, path)
 
 
 func _notify_scan_complete():
@@ -125,37 +94,25 @@ func _notify_scan_complete():
 	_clear_data()
 
 
-func _clear_unreachable_assets():
+func _update_assets():
 	var lib := AssetLibraryManager.get_asset_library()
 	var assets: Array[AssetResource] = lib.get_assets().duplicate()
 	for asset in assets:
-		var path := asset.folder_path
-		if path.is_empty():
-			continue
-		var folder := lib.get_folder(path)
-		if folder == null or not _is_asset_reachable_from_folder(asset, folder):
-			lib.remove_asset(asset)
-
-
-func _is_asset_reachable_from_folder(asset: AssetResource, folder: AssetFolder) -> bool:
-	var asset_folder_path := asset.folder_path
-	var folder_path := folder.path
-	if folder_path == asset_folder_path:
-		return true
-
-	if folder.include_subfolders and asset_folder_path.begins_with(folder_path + "/"):
-		return true
-
-	return false
-
-
-func _clear_invalid_assets():
-	var lib := AssetLibraryManager.get_asset_library()
-	var assets: Array[AssetResource] = lib.get_assets().duplicate()
-	for asset in assets:
-		if not asset.has_resource():
+		if not _is_asset_valid(asset):
 			_removed += 1
 			lib.remove_asset(asset)
+			continue
+
+		for folder in lib.get_folders():
+			if folder.has_asset(asset):
+				for rule in folder.get_rules():
+					asset = rule.do_after_asset_added(asset)
+		lib.update_asset(asset)
+
+
+func _is_asset_valid(asset: AssetResource):
+	var lib := AssetLibraryManager.get_asset_library()
+	return asset.has_resource() and lib.asset_has_folder(asset)
 
 
 func _clear_data():

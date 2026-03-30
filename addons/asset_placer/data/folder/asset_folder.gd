@@ -39,6 +39,23 @@ func remove_rule_at(index: int):
 		rules.remove_at(index)
 
 
+## Returns true if given strings passes at least one filter rule.
+func name_passes_filters(name: String) -> bool:
+	for rule in rules:
+		if rule.do_filter(name):
+			return true
+	return rules.is_empty()
+
+
+## Returns true if an asset is added by the folder.
+func has_asset(asset: AssetResource):
+	if not name_passes_filters(asset.name):
+		return false
+	var is_parent_folder := path == asset.folder_path
+	var is_sub_folder := include_subfolders and asset.folder_path.begins_with(path.path_join(""))
+	return is_parent_folder or is_sub_folder
+
+
 ## Returns the number of configured rules
 func get_rule_count() -> int:
 	return rules.size()
