@@ -38,10 +38,11 @@ func _create_config_ui(container: Control, on_changed: Callable):
 	line_edit.custom_minimum_size.x = 200
 	line_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
-	line_edit.text_changed.connect(
-		func(new_text):
-			pattern = new_text
-			on_changed.call(self)
+	line_edit.text_submitted.connect(
+		func(new_text: String):
+			if pattern != new_text:
+				pattern = new_text
+				on_changed.call(self)
 	)
 
 	container.add_child(line_edit)

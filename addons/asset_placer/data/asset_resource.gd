@@ -6,16 +6,15 @@ var id: String
 var tags: Array[int]
 var folder_path: String
 var primary_collection: int = -1
-var shallow_collections: Array[AssetCollection]:
-	get():
-		var shallow: Array[AssetCollection] = []
-		for tag_id in tags:
-			shallow.push_back(AssetCollection.new("name", Color.TRANSPARENT, tag_id))
-		return shallow
 
 var _resource: Resource = null
 ## If _resource fails to load, don't try to load it anymore
 var _failed_load := false
+
+
+## Checks whether the given filename is supported as a resource.
+static func is_file_supported(file: String) -> bool:
+	return file.get_extension() in ["tscn", "scn", "glb", "fbx", "obj", "gltf", "blend"]
 
 
 func _init(
@@ -25,11 +24,11 @@ func _init(
 	p_folder_path: String = "",
 	p_primary_collection: int = -1
 ):
-	self.name = p_name
-	self.id = res_id
-	self.tags = p_tags
-	self.folder_path = p_folder_path
-	self.primary_collection = p_primary_collection
+	name = p_name
+	id = res_id
+	tags = p_tags
+	folder_path = p_folder_path
+	primary_collection = p_primary_collection
 
 
 func get_primary_collection() -> int:
@@ -74,3 +73,20 @@ func belongs_to_some_collection(collections: Array[AssetCollection]) -> bool:
 	return collections.any(
 		func(collection: AssetCollection): return self.belongs_to_collection(collection)
 	)
+
+
+## Adds a tag to this asset. Does nothing if it already has new_tag.
+func add_tag(new_tag: int):
+	if not new_tag in tags:
+		tags.append(new_tag)
+
+
+## Adds multiple new tags to this asset. Skips tags it already has.
+func add_tags(new_tags: Array[int]):
+	for new_tag in new_tags:
+		add_tag(new_tag)
+
+
+## Removes a tag from this asset. Does nothing if it doesn't have tag.
+func remove_tag(tag: int):
+	tags.erase(tag)

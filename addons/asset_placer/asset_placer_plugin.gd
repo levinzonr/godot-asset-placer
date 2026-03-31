@@ -11,11 +11,8 @@ var plugin_path: String:
 	get():
 		return get_script().resource_path.get_base_dir()
 
-var _folder_repository: FolderRepository
 var _presenter: AssetPlacerPresenter
 var _asset_placer: AssetPlacer
-var _assets_repository: AssetsRepository
-var _collection_repository: AssetCollectionRepository
 var _updater: PluginUpdater
 var _async: AssetPlacerAsync
 var _asset_placer_window: AssetLibraryPanel
@@ -27,7 +24,6 @@ var _dock: MarginContainer
 var _asset_placer_button: Button
 
 var _migration_collection_id = null
-var _data_source: AssetLibraryDataSource
 
 
 func _enable_plugin():
@@ -41,6 +37,7 @@ func _disable_plugin():
 func _enter_tree():
 	_initialize_data_layer()
 	_run_migrations()
+
 	_async = AssetPlacerAsync.new()
 	_presenter = AssetPlacerPresenter.new()
 	AssetPlacerDockPresenter.new()
@@ -51,7 +48,7 @@ func _enter_tree():
 	get_tree().root.add_child(_plane_preview)
 
 	_asset_placer = AssetPlacer.new(get_undo_redo())
-	synchronizer = Synchronize.new(_folder_repository, _assets_repository)
+	synchronizer = Synchronize.new()
 	scene_changed.connect(_handle_scene_changed)
 	_init_parent_scene.call_deferred()
 	_presenter.asset_selected.connect(start_placement)
@@ -113,6 +110,9 @@ func _exit_tree():
 	_updater.update_ready.disconnect(_show_update_available)
 	overlay.queue_free()
 	_plane_preview.queue_free()
+
+	AssetLibraryManager.free_library()
+
 	settings_repository.settings_changed.disconnect(_react_to_settings_change)
 	_file_system.resources_reimported.disconnect(_react_to_reimorted_files)
 	_presenter.asset_selected.disconnect(start_placement)
@@ -152,10 +152,10 @@ func _initialize_data_layer():
 	settings_repository = AssetPlacerSettingsRepository.new()
 	current_settings = settings_repository.get_settings()
 	settings_repository.settings_changed.connect(_react_to_settings_change)
-	_data_source = AssetLibraryDataSource.new(current_settings.asset_library_path)
-	_folder_repository = FolderRepository.new(_data_source)
-	_assets_repository = AssetsRepository.new(_data_source)
-	_collection_repository = AssetCollectionRepository.new(_data_source)
+
+	# TODO load library file save path setting
+	var path := AssetLibraryParser.DEFAULT_SAVE_PATH
+	AssetLibraryManager.load_asset_library(path)
 
 
 func _react_to_settings_change(settings: AssetPlacerSettings):

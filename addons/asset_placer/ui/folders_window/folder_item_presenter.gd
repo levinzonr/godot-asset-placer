@@ -2,27 +2,21 @@ class_name FolderItemPresenter
 extends RefCounted
 
 var folder: AssetFolder
-var folder_repository: FolderRepository
-var asset_repository: AssetsRepository
 var synchronizer: Synchronize
 
 
 func _init(target_folder: AssetFolder):
 	folder = target_folder
-	folder_repository = FolderRepository.instance
-	asset_repository = AssetsRepository.instance
-	synchronizer = Synchronize.new(folder_repository, asset_repository)
+	synchronizer = Synchronize.new()
 
 
 func save():
-	folder_repository.update(folder)
+	AssetLibraryManager.get_asset_library().update_folder(folder)
 
 
 func delete():
-	folder_repository.delete(folder.path)
-	for asset in asset_repository.get_all_assets():
-		if asset.folder_path == folder.path:
-			asset_repository.delete(asset.id)
+	var lib := AssetLibraryManager.get_asset_library()
+	lib.remove_folder(folder)
 
 
 func sync():
@@ -32,6 +26,10 @@ func sync():
 func set_include_subfolders(include: bool):
 	folder.include_subfolders = include
 	save()
+
+
+func toggle_rules_visibility():
+	folder.is_rules_visible = not folder.is_rules_visible
 
 
 func add_rule(rule: AssetPlacerFolderRule):
