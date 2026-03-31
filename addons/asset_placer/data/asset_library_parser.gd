@@ -62,11 +62,8 @@ static func load_library(load_path = DEFAULT_SAVE_PATH) -> AssetLibrary:
 	return AssetLibrary.new(assets, folders, collections)
 
 
-static func save_libray(library: AssetLibrary, save_path = DEFAULT_SAVE_PATH):
-	assert(
-		is_instance_valid(library),
-		"AssetLibraryParser: Cannot save null library."
-	)
+static func save_library(library: AssetLibrary, save_path = DEFAULT_SAVE_PATH):
+	assert(is_instance_valid(library), "AssetLibraryParser: Cannot save null library.")
 
 	var assets_dict: Array[Dictionary] = []
 	var folders_dict: Array[Dictionary] = []
@@ -117,4 +114,3 @@ static func save_libray(library: AssetLibrary, save_path = DEFAULT_SAVE_PATH):
 	var file = FileAccess.open(save_path, FileAccess.WRITE)
 	file.store_string(json)
 	file.close()
-

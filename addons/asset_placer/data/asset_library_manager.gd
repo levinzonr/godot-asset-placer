@@ -52,7 +52,7 @@ static func _save_asset_library():
 
 	assert(is_instance_valid(_asset_library), "Cannot save AssetLibrary when none is loaded.")
 
-	AssetLibraryParser.save_libray(_asset_library, _save_path)
+	AssetLibraryParser.save_library(_asset_library, _save_path)
 
 
 static func _queue_save():

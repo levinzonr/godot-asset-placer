@@ -69,7 +69,7 @@ func add_assets_from_folder(folder: AssetFolder, override_path := ""):
 
 	for file in dir.get_files():
 		_scanned += 1
-		if not AssetResource.is_file_supported(file) or not folder.name_passes_filters(file.get_file()):
+		if not AssetResource.is_file_supported(file) or not folder.name_passes_filters(file):
 			continue
 
 		var uid = ResourceIdCompat.path_to_uid(folder_path.path_join(file))

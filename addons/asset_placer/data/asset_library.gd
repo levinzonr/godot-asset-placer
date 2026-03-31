@@ -1,3 +1,4 @@
+# gdlint: disable=max-public-methods
 @tool
 class_name AssetLibrary
 extends RefCounted
@@ -15,7 +16,12 @@ var _is_folders_changed_queued := false
 var _is_collections_changed_queued := false
 var _is_signal_queued: bool:
 	get:
-		return _is_assets_changed_queued or _is_folders_changed_queued or _is_collections_changed_queued
+		return (
+			_is_assets_changed_queued
+			or _is_folders_changed_queued
+			or _is_collections_changed_queued
+		)
+
 
 func _init(
 	assets: Array[AssetResource], folders: Array[AssetFolder], collections: Array[AssetCollection]
@@ -45,6 +51,7 @@ func get_asset(uid: String) -> AssetResource:
 		if asset.id == uid:
 			return asset
 	return null
+
 
 func add_asset(asset: AssetResource) -> bool:
 	assert(is_instance_valid(asset), "Cannot add null as an AssetResource to AssetLibrary.")
@@ -78,10 +85,7 @@ func update_asset(asset: AssetResource):
 	for i in _assets.size():
 		if _assets[i].id == asset.id:
 			index = i
-	assert(
-		index != -1,
-		"Cannot update asset with with id %s, as it doesn't exist" % asset.id
-	)
+	assert(index != -1, "Cannot update asset with with id %s, as it doesn't exist" % asset.id)
 	_assets[index] = asset
 	_queue_emit_assets_changed()
 
