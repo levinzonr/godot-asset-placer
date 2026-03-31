@@ -193,7 +193,7 @@ func _place_instance(transform: Transform3D, select_after_placement: bool):
 	var parent := AssetParentSelector.pick_parent(scene_root, asset, options.group_automatically)
 
 	if is_instance_valid(parent) and is_instance_valid(asset.get_resource()):
-		undo_redo.create_action("Place Asset: %s" % asset.name)
+		undo_redo.create_action("Place Asset: %s" % asset.name, 0, parent)
 		undo_redo.add_do_method(self, "_do_placement", parent, transform, select_after_placement)
 		undo_redo.add_undo_method(self, "_undo_placement", parent)
 		undo_redo.commit_action()
@@ -230,7 +230,7 @@ func _undo_placement(root: Node3D):
 func _confirm_node_transform():
 	if _is_node_transform_mode and preview_node:
 		# Create undo action for the node transformation
-		undo_redo.create_action("Transform Node: %s" % preview_node.name)
+		undo_redo.create_action("Transform Node: %s" % preview_node.name, 0, preview_node)
 		undo_redo.add_do_method(
 			self, "_do_node_transform", preview_node, preview_node.global_transform
 		)
