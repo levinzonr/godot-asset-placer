@@ -64,8 +64,6 @@ func _ready():
 			presenter.placement_mode = GapPlacementMode.PlanePlacement.new(plane)
 	)
 
-	
-
 	parent_button.pressed.connect(
 		func(): EditorInterface.popup_node_selector(presenter.select_parent, [&"Node3D"])
 	)
@@ -98,7 +96,7 @@ func show_placement_mode(mode: GapPlacementMode):
 		plane_origin_container.show()
 		plane_axis_spin_box.set_value_no_signal(mode.plane_options.normal)
 		plane_origin_spin_box.set_value_no_signal(mode.plane_options.origin)
-		
+
 	else:
 		plane_axis_container.hide()
 		plane_origin_container.hide()
@@ -106,7 +104,7 @@ func show_placement_mode(mode: GapPlacementMode):
 		placement_mode_options_button.select(0)
 	if mode is GapPlacementMode.Terrain3DPlacement:
 		placement_mode_options_button.select(2)
-	
+
 
 func set_options(options: AssetPlacerOptions):
 	random_asset_check_box.set_pressed_no_signal(options.enable_random_placement)

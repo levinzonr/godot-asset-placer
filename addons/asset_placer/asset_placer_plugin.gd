@@ -84,7 +84,9 @@ func _enter_tree():
 			EditorToasterCompat.toast(message)
 	)
 
-	self.overlay = load("res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.tscn").instantiate()
+	self.overlay = (
+		load("res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.tscn").instantiate()
+	)
 	get_editor_interface().get_editor_viewport_3d().add_child(overlay)
 
 	_file_system.resources_reimported.connect(_react_to_reimorted_files)
@@ -140,7 +142,9 @@ func _handle_scene_changed(scene: Node):
 
 
 func _run_migrations():
-	_migration_collection_id = load("res://addons/asset_placer/data/migrations/collection_id_migration.gd")
+	_migration_collection_id = load(
+		"res://addons/asset_placer/data/migrations/collection_id_migration.gd"
+	)
 	_migration_collection_id.new().run()
 
 
