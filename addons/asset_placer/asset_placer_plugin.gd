@@ -7,6 +7,10 @@ var synchronizer: Synchronize
 var overlay: Control
 var settings_repository: AssetPlacerSettingsRepository
 var current_settings: AssetPlacerSettings
+var asset_palette: AssetPalette:
+	get():
+		return AssetPaletteManager.get_asset_palette()
+
 var plugin_path: String:
 	get():
 		return get_script().resource_path.get_base_dir()
@@ -36,6 +40,7 @@ func _disable_plugin():
 
 func _enter_tree():
 	_initialize_data_layer()
+	set_input_event_forwarding_always_enabled()
 	_run_migrations()
 
 	_async = AssetPlacerAsync.new()
@@ -112,6 +117,7 @@ func _exit_tree():
 	_plane_preview.queue_free()
 
 	AssetLibraryManager.free_library()
+	AssetPaletteManager.free_palette()
 
 	settings_repository.settings_changed.disconnect(_react_to_settings_change)
 	_file_system.resources_reimported.disconnect(_react_to_reimorted_files)
@@ -156,6 +162,7 @@ func _initialize_data_layer():
 	# TODO load library file save path setting
 	var path := AssetLibraryParser.DEFAULT_SAVE_PATH
 	AssetLibraryManager.load_asset_library(path)
+	AssetPaletteManager.load_asset_palette()
 
 
 func _react_to_settings_change(settings: AssetPlacerSettings):
@@ -184,6 +191,35 @@ func _on_node_transform_mode_ended():
 	pass
 
 
+func _palette_keycode_to_slot_index(keycode: int) -> int:
+	if keycode >= KEY_1 and keycode <= KEY_9:
+		return keycode - KEY_1
+	if keycode == KEY_0:
+		return 9
+	return -1
+
+
+## Palette: digits 1–9,0 select a slot on palette 0 until active palette is stored elsewhere.
+func _try_handle_palette_hotkeys(event: InputEvent) -> bool:
+	if not event is InputEventKey:
+		return false
+	var ke := event as InputEventKey
+	if not ke.pressed or ke.echo:
+		return false
+	if ke.ctrl_pressed or ke.alt_pressed or ke.meta_pressed:
+		return false
+	var slot: int = _palette_keycode_to_slot_index(ke.keycode)
+	if slot >= 0:
+		var asset_id: String = asset_palette.get_asset_id_for_palette_slot(0, slot)
+		if not asset_id.is_empty():
+			var asset := AssetLibraryManager.get_asset_library().get_asset(asset_id)
+			if asset != null:
+				_presenter.select_asset(asset)
+				return true
+			push_warning("Asset palette: no library asset for id %s" % asset_id)
+	return false
+
+
 func _handle_in_place_transform():
 	if _presenter.is_node_transform_mode():
 		_presenter.end_node_transform_mode()
@@ -205,6 +241,9 @@ func _handle_in_place_transform():
 func _forward_3d_gui_input(viewport_camera, event):
 	if current_settings.bindings[AssetPlacerSettings.Bindings.InPlaceTransform].is_pressed(event):
 		_handle_in_place_transform()
+		return _handled()
+
+	if _try_handle_palette_hotkeys(event):
 		return _handled()
 
 	# Only process other inputs when plugin is active
