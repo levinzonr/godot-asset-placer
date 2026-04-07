@@ -1,3 +1,4 @@
+## In-memory active palette index for the editor session (not persisted, not in palette JSON).
 class_name AssetPaletteSessionState
 extends RefCounted
 

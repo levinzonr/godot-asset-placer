@@ -118,7 +118,6 @@ func _exit_tree():
 	overlay.queue_free()
 	_plane_preview.queue_free()
 
-
 	if palette_session_state != null:
 		palette_session_state.shutdown()
 		palette_session_state = null

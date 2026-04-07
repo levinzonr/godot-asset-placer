@@ -5,6 +5,7 @@ signal palette_changed
 
 const SLOT_COUNT := 10
 
+## Active palette index for the editor lives in AssetPaletteSessionState (in-memory), not here.
 ## Each entry: fixed [SLOT_COUNT] asset id strings; "" means empty slot.
 var _palettes: Array[PackedStringArray] = []
 
