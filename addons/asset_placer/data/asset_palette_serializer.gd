@@ -23,9 +23,7 @@ static func save_palette(palette: AssetPalette, save_path: String) -> void:
 
 	var palette_wrappers: Array[Dictionary] = []
 	for palette_index in palette.get_palette_count():
-		palette_wrappers.append(
-			{"slots": _slots_to_json_array(palette.get_palette(palette_index))}
-		)
+		palette_wrappers.append({"slots": _slots_to_json_array(palette.get_palette(palette_index))})
 
 	var payload = {"version": FORMAT_VERSION, "palettes": palette_wrappers}
 	var json_text = JSON.stringify(payload)

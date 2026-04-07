@@ -198,15 +198,6 @@ func _on_node_transform_mode_ended():
 	pass
 
 
-func _palette_keycode_to_slot_index(keycode: int) -> int:
-	if keycode >= KEY_1 and keycode <= KEY_9:
-		return keycode - KEY_1
-	if keycode == KEY_0:
-		return 9
-	return -1
-
-
-
 func _handle_in_place_transform():
 	if _presenter.is_node_transform_mode():
 		_presenter.end_node_transform_mode()

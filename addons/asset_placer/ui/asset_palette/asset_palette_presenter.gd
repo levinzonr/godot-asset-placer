@@ -4,8 +4,8 @@ extends RefCounted
 
 signal palette_change(slot_assets: Array[AssetResource])
 
-
 var _pallete_index: int = 0
+
 
 ## Call after construction to connect signals and emit [signal palette_change] once with the initial state.
 func ready(palette_index: int) -> void:
@@ -18,10 +18,8 @@ func shutdown() -> void:
 	_disconnect_signals()
 
 
-
 func get_palette_count() -> int:
 	return AssetPaletteManager.get_asset_palette().get_palette_count()
-
 
 
 func set_palette_index(palette_index: int) -> void:
@@ -47,15 +45,11 @@ func get_asset_at_slot(slot_index: int) -> AssetResource:
 func add_or_assign_asset(slot_index: int, asset: AssetResource) -> void:
 	if not is_instance_valid(asset):
 		return
-	AssetPaletteManager.get_asset_palette().set_slot_asset(
-		_pallete_index, slot_index, asset.id
-	)
+	AssetPaletteManager.get_asset_palette().set_slot_asset(_pallete_index, slot_index, asset.id)
 
 
 func remove_slot(slot_index: int) -> void:
-	AssetPaletteManager.get_asset_palette().clear_slot(
-		_pallete_index, slot_index
-	)
+	AssetPaletteManager.get_asset_palette().clear_slot(_pallete_index, slot_index)
 
 
 func swap_slots(slot_a: int, slot_b: int) -> void:
@@ -102,7 +96,9 @@ func _build_resolved_slots() -> Array[AssetResource]:
 	var asset_palette := AssetPaletteManager.get_asset_palette()
 	var asset_library := AssetLibraryManager.get_asset_library()
 	for slot_index in AssetPalette.SLOT_COUNT:
-		var asset_id: String = asset_palette.get_asset_id_for_palette_slot(_pallete_index, slot_index)
+		var asset_id: String = asset_palette.get_asset_id_for_palette_slot(
+			_pallete_index, slot_index
+		)
 		if asset_id.is_empty():
 			resolved_slots.append(null)
 		else:
