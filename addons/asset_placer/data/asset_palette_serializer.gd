@@ -12,69 +12,66 @@ static func load_palette(load_path: String) -> AssetPalette:
 	file.close()
 	if text.strip_edges().is_empty():
 		return AssetPalette.new()
-	var data = JSON.parse_string(text)
-	if typeof(data) != TYPE_DICTIONARY:
+	var parsed = JSON.parse_string(text)
+	if typeof(parsed) != TYPE_DICTIONARY:
 		return AssetPalette.new()
-	return _palette_from_dict(data)
+	return _decode_payload(parsed)
 
 
 static func save_palette(palette: AssetPalette, save_path: String) -> void:
 	assert(is_instance_valid(palette), "AssetPaletteSerializer: Cannot save null palette.")
 
 	var palette_wrappers: Array[Dictionary] = []
-	for i in palette.get_palette_count():
-		palette_wrappers.append({"slots": _serialize_slots(palette.get_palette(i))})
+	for palette_index in palette.get_palette_count():
+		palette_wrappers.append(
+			{"slots": _slots_to_json_array(palette.get_palette(palette_index))}
+		)
 
 	var payload = {"version": FORMAT_VERSION, "palettes": palette_wrappers}
 	var json_text = JSON.stringify(payload)
-	var out = FileAccess.open(save_path, FileAccess.WRITE)
-	if out == null:
+	var output_file = FileAccess.open(save_path, FileAccess.WRITE)
+	if output_file == null:
 		push_warning("AssetPaletteSerializer: could not write %s" % save_path)
 		return
-	out.store_string(json_text)
-	out.close()
+	output_file.store_string(json_text)
+	output_file.close()
 
 
-static func _palette_from_dict(data: Dictionary) -> AssetPalette:
-	var ver = int(data.get("version", 0))
-	if ver != FORMAT_VERSION:
+static func _decode_payload(payload: Dictionary) -> AssetPalette:
+	if int(payload.get("version", 0)) != FORMAT_VERSION:
 		return AssetPalette.new()
-	var slot_maps: Array[Dictionary] = []
-	var raw_palettes = data.get("palettes", [])
+	var raw_palettes = payload.get("palettes", [])
 	if typeof(raw_palettes) != TYPE_ARRAY or raw_palettes.is_empty():
 		return AssetPalette.new()
+	var slot_rows: Array[PackedStringArray] = []
 	for entry in raw_palettes:
-		if typeof(entry) != TYPE_DICTIONARY:
-			continue
-		var raw_slots = entry.get("slots", {})
-		slot_maps.append(_normalize_slots(raw_slots))
-	if slot_maps.is_empty():
-		return AssetPalette.new()
-	return AssetPalette.new(slot_maps)
+		var row := _row_from_json_entry(entry)
+		if row.is_empty():
+			return AssetPalette.new()
+		slot_rows.append(row)
+	return AssetPalette.new(slot_rows)
 
 
-static func _normalize_slots(raw: Variant) -> Dictionary:
-	var out := {}
-	if typeof(raw) != TYPE_DICTIONARY:
-		return out
-	for k in raw:
-		var ks = str(k)
-		if not ks.is_valid_int():
-			continue
-		var idx = int(ks)
-		if idx < 0 or idx > 9:
-			continue
-		var v = raw[k]
-		if typeof(v) != TYPE_STRING or (v as String).is_empty():
-			continue
-		out[str(idx)] = v
-	return out
+static func _row_from_json_entry(entry: Variant) -> PackedStringArray:
+	if typeof(entry) != TYPE_DICTIONARY:
+		return PackedStringArray()
+	var slots = (entry as Dictionary).get("slots")
+	if typeof(slots) != TYPE_ARRAY:
+		return PackedStringArray()
+	var arr: Array = slots
+	if arr.size() != AssetPalette.SLOT_COUNT:
+		return PackedStringArray()
+	var row := PackedStringArray()
+	row.resize(AssetPalette.SLOT_COUNT)
+	for i in AssetPalette.SLOT_COUNT:
+		if typeof(arr[i]) != TYPE_STRING:
+			return PackedStringArray()
+		row[i] = arr[i]
+	return row
 
 
-static func _serialize_slots(slots: Dictionary) -> Dictionary:
-	var out := {}
-	for k in slots:
-		var v = slots[k]
-		if typeof(v) == TYPE_STRING and not (v as String).is_empty():
-			out[str(k)] = v
-	return out
+static func _slots_to_json_array(slots: PackedStringArray) -> Array:
+	var a: Array = []
+	for i in AssetPalette.SLOT_COUNT:
+		a.append(slots[i])
+	return a

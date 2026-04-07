@@ -1,6 +1,3 @@
-# gdlint: disable=max-public-methods
-## In-memory asset palette: multiple palettes of up to 10 slots (keys 1–9, 0), sparse slot maps.
-## Which palette is "active" for the editor is not part of this model (stored elsewhere when implemented).
 class_name AssetPalette
 extends RefCounted
 
@@ -8,25 +5,28 @@ signal palette_changed
 
 const SLOT_COUNT := 10
 
-## Each entry: slot index string ("0".."9") -> asset id string.
-var _palettes: Array[Dictionary] = []
+## Each entry: fixed [SLOT_COUNT] asset id strings; "" means empty slot.
+var _palettes: Array[PackedStringArray] = []
 
 
-func _init(palettes: Array[Dictionary] = []):
+func _init(palettes: Array = []):
+	_palettes.clear()
 	if palettes.is_empty():
-		_palettes = [{}]
+		_palettes.append(_make_empty_slots())
 	else:
-		_palettes = palettes
+		for item in palettes:
+			assert(item is PackedStringArray, "AssetPalette: each row must be PackedStringArray")
+			_palettes.append((item as PackedStringArray).duplicate())
 
 
 func get_palette_count() -> int:
 	return _palettes.size()
 
 
-## Returns a shallow duplicate of the slot map for one palette (for serialization).
-func get_palette(palette_index: int) -> Dictionary:
+## Returns a duplicate of the slot ids for one palette (for serialization).
+func get_palette(palette_index: int) -> PackedStringArray:
 	if palette_index < 0 or palette_index >= _palettes.size():
-		return {}
+		return PackedStringArray()
 	return _palettes[palette_index].duplicate()
 
 
@@ -42,8 +42,8 @@ func set_slot_asset(palette_index: int, slot_index: int, asset_id: String) -> vo
 		clear_slot(palette_index, slot_index)
 		return
 	_remove_asset_id_from_all_palettes(asset_id)
-	var slots: Dictionary = _palettes[palette_index]
-	slots[str(slot_index)] = asset_id
+	var slots: PackedStringArray = _palettes[palette_index]
+	slots[slot_index] = asset_id
 	palette_changed.emit()
 
 
@@ -52,14 +52,36 @@ func clear_slot(palette_index: int, slot_index: int) -> void:
 		return
 	if palette_index < 0 or palette_index >= _palettes.size():
 		return
-	var slots: Dictionary = _palettes[palette_index]
-	slots.erase(str(slot_index))
+	_palettes[palette_index][slot_index] = ""
 	palette_changed.emit()
 
 
 func clear_all_slots() -> void:
-	for i in _palettes.size():
-		_palettes[i] = {}
+	for palette_index in _palettes.size():
+		_palettes[palette_index] = _make_empty_slots()
+	palette_changed.emit()
+
+
+## Clears every slot on one palette; single palette_changed emit.
+func clear_palette(palette_index: int) -> void:
+	if palette_index < 0 or palette_index >= _palettes.size():
+		return
+	_palettes[palette_index] = _make_empty_slots()
+	palette_changed.emit()
+
+
+## Exchanges two slot entries on the same palette only (no global id removal).
+func swap_slots(palette_index: int, slot_a: int, slot_b: int) -> void:
+	if not _is_valid_slot_index(slot_a) or not _is_valid_slot_index(slot_b):
+		return
+	if palette_index < 0 or palette_index >= _palettes.size():
+		return
+	if slot_a == slot_b:
+		return
+	var slots: PackedStringArray = _palettes[palette_index]
+	var tmp: String = slots[slot_a]
+	slots[slot_a] = slots[slot_b]
+	slots[slot_b] = tmp
 	palette_changed.emit()
 
 
@@ -68,22 +90,23 @@ func get_asset_id_for_palette_slot(palette_index: int, slot_index: int) -> Strin
 		return ""
 	if palette_index < 0 or palette_index >= _palettes.size():
 		return ""
-	var slots: Dictionary = _palettes[palette_index]
-	var id = slots.get(str(slot_index), "")
-	return id if id is String else ""
+	return _palettes[palette_index][slot_index]
 
 
 func _remove_asset_id_from_all_palettes(asset_id: String) -> void:
 	if asset_id.is_empty():
 		return
-	for pi in _palettes.size():
-		var slots: Dictionary = _palettes[pi]
-		var to_erase: Array[String] = []
-		for sk in slots:
-			if slots[sk] == asset_id:
-				to_erase.append(sk)
-		for sk in to_erase:
-			slots.erase(sk)
+	for palette_index in _palettes.size():
+		var slots: PackedStringArray = _palettes[palette_index]
+		for slot_index in SLOT_COUNT:
+			if slots[slot_index] == asset_id:
+				slots[slot_index] = ""
+
+
+static func _make_empty_slots() -> PackedStringArray:
+	var slots := PackedStringArray()
+	slots.resize(SLOT_COUNT)
+	return slots
 
 
 static func _is_valid_slot_index(slot_index: int) -> bool:

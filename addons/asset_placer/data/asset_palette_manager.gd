@@ -19,16 +19,16 @@ static func load_asset_palette(load_path: String = DEFAULT_SAVE_PATH) -> void:
 	if is_instance_valid(_asset_palette):
 		_save_asset_palette()
 
-	var new_palette := AssetPaletteSerializer.load_palette(load_path)
+	var loaded_asset_palette := AssetPaletteSerializer.load_palette(load_path)
 	_save_path = load_path
 
 	var is_first_load := not is_instance_valid(_asset_palette)
 	if is_first_load:
-		_asset_palette = new_palette
+		_asset_palette = loaded_asset_palette
 		_connect_save()
 	else:
 		_disconnect_save()
-		_asset_palette = new_palette
+		_asset_palette = loaded_asset_palette
 		_connect_save()
 
 

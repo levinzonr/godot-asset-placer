@@ -11,6 +11,8 @@ var asset_palette: AssetPalette:
 	get():
 		return AssetPaletteManager.get_asset_palette()
 
+var palette_session_state: AssetPaletteSessionState
+
 var plugin_path: String:
 	get():
 		return get_script().resource_path.get_base_dir()
@@ -116,6 +118,11 @@ func _exit_tree():
 	overlay.queue_free()
 	_plane_preview.queue_free()
 
+
+	if palette_session_state != null:
+		palette_session_state.shutdown()
+		palette_session_state = null
+
 	AssetLibraryManager.free_library()
 	AssetPaletteManager.free_palette()
 
@@ -163,6 +170,7 @@ func _initialize_data_layer():
 	var path := AssetLibraryParser.DEFAULT_SAVE_PATH
 	AssetLibraryManager.load_asset_library(path)
 	AssetPaletteManager.load_asset_palette()
+	palette_session_state = AssetPaletteSessionState.new()
 
 
 func _react_to_settings_change(settings: AssetPlacerSettings):
@@ -199,26 +207,6 @@ func _palette_keycode_to_slot_index(keycode: int) -> int:
 	return -1
 
 
-## Palette: digits 1–9,0 select a slot on palette 0 until active palette is stored elsewhere.
-func _try_handle_palette_hotkeys(event: InputEvent) -> bool:
-	if not event is InputEventKey:
-		return false
-	var ke := event as InputEventKey
-	if not ke.pressed or ke.echo:
-		return false
-	if ke.ctrl_pressed or ke.alt_pressed or ke.meta_pressed:
-		return false
-	var slot: int = _palette_keycode_to_slot_index(ke.keycode)
-	if slot >= 0:
-		var asset_id: String = asset_palette.get_asset_id_for_palette_slot(0, slot)
-		if not asset_id.is_empty():
-			var asset := AssetLibraryManager.get_asset_library().get_asset(asset_id)
-			if asset != null:
-				_presenter.select_asset(asset)
-				return true
-			push_warning("Asset palette: no library asset for id %s" % asset_id)
-	return false
-
 
 func _handle_in_place_transform():
 	if _presenter.is_node_transform_mode():
@@ -241,9 +229,6 @@ func _handle_in_place_transform():
 func _forward_3d_gui_input(viewport_camera, event):
 	if current_settings.bindings[AssetPlacerSettings.Bindings.InPlaceTransform].is_pressed(event):
 		_handle_in_place_transform()
-		return _handled()
-
-	if _try_handle_palette_hotkeys(event):
 		return _handled()
 
 	# Only process other inputs when plugin is active
