@@ -35,4 +35,3 @@ jobs:
 
       - name: Run gdlint
         run: gdlint addons/asset_placer
-1
