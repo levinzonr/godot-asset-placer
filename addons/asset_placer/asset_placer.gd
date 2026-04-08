@@ -33,10 +33,10 @@ func start_placement(root: Window, asset: AssetResource, placement: GapPlacement
 	preview_rids = get_collision_rids(preview_node)
 	set_placement_mode(placement)
 	_apply_preview_material(preview_node)
-	var scene = EditorInterface.get_selection().get_selected_nodes()[0]
-	if scene is Node3D:
+	var selected := EditorInterface.get_selection().get_selected_nodes()
+	if selected.size() == 1 and selected[0] is Node3D:
 		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
-		self.preview_aabb = AABBProvider.provide_aabb(preview_node)
+	self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
 
 func start_node_transform(node: Node3D, placement: GapPlacementMode):
@@ -186,7 +186,9 @@ func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
 
 func _place_instance(transform: Transform3D, select_after_placement: bool):
 	var scene := EditorInterface.get_edited_scene_root()
-	var scene_root := scene.get_node(AssetPlacerPresenter._instance._parent)
+	var scene_root := AssetPlacerPresenter._instance.resolve_placement_parent(scene)
+	if scene_root == null:
+		return
 	var options := AssetPlacerPresenter._instance.options
 	var parent := AssetParentSelector.pick_parent(scene_root, asset, options.group_automatically)
 
