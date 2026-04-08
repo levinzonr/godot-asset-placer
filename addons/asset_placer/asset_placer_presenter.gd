@@ -146,7 +146,7 @@ func _resolve_parent_from_selection() -> Node3D:
 	if selected.size() > 1:
 		push_warning(
 			(
-				'Asset Placer: multiple nodes selected; select a single Node3D or disable '
+				"Asset Placer: multiple nodes selected; select a single Node3D or disable "
 				+ '"Use selection for parent" and set Assets Parent.'
 			)
 		)
@@ -154,7 +154,7 @@ func _resolve_parent_from_selection() -> Node3D:
 	if selected.is_empty():
 		push_warning(
 			(
-				'Asset Placer: no node selected; select a Node3D (new assets are placed as siblings) '
+				"Asset Placer: no node selected; select a Node3D (new assets are placed as siblings) "
 				+ 'or disable "Use selection for parent" and set Assets Parent.'
 			)
 		)
