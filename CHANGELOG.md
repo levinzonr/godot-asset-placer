@@ -1,5 +1,21 @@
 # Godot Asset Placer Changelog
 
+## 1.5.0-alpha1
+
+Pre-release alpha for the upcoming **1.5.0** line. Expect further changes before stable **1.5.0**.
+
+### ✨ New Features
+
+- **#89** (@levinzonr) — **Use selection for parent**: optional checkbox in placement options that resolves the Assets Parent from the current editor selection (new instances are placed as **children** of the selected `Node3D` under the same parent; scene root selection parents under the root). Choosing **Assets Parent** turns this off and uses an explicit node again. Avoids the empty-path `Node not found: ""` error when no manual Assets Parent is chosen.
+- **#76** - Asset library data handling rework by @Sr3qt:
+  - Centralized load/save and access through **AssetLibraryManager**; **AssetLibrary** is a focused data API (get / add / remove)
+  - **AssetLibraryParser** replaces the former data-source type for parsing and serialization
+  - Folder, asset, and collection repositories live on **AssetLibrary**; **AssetResource** decides which file extensions are placeable
+  - **Automatic sync** when tracked folders change (single path via `folders_changed`), with more consistent behavior for **nested folders**
+  - **Folder rules** panel stays expanded when adding new asset folders
+
+---
+
 ## 1.4.0
 
 ### ✨ New Features
