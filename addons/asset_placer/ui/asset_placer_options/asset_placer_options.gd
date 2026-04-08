@@ -22,6 +22,7 @@ var presenter: AssetPlacerPresenter
 @onready var use_assets_origin_checkbox: CheckBox = %UseAssetsOriginCheckbox
 @onready var random_asset_check_box = %RandomAssetCheckBox
 @onready var group_automatically_check_box: CheckBox = %GroupAutomaticallyCheckBox
+@onready var use_selection_for_parent_check_box: CheckBox = %UseSelectionForParentCheckBox
 
 
 func _ready():
@@ -51,6 +52,7 @@ func _ready():
 	uniform_scale_check_box.toggled.connect(presenter.set_unform_scaling)
 	use_assets_origin_checkbox.toggled.connect(presenter.set_use_asset_origin)
 	group_automatically_check_box.toggled.connect(presenter.set_automatic_grouping)
+	use_selection_for_parent_check_box.toggled.connect(presenter.set_use_selected_as_parent)
 
 	plane_axis_spin_box.value_changed.connect(
 		func(normal: Vector3):
@@ -79,11 +81,21 @@ func _show_terrain_3d_selector():
 
 
 func show_parent(parent: NodePath):
+	if presenter.options.use_selected_as_parent:
+		parent_button.disabled = true
+		parent_button.text = "From selection"
+		parent_button.icon = EditorIconTexture2D.new("Node3D")
+		return
+	parent_button.disabled = false
 	if not parent.is_empty():
 		var scene = EditorInterface.get_edited_scene_root()
-		var node = scene.get_node(parent)
-		parent_button.text = node.name
-		parent_button.icon = EditorIconTexture2D.new(node.get_class())
+		var node = scene.get_node_or_null(parent)
+		if node:
+			parent_button.text = node.name
+			parent_button.icon = EditorIconTexture2D.new(node.get_class())
+		else:
+			parent_button.text = "Invalid parent path"
+			parent_button.icon = EditorIconTexture2D.new("NodeWarning")
 	else:
 		parent_button.text = "No parent selected"
 		parent_button.icon = EditorIconTexture2D.new("NodeWarning")
@@ -123,3 +135,5 @@ func set_options(options: AssetPlacerOptions):
 	align_normals_checkbox.set_pressed_no_signal(options.align_normals)
 	use_assets_origin_checkbox.set_pressed_no_signal(options.use_asset_origin)
 	group_automatically_check_box.set_pressed_no_signal(options.group_automatically)
+	use_selection_for_parent_check_box.set_pressed_no_signal(options.use_selected_as_parent)
+	show_parent(presenter.get_assets_parent_path())

@@ -80,9 +80,15 @@ func _select_placement_mode(mode: GapPlacementMode):
 	self.placement_mode = mode
 
 
+func get_assets_parent_path() -> NodePath:
+	return _parent
+
+
 func select_parent(node: NodePath):
 	self._parent = node
+	options.use_selected_as_parent = false
 	parent_changed.emit(node)
+	options_changed.emit(options)
 
 
 func toggle_transformation_mode(mode: TransformMode):
@@ -106,7 +112,58 @@ func toggle_transformation_mode(mode: TransformMode):
 
 func clear_parent():
 	self._parent = NodePath("")
+	options.use_selected_as_parent = false
 	parent_changed.emit(_parent)
+	options_changed.emit(options)
+
+
+func set_use_selected_as_parent(value: bool):
+	options.use_selected_as_parent = value
+	options_changed.emit(options)
+	parent_changed.emit(_parent)
+
+
+func resolve_placement_parent(edited_root: Node) -> Node3D:
+	if options.use_selected_as_parent:
+		return _resolve_parent_from_selection()
+	if _parent.is_empty():
+		push_warning(
+			(
+				'Asset Placer: enable "Use selection for parent" or choose an Assets Parent node '
+				+ "in the options panel."
+			)
+		)
+		return null
+	var node = edited_root.get_node_or_null(_parent)
+	if node is Node3D:
+		return node
+	push_warning("Asset Placer: Assets Parent path is invalid for this scene.")
+	return null
+
+
+func _resolve_parent_from_selection() -> Node3D:
+	var selected := EditorInterface.get_selection().get_selected_nodes()
+	if selected.size() > 1:
+		push_warning(
+			(
+				"Asset Placer: multiple nodes selected; select a single Node3D or disable "
+				+ '"Use selection for parent" and set Assets Parent.'
+			)
+		)
+		return null
+	if selected.is_empty():
+		push_warning(
+			(
+				"Asset Placer: no node selected; select a Node3D (new assets are placed as siblings) "
+				+ 'or disable "Use selection for parent" and set Assets Parent.'
+			)
+		)
+		return null
+	var picked: Node = selected[0]
+	if picked is not Node3D:
+		push_warning("Asset Placer: selected node must be a Node3D.")
+		return null
+	return picked
 
 
 func set_unform_scaling(value: bool):
