@@ -8,6 +8,7 @@ signal collections_changed(collections: Array[CollectionState], batch_mode: bool
 enum SelectMode { SINGLE, RANGE, MULTI }
 
 
+
 class CollectionState:
 	var collection: AssetCollection
 	var assigned_count: int = 0
@@ -32,7 +33,8 @@ var _assets: Array[AssetResource] = []
 var _selected_indices: PackedInt32Array = []
 var _batch_mode: bool = false
 var _last_toggled_index: int = -1
-
+var _name_query: String = ""
+var _show_unassigned: bool = false
 
 func ready(initial_asset_id: String = ""):
 	_assets = _asset_library.get_assets()
@@ -96,12 +98,25 @@ func select_all():
 
 
 func filter_assets(query: String):
+	_name_query = query
+	_filter_assets()
+
+
+func set_show_unassigned_only(show_unassigned: bool):
+	_show_unassigned = show_unassigned
+	_filter_assets()
+
+
+func _filter_assets():
 	var all_assets := _asset_library.get_assets()
 
-	if query.is_empty():
+	if _name_query.is_empty():
 		_assets = all_assets
 	else:
-		_assets = all_assets.filter(func(asset: AssetResource): return asset.name.containsn(query))
+		_assets = all_assets.filter(func(asset: AssetResource): return asset.name.containsn(_name_query))
+
+	if _show_unassigned:
+		_assets = _assets.filter(func(asset: AssetResource): return asset.tags.is_empty())
 
 	_selected_indices.clear()
 	if not _assets.is_empty():
@@ -131,6 +146,7 @@ func add_to_collection(collection: AssetCollection):
 			asset.add_tag(collection.id)
 			_asset_library.update_asset(asset)
 	_emit_collections()
+	_filter_assets()
 
 
 func remove_from_collection(collection: AssetCollection):
@@ -141,6 +157,7 @@ func remove_from_collection(collection: AssetCollection):
 			asset.primary_collection = -1
 		_asset_library.update_asset(asset)
 	_emit_collections()
+	_filter_assets()
 
 
 func _select_range(from_index: int, to_index: int):

@@ -18,6 +18,7 @@ var _asset_item_res = preload(
 @onready var _active_collections_container: Container = %ActiveCollectionsContainer
 @onready var _inactive_collections_container: Container = %InactiveCollectionsContainer
 @onready var _filter_line_edit: LineEdit = %FilterAssetsLineEdit
+@onready var _show_unassigned_check: CheckBox = %ShowUnassignedCheckBox
 @onready var _empty_assets_view = %EmptyAssetsEmptyView
 @onready var _empty_active_view = %NoActiveCollectionsEmptyView
 @onready var _empty_available_view = %NoInActiveCollectionsEmptyView
@@ -30,6 +31,7 @@ func _ready():
 	_presenter.selection_changed.connect(_on_selection_changed)
 	_presenter.collections_changed.connect(_on_collections_changed)
 	_filter_line_edit.text_changed.connect(_presenter.filter_assets)
+	_show_unassigned_check.toggled.connect(_presenter.set_show_unassigned_only)
 	_presenter.ready(initial_asset_id)
 	size_changed.connect(_on_size_changed)
 	call_deferred("_restore_size")
