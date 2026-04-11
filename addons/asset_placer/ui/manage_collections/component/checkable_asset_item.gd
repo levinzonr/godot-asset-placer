@@ -2,7 +2,9 @@
 extends Button
 
 var asset: AssetResource
-@onready var cirlce_icon = preload("res://addons/asset_placer/ui/asset_collections_window/components/collection_circle.svg")
+@onready var cirlce_icon = preload(
+	"res://addons/asset_placer/ui/asset_collections_window/components/collection_circle.svg"
+)
 @onready var collections_container: Container = %CollectionsContainer
 
 
@@ -11,7 +13,8 @@ func _ready():
 	if asset.has_resource():
 		icon = AssetThumbnailTexture2D.new(asset.get_resource())
 	_show_collections()
-	
+
+
 func _show_collections():
 	for collection_id in asset.tags:
 		var collection = AssetLibraryManager.get_asset_library().get_collection(collection_id)
