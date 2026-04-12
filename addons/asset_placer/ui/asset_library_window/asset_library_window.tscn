@@ -163,16 +163,6 @@ theme_override_font_sizes/font_size = 36
 text = "Assets"
 text_overrun_behavior = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=578510117]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(100, 10)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-indeterminate = true
-editor_preview_indeterminate = true
-
 [node name="VBoxContainer" type="VBoxContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=439730441]
 layout_mode = 2
 theme_override_constants/separation = 8
@@ -220,13 +210,26 @@ tooltip_text = "FolderCreate"
 icon = SubResource("Texture2D_5cqey")
 icon_alignment = 1
 
-[node name="ReloadButton" type="Button" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=389049027]
+[node name="CenterContainer" type="CenterContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1663076877]
+layout_mode = 2
+
+[node name="ReloadButton" type="Button" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/CenterContainer" unique_id=389049027]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 4
 text = "Sync Assets"
 icon = SubResource("Texture2D_qx6qk")
+
+[node name="ProgressBar" type="ProgressBar" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/CenterContainer" unique_id=578510117]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+indeterminate = true
+editor_preview_indeterminate = true
 
 [node name="Label" type="Label" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1774242199]
 layout_mode = 2
@@ -238,7 +241,7 @@ custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
 size_flags_horizontal = 4
 selected = 0
-item_count = 4
+item_count = 8
 popup/item_0/text = "Name"
 popup/item_0/id = 0
 popup/item_1/text = "Last Placed"
@@ -247,6 +250,14 @@ popup/item_2/text = "Last Saved"
 popup/item_2/id = 2
 popup/item_3/text = "Date Added"
 popup/item_3/id = 3
+popup/item_4/text = "Name"
+popup/item_4/id = 0
+popup/item_5/text = "Last Placed"
+popup/item_5/id = 1
+popup/item_6/text = "Last Saved"
+popup/item_6/id = 2
+popup/item_7/text = "Date Added"
+popup/item_7/id = 3
 
 [node name="Control" type="Control" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=395794459]
 custom_minimum_size = Vector2(32, 0)
