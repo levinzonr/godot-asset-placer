@@ -177,7 +177,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_vertical = 4
-tooltip_text = "Edit"
+tooltip_text = "Filter by Collection"
 icon = SubResource("Texture2D_yvyyx")
 icon_alignment = 1
 
@@ -206,7 +206,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_vertical = 4
-tooltip_text = "FolderCreate"
+tooltip_text = "Add Assets from Folder"
 icon = SubResource("Texture2D_5cqey")
 icon_alignment = 1
 
@@ -256,8 +256,7 @@ scale = Vector2(1, -1)
 pivot_offset = Vector2(14, 16)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "
-"
+tooltip_text = "Sort by descending order."
 icon = SubResource("Texture2D_2650m")
 icon_alignment = 1
 
