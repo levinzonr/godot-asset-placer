@@ -151,18 +151,17 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 alignment = 2
 
-[node name="Control" type="Control" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=391569685]
+[node name="MarginContainer" type="MarginContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=659313167]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/margin_top = -32
 
-[node name="Label" type="Label" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/Control" unique_id=530689257]
-layout_mode = 0
-offset_top = -6.0
-offset_right = 410.0
-offset_bottom = 44.0
-size_flags_horizontal = 3
+[node name="AssetsLabel" type="Label" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=1180368063]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Assets"
+text_overrun_behavior = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=578510117]
 unique_name_in_owner = true
