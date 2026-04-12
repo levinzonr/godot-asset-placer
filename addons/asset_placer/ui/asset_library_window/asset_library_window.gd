@@ -31,6 +31,9 @@ signal asset_selected(asset: AssetResource)
 
 
 func _ready():
+	if is_part_of_edited_scene():
+		return
+
 	presenter.assets_loaded.connect(show_assets)
 	presenter.show_filter_info.connect(show_filter_info)
 	AssetPlacerPresenter._instance.asset_selected.connect(set_selected_asset)
