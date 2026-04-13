@@ -17,11 +17,17 @@ static func sort_by_name(left: AssetResource, right: AssetResource) -> bool:
 	return left.name.naturalcasecmp_to(right.name) < 0
 
 
+static func sort_by_date_added(left: AssetResource, right: AssetResource):
+	return left.date_added < right.date_added
+
+
 static func get_sort_function(method: SortMethod, ascending_order := true) -> Callable:
 	var fun: Callable
 	match method:
 		SortMethod.Name:
 			fun = sort_by_name
+		SortMethod.DateAdded:
+			fun = sort_by_date_added
 		_:
 			push_warning("Chosen SortMethod %s is not supported." % method)
 			fun = _default_sort

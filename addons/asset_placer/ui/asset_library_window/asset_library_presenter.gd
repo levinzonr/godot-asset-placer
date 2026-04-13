@@ -59,7 +59,9 @@ func add_asset(path: String, folder_path: String):
 		existing.add_tags(tags)
 		_asset_library.update_asset(existing)
 	else:
-		var new_asset := AssetResource.new(id, path.get_file(), tags, folder_path)
+		var new_asset := AssetResource.new(
+			id, path.get_file(), tags, folder_path, -1, Time.get_unix_time_from_system()
+		)
 		_asset_library.add_asset(new_asset)
 
 

@@ -74,7 +74,9 @@ func add_assets_from_folder(folder: AssetFolder, override_path := ""):
 
 		var uid = ResourceIdCompat.path_to_uid(folder_path.path_join(file))
 		if not lib.has_asset_id(uid):
-			var asset := AssetResource.new(uid, file, [], folder_path)
+			var asset := AssetResource.new(
+				uid, file, [], folder_path, -1, Time.get_unix_time_from_system()
+			)
 			for rule in folder.get_rules():
 				asset = rule.do_after_asset_added(asset)
 			if lib.add_asset(asset):

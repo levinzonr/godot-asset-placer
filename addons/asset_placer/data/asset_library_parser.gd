@@ -48,7 +48,11 @@ static func load_library(load_path = DEFAULT_SAVE_PATH) -> AssetLibrary:
 		var p_collection: int = -1
 		if dict.has("primary_collection"):
 			p_collection = int(dict["primary_collection"])
-		var asset = AssetResource.new(id, asset_name, tags, folder_path, p_collection)
+
+		var date_added := 0.0
+		if dict.has("date_added"):
+			date_added = float(dict["date_added"])
+		var asset = AssetResource.new(id, asset_name, tags, folder_path, p_collection, date_added)
 		assets.append(asset)
 
 	for collection_dict in collections_dict:
@@ -90,7 +94,8 @@ static func save_library(library: AssetLibrary, save_path = DEFAULT_SAVE_PATH):
 				"id": asset.id,
 				"tags": asset.tags,
 				"folder_path": asset.folder_path,
-				"primary_collection": asset.primary_collection
+				"primary_collection": asset.primary_collection,
+				"date_added": asset.date_added,
 			}
 		)
 
