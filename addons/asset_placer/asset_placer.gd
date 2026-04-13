@@ -19,6 +19,10 @@ var _presenter: AssetPlacerPresenter:
 	get:
 		return AssetPlacerPresenter.instance
 
+var _options: AssetPlacerOptions:
+	get:
+		return AssetPlacerPresenter.instance.options
+
 
 func _init(undo_redo: EditorUndoRedoManager):
 	self.undo_redo = undo_redo
@@ -35,7 +39,7 @@ func start_placement(root: Window, asset: AssetResource, placement: GapPlacement
 	_apply_preview_material(preview_node)
 	var selected := EditorInterface.get_selection().get_selected_nodes()
 	if selected.size() == 1 and selected[0] is Node3D:
-		AssetTransformations.apply_transforms(preview_node, _presenter.options)
+		AssetTransformations.apply_transforms(preview_node, _options)
 	self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
 
@@ -68,7 +72,7 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 		var hit = _strategy.get_placement_point(camera, mouse_position)
 		var normal = Vector3.UP
 
-		if _presenter.options.align_normals and hit:
+		if _options.align_normals and hit:
 			normal = hit.normal
 
 		var snapped_pos = _snap_position(hit.position, normal)
@@ -160,10 +164,10 @@ func get_collision_rids(node: Node) -> Array:
 
 
 func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
-	if !_presenter.options.snapping_enabled:
+	if !_options.grid_snap_enabled:
 		return hit_pos
 
-	var grid_step: float = _presenter.options.snapping_grid_step
+	var grid_step := _options.grid_snap_step
 
 	# Build tangent basis aligned to the surface normal
 	var n := normal.normalized()
@@ -189,8 +193,7 @@ func _place_instance(transform: Transform3D, select_after_placement: bool):
 	var scene_root := _presenter.resolve_placement_parent(scene)
 	if scene_root == null:
 		return
-	var options := _presenter.options
-	var parent := AssetParentSelector.pick_parent(scene_root, asset, options.group_automatically)
+	var parent := AssetParentSelector.pick_parent(scene_root, asset, _options.group_automatically)
 
 	if is_instance_valid(parent) and is_instance_valid(asset.get_resource()):
 		var new_node: Node3D = _instantiate_asset_resource(asset)
@@ -205,7 +208,7 @@ func _place_instance(transform: Transform3D, select_after_placement: bool):
 		undo_redo.add_undo_method(self, "_undo_placement", new_node, parent)
 		undo_redo.commit_action()
 
-		AssetTransformations.apply_transforms(preview_node, _presenter.options)
+		AssetTransformations.apply_transforms(preview_node, _options)
 		_presenter.on_asset_placed()
 
 

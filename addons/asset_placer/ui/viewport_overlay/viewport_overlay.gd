@@ -24,18 +24,23 @@ func _ready():
 	_error_position = error_container.position
 	show_settings(_settings_repository.get_settings())
 	_settings_repository.settings_changed.connect(show_settings)
-	var viewport_size = get_viewport_rect().size
+
+	var viewport_size := get_viewport_rect().size
 	_error_hidden_position = Vector2(-viewport_size.x, _error_position.y)
 	error_container.position = _error_hidden_position
-	var presenter = AssetPlacerPresenter.instance
+	error_timer.timeout.connect(hide_error)
+
+	var presenter := AssetPlacerPresenter.instance
 	presenter.transform_mode_changed.connect(set_mode)
 	presenter.preview_transform_axis_changed.connect(set_axis)
 	presenter.placer_active.connect(_set_overlay_visible)
 	presenter.placement_mode_changed.connect(set_placement_mode)
-	presenter.options_changed.connect(show_options)
-	presenter.ready()
 	presenter.show_error.connect(show_error)
-	error_timer.timeout.connect(hide_error)
+	presenter.ready()
+
+	presenter.options.changed.connect(show_options)
+	show_options()
+
 	set_mode(presenter.transform_mode)
 	set_axis(presenter.preview_transform_axis)
 
@@ -87,8 +92,9 @@ func show_settings(settings: AssetPlacerSettings):
 	)
 
 
-func show_options(options: AssetPlacerOptions):
-	snapping_switch.button_pressed = options.snapping_enabled
+func show_options():
+	var options := AssetPlacerPresenter._instance.options
+	snapping_switch.button_pressed = options.grid_snap_enabled
 
 
 func set_axis(vector: Vector3):
