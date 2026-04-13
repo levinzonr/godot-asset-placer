@@ -152,7 +152,6 @@ func set_selected_asset(asset: AssetResource):
 
 
 func flip_order():
-	ascending_order_button.pivot_offset = ascending_order_button.size / 2
 	ascending_order_button.scale.y *= -1
 	var text := "Sort by %s order." % ("ascending" if presenter.is_sort_ascending else "descending")
 	ascending_order_button.tooltip_text = text

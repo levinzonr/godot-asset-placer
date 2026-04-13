@@ -168,13 +168,14 @@ layout_mode = 2
 theme_override_constants/separation = 8
 
 [node name="HBoxContainerTop" type="HBoxContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=263426647]
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 2
 
 [node name="FilterButton" type="Button" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=723111635]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Filter by Collection"
@@ -203,7 +204,7 @@ vertical_alignment = 1
 
 [node name="AddFolderButton" type="Button" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1736028897]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
 size_flags_vertical = 4
 tooltip_text = "Add Assets from Folder"
@@ -215,7 +216,7 @@ layout_mode = 2
 
 [node name="ReloadButton" type="Button" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/CenterContainer" unique_id=389049027]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 size_flags_vertical = 4
 text = "Sync Assets"
@@ -237,7 +238,7 @@ text = "Sort by"
 
 [node name="SortButton" type="OptionButton" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1145968409]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(120, 32)
+custom_minimum_size = Vector2(120, 34)
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -248,12 +249,12 @@ size_flags_horizontal = 3
 
 [node name="AscendingOrderButton" type="Button" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/Control" unique_id=1469154313]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(32, 32)
+custom_minimum_size = Vector2(34, 34)
 layout_mode = 0
-offset_right = 32.0
-offset_bottom = 31.0
+offset_right = 34.0
+offset_bottom = 34.0
 scale = Vector2(1, -1)
-pivot_offset = Vector2(14, 16)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 tooltip_text = "Sort by descending order."
