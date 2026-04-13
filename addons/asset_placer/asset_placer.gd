@@ -23,6 +23,10 @@ var _presenter: AssetPlacerPresenter:
 	get:
 		return AssetPlacerPresenter.instance
 
+var _options: AssetPlacerOptions:
+	get:
+		return AssetPlacerPresenter.instance.options
+
 
 func _init(undo_redo: EditorUndoRedoManager):
 	self.undo_redo = undo_redo
@@ -47,6 +51,7 @@ func start_placement(root: Window, asset: AssetResource, placement: GapPlacement
 	if selected.size() == 1 and selected[0] is Node3D and _presenter != null:
 		# Randomize the preview once
 		preview_node.force_next_stroke()
+	self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
 
 func start_node_transform(node: Node3D, placement: GapPlacementMode):
@@ -62,7 +67,7 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 		var hit = _strategy.get_placement_point(camera, mouse_position)
 		var normal = Vector3.UP
 
-		if _presenter.options.align_normals and hit:
+		if _options.align_normals and hit:
 			normal = hit.normal
 
 		var snapped_pos = _snap_position(hit.position, normal)
@@ -298,10 +303,10 @@ func transform_preview(
 
 
 func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
-	if !_presenter.options.snapping_enabled:
+	if !_options.grid_snap_enabled:
 		return hit_pos
 
-	var grid_step: float = _presenter.options.snapping_grid_step
+	var grid_step := _options.grid_snap_step
 
 	# Build tangent basis aligned to the surface normal
 	var n := normal.normalized()
