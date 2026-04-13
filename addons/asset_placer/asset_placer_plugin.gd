@@ -111,6 +111,7 @@ func _exit_tree():
 	overlay.queue_free()
 	_plane_preview.queue_free()
 
+	APEditorSettingsManager.free_settings()
 	AssetLibraryManager.free_library()
 
 	settings_repository.settings_changed.disconnect(_react_to_settings_change)
@@ -152,6 +153,8 @@ func _initialize_data_layer():
 	settings_repository = AssetPlacerSettingsRepository.new()
 	current_settings = settings_repository.get_settings()
 	settings_repository.settings_changed.connect(_react_to_settings_change)
+
+	APEditorSettingsManager.load_editor_settings()
 
 	# TODO load library file save path setting
 	var path := AssetLibraryParser.DEFAULT_SAVE_PATH

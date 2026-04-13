@@ -77,6 +77,9 @@ func remove_asset_by_id(asset_id: String):
 	assert(index != -1, "Cannot remove asset with id %s as it doesn't exist" % asset_id)
 
 	_assets.remove_at(index)
+	var es := APEditorSettingsManager.get_editor_settings()
+	if es:
+		es.remove_asset_time_placed(asset_id)
 	_queue_emit_assets_changed()
 
 

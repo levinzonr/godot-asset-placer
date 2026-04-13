@@ -7,9 +7,8 @@ extends RefCounted
 
 enum SortMethod {
 	Name,
-	LastPlaced,
-	LastSaved,
 	DateAdded,
+	LastPlaced,
 }
 
 
@@ -26,6 +25,17 @@ static func sort_by_date_added(
 
 
 
+static func sort_by_last_placed(left: AssetResource, right: AssetResource, ascending_order := true):
+	var es := APEditorSettingsManager.get_editor_settings()
+	var dict := es.get_assets_time_placed()
+	var left_val = dict.get(left.id, 0.0)
+	var right_val = dict.get(right.id, 0.0)
+	# if right_val == 0.0 and left_val == 0.0:
+	# 	return false
+	if ascending_order:
+		return left_val > right_val
+	return left_val < right_val
+
 static func get_sort_function(method: SortMethod, ascending_order := true) -> Callable:
 	var fun: Callable
 	match method:
@@ -33,6 +43,8 @@ static func get_sort_function(method: SortMethod, ascending_order := true) -> Ca
 			fun = sort_by_name.bind(ascending_order)
 		SortMethod.DateAdded:
 			fun = sort_by_date_added.bind(ascending_order)
+		SortMethod.LastPlaced:
+			fun = sort_by_last_placed.bind(ascending_order)
 		_:
 			push_warning("Chosen SortMethod %s is not supported." % method)
 			fun = _default_sort

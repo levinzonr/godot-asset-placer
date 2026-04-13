@@ -318,6 +318,10 @@ func end_node_transform_mode():
 
 
 func on_asset_placed():
+	var es := APEditorSettingsManager.get_editor_settings()
+	if es:
+		es.update_asset_time_placed(_selected_asset.id)
+
 	if options.enable_random_placement:
 		var random = current_assets.pick_random()
 		select_asset(random)
