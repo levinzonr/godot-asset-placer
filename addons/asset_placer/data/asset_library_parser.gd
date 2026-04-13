@@ -95,7 +95,7 @@ static func save_library(library: AssetLibrary, save_path = DEFAULT_SAVE_PATH):
 				"tags": asset.tags,
 				"folder_path": asset.folder_path,
 				"primary_collection": asset.primary_collection,
-				"date_added": asset.date_added,
+				"date_added": asset.date_added
 			}
 		)
 

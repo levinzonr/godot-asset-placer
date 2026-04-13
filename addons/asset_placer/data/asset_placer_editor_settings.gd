@@ -1,11 +1,11 @@
 @tool
-extends Resource
 class_name AssetPlacerEditorSettings
+extends Resource
 
 ## Resource for holding editor settings specific to a project.
 
 ## Holds a AssetResource id as a key and a UNIX timestamp as value.
-@export_storage var _assets_time_placed : Dictionary[String, float] = {}
+@export_storage var _assets_time_placed: Dictionary[String, float] = {}
 
 
 func get_assets_time_placed() -> Dictionary[String, float]:

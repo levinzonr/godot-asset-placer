@@ -46,7 +46,7 @@ func _ready():
 	presenter.on_ready()
 
 	for method in AssetSortBy.SortMethod.keys():
-		sort_button.add_item( method.capitalize(), AssetSortBy.SortMethod[method])
+		sort_button.add_item(method.capitalize(), AssetSortBy.SortMethod[method])
 
 	sort_button.selected = 0
 	sort_button.item_selected.connect(presenter.on_sort_method_change)

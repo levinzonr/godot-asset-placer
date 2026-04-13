@@ -12,7 +12,9 @@ enum SortMethod {
 }
 
 
-static func sort_by_name(left: AssetResource, right: AssetResource, ascending_order := true) -> bool:
+static func sort_by_name(
+	left: AssetResource, right: AssetResource, ascending_order := true
+) -> bool:
 	return not (ascending_order != (left.name.naturalnocasecmp_to(right.name) < 0))
 
 
@@ -24,17 +26,17 @@ static func sort_by_date_added(
 	return left.date_added > right.date_added
 
 
-
-static func sort_by_last_placed(left: AssetResource, right: AssetResource, ascending_order := true):
+static func sort_by_last_placed(
+	left: AssetResource, right: AssetResource, ascending_order := true
+) -> bool:
 	var es := APEditorSettingsManager.get_editor_settings()
 	var dict := es.get_assets_time_placed()
 	var left_val = dict.get(left.id, 0.0)
 	var right_val = dict.get(right.id, 0.0)
-	# if right_val == 0.0 and left_val == 0.0:
-	# 	return false
 	if ascending_order:
 		return left_val > right_val
 	return left_val < right_val
+
 
 static func get_sort_function(method: SortMethod, ascending_order := true) -> Callable:
 	var fun: Callable
@@ -53,5 +55,5 @@ static func get_sort_function(method: SortMethod, ascending_order := true) -> Ca
 
 
 ## Do not sort by default.
-static func _default_sort(left: AssetResource, right: AssetResource) -> bool:
+static func _default_sort(_left: AssetResource, _right: AssetResource) -> bool:
 	return false
