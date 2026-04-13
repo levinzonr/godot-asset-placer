@@ -1,5 +1,15 @@
 # Godot Asset Placer Changelog
 
+## 1.5.0-alpha2
+
+Pre-release alpha for the upcoming **1.5.0** line. Expect further changes before stable **1.5.0**.
+
+### 🐛 Fixed
+
+- **#96** Fixed asset placement undo history by @Sr3qt
+
+---
+
 ## 1.5.0-alpha1
 
 Pre-release alpha for the upcoming **1.5.0** line. Expect further changes before stable **1.5.0**.
