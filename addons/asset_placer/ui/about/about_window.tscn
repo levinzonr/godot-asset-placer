@@ -181,6 +181,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
+tooltip_text = "https://discord.gg/UyYCp53Hym"
 text = "Join our Discord"
 uri = "https://discord.gg/UyYCp53Hym"
 
@@ -190,12 +191,13 @@ alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=916920657]
 layout_mode = 2
-text = "Enjoying this Plugin? Please consider leaving a Star on "
+text = "Enjoying this Plugin? Please consider leaving a Star on"
 
 [node name="Label3" type="LinkButton" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=772806341]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "https://github.com/levinzonr/godot-asset-placer"
 text = "GitHub"
 uri = "https://github.com/levinzonr/godot-asset-placer"
 
@@ -218,6 +220,7 @@ alignment = 2
 [node name="FeatureRequestButton" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer2/CenterContainer" unique_id=908618622]
 unique_name_in_owner = true
 layout_mode = 2
+tooltip_text = "Create a feature request on Github"
 text = "Missing Feature?"
 icon = SubResource("Texture2D_r5xs8")
 alignment = 0
@@ -234,6 +237,7 @@ size_flags_horizontal = 3
 [node name="IssueButton" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer2/CenterContainer2" unique_id=746174359]
 unique_name_in_owner = true
 layout_mode = 2
+tooltip_text = "Create a bug report on Github"
 text = "Spotted Bug / Issue?"
 icon = SubResource("Texture2D_tt7kp")
 alignment = 0
