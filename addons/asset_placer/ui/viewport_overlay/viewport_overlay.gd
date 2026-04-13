@@ -27,7 +27,7 @@ func _ready():
 	var viewport_size = get_viewport_rect().size
 	_error_hidden_position = Vector2(-viewport_size.x, _error_position.y)
 	error_container.position = _error_hidden_position
-	var presenter = AssetPlacerPresenter._instance
+	var presenter = AssetPlacerPresenter.instance
 	presenter.transform_mode_changed.connect(set_mode)
 	presenter.preview_transform_axis_changed.connect(set_axis)
 	presenter.placer_active.connect(_set_overlay_visible)

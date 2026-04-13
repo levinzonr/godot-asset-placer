@@ -7,7 +7,7 @@ signal asset_selected(asset: AssetResource)
 @onready var presenter: AssetLibraryPresenter = AssetLibraryPresenter.new()
 @onready var folder_presenter: FolderPresenter = FolderPresenter.new()
 
-@onready var placer_presenter := AssetPlacerPresenter._instance
+@onready var placer_presenter := AssetPlacerPresenter.instance
 @onready var grid_container: Container = %GridContainer
 @onready var preview_resource = preload(
 	"res://addons/asset_placer/ui/components/asset_resource_preview.tscn"
@@ -30,8 +30,8 @@ signal asset_selected(asset: AssetResource)
 func _ready():
 	presenter.assets_loaded.connect(show_assets)
 	presenter.show_filter_info.connect(show_filter_info)
-	AssetPlacerPresenter._instance.asset_selected.connect(set_selected_asset)
-	AssetPlacerPresenter._instance.asset_deselected.connect(clear_selected_asset)
+	placer_presenter.asset_selected.connect(set_selected_asset)
+	placer_presenter.asset_deselected.connect(clear_selected_asset)
 	empty_collection_view_add_folder_btn.pressed.connect(show_folder_dialog)
 	empty_view_add_folder_btn.pressed.connect(show_folder_dialog)
 	presenter.show_empty_view.connect(show_empty_view)

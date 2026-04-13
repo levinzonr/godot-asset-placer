@@ -1,15 +1,15 @@
 class_name AssetPlacer
 extends RefCounted
 
+const META_ASSET_ID = &"asset_placer_res_id"
+
 var preview_node: Node3D
 var preview_aabb: AABB
-var node_history: Array[String] = []
 var preview_rids = []
 var asset: AssetResource
 var preview_transform_step: float = 0.1
 var preview_rotate_step: float = 5
 var undo_redo: EditorUndoRedoManager
-var meta_asset_id = &"asset_placer_res_id"
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
 
 var _is_node_transform_mode: bool = false
@@ -17,7 +17,7 @@ var _original_transform: Transform3D
 var _strategy: AssetPlacementStrategy
 var _presenter: AssetPlacerPresenter:
 	get:
-		return AssetPlacerPresenter._instance
+		return AssetPlacerPresenter.instance
 
 
 func _init(undo_redo: EditorUndoRedoManager):
@@ -35,7 +35,7 @@ func start_placement(root: Window, asset: AssetResource, placement: GapPlacement
 	_apply_preview_material(preview_node)
 	var selected := EditorInterface.get_selection().get_selected_nodes()
 	if selected.size() == 1 and selected[0] is Node3D:
-		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
+		AssetTransformations.apply_transforms(preview_node, _presenter.options)
 	self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
 
@@ -68,7 +68,7 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 		var hit = _strategy.get_placement_point(camera, mouse_position)
 		var normal = Vector3.UP
 
-		if AssetPlacerPresenter._instance.options.align_normals and hit:
+		if _presenter.options.align_normals and hit:
 			normal = hit.normal
 
 		var snapped_pos = _snap_position(hit.position, normal)
@@ -160,10 +160,10 @@ func get_collision_rids(node: Node) -> Array:
 
 
 func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
-	if !AssetPlacerPresenter._instance.options.snapping_enabled:
+	if !_presenter.options.snapping_enabled:
 		return hit_pos
 
-	var grid_step: float = AssetPlacerPresenter._instance.options.snapping_grid_step
+	var grid_step: float = _presenter.options.snapping_grid_step
 
 	# Build tangent basis aligned to the surface normal
 	var n := normal.normalized()
@@ -186,51 +186,47 @@ func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
 
 func _place_instance(transform: Transform3D, select_after_placement: bool):
 	var scene := EditorInterface.get_edited_scene_root()
-	var scene_root := AssetPlacerPresenter._instance.resolve_placement_parent(scene)
+	var scene_root := _presenter.resolve_placement_parent(scene)
 	if scene_root == null:
 		return
-	var options := AssetPlacerPresenter._instance.options
+	var options := _presenter.options
 	var parent := AssetParentSelector.pick_parent(scene_root, asset, options.group_automatically)
 
 	if is_instance_valid(parent) and is_instance_valid(asset.get_resource()):
-		undo_redo.create_action("Place Asset: %s" % asset.name)
-		undo_redo.add_do_method(self, "_do_placement", parent, transform, select_after_placement)
-		undo_redo.add_undo_method(self, "_undo_placement", parent)
+		var new_node: Node3D = _instantiate_asset_resource(asset)
+		new_node.global_transform = transform
+		new_node.transform = parent.global_transform.affine_inverse() * transform
+		new_node.name = _pick_name(new_node, parent)
+		new_node.set_meta(META_ASSET_ID, asset.id)
+
+		undo_redo.create_action("Place Asset: %s" % asset.name, 0, parent)
+		undo_redo.add_do_reference(new_node)
+		undo_redo.add_do_method(self, "_do_placement", new_node, parent, select_after_placement)
+		undo_redo.add_undo_method(self, "_undo_placement", new_node, parent)
 		undo_redo.commit_action()
-		AssetTransformations.apply_transforms(preview_node, AssetPlacerPresenter._instance.options)
+
+		AssetTransformations.apply_transforms(preview_node, _presenter.options)
 		_presenter.on_asset_placed()
 
 
-func _do_placement(root: Node3D, transform: Transform3D, select_after_placement: bool):
-	var new_node: Node3D = _instantiate_asset_resource(asset)
-	new_node.global_transform = transform
-	new_node.transform = root.global_transform.affine_inverse() * transform
-	new_node.set_meta(meta_asset_id, asset.id)
-	new_node.name = _pick_name(new_node, root)
+func _do_placement(new_node: Node3D, root: Node3D, select_after_placement: bool):
+	var temp_name := new_node.name
 	root.add_child(new_node)
+	new_node.name = temp_name
 	new_node.owner = EditorInterface.get_edited_scene_root()
-	node_history.push_front(new_node.name)
 	if select_after_placement:
-		AssetPlacerPresenter._instance.clear_selection()
+		_presenter.clear_selection()
 		EditorInterface.edit_node(new_node)
 
 
-func _undo_placement(root: Node3D):
-	var last_added = node_history.pop_front()
-	var children = root.get_children()
-	var node_index = -1
-	for a in root.get_child_count():
-		if children[a].name == last_added:
-			node_index = a
-			break
-	var node = root.get_child(node_index)
-	node.queue_free()
+func _undo_placement(new_node: Node3D, root: Node3D):
+	root.remove_child(new_node)
 
 
 func _confirm_node_transform():
 	if _is_node_transform_mode and preview_node:
 		# Create undo action for the node transformation
-		undo_redo.create_action("Transform Node: %s" % preview_node.name)
+		undo_redo.create_action("Transform Node: %s" % preview_node.name, 0, preview_node)
 		undo_redo.add_do_method(
 			self, "_do_node_transform", preview_node, preview_node.global_transform
 		)
@@ -286,9 +282,9 @@ func set_placement_mode(placement_mode: GapPlacementMode):
 
 
 func _pick_name(node: Node3D, parent: Node3D) -> String:
-	var number_of_same_scenes = 0
+	var number_of_same_scenes := 0
 	for child in parent.get_children():
-		if child.has_meta(meta_asset_id) && child.get_meta(meta_asset_id) == asset.id:
+		if child.has_meta(META_ASSET_ID) && child.get_meta(META_ASSET_ID) == asset.id:
 			number_of_same_scenes += 1
 	return node.name if number_of_same_scenes == 0 else node.name + " (%s)" % number_of_same_scenes
 
