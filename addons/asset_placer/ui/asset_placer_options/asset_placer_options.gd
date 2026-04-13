@@ -2,6 +2,10 @@
 extends Control
 
 var presenter: AssetPlacerPresenter
+var options: AssetPlacerOptions:
+	get:
+		return AssetPlacerOptionsManager.get_options()
+
 @onready var grid_snapping_checkbox = %GridSnappingCheckbox
 @onready var grid_snap_value_spin_box: SpinBox = %GridSnapValueSpinBox
 @onready var min_rotation_selector: SpinBoxVector3 = %MinRotationSelector
@@ -27,7 +31,7 @@ var presenter: AssetPlacerPresenter
 
 func _ready():
 	presenter = AssetPlacerPresenter.instance
-	presenter.options_changed.connect(set_options)
+	options.changed.connect(set_options)
 	presenter.parent_changed.connect(show_parent)
 	presenter.placement_mode_changed.connect(show_placement_mode)
 
@@ -42,17 +46,23 @@ func _ready():
 					_show_terrain_3d_selector()
 	)
 
-	grid_snapping_checkbox.toggled.connect(presenter.set_grid_snapping_enabled)
-	grid_snap_value_spin_box.value_changed.connect(presenter.set_grid_snap_value)
-	random_asset_check_box.toggled.connect(presenter.set_random_asset_enabled)
-	max_rotation_selector.value_changed.connect(presenter.set_max_rotation)
-	min_rotation_selector.value_changed.connect(presenter.set_min_rotation)
-	min_scale_selector.value_changed.connect(presenter.set_min_scale)
-	max_scale_selector.value_changed.connect(presenter.set_max_scale)
-	uniform_scale_check_box.toggled.connect(presenter.set_unform_scaling)
-	use_assets_origin_checkbox.toggled.connect(presenter.set_use_asset_origin)
-	group_automatically_check_box.toggled.connect(presenter.set_automatic_grouping)
-	use_selection_for_parent_check_box.toggled.connect(presenter.set_use_selected_as_parent)
+	grid_snapping_checkbox.toggled.connect(options.set_grid_snap_enabled)
+	grid_snap_value_spin_box.value_changed.connect(options.set_grid_snap_step)
+	random_asset_check_box.toggled.connect(options.set_pick_random_asset)
+
+	random_rotation_check_box.toggled.connect(options.set_use_random_rotation)
+	max_rotation_selector.value_changed.connect(options.set_max_random_rotation)
+	min_rotation_selector.value_changed.connect(options.set_min_random_rotation)
+
+	random_scale_check_box.toggled.connect(options.set_use_random_scale)
+	min_scale_selector.value_changed.connect(options.set_min_random_scale)
+	max_scale_selector.value_changed.connect(options.set_max_random_scale)
+	uniform_scale_check_box.toggled.connect(options.set_uniform_random_scaling)
+
+	use_assets_origin_checkbox.toggled.connect(options.set_use_asset_origin)
+	group_automatically_check_box.toggled.connect(options.set_automatic_grouping)
+	use_selection_for_parent_check_box.toggled.connect(options.set_use_selected_as_parent)
+	align_normals_checkbox.toggled.connect(options.set_align_normals)
 
 	plane_axis_spin_box.value_changed.connect(
 		func(normal: Vector3):
@@ -70,9 +80,7 @@ func _ready():
 		func(): EditorInterface.popup_node_selector(presenter.select_parent, [&"Node3D"])
 	)
 
-	random_rotation_check_box.toggled.connect(presenter.set_random_rotation_enabled)
-	random_scale_check_box.toggled.connect(presenter.set_random_scale_enabled)
-	align_normals_checkbox.toggled.connect(presenter.set_align_normals)
+	set_options()
 	presenter.ready()
 
 
@@ -81,7 +89,7 @@ func _show_terrain_3d_selector():
 
 
 func show_parent(parent: NodePath):
-	if presenter.options.use_selected_as_parent:
+	if options.use_selected_as_parent:
 		parent_button.disabled = true
 		parent_button.text = "From selection"
 		parent_button.icon = EditorIconTexture2D.new("Node3D")
@@ -118,20 +126,23 @@ func show_placement_mode(mode: GapPlacementMode):
 		placement_mode_options_button.select(2)
 
 
-func set_options(options: AssetPlacerOptions):
-	random_asset_check_box.set_pressed_no_signal(options.enable_random_placement)
-	grid_snapping_checkbox.set_pressed_no_signal(options.snapping_enabled)
-	grid_snap_value_spin_box.editable = options.snapping_enabled
-	grid_snap_value_spin_box.set_value_no_signal(options.snapping_grid_step)
-	max_rotation_selector.set_value_no_signal(options.max_rotation)
-	min_rotation_selector.set_value_no_signal(options.min_rotation)
-	min_scale_selector.set_value_no_signal(options.min_scale)
-	max_scale_selector.set_value_no_signal(options.max_scale)
-	min_scale_selector.uniform = options.uniform_scaling
-	max_scale_selector.uniform = options.uniform_scaling
-	uniform_scale_check_box.set_pressed_no_signal(options.uniform_scaling)
-	random_rotation_check_box.set_pressed_no_signal(options.rotate_on_placement)
-	random_scale_check_box.set_pressed_no_signal(options.scale_on_placement)
+func set_options():
+	grid_snapping_checkbox.set_pressed_no_signal(options.grid_snap_enabled)
+	grid_snap_value_spin_box.editable = options.grid_snap_enabled
+	grid_snap_value_spin_box.set_value_no_signal(options.grid_snap_step)
+	random_asset_check_box.set_pressed_no_signal(options.pick_random_asset)
+
+	random_scale_check_box.set_pressed_no_signal(options.use_random_scale)
+	min_scale_selector.set_value_no_signal(options.min_random_scale)
+	max_scale_selector.set_value_no_signal(options.max_random_scale)
+	min_scale_selector.uniform = options.uniform_random_scaling
+	max_scale_selector.uniform = options.uniform_random_scaling
+	uniform_scale_check_box.set_pressed_no_signal(options.uniform_random_scaling)
+
+	random_rotation_check_box.set_pressed_no_signal(options.use_random_rotation)
+	max_rotation_selector.set_value_no_signal(options.max_random_rotation)
+	min_rotation_selector.set_value_no_signal(options.min_random_rotation)
+
 	align_normals_checkbox.set_pressed_no_signal(options.align_normals)
 	use_assets_origin_checkbox.set_pressed_no_signal(options.use_asset_origin)
 	group_automatically_check_box.set_pressed_no_signal(options.group_automatically)
