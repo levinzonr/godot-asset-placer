@@ -19,8 +19,6 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
-expand_margin_left = 6.0
-expand_margin_top = 4.0
 
 [sub_resource type="Texture2D" id="Texture2D_yvyyx"]
 resource_local_to_scene = false
@@ -125,55 +123,50 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_5cqey")
 [node name="Panel" type="Panel" parent="MainContent/PanelContainer2" unique_id=717920366]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MainContent/PanelContainer2" unique_id=687641512]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = 4
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MainContent/PanelContainer2/MarginContainer" unique_id=1810251743]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContent/PanelContainer2" unique_id=1810251743]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer" unique_id=811757333]
+[node name="PanelContainer" type="PanelContainer" parent="MainContent/PanelContainer2/VBoxContainer" unique_id=811757333]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qx6qk")
 
-[node name="MarginContainer" type="MarginContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer" unique_id=296305669]
+[node name="MarginContainer" type="MarginContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer" unique_id=296305669]
 layout_mode = 2
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 6
+theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer" unique_id=1163473389]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer" unique_id=1163473389]
 layout_mode = 2
 alignment = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=659313167]
+[node name="MarginContainer" type="MarginContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=659313167]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_top = -32
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = -16
 
-[node name="AssetsLabel" type="Label" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=1180368063]
+[node name="AssetsLabel" type="Label" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=1180368063]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Assets"
 text_overrun_behavior = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=439730441]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=439730441]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="HBoxContainerTop" type="HBoxContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=263426647]
+[node name="HBoxContainerTop" type="HBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=263426647]
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 2
 
-[node name="FilterButton" type="Button" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=723111635]
+[node name="FilterButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=723111635]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
@@ -182,7 +175,7 @@ tooltip_text = "Filter by Collection"
 icon = SubResource("Texture2D_yvyyx")
 icon_alignment = 1
 
-[node name="FiltersLabel" type="Label" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/FilterButton" unique_id=2017174812]
+[node name="FiltersLabel" type="Label" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/FilterButton" unique_id=2017174812]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -202,7 +195,7 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AddFolderButton" type="Button" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1736028897]
+[node name="AddFolderButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1736028897]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
@@ -211,10 +204,10 @@ tooltip_text = "Add Assets from Folder"
 icon = SubResource("Texture2D_5cqey")
 icon_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1663076877]
+[node name="CenterContainer" type="CenterContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1663076877]
 layout_mode = 2
 
-[node name="ReloadButton" type="Button" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/CenterContainer" unique_id=389049027]
+[node name="ReloadButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/CenterContainer" unique_id=389049027]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
@@ -222,7 +215,7 @@ size_flags_vertical = 4
 text = "Sync Assets"
 icon = SubResource("Texture2D_qx6qk")
 
-[node name="ProgressBar" type="ProgressBar" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/CenterContainer" unique_id=578510117]
+[node name="ProgressBar" type="ProgressBar" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/CenterContainer" unique_id=578510117]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(100, 10)
@@ -232,22 +225,22 @@ size_flags_vertical = 4
 indeterminate = true
 editor_preview_indeterminate = true
 
-[node name="Label" type="Label" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1774242199]
+[node name="Label" type="Label" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1774242199]
 layout_mode = 2
 text = "Sort by"
 
-[node name="SortButton" type="OptionButton" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1145968409]
+[node name="SortButton" type="OptionButton" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1145968409]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 34)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Control" type="Control" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=395794459]
+[node name="Control" type="Control" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=395794459]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AscendingOrderButton" type="Button" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/Control" unique_id=1469154313]
+[node name="AscendingOrderButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/Control" unique_id=1469154313]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(34, 34)
 layout_mode = 0
@@ -261,112 +254,117 @@ tooltip_text = "Sort by descending order."
 icon = SubResource("Texture2D_2650m")
 icon_alignment = 1
 
-[node name="HBoxContainerBot" type="HBoxContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=448990933]
+[node name="HBoxContainerBot" type="HBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=448990933]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerBot" unique_id=1009293278]
+[node name="TextureRect" type="TextureRect" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerBot" unique_id=1009293278]
 layout_mode = 2
 size_flags_vertical = 4
 texture = SubResource("Texture2D_gvdec")
 stretch_mode = 5
 
-[node name="SearchField" type="LineEdit" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerBot" unique_id=650943463]
+[node name="SearchField" type="LineEdit" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerBot" unique_id=650943463]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_vertical = 4
 placeholder_text = "Filter assets by name"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer" unique_id=1511808776]
+[node name="MarginContainer" type="MarginContainer" parent="MainContent/PanelContainer2/VBoxContainer" unique_id=1274464248]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 6
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContent/PanelContainer2/VBoxContainer/MarginContainer" unique_id=1511808776]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GridContainer" type="HFlowContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer" unique_id=2008987014]
+[node name="GridContainer" type="HFlowContainer" parent="MainContent/PanelContainer2/VBoxContainer/MarginContainer/ScrollContainer" unique_id=2008987014]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="EmptyCollectionContent" type="CenterContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer" unique_id=2105840377]
+[node name="EmptyCollectionContent" type="CenterContainer" parent="MainContent/PanelContainer2/VBoxContainer" unique_id=2105840377]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="VBoxContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/EmptyCollectionContent" unique_id=405080356]
+[node name="HBoxContainer" type="VBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/EmptyCollectionContent" unique_id=405080356]
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="Label" type="Label" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/EmptyCollectionContent/HBoxContainer" unique_id=1598958730]
+[node name="Label" type="Label" parent="MainContent/PanelContainer2/VBoxContainer/EmptyCollectionContent/HBoxContainer" unique_id=1598958730]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "No assets in this collection"
 horizontal_alignment = 1
 
-[node name="Space" type="Control" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/EmptyCollectionContent/HBoxContainer" unique_id=2107497302]
+[node name="Space" type="Control" parent="MainContent/PanelContainer2/VBoxContainer/EmptyCollectionContent/HBoxContainer" unique_id=2107497302]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/EmptyCollectionContent/HBoxContainer" unique_id=923357456]
+[node name="Label2" type="Label" parent="MainContent/PanelContainer2/VBoxContainer/EmptyCollectionContent/HBoxContainer" unique_id=923357456]
 layout_mode = 2
 text = "This collection currently has no assets assigned.
 You can Drag and Drop assets/folders into this window to fix that!"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/EmptyCollectionContent/HBoxContainer" unique_id=1708860321]
+[node name="Label3" type="Label" parent="MainContent/PanelContainer2/VBoxContainer/EmptyCollectionContent/HBoxContainer" unique_id=1708860321]
 layout_mode = 2
 text = "Or"
 horizontal_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/EmptyCollectionContent/HBoxContainer" unique_id=369917372]
+[node name="CenterContainer" type="CenterContainer" parent="MainContent/PanelContainer2/VBoxContainer/EmptyCollectionContent/HBoxContainer" unique_id=369917372]
 layout_mode = 2
 
-[node name="EmptyCollectionViewAddFolderBtn" type="Button" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/EmptyCollectionContent/HBoxContainer/CenterContainer" unique_id=1001134906]
+[node name="EmptyCollectionViewAddFolderBtn" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/EmptyCollectionContent/HBoxContainer/CenterContainer" unique_id=1001134906]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Add Folders  Using Dialog"
 icon = SubResource("Texture2D_mdpb8")
 
-[node name="EmptySearchContent" type="CenterContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer" unique_id=961587485]
+[node name="EmptySearchContent" type="CenterContainer" parent="MainContent/PanelContainer2/VBoxContainer" unique_id=961587485]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="VBoxContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/EmptySearchContent" unique_id=1297012161]
+[node name="HBoxContainer" type="VBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/EmptySearchContent" unique_id=1297012161]
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="Label" type="Label" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/EmptySearchContent/HBoxContainer" unique_id=498463512]
+[node name="Label" type="Label" parent="MainContent/PanelContainer2/VBoxContainer/EmptySearchContent/HBoxContainer" unique_id=498463512]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "No assets found"
 horizontal_alignment = 1
 
-[node name="Space" type="Control" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/EmptySearchContent/HBoxContainer" unique_id=2143086520]
+[node name="Space" type="Control" parent="MainContent/PanelContainer2/VBoxContainer/EmptySearchContent/HBoxContainer" unique_id=2143086520]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/EmptySearchContent/HBoxContainer" unique_id=1526199362]
+[node name="Label2" type="Label" parent="MainContent/PanelContainer2/VBoxContainer/EmptySearchContent/HBoxContainer" unique_id=1526199362]
 layout_mode = 2
 text = "No assets found that would have this name
 You can Drag and Drop assets/folders into this window to fix that!"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/EmptySearchContent/HBoxContainer" unique_id=2018307732]
+[node name="Label3" type="Label" parent="MainContent/PanelContainer2/VBoxContainer/EmptySearchContent/HBoxContainer" unique_id=2018307732]
 layout_mode = 2
 text = "Or"
 horizontal_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/EmptySearchContent/HBoxContainer" unique_id=1434945112]
+[node name="CenterContainer" type="CenterContainer" parent="MainContent/PanelContainer2/VBoxContainer/EmptySearchContent/HBoxContainer" unique_id=1434945112]
 layout_mode = 2
 
-[node name="EmptyCollectionViewAddFolderBtn" type="Button" parent="MainContent/PanelContainer2/MarginContainer/VBoxContainer/EmptySearchContent/HBoxContainer/CenterContainer" unique_id=1457677871]
+[node name="EmptyCollectionViewAddFolderBtn" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/EmptySearchContent/HBoxContainer/CenterContainer" unique_id=1457677871]
 layout_mode = 2
 text = "Add Folders  Using Dialog"
 icon = SubResource("Texture2D_mdpb8")
