@@ -9,10 +9,12 @@ signal show_empty_view(type: EmptyType)
 enum EmptyType { Search, Collection, All, None }
 
 var synchronizer: Synchronize
+var is_sort_ascending := true
 
 var _active_collections: Array[AssetCollection] = []
 var _filtered_assets: Array[AssetResource] = []
 var _current_query: String
+var _current_sort_method: AssetSortBy.SortMethod
 
 var _asset_library: AssetLibrary:
 	get:
@@ -57,7 +59,9 @@ func add_asset(path: String, folder_path: String):
 		existing.add_tags(tags)
 		_asset_library.update_asset(existing)
 	else:
-		var new_asset := AssetResource.new(id, path.get_file(), tags, folder_path)
+		var new_asset := AssetResource.new(
+			id, path.get_file(), tags, folder_path, -1, Time.get_unix_time_from_system()
+		)
 		_asset_library.add_asset(new_asset)
 
 
@@ -90,6 +94,11 @@ func toggle_collection_filter(collection: AssetCollection, enabled: bool):
 	_filter_by_collections_and_query()
 
 
+func on_sort_method_change(method: AssetSortBy.SortMethod):
+	_current_sort_method = method
+	_filter_by_collections_and_query()
+
+
 func _filter_by_collections_and_query():
 	var filtered: Array[AssetResource] = []
 	for asset in _asset_library.get_assets():
@@ -101,6 +110,7 @@ func _filter_by_collections_and_query():
 		if matches_query and belongs_to_collection:
 			filtered.push_back(asset)
 
+	filtered.sort_custom(AssetSortBy.get_sort_function(_current_sort_method, is_sort_ascending))
 	if filtered.is_empty():
 		if _active_collections.is_empty() && _current_query.is_empty():
 			show_empty_view.emit(EmptyType.All)

@@ -17,6 +17,9 @@ signal asset_selected(asset: AssetResource)
 @onready var filter_button: Button = %FilterButton
 @onready var filters_label: Label = %FiltersLabel
 @onready var reload_button: Button = %ReloadButton
+@onready var sort_button: Button = %SortButton
+@onready var ascending_order_button: Button = %AscendingOrderButton
+
 @onready var progress_bar = %ProgressBar
 @onready var empty_content = %EmptyContent
 @onready var main_content = %MainContent
@@ -28,6 +31,9 @@ signal asset_selected(asset: AssetResource)
 
 
 func _ready():
+	if is_part_of_edited_scene():
+		return
+
 	presenter.assets_loaded.connect(show_assets)
 	presenter.show_filter_info.connect(show_filter_info)
 	placer_presenter.asset_selected.connect(set_selected_asset)
@@ -38,6 +44,14 @@ func _ready():
 	presenter.synchronizer.sync_state_change.connect(func(v): show_sync_in_progress(v))
 
 	presenter.on_ready()
+
+	for method in AssetSortBy.SortMethod.keys():
+		sort_button.add_item(method.capitalize(), AssetSortBy.SortMethod[method])
+
+	sort_button.selected = 0
+	sort_button.item_selected.connect(presenter.on_sort_method_change)
+	ascending_order_button.pressed.connect(flip_order)
+
 	add_folder_button.pressed.connect(show_folder_dialog)
 	search_field.text_changed.connect(presenter.on_query_change)
 	reload_button.pressed.connect(presenter.sync)
@@ -135,6 +149,15 @@ func set_selected_asset(asset: AssetResource):
 	for child in grid_container.get_children():
 		if child is AssetResourcePreview:
 			child.select_not_signal(child.get_meta("id") == asset.id)
+
+
+func flip_order():
+	ascending_order_button.scale.y *= -1
+	var text := "Sort by %s order." % ("ascending" if presenter.is_sort_ascending else "descending")
+	ascending_order_button.tooltip_text = text
+
+	presenter.is_sort_ascending = not presenter.is_sort_ascending
+	presenter._filter_by_collections_and_query()
 
 
 func show_empty_view(type: AssetLibraryPresenter.EmptyType):
