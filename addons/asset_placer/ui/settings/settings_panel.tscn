@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ckokuu85fua3"]
+[gd_scene format=3 uid="uid://ckokuu85fua3"]
 
 [ext_resource type="Script" uid="uid://ckohy5300ciba" path="res://addons/asset_placer/ui/settings/settings_panel.gd" id="1_cqn4c"]
 [ext_resource type="PackedScene" uid="uid://bjgh4jo3pc65i" path="res://addons/asset_placer/ui/settings/components/keybinding_option.tscn" id="1_gi0tg"]
@@ -42,7 +42,7 @@ script = ExtResource("1_si2q2")
 icon_name = &"KeyboardPhysical"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
-[node name="SettingsPanel" type="Control"]
+[node name="SettingsPanel" type="Control" unique_id=126007270]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,7 +51,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cqn4c")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=356747440]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,7 +59,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=898713020]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,14 +71,14 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer" unique_id=1499630830]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer" unique_id=1874520967]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ResetButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="ResetButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=582147653]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
@@ -86,62 +86,76 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_cqn4c")
 text = "Reset To Defaults"
 icon = SubResource("Texture2D_l6bix")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1100562439]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="General" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="General" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1401066908]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=1535153568]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer2" unique_id=742817186]
 layout_mode = 2
 texture = SubResource("Texture2D_a1e85")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer2"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer2" unique_id=1294546808]
 layout_mode = 2
 text = "Settings"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General"]
+[node name="HBoxContainer6" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=117105376]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer3"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer6" unique_id=653223322]
+layout_mode = 2
+text = "Asset Library Save Path"
+
+[node name="AssetLibraryButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer6" unique_id=103615135]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+text_overrun_behavior = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=1178045438]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer3" unique_id=687410114]
 layout_mode = 2
 text = "Transform Step (Scale, Translate)"
 
-[node name="TrasformStepSpinBox" type="SpinBox" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer3"]
+[node name="TrasformStepSpinBox" type="SpinBox" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer3" unique_id=1812298941]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 step = 0.01
 value = 0.1
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=938920544]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer4"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer4" unique_id=1343198212]
 layout_mode = 2
 text = "Rotation Step (Degrees)"
 
-[node name="RotationStepSpinBox" type="SpinBox" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer4"]
+[node name="RotationStepSpinBox" type="SpinBox" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer4" unique_id=1515420082]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 max_value = 360.0
 value = 5.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=1123812084]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer" unique_id=1921343675]
 layout_mode = 2
 text = "Preview Material Resource"
 
-[node name="MaterialPickerButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer"]
+[node name="MaterialPickerButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer" unique_id=1303403192]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -150,40 +164,40 @@ alignment = 2
 autowrap_trim_flags = 0
 icon_alignment = 2
 
-[node name="MaterialClearButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer"]
+[node name="MaterialClearButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer" unique_id=420008564]
 unique_name_in_owner = true
 layout_mode = 2
 icon = SubResource("Texture2D_y61cc")
 
-[node name="PlaneMaterialOption" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General"]
+[node name="PlaneMaterialOption" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=82083214]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/PlaneMaterialOption"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/PlaneMaterialOption" unique_id=21734961]
 layout_mode = 2
 text = "Plane Mode Material Resource"
 
-[node name="PlaneMaterialPickerButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/PlaneMaterialOption"]
+[node name="PlaneMaterialPickerButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/PlaneMaterialOption" unique_id=1330310838]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 text = "plane_preview_material.tres"
 alignment = 2
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=1075296859]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5" unique_id=1879340334]
 layout_mode = 2
 text = "Thumbnails UI Scale"
 
-[node name="SliderValue" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5"]
+[node name="SliderValue" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5" unique_id=584792401]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "0.8"
+text = "1.0"
 horizontal_alignment = 2
 
-[node name="UIScaleHSlider" type="HSlider" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5"]
+[node name="UIScaleHSlider" type="HSlider" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5" unique_id=1293124067]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -191,27 +205,27 @@ size_flags_vertical = 1
 min_value = 0.2
 max_value = 2.0
 step = 0.1
-value = 0.8
+value = 1.0
 ticks_position = 3
 
-[node name="Spacing" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General"]
+[node name="Spacing" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=653626810]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="UpdateChannelContainer" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General"]
+[node name="UpdateChannelContainer" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=1499912835]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/UpdateChannelContainer"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/UpdateChannelContainer" unique_id=1799532065]
 layout_mode = 2
 text = "Plugin Update Channel"
 
-[node name="UpdateChannelInfoButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/UpdateChannelContainer"]
+[node name="UpdateChannelInfoButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/UpdateChannelContainer" unique_id=1662314607]
 unique_name_in_owner = true
 layout_mode = 2
 icon = SubResource("Texture2D_altf5")
 flat = true
 
-[node name="UpdateChannelOptionButton" type="OptionButton" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/UpdateChannelContainer"]
+[node name="UpdateChannelOptionButton" type="OptionButton" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/UpdateChannelContainer" unique_id=1908545530]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -225,78 +239,78 @@ popup/item_1/id = 1
 popup/item_2/text = "Alpha"
 popup/item_2/id = 2
 
-[node name="KeyBindings" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+[node name="KeyBindings" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1876461377]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings" unique_id=520985477]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/HBoxContainer" unique_id=1615448721]
 layout_mode = 2
 texture = SubResource("Texture2D_cqn4c")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/HBoxContainer"]
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/HBoxContainer" unique_id=155629514]
 layout_mode = 2
 text = "Key Bindings"
 
-[node name="KeyBindingsOptions" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings"]
+[node name="KeyBindingsOptions" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings" unique_id=577854951]
 layout_mode = 2
 script = ExtResource("3_l6bix")
 
-[node name="KeybindingOptionRotate" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionRotate" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=1033935065 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Rotate Asset"
 
-[node name="KeybindingOptionScale" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionScale" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=182784807 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Scale Asset"
 
-[node name="KeybindingOptionTranslate" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionTranslate" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=612690937 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Translate Asset / Plane Placement"
 
-[node name="KeybindingOptionGridSnap" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionGridSnap" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=303777703 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Grid Snapping "
 
-[node name="KeybindingOptionPlaneMode" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionPlaneMode" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=2002350479 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Toggle Plane Mode"
 
-[node name="KeybindingOptionInPlaceTransform" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionInPlaceTransform" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=223925137 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 allow_mouse_buttons = true
 label = "In-Place Transform Mode "
 
-[node name="KeybindingOptionPositiveTransform" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionPositiveTransform" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=1164883150 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Apply Positive Transform "
 
-[node name="KeybindingOptionNegativeTransform" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionNegativeTransform" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=226098419 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Apply Negative Transform "
 
-[node name="KeybindingOptionAxisX" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionAxisX" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=1393918530 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Toggle X Axis"
 
-[node name="KeybindingOptionAxisY" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionAxisY" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=1456901673 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Toggle Y Axis"
 
-[node name="KeybindingOptionAxisZ" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionAxisZ" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=1973765067 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Toggle Z Axis"

@@ -22,6 +22,14 @@ func reset_to_defaults():
 	_repository.set_settings(AssetPlacerSettings.default())
 
 
+func set_asset_library_path(path: String):
+	var settings = _repository.get_settings()
+	settings.asset_library_path = path
+	_repository.set_settings(settings)
+
+	AssetLibraryManager.update_save_path(path)
+
+
 func set_default_transform_step(value: float):
 	var settings = _repository.get_settings()
 	settings.transform_step = value

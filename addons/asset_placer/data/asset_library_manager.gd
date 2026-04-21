@@ -17,6 +17,31 @@ static func get_asset_library() -> AssetLibrary:
 	return _asset_library
 
 
+static func update_save_path(new_path: String):
+	assert(new_path.is_absolute_path(), "Cannot use non-absolute asset library path %s" % new_path)
+	if new_path == _save_path:
+		return
+
+	if is_instance_valid(_save_timer):
+		_save_asset_library()
+
+	if FileAccess.file_exists(new_path):
+		var msg := "Asset Placer: Existing Asset Library found at %s, loading new library. " + \
+			"The old library can still be found at %s"
+		print(msg % [new_path, _save_path])
+		_save_path = new_path
+		load_asset_library(new_path)
+
+	else:
+		var msg := (
+			"Asset Placer: Copying Asset Library to new path %s. " +
+			"The old library can still be found at %s"
+		)
+		print(msg % [new_path, _save_path])
+		_save_path = new_path
+		_save_asset_library()
+
+
 static func load_asset_library(load_path: String) -> void:
 	if is_instance_valid(_save_timer):
 		_save_asset_library()
@@ -47,8 +72,9 @@ static func free_library():
 
 
 static func _save_asset_library():
-	_save_timer.timeout.disconnect(_save_asset_library)
-	_save_timer = null
+	if is_instance_valid(_save_timer):
+		_save_timer.timeout.disconnect(_save_asset_library)
+		_save_timer = null
 
 	assert(is_instance_valid(_asset_library), "Cannot save AssetLibrary when none is loaded.")
 
