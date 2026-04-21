@@ -21,6 +21,13 @@ script = ExtResource("1_si2q2")
 icon_name = &"Tools"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
+[sub_resource type="Texture2D" id="Texture2D_xga4m"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_si2q2")
+icon_name = &"Reload"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
 [sub_resource type="Texture2D" id="Texture2D_y61cc"]
 resource_local_to_scene = false
 resource_name = ""
@@ -113,11 +120,23 @@ layout_mode = 2
 layout_mode = 2
 text = "Asset Library Save Path"
 
+[node name="ResetAssetLibraryButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer6" unique_id=2032001974]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(33, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+tooltip_text = "Reset to default"
+icon = SubResource("Texture2D_xga4m")
+icon_alignment = 1
+expand_icon = true
+
 [node name="AssetLibraryButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer6" unique_id=103615135]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 10
+tooltip_text = "user://asset_library.json"
+text = "user://asset_library.json"
 text_overrun_behavior = 3
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=1178045438]

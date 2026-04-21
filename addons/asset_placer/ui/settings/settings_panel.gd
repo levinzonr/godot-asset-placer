@@ -5,6 +5,7 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 @onready var reset_button: Button = %ResetButton
 
 @onready var asset_library_button: Button = %AssetLibraryButton
+@onready var reset_asset_library_button: Button = %ResetAssetLibraryButton
 @onready var material_picker_button: Button = %MaterialPickerButton
 @onready var material_clear_button: Button = %MaterialClearButton
 @onready var plane_material_picker_button: Button = %PlaneMaterialPickerButton
@@ -37,6 +38,9 @@ func _ready():
 	reset_button.pressed.connect(_presenter.reset_to_defaults)
 
 	asset_library_button.pressed.connect(_show_asset_library_picker)
+	reset_asset_library_button.pressed.connect(
+		_presenter.set_asset_library_path.bind(AssetPlacerSettings.DEFAULT_ASSET_LIBRARY_PATH)
+	)
 	material_clear_button.pressed.connect(_presenter.clear_preivew_material)
 	material_picker_button.pressed.connect(_show_preview_material_picker)
 	plane_material_picker_button.pressed.connect(
@@ -78,6 +82,10 @@ func _ready():
 func _show_settings(setting: AssetPlacerSettings):
 	asset_library_button.text = setting.asset_library_path
 	asset_library_button.tooltip_text = setting.asset_library_path
+	if setting.asset_library_path == setting.DEFAULT_ASSET_LIBRARY_PATH:
+		reset_asset_library_button.hide()
+	else:
+		reset_asset_library_button.show()
 
 	plane_material_picker_button.text = setting.plane_material_resource.get_file()
 	if setting.preview_material_resource.is_empty():
