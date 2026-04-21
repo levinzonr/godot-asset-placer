@@ -1,5 +1,19 @@
 # Godot Asset Placer Changelog
 
+## 1.5.0-alpha3
+
+Pre-release alpha for the upcoming **1.5.0** line. Expect further changes before stable **1.5.0**.
+
+### ✨ New Features
+
+- **#65** Added asset sorting options (Name, Date Added, Last Placed) with ascending/descending toggle in the asset library by @Sr3qt
+
+### 🐛 Fixed
+
+- **#91** Fixed About window overflowing when the dock is resized small by @Sr3qt
+
+---
+
 ## 1.5.0-alpha2
 
 Pre-release alpha for the upcoming **1.5.0** line. Expect further changes before stable **1.5.0**.
