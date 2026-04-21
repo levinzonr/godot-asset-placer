@@ -1,10 +1,6 @@
 class_name AssetPlacerSettings
 extends RefCounted
 
-const DEFAULT_PREVIEW_MATERIAL := "res://addons/asset_placer/utils/preview_material.tres"
-const DEFAULT_PLANE_MATERIAL := "res://addons/asset_placer/ui/plane_preview/plane_preview_material.tres"
-const DEFAULT_ASSET_LIBRARY_PATH := AssetLibraryParser.DEFAULT_SAVE_PATH
-
 enum Bindings {
 	Rotate,
 	Scale,
@@ -20,6 +16,10 @@ enum Bindings {
 }
 
 enum UpdateChannel { Stable, Beta, Alpha }
+
+const DEFAULT_PREVIEW_MATERIAL := "res://addons/asset_placer/utils/preview_material.tres"
+const DEFAULT_PLANE_MATERIAL := "res://addons/asset_placer/ui/plane_preview/plane_preview_material.tres"
+const DEFAULT_ASSET_LIBRARY_PATH := AssetLibraryParser.DEFAULT_SAVE_PATH
 
 var transform_step: float
 var rotation_step: float

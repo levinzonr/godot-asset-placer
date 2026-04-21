@@ -60,21 +60,21 @@ func _ready():
 			OS.shell_open("https://levinzonr.github.io/godot-asset-placer/development-lifecycle/")
 	)
 
-	var Bindings := AssetPlacerSettings.Bindings
+	var bindings := AssetPlacerSettings.Bindings
 	var set_binding := _presenter.set_binding
 
-	kb_rotate.keybind_changed.connect(set_binding.bind(Bindings.Rotate))
-	kb_scale.keybind_changed.connect(set_binding.bind(Bindings.Scale))
-	kb_translate.keybind_changed.connect(set_binding.bind(Bindings.Translate))
-	kb_grid_snap.keybind_changed.connect(set_binding.bind(Bindings.GridSnapping))
+	kb_rotate.keybind_changed.connect(set_binding.bind(bindings.Rotate))
+	kb_scale.keybind_changed.connect(set_binding.bind(bindings.Scale))
+	kb_translate.keybind_changed.connect(set_binding.bind(bindings.Translate))
+	kb_grid_snap.keybind_changed.connect(set_binding.bind(bindings.GridSnapping))
 
-	kb_positive_transform.keybind_changed.connect(set_binding.bind(Bindings.TransformPositive))
-	kb_negative_transform.keybind_changed.connect(set_binding.bind(Bindings.TransformNegative))
-	kb_in_place_transform.keybind_changed.connect(set_binding.bind(Bindings.InPlaceTransform))
-	kb_axis_x.keybind_changed.connect(set_binding.bind(Bindings.ToggleAxisX))
-	kb_axis_y.keybind_changed.connect(set_binding.bind(Bindings.ToggleAxisY))
-	kb_axis_z.keybind_changed.connect(set_binding.bind(Bindings.ToggleAxisZ))
-	kb_plane_mode.keybind_changed.connect(set_binding.bind(Bindings.TogglePlaneMode))
+	kb_positive_transform.keybind_changed.connect(set_binding.bind(bindings.TransformPositive))
+	kb_negative_transform.keybind_changed.connect(set_binding.bind(bindings.TransformNegative))
+	kb_in_place_transform.keybind_changed.connect(set_binding.bind(bindings.InPlaceTransform))
+	kb_axis_x.keybind_changed.connect(set_binding.bind(bindings.ToggleAxisX))
+	kb_axis_y.keybind_changed.connect(set_binding.bind(bindings.ToggleAxisY))
+	kb_axis_z.keybind_changed.connect(set_binding.bind(bindings.ToggleAxisZ))
+	kb_plane_mode.keybind_changed.connect(set_binding.bind(bindings.TogglePlaneMode))
 
 	_presenter.ready()
 
@@ -100,19 +100,18 @@ func _show_settings(setting: AssetPlacerSettings):
 
 	update_channel_option_button.select(setting.update_channel)
 
-	var Bindings := AssetPlacerSettings.Bindings
-	var bindings := setting.bindings
-	kb_rotate.set_keybind(bindings[AssetPlacerSettings.Bindings.Rotate])
-	kb_translate.set_keybind(bindings[Bindings.Translate])
-	kb_scale.set_keybind(bindings[Bindings.Scale])
-	kb_grid_snap.set_keybind(bindings[Bindings.GridSnapping])
-	kb_in_place_transform.set_keybind(bindings[Bindings.InPlaceTransform])
-	kb_negative_transform.set_keybind(bindings[Bindings.TransformNegative])
-	kb_positive_transform.set_keybind(bindings[Bindings.TransformPositive])
-	kb_axis_x.set_keybind(bindings[Bindings.ToggleAxisX])
-	kb_axis_y.set_keybind(bindings[Bindings.ToggleAxisY])
-	kb_axis_z.set_keybind(bindings[Bindings.ToggleAxisZ])
-	kb_plane_mode.set_keybind(bindings[Bindings.TogglePlaneMode])
+	var bindings := AssetPlacerSettings.Bindings
+	kb_rotate.set_keybind(setting.bindings[bindings.Rotate])
+	kb_translate.set_keybind(setting.bindings[bindings.Translate])
+	kb_scale.set_keybind(setting.bindings[bindings.Scale])
+	kb_grid_snap.set_keybind(setting.bindings[bindings.GridSnapping])
+	kb_in_place_transform.set_keybind(setting.bindings[bindings.InPlaceTransform])
+	kb_negative_transform.set_keybind(setting.bindings[bindings.TransformNegative])
+	kb_positive_transform.set_keybind(setting.bindings[bindings.TransformPositive])
+	kb_axis_x.set_keybind(setting.bindings[bindings.ToggleAxisX])
+	kb_axis_y.set_keybind(setting.bindings[bindings.ToggleAxisY])
+	kb_axis_z.set_keybind(setting.bindings[bindings.ToggleAxisZ])
+	kb_plane_mode.set_keybind(setting.bindings[bindings.TogglePlaneMode])
 
 
 func _show_preview_material_picker():

@@ -26,16 +26,18 @@ static func update_save_path(new_path: String):
 		_save_asset_library()
 
 	if FileAccess.file_exists(new_path):
-		var msg := "Asset Placer: Existing Asset Library found at %s, loading new library. " + \
-			"The old library can still be found at %s"
+		var msg := (
+			"Asset Placer: Existing Asset Library found at %s, loading new library. "
+			+ "The old library can still be found at %s"
+		)
 		print(msg % [new_path, _save_path])
 		_save_path = new_path
 		load_asset_library(new_path)
 
 	else:
 		var msg := (
-			"Asset Placer: Copying Asset Library to new path %s. " +
-			"The old library can still be found at %s"
+			"Asset Placer: Copying Asset Library to new path %s. "
+			+ "The old library can still be found at %s"
 		)
 		print(msg % [new_path, _save_path])
 		_save_path = new_path
