@@ -99,7 +99,7 @@ func set_binding_in_place_transform(key: APInputOption):
 	_repository.set_settings(current)
 
 
-func set_binding(key: AssetPlacerSettings.Bindings, input: APInputOption):
+func set_binding(input: APInputOption, key: AssetPlacerSettings.Bindings):
 	var current_settings = _repository.get_settings()
 	current_settings.bindings[key] = input
 	_repository.set_settings(current_settings)

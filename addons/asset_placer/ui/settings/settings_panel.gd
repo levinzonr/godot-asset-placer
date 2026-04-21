@@ -17,17 +17,19 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 @onready var update_channel_option_button: OptionButton = %UpdateChannelOptionButton
 @onready var update_channel_info_button: Button = %UpdateChannelInfoButton
 
-@onready var keybinding_option_rotate = %KeybindingOptionRotate
-@onready var keybinding_option_scale = %KeybindingOptionScale
-@onready var keybinding_option_translate = %KeybindingOptionTranslate
-@onready var keybinding_option_grid_snap = %KeybindingOptionGridSnap
-@onready var keybinding_option_in_place_transform = %KeybindingOptionInPlaceTransform
-@onready var keybinding_option_positive_transform = %KeybindingOptionPositiveTransform
-@onready var keybinding_option_negative_transform = %KeybindingOptionNegativeTransform
-@onready var keybinding_option_axis_x = %KeybindingOptionAxisX
-@onready var keybinding_option_axis_y = %KeybindingOptionAxisY
-@onready var keybinding_option_axis_z = %KeybindingOptionAxisZ
-@onready var keybinding_option_plane_mode = %KeybindingOptionPlaneMode
+# Keybinds
+
+@onready var kb_rotate = %KeybindingOptionRotate
+@onready var kb_scale = %KeybindingOptionScale
+@onready var kb_translate = %KeybindingOptionTranslate
+@onready var kb_grid_snap = %KeybindingOptionGridSnap
+@onready var kb_in_place_transform = %KeybindingOptionInPlaceTransform
+@onready var kb_positive_transform = %KeybindingOptionPositiveTransform
+@onready var kb_negative_transform = %KeybindingOptionNegativeTransform
+@onready var kb_axis_x = %KeybindingOptionAxisX
+@onready var kb_axis_y = %KeybindingOptionAxisY
+@onready var kb_axis_z = %KeybindingOptionAxisZ
+@onready var kb_plane_mode = %KeybindingOptionPlaneMode
 
 
 func _ready():
@@ -54,43 +56,21 @@ func _ready():
 			OS.shell_open("https://levinzonr.github.io/godot-asset-placer/development-lifecycle/")
 	)
 
-	keybinding_option_rotate.keybind_changed.connect(
-		func(key): _presenter.set_binding(AssetPlacerSettings.Bindings.Rotate, key)
-	)
+	var Bindings := AssetPlacerSettings.Bindings
+	var set_binding := _presenter.set_binding
 
-	keybinding_option_positive_transform.keybind_changed.connect(
-		func(key): _presenter.set_binding(AssetPlacerSettings.Bindings.TransformPositive, key)
-	)
+	kb_rotate.keybind_changed.connect(set_binding.bind(Bindings.Rotate))
+	kb_scale.keybind_changed.connect(set_binding.bind(Bindings.Scale))
+	kb_translate.keybind_changed.connect(set_binding.bind(Bindings.Translate))
+	kb_grid_snap.keybind_changed.connect(set_binding.bind(Bindings.GridSnapping))
 
-	keybinding_option_translate.keybind_changed.connect(
-		func(key): _presenter.set_binding(AssetPlacerSettings.Bindings.Translate, key)
-	)
-
-	keybinding_option_plane_mode.keybind_changed.connect(
-		func(key): _presenter.set_binding(AssetPlacerSettings.Bindings.TogglePlaneMode, key)
-	)
-
-	keybinding_option_negative_transform.keybind_changed.connect(
-		func(key): _presenter.set_binding(AssetPlacerSettings.Bindings.TransformNegative, key)
-	)
-	keybinding_option_scale.keybind_changed.connect(
-		func(key): _presenter.set_binding(AssetPlacerSettings.Bindings.Scale, key)
-	)
-	keybinding_option_in_place_transform.keybind_changed.connect(
-		func(key): _presenter.set_binding(AssetPlacerSettings.Bindings.InPlaceTransform, key)
-	)
-	keybinding_option_grid_snap.keybind_changed.connect(
-		func(key): _presenter.set_binding(AssetPlacerSettings.Bindings.GridSnapping, key)
-	)
-	keybinding_option_axis_x.keybind_changed.connect(
-		func(key): _presenter.set_binding(AssetPlacerSettings.Bindings.ToggleAxisX, key)
-	)
-	keybinding_option_axis_y.keybind_changed.connect(
-		func(key): _presenter.set_binding(AssetPlacerSettings.Bindings.ToggleAxisY, key)
-	)
-	keybinding_option_axis_z.keybind_changed.connect(
-		func(key): _presenter.set_binding(AssetPlacerSettings.Bindings.ToggleAxisZ, key)
-	)
+	kb_positive_transform.keybind_changed.connect(set_binding.bind(Bindings.TransformPositive))
+	kb_negative_transform.keybind_changed.connect(set_binding.bind(Bindings.TransformNegative))
+	kb_in_place_transform.keybind_changed.connect(set_binding.bind(Bindings.InPlaceTransform))
+	kb_axis_x.keybind_changed.connect(set_binding.bind(Bindings.ToggleAxisX))
+	kb_axis_y.keybind_changed.connect(set_binding.bind(Bindings.ToggleAxisY))
+	kb_axis_z.keybind_changed.connect(set_binding.bind(Bindings.ToggleAxisZ))
+	kb_plane_mode.keybind_changed.connect(set_binding.bind(Bindings.TogglePlaneMode))
 
 	_presenter.ready()
 
@@ -114,17 +94,17 @@ func _show_settings(setting: AssetPlacerSettings):
 
 	var Bindings := AssetPlacerSettings.Bindings
 	var bindings := setting.bindings
-	keybinding_option_rotate.set_keybind(bindings[AssetPlacerSettings.Bindings.Rotate])
-	keybinding_option_translate.set_keybind(bindings[Bindings.Translate])
-	keybinding_option_scale.set_keybind(bindings[Bindings.Scale])
-	keybinding_option_grid_snap.set_keybind(bindings[Bindings.GridSnapping])
-	keybinding_option_in_place_transform.set_keybind(bindings[Bindings.InPlaceTransform])
-	keybinding_option_negative_transform.set_keybind(bindings[Bindings.TransformNegative])
-	keybinding_option_positive_transform.set_keybind(bindings[Bindings.TransformPositive])
-	keybinding_option_axis_x.set_keybind(bindings[Bindings.ToggleAxisX])
-	keybinding_option_axis_y.set_keybind(bindings[Bindings.ToggleAxisY])
-	keybinding_option_axis_z.set_keybind(bindings[Bindings.ToggleAxisZ])
-	keybinding_option_plane_mode.set_keybind(bindings[Bindings.TogglePlaneMode])
+	kb_rotate.set_keybind(bindings[AssetPlacerSettings.Bindings.Rotate])
+	kb_translate.set_keybind(bindings[Bindings.Translate])
+	kb_scale.set_keybind(bindings[Bindings.Scale])
+	kb_grid_snap.set_keybind(bindings[Bindings.GridSnapping])
+	kb_in_place_transform.set_keybind(bindings[Bindings.InPlaceTransform])
+	kb_negative_transform.set_keybind(bindings[Bindings.TransformNegative])
+	kb_positive_transform.set_keybind(bindings[Bindings.TransformPositive])
+	kb_axis_x.set_keybind(bindings[Bindings.ToggleAxisX])
+	kb_axis_y.set_keybind(bindings[Bindings.ToggleAxisY])
+	kb_axis_z.set_keybind(bindings[Bindings.ToggleAxisZ])
+	kb_plane_mode.set_keybind(bindings[Bindings.TogglePlaneMode])
 
 
 func _show_preview_material_picker():
