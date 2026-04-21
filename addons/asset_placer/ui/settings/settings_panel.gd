@@ -119,10 +119,15 @@ func _show_preview_material_picker():
 
 
 func _show_asset_library_picker():
-	var library_picker = EditorFileDialog.new()
+	var library_picker := EditorFileDialog.new()
+	# Only supported in 4.6+
+	if library_picker.get("overwrite_warning_enabled") != null:
+		library_picker.overwrite_warning_enabled = false
+
 	library_picker.file_mode = EditorFileDialog.FILE_MODE_SAVE_FILE
 	library_picker.access = EditorFileDialog.ACCESS_RESOURCES
-	library_picker.overwrite_warning_enabled = false
 	library_picker.add_filter("*.json", "Asset Library")
+	library_picker.title = "Choose where to save the AssetLibrary"
+	library_picker.ok_button_text = "Choose path"
 	library_picker.file_selected.connect(_presenter.set_asset_library_path)
 	EditorInterface.popup_dialog_centered(library_picker, Vector2i(720, 500))
