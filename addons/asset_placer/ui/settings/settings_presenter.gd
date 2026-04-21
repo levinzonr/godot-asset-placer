@@ -28,7 +28,7 @@ func set_asset_library_path(path: String):
 	_repository.set_settings(settings)
 
 	AssetLibraryManager.update_save_path(path)
-
+	ProjectSettings.save()
 
 func set_default_transform_step(value: float):
 	var settings = _repository.get_settings()
@@ -61,6 +61,7 @@ func set_preview_material(material: String):
 	current.preview_material_resource = material
 	_repository.set_settings(current)
 
+	ProjectSettings.save()
 
 func set_plane_material(material: String):
 	if not material.is_empty():
@@ -68,6 +69,7 @@ func set_plane_material(material: String):
 		current.plane_material_resource = material
 		_repository.set_settings(current)
 
+	ProjectSettings.save()
 
 func clear_preivew_material():
 	var current = _repository.get_settings()
