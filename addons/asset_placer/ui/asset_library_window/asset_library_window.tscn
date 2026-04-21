@@ -20,6 +20,20 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
+[sub_resource type="Texture2D" id="Texture2D_gvdec"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_gvdec")
+icon_name = &"Search"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_2650m"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_gvdec")
+icon_name = &"Sort"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
 [sub_resource type="Texture2D" id="Texture2D_yvyyx"]
 resource_local_to_scene = false
 resource_name = ""
@@ -48,20 +62,6 @@ resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("3_gvdec")
 icon_name = &"Reload"
-metadata/_custom_type_script = "uid://dmicn3kmr620j"
-
-[sub_resource type="Texture2D" id="Texture2D_2650m"]
-resource_local_to_scene = false
-resource_name = ""
-script = ExtResource("3_gvdec")
-icon_name = &"Sort"
-metadata/_custom_type_script = "uid://dmicn3kmr620j"
-
-[sub_resource type="Texture2D" id="Texture2D_gvdec"]
-resource_local_to_scene = false
-resource_name = ""
-script = ExtResource("3_gvdec")
-icon_name = &"Search"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [sub_resource type="Texture2D" id="Texture2D_mdpb8"]
@@ -166,11 +166,60 @@ layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 2
 
+[node name="HBoxContainerBot" type="HBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=448990933]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/HBoxContainerBot" unique_id=1009293278]
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("Texture2D_gvdec")
+stretch_mode = 5
+
+[node name="SearchField" type="LineEdit" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/HBoxContainerBot" unique_id=650943463]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(203.48, 0)
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "Filter assets by name"
+
+[node name="Label" type="Label" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1774242199]
+layout_mode = 2
+text = "Sort by"
+
+[node name="SortButton" type="OptionButton" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1145968409]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 34)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Control" type="Control" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=395794459]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="AscendingOrderButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/Control" unique_id=1469154313]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, -1)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Sort by descending order."
+icon = SubResource("Texture2D_2650m")
+icon_alignment = 1
+
 [node name="FilterButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=723111635]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
-size_flags_vertical = 4
 tooltip_text = "Filter by Collection"
 icon = SubResource("Texture2D_yvyyx")
 icon_alignment = 1
@@ -195,7 +244,11 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AddFolderButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1736028897]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=170963825]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="AddFolderButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1736028897]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
@@ -204,10 +257,10 @@ tooltip_text = "Add Assets from Folder"
 icon = SubResource("Texture2D_5cqey")
 icon_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1663076877]
+[node name="CenterContainer" type="CenterContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1663076877]
 layout_mode = 2
 
-[node name="ReloadButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/CenterContainer" unique_id=389049027]
+[node name="ReloadButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/CenterContainer" unique_id=389049027]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
@@ -215,7 +268,7 @@ size_flags_vertical = 4
 text = "Sync Assets"
 icon = SubResource("Texture2D_qx6qk")
 
-[node name="ProgressBar" type="ProgressBar" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/CenterContainer" unique_id=578510117]
+[node name="ProgressBar" type="ProgressBar" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/CenterContainer" unique_id=578510117]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(100, 10)
@@ -224,53 +277,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 indeterminate = true
 editor_preview_indeterminate = true
-
-[node name="Label" type="Label" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1774242199]
-layout_mode = 2
-text = "Sort by"
-
-[node name="SortButton" type="OptionButton" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=1145968409]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(120, 34)
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Control" type="Control" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=395794459]
-custom_minimum_size = Vector2(32, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="AscendingOrderButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/Control" unique_id=1469154313]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(34, 34)
-layout_mode = 0
-offset_right = 34.0
-offset_bottom = 34.0
-scale = Vector2(1, -1)
-pivot_offset_ratio = Vector2(0.5, 0.5)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-tooltip_text = "Sort by descending order."
-icon = SubResource("Texture2D_2650m")
-icon_alignment = 1
-
-[node name="HBoxContainerBot" type="HBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=448990933]
-layout_mode = 2
-theme_override_constants/separation = 10
-alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerBot" unique_id=1009293278]
-layout_mode = 2
-size_flags_vertical = 4
-texture = SubResource("Texture2D_gvdec")
-stretch_mode = 5
-
-[node name="SearchField" type="LineEdit" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerBot" unique_id=650943463]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_vertical = 4
-placeholder_text = "Filter assets by name"
 
 [node name="MarginContainer" type="MarginContainer" parent="MainContent/PanelContainer2/VBoxContainer" unique_id=1274464248]
 layout_mode = 2
