@@ -157,9 +157,7 @@ func _initialize_data_layer():
 
 	APEditorSettingsManager.load_editor_settings()
 
-	# TODO load library file save path setting
-	var path := AssetLibraryParser.DEFAULT_SAVE_PATH
-	AssetLibraryManager.load_asset_library(path)
+	AssetLibraryManager.load_asset_library(current_settings.asset_library_path)
 
 
 func _react_to_settings_change(settings: AssetPlacerSettings):
