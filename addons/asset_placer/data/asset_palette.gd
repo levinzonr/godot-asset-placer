@@ -21,6 +21,16 @@ func _ensure_nonempty() -> void:
 		_palettes.append(_make_empty_slots())
 
 
+# return true if all slots are empty for the given palette
+func is_palette_empty(palette_index: int) -> bool:
+	if palette_index < 0 or palette_index >= _palettes.size():
+		return true
+	for slot in _palettes[palette_index]:
+		if not slot.is_empty():
+			return false
+	return true
+
+
 func _notify_palette_changed() -> void:
 	palette_changed.emit()
 	emit_changed()
@@ -38,6 +48,7 @@ func remove_palette(palette_index: int) -> void:
 		return
 	_palettes.remove_at(palette_index)
 	_notify_palette_changed()
+
 
 func get_palette_count() -> int:
 	_ensure_nonempty()

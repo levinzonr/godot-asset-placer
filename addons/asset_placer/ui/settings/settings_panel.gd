@@ -31,6 +31,8 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 @onready var kb_axis_y = %KeybindingOptionAxisY
 @onready var kb_axis_z = %KeybindingOptionAxisZ
 @onready var kb_plane_mode = %KeybindingOptionPlaneMode
+@onready var kb_palette_next = %KeybindingOptionPalleteNext
+@onready var kb_palette_previous = %KeybindingOptionPalletePrevious
 
 
 func _ready():
@@ -75,7 +77,8 @@ func _ready():
 	kb_axis_y.keybind_changed.connect(set_binding.bind(bindings.ToggleAxisY))
 	kb_axis_z.keybind_changed.connect(set_binding.bind(bindings.ToggleAxisZ))
 	kb_plane_mode.keybind_changed.connect(set_binding.bind(bindings.TogglePlaneMode))
-
+	kb_palette_next.keybind_changed.connect(set_binding.bind(bindings.PaletteNext))
+	kb_palette_previous.keybind_changed.connect(set_binding.bind(bindings.PalettePrevious))
 	_presenter.ready()
 
 
@@ -110,6 +113,8 @@ func _show_settings(setting: AssetPlacerSettings):
 	kb_positive_transform.set_keybind(setting.bindings[bindings.TransformPositive])
 	kb_axis_x.set_keybind(setting.bindings[bindings.ToggleAxisX])
 	kb_axis_y.set_keybind(setting.bindings[bindings.ToggleAxisY])
+	kb_palette_next.set_keybind(setting.bindings[bindings.PaletteNext])
+	kb_palette_previous.set_keybind(setting.bindings[bindings.PalettePrevious])
 	kb_axis_z.set_keybind(setting.bindings[bindings.ToggleAxisZ])
 	kb_plane_mode.set_keybind(setting.bindings[bindings.TogglePlaneMode])
 

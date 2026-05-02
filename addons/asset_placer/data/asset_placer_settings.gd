@@ -12,7 +12,9 @@ enum Bindings {
 	ToggleAxisX,
 	ToggleAxisZ,
 	ToggleAxisY,
-	TogglePlaneMode
+	TogglePlaneMode,
+	PaletteNext,
+	PalettePrevious
 }
 
 enum UpdateChannel { Stable, Beta, Alpha }
@@ -58,7 +60,8 @@ static func default() -> AssetPlacerSettings:
 	settings.bindings[Bindings.ToggleAxisY] = APInputOption.key_press(Key.KEY_Y)
 	settings.bindings[Bindings.ToggleAxisZ] = APInputOption.key_press(Key.KEY_Z)
 	settings.bindings[Bindings.TogglePlaneMode] = APInputOption.key_press(Key.KEY_Q)
-
+	settings.bindings[Bindings.PaletteNext] = APInputOption.key_press(Key.KEY_BRACKETRIGHT)
+	settings.bindings[Bindings.PalettePrevious] = APInputOption.key_press(Key.KEY_BRACKETLEFT)
 	settings.transform_step = 0.1
 	settings.rotation_step = 5
 	settings.ui_scale = 1.0

@@ -1,13 +1,17 @@
-## In-memory active palette index for the editor session (not persisted, not in palette JSON).
 class_name AssetPaletteSessionState
 extends RefCounted
 
+## In-memory active palette index for the editor session (not persisted, not in palette JSON).
+
 signal active_palette_index_changed
+
+static var instance: AssetPaletteSessionState = null
 
 var _active_palette_index: int = 0
 
 
 func _init():
+	instance = self
 	APEditorSettingsManager.get_editor_settings().get_asset_palette().palette_changed.connect(
 		_on_palette_data_changed
 	)
@@ -46,28 +50,27 @@ func set_active_palette_index(index: int) -> void:
 	active_palette_index_changed.emit()
 
 
-func next_palette() -> void:
+func next_palette() -> bool:
+	return find_next_non_empty_palette(1)
+
+
+func previous_palette() -> bool:
+	return find_next_non_empty_palette(-1)
+
+
+func find_next_non_empty_palette(direction: int) -> bool:
 	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
 	var palette_count := asset_palette.get_palette_count()
 	if palette_count < 1:
-		return
-	var next_palette_index := _active_palette_index + 1
-	if next_palette_index >= palette_count:
-		return
-	_active_palette_index = next_palette_index
-	active_palette_index_changed.emit()
-
-
-func previous_palette() -> void:
-	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
-	var palette_count := asset_palette.get_palette_count()
-	if palette_count < 1:
-		return
-	var previous_index := (_active_palette_index - 1 + palette_count) % palette_count
-	if previous_index == _active_palette_index:
-		return
-	_active_palette_index = previous_index
-	active_palette_index_changed.emit()
+		return false
+	var current_index := _active_palette_index
+	for i in range(palette_count):
+		var next_index := (current_index + direction + palette_count) % palette_count
+		if not asset_palette.is_palette_empty(next_index):
+			_active_palette_index = next_index
+			active_palette_index_changed.emit()
+			return true
+	return false
 
 
 func _on_palette_data_changed() -> void:

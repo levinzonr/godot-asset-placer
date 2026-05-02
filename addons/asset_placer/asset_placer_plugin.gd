@@ -24,7 +24,7 @@ var _async: AssetPlacerAsync
 var _asset_placer_window: AssetLibraryPanel
 var _file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
 var _plane_preview: Node3D
-
+var _palette_session_state: AssetPaletteSessionState
 # Actual type is EditorDock
 var _dock: MarginContainer
 var _asset_placer_button: Button
@@ -111,9 +111,9 @@ func _exit_tree():
 	overlay.queue_free()
 	_plane_preview.queue_free()
 
-	if palette_session_state != null:
-		palette_session_state.shutdown()
-		palette_session_state = null
+	if _palette_session_state != null:
+		_palette_session_state.shutdown()
+		_palette_session_state = null
 
 	APEditorSettingsManager.free_settings()
 	AssetLibraryManager.free_library()
@@ -165,7 +165,7 @@ func _initialize_data_layer():
 
 	AssetLibraryManager.load_asset_library(current_settings.asset_library_path)
 	APEditorSettingsManager.get_editor_settings().get_asset_palette()
-	palette_session_state = AssetPaletteSessionState.new()
+	_palette_session_state = AssetPaletteSessionState.new()
 
 
 func _react_to_settings_change(settings: AssetPlacerSettings):
@@ -224,6 +224,19 @@ func _forward_3d_gui_input(viewport_camera, event):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		return false
 
+	if asset_palette.get_palette_count() > 1:
+		var is_pressed = event.is_pressed()
+		if current_settings.bindings[AssetPlacerSettings.Bindings.PaletteNext].is_pressed(event):
+			if is_pressed:
+				_palette_session_state.next_palette()
+			return _handled()
+		if current_settings.bindings[AssetPlacerSettings.Bindings.PalettePrevious].is_pressed(
+			event
+		):
+			if is_pressed:
+				_palette_session_state.previous_palette()
+			return _handled()
+
 	if (
 		_presenter.has_placement_asset_selected()
 		and not _presenter.is_node_transform_mode()
@@ -236,7 +249,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 	):
 		var slot := _palette_slot_from_key(event as InputEventKey)
 		if slot >= 0:
-			var asset: AssetResource = palette_session_state.get_asset_at_slot(slot)
+			var asset: AssetResource = _palette_session_state.get_asset_at_slot(slot)
 			if asset != null and asset.has_resource():
 				_presenter.toggle_asset(asset)
 				return _handled()

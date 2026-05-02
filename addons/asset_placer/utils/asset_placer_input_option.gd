@@ -119,7 +119,7 @@ class MousePress:
 		if modifiers == 0:
 			return button_name
 		else:
-			return OS.get_keycode_string(Key.KEY_NONE | modifiers) + button_name
+			return OS.get_keycode_string(Key.KEY_NONE | modifiers) + "+" + button_name
 
 
 static func desirialize(raw: String) -> APInputOption:

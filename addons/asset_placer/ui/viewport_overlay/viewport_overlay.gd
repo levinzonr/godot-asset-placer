@@ -48,6 +48,12 @@ func _ready():
 	asset_pallete_presenter.palette_change.connect(show_asset_pallete)
 	asset_pallete_presenter.ready(0)
 
+	AssetPaletteSessionState.instance.active_palette_index_changed.connect(
+		func():
+			var index = AssetPaletteSessionState.instance.get_active_palette_index()
+			asset_pallete_presenter.set_palette_index(index)
+	)
+
 
 func show_asset_pallete(assets: Array[AssetResource]):
 	if assets.all(func(a): return a == null):

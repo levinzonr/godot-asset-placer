@@ -1,11 +1,13 @@
 @tool
-extends HBoxContainer
 class_name AssetPalleteContainer
+extends HBoxContainer
+
+signal on_delete_pallete_click
+
 var _item_resource = preload("res://addons/asset_placer/ui/asset_palette/asset_pallete_item.tscn")
+var _pallete_index: int = 0
 @onready var presenter := AssetPalettePresenter.new()
 
-var _pallete_index: int = 0;
-signal on_delete_pallete_click
 
 func _ready() -> void:
 	add_theme_constant_override("separation", 12)
@@ -16,6 +18,7 @@ func _ready() -> void:
 
 func get_pallete_index() -> int:
 	return _pallete_index
+
 
 func _show_pallete_items(pallete_items: Array[AssetResource]) -> void:
 	for child in get_children():
@@ -34,7 +37,7 @@ func _show_pallete_items(pallete_items: Array[AssetResource]) -> void:
 				)
 		)
 		item_instance.on_clear_asset_click.connect(func(): presenter.remove_slot(index))
-		
+
 	add_delete_button()
 
 
@@ -48,7 +51,8 @@ func add_pallete_label():
 	label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	add_child(label)
 
-func add_delete_button():	
+
+func add_delete_button():
 	var delete_button = Button.new()
 	delete_button.icon = EditorIconTexture2D.new("Remove")
 	delete_button.expand_icon = false
@@ -59,6 +63,7 @@ func add_delete_button():
 		delete_button.modulate.a = 0
 	delete_button.pressed.connect(func(): on_delete_pallete_click.emit())
 	add_child(delete_button)
+
 
 static func create_pallete_container(pallete_index: int = 0) -> AssetPalleteContainer:
 	var container = AssetPalleteContainer.new()

@@ -5,10 +5,12 @@ extends Control
 @onready var palletes_container: VBoxContainer = %PalletesContainer
 @onready var presenter: AssetPalletesPresenter = AssetPalletesPresenter.new()
 
+
 func _ready() -> void:
 	presenter.pallete_changed.connect(_show_palletes)
 	new_pallete.pressed.connect(presenter.create_new_pallete)
 	presenter.ready()
+
 
 func _show_palletes(pallete: AssetPalette):
 	for child in palletes_container.get_children():

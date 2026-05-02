@@ -22,6 +22,8 @@ const KEY_BINDING_TOGGLE_AXIS_X: String = "bindings/toggle_axis_x"
 const KEY_BINDING_TOGGLE_AXIS_Y: String = "bindings/toggle_axis_y"
 const KEY_BINDING_TOGGLE_AXIS_Z: String = "bindings/toggle_axis_z"
 const KEY_BINDING_TOGGLE_PLANE_MODE: String = "bindings/toggle_plane_mode"
+const KEY_BINDING_PALETTE_NEXT: String = "bindings/palette_next"
+const KEY_BINDING_PALETTE_PREVIOUS: String = "bindings/palette_previous"
 const _BINDING_KEYS := {
 	AssetPlacerSettings.Bindings.Rotate: KEY_BINDING_ROTATE,
 	AssetPlacerSettings.Bindings.Scale: KEY_BINDING_SCALE,
@@ -34,6 +36,8 @@ const _BINDING_KEYS := {
 	AssetPlacerSettings.Bindings.ToggleAxisY: KEY_BINDING_TOGGLE_AXIS_Y,
 	AssetPlacerSettings.Bindings.ToggleAxisZ: KEY_BINDING_TOGGLE_AXIS_Z,
 	AssetPlacerSettings.Bindings.TogglePlaneMode: KEY_BINDING_TOGGLE_PLANE_MODE,
+	AssetPlacerSettings.Bindings.PaletteNext: KEY_BINDING_PALETTE_NEXT,
+	AssetPlacerSettings.Bindings.PalettePrevious: KEY_BINDING_PALETTE_PREVIOUS,
 }
 
 # Project Settings
