@@ -77,7 +77,10 @@ func _clear_assets() -> void:
 
 static func open(on_pick: Callable) -> AssetPickerDialog:
 	var dialog := (
-		load("res://addons/asset_placer/ui/asset_picker_dialog/asset_picker_dialog.tscn").instantiate()
+		(
+			load("res://addons/asset_placer/ui/asset_picker_dialog/asset_picker_dialog.tscn")
+			. instantiate()
+		)
 		as AssetPickerDialog
 	)
 	dialog.asset_picked.connect(on_pick, CONNECT_ONE_SHOT)

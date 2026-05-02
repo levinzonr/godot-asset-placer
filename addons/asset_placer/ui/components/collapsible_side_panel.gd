@@ -171,7 +171,10 @@ func _tween_content_width_to(to_x: float) -> void:
 	_width_tween = create_tween()
 	_width_tween.set_parallel(false)
 	_width_tween.tween_method(
-		func(x: float): content_host.custom_minimum_size = Vector2(x, y), from_x, to_x, animate_duration
+		func(x: float): content_host.custom_minimum_size = Vector2(x, y),
+		from_x,
+		to_x,
+		animate_duration
 	)
 
 
