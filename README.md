@@ -29,6 +29,9 @@ This is Godot Editor plugin that allows for quick asset placement and management
 - **Auto-Grouping** - Automatically group placed assets under nodes named after their primary collection
 - **Parent from selection** - Optionally derive the Assets Parent from the selected `Node3D` so new assets are placed as siblings (see Options; since **1.5.0-alpha1**)
 - **Folder Rules** - Configure rules to automatically assign collections when syncing asset folders
+- **Asset palettes** - Multiple palettes with ten shortcut slots each, plus an optional thumbnail strip in the viewport while you place assets
+- **Palette shortcuts** - Change which palette is active when more than one exists (default square bracket keys; rebindable in Settings), and jump to a slot assignment with number keys during placement
+- **Asset library sorting** - Sort assets by name, date added, or last placed, with ascending or descending order
 - Filter Assets by their name and collection
 - Grid snapping when placing assets
 - Randomize asset Rotation and Scale on placement
@@ -68,6 +71,10 @@ Right now the plugin relies on user selecting the folders where your assets are 
 You can folders to sync by either Drag And Droping the folder or  using "Add folder button" within Folders Tab
 ![addon_folders.png](docs/addon_folders.png)
 
+On the **Assets** tab you can sort the library by name, date added, or last placed, and flip between ascending and descending order using the sort controls.
+
+> Asset sorting is available since version **1.5.0-alpha3**.
+
 ### Folder Rules
 
 > Available since version 1.3.0
@@ -82,6 +89,14 @@ Folder Rules allow you to automate actions when syncing asset folders. Rules are
 - **Filter by Name** - Only include assets whose filename contains specified text
 
 To configure rules, click the "Rules" button on any folder in the Folders tab to expand the rules panel.
+
+### Asset palettes
+
+Use the **Pallete** tab in the Asset Placer dock to define quick-access rows of assets. Each palette offers ten numbered slots; use **New Pallete** to add another palette beyond the first. Assign an asset to a slot from the picker, or clear a slot when you no longer need it. The first palette cannot be removed.
+
+Palette data is saved with your Asset Placer configuration. Which palette is **active** during an editing session can change as you work: while more than one palette exists, the default shortcuts switch to the next or previous palette (square bracket keys). Cycling skips palettes that have no asset assigned in any slot.
+
+After you enter placement mode and already have an asset selected for placement, you can press **1** through **9**, then **0**, to select the asset bound to that numbered slot on the active palette (including number pad keys). When at least one slot has an asset, the viewport overlay can show thumbnails for the active palette.
 
 ### Placing Assets
 
@@ -237,6 +252,7 @@ Version 1.2.0 introduced a dedicated Settings Panel for comprehensive customizat
 - **Thumbnail UI Scale** - Adjust the size of thumbnails in the Assets Panel (default: 1.0)
 - **Plane Mode Toggle** - Configure plane placement mode behavior
 - **Asset Library Path** - Set a custom location for the `asset_library.json` file, useful for version control and team sharing
+- **Update channel** - Choose Stable, Beta, or Alpha so in-editor update checks match the release tier you follow. More detail: [development lifecycle](https://levinzonr.github.io/godot-asset-placer/development-lifecycle/)
 
 #### Key Bindings
 
@@ -250,6 +266,8 @@ Customize shortcuts for all Asset Placer actions:
 - Toggle X, Y, Z Axis (Default: `X`, `Y`, `Z`)
 - Transform Apply (Default: Mouse Wheel Up/Down)
 - In Place Transform Mode (Default: `Shift+E`)
+- Palette Next (Default: `]`)
+- Palette Previous (Default: `[`)
 
 Key bindings support Mouse Button and Modifier Combinations (Ctrl, Shift, Alt), allowing you to avoid conflicts with existing Godot shortcuts. The Settings Panel includes conflict detection that will highlight conflicting keys in red.
 
