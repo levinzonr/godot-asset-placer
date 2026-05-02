@@ -19,6 +19,10 @@ var _error_hidden_position: Vector2
 @onready var _settings_repository := AssetPlacerSettingsRepository.instance
 
 
+@onready var asset_pallete_presenter := AssetPalettePresenter.new()
+@onready var asset_pallete_container: HBoxContainer = %PalleteContainer
+@onready var asset_pallete_resource = preload("res://addons/asset_placer/ui/asset_palette/asset_pallete_item.tscn")
+
 func _ready():
 	hide()
 	_error_position = error_container.position
@@ -39,6 +43,20 @@ func _ready():
 	set_mode(presenter.transform_mode)
 	set_axis(presenter.preview_transform_axis)
 
+	asset_pallete_presenter.palette_change.connect(show_asset_pallete)
+	asset_pallete_presenter.ready(0)
+
+func show_asset_pallete(assets: Array[AssetResource]):
+	print("Show asset pallete: " + str(assets.size()))
+	for child in asset_pallete_container.get_children():
+		child.queue_free()
+	for index in range(assets.size()):
+		var asset = assets[index]
+		var asset_instance = asset_pallete_resource.instantiate() as AssetPalletItem
+		asset_pallete_container.add_child(asset_instance)
+		asset_instance.set_asset(asset)
+		asset_instance.set_index(index)
+	
 
 func set_mode(mode: AssetPlacerPresenter.TransformMode):
 	rotate_check_button.button_pressed = mode == AssetPlacerPresenter.TransformMode.Rotate

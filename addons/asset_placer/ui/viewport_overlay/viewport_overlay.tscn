@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://y4168twxqqwr"]
+[gd_scene format=3 uid="uid://y4168twxqqwr"]
 
 [ext_resource type="Script" uid="uid://e3l8cnd506a1" path="res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.gd" id="1_3e3nf"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_1410h"]
@@ -84,7 +84,16 @@ script = ExtResource("2_1410h")
 icon_name = &"KeyTrackPosition"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
-[node name="ViewportOverlay" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87cg6"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.17254902, 0.17254902, 0.17254902, 0.6)
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="ViewportOverlay" type="Control" unique_id=445419164]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,7 +103,7 @@ grow_vertical = 2
 focus_mode = 2
 script = ExtResource("1_3e3nf")
 
-[node name="MarginContainer2" type="PanelContainer" parent="."]
+[node name="MarginContainer2" type="PanelContainer" parent="." unique_id=691841675]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -107,13 +116,13 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_epucf")
 
-[node name="SnappingSwitch" type="CheckButton" parent="MarginContainer2"]
+[node name="SnappingSwitch" type="CheckButton" parent="MarginContainer2" unique_id=500597675]
 unique_name_in_owner = true
 layout_mode = 2
 text = "S: Grid Snapping"
 icon = SubResource("Texture2D_luwev")
 
-[node name="MarginContainer3" type="PanelContainer" parent="."]
+[node name="MarginContainer3" type="PanelContainer" parent="." unique_id=982597977]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -123,12 +132,12 @@ offset_right = 239.0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bu8qk")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer3" unique_id=2100901844]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer3/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer3/HBoxContainer" unique_id=1253345806]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -137,50 +146,50 @@ texture = ExtResource("3_h3uaa")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PlacementModeLabel" type="Label" parent="MarginContainer3/HBoxContainer"]
+[node name="PlacementModeLabel" type="Label" parent="MarginContainer3/HBoxContainer" unique_id=1064067405]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Surface Placement"
 
-[node name="PlacementShortcutLabel" type="Label" parent="MarginContainer3/HBoxContainer"]
+[node name="PlacementShortcutLabel" type="Label" parent="MarginContainer3/HBoxContainer" unique_id=1724834724]
 unique_name_in_owner = true
 layout_mode = 2
 text = "(Q)"
 
-[node name="ErrorContainer" type="PanelContainer" parent="."]
+[node name="ErrorContainer" type="PanelContainer" parent="." unique_id=982228611]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.745
 anchor_bottom = 0.745
-offset_left = -2.0
+offset_left = -1306.0
 offset_top = -27.5
-offset_right = 258.0
+offset_right = -1046.0
 offset_bottom = 27.5
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_luwev")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ErrorContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ErrorContainer" unique_id=1402388942]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="TextureRect" type="TextureRect" parent="ErrorContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="ErrorContainer/HBoxContainer" unique_id=133169159]
 layout_mode = 2
 texture = SubResource("Texture2D_bu8qk")
 stretch_mode = 3
 
-[node name="ErrorLabel" type="Label" parent="ErrorContainer/HBoxContainer"]
+[node name="ErrorLabel" type="Label" parent="ErrorContainer/HBoxContainer" unique_id=2115614092]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "No Surface to Collide With"
 
-[node name="ErrorTimer" type="Timer" parent="."]
+[node name="ErrorTimer" type="Timer" parent="." unique_id=1552872314]
 unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="." unique_id=1702169946]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -194,47 +203,47 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_h3uaa")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=608962691]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=596689943]
 layout_mode = 2
 
-[node name="RotateCheckButton" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="RotateCheckButton" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer" unique_id=766197360]
 unique_name_in_owner = true
 layout_mode = 2
 text = "E: To Rotate"
 icon = SubResource("Texture2D_h3uaa")
 
-[node name="ScaleCheckButton" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="ScaleCheckButton" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer" unique_id=334631791]
 unique_name_in_owner = true
 layout_mode = 2
 text = "R: To Scale"
 icon = SubResource("Texture2D_1410h")
 
-[node name="TranslateCheckButton" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="TranslateCheckButton" type="CheckBox" parent="Panel/VBoxContainer/HBoxContainer" unique_id=1956882547]
 unique_name_in_owner = true
 layout_mode = 2
 text = "W: To Translate"
 icon = SubResource("Texture2D_epucf")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=1961150113]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer/HBoxContainer2" unique_id=1284401341]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Active Axis"
 
-[node name="XCheckButton" type="CheckButton" parent="Panel/VBoxContainer/HBoxContainer2"]
+[node name="XCheckButton" type="CheckButton" parent="Panel/VBoxContainer/HBoxContainer2" unique_id=1492781457]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9411765, 0.23529412, 0.37254903, 1)
 theme_override_font_sizes/font_size = 20
 text = "X"
 
-[node name="YCheckButton" type="CheckButton" parent="Panel/VBoxContainer/HBoxContainer2"]
+[node name="YCheckButton" type="CheckButton" parent="Panel/VBoxContainer/HBoxContainer2" unique_id=215807572]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.6627451, 0.9607843, 1)
@@ -243,9 +252,23 @@ button_pressed = true
 text = "Y
 "
 
-[node name="ZCheckButton" type="CheckButton" parent="Panel/VBoxContainer/HBoxContainer2"]
+[node name="ZCheckButton" type="CheckButton" parent="Panel/VBoxContainer/HBoxContainer2" unique_id=1560500339]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.85490197, 0.047058824, 1)
 theme_override_font_sizes/font_size = 20
 text = "Z"
+
+[node name="AssetPalleteContainer" type="PanelContainer" parent="." unique_id=936951251]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_87cg6")
+
+[node name="PalleteContainer" type="HBoxContainer" parent="AssetPalleteContainer" unique_id=303557671]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12

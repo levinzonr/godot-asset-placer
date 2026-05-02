@@ -15,7 +15,6 @@ func _show_pallete_items(pallete_items: Array[AssetResource]) -> void:
 	for child in h_box_container.get_children():
 		child.queue_free()
 	for index in range(pallete_items.size()):
-		print("Index: " + str(index))
 		var item = pallete_items[index]
 		var item_instance = _item_resource.instantiate() as AssetPalletItem
 		h_box_container.add_child(item_instance)
