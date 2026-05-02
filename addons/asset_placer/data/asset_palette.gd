@@ -26,6 +26,19 @@ func _notify_palette_changed() -> void:
 	emit_changed()
 
 
+func add_new_palette() -> void:
+	_ensure_nonempty()
+	_palettes.append(_make_empty_slots())
+	_notify_palette_changed()
+
+
+func remove_palette(palette_index: int) -> void:
+	_ensure_nonempty()
+	if palette_index < 0 or palette_index >= _palettes.size():
+		return
+	_palettes.remove_at(palette_index)
+	_notify_palette_changed()
+
 func get_palette_count() -> int:
 	_ensure_nonempty()
 	return _palettes.size()

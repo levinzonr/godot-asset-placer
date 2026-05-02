@@ -1,6 +1,14 @@
 [gd_scene format=3 uid="uid://d17xcytsemy6"]
 
-[ext_resource type="Script" uid="uid://bbvmf264kky8o" path="res://addons/asset_placer/ui/asset_palette/asset_pallete_tab.gd" id="1_p48d3"]
+[ext_resource type="Script" uid="uid://gofciqx8sftr" path="res://addons/asset_placer/ui/asset_palette/asset_pallete_tab.gd" id="1_p48d3"]
+[ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_ek5gy"]
+
+[sub_resource type="Texture2D" id="Texture2D_6ulqi"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_ek5gy")
+icon_name = &"Add"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [node name="AssetPalleteTab" type="Control" unique_id=2139977870]
 layout_mode = 3
@@ -31,23 +39,36 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=859704059]
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer" unique_id=1310847106]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=836253893]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer" unique_id=859704059]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=836253893]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Asset Palletes"
 
-[node name="Label2" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1946273440]
+[node name="Label2" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1946273440]
 layout_mode = 2
 text = "Configure Shortcuts for your favorite assets"
 
-[node name="Spacer" type="Control" parent="Panel/MarginContainer/VBoxContainer" unique_id=752224347]
+[node name="Spacer" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=752224347]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1608361714]
+[node name="PalletesContainer" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=180349528]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
+
+[node name="NewPallete" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1714518559]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "New Pallete
+"
+icon = SubResource("Texture2D_6ulqi")
+flat = true
+alignment = 0
