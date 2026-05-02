@@ -336,6 +336,10 @@ func is_node_transform_mode() -> bool:
 	return _selected_node != null
 
 
+func has_placement_asset_selected() -> bool:
+	return _selected_asset != null
+
+
 func get_selected_node() -> Node3D:
 	return _selected_node
 

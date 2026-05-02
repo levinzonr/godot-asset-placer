@@ -8,6 +8,7 @@ title = "Pick Asset"
 size = Vector2i(920, 720)
 visible = true
 unresizable = false
+borderless = false
 always_on_top = true
 extend_to_title = true
 script = ExtResource("1_script")

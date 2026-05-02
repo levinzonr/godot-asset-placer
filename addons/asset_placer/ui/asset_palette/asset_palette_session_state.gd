@@ -23,6 +23,16 @@ func get_active_palette_index() -> int:
 	return _active_palette_index
 
 
+func get_asset_at_slot(slot_index: int) -> AssetResource:
+	if slot_index < 0 or slot_index >= AssetPalette.SLOT_COUNT:
+		return null
+	var palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
+	var asset_id: String = palette.get_asset_id_for_palette_slot(_active_palette_index, slot_index)
+	if asset_id.is_empty():
+		return null
+	return AssetLibraryManager.get_asset_library().get_asset(asset_id)
+
+
 func set_active_palette_index(index: int) -> void:
 	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
 	var palette_count := asset_palette.get_palette_count()

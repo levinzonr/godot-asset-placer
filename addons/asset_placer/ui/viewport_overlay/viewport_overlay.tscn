@@ -259,7 +259,7 @@ theme_override_colors/font_color = Color(0.6, 0.85490197, 0.047058824, 1)
 theme_override_font_sizes/font_size = 20
 text = "Z"
 
-[node name="AssetPalleteContainer" type="PanelContainer" parent="." unique_id=936951251]
+[node name="AssetPallete" type="PanelContainer" parent="." unique_id=936951251]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 5
@@ -268,7 +268,7 @@ anchor_right = 0.5
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_87cg6")
 
-[node name="PalleteContainer" type="HBoxContainer" parent="AssetPalleteContainer" unique_id=303557671]
+[node name="PalleteContainer" type="HBoxContainer" parent="AssetPallete" unique_id=303557671]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 12

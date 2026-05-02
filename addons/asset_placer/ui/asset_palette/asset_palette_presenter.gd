@@ -31,16 +31,6 @@ func get_resolved_slots() -> Array[AssetResource]:
 	return _build_resolved_slots()
 
 
-func get_asset_at_slot(slot_index: int) -> AssetResource:
-	if slot_index < 0 or slot_index >= AssetPalette.SLOT_COUNT:
-		return null
-	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
-	var asset_library := AssetLibraryManager.get_asset_library()
-	var asset_id: String = asset_palette.get_asset_id_for_palette_slot(_pallete_index, slot_index)
-	if asset_id.is_empty():
-		return null
-	return asset_library.get_asset(asset_id)
-
 
 func add_or_assign_asset(slot_index: int, asset: AssetResource) -> void:
 	if not is_instance_valid(asset):

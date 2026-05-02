@@ -18,7 +18,7 @@ var _error_hidden_position: Vector2
 @onready var placement_shortcut_label: Label = %PlacementShortcutLabel
 @onready var _settings_repository := AssetPlacerSettingsRepository.instance
 
-
+@onready var asset_pallete: PanelContainer = %AssetPallete
 @onready var asset_pallete_presenter := AssetPalettePresenter.new()
 @onready var asset_pallete_container: HBoxContainer = %PalleteContainer
 @onready var asset_pallete_resource = preload("res://addons/asset_placer/ui/asset_palette/asset_pallete_item.tscn")
@@ -47,7 +47,12 @@ func _ready():
 	asset_pallete_presenter.ready(0)
 
 func show_asset_pallete(assets: Array[AssetResource]):
-	print("Show asset pallete: " + str(assets.size()))
+	
+	if assets.all(func(a): return a == null):
+		asset_pallete.hide()
+	else:
+		asset_pallete.show()
+	
 	for child in asset_pallete_container.get_children():
 		child.queue_free()
 	for index in range(assets.size()):

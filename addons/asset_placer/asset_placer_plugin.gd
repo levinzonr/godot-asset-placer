@@ -224,6 +224,23 @@ func _forward_3d_gui_input(viewport_camera, event):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		return false
 
+	if (
+		_presenter.has_placement_asset_selected()
+		and not _presenter.is_node_transform_mode()
+		and event is InputEventKey
+		and event.pressed
+		and not event.echo
+		and not event.ctrl_pressed
+		and not event.meta_pressed
+		and not event.alt_pressed
+	):
+		var slot := _palette_slot_from_key(event as InputEventKey)
+		if slot >= 0:
+			var asset: AssetResource = palette_session_state.get_asset_at_slot(slot)
+			if asset != null and asset.has_resource():
+				_presenter.toggle_asset(asset)
+				return _handled()
+
 	if current_settings.bindings[AssetPlacerSettings.Bindings.Rotate].is_pressed(event):
 		_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Rotate)
 		return _handled()
@@ -297,6 +314,32 @@ func _show_update_available(_update: PluginUpdate):
 	else:
 		_asset_placer_button.icon = EditorIconTexture2D.new("MoveUp")
 		_asset_placer_button.icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+
+
+func _palette_slot_from_key(event: InputEventKey) -> int:
+	match event.keycode:
+		KEY_1, KEY_KP_1:
+			return 0
+		KEY_2, KEY_KP_2:
+			return 1
+		KEY_3, KEY_KP_3:
+			return 2
+		KEY_4, KEY_KP_4:
+			return 3
+		KEY_5, KEY_KP_5:
+			return 4
+		KEY_6, KEY_KP_6:
+			return 5
+		KEY_7, KEY_KP_7:
+			return 6
+		KEY_8, KEY_KP_8:
+			return 7
+		KEY_9, KEY_KP_9:
+			return 8
+		KEY_0, KEY_KP_0:
+			return 9
+		_:
+			return -1
 
 
 func _handled():
