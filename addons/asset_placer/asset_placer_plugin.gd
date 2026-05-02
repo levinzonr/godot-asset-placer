@@ -82,14 +82,7 @@ func _enter_tree():
 
 	_presenter.placement_mode_changed.connect(_asset_placer.set_placement_mode)
 
-	synchronizer.sync_complete.connect(
-		func(added, removed, scanned):
-			var message = (
-				"Asset Placer Sync complete\nAdded: %d Removed: %d Scanned total: %d"
-				% [added, removed, scanned]
-			)
-			EditorToasterCompat.toast(message)
-	)
+	synchronizer.sync_complete.connect(_on_sync_complete)
 
 	self.overlay = (
 		load("res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.tscn").instantiate()
@@ -122,6 +115,7 @@ func _exit_tree():
 		palette_session_state.shutdown()
 		palette_session_state = null
 
+	APEditorSettingsManager.free_settings()
 	AssetLibraryManager.free_library()
 	AssetPaletteManager.free_palette()
 
@@ -133,6 +127,8 @@ func _exit_tree():
 	_asset_placer.stop_placement()
 	scene_changed.disconnect(_handle_scene_changed)
 	_asset_placer_window.queue_free()
+
+	synchronizer.sync_complete.disconnect(_on_sync_complete)
 	_async.await_completion()
 
 
@@ -164,10 +160,11 @@ func _initialize_data_layer():
 	settings_repository = AssetPlacerSettingsRepository.new()
 	current_settings = settings_repository.get_settings()
 	settings_repository.settings_changed.connect(_react_to_settings_change)
+	settings_repository.initialize_project_settings(current_settings)
 
-	# TODO load library file save path setting
-	var path := AssetLibraryParser.DEFAULT_SAVE_PATH
-	AssetLibraryManager.load_asset_library(path)
+	APEditorSettingsManager.load_editor_settings()
+
+	AssetLibraryManager.load_asset_library(current_settings.asset_library_path)
 	AssetPaletteManager.load_asset_palette()
 	palette_session_state = AssetPaletteSessionState.new()
 
@@ -306,3 +303,11 @@ func _show_update_available(_update: PluginUpdate):
 func _handled():
 	get_viewport().set_input_as_handled()
 	return EditorPlugin.AFTER_GUI_INPUT_STOP
+
+
+func _on_sync_complete(added, removed, scanned):
+	var message := (
+		"Asset Placer Sync complete\nAdded: %d Removed: %d Scanned total: %d"
+		% [added, removed, scanned]
+	)
+	EditorToasterCompat.toast(message)

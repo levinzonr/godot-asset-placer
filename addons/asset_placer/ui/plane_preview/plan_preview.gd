@@ -5,8 +5,8 @@ extends Node3D
 
 
 func _ready():
-	var presenter := AssetPlacerPresenter._instance
-	var mode = AssetPlacerPresenter._instance.placement_mode
+	var presenter := AssetPlacerPresenter.instance
+	var mode = AssetPlacerPresenter.instance.placement_mode
 	var settings_repository := AssetPlacerSettingsRepository.instance
 	_set_plane_material(settings_repository.get_settings())
 	settings_repository.settings_changed.connect(_set_plane_material)

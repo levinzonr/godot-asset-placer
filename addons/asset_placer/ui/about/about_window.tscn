@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dynyrwa38r5ag"]
+[gd_scene format=3 uid="uid://dynyrwa38r5ag"]
 
 [ext_resource type="Script" uid="uid://43kdnn7nr2ch" path="res://addons/asset_placer/ui/about/about_window.gd" id="1_namxt"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="2_r5xs8"]
@@ -32,8 +32,7 @@ script = ExtResource("2_r5xs8")
 icon_name = &"Debug"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
-[node name="AboutWindow" type="Control"]
-layout_mode = 3
+[node name="AboutWindow" type="MarginContainer" unique_id=2094620722]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -41,14 +40,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_namxt")
 
-[node name="UpdatePopup" type="PopupPanel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1237872375]
+layout_mode = 2
+
+[node name="UpdatePopup" type="PopupPanel" parent="." unique_id=788300311]
 oversampling_override = 1.0
 title = "Update"
 initial_position = 1
 size = Vector2i(552, 475)
 borderless = false
 
-[node name="MarginContainer" type="MarginContainer" parent="UpdatePopup"]
+[node name="MarginContainer" type="MarginContainer" parent="UpdatePopup" unique_id=905653634]
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 548.0
@@ -58,33 +60,33 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Vbox" type="VBoxContainer" parent="UpdatePopup/MarginContainer"]
+[node name="Vbox" type="VBoxContainer" parent="UpdatePopup/MarginContainer" unique_id=44470046]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="TextureRect" type="TextureRect" parent="UpdatePopup/MarginContainer/Vbox"]
+[node name="TextureRect" type="TextureRect" parent="UpdatePopup/MarginContainer/Vbox" unique_id=607287267]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 texture = ExtResource("3_vijnu")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="UpdatePopup/MarginContainer/Vbox"]
+[node name="Label" type="Label" parent="UpdatePopup/MarginContainer/Vbox" unique_id=1744209359]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "New Version is Available"
 horizontal_alignment = 1
 
-[node name="Spacing" type="Control" parent="UpdatePopup/MarginContainer/Vbox"]
+[node name="Spacing" type="Control" parent="UpdatePopup/MarginContainer/Vbox" unique_id=945217962]
 custom_minimum_size = Vector2(0, 32.14)
 layout_mode = 2
 
-[node name="HBoxContainer" type="VBoxContainer" parent="UpdatePopup/MarginContainer/Vbox"]
+[node name="HBoxContainer" type="VBoxContainer" parent="UpdatePopup/MarginContainer/Vbox" unique_id=334247581]
 layout_mode = 2
 size_flags_vertical = 4
 alignment = 1
 
-[node name="UpdateVersionLabel" type="Label" parent="UpdatePopup/MarginContainer/Vbox/HBoxContainer"]
+[node name="UpdateVersionLabel" type="Label" parent="UpdatePopup/MarginContainer/Vbox/HBoxContainer" unique_id=616983189]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -92,7 +94,7 @@ theme_override_font_sizes/font_size = 24
 text = "1.1.5"
 horizontal_alignment = 1
 
-[node name="ChangelogLinkButton" type="LinkButton" parent="UpdatePopup/MarginContainer/Vbox/HBoxContainer"]
+[node name="ChangelogLinkButton" type="LinkButton" parent="UpdatePopup/MarginContainer/Vbox/HBoxContainer" unique_id=1015748853]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -100,59 +102,53 @@ theme_override_font_sizes/font_size = 24
 text = "View Changelog"
 uri = "https://github.com/levinzonr/godot-asset-placer/blob/main/CHANGELOG.md#115"
 
-[node name="Spacing2" type="Control" parent="UpdatePopup/MarginContainer/Vbox"]
+[node name="Spacing2" type="Control" parent="UpdatePopup/MarginContainer/Vbox" unique_id=698782035]
 custom_minimum_size = Vector2(0, 32.14)
 layout_mode = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="UpdatePopup/MarginContainer/Vbox"]
+[node name="ProgressBar" type="ProgressBar" parent="UpdatePopup/MarginContainer/Vbox" unique_id=256829668]
 visible = false
 layout_mode = 2
 indeterminate = true
 editor_preview_indeterminate = true
 
-[node name="DownloadUpdateBtn" type="Button" parent="UpdatePopup/MarginContainer/Vbox"]
+[node name="DownloadUpdateBtn" type="Button" parent="UpdatePopup/MarginContainer/Vbox" unique_id=147086439]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Download Update"
 
-[node name="ApplyUpdateAndRestartBtn" type="Button" parent="UpdatePopup/MarginContainer/Vbox"]
+[node name="ApplyUpdateAndRestartBtn" type="Button" parent="UpdatePopup/MarginContainer/Vbox" unique_id=1204746069]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Apply Update and Restart"
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="VBoxContainer" parent="Panel/CenterContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=385866275]
 layout_mode = 2
+theme_override_constants/margin_top = -16
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer" unique_id=1342642714]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer" unique_id=1111038844]
+layout_mode = 2
+theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label" type="Label" parent="Panel/CenterContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer" unique_id=2025837285]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 48
 text = "Asset Placer"
 
-[node name="VersionLabel" type="Label" parent="Panel/CenterContainer/HBoxContainer"]
+[node name="VersionLabel" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer" unique_id=1221704459]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Version 1.2.1"
+text = "Version 1.5.0-alpha3"
 
-[node name="UpdateButton" type="Button" parent="Panel/CenterContainer/HBoxContainer"]
+[node name="UpdateButton" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer" unique_id=133643675]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -161,95 +157,100 @@ theme_override_constants/h_separation = 4
 text = "Version 1.1.5 Availalbe"
 icon = SubResource("Texture2D_4v60v")
 
-[node name="Space" type="Control" parent="Panel/CenterContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
+[node name="Space" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer" unique_id=1130040503]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CenterContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer" unique_id=1821612903]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 12
 alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=620198924]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer3" unique_id=990267933]
 layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer3/Control" unique_id=1986662026]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -15.5
+offset_bottom = 16.499996
+grow_horizontal = 0
+grow_vertical = 2
 texture = ExtResource("3_vijnu")
-expand_mode = 2
+expand_mode = 1
 stretch_mode = 5
 
-[node name="DiscordLinkButton" type="LinkButton" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="DiscordLinkButton" type="LinkButton" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer3" unique_id=478282305]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
+tooltip_text = "https://discord.gg/UyYCp53Hym"
 text = "Join our Discord"
 uri = "https://discord.gg/UyYCp53Hym"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=672040414]
 layout_mode = 2
 alignment = 1
 
-[node name="Label2" type="Label" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=916920657]
 layout_mode = 2
-text = "Enjoying this Plugin? Please consider leaving a Star on "
+text = "Enjoying this Plugin? Please consider leaving a Star on"
 
-[node name="Label3" type="LinkButton" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label3" type="LinkButton" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=772806341]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "https://github.com/levinzonr/godot-asset-placer"
 text = "GitHub"
 uri = "https://github.com/levinzonr/godot-asset-placer"
 
-[node name="TextureRect" type="TextureRect" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1039292615]
 layout_mode = 2
 texture = SubResource("Texture2D_vijnu")
 stretch_mode = 3
 
-[node name="Label" type="Label" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Or"
-horizontal_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=967098558]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 35
 alignment = 1
 
-[node name="CenterContainer" type="BoxContainer" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="FeatureRequestButton" type="Button" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer2/CenterContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Missing Feature?"
-icon = SubResource("Texture2D_r5xs8")
-alignment = 0
-
-[node name="CenterContainer2" type="BoxContainer" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="CenterContainer" type="BoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=403765861]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="IssueButton" type="Button" parent="Panel/CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer2/CenterContainer2"]
+[node name="FeatureRequestButton" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer2/CenterContainer" unique_id=908618622]
 unique_name_in_owner = true
 layout_mode = 2
+tooltip_text = "Create a feature request on Github"
+text = "Missing Feature?"
+icon = SubResource("Texture2D_r5xs8")
+alignment = 0
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1801033334]
+layout_mode = 2
+text = "Or"
+horizontal_alignment = 1
+
+[node name="CenterContainer2" type="BoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer2" unique_id=552566354]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="IssueButton" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer2/CenterContainer2" unique_id=746174359]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Create a bug report on Github"
 text = "Spotted Bug / Issue?"
 icon = SubResource("Texture2D_tt7kp")
 alignment = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -123.0
-offset_bottom = 40.0
-grow_horizontal = 0
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12

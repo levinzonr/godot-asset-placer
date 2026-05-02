@@ -6,6 +6,8 @@ var id: String
 var tags: Array[int]
 var folder_path: String
 var primary_collection: int = -1
+## UNIX timestamp of when the AssetResource was added to AssetLibrary.
+var date_added: float
 
 var _resource: Resource = null
 ## If _resource fails to load, don't try to load it anymore
@@ -22,13 +24,15 @@ func _init(
 	p_name: String,
 	p_tags: Array[int] = [],
 	p_folder_path: String = "",
-	p_primary_collection: int = -1
+	p_primary_collection: int = -1,
+	p_date_added: float = 0.0,
 ):
 	name = p_name
 	id = res_id
 	tags = p_tags
 	folder_path = p_folder_path
 	primary_collection = p_primary_collection
+	date_added = p_date_added
 
 
 func get_primary_collection() -> int:

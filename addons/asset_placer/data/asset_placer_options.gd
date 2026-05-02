@@ -18,3 +18,4 @@ var max_scale: Vector3 = Vector3.ONE * 2
 var uniform_scaling: bool = true
 
 var group_automatically: bool = true
+var use_selected_as_parent: bool = false

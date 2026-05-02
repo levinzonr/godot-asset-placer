@@ -27,6 +27,7 @@ This is Godot Editor plugin that allows for quick asset placement and management
 - **Advanced Placement Options** - Normal alignment and scene bottom alignment controls
 - Organize Assets into collections for quick access and filtering
 - **Auto-Grouping** - Automatically group placed assets under nodes named after their primary collection
+- **Parent from selection** - Optionally derive the Assets Parent from the selected `Node3D` so new assets are placed as siblings (see Options; since **1.5.0-alpha1**)
 - **Folder Rules** - Configure rules to automatically assign collections when syncing asset folders
 - Filter Assets by their name and collection
 - Grid snapping when placing assets
@@ -111,7 +112,7 @@ To place an asset, follow these steps:
 1. Navigate to the 3D Scene of your choice
 2. Optional: Change Placement Mode. By default, the Plugin uses Surface Collision mode, you can change it within Options Sub View
 3. Open Asset Placer Dock window and select the asset you want to place from the Assets tab
-4. Optional: Change Parent Node. By default, the Plugin will select as Root Node3D as the parent, you can change it withing Options Sub View
+4. Optional: Set **Assets Parent** under the selected root, or enable **Use selection for parent** (since **1.5.0-alpha1**) so the parent is taken from the current `Node3D` selection (sibling placement). Picking **Assets Parent** disables selection-based mode.
 5. Optional: Configure Placement Options:
    - **Align Normals** - Enable to align assets with surface normals for natural placement on sloped surfaces
    - **Use Assets Origin** - Enable to place using asset's local origin point, or disable to use the asset's actual bottom
@@ -256,7 +257,7 @@ All settings are persisted across Godot sessions within EditorSettings and apply
 
 ## Known Issues
 
-- So far plugin only supports `tscn` files, `glb`, `gltf` `obj` and `fbx` models. If you have any other formats you would like to see supported, please let me know.
+- So far the plugin only supports placeable scenes and models with these extensions: `tscn`, `scn`, `glb`, `gltf`, `obj`, `fbx`, and `blend`. If you would like other formats supported, please open an issue.
 - Sometimes Previews for the Assets are not perfect - but they are directly take from the Godot Previews system
 
 ## Contributing
