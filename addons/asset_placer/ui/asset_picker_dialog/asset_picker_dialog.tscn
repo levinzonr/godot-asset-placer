@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://cxwm8hkp7yf35"]
+
+[ext_resource type="Script" uid="uid://bqmcp83vk45yx" path="res://addons/asset_placer/ui/asset_picker_dialog/asset_picker_dialog.gd" id="1_script"]
+
+[node name="AssetPickerDialog" type="PopupPanel" unique_id=153924622]
+oversampling_override = 1.0
+title = "Pick Asset"
+size = Vector2i(920, 720)
+visible = true
+unresizable = false
+always_on_top = true
+extend_to_title = true
+script = ExtResource("1_script")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=932314554]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1802366144]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=274622516]
+layout_mode = 2
+text = "Pick Asset"
+
+[node name="SearchField" type="LineEdit" parent="MarginContainer/VBoxContainer" unique_id=909377435]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Search by name"
+clear_button_enabled = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=1376706185]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer" unique_id=165538948]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="BodyVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer2" unique_id=1188743965]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AssetsFlow" type="HFlowContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer2/BodyVBox" unique_id=1342263380]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EmptyAllView" type="CenterContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer2/BodyVBox" unique_id=2118734293]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 360)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer2/BodyVBox/EmptyAllView" unique_id=1452327365]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "No assets in library."
+horizontal_alignment = 1
+
+[node name="EmptySearchView" type="CenterContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer2/BodyVBox" unique_id=135083583]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 360)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer2/BodyVBox/EmptySearchView" unique_id=1507819645]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "No assets match your search."
+horizontal_alignment = 1

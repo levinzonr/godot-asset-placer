@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://d17xcytsemy6"]
 
+[ext_resource type="Script" uid="uid://bbvmf264kky8o" path="res://addons/asset_placer/ui/asset_palette/asset_pallete_tab.gd" id="1_p48d3"]
+
 [node name="AssetPalleteTab" type="Control" unique_id=2139977870]
 layout_mode = 3
 anchors_preset = 15
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_p48d3")
 
 [node name="Panel" type="Panel" parent="." unique_id=485938601]
 layout_mode = 1
@@ -17,9 +20,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=455951920]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 32
@@ -32,3 +38,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Asset Palletes"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1608361714]
+layout_mode = 2
+theme_override_constants/separation = 16
