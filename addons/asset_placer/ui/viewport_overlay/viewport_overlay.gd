@@ -66,8 +66,6 @@ func show_asset_pallete(assets: Array[AssetResource]):
 			asset_instance.set_asset(asset)
 			asset_instance.configurable = false
 			asset_instance.set_index(index)
-		
-		
 
 
 func set_mode(mode: AssetPlacerPresenter.TransformMode):
