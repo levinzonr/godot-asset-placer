@@ -19,12 +19,6 @@ run/main_scene="uid://3qun24bndqll"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
-[asset_placer]
-
-general/preview_material="res://addons/asset_placer/utils/preview_material.tres"
-general/plane_material="res://addons/asset_placer/ui/plane_preview/plane_preview_material.tres"
-general/asset_library_path="user://asset_library.json"
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg")
