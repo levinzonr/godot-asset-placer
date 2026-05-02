@@ -31,7 +31,6 @@ func get_resolved_slots() -> Array[AssetResource]:
 	return _build_resolved_slots()
 
 
-
 func add_or_assign_asset(slot_index: int, asset: AssetResource) -> void:
 	if not is_instance_valid(asset):
 		return

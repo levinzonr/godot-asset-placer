@@ -1,9 +1,9 @@
 @tool
 extends Control
 
+var _item_resource = preload("res://addons/asset_placer/ui/asset_palette/asset_pallete_item.tscn")
 @onready var h_box_container: HBoxContainer = $Panel/MarginContainer/VBoxContainer/HBoxContainer
 @onready var presenter := AssetPalettePresenter.new()
-var _item_resource = preload("res://addons/asset_placer/ui/asset_palette/asset_pallete_item.tscn")
 
 
 func _ready() -> void:

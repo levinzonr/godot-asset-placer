@@ -1,6 +1,9 @@
 @tool
-extends Control
 class_name AssetPalletItem
+extends Control
+
+signal on_clear_asset_click
+signal on_add_asset_click
 
 @export var button_size: Vector2 = Vector2(64, 64):
 	set(value):
@@ -12,13 +15,10 @@ class_name AssetPalletItem
 		configurable = value
 		_apply_button_geometry_and_state()
 
+var _asset: AssetResource
+
 @onready var button: Button = %Button
 @onready var label: Label = %Label
-
-signal on_clear_asset_click
-signal on_add_asset_click
-
-var _asset: AssetResource
 
 
 func _ready() -> void:

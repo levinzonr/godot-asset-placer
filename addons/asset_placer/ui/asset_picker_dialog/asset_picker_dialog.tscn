@@ -5,6 +5,7 @@
 [node name="AssetPickerDialog" type="PopupPanel" unique_id=153924622]
 oversampling_override = 1.0
 title = "Pick Asset"
+position = Vector2i(0, 36)
 size = Vector2i(920, 720)
 visible = true
 unresizable = false

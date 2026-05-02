@@ -47,14 +47,14 @@ signal toggled(is_expanded: bool)
 		if is_node_ready():
 			_schedule_refresh_width()
 
-@onready var content_host: PanelContainer = %ContentHost
-@onready var toggle_button: Button = %ToggleButton
-
 var _animate_expand_toggle: bool = false
 var _refresh_scheduled: bool = false
 var _width_tween: Tween
 var _icon_collapsed: Texture2D
 var _icon_expanded: Texture2D
+
+@onready var content_host: PanelContainer = %ContentHost
+@onready var toggle_button: Button = %ToggleButton
 
 
 func _notification(what: int) -> void:
