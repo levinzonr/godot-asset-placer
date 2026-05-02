@@ -75,14 +75,7 @@ func _enter_tree():
 
 	_presenter.placement_mode_changed.connect(_asset_placer.set_placement_mode)
 
-	synchronizer.sync_complete.connect(
-		func(added, removed, scanned):
-			var message = (
-				"Asset Placer Sync complete\nAdded: %d Removed: %d Scanned total: %d"
-				% [added, removed, scanned]
-			)
-			EditorToasterCompat.toast(message)
-	)
+	synchronizer.sync_complete.connect(_on_sync_complete)
 
 	self.overlay = (
 		load("res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.tscn").instantiate()
@@ -122,6 +115,8 @@ func _exit_tree():
 	_asset_placer.stop_placement()
 	scene_changed.disconnect(_handle_scene_changed)
 	_asset_placer_window.queue_free()
+
+	synchronizer.sync_complete.disconnect(_on_sync_complete)
 	_async.await_completion()
 
 
@@ -294,3 +289,11 @@ func _show_update_available(_update: PluginUpdate):
 func _handled():
 	get_viewport().set_input_as_handled()
 	return EditorPlugin.AFTER_GUI_INPUT_STOP
+
+
+func _on_sync_complete(added, removed, scanned):
+	var message := (
+		"Asset Placer Sync complete\nAdded: %d Removed: %d Scanned total: %d"
+		% [added, removed, scanned]
+	)
+	EditorToasterCompat.toast(message)
