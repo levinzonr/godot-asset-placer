@@ -7,6 +7,12 @@ var synchronizer: Synchronize
 var overlay: Control
 var settings_repository: AssetPlacerSettingsRepository
 var current_settings: AssetPlacerSettings
+var asset_palette: AssetPalette:
+	get():
+		return APEditorSettingsManager.get_editor_settings().get_asset_palette()
+
+var palette_session_state: AssetPaletteSessionState
+
 var plugin_path: String:
 	get():
 		return get_script().resource_path.get_base_dir()
@@ -18,7 +24,7 @@ var _async: AssetPlacerAsync
 var _asset_placer_window: AssetLibraryPanel
 var _file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
 var _plane_preview: Node3D
-
+var _palette_session_state: AssetPaletteSessionState
 # Actual type is EditorDock
 var _dock: MarginContainer
 var _asset_placer_button: Button
@@ -36,6 +42,7 @@ func _disable_plugin():
 
 func _enter_tree():
 	_initialize_data_layer()
+	set_input_event_forwarding_always_enabled()
 	_run_migrations()
 
 	_async = AssetPlacerAsync.new()
@@ -104,6 +111,10 @@ func _exit_tree():
 	overlay.queue_free()
 	_plane_preview.queue_free()
 
+	if _palette_session_state != null:
+		_palette_session_state.shutdown()
+		_palette_session_state = null
+
 	APEditorSettingsManager.free_settings()
 	AssetLibraryManager.free_library()
 
@@ -153,6 +164,8 @@ func _initialize_data_layer():
 	APEditorSettingsManager.load_editor_settings()
 
 	AssetLibraryManager.load_asset_library(current_settings.asset_library_path)
+	APEditorSettingsManager.get_editor_settings().get_asset_palette()
+	_palette_session_state = AssetPaletteSessionState.new()
 
 
 func _react_to_settings_change(settings: AssetPlacerSettings):
@@ -210,6 +223,36 @@ func _forward_3d_gui_input(viewport_camera, event):
 
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		return false
+
+	if asset_palette.get_palette_count() > 1:
+		var is_pressed = event.is_pressed()
+		if current_settings.bindings[AssetPlacerSettings.Bindings.PaletteNext].is_pressed(event):
+			if is_pressed:
+				_palette_session_state.next_palette()
+			return _handled()
+		if current_settings.bindings[AssetPlacerSettings.Bindings.PalettePrevious].is_pressed(
+			event
+		):
+			if is_pressed:
+				_palette_session_state.previous_palette()
+			return _handled()
+
+	if (
+		_presenter.has_placement_asset_selected()
+		and not _presenter.is_node_transform_mode()
+		and event is InputEventKey
+		and event.pressed
+		and not event.echo
+		and not event.ctrl_pressed
+		and not event.meta_pressed
+		and not event.alt_pressed
+	):
+		var slot := _palette_slot_from_key(event as InputEventKey)
+		if slot >= 0:
+			var asset: AssetResource = _palette_session_state.get_asset_at_slot(slot)
+			if asset != null and asset.has_resource():
+				_presenter.toggle_asset(asset)
+				return _handled()
 
 	if current_settings.bindings[AssetPlacerSettings.Bindings.Rotate].is_pressed(event):
 		_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.Rotate)
@@ -284,6 +327,32 @@ func _show_update_available(_update: PluginUpdate):
 	else:
 		_asset_placer_button.icon = EditorIconTexture2D.new("MoveUp")
 		_asset_placer_button.icon_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+
+
+func _palette_slot_from_key(event: InputEventKey) -> int:
+	match event.keycode:
+		KEY_1, KEY_KP_1:
+			return 0
+		KEY_2, KEY_KP_2:
+			return 1
+		KEY_3, KEY_KP_3:
+			return 2
+		KEY_4, KEY_KP_4:
+			return 3
+		KEY_5, KEY_KP_5:
+			return 4
+		KEY_6, KEY_KP_6:
+			return 5
+		KEY_7, KEY_KP_7:
+			return 6
+		KEY_8, KEY_KP_8:
+			return 7
+		KEY_9, KEY_KP_9:
+			return 8
+		KEY_0, KEY_KP_0:
+			return 9
+		_:
+			return -1
 
 
 func _handled():

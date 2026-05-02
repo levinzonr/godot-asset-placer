@@ -16,6 +16,12 @@ var _error_hidden_position: Vector2
 @onready var error_timer: Timer = %ErrorTimer
 @onready var snapping_switch: CheckButton = %SnappingSwitch
 @onready var placement_shortcut_label: Label = %PlacementShortcutLabel
+@onready var asset_pallete: PanelContainer = %AssetPallete
+@onready var asset_pallete_presenter := AssetPalettePresenter.new()
+@onready var asset_pallete_container: HBoxContainer = %PalleteContainer
+@onready var asset_pallete_resource = preload(
+	"res://addons/asset_placer/ui/asset_palette/asset_pallete_item.tscn"
+)
 @onready var _settings_repository := AssetPlacerSettingsRepository.instance
 
 
@@ -38,6 +44,34 @@ func _ready():
 	error_timer.timeout.connect(hide_error)
 	set_mode(presenter.transform_mode)
 	set_axis(presenter.preview_transform_axis)
+
+	asset_pallete_presenter.palette_change.connect(show_asset_pallete)
+	asset_pallete_presenter.ready(0)
+
+	AssetPaletteSessionState.instance.active_palette_index_changed.connect(
+		func():
+			var index = AssetPaletteSessionState.instance.get_active_palette_index()
+			asset_pallete_presenter.set_palette_index(index)
+	)
+
+
+func show_asset_pallete(assets: Array[AssetResource]):
+	if assets.all(func(a): return a == null):
+		asset_pallete.hide()
+	else:
+		asset_pallete.show()
+
+	for child in asset_pallete_container.get_children():
+		child.queue_free()
+	for index in range(assets.size()):
+		var asset = assets[index]
+		if asset:
+			var asset_instance = asset_pallete_resource.instantiate() as AssetPalletItem
+			asset_pallete_container.add_child(asset_instance)
+			asset_instance.button_size = Vector2(48, 48)
+			asset_instance.set_asset(asset)
+			asset_instance.configurable = false
+			asset_instance.set_index(index)
 
 
 func set_mode(mode: AssetPlacerPresenter.TransformMode):

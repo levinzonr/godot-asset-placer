@@ -122,6 +122,7 @@ text = "Asset Library Save Path"
 
 [node name="ResetAssetLibraryButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer6" unique_id=2032001974]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(33, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -213,7 +214,7 @@ text = "Thumbnails UI Scale"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "1.0"
+text = "0.7"
 horizontal_alignment = 2
 
 [node name="UIScaleHSlider" type="HSlider" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5" unique_id=1293124067]
@@ -224,7 +225,7 @@ size_flags_vertical = 1
 min_value = 0.2
 max_value = 2.0
 step = 0.1
-value = 1.0
+value = 0.7
 ticks_position = 3
 
 [node name="Spacing" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=653626810]
@@ -333,3 +334,13 @@ label = "Toggle Y Axis"
 unique_name_in_owner = true
 layout_mode = 2
 label = "Toggle Z Axis"
+
+[node name="KeybindingOptionPalleteNext" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=898397609 instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "Next Pallete"
+
+[node name="KeybindingOptionPalletePrevious" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=503667236 instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "Previous Pallete"

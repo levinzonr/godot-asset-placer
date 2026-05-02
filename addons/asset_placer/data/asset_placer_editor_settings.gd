@@ -7,6 +7,8 @@ extends Resource
 ## Holds a AssetResource id as a key and a UNIX timestamp as value.
 @export_storage var _assets_time_placed: Dictionary[String, float] = {}
 
+@export var asset_palette: AssetPalette
+
 
 func get_assets_time_placed() -> Dictionary[String, float]:
 	return _assets_time_placed
@@ -20,6 +22,13 @@ func update_asset_time_placed(asset_id: String):
 func remove_asset_time_placed(asset_id: String):
 	if _assets_time_placed.has(asset_id):
 		_assets_time_placed.erase(asset_id)
+
+
+func get_asset_palette() -> AssetPalette:
+	if not is_instance_valid(asset_palette):
+		asset_palette = AssetPalette.create_default()
+	asset_palette._ensure_nonempty()
+	return asset_palette
 
 
 func _emit_all_changed():

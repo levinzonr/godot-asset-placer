@@ -12,6 +12,7 @@ var _last_time_modified = 0
 func _init(res: Resource = null):
 	if res:
 		self.resource = res
+		_resolved_texture = load("res://addons/asset_placer/icon.png")
 		_preview_resource()
 
 

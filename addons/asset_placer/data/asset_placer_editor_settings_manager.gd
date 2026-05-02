@@ -12,6 +12,9 @@ static var time_to_save: float = 1.0
 static var _editor_settings: AssetPlacerEditorSettings
 static var _save_timer: SceneTreeTimer
 
+## Last palette AssetPalette.changed connected to editor emit_changed (see _connect_save).
+static var _palette_forward_palette: AssetPalette
+
 
 static func get_editor_settings() -> AssetPlacerEditorSettings:
 	assert(
@@ -32,12 +35,14 @@ static func load_editor_settings(load_path := SAVE_PATH) -> void:
 	var is_first_load := not is_instance_valid(_editor_settings)
 	if is_first_load:
 		_editor_settings = new_editor_settings
+		_editor_settings.get_asset_palette()
 		_connect_save()
 	else:
 		_disconnect_save()
 		_move_signal_connections(new_editor_settings)
 
 		_editor_settings = new_editor_settings
+		_editor_settings.get_asset_palette()
 		_editor_settings._emit_all_changed()
 
 		_connect_save()
@@ -47,6 +52,8 @@ static func free_settings():
 	if is_instance_valid(_save_timer):
 		_save_editor_settings()
 
+	if is_instance_valid(_editor_settings):
+		_disconnect_save()
 	_move_signal_connections(null)
 	_editor_settings = null
 
@@ -84,7 +91,15 @@ static func _move_signal_connections(other: AssetPlacerEditorSettings):
 
 static func _connect_save():
 	_editor_settings.changed.connect(_queue_save)
+	var pal := _editor_settings.get_asset_palette()
+	_palette_forward_palette = pal
+	pal.changed.connect(Callable(_editor_settings, &"emit_changed"))
 
 
 static func _disconnect_save():
 	_editor_settings.changed.disconnect(_queue_save)
+	if is_instance_valid(_palette_forward_palette):
+		var forward := Callable(_editor_settings, &"emit_changed")
+		if _palette_forward_palette.changed.is_connected(forward):
+			_palette_forward_palette.changed.disconnect(forward)
+		_palette_forward_palette = null

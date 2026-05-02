@@ -17,6 +17,16 @@ static func get_asset_library() -> AssetLibrary:
 	return _asset_library
 
 
+static func get_asset_for_palette_slot(palette_index: int, slot_index: int) -> AssetResource:
+	if slot_index < 0 or slot_index >= AssetPalette.SLOT_COUNT:
+		return null
+	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
+	var asset_id: String = asset_palette.get_asset_id_for_palette_slot(palette_index, slot_index)
+	if asset_id.is_empty():
+		return null
+	return get_asset_library().get_asset(asset_id)
+
+
 static func update_save_path(new_path: String):
 	assert(new_path.is_absolute_path(), "Cannot use non-absolute asset library path %s" % new_path)
 	if new_path == _save_path:
