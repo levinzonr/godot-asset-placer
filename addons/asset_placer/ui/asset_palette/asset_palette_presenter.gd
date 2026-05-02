@@ -45,15 +45,21 @@ func get_asset_at_slot(slot_index: int) -> AssetResource:
 func add_or_assign_asset(slot_index: int, asset: AssetResource) -> void:
 	if not is_instance_valid(asset):
 		return
-	APEditorSettingsManager.get_editor_settings().get_asset_palette().set_slot_asset(_pallete_index, slot_index, asset.id)
+	APEditorSettingsManager.get_editor_settings().get_asset_palette().set_slot_asset(
+		_pallete_index, slot_index, asset.id
+	)
 
 
 func remove_slot(slot_index: int) -> void:
-	APEditorSettingsManager.get_editor_settings().get_asset_palette().clear_slot(_pallete_index, slot_index)
+	APEditorSettingsManager.get_editor_settings().get_asset_palette().clear_slot(
+		_pallete_index, slot_index
+	)
 
 
 func swap_slots(slot_a: int, slot_b: int) -> void:
-	APEditorSettingsManager.get_editor_settings().get_asset_palette().swap_slots(_pallete_index, slot_a, slot_b)
+	APEditorSettingsManager.get_editor_settings().get_asset_palette().swap_slots(
+		_pallete_index, slot_a, slot_b
+	)
 
 
 func clear_active_palette() -> void:

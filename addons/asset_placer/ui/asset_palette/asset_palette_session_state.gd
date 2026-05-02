@@ -8,7 +8,9 @@ var _active_palette_index: int = 0
 
 
 func _init():
-	APEditorSettingsManager.get_editor_settings().get_asset_palette().palette_changed.connect(_on_palette_data_changed)
+	APEditorSettingsManager.get_editor_settings().get_asset_palette().palette_changed.connect(
+		_on_palette_data_changed
+	)
 
 
 func shutdown() -> void:
