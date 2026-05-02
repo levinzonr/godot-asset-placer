@@ -8,11 +8,11 @@ var _active_palette_index: int = 0
 
 
 func _init():
-	AssetPaletteManager.get_asset_palette().palette_changed.connect(_on_palette_data_changed)
+	APEditorSettingsManager.get_editor_settings().get_asset_palette().palette_changed.connect(_on_palette_data_changed)
 
 
 func shutdown() -> void:
-	var asset_palette := AssetPaletteManager.get_asset_palette()
+	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
 	if asset_palette.palette_changed.is_connected(_on_palette_data_changed):
 		asset_palette.palette_changed.disconnect(_on_palette_data_changed)
 
@@ -22,7 +22,7 @@ func get_active_palette_index() -> int:
 
 
 func set_active_palette_index(index: int) -> void:
-	var asset_palette := AssetPaletteManager.get_asset_palette()
+	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
 	var palette_count := asset_palette.get_palette_count()
 	if palette_count < 1:
 		return
@@ -35,7 +35,7 @@ func set_active_palette_index(index: int) -> void:
 
 
 func next_palette() -> void:
-	var asset_palette := AssetPaletteManager.get_asset_palette()
+	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
 	var palette_count := asset_palette.get_palette_count()
 	if palette_count < 1:
 		return
@@ -47,7 +47,7 @@ func next_palette() -> void:
 
 
 func previous_palette() -> void:
-	var asset_palette := AssetPaletteManager.get_asset_palette()
+	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
 	var palette_count := asset_palette.get_palette_count()
 	if palette_count < 1:
 		return
@@ -66,7 +66,7 @@ func _on_palette_data_changed() -> void:
 
 
 func _clamp_active_index() -> void:
-	var asset_palette := AssetPaletteManager.get_asset_palette()
+	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
 	var palette_count := asset_palette.get_palette_count()
 	if palette_count < 1:
 		return

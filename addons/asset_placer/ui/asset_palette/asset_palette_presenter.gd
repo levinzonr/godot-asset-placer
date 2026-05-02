@@ -19,7 +19,7 @@ func shutdown() -> void:
 
 
 func get_palette_count() -> int:
-	return AssetPaletteManager.get_asset_palette().get_palette_count()
+	return APEditorSettingsManager.get_editor_settings().get_asset_palette().get_palette_count()
 
 
 func set_palette_index(palette_index: int) -> void:
@@ -34,7 +34,7 @@ func get_resolved_slots() -> Array[AssetResource]:
 func get_asset_at_slot(slot_index: int) -> AssetResource:
 	if slot_index < 0 or slot_index >= AssetPalette.SLOT_COUNT:
 		return null
-	var asset_palette := AssetPaletteManager.get_asset_palette()
+	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
 	var asset_library := AssetLibraryManager.get_asset_library()
 	var asset_id: String = asset_palette.get_asset_id_for_palette_slot(_pallete_index, slot_index)
 	if asset_id.is_empty():
@@ -45,30 +45,30 @@ func get_asset_at_slot(slot_index: int) -> AssetResource:
 func add_or_assign_asset(slot_index: int, asset: AssetResource) -> void:
 	if not is_instance_valid(asset):
 		return
-	AssetPaletteManager.get_asset_palette().set_slot_asset(_pallete_index, slot_index, asset.id)
+	APEditorSettingsManager.get_editor_settings().get_asset_palette().set_slot_asset(_pallete_index, slot_index, asset.id)
 
 
 func remove_slot(slot_index: int) -> void:
-	AssetPaletteManager.get_asset_palette().clear_slot(_pallete_index, slot_index)
+	APEditorSettingsManager.get_editor_settings().get_asset_palette().clear_slot(_pallete_index, slot_index)
 
 
 func swap_slots(slot_a: int, slot_b: int) -> void:
-	AssetPaletteManager.get_asset_palette().swap_slots(_pallete_index, slot_a, slot_b)
+	APEditorSettingsManager.get_editor_settings().get_asset_palette().swap_slots(_pallete_index, slot_a, slot_b)
 
 
 func clear_active_palette() -> void:
-	AssetPaletteManager.get_asset_palette().clear_palette(_pallete_index)
+	APEditorSettingsManager.get_editor_settings().get_asset_palette().clear_palette(_pallete_index)
 
 
 func _connect_signals() -> void:
-	var asset_palette := AssetPaletteManager.get_asset_palette()
+	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
 	var asset_library := AssetLibraryManager.get_asset_library()
 	asset_palette.palette_changed.connect(_on_palette_changed)
 	asset_library.assets_changed.connect(_on_library_assets_changed)
 
 
 func _disconnect_signals() -> void:
-	var asset_palette := AssetPaletteManager.get_asset_palette()
+	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
 	var asset_library := AssetLibraryManager.get_asset_library()
 	if asset_palette.palette_changed.is_connected(_on_palette_changed):
 		asset_palette.palette_changed.disconnect(_on_palette_changed)
@@ -85,7 +85,7 @@ func _on_library_assets_changed() -> void:
 
 
 func _emit_pallete_change() -> void:
-	var asset_palette := AssetPaletteManager.get_asset_palette()
+	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
 	var palette_count := asset_palette.get_palette_count()
 	var slot_assets: Array[AssetResource] = _build_resolved_slots()
 	palette_change.emit(slot_assets)
@@ -93,7 +93,7 @@ func _emit_pallete_change() -> void:
 
 func _build_resolved_slots() -> Array[AssetResource]:
 	var resolved_slots: Array[AssetResource] = []
-	var asset_palette := AssetPaletteManager.get_asset_palette()
+	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
 	var asset_library := AssetLibraryManager.get_asset_library()
 	for slot_index in AssetPalette.SLOT_COUNT:
 		var asset_id: String = asset_palette.get_asset_id_for_palette_slot(

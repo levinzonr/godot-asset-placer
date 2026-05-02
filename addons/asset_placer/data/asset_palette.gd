@@ -1,31 +1,39 @@
+@tool
 class_name AssetPalette
-extends RefCounted
+extends Resource
 
 signal palette_changed
 
 const SLOT_COUNT := 10
 
-## Active palette index for the editor lives in AssetPaletteSessionState (in-memory), not here.
 ## Each entry: fixed [SLOT_COUNT] asset id strings; "" means empty slot.
-var _palettes: Array[PackedStringArray] = []
+@export_storage var _palettes: Array[PackedStringArray] = []
 
 
-func _init(palettes: Array = []):
-	_palettes.clear()
-	if palettes.is_empty():
+static func create_default() -> AssetPalette:
+	var p := AssetPalette.new()
+	p._ensure_nonempty()
+	return p
+
+
+func _ensure_nonempty() -> void:
+	if _palettes.is_empty():
 		_palettes.append(_make_empty_slots())
-	else:
-		for item in palettes:
-			assert(item is PackedStringArray, "AssetPalette: each row must be PackedStringArray")
-			_palettes.append((item as PackedStringArray).duplicate())
+
+
+func _notify_palette_changed() -> void:
+	palette_changed.emit()
+	emit_changed()
 
 
 func get_palette_count() -> int:
+	_ensure_nonempty()
 	return _palettes.size()
 
 
 ## Returns a duplicate of the slot ids for one palette (for serialization).
 func get_palette(palette_index: int) -> PackedStringArray:
+	_ensure_nonempty()
 	if palette_index < 0 or palette_index >= _palettes.size():
 		return PackedStringArray()
 	return _palettes[palette_index].duplicate()
@@ -33,6 +41,7 @@ func get_palette(palette_index: int) -> PackedStringArray:
 
 ## Assigns asset_id to slot on palette palette_index; removes that id from every other slot (all palettes).
 func set_slot_asset(palette_index: int, slot_index: int, asset_id: String) -> void:
+	_ensure_nonempty()
 	if not _is_valid_slot_index(slot_index):
 		push_warning("AssetPalette: slot_index must be 0..9")
 		return
@@ -45,34 +54,38 @@ func set_slot_asset(palette_index: int, slot_index: int, asset_id: String) -> vo
 	_remove_asset_id_from_all_palettes(asset_id)
 	var slots: PackedStringArray = _palettes[palette_index]
 	slots[slot_index] = asset_id
-	palette_changed.emit()
+	_notify_palette_changed()
 
 
 func clear_slot(palette_index: int, slot_index: int) -> void:
+	_ensure_nonempty()
 	if not _is_valid_slot_index(slot_index):
 		return
 	if palette_index < 0 or palette_index >= _palettes.size():
 		return
 	_palettes[palette_index][slot_index] = ""
-	palette_changed.emit()
+	_notify_palette_changed()
 
 
 func clear_all_slots() -> void:
+	_ensure_nonempty()
 	for palette_index in _palettes.size():
 		_palettes[palette_index] = _make_empty_slots()
-	palette_changed.emit()
+	_notify_palette_changed()
 
 
 ## Clears every slot on one palette; single palette_changed emit.
 func clear_palette(palette_index: int) -> void:
+	_ensure_nonempty()
 	if palette_index < 0 or palette_index >= _palettes.size():
 		return
 	_palettes[palette_index] = _make_empty_slots()
-	palette_changed.emit()
+	_notify_palette_changed()
 
 
 ## Exchanges two slot entries on the same palette only (no global id removal).
 func swap_slots(palette_index: int, slot_a: int, slot_b: int) -> void:
+	_ensure_nonempty()
 	if not _is_valid_slot_index(slot_a) or not _is_valid_slot_index(slot_b):
 		return
 	if palette_index < 0 or palette_index >= _palettes.size():
@@ -83,10 +96,11 @@ func swap_slots(palette_index: int, slot_a: int, slot_b: int) -> void:
 	var tmp: String = slots[slot_a]
 	slots[slot_a] = slots[slot_b]
 	slots[slot_b] = tmp
-	palette_changed.emit()
+	_notify_palette_changed()
 
 
 func get_asset_id_for_palette_slot(palette_index: int, slot_index: int) -> String:
+	_ensure_nonempty()
 	if not _is_valid_slot_index(slot_index):
 		return ""
 	if palette_index < 0 or palette_index >= _palettes.size():

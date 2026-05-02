@@ -9,7 +9,7 @@ var settings_repository: AssetPlacerSettingsRepository
 var current_settings: AssetPlacerSettings
 var asset_palette: AssetPalette:
 	get():
-		return AssetPaletteManager.get_asset_palette()
+		return APEditorSettingsManager.get_editor_settings().get_asset_palette()
 
 var palette_session_state: AssetPaletteSessionState
 
@@ -117,7 +117,6 @@ func _exit_tree():
 
 	APEditorSettingsManager.free_settings()
 	AssetLibraryManager.free_library()
-	AssetPaletteManager.free_palette()
 
 	settings_repository.settings_changed.disconnect(_react_to_settings_change)
 	_file_system.resources_reimported.disconnect(_react_to_reimorted_files)
@@ -165,7 +164,7 @@ func _initialize_data_layer():
 	APEditorSettingsManager.load_editor_settings()
 
 	AssetLibraryManager.load_asset_library(current_settings.asset_library_path)
-	AssetPaletteManager.load_asset_palette()
+	APEditorSettingsManager.get_editor_settings().get_asset_palette()
 	palette_session_state = AssetPaletteSessionState.new()
 
 
