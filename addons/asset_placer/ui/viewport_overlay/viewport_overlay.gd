@@ -54,7 +54,9 @@ func show_asset_pallete(assets: Array[AssetResource]):
 		var asset = assets[index]
 		var asset_instance = asset_pallete_resource.instantiate() as AssetPalletItem
 		asset_pallete_container.add_child(asset_instance)
+		asset_instance.button_size = Vector2(48, 48)
 		asset_instance.set_asset(asset)
+		asset_instance.configurable = false
 		asset_instance.set_index(index)
 	
 

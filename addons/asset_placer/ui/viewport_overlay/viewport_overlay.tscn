@@ -86,9 +86,9 @@ metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87cg6"]
 content_margin_left = 12.0
-content_margin_top = 12.0
+content_margin_top = 8.0
 content_margin_right = 12.0
-content_margin_bottom = 12.0
+content_margin_bottom = 0.0
 bg_color = Color(0.17254902, 0.17254902, 0.17254902, 0.6)
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12

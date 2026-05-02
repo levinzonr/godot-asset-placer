@@ -7,6 +7,8 @@
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_c2ruk")
+button_size = null
+configurable = null
 
 [node name="Button" type="Button" parent="." unique_id=1843764788]
 unique_name_in_owner = true
@@ -19,5 +21,6 @@ expand_icon = true
 [node name="Label" type="Label" parent="." unique_id=32519648]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "1"
 horizontal_alignment = 1
