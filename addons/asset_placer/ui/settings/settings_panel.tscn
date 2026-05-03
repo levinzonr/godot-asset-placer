@@ -85,7 +85,20 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ResetButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=582147653]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=233748226]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="RegenerateThumbnailsButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" unique_id=1882165098]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Regenerate Thumbnails"
+flat = true
+alignment = 0
+expand_icon = true
+
+[node name="ResetButton" type="Button" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" unique_id=582147653]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
@@ -214,7 +227,7 @@ text = "Thumbnails UI Scale"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "0.7"
+text = "0.6"
 horizontal_alignment = 2
 
 [node name="UIScaleHSlider" type="HSlider" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5" unique_id=1293124067]
@@ -225,7 +238,7 @@ size_flags_vertical = 1
 min_value = 0.2
 max_value = 2.0
 step = 0.1
-value = 0.7
+value = 0.6000000000000001
 ticks_position = 3
 
 [node name="Spacing" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=653626810]
@@ -250,7 +263,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 alignment = 2
-selected = 0
+selected = 2
 item_count = 3
 popup/item_0/text = "Stable"
 popup/item_0/id = 0

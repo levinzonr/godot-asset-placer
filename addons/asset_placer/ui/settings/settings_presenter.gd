@@ -111,6 +111,15 @@ func set_binding(input: APInputOption, key: AssetPlacerSettings.Bindings):
 	_repository.set_settings(current_settings)
 
 
+func start_thumbnail_regeneration() -> bool:
+	var coordinator := ThumbnailGenerationCoordinator.instance
+	if not is_instance_valid(coordinator):
+		return false
+	if coordinator.is_running():
+		return false
+	return coordinator.start_regeneration([], true)
+
+
 func set_translate_binding(key: APInputOption):
 	var current = _repository.get_settings()
 	current.binding_translate = key

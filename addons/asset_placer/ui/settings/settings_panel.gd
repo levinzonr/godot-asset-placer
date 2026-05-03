@@ -9,6 +9,7 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 @onready var material_picker_button: Button = %MaterialPickerButton
 @onready var material_clear_button: Button = %MaterialClearButton
 @onready var plane_material_picker_button: Button = %PlaneMaterialPickerButton
+@onready var regenerate_thumbnails_button: Button = %RegenerateThumbnailsButton
 
 @onready var trasform_step_spin_box: SpinBox = %TrasformStepSpinBox
 @onready var rotation_step_spin_box: SpinBox = %RotationStepSpinBox
@@ -17,6 +18,8 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 
 @onready var update_channel_option_button: OptionButton = %UpdateChannelOptionButton
 @onready var update_channel_info_button: Button = %UpdateChannelInfoButton
+
+var _thumbnail_regeneration_dialog: ThumbnailRegenerationDialog
 
 # Keybinds
 
@@ -48,6 +51,7 @@ func _ready():
 	plane_material_picker_button.pressed.connect(
 		func(): EditorInterface.popup_quick_open(_presenter.set_plane_material, ["BaseMaterial3D"])
 	)
+	regenerate_thumbnails_button.pressed.connect(_start_thumbnail_regeneration)
 
 	ui_scale_h_slider.drag_ended.connect(
 		func(changed): _presenter.set_ui_scale(ui_scale_h_slider.value)
@@ -136,3 +140,19 @@ func _show_asset_library_picker():
 	library_picker.ok_button_text = "Choose path"
 	library_picker.file_selected.connect(_presenter.set_asset_library_path)
 	EditorInterface.popup_dialog_centered(library_picker, Vector2i(720, 500))
+
+
+func _start_thumbnail_regeneration():
+	if not is_instance_valid(_thumbnail_regeneration_dialog):
+		_thumbnail_regeneration_dialog = (
+			load("res://addons/asset_placer/ui/settings/thumbnail_regeneration_dialog.tscn").instantiate()
+		)
+	if _thumbnail_regeneration_dialog.get_parent() == null:
+		EditorInterface.popup_dialog_centered(_thumbnail_regeneration_dialog, Vector2i(520, 210))
+	else:
+		_thumbnail_regeneration_dialog.popup_centered(Vector2i(520, 210))
+	_thumbnail_regeneration_dialog.open_and_track()
+	if not _presenter.start_thumbnail_regeneration():
+		var coordinator := ThumbnailGenerationCoordinator.instance
+		if coordinator == null or not coordinator.is_running():
+			push_warning("Failed to start thumbnail regeneration.")

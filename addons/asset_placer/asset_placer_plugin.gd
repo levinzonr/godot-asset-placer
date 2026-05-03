@@ -21,6 +21,9 @@ var _presenter: AssetPlacerPresenter
 var _asset_placer: AssetPlacer
 var _updater: PluginUpdater
 var _async: AssetPlacerAsync
+var _thumbnail_cache_store: ThumbnailCacheStore
+var _thumbnail_render_service: ThumbnailRenderService
+var _thumbnail_coordinator: ThumbnailGenerationCoordinator
 var _asset_placer_window: AssetLibraryPanel
 var _file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
 var _plane_preview: Node3D
@@ -46,6 +49,10 @@ func _enter_tree():
 	_run_migrations()
 
 	_async = AssetPlacerAsync.new()
+	_thumbnail_cache_store = ThumbnailCacheStore.new()
+	_thumbnail_render_service = ThumbnailRenderService.new()
+	_thumbnail_coordinator = ThumbnailGenerationCoordinator.new()
+	get_tree().root.add_child(_thumbnail_coordinator)
 	_presenter = AssetPlacerPresenter.new()
 	AssetPlacerDockPresenter.new()
 	_updater = PluginUpdater.new(ADDON_PATH + "/plugin.cfg", "")
@@ -100,16 +107,24 @@ func _enter_tree():
 
 func _exit_tree():
 	if ClassDB.class_exists(&"EditorDock"):
-		call("remove_dock", _dock)
-		_dock.queue_free()
+		if is_instance_valid(_dock):
+			call("remove_dock", _dock)
+			_dock.queue_free()
 		_dock = null
 	else:
-		remove_control_from_bottom_panel(_asset_placer_window)
-	_updater.updater_up_to_date.disconnect(_show_plugin_up_to_date)
-	_updater.updater_update_available.disconnect(_show_update_available)
-	_updater.update_ready.disconnect(_show_update_available)
-	overlay.queue_free()
-	_plane_preview.queue_free()
+		if is_instance_valid(_asset_placer_window):
+			remove_control_from_bottom_panel(_asset_placer_window)
+	if is_instance_valid(_updater):
+		if _updater.updater_up_to_date.is_connected(_show_plugin_up_to_date):
+			_updater.updater_up_to_date.disconnect(_show_plugin_up_to_date)
+		if _updater.updater_update_available.is_connected(_show_update_available):
+			_updater.updater_update_available.disconnect(_show_update_available)
+		if _updater.update_ready.is_connected(_show_update_available):
+			_updater.update_ready.disconnect(_show_update_available)
+	if is_instance_valid(overlay):
+		overlay.queue_free()
+	if is_instance_valid(_plane_preview):
+		_plane_preview.queue_free()
 
 	if _palette_session_state != null:
 		_palette_session_state.shutdown()
@@ -118,17 +133,37 @@ func _exit_tree():
 	APEditorSettingsManager.free_settings()
 	AssetLibraryManager.free_library()
 
-	settings_repository.settings_changed.disconnect(_react_to_settings_change)
-	_file_system.resources_reimported.disconnect(_react_to_reimorted_files)
-	_presenter.asset_selected.disconnect(start_placement)
-	_presenter.asset_deselected.disconnect(_asset_placer.stop_placement)
-	_asset_placer_window.visibility_changed.disconnect(_on_dock_visibility_changed)
-	_asset_placer.stop_placement()
-	scene_changed.disconnect(_handle_scene_changed)
-	_asset_placer_window.queue_free()
+	if is_instance_valid(settings_repository):
+		if settings_repository.settings_changed.is_connected(_react_to_settings_change):
+			settings_repository.settings_changed.disconnect(_react_to_settings_change)
+	if _file_system.resources_reimported.is_connected(_react_to_reimorted_files):
+		_file_system.resources_reimported.disconnect(_react_to_reimorted_files)
+	if is_instance_valid(_presenter):
+		if _presenter.asset_selected.is_connected(start_placement):
+			_presenter.asset_selected.disconnect(start_placement)
+		if _presenter.asset_deselected.is_connected(_asset_placer.stop_placement):
+			_presenter.asset_deselected.disconnect(_asset_placer.stop_placement)
+	if is_instance_valid(_asset_placer_window):
+		if _asset_placer_window.visibility_changed.is_connected(_on_dock_visibility_changed):
+			_asset_placer_window.visibility_changed.disconnect(_on_dock_visibility_changed)
+	if is_instance_valid(_asset_placer):
+		_asset_placer.stop_placement()
+	if scene_changed.is_connected(_handle_scene_changed):
+		scene_changed.disconnect(_handle_scene_changed)
+	if is_instance_valid(_asset_placer_window):
+		_asset_placer_window.queue_free()
 
-	synchronizer.sync_complete.disconnect(_on_sync_complete)
-	_async.await_completion()
+	if is_instance_valid(synchronizer) and synchronizer.sync_complete.is_connected(_on_sync_complete):
+		synchronizer.sync_complete.disconnect(_on_sync_complete)
+	if is_instance_valid(_thumbnail_coordinator):
+		_thumbnail_coordinator.queue_free()
+		_thumbnail_coordinator = null
+	if is_instance_valid(_thumbnail_render_service):
+		_thumbnail_render_service.dispose()
+	_thumbnail_render_service = null
+	_thumbnail_cache_store = null
+	if is_instance_valid(_async):
+		_async.await_completion()
 
 
 func _init_parent_scene():

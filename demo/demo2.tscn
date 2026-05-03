@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://brdpwtjmcve3j"]
+[gd_scene format=3 uid="uid://brdpwtjmcve3j"]
 
 [ext_resource type="PackedScene" uid="uid://gwihxo1nnefo" path="res://demo/assets/ForestRock1.glb" id="1_jnsbc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7veo4"]
 size = Vector3(20, 1, 20)
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" unique_id=1614292105]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=87360014]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2091779114]
 shape = SubResource("BoxShape3D_7veo4")
 
-[node name="ForestRock12" type="Node3D" parent="." instance=ExtResource("1_jnsbc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5573337, 1.075604, 4.492753)
+[node name="ForestRock12" parent="." unique_id=1431105087 instance=ExtResource("1_jnsbc")]
+transform = Transform3D(0.014031979, 0, -0.99990153, 0, 1, 0, 0.99990153, 0, 0.014031979, 0.5271869, 1.075604, 0.7278919)
 metadata/asset_placer_res_id = "uid://gwihxo1nnefo"
