@@ -93,7 +93,7 @@ To configure rules, click the "Rules" button on any folder in the Folders tab to
 
 Use the **Pallete** tab in the Asset Placer dock to define quick-access rows of assets. Each palette offers ten numbered slots; use **New Pallete** to add another palette beyond the first. Assign an asset to a slot from the picker, or clear a slot when you no longer need it. The first palette cannot be removed.
 
-Palette data is saved with your Asset Placer configuration. Which palette is **active** during an editing session can change as you work: while more than one palette exists, the default shortcuts switch to the next or previous palette (square bracket keys). Cycling skips palettes that have no asset assigned in any slot.
+Palette data is saved with your Asset Placer configuration. Which palette is **active** during an editing session can change as you work: while more than one palette exists, the default shortcuts switch to the next or previous palette (`Tab` / `Shift+Tab`). Cycling skips palettes that have no asset assigned in any slot.
 
 After you enter placement mode, you can press **1** through **9**, then **0**, to select the asset bound to that numbered slot to immdediatly select that asset without going through the asset pallete
 
@@ -265,8 +265,8 @@ Customize shortcuts for all Asset Placer actions:
 - Toggle X, Y, Z Axis (Default: `X`, `Y`, `Z`)
 - Transform Apply (Default: Mouse Wheel Up/Down)
 - In Place Transform Mode (Default: `Shift+E`)
-- Palette Next (Default: `]`)
-- Palette Previous (Default: `[`)
+- Palette Next (Default: `Tab`)
+- Palette Previous (Default: `Shift+Tab`)
 
 Key bindings support Mouse Button and Modifier Combinations (Ctrl, Shift, Alt), allowing you to avoid conflicts with existing Godot shortcuts. The Settings Panel includes conflict detection that will highlight conflicting keys in red.
 
@@ -275,7 +275,7 @@ All settings are persisted across Godot sessions within EditorSettings and apply
 ## Known Issues
 
 - So far the plugin only supports placeable scenes and models with these extensions: `tscn`, `scn`, `glb`, `gltf`, `obj`, `fbx`, and `blend`. If you would like other formats supported, please open an issue.
-- Sometimes Previews for the Assets are not perfect - but they are directly take from the Godot Previews system
+- Some generated thumbnails may still look imperfect depending on asset complexity, materials, and scene setup
 
 ## Contributing
 
