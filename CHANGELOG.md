@@ -1,5 +1,21 @@
 # Godot Asset Placer Changelog
 
+## 1.5.0-alpha5
+
+Pre-release alpha for the upcoming **1.5.0** line. This release focuses on better thumbnail quality and related UX improvements.
+
+### ✨ New Features
+
+- **#103** (**#5**): Added custom asset thumbnail rendering pipeline with generation coordination and cache storage for more consistent previews
+- **#103**: Added thumbnail regeneration flow in Settings to rebuild generated previews when needed
+- **#103**: Updated palette cycling defaults to `Tab` / `Shift+Tab` for faster keyboard switching
+
+### 🐛 Fixed
+
+- **#103**: Fixed asset palette cycling behavior
+
+---
+
 ## 1.5.0-alpha4
 
 Pre-release alpha for the upcoming **1.5.0** line. This will be last Alpha Release on the way to the Stable one - no new features expected in 1.5.0
