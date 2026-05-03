@@ -29,8 +29,7 @@ This is Godot Editor plugin that allows for quick asset placement and management
 - **Auto-Grouping** - Automatically group placed assets under nodes named after their primary collection
 - **Parent from selection** - Optionally derive the Assets Parent from the selected `Node3D` so new assets are placed as siblings (see Options; since **1.5.0-alpha1**)
 - **Folder Rules** - Configure rules to automatically assign collections when syncing asset folders
-- **Asset palettes** - Multiple palettes with ten shortcut slots each, plus an optional thumbnail strip in the viewport while you place assets
-- **Palette shortcuts** - Change which palette is active when more than one exists (default square bracket keys; rebindable in Settings), and jump to a slot assignment with number keys during placement
+- **Asset palettes** - Shortcuts to your most used assets right under your fingertips 
 - **Asset library sorting** - Sort assets by name, date added, or last placed, with ascending or descending order
 - Filter Assets by their name and collection
 - Grid snapping when placing assets
@@ -96,7 +95,7 @@ Use the **Pallete** tab in the Asset Placer dock to define quick-access rows of 
 
 Palette data is saved with your Asset Placer configuration. Which palette is **active** during an editing session can change as you work: while more than one palette exists, the default shortcuts switch to the next or previous palette (square bracket keys). Cycling skips palettes that have no asset assigned in any slot.
 
-After you enter placement mode and already have an asset selected for placement, you can press **1** through **9**, then **0**, to select the asset bound to that numbered slot on the active palette (including number pad keys). When at least one slot has an asset, the viewport overlay can show thumbnails for the active palette.
+After you enter placement mode, you can press **1** through **9**, then **0**, to select the asset bound to that numbered slot to immdediatly select that asset without going through the asset pallete
 
 ### Placing Assets
 

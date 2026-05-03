@@ -146,7 +146,7 @@ text = "Asset Placer"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Version 1.5.0-alpha3"
+text = ""
 
 [node name="UpdateButton" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer" unique_id=133643675]
 unique_name_in_owner = true

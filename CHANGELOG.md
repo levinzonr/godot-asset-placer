@@ -1,5 +1,20 @@
 # Godot Asset Placer Changelog
 
+## 1.5.0-alpha4
+
+Pre-release alpha for the upcoming **1.5.0** line. This will be last Alpha Release on the way to the Stable one - no new features expected in 1.5.0
+
+### ✨ New Features
+
+- **#92** (**#80**): Introducing Asset palettes! Assete Pallete provides you with ability to configure your most used/favorite asset as 1-9 keybindings. Open new Pallete tab to configure it. When not empty, you will see new UI added to the ViewPort Overlay showcasing your selected assets and then each you can quickly selected them using 0-1 keys. You can configure as much Palletes as you want and cycle them through Bracket Keys ('[' and ']' ) - Or configure your bindings own through Settings Panel
+- **#101** Asset library path option in Settings (picker and reset to default), and persist project settings when the library path or preview material changes by @Sr3qt
+
+### 🐛 Fixed
+
+- **#100** Fixed editor crash by replacing a problematic lambda with a named function by @Sr3qt
+
+---
+
 ## 1.5.0-alpha3
 
 Pre-release alpha for the upcoming **1.5.0** line. Expect further changes before stable **1.5.0**.

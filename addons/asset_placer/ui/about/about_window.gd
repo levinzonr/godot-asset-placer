@@ -9,6 +9,7 @@ const ISSUE_TEMPLATE = (
 	"https://github.com/levinzonr/godot-asset-placer/issues/new"
 	+ "?template=bug_report.md&labels=bug&title=%5BBUG%5D%20"
 )
+const PLUGIN_CONFIG_PATH := "res://addons/asset_placer/plugin.cfg"
 
 var updater: PluginUpdater = PluginUpdater.instance
 
@@ -26,6 +27,7 @@ var updater: PluginUpdater = PluginUpdater.instance
 
 
 func _ready():
+	version_label.text = "Version %s" % get_plugin_version()
 	var settings = settings_repository.get_settings()
 	settings_repository.settings_changed.connect(
 		func(s): updater.check_for_updates(s.update_channel)
@@ -38,7 +40,6 @@ func _ready():
 	update_button.pressed.connect(update_popup.popup)
 	download_update_button.pressed.connect(updater.do_update)
 	apply_update_button.pressed.connect(updater.apply_update)
-	version_label.text = "Version %s" % get_plugin_version()
 	issue_button.pressed.connect(func(): OS.shell_open(ISSUE_TEMPLATE))
 	feature_request_button.pressed.connect(func(): OS.shell_open(FEATURE_TEMPLATE))
 
@@ -75,4 +76,4 @@ func _show_update_ready_to_apply(update: PluginUpdate):
 
 
 func get_plugin_version() -> String:
-	return PluginConfiguration.new("res://addons/asset_placer/plugin.cfg").version.to_string()
+	return PluginConfiguration.new(PLUGIN_CONFIG_PATH).version.to_string()
