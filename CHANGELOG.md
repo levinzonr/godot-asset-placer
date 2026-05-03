@@ -1,5 +1,15 @@
 # Godot Asset Placer Changelog
 
+## 1.5.0-beta1
+
+Pre-release beta for the upcoming **1.5.0** line.
+
+### 🐛 Fixed
+
+- Fixed thumbnail rendering showing editor scene content in the background by isolating the render viewport with its own World3D
+
+---
+
 ## 1.5.0-alpha5
 
 Pre-release alpha for the upcoming **1.5.0** line. This release focuses on better thumbnail quality and related UX improvements.
