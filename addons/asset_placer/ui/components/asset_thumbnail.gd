@@ -32,7 +32,11 @@ func _refresh_thumbnail(request_regeneration: bool):
 	var cache_store := ThumbnailCacheStore.instance
 	if cache_store == null:
 		return
-	if is_part_of_edited_scene() or not is_instance_valid(_resource) or not _resource.has_resource():
+	if (
+		is_part_of_edited_scene()
+		or not is_instance_valid(_resource)
+		or not _resource.has_resource()
+	):
 		texture = cache_store.get_placeholder_texture()
 		return
 

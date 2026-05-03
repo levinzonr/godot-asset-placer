@@ -153,7 +153,10 @@ func _exit_tree():
 	if is_instance_valid(_asset_placer_window):
 		_asset_placer_window.queue_free()
 
-	if is_instance_valid(synchronizer) and synchronizer.sync_complete.is_connected(_on_sync_complete):
+	if (
+		is_instance_valid(synchronizer)
+		and synchronizer.sync_complete.is_connected(_on_sync_complete)
+	):
 		synchronizer.sync_complete.disconnect(_on_sync_complete)
 	if is_instance_valid(_thumbnail_coordinator):
 		_thumbnail_coordinator.queue_free()

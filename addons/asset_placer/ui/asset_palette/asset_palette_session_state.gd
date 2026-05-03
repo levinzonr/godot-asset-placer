@@ -61,15 +61,14 @@ func previous_palette() -> bool:
 func find_next_non_empty_palette(direction: int) -> bool:
 	var asset_palette := APEditorSettingsManager.get_editor_settings().get_asset_palette()
 	var palette_count := asset_palette.get_palette_count()
-	if palette_count < 1:
-		return false
 	var current_index := _active_palette_index
 	for i in range(palette_count):
-		var next_index := (current_index + direction + palette_count) % palette_count
+		var next_index := posmod(current_index + direction * (i + 1), palette_count)
 		if not asset_palette.is_palette_empty(next_index):
 			_active_palette_index = next_index
 			active_palette_index_changed.emit()
 			return true
+
 	return false
 
 

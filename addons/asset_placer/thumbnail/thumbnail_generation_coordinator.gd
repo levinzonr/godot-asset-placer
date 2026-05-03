@@ -38,9 +38,7 @@ func request_cancel():
 	_cancel_requested = true
 
 
-func start_regeneration(
-	assets: Array[AssetResource] = [], stale_only: bool = true
-) -> bool:
+func start_regeneration(assets: Array[AssetResource] = [], stale_only: bool = true) -> bool:
 	if _running:
 		return false
 	if not _ensure_services():

@@ -145,7 +145,8 @@ func _show_asset_library_picker():
 func _start_thumbnail_regeneration():
 	if not is_instance_valid(_thumbnail_regeneration_dialog):
 		_thumbnail_regeneration_dialog = (
-			load("res://addons/asset_placer/ui/settings/thumbnail_regeneration_dialog.tscn").instantiate()
+			load("res://addons/asset_placer/ui/settings/thumbnail_regeneration_dialog.tscn")
+			. instantiate()
 		)
 	if _thumbnail_regeneration_dialog.get_parent() == null:
 		EditorInterface.popup_dialog_centered(_thumbnail_regeneration_dialog, Vector2i(520, 210))
