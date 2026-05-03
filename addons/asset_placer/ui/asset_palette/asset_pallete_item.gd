@@ -16,7 +16,7 @@ signal on_add_asset_click
 		_apply_button_geometry_and_state()
 
 var _asset: AssetResource
-
+var _index: int = 0
 @onready var button: Button = %Button
 @onready var label: Label = %Label
 
@@ -31,9 +31,13 @@ func _ready() -> void:
 	)
 	_apply_button_geometry_and_state()
 	set_asset(null)
+	set_index(_index)
 
 
 func set_index(index: int):
+	_index = index
+	if not is_node_ready():
+		return
 	label.text = str(index + 1)
 
 
