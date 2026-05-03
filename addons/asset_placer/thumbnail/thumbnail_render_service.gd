@@ -69,6 +69,7 @@ func _ensure_viewport() -> bool:
 	_viewport.size = THUMBNAIL_SIZE
 	_viewport.transparent_bg = true
 	_viewport.disable_3d = false
+	_viewport.own_world_3d = true
 	_viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
 	_viewport.msaa_3d = Viewport.MSAA_2X
 	_viewport.debug_draw = Viewport.DEBUG_DRAW_DISABLED
