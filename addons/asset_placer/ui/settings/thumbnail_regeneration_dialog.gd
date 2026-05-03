@@ -2,10 +2,6 @@
 class_name ThumbnailRegenerationDialog
 extends AcceptDialog
 
-@onready var status_label: Label = %StatusLabel
-@onready var progress_bar: ProgressBar = %ProgressBar
-@onready var details_label: Label = %DetailsLabel
-
 var _cancel_button: Button
 var _coordinator: ThumbnailGenerationCoordinator
 var _total := 0
@@ -13,6 +9,10 @@ var _done := 0
 var _failed := 0
 var _skipped := 0
 var _success := 0
+
+@onready var status_label: Label = %StatusLabel
+@onready var progress_bar: ProgressBar = %ProgressBar
+@onready var details_label: Label = %DetailsLabel
 
 
 func _ready():

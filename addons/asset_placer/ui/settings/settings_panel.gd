@@ -2,6 +2,7 @@
 extends Control
 
 var _presenter: SettingsPresenter = SettingsPresenter.new()
+var _thumbnail_regeneration_dialog: ThumbnailRegenerationDialog
 @onready var reset_button: Button = %ResetButton
 
 @onready var asset_library_button: Button = %AssetLibraryButton
@@ -18,8 +19,6 @@ var _presenter: SettingsPresenter = SettingsPresenter.new()
 
 @onready var update_channel_option_button: OptionButton = %UpdateChannelOptionButton
 @onready var update_channel_info_button: Button = %UpdateChannelInfoButton
-
-var _thumbnail_regeneration_dialog: ThumbnailRegenerationDialog
 
 # Keybinds
 
