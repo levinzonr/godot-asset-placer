@@ -1,5 +1,15 @@
 # Godot Asset Placer Changelog
 
+## Unreleased
+
+### ✨ New Features
+
+- Added UI scaling settings for Asset Palette items.
+
+### 🐛 Fixed
+
+- Removed an unused container from the library tab.
+
 ## 1.5.0-beta1
 
 Pre-release beta for the upcoming **1.5.0** line.
