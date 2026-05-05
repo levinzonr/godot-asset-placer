@@ -92,7 +92,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 6
-split_offsets = PackedInt32Array(350, -24)
+split_offsets = PackedInt32Array(350)
 split_offset = 350
 
 [node name="PanelContainer" type="PanelContainer" parent="MainContent" unique_id=814115667]
@@ -374,9 +374,6 @@ layout_mode = 2
 layout_mode = 2
 text = "Add Folders  Using Dialog"
 icon = SubResource("Texture2D_mdpb8")
-
-[node name="PanelContainer3" type="FoldableContainer" parent="MainContent" unique_id=94818897]
-layout_mode = 2
 
 [node name="EmptyContent" type="CenterContainer" parent="." unique_id=1062482879]
 unique_name_in_owner = true
