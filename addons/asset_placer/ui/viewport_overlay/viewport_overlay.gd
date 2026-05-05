@@ -1,8 +1,11 @@
 @tool
 extends Control
 
+const OVERLAY_PALETTE_BUTTON_BASE := Vector2(48, 48)
+
 var _error_position: Vector2
 var _error_hidden_position: Vector2
+var _last_palette_assets: Array[AssetResource] = []
 
 @onready var rotate_check_button: CheckBox = %RotateCheckButton
 @onready var scale_check_button: CheckBox = %ScaleCheckButton
@@ -56,6 +59,7 @@ func _ready():
 
 
 func show_asset_pallete(assets: Array[AssetResource]):
+	_last_palette_assets = assets.duplicate()
 	if assets.all(func(a): return a == null):
 		asset_pallete.hide()
 	else:
@@ -63,12 +67,13 @@ func show_asset_pallete(assets: Array[AssetResource]):
 
 	for child in asset_pallete_container.get_children():
 		child.queue_free()
+	var palette_scale := _settings_repository.get_settings().palette_item_scale
 	for index in range(assets.size()):
 		var asset = assets[index]
 		if asset:
 			var asset_instance = asset_pallete_resource.instantiate() as AssetPalletItem
 			asset_pallete_container.add_child(asset_instance)
-			asset_instance.button_size = Vector2(48, 48)
+			asset_instance.button_size = OVERLAY_PALETTE_BUTTON_BASE * palette_scale
 			asset_instance.set_asset(asset)
 			asset_instance.configurable = false
 			asset_instance.set_index(index)
@@ -102,6 +107,8 @@ func hide_error():
 
 
 func show_settings(settings: AssetPlacerSettings):
+	if not _last_palette_assets.is_empty():
+		show_asset_pallete(_last_palette_assets)
 	rotate_check_button.text = (
 		"%s: To Rotate" % settings.bindings[AssetPlacerSettings.Bindings.Rotate].get_display_name()
 	)

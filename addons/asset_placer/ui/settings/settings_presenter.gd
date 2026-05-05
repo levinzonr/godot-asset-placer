@@ -43,6 +43,12 @@ func set_ui_scale(value: float):
 	_repository.set_settings(settings)
 
 
+func set_palette_item_scale(value: float):
+	var settings = _repository.get_settings()
+	settings.palette_item_scale = value
+	_repository.set_settings(settings)
+
+
 func set_rotation_step(value: float):
 	var settings = _repository.get_settings()
 	settings.rotation_step = value

@@ -16,6 +16,8 @@ var _thumbnail_regeneration_dialog: ThumbnailRegenerationDialog
 @onready var rotation_step_spin_box: SpinBox = %RotationStepSpinBox
 @onready var ui_scale_h_slider: HSlider = %UIScaleHSlider
 @onready var slider_value = %SliderValue
+@onready var palette_item_scale_h_slider: HSlider = %PaletteItemScaleHSlider
+@onready var palette_item_scale_value = %PaletteItemScaleValue
 
 @onready var update_channel_option_button: OptionButton = %UpdateChannelOptionButton
 @onready var update_channel_info_button: Button = %UpdateChannelInfoButton
@@ -53,9 +55,15 @@ func _ready():
 	regenerate_thumbnails_button.pressed.connect(_start_thumbnail_regeneration)
 
 	ui_scale_h_slider.drag_ended.connect(
-		func(changed): _presenter.set_ui_scale(ui_scale_h_slider.value)
+		func(_changed): _presenter.set_ui_scale(ui_scale_h_slider.value)
 	)
 	ui_scale_h_slider.value_changed.connect(func(value): slider_value.text = str(value))
+	palette_item_scale_h_slider.drag_ended.connect(
+		func(_changed): _presenter.set_palette_item_scale(palette_item_scale_h_slider.value)
+	)
+	palette_item_scale_h_slider.value_changed.connect(
+		func(value): palette_item_scale_value.text = str(value)
+	)
 	trasform_step_spin_box.value_changed.connect(_presenter.set_default_transform_step)
 	rotation_step_spin_box.value_changed.connect(_presenter.set_rotation_step)
 
@@ -101,6 +109,8 @@ func _show_settings(setting: AssetPlacerSettings):
 
 	slider_value.text = str(setting.ui_scale)
 	ui_scale_h_slider.set_value_no_signal(setting.ui_scale)
+	palette_item_scale_value.text = str(setting.palette_item_scale)
+	palette_item_scale_h_slider.set_value_no_signal(setting.palette_item_scale)
 	trasform_step_spin_box.set_value_no_signal(setting.transform_step)
 	rotation_step_spin_box.set_value_no_signal(setting.rotation_step)
 

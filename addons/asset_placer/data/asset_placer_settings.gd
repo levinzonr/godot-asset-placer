@@ -27,6 +27,7 @@ var transform_step: float
 var rotation_step: float
 var bindings: Dictionary
 var ui_scale: float
+var palette_item_scale: float
 var update_channel: UpdateChannel
 var binding_positive_transform: APInputOption:
 	get():
@@ -67,6 +68,7 @@ static func default() -> AssetPlacerSettings:
 	settings.transform_step = 0.1
 	settings.rotation_step = 5
 	settings.ui_scale = 1.0
+	settings.palette_item_scale = 1.0
 	settings.update_channel = UpdateChannel.Stable
 
 	return settings

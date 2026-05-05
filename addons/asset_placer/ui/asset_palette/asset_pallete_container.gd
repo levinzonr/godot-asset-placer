@@ -4,6 +4,8 @@ extends HBoxContainer
 
 signal on_delete_pallete_click
 
+const PALETTE_BUTTON_BASE := Vector2(64, 64)
+
 var _item_resource = preload("res://addons/asset_placer/ui/asset_palette/asset_pallete_item.tscn")
 var _pallete_index: int = 0
 @onready var presenter := AssetPalettePresenter.new()
@@ -13,7 +15,14 @@ func _ready() -> void:
 	add_theme_constant_override("separation", 12)
 	alignment = AlignmentMode.ALIGNMENT_CENTER
 	presenter.palette_change.connect(_show_pallete_items)
+	AssetPlacerSettingsRepository.instance.settings_changed.connect(_on_placer_settings_changed)
 	presenter.ready(_pallete_index)
+
+
+func _exit_tree() -> void:
+	var repo := AssetPlacerSettingsRepository.instance
+	if repo.settings_changed.is_connected(_on_placer_settings_changed):
+		repo.settings_changed.disconnect(_on_placer_settings_changed)
 
 
 func get_pallete_index() -> int:
@@ -28,6 +37,7 @@ func _show_pallete_items(pallete_items: Array[AssetResource]) -> void:
 		var item = pallete_items[index]
 		var item_instance = _item_resource.instantiate() as AssetPalletItem
 		add_child(item_instance)
+		item_instance.button_size = _palette_item_button_size()
 		item_instance.set_index(index)
 		item_instance.set_asset(item)
 		item_instance.on_add_asset_click.connect(
@@ -39,6 +49,19 @@ func _show_pallete_items(pallete_items: Array[AssetResource]) -> void:
 		item_instance.on_clear_asset_click.connect(func(): presenter.remove_slot(index))
 
 	add_delete_button()
+
+
+func _palette_item_button_size() -> Vector2:
+	return (
+		PALETTE_BUTTON_BASE
+		* AssetPlacerSettingsRepository.instance.get_settings().palette_item_scale
+	)
+
+
+func _on_placer_settings_changed(_settings: AssetPlacerSettings) -> void:
+	for child in get_children():
+		if child is AssetPalletItem:
+			(child as AssetPalletItem).button_size = _palette_item_button_size()
 
 
 func _configure_shortcut_key(item: AssetResource, shortcut_key: int) -> void:
