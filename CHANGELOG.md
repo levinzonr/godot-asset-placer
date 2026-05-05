@@ -1,6 +1,6 @@
 # Godot Asset Placer Changelog
 
-## Unreleased
+## 1.5.0-beta2
 
 ### ✨ New Features
 
