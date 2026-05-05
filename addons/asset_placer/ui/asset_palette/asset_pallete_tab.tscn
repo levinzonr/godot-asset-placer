@@ -48,7 +48,7 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=836253893]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 32
 text = "Asset Palletes"
 
 [node name="Label2" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer" unique_id=1946273440]

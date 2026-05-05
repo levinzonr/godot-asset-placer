@@ -143,16 +143,11 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 alignment = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=659313167]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = -16
-
-[node name="AssetsLabel" type="Label" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=1180368063]
+[node name="AssetsLabel" type="Label" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1180368063]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
 text = "Assets"
 text_overrun_behavior = 1
 
@@ -163,7 +158,7 @@ theme_override_constants/separation = 8
 [node name="HBoxContainerTop" type="HBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=263426647]
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 12
 alignment = 2
 
 [node name="HBoxContainerBot" type="HBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=448990933]
