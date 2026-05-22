@@ -22,6 +22,7 @@ var _last_palette_assets: Array[AssetResource] = []
 @onready var asset_pallete: PanelContainer = %AssetPallete
 @onready var asset_pallete_presenter := AssetPalettePresenter.new()
 @onready var asset_pallete_container: HBoxContainer = %PalleteContainer
+@onready var active_palette_label: Label = %ActivePaletteLabel
 @onready var asset_pallete_resource = preload(
 	"res://addons/asset_placer/ui/asset_palette/asset_pallete_item.tscn"
 )
@@ -55,7 +56,10 @@ func _ready():
 		func():
 			var index = AssetPaletteSessionState.instance.get_active_palette_index()
 			asset_pallete_presenter.set_palette_index(index)
+			_update_active_palette_label(index)
 	)
+	if AssetPaletteSessionState.instance:
+		_update_active_palette_label(AssetPaletteSessionState.instance.get_active_palette_index())
 
 
 func show_asset_pallete(assets: Array[AssetResource]):
@@ -77,6 +81,10 @@ func show_asset_pallete(assets: Array[AssetResource]):
 			asset_instance.set_asset(asset)
 			asset_instance.configurable = false
 			asset_instance.set_index(index)
+
+
+func _update_active_palette_label(index: int) -> void:
+	active_palette_label.text = "Palette #%d" % [index + 1]
 
 
 func set_mode(mode: AssetPlacerPresenter.TransformMode):
