@@ -39,7 +39,7 @@ current_tab = 0
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Pallete" parent="Panel/TabContainer" unique_id=2139977870 instance=ExtResource("3_ofgv0")]
+[node name="Palette" parent="Panel/TabContainer" unique_id=2139977870 instance=ExtResource("3_ofgv0")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
