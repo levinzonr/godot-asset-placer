@@ -81,9 +81,6 @@ func add_delete_button():
 	delete_button.expand_icon = false
 	delete_button.size = Vector2(24, 24)
 	delete_button.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-	if _pallete_index == 0:
-		delete_button.disabled = true
-		delete_button.modulate.a = 0
 	delete_button.pressed.connect(func(): on_delete_pallete_click.emit())
 	add_child(delete_button)
 
