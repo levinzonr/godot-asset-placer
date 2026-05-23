@@ -376,9 +376,9 @@ label = "Toggle Z Axis"
 [node name="KeybindingOptionPalleteNext" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=898397609 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
-label = "Next Pallete"
+label = "Palette Next"
 
 [node name="KeybindingOptionPalletePrevious" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=503667236 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
-label = "Previous Pallete"
+label = "Palette Previous"

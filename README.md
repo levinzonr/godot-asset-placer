@@ -91,11 +91,11 @@ To configure rules, click the "Rules" button on any folder in the Folders tab to
 
 ### Asset palettes
 
-Use the **Pallete** tab in the Asset Placer dock to define quick-access rows of assets. Each palette offers ten numbered slots; use **New Pallete** to add another palette beyond the first. Assign an asset to a slot from the picker, or clear a slot when you no longer need it. The first palette cannot be removed.
+Use the **Palette** tab in the Asset Placer dock to define quick-access rows of assets. Each palette offers ten numbered slots; use **New Palette** to add another palette beyond the first. Assign an asset to a slot from the picker, or clear a slot when you no longer need it. You can delete any palette; deleting the last one clears its slots.
 
-Palette data is saved with your Asset Placer configuration. Which palette is **active** during an editing session can change as you work: while more than one palette exists, the default shortcuts switch to the next or previous palette (`Tab` / `Shift+Tab`). Cycling skips palettes that have no asset assigned in any slot.
+Palette data is saved with your Asset Placer configuration. Which palette is **active** during an editing session can change as you work: while more than one palette exists, the default shortcuts switch to the next or previous palette (`Tab` / `Shift+Tab`). Cycling skips palettes that have no asset assigned in any slot. While placing assets, the viewport overlay shows which palette is active (for example, **Palette #2**).
 
-After you enter placement mode, you can press **1** through **9**, then **0**, to select the asset bound to that numbered slot to immdediatly select that asset without going through the asset pallete
+After you enter placement mode, you can press **1** through **9**, then **0**, to select the asset bound to that numbered slot and immediately pick that asset without going through the asset palette.
 
 ### Placing Assets
 
@@ -249,6 +249,7 @@ Version 1.2.0 introduced a dedicated Settings Panel for comprehensive customizat
   - Rotation Step (default: 5 degrees)
   - Scale/Translate Step (default: 0.1 units)
 - **Thumbnail UI Scale** - Adjust the size of thumbnails in the Assets Panel (default: 1.0)
+- **Asset Palette Item Scale** - Adjust the size of palette buttons in both the Palette tab and viewport overlay (default: 1.0)
 - **Plane Mode Toggle** - Configure plane placement mode behavior
 - **Asset Library Path** - Set a custom location for the `asset_library.json` file, useful for version control and team sharing
 - **Update channel** - Choose Stable, Beta, or Alpha so in-editor update checks match the release tier you follow. More detail: [development lifecycle](https://levinzonr.github.io/godot-asset-placer/development-lifecycle/)

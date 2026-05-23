@@ -46,6 +46,10 @@ func remove_palette(palette_index: int) -> void:
 	_ensure_nonempty()
 	if palette_index < 0 or palette_index >= _palettes.size():
 		return
+	if _palettes.size() == 1:
+		_palettes[0] = _make_empty_slots()
+		_notify_palette_changed()
+		return
 	_palettes.remove_at(palette_index)
 	_notify_palette_changed()
 
@@ -63,7 +67,7 @@ func get_palette(palette_index: int) -> PackedStringArray:
 	return _palettes[palette_index].duplicate()
 
 
-## Assigns asset_id to slot on palette palette_index; removes that id from every other slot (all palettes).
+## Assigns asset_id to slot on palette palette_index; keeps uniqueness only within that palette.
 func set_slot_asset(palette_index: int, slot_index: int, asset_id: String) -> void:
 	_ensure_nonempty()
 	if not _is_valid_slot_index(slot_index):
@@ -75,7 +79,7 @@ func set_slot_asset(palette_index: int, slot_index: int, asset_id: String) -> vo
 	if asset_id.is_empty():
 		clear_slot(palette_index, slot_index)
 		return
-	_remove_asset_id_from_all_palettes(asset_id)
+	_remove_asset_id_from_palette(palette_index, asset_id)
 	var slots: PackedStringArray = _palettes[palette_index]
 	slots[slot_index] = asset_id
 	_notify_palette_changed()
@@ -132,14 +136,15 @@ func get_asset_id_for_palette_slot(palette_index: int, slot_index: int) -> Strin
 	return _palettes[palette_index][slot_index]
 
 
-func _remove_asset_id_from_all_palettes(asset_id: String) -> void:
+func _remove_asset_id_from_palette(palette_index: int, asset_id: String) -> void:
 	if asset_id.is_empty():
 		return
-	for palette_index in _palettes.size():
-		var slots: PackedStringArray = _palettes[palette_index]
-		for slot_index in SLOT_COUNT:
-			if slots[slot_index] == asset_id:
-				slots[slot_index] = ""
+	if palette_index < 0 or palette_index >= _palettes.size():
+		return
+	var slots: PackedStringArray = _palettes[palette_index]
+	for slot_index in SLOT_COUNT:
+		if slots[slot_index] == asset_id:
+			slots[slot_index] = ""
 
 
 static func _make_empty_slots() -> PackedStringArray:

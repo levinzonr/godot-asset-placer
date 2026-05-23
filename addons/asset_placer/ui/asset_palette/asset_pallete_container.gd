@@ -40,15 +40,16 @@ func _show_pallete_items(pallete_items: Array[AssetResource]) -> void:
 		item_instance.button_size = _palette_item_button_size()
 		item_instance.set_index(index)
 		item_instance.set_asset(item)
-		item_instance.on_add_asset_click.connect(
-			func():
-				AssetPickerDialog.open(
-					func(asset: AssetResource): _configure_shortcut_key(asset, index)
-				)
-		)
+		item_instance.on_add_asset_click.connect(_handle_asset_click.bind(index))
 		item_instance.on_clear_asset_click.connect(func(): presenter.remove_slot(index))
 
 	add_delete_button()
+
+
+func _handle_asset_click(item_index: int) -> void:
+	AssetPickerDialog.open_for_palette(
+		func(asset: AssetResource): _configure_shortcut_key(asset, item_index), _pallete_index
+	)
 
 
 func _palette_item_button_size() -> Vector2:
@@ -70,8 +71,8 @@ func _configure_shortcut_key(item: AssetResource, shortcut_key: int) -> void:
 
 func add_pallete_label():
 	var label = Label.new()
-	label.text = "Pallete #" + str(_pallete_index + 1)
-	label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	label.text = "Palette #" + str(_pallete_index + 1)
+	label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	add_child(label)
 
 
@@ -80,10 +81,7 @@ func add_delete_button():
 	delete_button.icon = EditorIconTexture2D.new("Remove")
 	delete_button.expand_icon = false
 	delete_button.size = Vector2(24, 24)
-	delete_button.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-	if _pallete_index == 0:
-		delete_button.disabled = true
-		delete_button.modulate.a = 0
+	delete_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	delete_button.pressed.connect(func(): on_delete_pallete_click.emit())
 	add_child(delete_button)
 
