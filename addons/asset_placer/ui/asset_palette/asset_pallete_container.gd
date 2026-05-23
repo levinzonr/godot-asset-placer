@@ -70,7 +70,7 @@ func _configure_shortcut_key(item: AssetResource, shortcut_key: int) -> void:
 
 func add_pallete_label():
 	var label = Label.new()
-	label.text = "Pallete #" + str(_pallete_index + 1)
+	label.text = "Palette #" + str(_pallete_index + 1)
 	label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	add_child(label)
 

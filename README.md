@@ -91,9 +91,9 @@ To configure rules, click the "Rules" button on any folder in the Folders tab to
 
 ### Asset palettes
 
-Use the **Palette** tab in the Asset Placer dock to define quick-access rows of assets. Each palette offers ten numbered slots; use **New Palette** to add another palette beyond the first. Assign an asset to a slot from the picker, or clear a slot when you no longer need it. The first palette cannot be removed.
+Use the **Palette** tab in the Asset Placer dock to define quick-access rows of assets. Each palette offers ten numbered slots; use **New Palette** to add another palette beyond the first. Assign an asset to a slot from the picker, or clear a slot when you no longer need it. You can delete any palette; deleting the last one clears its slots.
 
-Palette data is saved with your Asset Placer configuration. Which palette is **active** during an editing session can change as you work: while more than one palette exists, the default shortcuts switch to the next or previous palette (`Tab` / `Shift+Tab`). Cycling skips palettes that have no asset assigned in any slot.
+Palette data is saved with your Asset Placer configuration. Which palette is **active** during an editing session can change as you work: while more than one palette exists, the default shortcuts switch to the next or previous palette (`Tab` / `Shift+Tab`). Cycling skips palettes that have no asset assigned in any slot. While placing assets, the viewport overlay shows which palette is active (for example, **Palette #2**).
 
 After you enter placement mode, you can press **1** through **9**, then **0**, to select the asset bound to that numbered slot and immediately pick that asset without going through the asset palette.
 
