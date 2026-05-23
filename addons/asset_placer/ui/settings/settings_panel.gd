@@ -28,6 +28,7 @@ var _thumbnail_regeneration_dialog: ThumbnailRegenerationDialog
 @onready var kb_scale = %KeybindingOptionScale
 @onready var kb_translate = %KeybindingOptionTranslate
 @onready var kb_grid_snap = %KeybindingOptionGridSnap
+@onready var kb_toggle_plugin_active = %KeybindingOptionTogglePluginActive
 @onready var kb_in_place_transform = %KeybindingOptionInPlaceTransform
 @onready var kb_positive_transform = %KeybindingOptionPositiveTransform
 @onready var kb_negative_transform = %KeybindingOptionNegativeTransform
@@ -80,6 +81,7 @@ func _ready():
 	kb_scale.keybind_changed.connect(set_binding.bind(bindings.Scale))
 	kb_translate.keybind_changed.connect(set_binding.bind(bindings.Translate))
 	kb_grid_snap.keybind_changed.connect(set_binding.bind(bindings.GridSnapping))
+	kb_toggle_plugin_active.keybind_changed.connect(set_binding.bind(bindings.TogglePluginActive))
 
 	kb_positive_transform.keybind_changed.connect(set_binding.bind(bindings.TransformPositive))
 	kb_negative_transform.keybind_changed.connect(set_binding.bind(bindings.TransformNegative))
@@ -121,6 +123,7 @@ func _show_settings(setting: AssetPlacerSettings):
 	kb_translate.set_keybind(setting.bindings[bindings.Translate])
 	kb_scale.set_keybind(setting.bindings[bindings.Scale])
 	kb_grid_snap.set_keybind(setting.bindings[bindings.GridSnapping])
+	kb_toggle_plugin_active.set_keybind(setting.bindings[bindings.TogglePluginActive])
 	kb_in_place_transform.set_keybind(setting.bindings[bindings.InPlaceTransform])
 	kb_negative_transform.set_keybind(setting.bindings[bindings.TransformNegative])
 	kb_positive_transform.set_keybind(setting.bindings[bindings.TransformPositive])

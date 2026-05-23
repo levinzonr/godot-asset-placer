@@ -47,9 +47,7 @@ func _show_pallete_items(pallete_items: Array[AssetResource]) -> void:
 
 
 func _handle_asset_click(item_index: int) -> void:
-	AssetPickerDialog.open_for_palette(
-		func(asset: AssetResource): _configure_shortcut_key(asset, item_index), _pallete_index
-	)
+	AssetPickerDialog.open(func(asset: AssetResource): _configure_shortcut_key(asset, item_index))
 
 
 func _palette_item_button_size() -> Vector2:

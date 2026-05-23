@@ -218,7 +218,7 @@ func _react_to_reimorted_files(_files: PackedStringArray):
 func _on_dock_visibility_changed():
 	if not _asset_placer_window.visible:
 		_presenter.toggle_transformation_mode(AssetPlacerPresenter.TransformMode.None)
-		_presenter.clear_selection()
+		_deactivate_plugin()
 
 
 func start_placement(asset: AssetResource):
@@ -236,8 +236,11 @@ func _handle_in_place_transform():
 	if _presenter.is_node_transform_mode():
 		_presenter.end_node_transform_mode()
 		_asset_placer.stop_placement()
-	# Check if a Node3D is selected and we're not already in asset placement mode
-	elif AssetPlacerContextUtil.is_current_selection_node3d() and not _presenter.plugin_is_active():
+	# Start in-place transform when a Node3D is selected and no placement asset is active.
+	elif (
+		AssetPlacerContextUtil.is_current_selection_node3d()
+		and not _presenter.has_placement_asset_selected()
+	):
 		var selection = EditorInterface.get_selection()
 		var selected_nodes = selection.get_selected_nodes()
 		if selected_nodes.size() == 1 and selected_nodes[0] is Node3D:
@@ -245,12 +248,40 @@ func _handle_in_place_transform():
 			_asset_placer.start_node_transform(selected_nodes[0], _presenter.placement_mode)
 	# If we're in asset placement mode, Tab should also exit it
 	elif _presenter.plugin_is_active() and not _presenter.is_node_transform_mode():
-		_presenter.clear_selection()
-		_asset_placer.stop_placement()
+		_deactivate_plugin()
+
+
+func _deactivate_plugin() -> void:
+	if _presenter.is_node_transform_mode():
+		_presenter.end_node_transform_mode()
+	_presenter.clear_selection()
+	_presenter.set_active(false)
+	_asset_placer.stop_placement()
+
+
+func _show_asset_placer_dock() -> void:
+	if ClassDB.class_exists(&"EditorDock") and is_instance_valid(_dock):
+		_dock.call("make_visible")
+	else:
+		make_bottom_panel_item_visible(_asset_placer_window)
+
+
+func _toggle_plugin_active() -> void:
+	if _presenter.plugin_is_active():
+		_deactivate_plugin()
+	else:
+		EditorInterface.set_main_screen_editor("3D")
+		AssetPlacerContextUtil.select_context()
+		_presenter.set_active(true)
+		_show_asset_placer_dock()
 
 
 # gdlint: disable=max-returns
 func _forward_3d_gui_input(viewport_camera, event):
+	if current_settings.bindings[AssetPlacerSettings.Bindings.TogglePluginActive].is_pressed(event):
+		_toggle_plugin_active()
+		return _handled()
+
 	if current_settings.bindings[AssetPlacerSettings.Bindings.InPlaceTransform].is_pressed(event):
 		_handle_in_place_transform()
 		return _handled()
@@ -276,8 +307,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 			return _handled()
 
 	if (
-		_presenter.has_placement_asset_selected()
-		and not _presenter.is_node_transform_mode()
+		not _presenter.is_node_transform_mode()
 		and event is InputEventKey
 		and event.pressed
 		and not event.echo

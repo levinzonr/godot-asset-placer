@@ -32,6 +32,7 @@ var _selected_asset: AssetResource
 var _parent: NodePath = NodePath("")
 var _last_plane_options := PlaneOptions.new(Vector3.UP, Vector3.ZERO)
 var _selected_node: Node3D
+var _active: bool = false
 
 
 func _init():
@@ -46,10 +47,19 @@ func ready():
 
 
 func plugin_is_active() -> bool:
-	if _selected_asset != null or _selected_node != null:
-		return true
-	else:
-		return false
+	return _active
+
+
+func set_active(value: bool) -> void:
+	if _active == value:
+		return
+	_active = value
+	placer_active.emit(_active)
+
+
+func toggle_active() -> bool:
+	set_active(not _active)
+	return _active
 
 
 func toggle_plane_placement():
@@ -280,41 +290,43 @@ func cancel():
 		toggle_transformation_mode(TransformMode.None)
 	elif _selected_node != null:
 		end_node_transform_mode()
-	else:
+	elif _selected_asset != null:
 		clear_selection()
+	else:
+		set_active(false)
 
 
 func clear_selection():
+	if _selected_asset == null:
+		return
 	_selected_asset = null
 	asset_deselected.emit()
-	placer_active.emit(false)
 
 
 func toggle_asset(asset: AssetResource):
 	if asset == _selected_asset:
-		_selected_asset = null
-		asset_deselected.emit()
-		placer_active.emit(false)
+		clear_selection()
 	else:
 		_selected_asset = asset
+		set_active(true)
 		asset_selected.emit(asset)
-		placer_active.emit(true)
 
 
 func select_asset(asset: AssetResource):
 	_selected_asset = asset
+	set_active(true)
 	asset_selected.emit(asset)
-	placer_active.emit(true)
 
 
 func start_node_transform_mode(node: Node3D):
 	_selected_node = node
-	placer_active.emit(true)
+	set_active(true)
 
 
 func end_node_transform_mode():
 	_selected_node = null
-	placer_active.emit(false)
+	if _selected_asset == null:
+		set_active(false)
 
 
 func on_asset_placed():

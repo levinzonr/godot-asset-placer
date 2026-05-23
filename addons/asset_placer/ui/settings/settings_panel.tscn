@@ -252,7 +252,7 @@ text = "Asset Palette Item Scale"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "1.0"
+text = "1.1"
 horizontal_alignment = 2
 
 [node name="PaletteItemScaleHSlider" type="HSlider" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainerPaletteItemScale" unique_id=1293124068]
@@ -263,7 +263,7 @@ size_flags_vertical = 1
 min_value = 0.2
 max_value = 2.0
 step = 0.1
-value = 1.0
+value = 1.1
 ticks_position = 3
 
 [node name="Spacing" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=653626810]
@@ -316,6 +316,11 @@ text = "Key Bindings"
 [node name="KeyBindingsOptions" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings" unique_id=577854951]
 layout_mode = 2
 script = ExtResource("3_l6bix")
+
+[node name="KeybindingOptionTogglePluginActive" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=-447676245 instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "Toggle Asset Placer"
 
 [node name="KeybindingOptionRotate" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=1033935065 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
