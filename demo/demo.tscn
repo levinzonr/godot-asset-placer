@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dk831mrcik0rw" path="res://demo/assets/JaggedRock3.glb" id="12_xm42s"]
 [ext_resource type="PackedScene" uid="uid://1hx47t5c3wpf" path="res://demo/assets/rock.glb" id="13_fy1p0"]
 [ext_resource type="PackedScene" uid="uid://ukx3omtlce8n" path="res://demo/assets/subfolder/another_cube.tscn" id="14_svvho"]
+[ext_resource type="PackedScene" uid="uid://b2htw2xvffvye" path="res://demo/assets/test/earth_impact.glb" id="15_fy1p0"]
 [ext_resource type="PackedScene" uid="uid://bc33e25gdc71n" path="res://demo/assets/tree.glb" id="16_svvho"]
 [ext_resource type="PackedScene" uid="uid://dqpwyuw1xhymj" path="res://demo/assets/JaggedRock1.glb" id="17_8rfdr"]
 
@@ -716,20 +717,44 @@ metadata/asset_placer_res_id = "uid://ukx3omtlce8n"
 transform = Transform3D(-0.92341965, 0, 0.38379183, 0, 1, 0, -0.3837919, 0, -0.9234198, 18.277184, 2.4021308, 23.183548)
 metadata/asset_placer_res_id = "uid://ch3qf4aflehel"
 
-[node name="Asa (5)" type="Node3D" parent="." unique_id=1241438533 instance=ExtResource("7_onvmd")]
+[node name="Asa (5)" parent="." unique_id=1241438533 instance=ExtResource("7_onvmd")]
 transform = Transform3D(-0.006267431, 0, 0.99998033, 0, 1, 0, -0.99998045, 0, -0.006267432, -2.2058365, 0.47780976, -2.901186)
 metadata/asset_placer_res_id = "uid://ch3qf4aflehel"
 
-[node name="Asa (6)" type="Node3D" parent="." unique_id=1920100247 instance=ExtResource("7_onvmd")]
+[node name="Asa (6)" parent="." unique_id=1920100247 instance=ExtResource("7_onvmd")]
 transform = Transform3D(-0.43559942, 0, -0.90014064, 0, 1, 0, 0.90014076, 0, -0.43559948, 4.4234066, 0.4778102, -0.1359234)
 metadata/asset_placer_res_id = "uid://ch3qf4aflehel"
 
-[node name="Asa (7)" type="Node3D" parent="." unique_id=570998450 instance=ExtResource("7_onvmd")]
+[node name="Asa (7)" parent="." unique_id=570998450 instance=ExtResource("7_onvmd")]
 transform = Transform3D(0.95983195, 0, -0.28057545, 0, 1, 0, 0.28057548, 0, 0.9598321, 1.3142308, 0.4778102, 2.2658443)
 metadata/asset_placer_res_id = "uid://ch3qf4aflehel"
 
-[node name="Asa (8)" type="Node3D" parent="." unique_id=1230643200 instance=ExtResource("7_onvmd")]
+[node name="Asa (8)" parent="." unique_id=1230643200 instance=ExtResource("7_onvmd")]
 transform = Transform3D(-0.6315333, 0, 0.77534866, 0, 1, 0, -0.7753488, 0, -0.6315334, -2.3459232, 0.4778102, 0.8609759)
 metadata/asset_placer_res_id = "uid://ch3qf4aflehel"
+
+[node name="AnotherCube (4)" type="Node3D" parent="." unique_id=946517389 instance=ExtResource("14_svvho")]
+transform = Transform3D(0.3332895, 0, 0.94282454, 0, 1, 0, -0.94282466, 0, 0.33328953, -2.7503672, 0.46870232, -10.038204)
+metadata/asset_placer_res_id = "uid://ukx3omtlce8n"
+
+[node name="AnotherCube (5)" type="Node3D" parent="." unique_id=1646669624 instance=ExtResource("14_svvho")]
+transform = Transform3D(-0.46930683, 0, -0.88303524, 0, 1, 0, 0.88303536, 0, -0.4693069, 5.055582, 0.46870232, -17.622244)
+metadata/asset_placer_res_id = "uid://ukx3omtlce8n"
+
+[node name="AnotherCube (6)" type="Node3D" parent="." unique_id=564011541 instance=ExtResource("14_svvho")]
+transform = Transform3D(0.15846595, 0, -0.9873645, 0, 1, 0, 0.9873646, 0, 0.15846597, 0, 0, 0)
+metadata/asset_placer_res_id = "uid://ukx3omtlce8n"
+
+[node name="AnotherCube (7)" type="Node3D" parent="." unique_id=2125496683 instance=ExtResource("14_svvho")]
+transform = Transform3D(-0.11559015, 0, 0.99329704, 0, 1, 0, -0.99329716, 0, -0.11559016, 0, 0, 0)
+metadata/asset_placer_res_id = "uid://ukx3omtlce8n"
+
+[node name="earth_impact" type="Node3D" parent="." unique_id=1336911434 instance=ExtResource("15_fy1p0")]
+transform = Transform3D(0.4619668, 0, 0.8868972, 0, 1, 0, -0.8868973, 0, 0.46196687, 10.584131, 0.46870232, -20.517653)
+metadata/asset_placer_res_id = "uid://b2htw2xvffvye"
+
+[node name="JaggedRock12 (1)" type="Node3D" parent="." unique_id=2031155687 instance=ExtResource("17_8rfdr")]
+transform = Transform3D(0.7922349, 0, 0.61021626, 0, 1, 0, -0.6102163, 0, 0.792235, -19.576445, 0.46870232, -15.784774)
+metadata/asset_placer_res_id = "uid://dqpwyuw1xhymj"
 
 [editable path="ForestRock12"]

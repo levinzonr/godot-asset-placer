@@ -71,7 +71,7 @@ func _configure_shortcut_key(item: AssetResource, shortcut_key: int) -> void:
 func add_pallete_label():
 	var label = Label.new()
 	label.text = "Palette #" + str(_pallete_index + 1)
-	label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	add_child(label)
 
 
@@ -80,7 +80,7 @@ func add_delete_button():
 	delete_button.icon = EditorIconTexture2D.new("Remove")
 	delete_button.expand_icon = false
 	delete_button.size = Vector2(24, 24)
-	delete_button.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	delete_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	delete_button.pressed.connect(func(): on_delete_pallete_click.emit())
 	add_child(delete_button)
 
