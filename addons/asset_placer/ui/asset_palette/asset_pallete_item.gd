@@ -56,6 +56,7 @@ func _apply_button_geometry_and_state() -> void:
 func _update_button_icon() -> void:
 	if not is_node_ready():
 		return
+	button.tooltip_text = _asset.name
 	if _asset != null and _asset.has_resource():
 		button.icon = AssetThumbnailTexture2D.new(_asset.get_resource())
 	elif configurable:
