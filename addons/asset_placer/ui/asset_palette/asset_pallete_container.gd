@@ -51,6 +51,7 @@ func _handle_asset_click(item_index: int) -> void:
 		func(asset: AssetResource): _configure_shortcut_key(asset, item_index), _pallete_index
 	)
 
+
 func _palette_item_button_size() -> Vector2:
 	return (
 		PALETTE_BUTTON_BASE

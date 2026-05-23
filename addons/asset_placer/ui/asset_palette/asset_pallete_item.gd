@@ -68,5 +68,9 @@ func _update_button_icon() -> void:
 func _on_button_gui_input(event: InputEvent) -> void:
 	if not configurable or _asset == null:
 		return
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+	if (
+		event is InputEventMouseButton
+		and event.pressed
+		and event.button_index == MOUSE_BUTTON_RIGHT
+	):
 		on_clear_asset_click.emit()
