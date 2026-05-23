@@ -40,16 +40,16 @@ func _show_pallete_items(pallete_items: Array[AssetResource]) -> void:
 		item_instance.button_size = _palette_item_button_size()
 		item_instance.set_index(index)
 		item_instance.set_asset(item)
-		item_instance.on_add_asset_click.connect(
-			func():
-				AssetPickerDialog.open(
-					func(asset: AssetResource): _configure_shortcut_key(asset, index)
-				)
-		)
+		item_instance.on_add_asset_click.connect(_handle_asset_click.bind(index))
 		item_instance.on_clear_asset_click.connect(func(): presenter.remove_slot(index))
 
 	add_delete_button()
 
+
+func _handle_asset_click(item_index: int) -> void:
+	AssetPickerDialog.open_for_palette(
+		func(asset: AssetResource): _configure_shortcut_key(asset, item_index), _pallete_index
+	)
 
 func _palette_item_button_size() -> Vector2:
 	return (
