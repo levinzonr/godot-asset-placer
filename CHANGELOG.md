@@ -1,5 +1,24 @@
 # Godot Asset Placer Changelog
 
+## 1.5.0-beta3
+
+Pre-release beta for the upcoming **1.5.0** line.
+
+### ✨ Changes
+
+- **#104** (**#105**): Asset palette improvements:
+  - The same asset can appear in multiple palettes (slot uniqueness is per palette only)
+  - Deleting the last palette clears its slots instead of blocking removal
+  - Viewport overlay shows which palette is active (for example, **Palette #2**) while placing assets
+  - Palette slot buttons show the assigned asset name as a tooltip
+- Added **Toggle Asset Placer** keybinding (default: `Shift+A`) to turn placement mode on or off from the 3D viewport without picking an asset from the library
+
+### 🐛 Fixed
+
+- Plugin active state is tracked explicitly when hiding the dock, canceling placement, or exiting in-place transform
+- In-place transform (`Shift+E`) no longer conflicts with asset placement selection state
+- Viewport overlay padding and layout for palette controls
+
 ## 1.5.0-beta2
 
 ### ✨ New Features
