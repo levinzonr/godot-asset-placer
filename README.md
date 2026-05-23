@@ -90,13 +90,36 @@ Folder Rules allow you to automate actions when syncing asset folders. Rules are
 
 To configure rules, click the "Rules" button on any folder in the Folders tab to expand the rules panel.
 
-### Asset palettes
+### Asset Palettes
 
-Use the **Palette** tab in the Asset Placer dock to define quick-access rows of assets. Each palette offers ten numbered slots; use **New Palette** to add another palette beyond the first. Assign an asset to a slot from the picker, or clear a slot when you no longer need it. The same asset may appear in more than one palette. You can delete any palette; deleting the last one clears its slots.
+> Available since version **1.5.0-alpha4**. Palette overlay label, per-palette asset slots, and last-palette deletion behavior were refined in **1.5.0-beta3**.
 
-Palette data is saved with your Asset Placer configuration. Which palette is **active** during an editing session can change as you work: while more than one palette exists, the default shortcuts switch to the next or previous palette (`Tab` / `Shift+Tab`). Cycling skips palettes that have no asset assigned in any slot. While placing assets, the viewport overlay shows which palette is active (for example, **Palette #2**).
+Asset Palettes give you quick-access rows of your most-used assets. Configure them in the dock, then switch and place from the 3D viewport without returning to the asset library.
 
-After you enter placement mode, you can press **1** through **9**, then **0**, to select the asset bound to that numbered slot and immediately pick that asset without going through the asset palette.
+#### Configuration
+
+Open the **Palette** tab in the Asset Placer dock to define palettes and assign assets to numbered slots.
+
+![](docs/assets/palette_panel.png)
+
+- Each palette has **10 numbered slots** (keys **1**–**9**, then **0**)
+- Click a slot to pick an asset from the library; **right-click** a filled slot to clear it
+- Use **New Palette** to add another row; the same asset may appear in more than one palette
+- Delete a palette with the trash control; deleting the last palette **clears its slots** instead of removing the row
+- Adjust slot size with **Asset Palette Item Scale** in [Settings](#settings-panel) (default: 1.0)
+
+Palette data is saved with your Asset Placer configuration.
+
+#### Viewport overlay
+
+While placement mode is active, the viewport overlay shows the active palette and its slot shortcuts so you can swap assets without opening the dock.
+
+![](docs/assets/overlay.png)
+
+- The header shows which palette is active (for example, **Palette #1**)
+- Press **1** through **9**, then **0**, to select the asset in that slot
+- When you have more than one palette, cycle with **Tab** / **Shift+Tab** (configurable in Settings); cycling skips palettes with no assets assigned
+- Use **Toggle Asset Placer** (default: **Shift+A**) to turn placement mode on or off from the viewport
 
 ### Placing Assets
 
