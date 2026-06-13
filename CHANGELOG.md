@@ -1,5 +1,57 @@
 # Godot Asset Placer Changelog
 
+## 1.5.0
+
+Version **1.5.0** is a feature release focused on faster asset workflows: asset palettes, library sorting, custom thumbnails, and more flexible placement and configuration options.
+
+### ✨ New Features
+
+#### Asset Palettes
+
+- **#92** (**#80**): Asset palettes for quick-access placement — configure numbered slots (**1**–**9**, then **0**) in the Palette tab and select assets from the viewport overlay
+- Create multiple palettes and cycle between them with **Tab** / **Shift+Tab** (configurable in Settings)
+- **#104** (**#105**): Palette improvements:
+  - The same asset can appear in multiple palettes (slot uniqueness is per palette only)
+  - Deleting the last palette clears its slots instead of blocking removal
+  - Viewport overlay shows which palette is active (for example, **Palette #2**) while placing assets
+  - Palette slot buttons show the assigned asset name as a tooltip
+- **Asset Palette Item Scale** setting to adjust palette button size in the dock and viewport overlay
+
+#### Asset Library
+
+- **#76**: Asset library data handling rework by @Sr3qt:
+  - Centralized load/save and access through **AssetLibraryManager**; **AssetLibrary** is a focused data API (get / add / remove)
+  - **AssetLibraryParser** replaces the former data-source type for parsing and serialization
+  - Folder, asset, and collection repositories live on **AssetLibrary**; **AssetResource** decides which file extensions are placeable
+  - **Automatic sync** when tracked folders change (single path via `folders_changed`), with more consistent behavior for **nested folders**
+  - **Folder rules** panel stays expanded when adding new asset folders
+- **#65**: Asset sorting options (Name, Date Added, Last Placed) with ascending/descending toggle in the asset library by @Sr3qt
+- **#101**: Asset library path option in Settings (picker and reset to default), and persist project settings when the library path or preview material changes by @Sr3qt
+
+#### Thumbnails
+
+- **#103** (**#5**): Custom asset thumbnail rendering pipeline with generation coordination and cache storage for more consistent previews
+- Thumbnail regeneration flow in Settings to rebuild generated previews when needed
+
+#### Placement & Workflow
+
+- **#89** (@levinzonr) — **Use selection for parent**: optional checkbox in placement options that resolves the Assets Parent from the current editor selection (new instances are placed as **children** of the selected `Node3D` under the same parent; scene root selection parents under the root). Choosing **Assets Parent** turns this off and uses an explicit node again. Avoids the empty-path `Node not found: ""` error when no manual Assets Parent is chosen.
+- **Toggle Asset Placer** keybinding (default: `Shift+A`) to turn placement mode on or off from the 3D viewport without picking an asset from the library
+
+### 🐛 Fixed
+
+- **#96** Fixed asset placement undo history by @Sr3qt
+- **#91** Fixed About window overflowing when the dock is resized small by @Sr3qt
+- **#100** Fixed editor crash by replacing a problematic lambda with a named function by @Sr3qt
+- **#103** Fixed asset palette cycling behavior
+- Fixed thumbnail rendering showing editor scene content in the background by isolating the render viewport with its own World3D
+- Removed an unused container from the library tab
+- Plugin active state is tracked explicitly when hiding the dock, canceling placement, or exiting in-place transform
+- In-place transform (`Shift+E`) no longer conflicts with asset placement selection state
+- Viewport overlay padding and layout for palette controls
+
+---
+
 ## 1.5.0-beta3
 
 Pre-release beta for the upcoming **1.5.0** line.

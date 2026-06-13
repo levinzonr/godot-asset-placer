@@ -14,8 +14,7 @@ This is Godot Editor plugin that allows for quick asset placement and management
 	<img src="./docs/logo.png" alt="Logo" />
 </p>
 
-> This plugin is still in development and may have bugs or incomplete features. Please report any issues you encounter
-> Any Features and Suggestions are welcome as well
+> Please report any issues you encounter. Feature suggestions are welcome as well.
 
 ## Features
 
@@ -27,11 +26,12 @@ This is Godot Editor plugin that allows for quick asset placement and management
 - **Advanced Placement Options** - Normal alignment and scene bottom alignment controls
 - Organize Assets into collections for quick access and filtering
 - **Auto-Grouping** - Automatically group placed assets under nodes named after their primary collection
-- **Parent from selection** - Optionally derive the Assets Parent from the selected `Node3D` so new assets are placed as siblings (see Options; since **1.5.0-alpha1**)
+- **Parent from selection** - Optionally derive the Assets Parent from the selected `Node3D` so new assets are placed as siblings (see Options)
 - **Folder Rules** - Configure rules to automatically assign collections when syncing asset folders
 - **Asset palettes** - Shortcuts to your most used assets right under your fingertips (same asset can live in multiple palettes; active palette shown in the viewport overlay)
-- **Toggle Asset Placer** - Enable or disable placement mode from the 3D viewport with a configurable shortcut (default: `Shift+A`; since **1.5.0-beta3**)
+- **Toggle Asset Placer** - Enable or disable placement mode from the 3D viewport with a configurable shortcut (default: `Shift+A`)
 - **Asset library sorting** - Sort assets by name, date added, or last placed, with ascending or descending order
+- **Custom thumbnail rendering** - Generated previews with cache storage and a regeneration option in Settings
 - Filter Assets by their name and collection
 - Grid snapping when placing assets
 - Randomize asset Rotation and Scale on placement
@@ -55,12 +55,14 @@ This is Godot Editor plugin that allows for quick asset placement and management
 
 1. There are several ways to install the addon:
 
-- [Godot Asset Library](https://godotengine.org/asset-library/asset/4244) or by searching for "Godot Asset Placer"
-- [GitHub Releases page](https://github.com/levinzonr/godot-asset-placer/releases) and download the latest release
+- [Godot Asset Store](https://store.godotengine.org/asset/levinzonr/godot-asset-placer/) — search for "Godot Asset Placer" on the store
+- [Godot Asset Library](https://godotengine.org/asset-library/asset/4244) (in-editor) or by searching for "Godot Asset Placer"
+- [GitHub Releases page](https://github.com/levinzonr/godot-asset-placer/releases) — download the latest release
 - Manually by cloning the repository
+
   No matter which method you choose, the remaining steps are the same
 
-2. Copy the `addons/asset_placer` folder into your Godot project under the `addons` directory. (Godot Asset Library will do this automatically)
+2. Copy the `addons/asset_placer` folder into your Godot project under the `addons` directory. (The Godot Asset Store and Asset Library will do this automatically.)
 3. Enable the plugin in the Godot Editor by going to `Project` -> `Project Settings` -> `Plugins` and enabling the `Asset Placer` plugin.
 
 ## Usage
@@ -73,7 +75,6 @@ You can folders to sync by either Drag And Droping the folder or  using "Add fol
 
 On the **Assets** tab you can sort the library by name, date added, or last placed, and flip between ascending and descending order using the sort controls.
 
-> Asset sorting is available since version **1.5.0-alpha3**.
 
 ### Folder Rules
 
@@ -91,8 +92,6 @@ Folder Rules allow you to automate actions when syncing asset folders. Rules are
 To configure rules, click the "Rules" button on any folder in the Folders tab to expand the rules panel.
 
 ### Asset Palettes
-
-> Available since version **1.5.0-alpha4**. Palette overlay label, per-palette asset slots, and last-palette deletion behavior were refined in **1.5.0-beta3**.
 
 Asset Palettes give you quick-access rows of your most-used assets. Configure them in the dock, then switch and place from the 3D viewport without returning to the asset library.
 
@@ -150,7 +149,7 @@ To place an asset, follow these steps:
 1. Navigate to the 3D Scene of your choice
 2. Optional: Change Placement Mode. By default, the Plugin uses Surface Collision mode, you can change it within Options Sub View
 3. Open Asset Placer Dock window and select the asset you want to place from the Assets tab
-4. Optional: Set **Assets Parent** under the selected root, or enable **Use selection for parent** (since **1.5.0-alpha1**) so the parent is taken from the current `Node3D` selection (sibling placement). Picking **Assets Parent** disables selection-based mode.
+4. Optional: Set **Assets Parent** under the selected root, or enable **Use selection for parent** so the parent is taken from the current `Node3D` selection (sibling placement). Picking **Assets Parent** disables selection-based mode.
 5. Optional: Configure Placement Options:
    - **Align Normals** - Enable to align assets with surface normals for natural placement on sloped surfaces
    - **Use Assets Origin** - Enable to place using asset's local origin point, or disable to use the asset's actual bottom
@@ -273,6 +272,7 @@ Version 1.2.0 introduced a dedicated Settings Panel for comprehensive customizat
   - Rotation Step (default: 5 degrees)
   - Scale/Translate Step (default: 0.1 units)
 - **Thumbnail UI Scale** - Adjust the size of thumbnails in the Assets Panel (default: 1.0)
+- **Regenerate Thumbnails** - Rebuild generated asset previews from Settings when needed
 - **Asset Palette Item Scale** - Adjust the size of palette buttons in both the Palette tab and viewport overlay (default: 1.0)
 - **Plane Mode Toggle** - Configure plane placement mode behavior
 - **Asset Library Path** - Set a custom location for the `asset_library.json` file, useful for version control and team sharing
