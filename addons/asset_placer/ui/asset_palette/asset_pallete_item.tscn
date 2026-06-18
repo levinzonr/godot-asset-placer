@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dyevu7h71klg4"]
 
 [ext_resource type="Script" uid="uid://dbfr66nx70y7c" path="res://addons/asset_placer/ui/asset_palette/asset_pallete_item.gd" id="1_c2ruk"]
-[ext_resource type="Texture2D" uid="uid://btqtv2stkxtdk" path="res://docs/logo.png" id="2_c2ruk"]
+[ext_resource type="Texture2D" uid="uid://be61c5ff55gfo" path="res://addons/asset_placer/icon.png" id="2_c2ruk"]
 
 [node name="VBoxContainer" type="VBoxContainer" unique_id=510652609]
 offset_right = 40.0
