@@ -1,5 +1,12 @@
 # Godot Asset Placer Changelog
 
+## 1.5.1
+
+### 🐛 Fixed
+
+- Fixed preview node flickering and teleporting to origin point directly after placement
+- Fixed missing placeholder icon warning during export for `asset_pallete_item.tscn`
+
 ## 1.5.0
 
 Version **1.5.0** is a feature release focused on faster asset workflows: asset palettes, library sorting, custom thumbnails, and more flexible placement and configuration options.
