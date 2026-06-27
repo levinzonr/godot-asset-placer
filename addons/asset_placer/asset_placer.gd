@@ -34,7 +34,7 @@ func start_placement(root: Window, asset: AssetResource, placement: GapPlacement
 	set_placement_mode(placement)
 	_apply_preview_material(preview_node)
 	var selected := EditorInterface.get_selection().get_selected_nodes()
-	if selected.size() == 1 and selected[0] is Node3D:
+	if selected.size() == 1 and selected[0] is Node3D and _presenter != null:
 		AssetTransformations.apply_transforms(preview_node, _presenter.options)
 	self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
@@ -64,7 +64,7 @@ func _apply_preview_material(node: Node3D):
 
 
 func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
-	if preview_node:
+	if preview_node and _presenter != null:
 		var hit = _strategy.get_placement_point(camera, mouse_position)
 		var normal = Vector3.UP
 
@@ -97,7 +97,7 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 
 
 func place_asset(focus_on_placement: bool):
-	if preview_node:
+	if preview_node and _presenter != null:
 		if _is_node_transform_mode:
 			_confirm_node_transform()
 			return true
