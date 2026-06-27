@@ -1,5 +1,11 @@
 # Godot Asset Placer Changelog
 
+## 1.5.2
+
+### 🐛 Fixed
+
+- Fixed a crash during Terrain3D placement after switching scenes or reloading the editor.
+
 ## 1.5.1
 
 ### 🐛 Fixed
