@@ -17,6 +17,13 @@ resource_name = ""
 script = ExtResource("2_o45xf")
 icon_name = &"NodeWarning"
 
+[sub_resource type="Texture2D" id="Texture2D_brush"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_o45xf")
+icon_name = &"CanvasItem"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
 [sub_resource type="Texture2D" id="Texture2D_h8tp4"]
 resource_local_to_scene = false
 resource_name = ""
@@ -97,29 +104,6 @@ text = "Options"
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=876043794]
 layout_mode = 2
 
-[node name="BrushSettingsContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=987654321]
-layout_mode = 2
-
-[node name="BrushRadiusLabel" type="Label" parent="VBoxContainer/BrushSettingsContainer" unique_id=987654322]
-layout_mode = 2
-text = "Brush Radius"
-
-[node name="BrushRadiusSpinBox" type="SpinBox" parent="VBoxContainer/BrushSettingsContainer" unique_id=987654323]
-unique_name_in_owner = true
-layout_mode = 2
-step = 0.1
-max_value = 100.0
-
-[node name="BrushDensityLabel" type="Label" parent="VBoxContainer/BrushSettingsContainer" unique_id=987654324]
-layout_mode = 2
-text = "Density"
-
-[node name="BrushDensitySpinBox" type="SpinBox" parent="VBoxContainer/BrushSettingsContainer" unique_id=987654325]
-unique_name_in_owner = true
-layout_mode = 2
-max_value = 1.0
-step = 0.01
-
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=323794363]
 layout_mode = 2
 texture = SubResource("Texture2D_rixd2")
@@ -136,6 +120,75 @@ size_flags_horizontal = 0
 text = "No parent selected"
 icon = SubResource("Texture2D_o45xf")
 alignment = 0
+
+[node name="BrushSettingsSection" type="VBoxContainer" parent="VBoxContainer" unique_id=987654321]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="BrushSettingsHeader" type="HBoxContainer" parent="VBoxContainer/BrushSettingsSection" unique_id=987654322]
+layout_mode = 2
+
+[node name="BrushIcon" type="TextureRect" parent="VBoxContainer/BrushSettingsSection/BrushSettingsHeader" unique_id=987654323]
+layout_mode = 2
+texture = SubResource("Texture2D_brush")
+stretch_mode = 3
+
+[node name="BrushLabel" type="Label" parent="VBoxContainer/BrushSettingsSection/BrushSettingsHeader" unique_id=987654324]
+layout_mode = 2
+text = "Brush Settings"
+
+[node name="BrushRadiusRow" type="HBoxContainer" parent="VBoxContainer/BrushSettingsSection" unique_id=987654325]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/BrushSettingsSection/BrushRadiusRow" unique_id=1812451733]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/BrushSettingsSection/BrushRadiusRow" unique_id=987654327]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Size"
+
+[node name="BrushRadiusSlider" type="HSlider" parent="VBoxContainer/BrushSettingsSection/BrushRadiusRow" unique_id=987654328]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 200.0
+step = 0.1
+value = 34.9
+
+[node name="BrushRadiusValue" type="Label" parent="VBoxContainer/BrushSettingsSection/BrushRadiusRow" unique_id=987654329]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "34.9"
+horizontal_alignment = 2
+
+[node name="BrushDensityRow" type="HBoxContainer" parent="VBoxContainer/BrushSettingsSection" unique_id=987654330]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/BrushSettingsSection/BrushDensityRow" unique_id=629535194]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/BrushSettingsSection/BrushDensityRow" unique_id=987654332]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Density"
+
+[node name="BrushDensitySlider" type="HSlider" parent="VBoxContainer/BrushSettingsSection/BrushDensityRow" unique_id=987654333]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="BrushDensityValue" type="Label" parent="VBoxContainer/BrushSettingsSection/BrushDensityRow" unique_id=987654334]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "0.00"
+horizontal_alignment = 2
 
 [node name="UseSelectionForParentCheckBox" type="CheckBox" parent="VBoxContainer" unique_id=438547014]
 unique_name_in_owner = true
