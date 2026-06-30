@@ -208,9 +208,15 @@ func _place_brush_instances(parent: Node3D, focus_on_placement: bool):
 	var amount_to_spawn = 1
 	if radius > 0.0:
 		var brush_area = PI * radius * radius
-		var asset_area = max(0.01, preview_aabb.size.x * preview_aabb.size.z)
-		var max_assets = brush_area / asset_area
-		amount_to_spawn = max(1, int(round(max_assets * density_factor)))
+		var asset_area = max(0.25, preview_aabb.size.x * preview_aabb.size.z)
+		
+		# Packing efficiency factor: 0.2 means 100% density fills roughly 20% of the mathematical area,
+		# which visually looks "full" without overlapping into a solid wall.
+		var max_assets = (brush_area / asset_area) * 0.2
+		
+		# Square the density factor to give the user more fine-grained control at lower values
+		var curved_density = pow(density_factor, 2.0)
+		amount_to_spawn = max(1, int(round(max_assets * curved_density)))
 	
 	var tangent = Vector3.UP.cross(brush_normal).normalized()
 	if tangent.length() < 0.001:
