@@ -13,6 +13,9 @@ var undo_redo: EditorUndoRedoManager
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
 var brush_decal: Decal
 var last_placed_position: Vector3 = Vector3(INF, INF, INF)
+var _is_in_stroke: bool = false
+var _stroke_id: int = 0
+const DEBOUNCE_DELAY_SEC: float = 0.3
 
 var _is_node_transform_mode: bool = false
 var _original_transform: Transform3D
@@ -136,7 +139,9 @@ func place_asset(focus_on_placement: bool):
 			if not is_instance_valid(parent) or not is_instance_valid(asset.get_resource()):
 				return false
 
-			undo_redo.create_action("Place Asset(s): %s" % asset.name, 0, parent)
+			if not _is_in_stroke:
+				undo_redo.create_action("Place Asset(s): %s" % asset.name, 0, parent)
+				_is_in_stroke = true
 
 			if is_brush_mode:
 				_place_brush_instances(parent, focus_on_placement)
@@ -144,12 +149,28 @@ func place_asset(focus_on_placement: bool):
 				_spawn_and_record_instance(preview_node.global_transform, parent, focus_on_placement)
 				AssetTransformations.apply_transforms(preview_node, _presenter.options)
 
-			undo_redo.commit_action()
 			_presenter.on_asset_placed()
 			last_placed_position = brush_decal.global_position if is_brush_mode else preview_node.global_position
+			
+			_schedule_commit()
 			return true
 	else:
 		return false
+
+func _schedule_commit():
+	_stroke_id += 1
+	var current_id = _stroke_id
+	var timer = Engine.get_main_loop().create_timer(DEBOUNCE_DELAY_SEC)
+	timer.timeout.connect(func():
+		if _is_in_stroke and _stroke_id == current_id:
+			end_stroke()
+	)
+
+func end_stroke():
+	if _is_in_stroke:
+		undo_redo.commit_action(false)
+		_is_in_stroke = false
+		_stroke_id += 1
 
 func should_drag_place() -> bool:
 	if not preview_node: return false
@@ -174,6 +195,8 @@ func _spawn_and_record_instance(transform: Transform3D, parent: Node3D, select_a
 	undo_redo.add_do_reference(new_node)
 	undo_redo.add_do_method(self, "_do_placement", new_node, parent, select_after_placement)
 	undo_redo.add_undo_method(self, "_undo_placement", new_node, parent)
+	
+	_do_placement(new_node, parent, select_after_placement)
 
 func _place_brush_instances(parent: Node3D, focus_on_placement: bool):
 	if not brush_decal: return
@@ -353,6 +376,7 @@ func _undo_node_transform(node: Node3D, original_transform: Transform3D):
 
 
 func stop_placement():
+	end_stroke()
 	self.asset = null
 	var was_node_transform_mode = _is_node_transform_mode
 	_is_node_transform_mode = false
