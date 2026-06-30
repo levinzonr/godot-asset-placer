@@ -11,6 +11,8 @@ var preview_transform_step: float = 0.1
 var preview_rotate_step: float = 5
 var undo_redo: EditorUndoRedoManager
 var preview_material = load("res://addons/asset_placer/utils/preview_material.tres")
+var brush_decal: Decal
+var last_placed_position: Vector3 = Vector3(INF, INF, INF)
 
 var _is_node_transform_mode: bool = false
 var _original_transform: Transform3D
@@ -30,6 +32,9 @@ func start_placement(root: Window, asset: AssetResource, placement: GapPlacement
 	_is_node_transform_mode = false
 	preview_node = _instantiate_asset_resource(asset)
 	root.add_child(preview_node)
+	if not brush_decal:
+		brush_decal = BrushDecalBuilder.build_decal()
+	root.add_child(brush_decal)
 	preview_rids = get_collision_rids(preview_node)
 	set_placement_mode(placement)
 	_apply_preview_material(preview_node)
@@ -76,24 +81,42 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 		if _strategy is Terrain3DAssetPlacementStrategy:
 			snapped_pos.y = _strategy.terrain_3d_node.data.get_height(snapped_pos)
 
-		var forward_hint = preview_node.global_transform.basis.z
+		var is_brush_mode = _presenter.options.brush_radius > 0.0
 
-		var new_basis = get_safe_basis(normal, forward_hint).scaled(preview_node.scale)
-		var new_transform = Transform3D(new_basis, snapped_pos)
-
-		var local_bottom = Vector3(0, preview_aabb.position.y, 0)
-
-		if _presenter.options.use_asset_origin:
-			local_bottom = Vector3.ZERO
-
-		var bottom_world = new_transform * local_bottom
-		var adjust = snapped_pos - bottom_world
-		new_transform.origin += adjust
-		preview_node.global_transform = new_transform
+		if brush_decal and is_brush_mode:
+			_move_brush_preview(snapped_pos, normal)
+		else:
+			_move_node_preview(snapped_pos, normal)
 
 		return true
 	else:
 		return false
+
+func _move_brush_preview(snapped_pos: Vector3, normal: Vector3):
+	brush_decal.visible = true
+	preview_node.visible = false
+	brush_decal.global_position = snapped_pos
+	brush_decal.global_transform.basis = get_safe_basis(normal, Vector3.FORWARD)
+	var r = _presenter.options.brush_radius
+	brush_decal.extents = Vector3(r, 10.0, r)
+
+func _move_node_preview(snapped_pos: Vector3, normal: Vector3):
+	preview_node.visible = true
+	brush_decal.visible = false
+	var forward_hint = preview_node.global_transform.basis.z
+
+	var new_basis = get_safe_basis(normal, forward_hint).scaled(preview_node.scale)
+	var new_transform = Transform3D(new_basis, snapped_pos)
+
+	var local_bottom = Vector3(0, preview_aabb.position.y, 0)
+
+	if _presenter.options.use_asset_origin:
+		local_bottom = Vector3.ZERO
+
+	var bottom_world = new_transform * local_bottom
+	var adjust = snapped_pos - bottom_world
+	new_transform.origin += adjust
+	preview_node.global_transform = new_transform
 
 
 func place_asset(focus_on_placement: bool):
@@ -102,10 +125,118 @@ func place_asset(focus_on_placement: bool):
 			_confirm_node_transform()
 			return true
 		else:
-			_place_instance(preview_node.global_transform, focus_on_placement)
+			var is_brush_mode = _presenter.options.brush_radius > 0.0
+			var scene := EditorInterface.get_edited_scene_root()
+			var scene_root := _presenter.resolve_placement_parent(scene)
+			if scene_root == null:
+				return false
+			var options := _presenter.options
+			var parent := AssetParentSelector.pick_parent(scene_root, asset, options.group_automatically)
+
+			if not is_instance_valid(parent) or not is_instance_valid(asset.get_resource()):
+				return false
+
+			undo_redo.create_action("Place Asset(s): %s" % asset.name, 0, parent)
+
+			if is_brush_mode:
+				_place_brush_instances(parent, focus_on_placement)
+			else:
+				_spawn_and_record_instance(preview_node.global_transform, parent, focus_on_placement)
+				AssetTransformations.apply_transforms(preview_node, _presenter.options)
+
+			undo_redo.commit_action()
+			_presenter.on_asset_placed()
+			last_placed_position = brush_decal.global_position if is_brush_mode else preview_node.global_position
 			return true
 	else:
 		return false
+
+func should_drag_place() -> bool:
+	if not preview_node: return false
+	var is_brush_mode = _presenter.options.brush_radius > 0.0
+	var current_pos = brush_decal.global_position if is_brush_mode else preview_node.global_position
+	
+	var spacing = max(preview_aabb.size.x, preview_aabb.size.z)
+	if spacing < 0.1: spacing = 0.1 # Minimum spacing safeguard
+	
+	if is_brush_mode:
+		spacing = max(spacing, _presenter.options.brush_radius * 0.5)
+		
+	return current_pos.distance_to(last_placed_position) >= spacing
+
+func _spawn_and_record_instance(transform: Transform3D, parent: Node3D, select_after_placement: bool):
+	var new_node: Node3D = _instantiate_asset_resource(asset)
+	new_node.global_transform = transform
+	new_node.transform = parent.global_transform.affine_inverse() * transform
+	new_node.name = _pick_name(new_node, parent)
+	new_node.set_meta(META_ASSET_ID, asset.id)
+
+	undo_redo.add_do_reference(new_node)
+	undo_redo.add_do_method(self, "_do_placement", new_node, parent, select_after_placement)
+	undo_redo.add_undo_method(self, "_undo_placement", new_node, parent)
+
+func _place_brush_instances(parent: Node3D, focus_on_placement: bool):
+	if not brush_decal: return
+	var center_pos = brush_decal.global_position
+	var brush_normal = brush_decal.global_transform.basis.y
+	var radius = _presenter.options.brush_radius
+	var density_factor = _presenter.options.brush_density
+	
+	var amount_to_spawn = 1
+	if radius > 0.0:
+		var brush_area = PI * radius * radius
+		var asset_area = max(0.01, preview_aabb.size.x * preview_aabb.size.z)
+		var max_assets = brush_area / asset_area
+		amount_to_spawn = max(1, int(round(max_assets * density_factor)))
+	
+	var tangent = Vector3.UP.cross(brush_normal).normalized()
+	if tangent.length() < 0.001:
+		tangent = Vector3.RIGHT.cross(brush_normal).normalized()
+	var bitangent = brush_normal.cross(tangent).normalized()
+	
+	var space_state = preview_node.get_world_3d().direct_space_state
+	
+	for i in range(amount_to_spawn):
+		var angle = randf() * TAU
+		var r = sqrt(randf()) * radius
+		var offset = tangent * (cos(angle) * r) + bitangent * (sin(angle) * r)
+		var query_pos = center_pos + offset
+		
+		var hit_pos = query_pos
+		var hit_normal = brush_normal
+		
+		if _strategy is Terrain3DAssetPlacementStrategy:
+			hit_pos.y = _strategy.terrain_3d_node.data.get_height(query_pos)
+		else:
+			var ray_from = query_pos + brush_normal * 100.0
+			var ray_to = query_pos - brush_normal * 100.0
+			var params = PhysicsRayQueryParameters3D.new()
+			params.from = ray_from
+			params.to = ray_to
+			params.exclude = preview_rids
+			var result = space_state.intersect_ray(params)
+			if result.has("position"):
+				hit_pos = result.position
+				if _presenter.options.align_normals:
+					hit_normal = result.normal
+				
+		var snapped_pos = _snap_position(hit_pos, hit_normal)
+		
+		var forward_hint = preview_node.global_transform.basis.z
+		var new_basis = get_safe_basis(hit_normal, forward_hint).scaled(preview_node.scale)
+		var new_transform = Transform3D(new_basis, snapped_pos)
+		
+		var local_bottom = Vector3(0, preview_aabb.position.y, 0)
+		if _presenter.options.use_asset_origin:
+			local_bottom = Vector3.ZERO
+		var bottom_world = new_transform * local_bottom
+		var adjust = snapped_pos - bottom_world
+		new_transform.origin += adjust
+		
+		new_transform = AssetTransformations.transform_rotation(new_transform, _presenter.options)
+		new_transform = AssetTransformations.transform_scale(new_transform, _presenter.options)
+		
+		_spawn_and_record_instance(new_transform, parent, focus_on_placement)
 
 
 func set_plugin_settings(settings: AssetPlacerSettings):
@@ -184,31 +315,6 @@ func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
 	return snapped
 
 
-func _place_instance(transform: Transform3D, select_after_placement: bool):
-	var scene := EditorInterface.get_edited_scene_root()
-	var scene_root := _presenter.resolve_placement_parent(scene)
-	if scene_root == null:
-		return
-	var options := _presenter.options
-	var parent := AssetParentSelector.pick_parent(scene_root, asset, options.group_automatically)
-
-	if is_instance_valid(parent) and is_instance_valid(asset.get_resource()):
-		var new_node: Node3D = _instantiate_asset_resource(asset)
-		new_node.global_transform = transform
-		new_node.transform = parent.global_transform.affine_inverse() * transform
-		new_node.name = _pick_name(new_node, parent)
-		new_node.set_meta(META_ASSET_ID, asset.id)
-
-		undo_redo.create_action("Place Asset: %s" % asset.name, 0, parent)
-		undo_redo.add_do_reference(new_node)
-		undo_redo.add_do_method(self, "_do_placement", new_node, parent, select_after_placement)
-		undo_redo.add_undo_method(self, "_undo_placement", new_node, parent)
-		undo_redo.commit_action()
-
-		AssetTransformations.apply_transforms(preview_node, _presenter.options)
-		_presenter.on_asset_placed()
-
-
 func _do_placement(new_node: Node3D, root: Node3D, select_after_placement: bool):
 	var temp_name := new_node.name
 	root.add_child(new_node)
@@ -253,6 +359,10 @@ func stop_placement():
 	if preview_node and not was_node_transform_mode:
 		preview_node.queue_free()
 	preview_node = null
+	last_placed_position = Vector3(INF, INF, INF)
+	if brush_decal:
+		brush_decal.queue_free()
+		brush_decal = null
 
 
 func _instantiate_asset_resource(asset: AssetResource) -> Node3D:

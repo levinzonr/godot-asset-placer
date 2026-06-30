@@ -97,6 +97,29 @@ text = "Options"
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=876043794]
 layout_mode = 2
 
+[node name="BrushSettingsContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=987654321]
+layout_mode = 2
+
+[node name="BrushRadiusLabel" type="Label" parent="VBoxContainer/BrushSettingsContainer" unique_id=987654322]
+layout_mode = 2
+text = "Brush Radius"
+
+[node name="BrushRadiusSpinBox" type="SpinBox" parent="VBoxContainer/BrushSettingsContainer" unique_id=987654323]
+unique_name_in_owner = true
+layout_mode = 2
+step = 0.1
+max_value = 100.0
+
+[node name="BrushDensityLabel" type="Label" parent="VBoxContainer/BrushSettingsContainer" unique_id=987654324]
+layout_mode = 2
+text = "Density"
+
+[node name="BrushDensitySpinBox" type="SpinBox" parent="VBoxContainer/BrushSettingsContainer" unique_id=987654325]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=323794363]
 layout_mode = 2
 texture = SubResource("Texture2D_rixd2")

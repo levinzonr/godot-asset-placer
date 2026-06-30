@@ -24,6 +24,9 @@ var presenter: AssetPlacerPresenter
 @onready var group_automatically_check_box: CheckBox = %GroupAutomaticallyCheckBox
 @onready var use_selection_for_parent_check_box: CheckBox = %UseSelectionForParentCheckBox
 
+@onready var brush_radius_spin_box: SpinBox = %BrushRadiusSpinBox
+@onready var brush_density_spin_box: SpinBox = %BrushDensitySpinBox
+
 
 func _ready():
 	presenter = AssetPlacerPresenter.instance
@@ -53,6 +56,8 @@ func _ready():
 	use_assets_origin_checkbox.toggled.connect(presenter.set_use_asset_origin)
 	group_automatically_check_box.toggled.connect(presenter.set_automatic_grouping)
 	use_selection_for_parent_check_box.toggled.connect(presenter.set_use_selected_as_parent)
+	brush_radius_spin_box.value_changed.connect(presenter.set_brush_radius)
+	brush_density_spin_box.value_changed.connect(presenter.set_brush_density)
 
 	plane_axis_spin_box.value_changed.connect(
 		func(normal: Vector3):
@@ -136,4 +141,6 @@ func set_options(options: AssetPlacerOptions):
 	use_assets_origin_checkbox.set_pressed_no_signal(options.use_asset_origin)
 	group_automatically_check_box.set_pressed_no_signal(options.group_automatically)
 	use_selection_for_parent_check_box.set_pressed_no_signal(options.use_selected_as_parent)
+	brush_radius_spin_box.set_value_no_signal(options.brush_radius)
+	brush_density_spin_box.set_value_no_signal(options.brush_density)
 	show_parent(presenter.get_assets_parent_path())

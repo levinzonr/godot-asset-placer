@@ -19,3 +19,6 @@ var uniform_scaling: bool = true
 
 var group_automatically: bool = true
 var use_selected_as_parent: bool = false
+
+var brush_radius: float = 0.0
+var brush_density: float = 0.0
