@@ -3,11 +3,13 @@ extends Object
 
 static var _brush_texture: Texture2D
 
+
 static func build_decal() -> Decal:
 	var decal = Decal.new()
 	decal.texture_albedo = _get_brush_texture()
 	decal.albedo_mix = 1.0
 	return decal
+
 
 static func _get_brush_texture() -> Texture2D:
 	if _brush_texture != null:
