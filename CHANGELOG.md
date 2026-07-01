@@ -1,5 +1,21 @@
 # Godot Asset Placer Changelog
 
+## 1.6.0-alpha2
+
+### Added
+
+- Previews are visible in brush mode as well so all the transformations are visible in real time.
+
+## 1.6.0-alpha1
+
+### ✨ Brush Mode
+
+- Easily paint multiple assets onto your scene at once! You can now adjust brush size and density to spawn scattered clusters of assets with a single click. Click and drag to continuously paint paths of assets across terrain and surfaces.
+- All existing placement methods were settings such as snapping, randomized transforms are preserved and are applied in brush mode as well.
+- Default "Painting" mode - single click placement - was preserved, all you need to do is specify the smallest brush size (which is also a default one) 
+
+
+
 ## 1.5.2
 
 ### 🐛 Fixed
