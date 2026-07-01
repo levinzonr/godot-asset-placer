@@ -1,5 +1,11 @@
 # Godot Asset Placer Changelog
 
+## 1.6.0-alpha2
+
+### Added
+
+- Previews are visible in brush mode as well so all the transformations are visible in real time.
+
 ## 1.6.0-alpha1
 
 ### ✨ Brush Mode
