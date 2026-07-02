@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dxvsrofiycvcb"
+path="res://.godot/imported/corridor-wide-junction.obj-3274cfbbe7adb47ce8b70f4bf7c549ec.mesh"
+
+[deps]
+
+files=["res://.godot/imported/corridor-wide-junction.obj-3274cfbbe7adb47ce8b70f4bf7c549ec.mesh"]
+
+source_file="res://demo/assets/kenney_dungeon_kit/OBJ format/corridor-wide-junction.obj"
+dest_files=["res://.godot/imported/corridor-wide-junction.obj-3274cfbbe7adb47ce8b70f4bf7c549ec.mesh", "res://.godot/imported/corridor-wide-junction.obj-3274cfbbe7adb47ce8b70f4bf7c549ec.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
