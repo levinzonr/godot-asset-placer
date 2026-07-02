@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dc0q8ej2tipdl"
+path="res://.godot/imported/wall_broken.obj-2b5fcef2cc983563de2538ede2cbcdcc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wall_broken.obj-2b5fcef2cc983563de2538ede2cbcdcc.mesh"]
+
+source_file="res://demo/assets/kenney_fantasy_town/wall_broken.obj"
+dest_files=["res://.godot/imported/wall_broken.obj-2b5fcef2cc983563de2538ede2cbcdcc.mesh", "res://.godot/imported/wall_broken.obj-2b5fcef2cc983563de2538ede2cbcdcc.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

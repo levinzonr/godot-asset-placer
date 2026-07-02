@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ctj55ewbblteq"
+path="res://.godot/imported/wall_wood_half.obj-176fdfb934c19da568b54e8be6b7a5fd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wall_wood_half.obj-176fdfb934c19da568b54e8be6b7a5fd.mesh"]
+
+source_file="res://demo/assets/kenney_fantasy_town/wall_wood_half.obj"
+dest_files=["res://.godot/imported/wall_wood_half.obj-176fdfb934c19da568b54e8be6b7a5fd.mesh", "res://.godot/imported/wall_wood_half.obj-176fdfb934c19da568b54e8be6b7a5fd.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

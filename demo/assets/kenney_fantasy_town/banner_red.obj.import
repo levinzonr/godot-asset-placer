@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dtmxo6w7q3i6k"
+path="res://.godot/imported/banner_red.obj-5f1ac99d262021b650cade5d7b7d89ab.mesh"
+
+[deps]
+
+files=["res://.godot/imported/banner_red.obj-5f1ac99d262021b650cade5d7b7d89ab.mesh"]
+
+source_file="res://demo/assets/kenney_fantasy_town/banner_red.obj"
+dest_files=["res://.godot/imported/banner_red.obj-5f1ac99d262021b650cade5d7b7d89ab.mesh", "res://.godot/imported/banner_red.obj-5f1ac99d262021b650cade5d7b7d89ab.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

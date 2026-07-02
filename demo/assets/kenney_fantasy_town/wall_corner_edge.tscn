@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="ArrayMesh" path="res://demo/assets/kenney_fantasy_town/wall_corner_edge.obj" id="1_mesh"]
+
+[node name="wall_corner_edge" type="Node3D"]
+
+[node name="wall_corner_edge_mesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_mesh")

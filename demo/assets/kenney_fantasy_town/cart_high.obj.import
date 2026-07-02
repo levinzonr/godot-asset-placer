@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://hvcu7xy5lj0u"
+path="res://.godot/imported/cart_high.obj-f5ca13729b635c202bf711791484ab2e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cart_high.obj-f5ca13729b635c202bf711791484ab2e.mesh"]
+
+source_file="res://demo/assets/kenney_fantasy_town/cart_high.obj"
+dest_files=["res://.godot/imported/cart_high.obj-f5ca13729b635c202bf711791484ab2e.mesh", "res://.godot/imported/cart_high.obj-f5ca13729b635c202bf711791484ab2e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
