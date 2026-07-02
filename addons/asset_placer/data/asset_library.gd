@@ -93,6 +93,22 @@ func update_asset(asset: AssetResource):
 	_queue_emit_assets_changed()
 
 
+func update_assets(assets: Array[AssetResource]):
+	if assets.is_empty():
+		return
+
+	var id_to_asset := {}
+	for a in assets:
+		id_to_asset[a.id] = a
+
+	for i in _assets.size():
+		var id = _assets[i].id
+		if id_to_asset.has(id):
+			_assets[i] = id_to_asset[id]
+
+	_queue_emit_assets_changed()
+
+
 func has_asset_id(asset_id: String):
 	return _assets.any(func(item: AssetResource): return item.id == asset_id)
 

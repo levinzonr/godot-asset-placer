@@ -126,32 +126,42 @@ func _apply_filters():
 
 
 func set_primary_collection(collection: AssetCollection):
+	var updated: Array[AssetResource] = []
 	for idx in _selected_indices:
 		var asset := _assets[idx]
 		if asset.primary_collection == collection.id:
 			asset.primary_collection = -1
 		else:
 			asset.primary_collection = collection.id
-		_asset_library.update_asset(asset)
+		updated.push_back(asset)
+	if not updated.is_empty():
+		_asset_library.update_assets(updated)
 	_emit_collections()
 
 
 func add_to_collection(collection: AssetCollection):
+	var updated: Array[AssetResource] = []
 	for idx in _selected_indices:
 		var asset := _assets[idx]
 		if not asset.tags.has(collection.id):
 			asset.add_tag(collection.id)
-			_asset_library.update_asset(asset)
+			updated.push_back(asset)
+	if not updated.is_empty():
+		_asset_library.update_assets(updated)
 	_emit_collections()
 
 
 func remove_from_collection(collection: AssetCollection):
+	var updated: Array[AssetResource] = []
 	for idx in _selected_indices:
 		var asset := _assets[idx]
-		asset.remove_tag(collection.id)
-		if asset.primary_collection == collection.id:
-			asset.primary_collection = -1
-		_asset_library.update_asset(asset)
+		if asset.tags.has(collection.id):
+			asset.remove_tag(collection.id)
+			if asset.primary_collection == collection.id:
+				asset.primary_collection = -1
+			updated.push_back(asset)
+	if not updated.is_empty():
+		_asset_library.update_assets(updated)
 	_emit_collections()
 
 
