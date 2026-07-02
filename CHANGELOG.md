@@ -1,5 +1,18 @@
 # Godot Asset Placer Changelog
 
+## 1.6.0-alpha3
+
+### ✨ Added
+
+- Auto apply Placement Strategy based on the selected scene
+- Unassigned filter inside Collection Management to show assets without collections
+- Updated demo assets with Kenney packs
+
+### 🐛 Fixed
+
+- Fixed a major editor freeze when adding assets to a collection in bulk by batching the `update_asset` calls.
+- Fallback on `ResourceLoader` when `ResourceId` has yet to resolve `uid`
+
 ## 1.6.0-alpha2
 
 ### Added
