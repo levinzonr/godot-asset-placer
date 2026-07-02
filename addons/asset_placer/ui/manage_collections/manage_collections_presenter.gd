@@ -32,6 +32,8 @@ var _assets: Array[AssetResource] = []
 var _selected_indices: PackedInt32Array = []
 var _batch_mode: bool = false
 var _last_toggled_index: int = -1
+var _current_query: String = ""
+var _unassigned_only: bool = false
 
 
 func ready(initial_asset_id: String = ""):
@@ -96,12 +98,22 @@ func select_all():
 
 
 func filter_assets(query: String):
-	var all_assets := _asset_library.get_assets()
+	_current_query = query
+	_apply_filters()
 
-	if query.is_empty():
-		_assets = all_assets
-	else:
-		_assets = all_assets.filter(func(asset: AssetResource): return asset.name.containsn(query))
+func set_unassigned_only(unassigned: bool):
+	_unassigned_only = unassigned
+	_apply_filters()
+
+func _apply_filters():
+	var all_assets := _asset_library.get_assets()
+	_assets = all_assets
+
+	if not _current_query.is_empty():
+		_assets = _assets.filter(func(asset: AssetResource): return asset.name.containsn(_current_query))
+	
+	if _unassigned_only:
+		_assets = _assets.filter(func(asset: AssetResource): return asset.tags.is_empty())
 
 	_selected_indices.clear()
 	if not _assets.is_empty():
