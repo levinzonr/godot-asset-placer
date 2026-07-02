@@ -101,17 +101,21 @@ func filter_assets(query: String):
 	_current_query = query
 	_apply_filters()
 
+
 func set_unassigned_only(unassigned: bool):
 	_unassigned_only = unassigned
 	_apply_filters()
+
 
 func _apply_filters():
 	var all_assets := _asset_library.get_assets()
 	_assets = all_assets
 
 	if not _current_query.is_empty():
-		_assets = _assets.filter(func(asset: AssetResource): return asset.name.containsn(_current_query))
-	
+		_assets = _assets.filter(
+			func(asset: AssetResource): return asset.name.containsn(_current_query)
+		)
+
 	if _unassigned_only:
 		_assets = _assets.filter(func(asset: AssetResource): return asset.tags.is_empty())
 
