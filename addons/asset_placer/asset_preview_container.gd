@@ -54,35 +54,53 @@ func update_preview(snapped_pos: Vector3, normal: Vector3, is_brush_mode: bool) 
 func _sync_preview_children(count: int, is_brush: bool) -> void:
 	var current_children = get_children()
 	if current_children.size() != count:
-		for child in current_children:
-			child.queue_free()
+		var active_children = []
+		for c in current_children:
+			if not c.is_queued_for_deletion():
+				active_children.append(c)
 
-		var rng = RandomNumberGenerator.new()
-		rng.seed = _stroke_id
+		if active_children.size() != count:
+			for child in active_children:
+				child.queue_free()
 
-		for i in range(count):
-			var new_child = _instantiate_asset_resource(asset)
-			add_child(new_child)
-			_apply_preview_material(new_child)
+			var rng = RandomNumberGenerator.new()
+			rng.seed = _stroke_id
 
-			if not is_brush:
-				var new_transform = Transform3D(_manual_rotation, Vector3.ZERO)
-				new_transform.basis = new_transform.basis.scaled(_manual_scale)
-				new_child.transform = new_transform
-			else:
-				var radius = options.brush_radius
-				var angle = rng.randf() * TAU
-				var r = sqrt(rng.randf()) * radius
-				var local_pos = Vector3(cos(angle) * r, 0, sin(angle) * r)
+			for i in range(count):
+				var new_child = _instantiate_asset_resource(asset)
+				add_child(new_child)
+				_apply_preview_material(new_child)
 
-				var new_transform = Transform3D(Basis(), local_pos)
-				new_transform = AssetTransformations.transform_rotation(new_transform, options, rng)
-				new_transform = AssetTransformations.transform_scale(new_transform, options, rng)
+				if not is_brush:
+					var orig_transform = new_child.transform
+					var new_basis = _manual_rotation * orig_transform.basis
+					new_basis = new_basis.scaled(_manual_scale)
+					new_child.transform = Transform3D(new_basis, orig_transform.origin)
+				else:
+					var radius = options.brush_radius
+					var angle = rng.randf() * TAU
+					var r = sqrt(rng.randf()) * radius
+					var local_pos = Vector3(cos(angle) * r, 0, sin(angle) * r)
 
-				new_transform.basis = new_transform.basis * _manual_rotation
-				new_transform.basis = new_transform.basis.scaled(_manual_scale)
+					var new_transform = Transform3D(Basis(), local_pos)
+					new_transform = AssetTransformations.transform_rotation(
+						new_transform, options, rng
+					)
+					new_transform = AssetTransformations.transform_scale(
+						new_transform, options, rng
+					)
 
-				new_child.transform = new_transform
+					new_transform.basis = new_transform.basis * _manual_rotation
+					new_transform.basis = new_transform.basis.scaled(_manual_scale)
+
+					new_child.transform = new_transform
+
+		var new_rids = []
+		for child in get_children():
+			if not child.is_queued_for_deletion():
+				new_rids.append_array(_get_collision_rids(child))
+		self.preview_rids.clear()
+		self.preview_rids.append_array(new_rids)
 
 
 func apply_manual_transform(
