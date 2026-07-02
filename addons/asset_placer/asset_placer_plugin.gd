@@ -182,6 +182,7 @@ func _handles(object):
 func _handle_scene_changed(scene: Node):
 	if scene is Node3D:
 		_presenter.select_parent(scene.get_path())
+		_presenter.placement_mode = PlacementStrategyResolver.resolve_placement_strategy(scene)
 	else:
 		_presenter.clear_parent()
 
