@@ -101,27 +101,53 @@ func on_sort_method_change(method: AssetSortBy.SortMethod):
 
 func _filter_by_collections_and_query():
 	var filtered: Array[AssetResource] = []
-	for asset in _asset_library.get_assets():
-		var matches_query = asset.name.containsn(_current_query) || _current_query.is_empty()
-		var belongs_to_collection = (
-			asset.belongs_to_some_collection(_active_collections) || _active_collections.is_empty()
-		)
 
-		if matches_query and belongs_to_collection:
+	var query_words := Array(_current_query.strip_edges().to_lower().split(" ", false))
+	var include_wor
+	var query_words := Array(_current_query.strip_edges().to_lower().split(" ", false))
+	var include_words: Array[String] = []
+	var exclude_words: Array[String] = []
+	for w: String in query_words:
+		if w.begins_with("-") && w.length() > 1:
+			exclude_words.append(w.substr(1))
+		else:
+			include_words.append(w)
+
+	for asset: AssetResource in _asset_library.get_assets():
+		if (
+			_active_collections.is_empty() == false
+			and asset.belongs_to_some_collection(_active_collections) == false
+		):
+			continue
+
+		var matches_query := true
+		var asset_lower := asset.name.to_lower()
+
+		for w in include_words:
+			if asset_lower.contains(w) == false:
+				matches_query = false
+				break
+
+		if matches_query:
+			for w in exclude_words:
+				if asset_lower.contains(w):
+					matches_query = false
+					break
+
+		if matches_query:
 			filtered.push_back(asset)
 
 	filtered.sort_custom(AssetSortBy.get_sort_function(_current_sort_method, is_sort_ascending))
 	if filtered.is_empty():
 		if _active_collections.is_empty() && _current_query.is_empty():
 			show_empty_view.emit(EmptyType.All)
-		elif not _active_collections.is_empty():
+		elif _active_collections.is_empty() == false:
 			show_empty_view.emit(EmptyType.Collection)
 		else:
 			show_empty_view.emit(EmptyType.Search)
 	else:
 		assets_loaded.emit(filtered)
 		show_empty_view.emit(EmptyType.None)
-
 	_filtered_assets = filtered
 
 
