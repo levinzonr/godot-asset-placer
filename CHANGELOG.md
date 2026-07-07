@@ -1,5 +1,14 @@
 # Godot Asset Placer Changelog
 
+## 1.5.3
+
+### ✨ New Features
+
+- **#110**: Improved asset library search — multi-word queries require all terms to match; prefix a term with `-` to exclude matching assets by @DissonantVoid
+  - `tree rock` — matches assets whose name contains both **tree** and **rock**
+  - `tree -dead` — matches assets with **tree** but not **dead**
+  - `oak -small pine` — matches assets with **oak** and **pine**, excluding names that contain **small**
+
 ## 1.5.2
 
 ### 🐛 Fixed
