@@ -104,7 +104,6 @@ func _filter_by_collections_and_query():
 
 	var query_words := Array(_current_query.strip_edges().to_lower().split(" ", false))
 	var include_wor
-	var query_words := Array(_current_query.strip_edges().to_lower().split(" ", false))
 	var include_words: Array[String] = []
 	var exclude_words: Array[String] = []
 	for w: String in query_words:
