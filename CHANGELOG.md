@@ -1,5 +1,11 @@
 # Godot Asset Placer Changelog
 
+## 1.5.4
+
+### 🐛 Fixed
+
+- Fixed a runtime error when loading the plugin due to duplicate lines in asset_library_presenter.gd.
+
 ## 1.5.3
 
 ### ✨ New Features
