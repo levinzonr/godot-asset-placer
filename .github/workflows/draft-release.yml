@@ -1,0 +1,54 @@
+name: Draft Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+
+jobs:
+  draft-release:
+    name: Create Draft Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Extract release notes from CHANGELOG
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          echo "Looking for CHANGELOG section: ## $TAG"
+
+          if ! grep -Fxq "## $TAG" CHANGELOG.md; then
+            echo "::error::No CHANGELOG entry found for '$TAG' (expected heading '## $TAG')"
+            exit 1
+          fi
+
+          awk -v header="## $TAG" '
+            $0 == header {found=1; next}
+            found && /^## / {exit}
+            found {print}
+          ' CHANGELOG.md > release_notes.md
+
+          # trim leading/trailing blank lines
+          awk 'NF{p=1} p' release_notes.md | tac | awk 'NF{p=1} p' | tac > release_notes.trimmed
+          mv release_notes.trimmed release_notes.md
+
+          if [ ! -s release_notes.md ]; then
+            echo "::error::CHANGELOG section for '$TAG' is empty"
+            exit 1
+          fi
+
+          echo "----- release notes -----"
+          cat release_notes.md
+
+      - name: Create draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            --draft \
+            --title "${GITHUB_REF_NAME}" \
+            --notes-file release_notes.md
