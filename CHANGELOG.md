@@ -1,5 +1,11 @@
 # Godot Asset Placer Changelog
 
+## 1.6.0-beta1
+
+### 🐛 Fixed
+
+- Fixed an issue where the plane preview would appear after changing scenes even when Asset Placer was inactive
+
 ## 1.6.0-alpha3
 
 ### ✨ Added
