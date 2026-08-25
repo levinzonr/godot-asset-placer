@@ -343,6 +343,16 @@ func set_automatic_grouping(value: bool):
 	options_changed.emit(options)
 
 
+func set_brush_radius(value: float):
+	options.brush_radius = value
+	options_changed.emit(options)
+
+
+func set_brush_density(value: float):
+	options.brush_density = value
+	options_changed.emit(options)
+
+
 func is_node_transform_mode() -> bool:
 	return _selected_node != null
 

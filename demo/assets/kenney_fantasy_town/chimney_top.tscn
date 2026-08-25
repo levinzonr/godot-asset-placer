@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="ArrayMesh" path="res://demo/assets/kenney_fantasy_town/chimney_top.obj" id="1_mesh"]
+
+[node name="chimney_top" type="Node3D"]
+
+[node name="chimney_top_mesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_mesh")

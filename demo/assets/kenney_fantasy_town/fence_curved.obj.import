@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cyjwvyth0qgp7"
+path="res://.godot/imported/fence_curved.obj-0e0eb47f2d427cc9d37f9b4bc52d5f71.mesh"
+
+[deps]
+
+files=["res://.godot/imported/fence_curved.obj-0e0eb47f2d427cc9d37f9b4bc52d5f71.mesh"]
+
+source_file="res://demo/assets/kenney_fantasy_town/fence_curved.obj"
+dest_files=["res://.godot/imported/fence_curved.obj-0e0eb47f2d427cc9d37f9b4bc52d5f71.mesh", "res://.godot/imported/fence_curved.obj-0e0eb47f2d427cc9d37f9b4bc52d5f71.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

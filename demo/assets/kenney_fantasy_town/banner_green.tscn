@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://heubqpncyl41"]
+
+[ext_resource type="ArrayMesh" uid="uid://dlpwy2brv7jxv" path="res://demo/assets/kenney_fantasy_town/banner_green.obj" id="1_mesh"]
+
+[node name="banner_green" type="Node3D" unique_id=1613932127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7829468, 0)
+
+[node name="banner_green_mesh" type="MeshInstance3D" parent="." unique_id=1628633606]
+mesh = ExtResource("1_mesh")

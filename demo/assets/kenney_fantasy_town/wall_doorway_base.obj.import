@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://diwe5lo7n8t3j"
+path="res://.godot/imported/wall_doorway_base.obj-e12c8311ed7777c2eb9cb50940330a7e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wall_doorway_base.obj-e12c8311ed7777c2eb9cb50940330a7e.mesh"]
+
+source_file="res://demo/assets/kenney_fantasy_town/wall_doorway_base.obj"
+dest_files=["res://.godot/imported/wall_doorway_base.obj-e12c8311ed7777c2eb9cb50940330a7e.mesh", "res://.godot/imported/wall_doorway_base.obj-e12c8311ed7777c2eb9cb50940330a7e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

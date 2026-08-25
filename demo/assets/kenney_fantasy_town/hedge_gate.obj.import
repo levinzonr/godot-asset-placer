@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cn1qj3x8ufprm"
+path="res://.godot/imported/hedge_gate.obj-730c59f0a01ed2920e95ea2707af1157.mesh"
+
+[deps]
+
+files=["res://.godot/imported/hedge_gate.obj-730c59f0a01ed2920e95ea2707af1157.mesh"]
+
+source_file="res://demo/assets/kenney_fantasy_town/hedge_gate.obj"
+dest_files=["res://.godot/imported/hedge_gate.obj-730c59f0a01ed2920e95ea2707af1157.mesh", "res://.godot/imported/hedge_gate.obj-730c59f0a01ed2920e95ea2707af1157.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

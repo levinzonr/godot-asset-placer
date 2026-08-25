@@ -28,7 +28,10 @@ func _set_plane_material(settings: AssetPlacerSettings):
 
 func _react_placement_mode_change(placement_mode: GapPlacementMode):
 	if placement_mode is GapPlacementMode.PlanePlacement:
-		show()
+		if AssetPlacerPresenter.instance.has_placement_asset_selected():
+			show()
+		else:
+			hide()
 		_update_mes_per_plane_configuration(placement_mode.plane_options)
 	else:
 		hide()

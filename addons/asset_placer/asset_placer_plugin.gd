@@ -182,6 +182,7 @@ func _handles(object):
 func _handle_scene_changed(scene: Node):
 	if scene is Node3D:
 		_presenter.select_parent(scene.get_path())
+		_presenter.placement_mode = PlacementStrategyResolver.resolve_placement_strategy(scene)
 	else:
 		_presenter.clear_parent()
 
@@ -366,8 +367,15 @@ func _forward_3d_gui_input(viewport_camera, event):
 			return _handled()
 
 	if event is InputEventMouseMotion:
-		if event.button_mask == 0:
-			if _asset_placer.move_preview(event.position, viewport_camera):
+		var moved = _asset_placer.move_preview(event.position, viewport_camera)
+		if moved:
+			if event.button_mask & MOUSE_BUTTON_MASK_LEFT != 0:
+				if _asset_placer.should_drag_place():
+					var handled = _asset_placer.place_asset(Input.is_key_pressed(KEY_SHIFT))
+					if handled:
+						return _handled()
+				return _handled()
+			if event.button_mask == 0:
 				return _handled()
 
 	if event is InputEventMouseButton:

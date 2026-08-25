@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://d4gwnq06xs8mf"]
+
+[ext_resource type="ArrayMesh" uid="uid://vdaaec01qmnk" path="res://demo/assets/kenney_fantasy_town/balcony_wall.obj" id="1_mesh"]
+
+[node name="balcony_wall" type="Node3D" unique_id=2055842116]
+
+[node name="balcony_wall_mesh" type="MeshInstance3D" parent="." unique_id=1479532637]
+mesh = ExtResource("1_mesh")

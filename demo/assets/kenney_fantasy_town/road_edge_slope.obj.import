@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dhfampe6loa00"
+path="res://.godot/imported/road_edge_slope.obj-7e9865d925e6d5155d1da01604aca146.mesh"
+
+[deps]
+
+files=["res://.godot/imported/road_edge_slope.obj-7e9865d925e6d5155d1da01604aca146.mesh"]
+
+source_file="res://demo/assets/kenney_fantasy_town/road_edge_slope.obj"
+dest_files=["res://.godot/imported/road_edge_slope.obj-7e9865d925e6d5155d1da01604aca146.mesh", "res://.godot/imported/road_edge_slope.obj-7e9865d925e6d5155d1da01604aca146.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

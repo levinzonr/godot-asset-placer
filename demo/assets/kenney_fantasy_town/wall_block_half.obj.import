@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dcbxr27jeev17"
+path="res://.godot/imported/wall_block_half.obj-11c6f5b9c1a81a4f16852dc7d6e91ecd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wall_block_half.obj-11c6f5b9c1a81a4f16852dc7d6e91ecd.mesh"]
+
+source_file="res://demo/assets/kenney_fantasy_town/wall_block_half.obj"
+dest_files=["res://.godot/imported/wall_block_half.obj-11c6f5b9c1a81a4f16852dc7d6e91ecd.mesh", "res://.godot/imported/wall_block_half.obj-11c6f5b9c1a81a4f16852dc7d6e91ecd.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

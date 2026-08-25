@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://jcewqjlknq3s"
+path="res://.godot/imported/stairs_stone_round.obj-03f572ede47bdfeb2b1d9c6b38ebcb2f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/stairs_stone_round.obj-03f572ede47bdfeb2b1d9c6b38ebcb2f.mesh"]
+
+source_file="res://demo/assets/kenney_fantasy_town/stairs_stone_round.obj"
+dest_files=["res://.godot/imported/stairs_stone_round.obj-03f572ede47bdfeb2b1d9c6b38ebcb2f.mesh", "res://.godot/imported/stairs_stone_round.obj-03f572ede47bdfeb2b1d9c6b38ebcb2f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
