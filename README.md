@@ -19,11 +19,13 @@ This is Godot Editor plugin that allows for quick asset placement and management
 ## Features
 
 - One-Click Asset Placement with Snapping to Ground, Collision shapes and Terrain3D Surfaces
+- **Brush Mode** - Paint multiple assets at once with adjustable brush size and density, continuous drag-painting, and real-time previews
 - [Quick Preview Node Transformations Before Placement](https://github.com/levinzonr/godot-asset-placer/blob/main/README.md#transforming-assets-before-placement)
 - **In Place Transform Mode** - Apply transformations to existing nodes in the scene using Asset Placer workflow
 - **Settings Panel** - Comprehensive customization options including key bindings, preview materials, and transform steps
 - **Random Asset Placement** - Automatically select random assets from filtered list after each placement
 - **Advanced Placement Options** - Normal alignment and scene bottom alignment controls
+- **Auto Placement Strategy** - Automatically detect and apply the optimal placement strategy based on the active scene
 - Organize Assets into collections for quick access and filtering
 - **Auto-Grouping** - Automatically group placed assets under nodes named after their primary collection
 - **Parent from selection** - Optionally derive the Assets Parent from the selected `Node3D` so new assets are placed as siblings (see Options)
@@ -157,6 +159,18 @@ To place an asset, follow these steps:
 7. Press `Left Mouse Button` to place the asset at the location of the mouse cursor
 8. If you want to modify the asset after placement, you can press `Shift` + `Left Mouse Button` to Place And Focus on the Placed Asset. This allows you to move, rotate, or scale the asset using the standard Godot Editor tools.
 
+#### Brush Mode
+
+> Available since version 1.6.0
+
+Brush Mode allows you to quickly paint multiple assets into your scene. In the Asset Placement Options, adjust **Brush Size** and **Brush Density** to scatter assets across surfaces:
+
+- **Cluster Placement** — Single-click to spawn clusters of assets scattered within the brush radius.
+- **Continuous Painting** — Click and drag the mouse cursor to paint trails of assets across terrain, collision objects, and planes.
+- **Real-Time Previews** — Live preview instances dynamically render within the brush circle showing transforms and placement before confirming.
+- **Transform & Snapping Support** — Brush mode works seamlessly with all placement settings, including grid snapping, surface normal alignment, and randomized rotation/scale.
+- Setting **Brush Size** to `1.0` (default) keeps standard single-asset placement active.
+
 #### Random Asset Placement
 
 You can enable random asset placement in the Asset Placement Options. When enabled, after each placement, a new asset will be randomly selected from the currently filtered list of assets in the Assets Panel. This is useful for quickly populating scenes with varied assets.
@@ -238,6 +252,7 @@ The Collection Management dialog provides a streamlined way to assign and remove
 - **Batch Selection** - Select multiple assets using Shift+Click (range) or Ctrl/Cmd+Click (multi-select)
 - **Quick Assignment** - Add or remove collections from all selected assets with one click
 - **Visual Feedback** - See which collections are fully assigned, partially assigned, or available
+- **Unassigned Filter** - Easily filter and locate assets not assigned to any collection
 
 To open the Collection Management dialog:
 
@@ -310,6 +325,15 @@ Found a problem or have an idea?
 - [🐛 Report a bug](https://github.com/levinzonr/godot-asset-placer/issues/new?template=bug_report.md&labels=bug&title=%5BBUG%5D%20)
 - [✨ Request a feature](https://github.com/levinzonr/godot-asset-placer/issues/new?template=feature_request.md&labels=enhancement&title=%5BFeature%5D%20)
 - [📖 Contributing guidelines](CONTRIBUTING.md)
+
+## Credits
+
+- 3D assets used in the demo scene are created by [Kenney](https://kenney.nl/) (Creative Commons Zero, CC0):
+  - [Dungeon Kit](https://kenney.nl/assets/dungeon-kit)
+  - [Factory Kit](https://kenney.nl/assets/factory-kit)
+  - [Fantasy Town Kit](https://kenney.nl/assets/fantasy-town-kit)
+  - [Pirate Kit](https://kenney.nl/assets/pirate-kit)
+  - [Platformer Kit](https://kenney.nl/assets/platformer-kit)
 
 ## Changelog
 

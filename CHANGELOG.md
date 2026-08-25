@@ -1,37 +1,32 @@
 # Godot Asset Placer Changelog
 
-## 1.6.0-beta1
+## 1.6.0
 
-### 🐛 Fixed
+Version **1.6.0** introduces **Brush Mode** for multi-asset and continuous painting, **automatic placement strategy detection**, an **unassigned assets filter** in collection management, and performance improvements for large libraries.
 
-- Fixed an issue where the plane preview would appear after changing scenes even when Asset Placer was inactive
+### ✨ New Features
 
-## 1.6.0-alpha3
+#### Brush Mode (Multi-Asset Painting)
 
-### ✨ Added
+- **Paint multiple assets at once** — Adjust **Brush Size** and **Brush Density** in the Placement Options to spawn scattered clusters of assets with a single click.
+- **Continuous painting** — Click and drag across terrain, collision shapes, and surfaces to paint paths and dense foliage naturally.
+- **Real-time brush previews** — Live preview instances display inside the brush radius with dynamic transform variations before placing.
+- **Full placement setting support** — Snapping, surface normal alignment, randomized rotations and scales, and parent selection rules seamlessly apply in brush mode.
+- **Preserved single-asset placement** — Setting brush size to the minimum (default `1.0`) maintains precise single-asset placement.
 
-- Auto apply Placement Strategy based on the selected scene
-- Unassigned filter inside Collection Management to show assets without collections
-- Updated demo assets with Kenney packs
+#### Placement & Workflow
 
-### 🐛 Fixed
+- **Auto Placement Strategy** — Automatically resolves and applies the appropriate placement strategy (Surface vs Terrain3D) based on the active scene and selected node.
 
-- Fixed a major editor freeze when adding assets to a collection in bulk by batching the `update_asset` calls.
-- Fallback on `ResourceLoader` when `ResourceId` has yet to resolve `uid`
+#### Collection Management
 
-## 1.6.0-alpha2
+- **Unassigned assets filter** — Added an "Unassigned" filter chip in the Collection Management dialog to quickly find and organize assets without collections.
+- **Batch collection updates** — Optimized bulk collection assignment to eliminate editor freezes when updating multiple assets in large libraries.
 
-### Added
+#### Asset Management
 
-- Previews are visible in brush mode as well so all the transformations are visible in real time.
-
-## 1.6.0-alpha1
-
-### ✨ Brush Mode
-
-- Easily paint multiple assets onto your scene at once! You can now adjust brush size and density to spawn scattered clusters of assets with a single click. Click and drag to continuously paint paths of assets across terrain and surfaces.
-- All existing placement methods were settings such as snapping, randomized transforms are preserved and are applied in brush mode as well.
-- Default "Painting" mode - single click placement - was preserved, all you need to do is specify the smallest brush size (which is also a default one) 
+- **Resource UID fallback** — Added fallback to `ResourceLoader` when `ResourceId` has not yet resolved `uid`.
+- **Updated demo assets** — Demo scenes and asset kits updated with Kenney asset packs (Fantasy Town & Pirate Kit).
 
 
 
