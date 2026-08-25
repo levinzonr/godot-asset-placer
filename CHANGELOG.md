@@ -1,5 +1,23 @@
 # Godot Asset Placer Changelog
 
+## 1.7.0-alpha1
+
+Pre-release alpha for the upcoming **1.7.0** line. This release adds **Persistent Placement Options** across editor sessions and **Orthographic Camera Placement Support**.
+
+### ✨ New Features
+
+- **#113** / **#117** — **Orthographic Camera Placement**:
+  - Support placing and transforming assets when the 3D editor camera is in orthographic/orthogonal mode (including standard Top, Front, Side views and free-look orthogonal mode).
+  - Automatically adapt placement planes to standard orthographic view axes (Top/Bottom -> XZ plane, Front/Rear -> XY plane, Left/Right -> YZ plane).
+  - Extended raycasting depth dynamically up to `camera.far` so zoomed-out orthographic cameras do not clip surface and terrain placement queries.
+- **#115** (@Sr3qt) — **Persistent Placement Options**:
+  - Placement options (grid snapping, random rotation, random scale, normal alignment, asset origin, auto-grouping, use selection for parent, and brush radius/density) are now automatically saved and restored across editor restarts.
+  - Options are serialized to `user://asset_placer_options.tres` with debounced auto-saving on modification.
+  - Refactored `AssetPlacerOptions` into an `@export_storage` Resource with direct setter signal bindings, eliminating intermediate boilerplate in `AssetPlacerPresenter`.
+  - Standardized option property names (`grid_snap_enabled`, `grid_snap_step`, `pick_random_asset`, `use_random_rotation`, `use_random_scale`, `uniform_random_scaling`).
+
+---
+
 ## 1.6.0
 
 Version **1.6.0** introduces **Brush Mode** for multi-asset and continuous painting, **automatic placement strategy detection**, an **unassigned assets filter** in collection management, and performance improvements for large libraries.

@@ -16,7 +16,8 @@ func get_placement_point(camera: Camera3D, mouse_position: Vector2) -> Collision
 	var params = PhysicsRayQueryParameters3D.new()
 	params.from = ray_origin
 	params.exclude = exclude_rids
-	params.to = ray_origin + ray_dir * 1000
+	var ray_distance := maxf(1000.0, camera.far)
+	params.to = ray_origin + ray_dir * ray_distance
 	var result = space_state.intersect_ray(params)
 	if not result.has("position") or not result.has("normal"):
 		AssetPlacerPresenter.instance.show_error.emit("No Surface to Collide With")

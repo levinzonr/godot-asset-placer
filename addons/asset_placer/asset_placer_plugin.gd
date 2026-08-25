@@ -200,6 +200,7 @@ func _initialize_data_layer():
 	settings_repository.settings_changed.connect(_react_to_settings_change)
 	settings_repository.initialize_project_settings(current_settings)
 
+	AssetPlacerOptionsManager.load_options()
 	APEditorSettingsManager.load_editor_settings()
 
 	AssetLibraryManager.load_asset_library(current_settings.asset_library_path)
