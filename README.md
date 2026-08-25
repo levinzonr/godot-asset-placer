@@ -23,6 +23,7 @@ This is Godot Editor plugin that allows for quick asset placement and management
 - [Quick Preview Node Transformations Before Placement](https://github.com/levinzonr/godot-asset-placer/blob/main/README.md#transforming-assets-before-placement)
 - **In Place Transform Mode** - Apply transformations to existing nodes in the scene using Asset Placer workflow
 - **Settings Panel** - Comprehensive customization options including key bindings, preview materials, and transform steps
+- **Persistent Placement Settings** - Placement options automatically persist across editor sessions and restarts
 - **Random Asset Placement** - Automatically select random assets from filtered list after each placement
 - **Advanced Placement Options** - Normal alignment and scene bottom alignment controls
 - **Auto Placement Strategy** - Automatically detect and apply the optimal placement strategy based on the active scene
