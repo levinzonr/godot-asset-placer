@@ -1,0 +1,22 @@
+class_name InstancingStrategy
+extends RefCounted
+
+signal focus_requested(node: Node3D)
+
+var _undo_redo: EditorUndoRedoManager
+
+
+func _init(undo_redo: EditorUndoRedoManager):
+	_undo_redo = undo_redo
+
+
+## Applies finalized world transforms and records changes in the caller's open undo action.
+## Changes must be applied immediately; the caller commits with commit_action(false).
+## Implementations must record deterministic redo operations rather than regenerate transforms.
+func place_instances(
+	_asset: AssetResource,
+	_world_transforms: Array[Transform3D],
+	_parent: Node3D,
+	_select_after_placement: bool
+) -> void:
+	push_error("InstancingStrategy.place_instances() must be implemented")
