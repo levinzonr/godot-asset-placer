@@ -14,9 +14,7 @@ class MeshPart:
 
 
 func place_instances(
-	asset: AssetResource,
-	world_transforms: Array[Transform3D],
-	parent: Node3D
+	asset: AssetResource, world_transforms: Array[Transform3D], parent: Node3D
 ) -> void:
 	if world_transforms.is_empty():
 		return

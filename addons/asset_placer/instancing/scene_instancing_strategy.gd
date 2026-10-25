@@ -5,9 +5,7 @@ const META_ASSET_ID = &"asset_placer_res_id"
 
 
 func place_instances(
-	asset: AssetResource,
-	world_transforms: Array[Transform3D],
-	parent: Node3D
+	asset: AssetResource, world_transforms: Array[Transform3D], parent: Node3D
 ) -> void:
 	for transform in world_transforms:
 		var new_node: Node3D = _instantiate_asset_resource(asset)
