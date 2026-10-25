@@ -17,6 +17,27 @@ resource_name = ""
 script = ExtResource("2_o45xf")
 icon_name = &"NodeWarning"
 
+[sub_resource type="Texture2D" id="Texture2D_65ccq"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_o45xf")
+icon_name = &"Instance"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_vp4bf"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_o45xf")
+icon_name = &"PackedScene"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
+[sub_resource type="Texture2D" id="Texture2D_nmiht"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_o45xf")
+icon_name = &"MultiMeshInstance3D"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
 [sub_resource type="Texture2D" id="Texture2D_brush"]
 resource_local_to_scene = false
 resource_name = ""
@@ -123,20 +144,31 @@ alignment = 0
 
 [node name="InstancingOptions" type="HBoxContainer" parent="VBoxContainer" unique_id=1006567862]
 layout_mode = 2
-theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/InstancingOptions" unique_id=478313346]
+layout_mode = 2
+texture = SubResource("Texture2D_65ccq")
+stretch_mode = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/InstancingOptions" unique_id=1763912996]
 layout_mode = 2
-text = "Instancing Mode"
+text = "Instancing Mode: "
 
 [node name="InstancingModeOptionButton" type="OptionButton" parent="VBoxContainer/InstancingOptions" unique_id=1049305522]
 unique_name_in_owner = true
 layout_mode = 2
-selected = 0
+tooltip_text = "Individual Scene: Creates a separate scene instance for each placement, preserving its nodes, scripts, collision, and animation. 
+Best for placing interactive objects
+
+MultiMesh: Extracts supported MeshInstance3D nodes from the scene and batches their copies for efficient rendering.
+Best for placing large amount of objects that are not meant to be interactable"
+selected = 1
 item_count = 2
 popup/item_0/text = "Indvidual Scene"
+popup/item_0/icon = SubResource("Texture2D_vp4bf")
 popup/item_0/id = 0
 popup/item_1/text = "MultMeshInstance"
+popup/item_1/icon = SubResource("Texture2D_nmiht")
 popup/item_1/id = 1
 
 [node name="BrushSettingsSection" type="VBoxContainer" parent="VBoxContainer" unique_id=987654321]
@@ -173,12 +205,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 max_value = 200.0
 step = 0.1
+value = 14.5
 
 [node name="BrushRadiusValue" type="Label" parent="VBoxContainer/BrushSettingsSection/BrushRadiusRow" unique_id=987654329]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-text = "0.0"
+text = "14.5"
 horizontal_alignment = 2
 
 [node name="BrushDensityRow" type="HBoxContainer" parent="VBoxContainer/BrushSettingsSection" unique_id=987654330]
@@ -199,13 +232,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
-value = 0.56
+value = 1.0
 
 [node name="BrushDensityValue" type="Label" parent="VBoxContainer/BrushSettingsSection/BrushDensityRow" unique_id=987654334]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-text = "0.56"
+text = "1.00"
 horizontal_alignment = 2
 
 [node name="UseSelectionForParentCheckBox" type="CheckBox" parent="VBoxContainer" unique_id=438547014]
@@ -300,14 +333,6 @@ layout_mode = 2
 text = "Enable Random Asset Placement"
 icon = SubResource("Texture2D_br0rc")
 
-[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=260316837]
-custom_minimum_size = Vector2(315, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 14
-text = "Experimental: This option will pick item from the currently visible assets  after each placement"
-autowrap_mode = 2
-
 [node name="Snapping" type="BoxContainer" parent="VBoxContainer" unique_id=22742712]
 layout_mode = 2
 
@@ -317,7 +342,6 @@ layout_mode = 2
 [node name="GridSnappingCheckbox" type="CheckBox" parent="VBoxContainer/Snapping/VBoxContainer" unique_id=42123293]
 unique_name_in_owner = true
 layout_mode = 2
-button_pressed = true
 text = "Grid Snapping"
 icon = SubResource("Texture2D_5lmt4")
 
@@ -333,6 +357,7 @@ unique_name_in_owner = true
 layout_mode = 2
 step = 0.01
 value = 2.0
+editable = false
 
 [node name="AlignNormalsCheckbox" type="CheckBox" parent="VBoxContainer" unique_id=100200436]
 unique_name_in_owner = true
