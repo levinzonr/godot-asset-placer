@@ -20,6 +20,7 @@ This is Godot Editor plugin that allows for quick asset placement and management
 
 - One-Click Asset Placement with Snapping to Ground, Collision shapes and Terrain3D Surfaces
 - **Brush Mode** - Paint multiple assets at once with adjustable brush size and density, continuous drag-painting, and real-time previews
+- **[Instancing Modes](#instancing-modes)** - Create individual scene instances or batch repeated static geometry with MultiMeshInstance3D
 - [Quick Preview Node Transformations Before Placement](https://github.com/levinzonr/godot-asset-placer/blob/main/README.md#transforming-assets-before-placement)
 - **In Place Transform Mode** - Apply transformations to existing nodes in the scene using Asset Placer workflow
 - **Settings Panel** - Comprehensive customization options including key bindings, preview materials, and transform steps
@@ -125,7 +126,7 @@ While placement mode is active, the viewport overlay shows the active palette an
 
 ### Placing Assets
 
-Godot Asset Placer provides various placement modes. All methods rely on RayCasting to determine where to place the asset.
+Godot Asset Placer provides various placement modes to determine **where** to place an asset. All methods rely on RayCasting. Separately, [Instancing Mode](#instancing-modes) determines **how** the placed asset is stored in your scene.
 
 Placement Modes can be cycled using `Q` Shortcut
 
@@ -145,6 +146,32 @@ This will allow to move the plane origin using Mouse Wheel along selected Axis
 
 This mode allows you to place assets directly onto a Terrain3D surface. When selected you will be prompted to select your Terrain3D node. After that the plugin will user Terrain3D surfaces to resolve placement location.
 
+#### Instancing Modes
+
+> Available since version 1.7.0-alpha2
+
+Choose **Instancing Mode** in the Placement Options:
+
+| Mode | How it works | Best suited for |
+|------|--------------|-----------------|
+| **Individual Scene** (default) | Creates a separate scene instance for each placement, preserving its nodes, scripts, collision, and animation. | Interactive objects, physics-enabled assets, and assets requiring individual scene-node editing. |
+| **MultiMesh** | Extracts supported `MeshInstance3D` nodes from the source scene and batches their copies into `MultiMeshInstance3D` nodes. | Repeated static geometry such as foliage, rocks, and decorative props. |
+
+Both modes work with Surface, Plane, and Terrain3D placement, single-asset placement, and brush painting. They use the same placement transforms, including snapping, normal alignment, and randomized rotation/scale.
+
+**MultiMesh behavior:**
+
+- Use your existing 3D scene assets; there is no need to prepare MultiMesh resources manually.
+- Each supported mesh node in the source scene gets a separate batch, preserving its nested transform, mesh materials, and surface material overrides.
+- New placements reuse compatible batches under the resolved **Assets Parent** or primary collection group.
+- Placement strokes support undo/redo. Switching modes finishes the current stroke and affects future placements only; it does not convert existing content.
+
+**MultiMesh limitations:**
+
+- Only static mesh visuals are copied. Collision, scripts, animation, and other non-mesh scene content are not copied. Use **Individual Scene** when those behaviors are required.
+- Individual copies are not separate scene nodes. Standard editor selection and transform tools affect an entire batch rather than a single copy.
+- Skinned and blend-shape meshes, top-level subtrees, and mesh subtrees separated by non-`Node3D` parents are skipped with warnings. Hidden and meshless nodes are omitted.
+
 #### Placement Steps
 
 To place an asset, follow these steps:
@@ -154,11 +181,12 @@ To place an asset, follow these steps:
 3. Open Asset Placer Dock window and select the asset you want to place from the Assets tab
 4. Optional: Set **Assets Parent** under the selected root, or enable **Use selection for parent** so the parent is taken from the current `Node3D` selection (sibling placement). Picking **Assets Parent** disables selection-based mode.
 5. Optional: Configure Placement Options:
+   - **Instancing Mode** - Keep **Individual Scene** for full scene instances, or choose **MultiMesh** for batched static visuals (see [Instancing Modes](#instancing-modes))
    - **Align Normals** - Enable to align assets with surface normals for natural placement on sloped surfaces
    - **Use Assets Origin** - Enable to place using asset's local origin point, or disable to use the asset's actual bottom
 6. At this point you will see a preview of the asset in the 3D viewport
 7. Press `Left Mouse Button` to place the asset at the location of the mouse cursor
-8. If you want to modify the asset after placement, you can press `Shift` + `Left Mouse Button` to Place And Focus on the Placed Asset. This allows you to move, rotate, or scale the asset using the standard Godot Editor tools.
+8. If you want to modify the asset after placement, you can press `Shift` + `Left Mouse Button` to Place And Focus on the Placed Asset. In **Individual Scene** mode, this allows you to move, rotate, or scale the individual asset using the standard Godot Editor tools. In **MultiMesh** mode, focus targets a batch, so those tools affect all copies in that batch.
 
 #### Brush Mode
 
@@ -197,6 +225,8 @@ For example, if you have assets assigned to "Trees" and "Rocks" collections:
 ```
 
 Assets without a primary collection will be placed directly under the parent node. See [Primary Collections](#primary-collections) for how to set the primary collection for your assets.
+
+In **MultiMesh** mode, the collection groups contain batch nodes instead of a separate scene node for each placed copy.
 
 #### Transforming Assets Before Placement
 

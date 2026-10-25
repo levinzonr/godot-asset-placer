@@ -1,5 +1,30 @@
 # Godot Asset Placer Changelog
 
+## 1.7.0-alpha2
+
+Second alpha for the upcoming **1.7.0** line. You can now configure how to instantiate your assets onto your scenes: Individual Scene (default and how it was done before) or MultiMesh
+
+### MultiMesh Instancing
+
+Use **MultiMesh** in the **Instancing Mode** to batch repeated static geometry, such as foliage, rocks, and decorative props, instead of creating a separate scene instance for every placement.
+
+- **Works with your existing Assets** — Extracts supported `MeshInstance3D` nodes from the selected asset, preserving their nested transforms, mesh materials, and surface material overrides. Scenes containing multiple mesh nodes produce a separate batch for each mesh node.
+- **Single placement and brush painting** — Uses the same placement transforms as Individual Scene mode, including snapping, randomized rotation/scale, and surface alignment.
+- **Automatic batch reuse** — New placements are appended to compatible batches under the resolved Assets Parent or collection group, keeping your scene tree clean
+- **Undo/redo support** — Placement strokes can be undone and redone. Switching instancing modes finishes the current stroke and affects future placements only; existing content is not converted.
+
+#### Limitations
+
+- **Static visuals only** — Collision, scripts, animation, and other non-mesh scene content are not copied. Use Individual Scene mode when those behaviors are required.
+- **No individual scene nodes** — Each copy is stored as a transform inside a MultiMesh. Standard editor selection and transform tools operate on the whole batch, not individual copies.
+- **Unsupported geometry is skipped** — Skinned and blend-shape meshes, top-level subtrees, and mesh subtrees separated by non-`Node3D` parents are skipped with warnings. Hidden and meshless nodes are omitted.
+
+
+### 🐛 Fixed
+- Fixed non-brush placement skipping randomized rotation and scale. Randomization now applies to both the initial single-asset preview and subsequent generated previews, with manual transforms applied afterward.
+
+---
+
 ## 1.7.0-alpha1
 
 Pre-release alpha for the upcoming **1.7.0** line. This release adds **Persistent Placement Options** across editor sessions and **Orthographic Camera Placement Support**.
