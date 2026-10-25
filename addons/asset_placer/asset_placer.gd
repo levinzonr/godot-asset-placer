@@ -20,6 +20,7 @@ var _is_node_transform_mode: bool = false
 var _original_transform: Transform3D
 var _placement_strategy: AssetPlacementStrategy
 var _instancing_strategy: InstancingStrategy
+
 var _presenter: AssetPlacerPresenter:
 	get:
 		return AssetPlacerPresenter.instance
@@ -31,8 +32,18 @@ var _options: AssetPlacerOptions:
 
 func _init(undo_redo: EditorUndoRedoManager):
 	self.undo_redo = undo_redo
-	_instancing_strategy = SceneInstancingStrategy.new(undo_redo)
-	_instancing_strategy.focus_requested.connect(_focus_placed_instance)
+	set_instancing_mode(SceneInstancingStrategy.new())
+
+
+func set_instancing_mode(strategy: InstancingStrategy) -> void:
+	if strategy == null or strategy == _instancing_strategy:
+		return
+	end_stroke()
+	strategy.setup(undo_redo)
+	if not strategy.focus_requested.is_connected(_focus_placed_instance):
+		strategy.focus_requested.connect(_focus_placed_instance)
+	_instancing_strategy = strategy
+	last_placed_position = Vector3(INF, INF, INF)
 
 
 func start_placement(root: Window, asset: AssetResource, placement: GapPlacementMode):
@@ -126,6 +137,8 @@ func place_asset(focus_on_placement: bool):
 
 			if not _is_in_stroke:
 				undo_redo.create_action("Place Asset(s): %s" % asset.name, 0, parent)
+				# Mode changes replace the strategy; history must retain its original method target.
+				undo_redo.add_do_reference(_instancing_strategy)
 				_is_in_stroke = true
 
 			var transforms: Array[Transform3D] = []

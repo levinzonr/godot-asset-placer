@@ -27,6 +27,7 @@ var options: AssetPlacerOptions:
 @onready var random_asset_check_box = %RandomAssetCheckBox
 @onready var group_automatically_check_box: CheckBox = %GroupAutomaticallyCheckBox
 @onready var use_selection_for_parent_check_box: CheckBox = %UseSelectionForParentCheckBox
+@onready var instancing_mode_option_button: OptionButton = %InstancingModeOptionButton
 
 @onready var brush_radius_slider: HSlider = %BrushRadiusSlider
 @onready var brush_radius_value: Label = %BrushRadiusValue
@@ -39,6 +40,16 @@ func _ready():
 	options.changed.connect(set_options)
 	presenter.parent_changed.connect(show_parent)
 	presenter.placement_mode_changed.connect(show_placement_mode)
+	presenter.instancing_mode_changed.connect(show_instancing_mode)
+
+	instancing_mode_option_button.item_selected.connect(
+		func(index: int):
+			match instancing_mode_option_button.get_item_id(index):
+				0:
+					presenter.instancing_mode = SceneInstancingStrategy.new()
+				1:
+					presenter.instancing_mode = MultiMeshInstancingStrategy.new()
+	)
 
 	placement_mode_options_button.item_selected.connect(
 		func(id):
@@ -123,6 +134,13 @@ func show_parent(parent: NodePath):
 	else:
 		parent_button.text = "No parent selected"
 		parent_button.icon = EditorIconTexture2D.new("NodeWarning")
+
+
+func show_instancing_mode(strategy: InstancingStrategy) -> void:
+	if strategy is SceneInstancingStrategy:
+		instancing_mode_option_button.select(instancing_mode_option_button.get_item_index(0))
+	elif strategy is MultiMeshInstancingStrategy:
+		instancing_mode_option_button.select(instancing_mode_option_button.get_item_index(1))
 
 
 func show_placement_mode(mode: GapPlacementMode):

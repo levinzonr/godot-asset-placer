@@ -62,6 +62,7 @@ func _enter_tree():
 	get_tree().root.add_child(_plane_preview)
 
 	_asset_placer = AssetPlacer.new(get_undo_redo())
+	_presenter.instancing_mode_changed.connect(_asset_placer.set_instancing_mode)
 	synchronizer = Synchronize.new()
 	scene_changed.connect(_handle_scene_changed)
 	_init_parent_scene.call_deferred()

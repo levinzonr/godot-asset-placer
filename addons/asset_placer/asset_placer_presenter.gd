@@ -7,6 +7,7 @@ signal asset_deselected
 signal parent_changed(parent: NodePath)
 signal transform_mode_changed(mode: TransformMode)
 signal placement_mode_changed(mode: GapPlacementMode)
+signal instancing_mode_changed(strategy: InstancingStrategy)
 signal preview_transform_axis_changed(axis: Vector3)
 signal asset_selected(asset: AssetResource)
 signal show_error(message: String)
@@ -27,6 +28,13 @@ var placement_mode: GapPlacementMode = GapPlacementMode.SurfacePlacement.new():
 	set(value):
 		placement_mode = value
 		placement_mode_changed.emit(value)
+
+var instancing_mode: InstancingStrategy = SceneInstancingStrategy.new():
+	set(value):
+		if value != instancing_mode:
+			instancing_mode = value
+			instancing_mode_changed.emit(value)
+
 var preview_transform_axis: Vector3 = Vector3.UP
 
 var _selected_asset: AssetResource
@@ -45,6 +53,7 @@ func _init():
 
 func ready():
 	placement_mode_changed.emit(placement_mode)
+	instancing_mode_changed.emit(instancing_mode)
 
 
 func plugin_is_active() -> bool:

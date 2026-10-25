@@ -685,46 +685,46 @@ metadata/asset_placer_res_id = "uid://ipb1v4hdbmwv"
 transform = Transform3D(0.7660454, 0, 0.6427884, 0, 1, 0, -0.64278847, 0, 0.7660455, 13, 0.46870327, 20.000002)
 metadata/asset_placer_res_id = "uid://ipb1v4hdbmwv"
 
-[node name="arrow-basic2" type="Node3D" parent="." unique_id=51333618 instance=ExtResource("18_62gnj")]
+[node name="arrow-basic2" parent="." unique_id=51333618 instance=ExtResource("18_62gnj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.0000001, -4, 0.4687519, 10.000001)
 metadata/asset_placer_res_id = "uid://b7dc1ygs8tlhr"
 
-[node name="arrow-basic2 (1)" type="Node3D" parent="." unique_id=1688182633 instance=ExtResource("18_62gnj")]
+[node name="arrow-basic2 (1)" parent="." unique_id=1688182633 instance=ExtResource("18_62gnj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.0000001, -2, 0.4687519, 10.000001)
 metadata/asset_placer_res_id = "uid://b7dc1ygs8tlhr"
 
-[node name="arrow-basic2 (2)" type="Node3D" parent="." unique_id=649083758 instance=ExtResource("18_62gnj")]
+[node name="arrow-basic2 (2)" parent="." unique_id=649083758 instance=ExtResource("18_62gnj")]
 transform = Transform3D(-0.93969315, 0, -0.34202063, 0, 1, 0, 0.34202066, 0, -0.9396933, 0, 0.46862984, 10.000001)
 metadata/asset_placer_res_id = "uid://b7dc1ygs8tlhr"
 
-[node name="arrow-basic2 (3)" type="Node3D" parent="." unique_id=381804796 instance=ExtResource("18_62gnj")]
+[node name="arrow-basic2 (3)" parent="." unique_id=381804796 instance=ExtResource("18_62gnj")]
 transform = Transform3D(0.34202078, 0, -0.93969417, 0, 1, 0, 0.9396943, 0, 0.3420208, 0, 0.4687519, 8.000001)
 metadata/asset_placer_res_id = "uid://b7dc1ygs8tlhr"
 
-[node name="block-grass-corner-low2" type="Node3D" parent="." unique_id=1829475782 instance=ExtResource("19_vkopi")]
+[node name="block-grass-corner-low2" parent="." unique_id=1829475782 instance=ExtResource("19_vkopi")]
 transform = Transform3D(3.4343889, 0, 0, 0, 3.4343889, 0, 0, 0, 3.4343894, -6, 0, 14.000002)
 metadata/asset_placer_res_id = "uid://utjwk4ypq4j8"
 
-[node name="block-grass-corner-low2 (1)" type="Node3D" parent="." unique_id=1622505823 instance=ExtResource("19_vkopi")]
+[node name="block-grass-corner-low2 (1)" parent="." unique_id=1622505823 instance=ExtResource("19_vkopi")]
 transform = Transform3D(-1.841739, 0, -3.189987, 0, 3.6834705, 0, 3.1899874, 0, -1.8417393, -2, 0, 14.000002)
 metadata/asset_placer_res_id = "uid://utjwk4ypq4j8"
 
-[node name="block-grass-narrow2" type="Node3D" parent="." unique_id=1953579078 instance=ExtResource("20_qvfii")]
+[node name="block-grass-narrow2" parent="." unique_id=1953579078 instance=ExtResource("20_qvfii")]
 transform = Transform3D(4.5949736, 0, 0, 0, 4.5949736, 0, 0, 0, 4.594974, 2, 0, 14.000002)
 metadata/asset_placer_res_id = "uid://b4ax4fy4op0l2"
 
-[node name="block-grass-narrow2 (1)" type="Node3D" parent="." unique_id=1511517189 instance=ExtResource("20_qvfii")]
+[node name="block-grass-narrow2 (1)" parent="." unique_id=1511517189 instance=ExtResource("20_qvfii")]
 transform = Transform3D(4.5949736, 0, 0, 0, 4.5949736, 0, 0, 0, 4.594974, -10, 0, 16.000002)
 metadata/asset_placer_res_id = "uid://b4ax4fy4op0l2"
 
-[node name="block-grass-low-narrow2" type="Node3D" parent="." unique_id=919242998 instance=ExtResource("21_8rfdr")]
+[node name="block-grass-low-narrow2" parent="." unique_id=919242998 instance=ExtResource("21_8rfdr")]
 transform = Transform3D(14.420996, 0, 0, 0, 14.420996, 0, 0, 0, 14.420998, -28, 0.46887398, 16.000002)
 metadata/asset_placer_res_id = "uid://bdj2knkhognhy"
 
-[node name="block-grass-low-narrow2 (1)" type="Node3D" parent="." unique_id=654060002 instance=ExtResource("21_8rfdr")]
+[node name="block-grass-low-narrow2 (1)" parent="." unique_id=654060002 instance=ExtResource("21_8rfdr")]
 transform = Transform3D(14.420996, 0, 0, 0, 14.420996, 0, 0, 0, 14.420998, -54, 0, 18.000002)
 metadata/asset_placer_res_id = "uid://bdj2knkhognhy"
 
-[node name="block-grass-low-narrow2 (2)" type="Node3D" parent="." unique_id=573428541 instance=ExtResource("21_8rfdr")]
+[node name="block-grass-low-narrow2 (2)" parent="." unique_id=573428541 instance=ExtResource("21_8rfdr")]
 transform = Transform3D(14.420996, 0, 0, 0, 14.420996, 0, 0, 0, 14.420998, -44, 0, -4.0000005)
 metadata/asset_placer_res_id = "uid://bdj2knkhognhy"

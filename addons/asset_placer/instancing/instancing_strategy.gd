@@ -6,7 +6,8 @@ signal focus_requested(node: Node3D)
 var _undo_redo: EditorUndoRedoManager
 
 
-func _init(undo_redo: EditorUndoRedoManager):
+## Must be called before placing instances.
+func setup(undo_redo: EditorUndoRedoManager) -> void:
 	_undo_redo = undo_redo
 
 
