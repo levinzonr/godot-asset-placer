@@ -11,7 +11,7 @@
 This is Godot Editor plugin that allows for quick asset placement and management when working with large 3D Scenes.
 
 <p align="center">
-	<img src="./addons/asset_placer/icon.png" alt="Logo" width="128" height="128" />
+	<img src="./docs/gh_hero.png" alt="Godot Asset Placer" width="800" />
 </p>
 
 > Please report any issues you encounter. Feature suggestions are welcome as well.
