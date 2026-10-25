@@ -373,7 +373,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 		if moved:
 			if event.button_mask & MOUSE_BUTTON_MASK_LEFT != 0:
 				if _asset_placer.should_drag_place():
-					var handled = _asset_placer.place_asset(Input.is_key_pressed(KEY_SHIFT))
+					var handled = _asset_placer.place_asset()
 					if handled:
 						return _handled()
 				return _handled()
@@ -385,7 +385,7 @@ func _forward_3d_gui_input(viewport_camera, event):
 			# Don't handle RMB, let it pass through
 			pass
 		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			var handled = _asset_placer.place_asset(Input.is_key_pressed(KEY_SHIFT))
+			var handled = _asset_placer.place_asset()
 			if handled:
 				return _handled()
 

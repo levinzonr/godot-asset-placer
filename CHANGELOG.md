@@ -19,6 +19,11 @@ Use **MultiMesh** in the **Instancing Mode** to batch repeated static geometry, 
 - **No individual scene nodes** — Each copy is stored as a transform inside a MultiMesh. Standard editor selection and transform tools operate on the whole batch, not individual copies.
 - **Unsupported geometry is skipped** — Skinned and blend-shape meshes, top-level subtrees, and mesh subtrees separated by non-`Node3D` parents are skipped with warnings. Hidden and meshless nodes are omitted.
 
+### Removed
+
+- Removed Shift-click place-and-focus. Placement and redo no longer automatically select placed nodes or MultiMesh batches; exit placement mode and select them manually to edit.
+
+> Reasoning: While I initially thought this might be a nice feature, it proved to be less and less important and useful with more helpful features being added to the plugin. With introduction of Instacing option I decided to let it go to reduce the coupling between placement logic and selection behavior and simplify Plugins API.
 
 ### 🐛 Fixed
 - Fixed non-brush placement skipping randomized rotation and scale. Randomization now applies to both the initial single-asset preview and subsequent generated previews, with manual transforms applied afterward.

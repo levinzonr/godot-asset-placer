@@ -16,8 +16,7 @@ class MeshPart:
 func place_instances(
 	asset: AssetResource,
 	world_transforms: Array[Transform3D],
-	parent: Node3D,
-	select_after_placement: bool
+	parent: Node3D
 ) -> void:
 	if world_transforms.is_empty():
 		return
@@ -27,7 +26,7 @@ func place_instances(
 
 	var parts: Array[MeshPart] = []
 	_collect_mesh_parts(source, source, Transform3D.IDENTITY, parts)
-	var last_batch: AssetPlacerMultiMeshBatch
+
 	if parts.is_empty():
 		push_warning(
 			"Asset Placer: '%s' has no supported visible MeshInstance3D nodes." % asset.name
@@ -35,12 +34,8 @@ func place_instances(
 	else:
 		var scene_owner := EditorInterface.get_edited_scene_root()
 		for part in parts:
-			last_batch = _place_mesh_part(asset, part, world_transforms, parent, scene_owner)
+			_place_mesh_part(asset, part, world_transforms, parent, scene_owner)
 	source.free()
-
-	if select_after_placement and last_batch != null:
-		_undo_redo.add_do_method(self, "_focus_batch", last_batch)
-		_focus_batch(last_batch)
 
 
 func _instantiate_source(asset: AssetResource) -> Node3D:
@@ -107,7 +102,7 @@ func _place_mesh_part(
 	world_transforms: Array[Transform3D],
 	parent: Node3D,
 	scene_owner: Node
-) -> AssetPlacerMultiMeshBatch:
+) -> void:
 	var batch := _find_batch(parent, asset.id, part)
 	var is_new := batch == null
 	if is_new:
@@ -129,7 +124,6 @@ func _place_mesh_part(
 	_undo_redo.add_do_method(self, "_do_placement", batch, parent, scene_owner, transforms)
 	_undo_redo.add_undo_method(self, "_undo_placement", batch, parent, previous_count, is_new)
 	_do_placement(batch, parent, scene_owner, transforms)
-	return batch
 
 
 func _find_batch(parent: Node3D, asset_id: String, part: MeshPart) -> AssetPlacerMultiMeshBatch:
@@ -150,10 +144,6 @@ func _do_placement(
 		parent.add_child(batch, true)
 		batch.owner = scene_owner
 	batch.set_instance_transforms(transforms)
-
-
-func _focus_batch(batch: AssetPlacerMultiMeshBatch) -> void:
-	focus_requested.emit(batch)
 
 
 func _undo_placement(

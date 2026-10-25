@@ -40,8 +40,7 @@ func set_instancing_mode(strategy: InstancingStrategy) -> void:
 		return
 	end_stroke()
 	strategy.setup(undo_redo)
-	if not strategy.focus_requested.is_connected(_focus_placed_instance):
-		strategy.focus_requested.connect(_focus_placed_instance)
+
 	_instancing_strategy = strategy
 	last_placed_position = Vector3(INF, INF, INF)
 
@@ -116,7 +115,7 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 		return false
 
 
-func place_asset(focus_on_placement: bool):
+func place_asset():
 	if preview_node and _presenter != null:
 		if _is_node_transform_mode:
 			_confirm_node_transform()
@@ -151,7 +150,7 @@ func place_asset(focus_on_placement: bool):
 			else:
 				transforms.append(preview_node.global_transform)
 
-			_instancing_strategy.place_instances(asset, transforms, parent, focus_on_placement)
+			_instancing_strategy.place_instances(asset, transforms, parent)
 
 			_presenter.on_asset_placed()
 			last_placed_position = (
@@ -328,11 +327,6 @@ func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
 	var snapped = tangent * snapped_tangent + bitangent * snapped_bitangent + n * local_height
 
 	return snapped
-
-
-func _focus_placed_instance(node: Node3D):
-	_presenter.clear_selection()
-	EditorInterface.edit_node(node)
 
 
 func _confirm_node_transform():

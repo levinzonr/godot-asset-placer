@@ -186,7 +186,7 @@ To place an asset, follow these steps:
    - **Use Assets Origin** - Enable to place using asset's local origin point, or disable to use the asset's actual bottom
 6. At this point you will see a preview of the asset in the 3D viewport
 7. Press `Left Mouse Button` to place the asset at the location of the mouse cursor
-8. If you want to modify the asset after placement, you can press `Shift` + `Left Mouse Button` to Place And Focus on the Placed Asset. In **Individual Scene** mode, this allows you to move, rotate, or scale the individual asset using the standard Godot Editor tools. In **MultiMesh** mode, focus targets a batch, so those tools affect all copies in that batch.
+8. To edit placed content, exit placement mode and select it using the scene tree or viewport. In **Individual Scene** mode, the standard Godot Editor tools affect the individual asset. In **MultiMesh** mode, they affect all copies in the selected batch.
 
 #### Brush Mode
 

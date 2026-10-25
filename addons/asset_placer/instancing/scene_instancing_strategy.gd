@@ -7,8 +7,7 @@ const META_ASSET_ID = &"asset_placer_res_id"
 func place_instances(
 	asset: AssetResource,
 	world_transforms: Array[Transform3D],
-	parent: Node3D,
-	select_after_placement: bool
+	parent: Node3D
 ) -> void:
 	for transform in world_transforms:
 		var new_node: Node3D = _instantiate_asset_resource(asset)
@@ -18,19 +17,17 @@ func place_instances(
 		new_node.set_meta(META_ASSET_ID, asset.id)
 
 		_undo_redo.add_do_reference(new_node)
-		_undo_redo.add_do_method(self, "_do_placement", new_node, parent, select_after_placement)
+		_undo_redo.add_do_method(self, "_do_placement", new_node, parent)
 		_undo_redo.add_undo_method(self, "_undo_placement", new_node, parent)
 
-		_do_placement(new_node, parent, select_after_placement)
+		_do_placement(new_node, parent)
 
 
-func _do_placement(new_node: Node3D, parent: Node3D, select_after_placement: bool):
+func _do_placement(new_node: Node3D, parent: Node3D):
 	var temp_name := new_node.name
 	parent.add_child(new_node)
 	new_node.name = temp_name
 	new_node.owner = EditorInterface.get_edited_scene_root()
-	if select_after_placement:
-		focus_requested.emit(new_node)
 
 
 func _undo_placement(new_node: Node3D, parent: Node3D):
