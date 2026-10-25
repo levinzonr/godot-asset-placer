@@ -11,7 +11,7 @@
 This is Godot Editor plugin that allows for quick asset placement and management when working with large 3D Scenes.
 
 <p align="center">
-	<img src="./docs/logo.png" alt="Logo" />
+	<img src="./addons/asset_placer/icon.png" alt="Logo" width="128" height="128" />
 </p>
 
 > Please report any issues you encounter. Feature suggestions are welcome as well.
@@ -186,8 +186,6 @@ To place an asset, follow these steps:
    - **Use Assets Origin** - Enable to place using asset's local origin point, or disable to use the asset's actual bottom
 6. At this point you will see a preview of the asset in the 3D viewport
 7. Press `Left Mouse Button` to place the asset at the location of the mouse cursor
-8. To edit placed content, exit placement mode and select it using the scene tree or viewport. In **Individual Scene** mode, the standard Godot Editor tools affect the individual asset. In **MultiMesh** mode, they affect all copies in the selected batch.
-
 #### Brush Mode
 
 > Available since version 1.6.0
