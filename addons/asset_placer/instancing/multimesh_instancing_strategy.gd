@@ -26,7 +26,6 @@ func place_instances(
 		return
 
 	var parts: Array[MeshPart] = []
-	# Incoming transforms already contain the instantiated scene root's transform.
 	_collect_mesh_parts(source, source, Transform3D.IDENTITY, parts)
 	var last_batch: AssetPlacerMultiMeshBatch
 	if parts.is_empty():
@@ -39,7 +38,6 @@ func place_instances(
 			last_batch = _place_mesh_part(asset, part, world_transforms, parent, scene_owner)
 	source.free()
 
-	# Focus listeners may end the stroke, so notify only after every mesh part is recorded.
 	if select_after_placement and last_batch != null:
 		_undo_redo.add_do_method(self, "_focus_batch", last_batch)
 		_focus_batch(last_batch)
