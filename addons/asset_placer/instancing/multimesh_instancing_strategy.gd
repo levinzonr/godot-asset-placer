@@ -14,7 +14,9 @@ class MeshPart:
 
 
 func place_instances(
-	asset: AssetResource, world_transforms: Array[Transform3D], parent: Node3D
+	asset: AssetResource,
+	world_transforms: Array[Transform3D],
+	parent: Node3D
 ) -> void:
 	if world_transforms.is_empty():
 		return
@@ -106,7 +108,7 @@ func _place_mesh_part(
 	if is_new:
 		batch = AssetPlacerMultiMeshBatch.new()
 		batch.name = (
-			(asset.name + "_" + str(part.mesh_instance.name) + "_MultiMesh").validate_node_name()
+			(asset.name.capitalize() + "MultiMesh").validate_node_name()
 		)
 		batch.configure(asset.id, part.mesh_path, part.mesh_instance)
 
