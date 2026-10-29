@@ -10,6 +10,7 @@
 ### 🐛 Fixed
 
 - Fixed OBJ asset previews failing because imported mesh resources were treated as scenes. Mesh resources are now wrapped in `MeshInstance3D` for preview and supported by both instancing modes.
+- Fixed bounds calculation errors for scenes containing non-3D nodes, such as `AnimationPlayer`.
 
 ---
 
