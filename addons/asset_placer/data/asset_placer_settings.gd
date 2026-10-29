@@ -66,9 +66,7 @@ static func default() -> AssetPlacerSettings:
 	settings.bindings[Bindings.PalettePrevious] = APInputOption.key_press(
 		Key.KEY_TAB, KeyModifierMask.KEY_MASK_SHIFT
 	)
-	settings.bindings[Bindings.TogglePluginActive] = APInputOption.key_press(
-		Key.KEY_A, KeyModifierMask.KEY_MASK_SHIFT
-	)
+	settings.bindings[Bindings.TogglePluginActive] = APInputOption.none()
 	settings.transform_step = 0.1
 	settings.rotation_step = 5
 	settings.ui_scale = 1.0

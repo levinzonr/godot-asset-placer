@@ -33,7 +33,6 @@ This is Godot Editor plugin that allows for quick asset placement and management
 - **Parent from selection** - Optionally derive the Assets Parent from the selected `Node3D` so new assets are placed as siblings (see Options)
 - **Folder Rules** - Configure rules to automatically assign collections when syncing asset folders
 - **Asset palettes** - Shortcuts to your most used assets right under your fingertips (same asset can live in multiple palettes; active palette shown in the viewport overlay)
-- **Toggle Asset Placer** - Enable or disable placement mode from the 3D viewport with a configurable shortcut (default: `Shift+A`)
 - **Asset library sorting** - Sort assets by name, date added, or last placed, with ascending or descending order
 - **Custom thumbnail rendering** - Generated previews with cache storage and a regeneration option in Settings
 - Filter Assets by their name and collection
@@ -122,7 +121,7 @@ While placement mode is active, the viewport overlay shows the active palette an
 - The header shows which palette is active (for example, **Palette #1**)
 - Press **1** through **9**, then **0**, to select the asset in that slot
 - When you have more than one palette, cycle with **Tab** / **Shift+Tab** (configurable in Settings); cycling skips palettes with no assets assigned
-- Use **Toggle Asset Placer** (default: **Shift+A**) to turn placement mode on or off from the viewport
+- Assign a **Toggle Asset Placer** shortcut in Settings to turn placement mode on or off from the viewport (unassigned by default)
 
 ### Placing Assets
 
@@ -324,7 +323,7 @@ Version 1.2.0 introduced a dedicated Settings Panel for comprehensive customizat
 
 #### Key Bindings
 
-Customize shortcuts for all Asset Placer actions:
+Customize shortcuts for all Asset Placer actions. **Left-click** a shortcut button to change it, or **right-click** to unassign it. Hover over a shortcut button to see these actions; press **Esc** to cancel while assigning a new shortcut:
 
 - Rotate (Default: `E`)
 - Scale (Default: `R`)
@@ -336,7 +335,7 @@ Customize shortcuts for all Asset Placer actions:
 - In Place Transform Mode (Default: `Shift+E`)
 - Palette Next (Default: `Tab`)
 - Palette Previous (Default: `Shift+Tab`)
-- Toggle Asset Placer (Default: `Shift+A`)
+- Toggle Asset Placer (Default: unassigned)
 
 Key bindings support Mouse Button and Modifier Combinations (Ctrl, Shift, Alt), allowing you to avoid conflicts with existing Godot shortcuts. The Settings Panel includes conflict detection that will highlight conflicting keys in red.
 

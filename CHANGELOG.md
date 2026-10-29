@@ -2,6 +2,11 @@
 
 ## 1.7.0-alpha3
 
+### ✨ Changes
+
+- **Toggle Asset Placer** is now unassigned by default instead of `Shift+A`. Existing saved bindings are preserved; configure or clear the shortcut in Settings.
+- Shortcut buttons now support **right-click to unassign**.
+
 ### 🐛 Fixed
 
 - Fixed OBJ asset previews failing because imported mesh resources were treated as scenes. Mesh resources are now wrapped in `MeshInstance3D` for preview and supported by both instancing modes.
