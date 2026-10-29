@@ -1,5 +1,13 @@
 # Godot Asset Placer Changelog
 
+## 1.7.0-alpha3
+
+### 🐛 Fixed
+
+- Fixed OBJ asset previews failing because imported mesh resources were treated as scenes. Mesh resources are now wrapped in `MeshInstance3D` for preview and supported by both instancing modes.
+
+---
+
 ## 1.7.0-alpha2
 
 Second alpha for the upcoming **1.7.0** line. You can now configure how to instantiate your assets onto your scenes: Individual Scene (default and how it was done before) or MultiMesh

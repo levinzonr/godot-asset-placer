@@ -157,7 +157,16 @@ func get_children_transforms() -> Array[Transform3D]:
 
 
 func _instantiate_asset_resource(p_asset: AssetResource) -> Node3D:
-	return p_asset.get_resource().instantiate() as Node3D
+	var resource := p_asset.get_resource()
+	if resource is PackedScene:
+		return resource.instantiate() as Node3D
+	if resource is Mesh:
+		var mesh_instance := MeshInstance3D.new()
+		mesh_instance.name = p_asset.name
+		mesh_instance.mesh = resource
+		return mesh_instance
+	push_error("Not supported resource type %s" % str(resource))
+	return null
 
 
 func _apply_preview_material(node: Node) -> void:

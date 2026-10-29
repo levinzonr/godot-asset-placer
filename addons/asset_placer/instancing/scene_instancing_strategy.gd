@@ -37,7 +37,7 @@ func _instantiate_asset_resource(asset: AssetResource) -> Node3D:
 	var resource := asset.get_resource()
 	if resource is PackedScene:
 		new_node = (resource.instantiate() as Node3D)
-	elif resource is ArrayMesh:
+	elif resource is Mesh:
 		new_node = MeshInstance3D.new()
 		new_node.name = asset.name
 		new_node.mesh = resource.duplicate()
