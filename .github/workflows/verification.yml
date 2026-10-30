@@ -21,7 +21,7 @@ jobs:
         uses: Scony/godot-gdscript-toolkit@master
 
       - name: Check formatting with gdformat
-        run: gdformat --check addons/asset_placer
+        run: gdformat --check addons/asset_placer tests
 
   lint-check:
     name: Lint Check
@@ -34,4 +34,55 @@ jobs:
         uses: Scony/godot-gdscript-toolkit@master
 
       - name: Run gdlint
-        run: gdlint addons/asset_placer
+        run: gdlint addons/asset_placer tests
+
+  test-check:
+    name: gdUnit4 Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: '4.7.2'
+          use-dotnet: false
+
+      - name: Disable editor plugins for headless import
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          project = Path("project.godot")
+          content, count = re.subn(
+              r'(?m)^(\[editor_plugins\]\s*\n)enabled=.*$',
+              r'\1enabled=PackedStringArray()',
+              project.read_text(),
+          )
+          if count != 1:
+              raise SystemExit("Expected exactly one editor_plugins enabled setting")
+          project.write_text(content)
+          PY
+
+      - name: Import project
+        run: |
+          mkdir -p reports
+          godot --headless --editor --import --path . --log-file reports/import.log
+
+      - name: Run gdUnit4 tests
+        run: >-
+          godot --headless --path . --log-file reports/tests.log
+          --script addons/gdUnit4/bin/GdUnitCmdTool.gd
+          --ignoreHeadlessMode -a res://tests -rd res://reports/gdunit4 -c
+
+      - name: Upload test reports and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gdunit4-reports
+          path: reports/
+          if-no-files-found: ignore
+          retention-days: 14

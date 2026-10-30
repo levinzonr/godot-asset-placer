@@ -1,5 +1,78 @@
 # Godot Asset Placer Changelog
 
+
+## 1.7.0-alpha4
+
+### Asset Library Panel Performance Improvements
+
+Asset Library panel has been re-written with performance in mind. Instead of rendering all assets inside the GridContainer, the Item views are being recycled and re-used during scroll - Very much similar to the Android RecyclerView (in fact, it uses a `RecyclerView`-style API)
+
+### Added
+- [GDUnit4](https://github.com/godot-gdunit-labs/gdUnit4) Tests and new CI verifcaiotn step
+
+## 1.7.0-alpha3
+
+### ✨ Changes
+
+- Added an **Asset Placer** toggle button to the 3D editor toolbar, with a Settings option to show or hide it.
+- **Toggle Asset Placer** is now unassigned by default instead of `Shift+A`. Existing saved bindings are preserved; configure or clear the shortcut in Settings.
+- Shortcut buttons now support **right-click to unassign**.
+
+### 🐛 Fixed
+
+- Fixed OBJ asset previews failing because imported mesh resources were treated as scenes. Mesh resources are now wrapped in `MeshInstance3D` for preview and supported by both instancing modes.
+- Fixed bounds calculation errors for scenes containing non-3D nodes, such as `AnimationPlayer`.
+
+---
+
+## 1.7.0-alpha2
+
+Second alpha for the upcoming **1.7.0** line. You can now configure how to instantiate your assets onto your scenes: Individual Scene (default and how it was done before) or MultiMesh
+
+### MultiMesh Instancing
+
+Use **MultiMesh** in the **Instancing Mode** to batch repeated static geometry, such as foliage, rocks, and decorative props, instead of creating a separate scene instance for every placement.
+
+- **Works with your existing Assets** — Extracts supported `MeshInstance3D` nodes from the selected asset, preserving their nested transforms, mesh materials, and surface material overrides. Scenes containing multiple mesh nodes produce a separate batch for each mesh node.
+- **Single placement and brush painting** — Uses the same placement transforms as Individual Scene mode, including snapping, randomized rotation/scale, and surface alignment.
+- **Automatic batch reuse** — New placements are appended to compatible batches under the resolved Assets Parent or collection group, keeping your scene tree clean
+- **Undo/redo support** — Placement strokes can be undone and redone. Switching instancing modes finishes the current stroke and affects future placements only; existing content is not converted.
+
+#### Limitations
+
+- **Static visuals only** — Collision, scripts, animation, and other non-mesh scene content are not copied. Use Individual Scene mode when those behaviors are required.
+- **No individual scene nodes** — Each copy is stored as a transform inside a MultiMesh. Standard editor selection and transform tools operate on the whole batch, not individual copies.
+- **Unsupported geometry is skipped** — Skinned and blend-shape meshes, top-level subtrees, and mesh subtrees separated by non-`Node3D` parents are skipped with warnings. Hidden and meshless nodes are omitted.
+
+### Removed
+
+- Removed Shift-click place-and-focus. Placement and redo no longer automatically select placed nodes or MultiMesh batches; exit placement mode and select them manually to edit.
+
+> Reasoning: While I initially thought this might be a nice feature, it proved to be less and less important and useful with more helpful features being added to the plugin. With introduction of Instacing option I decided to let it go to reduce the coupling between placement logic and selection behavior and simplify Plugins API.
+
+### 🐛 Fixed
+- Fixed non-brush placement skipping randomized rotation and scale. Randomization now applies to both the initial single-asset preview and subsequent generated previews, with manual transforms applied afterward.
+
+---
+
+## 1.7.0-alpha1
+
+Pre-release alpha for the upcoming **1.7.0** line. This release adds **Persistent Placement Options** across editor sessions and **Orthographic Camera Placement Support**.
+
+### ✨ New Features
+
+- **#113** / **#117** — **Orthographic Camera Placement**:
+  - Support placing and transforming assets when the 3D editor camera is in orthographic/orthogonal mode (including standard Top, Front, Side views and free-look orthogonal mode).
+  - Automatically adapt placement planes to standard orthographic view axes (Top/Bottom -> XZ plane, Front/Rear -> XY plane, Left/Right -> YZ plane).
+  - Extended raycasting depth dynamically up to `camera.far` so zoomed-out orthographic cameras do not clip surface and terrain placement queries.
+- **#115** (@Sr3qt) — **Persistent Placement Options**:
+  - Placement options (grid snapping, random rotation, random scale, normal alignment, asset origin, auto-grouping, use selection for parent, and brush radius/density) are now automatically saved and restored across editor restarts.
+  - Options are serialized to `user://asset_placer_options.tres` with debounced auto-saving on modification.
+  - Refactored `AssetPlacerOptions` into an `@export_storage` Resource with direct setter signal bindings, eliminating intermediate boilerplate in `AssetPlacerPresenter`.
+  - Standardized option property names (`grid_snap_enabled`, `grid_snap_step`, `pick_random_asset`, `use_random_rotation`, `use_random_scale`, `uniform_random_scaling`).
+
+---
+
 ## 1.6.0
 
 Version **1.6.0** introduces **Brush Mode** for multi-asset and continuous painting, **automatic placement strategy detection**, an **unassigned assets filter** in collection management, and performance improvements for large libraries.

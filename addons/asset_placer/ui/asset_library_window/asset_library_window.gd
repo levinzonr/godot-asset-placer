@@ -4,14 +4,13 @@ extends Control
 
 signal asset_selected(asset: AssetResource)
 
+const AssetRecycler = preload("asset_library_recycler_view.gd")
+
 @onready var presenter: AssetLibraryPresenter = AssetLibraryPresenter.new()
 @onready var folder_presenter: FolderPresenter = FolderPresenter.new()
 
 @onready var placer_presenter := AssetPlacerPresenter.instance
-@onready var grid_container: Container = %GridContainer
-@onready var preview_resource = preload(
-	"res://addons/asset_placer/ui/components/asset_resource_preview.tscn"
-)
+
 @onready var add_folder_button: Button = %AddFolderButton
 @onready var search_field: LineEdit = %SearchField
 @onready var filter_button: Button = %FilterButton
@@ -25,7 +24,7 @@ signal asset_selected(asset: AssetResource)
 @onready var main_content = %MainContent
 @onready var empty_collection_content = %EmptyCollectionContent
 @onready var empty_collection_view_add_folder_btn: Button = %EmptyCollectionViewAddFolderBtn
-@onready var scroll_container = %ScrollContainer
+@onready var scroll_container: AssetRecycler = %ScrollContainer
 @onready var empty_search_content = %EmptySearchContent
 @onready var empty_view_add_folder_btn = %EmptyViewAddFolderBtn
 
@@ -34,6 +33,9 @@ func _ready():
 	if is_part_of_edited_scene():
 		return
 
+	scroll_container.asset_clicked.connect(_on_asset_clicked)
+	scroll_container.asset_context_requested.connect(show_asset_menu)
+	scroll_container.set_selected_asset(placer_presenter._selected_asset)
 	presenter.assets_loaded.connect(show_assets)
 	presenter.show_filter_info.connect(show_filter_info)
 	placer_presenter.asset_selected.connect(set_selected_asset)
@@ -65,23 +67,21 @@ func _ready():
 
 func show_assets(assets: Array[AssetResource]):
 	placer_presenter.current_assets = assets
+	scroll_container.set_selected_asset(placer_presenter._selected_asset)
+	scroll_container.set_assets(assets)
 	empty_collection_content.hide()
 	scroll_container.show()
-	for child in grid_container.get_children():
-		child.queue_free()
-	for asset in assets:
-		var child: AssetResourcePreview = preview_resource.instantiate()
-		child.left_clicked.connect(
-			func(asset: AssetResource):
-				if is_instance_valid(asset.get_resource()):
-					placer_presenter.toggle_asset(asset)
-				else:
-					push_error("Invalid asset")
-		)
-		child.right_clicked.connect(func(asset): show_asset_menu(asset, child))
-		child.set_meta("id", asset.id)
-		grid_container.add_child(child)
-		child.set_asset(asset)
+
+
+func _on_asset_clicked(asset: AssetResource):
+	if not is_instance_valid(asset.get_resource()):
+		push_error("Invalid asset")
+		return
+	var selected: AssetResource = placer_presenter._selected_asset
+	if is_instance_valid(selected) and selected.id == asset.id:
+		placer_presenter.clear_selection()
+	else:
+		placer_presenter.toggle_asset(asset)
 
 
 func show_asset_menu(asset: AssetResource, _control: Control):
@@ -119,9 +119,7 @@ func show_folder_dialog():
 
 
 func clear_selected_asset():
-	for child in grid_container.get_children():
-		if child is Button:
-			child.set_pressed_no_signal(false)
+	scroll_container.set_selected_asset(null)
 
 
 func _can_drop_data(_at_position, data):
@@ -146,9 +144,7 @@ func show_filter_info(size: int):
 
 
 func set_selected_asset(asset: AssetResource):
-	for child in grid_container.get_children():
-		if child is AssetResourcePreview:
-			child.select_not_signal(child.get_meta("id") == asset.id)
+	scroll_container.set_selected_asset(asset)
 
 
 func flip_order():
@@ -161,6 +157,9 @@ func flip_order():
 
 
 func show_empty_view(type: AssetLibraryPresenter.EmptyType):
+	if type != AssetLibraryPresenter.EmptyType.None:
+		placer_presenter.current_assets = []
+		scroll_container.set_assets([])
 	match type:
 		AssetLibraryPresenter.EmptyType.Search:
 			show_empty_search_content()

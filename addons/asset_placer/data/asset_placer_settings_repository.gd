@@ -8,6 +8,7 @@ const KEY_TRANSFORM_STEP: String = "general/transform_step_normal"
 const KEY_ROTATION_STEP: String = "general/rotation_step_normal"
 const KEY_UI_SCALE: String = "general/ui_scale"
 const KEY_PALETTE_ITEM_SCALE: String = "general/palette_item_scale"
+const KEY_SHOW_TOOLBAR_BUTTON: String = "general/show_toolbar_button"
 const KEY_UPDATE_CHANNEL: String = "general/update_channel"
 const KEY_MANAGE_COLLECTIONS_DIALOG_SIZE: String = "ui/manage_collections_dialog_size"
 
@@ -91,6 +92,7 @@ func set_settings(settings: AssetPlacerSettings):
 	_set_editor_setting(KEY_ROTATION_STEP, settings.rotation_step)
 	_set_editor_setting(KEY_UI_SCALE, settings.ui_scale)
 	_set_editor_setting(KEY_PALETTE_ITEM_SCALE, settings.palette_item_scale)
+	_set_editor_setting(KEY_SHOW_TOOLBAR_BUTTON, settings.show_toolbar_button)
 	_set_editor_setting(KEY_UPDATE_CHANNEL, settings.update_channel)
 
 	_set_project_setting(KEY_GENERAL_PREVIEW_MATERIAL, settings.preview_material_resource)
@@ -116,6 +118,9 @@ func get_settings() -> AssetPlacerSettings:
 	settings.ui_scale = _get_editor_setting(KEY_UI_SCALE, settings.ui_scale)
 	settings.palette_item_scale = _get_editor_setting(
 		KEY_PALETTE_ITEM_SCALE, settings.palette_item_scale
+	)
+	settings.show_toolbar_button = _get_editor_setting(
+		KEY_SHOW_TOOLBAR_BUTTON, settings.show_toolbar_button
 	)
 	settings.update_channel = _get_editor_setting(KEY_UPDATE_CHANNEL, settings.update_channel)
 

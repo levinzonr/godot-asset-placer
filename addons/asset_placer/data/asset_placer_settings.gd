@@ -29,6 +29,7 @@ var rotation_step: float
 var bindings: Dictionary
 var ui_scale: float
 var palette_item_scale: float
+var show_toolbar_button: bool = true
 var update_channel: UpdateChannel
 var binding_positive_transform: APInputOption:
 	get():
@@ -66,9 +67,7 @@ static func default() -> AssetPlacerSettings:
 	settings.bindings[Bindings.PalettePrevious] = APInputOption.key_press(
 		Key.KEY_TAB, KeyModifierMask.KEY_MASK_SHIFT
 	)
-	settings.bindings[Bindings.TogglePluginActive] = APInputOption.key_press(
-		Key.KEY_A, KeyModifierMask.KEY_MASK_SHIFT
-	)
+	settings.bindings[Bindings.TogglePluginActive] = APInputOption.none()
 	settings.transform_step = 0.1
 	settings.rotation_step = 5
 	settings.ui_scale = 1.0

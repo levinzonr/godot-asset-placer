@@ -11,7 +11,7 @@
 This is Godot Editor plugin that allows for quick asset placement and management when working with large 3D Scenes.
 
 <p align="center">
-	<img src="./docs/logo.png" alt="Logo" />
+	<img src="./docs/gh_hero.png" alt="Godot Asset Placer" width="800" />
 </p>
 
 > Please report any issues you encounter. Feature suggestions are welcome as well.
@@ -20,9 +20,11 @@ This is Godot Editor plugin that allows for quick asset placement and management
 
 - One-Click Asset Placement with Snapping to Ground, Collision shapes and Terrain3D Surfaces
 - **Brush Mode** - Paint multiple assets at once with adjustable brush size and density, continuous drag-painting, and real-time previews
+- **[Instancing Modes](#instancing-modes)** - Create individual scene instances or batch repeated static geometry with MultiMeshInstance3D
 - [Quick Preview Node Transformations Before Placement](https://github.com/levinzonr/godot-asset-placer/blob/main/README.md#transforming-assets-before-placement)
 - **In Place Transform Mode** - Apply transformations to existing nodes in the scene using Asset Placer workflow
 - **Settings Panel** - Comprehensive customization options including key bindings, preview materials, and transform steps
+- **Persistent Placement Settings** - Placement options automatically persist across editor sessions and restarts
 - **Random Asset Placement** - Automatically select random assets from filtered list after each placement
 - **Advanced Placement Options** - Normal alignment and scene bottom alignment controls
 - **Auto Placement Strategy** - Automatically detect and apply the optimal placement strategy based on the active scene
@@ -31,7 +33,7 @@ This is Godot Editor plugin that allows for quick asset placement and management
 - **Parent from selection** - Optionally derive the Assets Parent from the selected `Node3D` so new assets are placed as siblings (see Options)
 - **Folder Rules** - Configure rules to automatically assign collections when syncing asset folders
 - **Asset palettes** - Shortcuts to your most used assets right under your fingertips (same asset can live in multiple palettes; active palette shown in the viewport overlay)
-- **Toggle Asset Placer** - Enable or disable placement mode from the 3D viewport with a configurable shortcut (default: `Shift+A`)
+- **3D toolbar toggle** - Activate or deactivate Asset Placer from the 3D editor toolbar
 - **Asset library sorting** - Sort assets by name, date added, or last placed, with ascending or descending order
 - **Custom thumbnail rendering** - Generated previews with cache storage and a regeneration option in Settings
 - Filter Assets by their name and collection
@@ -120,11 +122,11 @@ While placement mode is active, the viewport overlay shows the active palette an
 - The header shows which palette is active (for example, **Palette #1**)
 - Press **1** through **9**, then **0**, to select the asset in that slot
 - When you have more than one palette, cycle with **Tab** / **Shift+Tab** (configurable in Settings); cycling skips palettes with no assets assigned
-- Use **Toggle Asset Placer** (default: **Shift+A**) to turn placement mode on or off from the viewport
+- Use the **Asset Placer** button in the 3D editor toolbar to turn placement mode on or off, or assign a **Toggle Asset Placer** shortcut in Settings (unassigned by default)
 
 ### Placing Assets
 
-Godot Asset Placer provides various placement modes. All methods rely on RayCasting to determine where to place the asset.
+Godot Asset Placer provides various placement modes to determine **where** to place an asset. All methods rely on RayCasting. Separately, [Instancing Mode](#instancing-modes) determines **how** the placed asset is stored in your scene.
 
 Placement Modes can be cycled using `Q` Shortcut
 
@@ -144,6 +146,32 @@ This will allow to move the plane origin using Mouse Wheel along selected Axis
 
 This mode allows you to place assets directly onto a Terrain3D surface. When selected you will be prompted to select your Terrain3D node. After that the plugin will user Terrain3D surfaces to resolve placement location.
 
+#### Instancing Modes
+
+> Available since version 1.7.0-alpha2
+
+Choose **Instancing Mode** in the Placement Options:
+
+| Mode | How it works | Best suited for |
+|------|--------------|-----------------|
+| **Individual Scene** (default) | Creates a separate scene instance for each placement, preserving its nodes, scripts, collision, and animation. | Interactive objects, physics-enabled assets, and assets requiring individual scene-node editing. |
+| **MultiMesh** | Extracts supported `MeshInstance3D` nodes from the source scene and batches their copies into `MultiMeshInstance3D` nodes. | Repeated static geometry such as foliage, rocks, and decorative props. |
+
+Both modes work with Surface, Plane, and Terrain3D placement, single-asset placement, and brush painting. They use the same placement transforms, including snapping, normal alignment, and randomized rotation/scale.
+
+**MultiMesh behavior:**
+
+- Use your existing 3D scene assets; there is no need to prepare MultiMesh resources manually.
+- Each supported mesh node in the source scene gets a separate batch, preserving its nested transform, mesh materials, and surface material overrides.
+- New placements reuse compatible batches under the resolved **Assets Parent** or primary collection group.
+- Placement strokes support undo/redo. Switching modes finishes the current stroke and affects future placements only; it does not convert existing content.
+
+**MultiMesh limitations:**
+
+- Only static mesh visuals are copied. Collision, scripts, animation, and other non-mesh scene content are not copied. Use **Individual Scene** when those behaviors are required.
+- Individual copies are not separate scene nodes. Standard editor selection and transform tools affect an entire batch rather than a single copy.
+- Skinned and blend-shape meshes, top-level subtrees, and mesh subtrees separated by non-`Node3D` parents are skipped with warnings. Hidden and meshless nodes are omitted.
+
 #### Placement Steps
 
 To place an asset, follow these steps:
@@ -153,12 +181,11 @@ To place an asset, follow these steps:
 3. Open Asset Placer Dock window and select the asset you want to place from the Assets tab
 4. Optional: Set **Assets Parent** under the selected root, or enable **Use selection for parent** so the parent is taken from the current `Node3D` selection (sibling placement). Picking **Assets Parent** disables selection-based mode.
 5. Optional: Configure Placement Options:
+   - **Instancing Mode** - Keep **Individual Scene** for full scene instances, or choose **MultiMesh** for batched static visuals (see [Instancing Modes](#instancing-modes))
    - **Align Normals** - Enable to align assets with surface normals for natural placement on sloped surfaces
    - **Use Assets Origin** - Enable to place using asset's local origin point, or disable to use the asset's actual bottom
 6. At this point you will see a preview of the asset in the 3D viewport
 7. Press `Left Mouse Button` to place the asset at the location of the mouse cursor
-8. If you want to modify the asset after placement, you can press `Shift` + `Left Mouse Button` to Place And Focus on the Placed Asset. This allows you to move, rotate, or scale the asset using the standard Godot Editor tools.
-
 #### Brush Mode
 
 > Available since version 1.6.0
@@ -196,6 +223,8 @@ For example, if you have assets assigned to "Trees" and "Rocks" collections:
 ```
 
 Assets without a primary collection will be placed directly under the parent node. See [Primary Collections](#primary-collections) for how to set the primary collection for your assets.
+
+In **MultiMesh** mode, the collection groups contain batch nodes instead of a separate scene node for each placed copy.
 
 #### Transforming Assets Before Placement
 
@@ -289,13 +318,14 @@ Version 1.2.0 introduced a dedicated Settings Panel for comprehensive customizat
 - **Thumbnail UI Scale** - Adjust the size of thumbnails in the Assets Panel (default: 1.0)
 - **Regenerate Thumbnails** - Rebuild generated asset previews from Settings when needed
 - **Asset Palette Item Scale** - Adjust the size of palette buttons in both the Palette tab and viewport overlay (default: 1.0)
+- **Show Toggle Asset Placer Button** - Show or hide the 3D editor toolbar button (shown by default)
 - **Plane Mode Toggle** - Configure plane placement mode behavior
 - **Asset Library Path** - Set a custom location for the `asset_library.json` file, useful for version control and team sharing
 - **Update channel** - Choose Stable, Beta, or Alpha so in-editor update checks match the release tier you follow. More detail: [development lifecycle](https://levinzonr.github.io/godot-asset-placer/development-lifecycle/)
 
 #### Key Bindings
 
-Customize shortcuts for all Asset Placer actions:
+Customize shortcuts for all Asset Placer actions. **Left-click** a shortcut button to change it, or **right-click** to unassign it. Hover over a shortcut button to see these actions; press **Esc** to cancel while assigning a new shortcut:
 
 - Rotate (Default: `E`)
 - Scale (Default: `R`)
@@ -307,7 +337,7 @@ Customize shortcuts for all Asset Placer actions:
 - In Place Transform Mode (Default: `Shift+E`)
 - Palette Next (Default: `Tab`)
 - Palette Previous (Default: `Shift+Tab`)
-- Toggle Asset Placer (Default: `Shift+A`)
+- Toggle Asset Placer (Default: unassigned)
 
 Key bindings support Mouse Button and Modifier Combinations (Ctrl, Shift, Alt), allowing you to avoid conflicts with existing Godot shortcuts. The Settings Panel includes conflict detection that will highlight conflicting keys in red.
 
@@ -327,7 +357,7 @@ Found a problem or have an idea?
 - [📖 Contributing guidelines](CONTRIBUTING.md)
 
 ## Credits
-
+- Test Suite by [GDUnit4](https://github.com/godot-gdunit-labs/gdUnit4)
 - 3D assets used in the demo scene are created by [Kenney](https://kenney.nl/) (Creative Commons Zero, CC0):
   - [Dungeon Kit](https://kenney.nl/assets/dungeon-kit)
   - [Factory Kit](https://kenney.nl/assets/factory-kit)

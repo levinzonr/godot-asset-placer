@@ -18,6 +18,13 @@ script = ExtResource("2_r5xs8")
 icon_name = &"Favorites"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
+[sub_resource type="Texture2D" id="Texture2D_65ccq"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_r5xs8")
+icon_name = &"AssetStore"
+metadata/_custom_type_script = "uid://dmicn3kmr620j"
+
 [sub_resource type="Texture2D" id="Texture2D_r5xs8"]
 resource_local_to_scene = false
 resource_name = ""
@@ -54,7 +61,7 @@ borderless = false
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 548.0
-offset_bottom = 471.0
+offset_bottom = 473.0
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
@@ -146,7 +153,7 @@ text = "Asset Placer"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-text = ""
+text = "Version 1.7.0-alpha1"
 
 [node name="UpdateButton" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer" unique_id=133643675]
 unique_name_in_owner = true
@@ -218,6 +225,25 @@ uri = "https://github.com/levinzonr/godot-asset-placer"
 layout_mode = 2
 texture = SubResource("Texture2D_vijnu")
 stretch_mode = 3
+
+[node name="ReviewRow" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=656452955]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/ReviewRow" unique_id=780508330]
+layout_mode = 2
+text = "You can also support the plugin by"
+
+[node name="ReviewLinkButton" type="LinkButton" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/ReviewRow" unique_id=53402758]
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Leave a review on the Godot Asset Store"
+text = "leaving a review"
+uri = "https://store.godotengine.org/asset/levinzonr/godot-asset-placer/#reviews"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/ReviewRow" unique_id=818790034]
+layout_mode = 2
+texture = SubResource("Texture2D_65ccq")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer" unique_id=967098558]
 layout_mode = 2

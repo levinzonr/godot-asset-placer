@@ -167,6 +167,18 @@ size_flags_horizontal = 10
 step = 0.01
 value = 0.1
 
+[node name="ToggleVisibilityOption" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=1473450051]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/ToggleVisibilityOption" unique_id=289049036]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Show Toggle Asset Placer Button"
+
+[node name="ToggleVisibilityCheckButton" type="CheckButton" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/ToggleVisibilityOption" unique_id=893852659]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="HBoxContainer4" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=938920544]
 layout_mode = 2
 
@@ -227,7 +239,7 @@ text = "Thumbnails UI Scale"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "0.7"
+text = "1.0"
 horizontal_alignment = 2
 
 [node name="UIScaleHSlider" type="HSlider" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainer5" unique_id=1293124067]
@@ -238,7 +250,7 @@ size_flags_vertical = 1
 min_value = 0.2
 max_value = 2.0
 step = 0.1
-value = 0.7
+value = 1.0
 ticks_position = 3
 
 [node name="HBoxContainerPaletteItemScale" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=1075296860]
@@ -252,7 +264,7 @@ text = "Asset Palette Item Scale"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "1.1"
+text = "1.0"
 horizontal_alignment = 2
 
 [node name="PaletteItemScaleHSlider" type="HSlider" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/HBoxContainerPaletteItemScale" unique_id=1293124068]
@@ -263,7 +275,7 @@ size_flags_vertical = 1
 min_value = 0.2
 max_value = 2.0
 step = 0.1
-value = 1.1
+value = 1.0
 ticks_position = 3
 
 [node name="Spacing" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=653626810]
@@ -288,7 +300,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 alignment = 2
-selected = 2
+selected = 0
 item_count = 3
 popup/item_0/text = "Stable"
 popup/item_0/id = 0
