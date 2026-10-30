@@ -1,5 +1,14 @@
 # Godot Asset Placer Changelog
 
+
+## 1.7.0-alpha4
+
+### Asset Library Panel Performance Improvements
+
+Asset Library panel has been re-written with performance in mind. Instead of rendering all assets inside the GridContainer, the Item views are being recycled and re-used during scroll - Very much similar to the Android RecyclerView (in fact, it uses a `RecyclerView`-style API)
+
+
+
 ## 1.7.0-alpha3
 
 ### ✨ Changes
