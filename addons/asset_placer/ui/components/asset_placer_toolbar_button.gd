@@ -16,7 +16,6 @@ func _init() -> void:
 	tooltip_text = "Toggle Asset Placer"
 
 
-
 func _ready() -> void:
 	_presenter = AssetPlacerPresenter.instance
 	set_pressed_no_signal(_presenter.plugin_is_active())
