@@ -7,7 +7,8 @@
 
 Asset Library panel has been re-written with performance in mind. Instead of rendering all assets inside the GridContainer, the Item views are being recycled and re-used during scroll - Very much similar to the Android RecyclerView (in fact, it uses a `RecyclerView`-style API)
 
-
+### Added
+- [GDUnit4](https://github.com/godot-gdunit-labs/gdUnit4) Tests and new CI verifcaiotn step
 
 ## 1.7.0-alpha3
 
