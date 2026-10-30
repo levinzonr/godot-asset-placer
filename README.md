@@ -357,7 +357,7 @@ Found a problem or have an idea?
 - [📖 Contributing guidelines](CONTRIBUTING.md)
 
 ## Credits
-
+- Test Suite by [GDUnit4](https://github.com/godot-gdunit-labs/gdUnit4)
 - 3D assets used in the demo scene are created by [Kenney](https://kenney.nl/) (Creative Commons Zero, CC0):
   - [Dungeon Kit](https://kenney.nl/assets/dungeon-kit)
   - [Factory Kit](https://kenney.nl/assets/factory-kit)
