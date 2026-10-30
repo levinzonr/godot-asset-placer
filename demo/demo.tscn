@@ -531,299 +531,299 @@ mesh = SubResource("ArrayMesh_d1m6b")
 skeleton = NodePath("../..")
 metadata/asset_placer_res_id = "uid://cd602gb2taynf"
 
-[node name="barrel2" type="Node3D" parent="castle-door" unique_id=1455335485 instance=ExtResource("7_oeqrt")]
+[node name="barrel2" parent="castle-door" unique_id=1455335485 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 42.40377, 2.861023e-06, 1.3843822)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (1)" type="Node3D" parent="castle-door" unique_id=1825744011 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (1)" parent="castle-door" unique_id=1825744011 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 42.056477, 2.861023e-06, 3.3539963)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (2)" type="Node3D" parent="castle-door" unique_id=1036613226 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (2)" parent="castle-door" unique_id=1036613226 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 42.40377, 2.861023e-06, 1.3843822)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (3)" type="Node3D" parent="castle-door" unique_id=1453205596 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (3)" parent="castle-door" unique_id=1453205596 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 22.707638, 2.861023e-06, -2.088581)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (4)" type="Node3D" parent="castle-door" unique_id=82944178 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (4)" parent="castle-door" unique_id=82944178 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 24.67725, 2.861023e-06, -1.7412853)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (5)" type="Node3D" parent="castle-door" unique_id=1246933509 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (5)" parent="castle-door" unique_id=1246933509 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 22.707638, 2.861023e-06, -2.088581)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (6)" type="Node3D" parent="castle-door" unique_id=1724515094 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (6)" parent="castle-door" unique_id=1724515094 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 32.322575, 2.861023e-06, -10.547462)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (7)" type="Node3D" parent="castle-door" unique_id=2009024822 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (7)" parent="castle-door" unique_id=2009024822 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 32.66987, 2.861023e-06, -12.5170765)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (8)" type="Node3D" parent="castle-door" unique_id=516277741 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (8)" parent="castle-door" unique_id=516277741 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 32.66987, 2.861023e-06, -12.5170765)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (9)" type="Node3D" parent="castle-door" unique_id=373997903 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (9)" parent="castle-door" unique_id=373997903 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 36.609097, 2.861023e-06, -11.822483)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (10)" type="Node3D" parent="castle-door" unique_id=1480594791 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (10)" parent="castle-door" unique_id=1480594791 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 36.609097, 2.861023e-06, -11.822483)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (11)" type="Node3D" parent="castle-door" unique_id=1355600394 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (11)" parent="castle-door" unique_id=1355600394 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 36.609097, 2.861023e-06, -11.822483)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (12)" type="Node3D" parent="castle-door" unique_id=957186566 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (12)" parent="castle-door" unique_id=957186566 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 32.788837, 2.861023e-06, 9.843266)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (13)" type="Node3D" parent="castle-door" unique_id=731678809 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (13)" parent="castle-door" unique_id=731678809 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 35.105747, 2.861023e-06, 8.220947)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (14)" type="Node3D" parent="castle-door" unique_id=1692291065 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (14)" parent="castle-door" unique_id=1692291065 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 33.136135, 2.861023e-06, 7.8736515)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (15)" type="Node3D" parent="castle-door" unique_id=1125760631 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (15)" parent="castle-door" unique_id=1125760631 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 29.196907, 2.861023e-06, 7.179058)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (16)" type="Node3D" parent="castle-door" unique_id=300697357 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (16)" parent="castle-door" unique_id=300697357 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 27.227291, 2.861023e-06, 6.831762)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="barrel2 (17)" type="Node3D" parent="castle-door" unique_id=1612258147 instance=ExtResource("7_oeqrt")]
+[node name="barrel2 (17)" parent="castle-door" unique_id=1612258147 instance=ExtResource("7_oeqrt")]
 transform = Transform3D(0.6427871, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.64278716, 29.196907, 2.861023e-06, 7.179058)
 metadata/asset_placer_res_id = "uid://bc7stbffphjft"
 
-[node name="flowers-tall2" type="Node3D" parent="castle-door" unique_id=603220095 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2" parent="castle-door" unique_id=603220095 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 34.872616, 2.861023e-06, -1.9744167)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (1)" type="Node3D" parent="castle-door" unique_id=1678085335 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (1)" parent="castle-door" unique_id=1678085335 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 34.52532, 2.861023e-06, -0.004802704)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (2)" type="Node3D" parent="castle-door" unique_id=590036835 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (2)" parent="castle-door" unique_id=590036835 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 34.872616, 2.861023e-06, -1.9744167)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (3)" type="Node3D" parent="castle-door" unique_id=1938024640 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (3)" parent="castle-door" unique_id=1938024640 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 32.903, 2.861023e-06, -2.3217134)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (4)" type="Node3D" parent="castle-door" unique_id=857524104 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (4)" parent="castle-door" unique_id=857524104 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 35.219913, 2.861023e-06, -3.9440289)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (5)" type="Node3D" parent="castle-door" unique_id=732511542 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (5)" parent="castle-door" unique_id=732511542 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 32.903, 2.861023e-06, -2.3217134)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (6)" type="Node3D" parent="castle-door" unique_id=1860685196 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (6)" parent="castle-door" unique_id=1860685196 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 35.219913, 2.861023e-06, -3.9440289)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (7)" type="Node3D" parent="castle-door" unique_id=888922704 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (7)" parent="castle-door" unique_id=888922704 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 26.99416, 2.861023e-06, -3.3636036)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (8)" type="Node3D" parent="castle-door" unique_id=1234865684 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (8)" parent="castle-door" unique_id=1234865684 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 30.933388, 2.861023e-06, -2.6690102)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (9)" type="Node3D" parent="castle-door" unique_id=1043456678 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (9)" parent="castle-door" unique_id=1043456678 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 30.933388, 2.861023e-06, -2.6690102)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (10)" type="Node3D" parent="castle-door" unique_id=1249398176 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (10)" parent="castle-door" unique_id=1249398176 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 29.31107, 2.861023e-06, -4.985918)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (11)" type="Node3D" parent="castle-door" unique_id=1629685424 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (11)" parent="castle-door" unique_id=1629685424 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 28.963772, 2.861023e-06, -3.016306)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (12)" type="Node3D" parent="castle-door" unique_id=181223513 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (12)" parent="castle-door" unique_id=181223513 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 26.99416, 2.861023e-06, -3.3636036)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (13)" type="Node3D" parent="castle-door" unique_id=1266005144 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (13)" parent="castle-door" unique_id=1266005144 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 28.963772, 2.861023e-06, -3.016306)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (14)" type="Node3D" parent="castle-door" unique_id=1242079994 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (14)" parent="castle-door" unique_id=1242079994 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 40.43416, 2.861023e-06, 1.0370865)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (15)" type="Node3D" parent="castle-door" unique_id=691249813 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (15)" parent="castle-door" unique_id=691249813 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 40.781456, 2.861023e-06, -0.93252754)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (16)" type="Node3D" parent="castle-door" unique_id=1757848461 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (16)" parent="castle-door" unique_id=1757848461 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 38.811844, 2.861023e-06, -1.2798243)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (17)" type="Node3D" parent="castle-door" unique_id=1180559184 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (17)" parent="castle-door" unique_id=1180559184 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 41.128754, 2.861023e-06, -2.9021397)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (18)" type="Node3D" parent="castle-door" unique_id=847941589 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (18)" parent="castle-door" unique_id=847941589 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 38.811844, 2.861023e-06, -1.2798243)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (19)" type="Node3D" parent="castle-door" unique_id=1363536358 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (19)" parent="castle-door" unique_id=1363536358 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 41.128754, 2.861023e-06, -2.9021397)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (20)" type="Node3D" parent="castle-door" unique_id=995887646 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (20)" parent="castle-door" unique_id=995887646 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 41.128754, 2.861023e-06, -2.9021397)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (21)" type="Node3D" parent="castle-door" unique_id=1011237140 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (21)" parent="castle-door" unique_id=1011237140 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 33.94489, 2.861023e-06, -8.230555)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (22)" type="Node3D" parent="castle-door" unique_id=33915184 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (22)" parent="castle-door" unique_id=33915184 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 33.94489, 2.861023e-06, -8.230555)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (23)" type="Node3D" parent="castle-door" unique_id=1161795918 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (23)" parent="castle-door" unique_id=1161795918 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 33.597595, 2.861023e-06, -6.2609386)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (24)" type="Node3D" parent="castle-door" unique_id=2113053215 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (24)" parent="castle-door" unique_id=2113053215 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 35.914505, 2.861023e-06, -7.883257)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (25)" type="Node3D" parent="castle-door" unique_id=2101978481 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (25)" parent="castle-door" unique_id=2101978481 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 31.62798, 2.861023e-06, -6.6082363)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (26)" type="Node3D" parent="castle-door" unique_id=1255803913 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (26)" parent="castle-door" unique_id=1255803913 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 31.975277, 2.861023e-06, -8.57785)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (27)" type="Node3D" parent="castle-door" unique_id=1024809210 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (27)" parent="castle-door" unique_id=1024809210 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 36.261803, 2.861023e-06, -9.852869)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (28)" type="Node3D" parent="castle-door" unique_id=1511861732 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (28)" parent="castle-door" unique_id=1511861732 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 33.94489, 2.861023e-06, -8.230555)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (29)" type="Node3D" parent="castle-door" unique_id=142858521 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (29)" parent="castle-door" unique_id=142858521 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 36.261803, 2.861023e-06, -9.852869)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (30)" type="Node3D" parent="castle-door" unique_id=2128635234 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (30)" parent="castle-door" unique_id=2128635234 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 32.66987, 2.861023e-06, -12.5170765)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (31)" type="Node3D" parent="castle-door" unique_id=1133480399 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (31)" parent="castle-door" unique_id=1133480399 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 34.292187, 2.861023e-06, -10.200167)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (32)" type="Node3D" parent="castle-door" unique_id=697732072 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (32)" parent="castle-door" unique_id=697732072 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 33.94489, 2.861023e-06, -8.230555)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (33)" type="Node3D" parent="castle-door" unique_id=2000365577 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (33)" parent="castle-door" unique_id=2000365577 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 34.292187, 2.861023e-06, -10.200167)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (34)" type="Node3D" parent="castle-door" unique_id=902566149 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (34)" parent="castle-door" unique_id=902566149 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 36.261803, 2.861023e-06, -9.852869)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (35)" type="Node3D" parent="castle-door" unique_id=361772898 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (35)" parent="castle-door" unique_id=361772898 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 25.371845, 2.861023e-06, -5.6805115)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (36)" type="Node3D" parent="castle-door" unique_id=1449069252 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (36)" parent="castle-door" unique_id=1449069252 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 25.024548, 2.861023e-06, -3.7108994)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (37)" type="Node3D" parent="castle-door" unique_id=875622113 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (37)" parent="castle-door" unique_id=875622113 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 26.646862, 2.861023e-06, -1.3939886)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (38)" type="Node3D" parent="castle-door" unique_id=251515653 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (38)" parent="castle-door" unique_id=251515653 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 25.024548, 2.861023e-06, -3.7108994)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (39)" type="Node3D" parent="castle-door" unique_id=1183775770 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (39)" parent="castle-door" unique_id=1183775770 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 27.341457, 2.861023e-06, -5.3332157)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (40)" type="Node3D" parent="castle-door" unique_id=1696318856 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (40)" parent="castle-door" unique_id=1696318856 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 26.99416, 2.861023e-06, -3.3636036)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (41)" type="Node3D" parent="castle-door" unique_id=158322262 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (41)" parent="castle-door" unique_id=158322262 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 29.31107, 2.861023e-06, -4.985918)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (42)" type="Node3D" parent="castle-door" unique_id=1213533089 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (42)" parent="castle-door" unique_id=1213533089 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 31.513817, 2.861023e-06, 5.5567417)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (43)" type="Node3D" parent="castle-door" unique_id=1760561132 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (43)" parent="castle-door" unique_id=1760561132 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 32.20841, 2.861023e-06, 1.6175146)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (44)" type="Node3D" parent="castle-door" unique_id=2087403971 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (44)" parent="castle-door" unique_id=2087403971 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 29.891499, 2.861023e-06, 3.239832)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (45)" type="Node3D" parent="castle-door" unique_id=1862524262 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (45)" parent="castle-door" unique_id=1862524262 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 31.86111, 2.861023e-06, 3.5871286)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (46)" type="Node3D" parent="castle-door" unique_id=771021014 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (46)" parent="castle-door" unique_id=771021014 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 31.86111, 2.861023e-06, 3.5871286)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (47)" type="Node3D" parent="castle-door" unique_id=1261420972 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (47)" parent="castle-door" unique_id=1261420972 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 32.20841, 2.861023e-06, 1.6175146)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (48)" type="Node3D" parent="castle-door" unique_id=2100975388 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (48)" parent="castle-door" unique_id=2100975388 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 31.513817, 2.861023e-06, 5.5567417)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (49)" type="Node3D" parent="castle-door" unique_id=211781602 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (49)" parent="castle-door" unique_id=211781602 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 31.513817, 2.861023e-06, 5.5567417)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (50)" type="Node3D" parent="castle-door" unique_id=1736657922 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (50)" parent="castle-door" unique_id=1736657922 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 31.86111, 2.861023e-06, 3.5871286)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (51)" type="Node3D" parent="castle-door" unique_id=352218458 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (51)" parent="castle-door" unique_id=352218458 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 31.513817, 2.861023e-06, 5.5567417)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (52)" type="Node3D" parent="castle-door" unique_id=2123652590 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (52)" parent="castle-door" unique_id=2123652590 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 29.891499, 2.861023e-06, 3.239832)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (53)" type="Node3D" parent="castle-door" unique_id=240852098 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (53)" parent="castle-door" unique_id=240852098 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 32.20841, 2.861023e-06, 1.6175146)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (54)" type="Node3D" parent="castle-door" unique_id=874558616 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (54)" parent="castle-door" unique_id=874558616 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 31.86111, 2.861023e-06, 3.5871286)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 
-[node name="flowers-tall2 (55)" type="Node3D" parent="castle-door" unique_id=781494282 instance=ExtResource("8_ykvhj")]
+[node name="flowers-tall2 (55)" parent="castle-door" unique_id=781494282 instance=ExtResource("8_ykvhj")]
 transform = Transform3D(0.6427872, 0, 0.7660438, 0, 1, 0, -0.7660438, 0, 0.6427872, 29.891499, 2.861023e-06, 3.239832)
 metadata/asset_placer_res_id = "uid://46cojdkrh1rr"
 

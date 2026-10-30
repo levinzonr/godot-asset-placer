@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d3hm5bn8vmd2" path="res://addons/asset_placer/ui/asset_library_window/asset_library_window.gd" id="1_l06eo"]
 [ext_resource type="PackedScene" uid="uid://dua2vx4bi1gmf" path="res://addons/asset_placer/ui/asset_placer_options/asset_placer_options.tscn" id="2_qx6qk"]
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="3_gvdec"]
+[ext_resource type="Script" path="res://addons/asset_placer/ui/asset_library_window/asset_library_recycler_view.gd" id="4_recycler"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qx6qk"]
 
@@ -282,12 +283,7 @@ theme_override_constants/margin_left = 6
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="GridContainer" type="HFlowContainer" parent="MainContent/PanelContainer2/VBoxContainer/MarginContainer/ScrollContainer" unique_id=2008987014]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+script = ExtResource("4_recycler")
 
 [node name="EmptyCollectionContent" type="CenterContainer" parent="MainContent/PanelContainer2/VBoxContainer" unique_id=2105840377]
 unique_name_in_owner = true

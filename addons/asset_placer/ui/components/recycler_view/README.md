@@ -2,8 +2,8 @@
 
 An independent, reusable GDScript recycler component, built incrementally. A native
 scrolling control now connects layout geometry, adapters, view holders, and a bounded
-reuse pool. There is no Asset Placer integration. The source has no dependency on
-Asset Placer or gdUnit4.
+reuse pool. The asset library integrates it through adapter/layout specializations
+outside this directory; this component has no dependency on Asset Placer or gdUnit4.
 
 ## RecyclerView
 

@@ -262,7 +262,7 @@ func on_asset_placed():
 	if es:
 		es.update_asset_time_placed(_selected_asset.id)
 
-	if options.pick_random_asset:
+	if options.pick_random_asset and not current_assets.is_empty():
 		var random = current_assets.pick_random()
 		select_asset(random)
 
