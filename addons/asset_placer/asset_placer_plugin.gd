@@ -31,6 +31,7 @@ var _palette_session_state: AssetPaletteSessionState
 # Actual type is EditorDock
 var _dock: MarginContainer
 var _asset_placer_button: Button
+var _toolbar_button: AssetPlacerToolbarButton
 
 var _migration_collection_id = null
 
@@ -88,6 +89,11 @@ func _enter_tree():
 
 	_asset_placer_window.visibility_changed.connect(_on_dock_visibility_changed)
 
+	_toolbar_button = AssetPlacerToolbarButton.new()
+	_toolbar_button.pressed.connect(_toggle_plugin_active)
+	add_control_to_container(CONTAINER_SPATIAL_EDITOR_MENU, _toolbar_button)
+	_toolbar_button.visible = current_settings.show_toolbar_button
+
 	_presenter.placement_mode_changed.connect(_asset_placer.set_placement_mode)
 
 	synchronizer.sync_complete.connect(_on_sync_complete)
@@ -107,6 +113,10 @@ func _enter_tree():
 
 
 func _exit_tree():
+	if is_instance_valid(_toolbar_button):
+		remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, _toolbar_button)
+		_toolbar_button.queue_free()
+		_toolbar_button = null
 	if ClassDB.class_exists(&"EditorDock"):
 		if is_instance_valid(_dock):
 			call("remove_dock", _dock)
@@ -212,6 +222,8 @@ func _initialize_data_layer():
 func _react_to_settings_change(settings: AssetPlacerSettings):
 	self.current_settings = settings
 	_asset_placer.set_plugin_settings(settings)
+	if is_instance_valid(_toolbar_button):
+		_toolbar_button.visible = settings.show_toolbar_button
 
 
 func _react_to_reimorted_files(_files: PackedStringArray):

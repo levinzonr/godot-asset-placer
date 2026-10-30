@@ -4,6 +4,7 @@
 
 ### ✨ Changes
 
+- Added an **Asset Placer** toggle button to the 3D editor toolbar, with a Settings option to show or hide it.
 - **Toggle Asset Placer** is now unassigned by default instead of `Shift+A`. Existing saved bindings are preserved; configure or clear the shortcut in Settings.
 - Shortcut buttons now support **right-click to unassign**.
 

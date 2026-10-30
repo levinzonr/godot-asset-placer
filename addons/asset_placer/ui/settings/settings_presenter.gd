@@ -49,6 +49,12 @@ func set_palette_item_scale(value: float):
 	_repository.set_settings(settings)
 
 
+func set_show_toolbar_button(value: bool):
+	var settings = _repository.get_settings()
+	settings.show_toolbar_button = value
+	_repository.set_settings(settings)
+
+
 func set_rotation_step(value: float):
 	var settings = _repository.get_settings()
 	settings.rotation_step = value

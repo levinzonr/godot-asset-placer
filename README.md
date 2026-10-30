@@ -33,6 +33,7 @@ This is Godot Editor plugin that allows for quick asset placement and management
 - **Parent from selection** - Optionally derive the Assets Parent from the selected `Node3D` so new assets are placed as siblings (see Options)
 - **Folder Rules** - Configure rules to automatically assign collections when syncing asset folders
 - **Asset palettes** - Shortcuts to your most used assets right under your fingertips (same asset can live in multiple palettes; active palette shown in the viewport overlay)
+- **3D toolbar toggle** - Activate or deactivate Asset Placer from the 3D editor toolbar
 - **Asset library sorting** - Sort assets by name, date added, or last placed, with ascending or descending order
 - **Custom thumbnail rendering** - Generated previews with cache storage and a regeneration option in Settings
 - Filter Assets by their name and collection
@@ -121,7 +122,7 @@ While placement mode is active, the viewport overlay shows the active palette an
 - The header shows which palette is active (for example, **Palette #1**)
 - Press **1** through **9**, then **0**, to select the asset in that slot
 - When you have more than one palette, cycle with **Tab** / **Shift+Tab** (configurable in Settings); cycling skips palettes with no assets assigned
-- Assign a **Toggle Asset Placer** shortcut in Settings to turn placement mode on or off from the viewport (unassigned by default)
+- Use the **Asset Placer** button in the 3D editor toolbar to turn placement mode on or off, or assign a **Toggle Asset Placer** shortcut in Settings (unassigned by default)
 
 ### Placing Assets
 
@@ -317,6 +318,7 @@ Version 1.2.0 introduced a dedicated Settings Panel for comprehensive customizat
 - **Thumbnail UI Scale** - Adjust the size of thumbnails in the Assets Panel (default: 1.0)
 - **Regenerate Thumbnails** - Rebuild generated asset previews from Settings when needed
 - **Asset Palette Item Scale** - Adjust the size of palette buttons in both the Palette tab and viewport overlay (default: 1.0)
+- **Show Toggle Asset Placer Button** - Show or hide the 3D editor toolbar button (shown by default)
 - **Plane Mode Toggle** - Configure plane placement mode behavior
 - **Asset Library Path** - Set a custom location for the `asset_library.json` file, useful for version control and team sharing
 - **Update channel** - Choose Stable, Beta, or Alpha so in-editor update checks match the release tier you follow. More detail: [development lifecycle](https://levinzonr.github.io/godot-asset-placer/development-lifecycle/)

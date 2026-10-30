@@ -38,6 +38,7 @@ var _thumbnail_regeneration_dialog: ThumbnailRegenerationDialog
 @onready var kb_plane_mode = %KeybindingOptionPlaneMode
 @onready var kb_palette_next = %KeybindingOptionPalleteNext
 @onready var kb_palette_previous = %KeybindingOptionPalletePrevious
+@onready var toggle_visibility_check_button: CheckButton = %ToggleVisibilityCheckButton
 
 
 func _ready():
@@ -67,6 +68,7 @@ func _ready():
 	)
 	trasform_step_spin_box.value_changed.connect(_presenter.set_default_transform_step)
 	rotation_step_spin_box.value_changed.connect(_presenter.set_rotation_step)
+	toggle_visibility_check_button.toggled.connect(_presenter.set_show_toolbar_button)
 
 	update_channel_option_button.item_selected.connect(_presenter.set_update_channel)
 	update_channel_info_button.pressed.connect(
@@ -115,6 +117,7 @@ func _show_settings(setting: AssetPlacerSettings):
 	palette_item_scale_h_slider.set_value_no_signal(setting.palette_item_scale)
 	trasform_step_spin_box.set_value_no_signal(setting.transform_step)
 	rotation_step_spin_box.set_value_no_signal(setting.rotation_step)
+	toggle_visibility_check_button.set_pressed_no_signal(setting.show_toolbar_button)
 
 	update_channel_option_button.select(setting.update_channel)
 

@@ -29,6 +29,7 @@ var rotation_step: float
 var bindings: Dictionary
 var ui_scale: float
 var palette_item_scale: float
+var show_toolbar_button: bool = true
 var update_channel: UpdateChannel
 var binding_positive_transform: APInputOption:
 	get():
