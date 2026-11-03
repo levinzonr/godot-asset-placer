@@ -40,6 +40,7 @@ var _thumbnail_regeneration_dialog: ThumbnailRegenerationDialog
 @onready var kb_axis_y = %KeybindingOptionAxisY
 @onready var kb_axis_z = %KeybindingOptionAxisZ
 @onready var kb_plane_mode = %KeybindingOptionPlaneMode
+@onready var kb_instancing_mode = %KeybindingOptionInstancingMode
 @onready var kb_palette_next = %KeybindingOptionPalleteNext
 @onready var kb_palette_previous = %KeybindingOptionPalletePrevious
 @onready var toggle_visibility_check_button: CheckButton = %ToggleVisibilityCheckButton
@@ -104,6 +105,7 @@ func _ready():
 	kb_axis_y.keybind_changed.connect(set_binding.bind(bindings.ToggleAxisY))
 	kb_axis_z.keybind_changed.connect(set_binding.bind(bindings.ToggleAxisZ))
 	kb_plane_mode.keybind_changed.connect(set_binding.bind(bindings.TogglePlaneMode))
+	kb_instancing_mode.keybind_changed.connect(set_binding.bind(bindings.ToggleInstancingMode))
 	kb_palette_next.keybind_changed.connect(set_binding.bind(bindings.PaletteNext))
 	kb_palette_previous.keybind_changed.connect(set_binding.bind(bindings.PalettePrevious))
 	_presenter.ready()
@@ -152,6 +154,7 @@ func _show_settings(setting: AssetPlacerSettings):
 	kb_palette_previous.set_keybind(setting.bindings[bindings.PalettePrevious])
 	kb_axis_z.set_keybind(setting.bindings[bindings.ToggleAxisZ])
 	kb_plane_mode.set_keybind(setting.bindings[bindings.TogglePlaneMode])
+	kb_instancing_mode.set_keybind(setting.bindings[bindings.ToggleInstancingMode])
 
 
 func _show_preview_material_picker():

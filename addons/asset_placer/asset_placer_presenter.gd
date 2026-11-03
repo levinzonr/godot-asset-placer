@@ -72,6 +72,13 @@ func toggle_active() -> bool:
 	return _active
 
 
+func cycle_instancing_mode():
+	if instancing_mode is SceneInstancingStrategy:
+		instancing_mode = MultiMeshInstancingStrategy.new()
+	else:
+		instancing_mode = SceneInstancingStrategy.new()
+
+
 func toggle_plane_placement():
 	placement_mode = GapPlacementMode.PlanePlacement.new(_last_plane_options)
 

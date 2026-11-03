@@ -20,6 +20,7 @@ enum Bindings {
 	BrushSizeDecrease,
 	BrushDensityIncrease,
 	BrushDensityDecrease,
+	ToggleInstancingMode,
 }
 
 enum UpdateChannel { Stable, Beta, Alpha }
@@ -63,6 +64,7 @@ static func default() -> AssetPlacerSettings:
 	settings.bindings[Bindings.ToggleAxisY] = APInputOption.key_press(Key.KEY_Y)
 	settings.bindings[Bindings.ToggleAxisZ] = APInputOption.key_press(Key.KEY_Z)
 	settings.bindings[Bindings.TogglePlaneMode] = APInputOption.key_press(Key.KEY_Q)
+	settings.bindings[Bindings.ToggleInstancingMode] = APInputOption.key_press(Key.KEY_V)
 	settings.bindings[Bindings.PaletteNext] = APInputOption.key_press(Key.KEY_TAB)
 	settings.bindings[Bindings.PalettePrevious] = APInputOption.key_press(
 		Key.KEY_TAB, KeyModifierMask.KEY_MASK_SHIFT
