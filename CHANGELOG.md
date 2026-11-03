@@ -17,6 +17,7 @@
 ### 🐛 Fixed
 
 - Fixed the icon displayed in the About panel.
+- Remove gdUnit4 addon and tests from the exported artifacts
 
 ---
 
