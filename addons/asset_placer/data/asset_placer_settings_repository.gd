@@ -27,7 +27,15 @@ const KEY_BINDING_TOGGLE_PLANE_MODE: String = "bindings/toggle_plane_mode"
 const KEY_BINDING_PALETTE_NEXT: String = "bindings/palette_next"
 const KEY_BINDING_PALETTE_PREVIOUS: String = "bindings/palette_previous"
 const KEY_BINDING_TOGGLE_PLUGIN_ACTIVE: String = "bindings/toggle_plugin_active"
+const KEY_BINDING_BRUSH_SIZE_INCREASE := "bindings/brush_size_increase"
+const KEY_BINDING_BRUSH_SIZE_DECREASE := "bindings/brush_size_decrease"
+const KEY_BINDING_BRUSH_DENSITY_INCREASE := "bindings/brush_density_increase"
+const KEY_BINDING_BRUSH_DENSITY_DECREASE := "bindings/brush_density_decrease"
 const _BINDING_KEYS := {
+	AssetPlacerSettings.Bindings.BrushSizeIncrease: KEY_BINDING_BRUSH_SIZE_INCREASE,
+	AssetPlacerSettings.Bindings.BrushSizeDecrease: KEY_BINDING_BRUSH_SIZE_DECREASE,
+	AssetPlacerSettings.Bindings.BrushDensityIncrease: KEY_BINDING_BRUSH_DENSITY_INCREASE,
+	AssetPlacerSettings.Bindings.BrushDensityDecrease: KEY_BINDING_BRUSH_DENSITY_DECREASE,
 	AssetPlacerSettings.Bindings.Rotate: KEY_BINDING_ROTATE,
 	AssetPlacerSettings.Bindings.Scale: KEY_BINDING_SCALE,
 	AssetPlacerSettings.Bindings.Translate: KEY_BINDING_TRANSLATE,

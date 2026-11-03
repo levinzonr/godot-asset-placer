@@ -24,6 +24,10 @@ var _thumbnail_regeneration_dialog: ThumbnailRegenerationDialog
 
 # Keybinds
 
+@onready var kb_brush_size_increase = %KeybindingOptionBrushSizeIncrease
+@onready var kb_brush_size_decrease = %KeybindingOptionBrushSizeDecrease
+@onready var kb_brush_density_increase = %KeybindingOptionBrushDensityIncrease
+@onready var kb_brush_density_decrease = %KeybindingOptionBrushDensityDecrease
 @onready var kb_rotate = %KeybindingOptionRotate
 @onready var kb_scale = %KeybindingOptionScale
 @onready var kb_translate = %KeybindingOptionTranslate
@@ -79,6 +83,10 @@ func _ready():
 	var bindings := AssetPlacerSettings.Bindings
 	var set_binding := _presenter.set_binding
 
+	kb_brush_size_increase.keybind_changed.connect(set_binding.bind(bindings.BrushSizeIncrease))
+	kb_brush_size_decrease.keybind_changed.connect(set_binding.bind(bindings.BrushSizeDecrease))
+	kb_brush_density_increase.keybind_changed.connect(set_binding.bind(bindings.BrushDensityIncrease))
+	kb_brush_density_decrease.keybind_changed.connect(set_binding.bind(bindings.BrushDensityDecrease))
 	kb_rotate.keybind_changed.connect(set_binding.bind(bindings.Rotate))
 	kb_scale.keybind_changed.connect(set_binding.bind(bindings.Scale))
 	kb_translate.keybind_changed.connect(set_binding.bind(bindings.Translate))
@@ -122,6 +130,10 @@ func _show_settings(setting: AssetPlacerSettings):
 	update_channel_option_button.select(setting.update_channel)
 
 	var bindings := AssetPlacerSettings.Bindings
+	kb_brush_size_increase.set_keybind(setting.bindings[bindings.BrushSizeIncrease])
+	kb_brush_size_decrease.set_keybind(setting.bindings[bindings.BrushSizeDecrease])
+	kb_brush_density_increase.set_keybind(setting.bindings[bindings.BrushDensityIncrease])
+	kb_brush_density_decrease.set_keybind(setting.bindings[bindings.BrushDensityDecrease])
 	kb_rotate.set_keybind(setting.bindings[bindings.Rotate])
 	kb_translate.set_keybind(setting.bindings[bindings.Translate])
 	kb_scale.set_keybind(setting.bindings[bindings.Scale])

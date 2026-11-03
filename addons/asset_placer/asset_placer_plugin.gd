@@ -351,6 +351,23 @@ func _forward_3d_gui_input(viewport_camera, event):
 		_presenter.toggle_grid_snapping()
 		return _handled()
 
+	if current_settings.bindings[AssetPlacerSettings.Bindings.BrushDensityIncrease].is_pressed(event):
+		_presenter.increase_brush_density(0.1)
+		return _handled()
+
+	if current_settings.bindings[AssetPlacerSettings.Bindings.BrushSizeIncrease].is_pressed(event):
+		_presenter.increase_brush_size(0.1)
+		return _handled()
+
+	if current_settings.bindings[AssetPlacerSettings.Bindings.BrushDensityDecrease].is_pressed(event):
+		_presenter.increase_brush_density(-0.1)
+		return _handled()
+
+	if current_settings.bindings[AssetPlacerSettings.Bindings.BrushSizeDecrease].is_pressed(event):
+		_presenter.increase_brush_size(-0.1)
+		return _handled()
+
+
 	if current_settings.binding_positive_transform.is_pressed(event):
 		var axis := _presenter.preview_transform_axis
 		if _asset_placer.transform_preview(_presenter.transform_mode, axis, 1):

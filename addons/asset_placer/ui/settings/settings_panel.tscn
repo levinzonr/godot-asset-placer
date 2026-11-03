@@ -399,3 +399,23 @@ label = "Palette Next"
 unique_name_in_owner = true
 layout_mode = 2
 label = "Palette Previous"
+
+[node name="KeybindingOptionBrushSizeIncrease" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "Brush Size Increase"
+
+[node name="KeybindingOptionBrushSizeDecrease" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "Brush Size Decrease"
+
+[node name="KeybindingOptionBrushDensityIncrease" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "Brush Density Increase"
+
+[node name="KeybindingOptionBrushDensityDecrease" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "Brush Density Decrease"
