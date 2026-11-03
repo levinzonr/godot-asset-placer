@@ -4,6 +4,8 @@
 /*.md export-ignore
 /.* export-ignore
 /addons/terrain_3d/ export-ignore
+/addons/gdUnit4/ export-ignore
+/tests export-ignore
 /demo export-ignore
 /docs export-ignore
 /icon.svg* export-ignore
