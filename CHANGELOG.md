@@ -1,6 +1,25 @@
 # Godot Asset Placer Changelog
 
 
+## 1.7.0-alpha5
+
+### ✨ New Features
+
+- Added configurable shortcuts to adjust brush size and density:
+  - **Alt + Mouse Wheel Up/Down** — Increase/decrease brush size.
+  - **Alt + Shift + Mouse Wheel Up/Down** — Increase/decrease brush density.
+- Added **V** to switch between Individual Scene and MultiMesh instancing modes.
+
+### Changes
+
+- Reduced the maximum brush size from **200** to **20** for finer control with the brush size slider.
+
+### 🐛 Fixed
+
+- Fixed the icon displayed in the About panel.
+
+---
+
 ## 1.7.0-alpha4
 
 ### Asset Library Panel Performance Improvements
