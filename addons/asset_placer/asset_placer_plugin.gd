@@ -391,7 +391,9 @@ func _forward_3d_gui_input(viewport_camera, event):
 		_presenter.toggle_axis(Vector3.BACK)
 		return _handled()
 
-	if current_settings.bindings[AssetPlacerSettings.Bindings.ToggleInstancingMode].is_pressed(event):
+	if current_settings.bindings[AssetPlacerSettings.Bindings.ToggleInstancingMode].is_pressed(
+		event
+	):
 		_presenter.cycle_instancing_mode()
 		return _handled()
 
