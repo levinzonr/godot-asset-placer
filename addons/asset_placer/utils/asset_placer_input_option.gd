@@ -150,5 +150,6 @@ static func mouse_press(mouse_button: MouseButton, modifiers: KeyModifierMask = 
 static func mouse_wheel_up(modifiers: KeyModifierMask = 0) -> APInputOption:
 	return APInputOption.MousePress.new(MouseButton.MOUSE_BUTTON_WHEEL_UP, modifiers)
 
+
 static func mouse_wheel_down(modifiers: KeyModifierMask = 0) -> APInputOption:
 	return APInputOption.MousePress.new(MouseButton.MOUSE_BUTTON_WHEEL_DOWN, modifiers)

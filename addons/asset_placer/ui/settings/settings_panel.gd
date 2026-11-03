@@ -85,8 +85,12 @@ func _ready():
 
 	kb_brush_size_increase.keybind_changed.connect(set_binding.bind(bindings.BrushSizeIncrease))
 	kb_brush_size_decrease.keybind_changed.connect(set_binding.bind(bindings.BrushSizeDecrease))
-	kb_brush_density_increase.keybind_changed.connect(set_binding.bind(bindings.BrushDensityIncrease))
-	kb_brush_density_decrease.keybind_changed.connect(set_binding.bind(bindings.BrushDensityDecrease))
+	kb_brush_density_increase.keybind_changed.connect(
+		set_binding.bind(bindings.BrushDensityIncrease)
+	)
+	kb_brush_density_decrease.keybind_changed.connect(
+		set_binding.bind(bindings.BrushDensityDecrease)
+	)
 	kb_rotate.keybind_changed.connect(set_binding.bind(bindings.Rotate))
 	kb_scale.keybind_changed.connect(set_binding.bind(bindings.Scale))
 	kb_translate.keybind_changed.connect(set_binding.bind(bindings.Translate))

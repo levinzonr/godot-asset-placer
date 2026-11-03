@@ -68,11 +68,18 @@ static func default() -> AssetPlacerSettings:
 		Key.KEY_TAB, KeyModifierMask.KEY_MASK_SHIFT
 	)
 	settings.bindings[Bindings.TogglePluginActive] = APInputOption.none()
-	settings.bindings[Bindings.BrushSizeIncrease] = APInputOption.mouse_wheel_up(KeyModifierMask.KEY_MASK_ALT)
-	settings.bindings[Bindings.BrushSizeDecrease] = APInputOption.mouse_wheel_down(KeyModifierMask.KEY_MASK_ALT)
-	settings.bindings[Bindings.BrushDensityIncrease] = APInputOption.mouse_wheel_up(KeyModifierMask.KEY_MASK_ALT | KeyModifierMask.KEY_MASK_SHIFT)
-	settings.bindings[Bindings.BrushDensityDecrease] = APInputOption.mouse_wheel_down(KeyModifierMask.KEY_MASK_ALT | KeyModifierMask.KEY_MASK_SHIFT)
-
+	settings.bindings[Bindings.BrushSizeIncrease] = APInputOption.mouse_wheel_up(
+		KeyModifierMask.KEY_MASK_ALT
+	)
+	settings.bindings[Bindings.BrushSizeDecrease] = APInputOption.mouse_wheel_down(
+		KeyModifierMask.KEY_MASK_ALT
+	)
+	settings.bindings[Bindings.BrushDensityIncrease] = APInputOption.mouse_wheel_up(
+		KeyModifierMask.KEY_MASK_ALT | KeyModifierMask.KEY_MASK_SHIFT
+	)
+	settings.bindings[Bindings.BrushDensityDecrease] = APInputOption.mouse_wheel_down(
+		KeyModifierMask.KEY_MASK_ALT | KeyModifierMask.KEY_MASK_SHIFT
+	)
 
 	settings.transform_step = 0.1
 	settings.rotation_step = 5

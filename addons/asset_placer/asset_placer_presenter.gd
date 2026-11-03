@@ -158,7 +158,6 @@ func _resolve_parent_from_selection() -> Node3D:
 	return picked
 
 
-
 func toggle_transformation_mode(mode: TransformMode):
 	if transform_mode == mode:
 		transform_mode = TransformMode.None
@@ -216,6 +215,7 @@ func increase_brush_size(value: float = 0.5):
 
 func increase_brush_density(value: float = 0.5):
 	options.set_brush_density(clampf(options.brush_density + value, 0.0, 1.0))
+
 
 func toggle_grid_snapping():
 	options.grid_snap_enabled = not options.grid_snap_enabled
