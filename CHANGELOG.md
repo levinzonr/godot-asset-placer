@@ -1,6 +1,18 @@
 # Godot Asset Placer Changelog
 
 
+## 1.7.0-alpha6
+
+### ✨ New Features
+
+- Added a **Max Brush Size** preference in Settings to configure the brush size slider's upper limit. Defaults to **20**.
+
+### 🐛 Fixed
+
+- Fixed an editor crash when Settings are being frequently updated. Internal Plugin Updater now runs only when the update channel changes, rather than on every settings change.
+
+---
+
 ## 1.7.0-alpha5
 
 ### ✨ New Features
