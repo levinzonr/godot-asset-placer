@@ -167,6 +167,22 @@ size_flags_horizontal = 10
 step = 0.01
 value = 0.1
 
+[node name="MaxBrushSizeOption" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=2046691901]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/MaxBrushSizeOption" unique_id=809335553]
+layout_mode = 2
+text = "Max Brush Size"
+
+[node name="MaxBrushSizeSpinBox" type="SpinBox" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General/MaxBrushSizeOption" unique_id=1098646818]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+tooltip_text = "Maximum brush radius in world units."
+step = 0.1
+value = 20.0
+allow_greater = true
+
 [node name="ToggleVisibilityOption" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/General" unique_id=1473450051]
 layout_mode = 2
 
@@ -400,27 +416,27 @@ unique_name_in_owner = true
 layout_mode = 2
 label = "Palette Previous"
 
-[node name="KeybindingOptionInstancingMode" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionInstancingMode" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=1454390926 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Toggle Instancing Mode"
 
-[node name="KeybindingOptionBrushSizeIncrease" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionBrushSizeIncrease" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=1704582557 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Brush Size Increase"
 
-[node name="KeybindingOptionBrushSizeDecrease" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionBrushSizeDecrease" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=1057173665 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Brush Size Decrease"
 
-[node name="KeybindingOptionBrushDensityIncrease" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionBrushDensityIncrease" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=985074752 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Brush Density Increase"
 
-[node name="KeybindingOptionBrushDensityDecrease" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" instance=ExtResource("1_gi0tg")]
+[node name="KeybindingOptionBrushDensityDecrease" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/KeyBindings/KeyBindingsOptions" unique_id=782291120 instance=ExtResource("1_gi0tg")]
 unique_name_in_owner = true
 layout_mode = 2
 label = "Brush Density Decrease"

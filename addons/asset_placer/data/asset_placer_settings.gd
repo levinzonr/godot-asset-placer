@@ -28,9 +28,13 @@ enum UpdateChannel { Stable, Beta, Alpha }
 const DEFAULT_PREVIEW_MATERIAL := "res://addons/asset_placer/utils/preview_material.tres"
 const DEFAULT_PLANE_MATERIAL := "res://addons/asset_placer/ui/plane_preview/plane_preview_material.tres"
 const DEFAULT_ASSET_LIBRARY_PATH := AssetLibraryParser.DEFAULT_SAVE_PATH
+const MIN_BRUSH_SIZE = 5
 
 var transform_step: float
 var rotation_step: float
+var max_brush_size: float = 20.0:
+	set(value):
+		max_brush_size = maxf(value, MIN_BRUSH_SIZE)
 var bindings: Dictionary
 var ui_scale: float
 var palette_item_scale: float

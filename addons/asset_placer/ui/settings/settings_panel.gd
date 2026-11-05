@@ -14,6 +14,7 @@ var _thumbnail_regeneration_dialog: ThumbnailRegenerationDialog
 
 @onready var trasform_step_spin_box: SpinBox = %TrasformStepSpinBox
 @onready var rotation_step_spin_box: SpinBox = %RotationStepSpinBox
+@onready var max_brush_size_spin_box: SpinBox = %MaxBrushSizeSpinBox
 @onready var ui_scale_h_slider: HSlider = %UIScaleHSlider
 @onready var slider_value = %SliderValue
 @onready var palette_item_scale_h_slider: HSlider = %PaletteItemScaleHSlider
@@ -73,6 +74,8 @@ func _ready():
 	)
 	trasform_step_spin_box.value_changed.connect(_presenter.set_default_transform_step)
 	rotation_step_spin_box.value_changed.connect(_presenter.set_rotation_step)
+	max_brush_size_spin_box.min_value = AssetPlacerSettings.MIN_BRUSH_SIZE
+	max_brush_size_spin_box.value_changed.connect(_presenter.set_max_brush_size)
 	toggle_visibility_check_button.toggled.connect(_presenter.set_show_toolbar_button)
 
 	update_channel_option_button.item_selected.connect(_presenter.set_update_channel)
@@ -131,6 +134,7 @@ func _show_settings(setting: AssetPlacerSettings):
 	palette_item_scale_h_slider.set_value_no_signal(setting.palette_item_scale)
 	trasform_step_spin_box.set_value_no_signal(setting.transform_step)
 	rotation_step_spin_box.set_value_no_signal(setting.rotation_step)
+	max_brush_size_spin_box.set_value_no_signal(setting.max_brush_size)
 	toggle_visibility_check_button.set_pressed_no_signal(setting.show_toolbar_button)
 
 	update_channel_option_button.select(setting.update_channel)

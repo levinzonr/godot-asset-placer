@@ -6,6 +6,7 @@ signal settings_changed(settings: AssetPlacerSettings)
 const KEY_BASE = "asset_placer/%s"
 const KEY_TRANSFORM_STEP: String = "general/transform_step_normal"
 const KEY_ROTATION_STEP: String = "general/rotation_step_normal"
+const KEY_MAX_BRUSH_SIZE: String = "general/max_brush_size"
 const KEY_UI_SCALE: String = "general/ui_scale"
 const KEY_PALETTE_ITEM_SCALE: String = "general/palette_item_scale"
 const KEY_SHOW_TOOLBAR_BUTTON: String = "general/show_toolbar_button"
@@ -100,6 +101,7 @@ func set_settings(settings: AssetPlacerSettings):
 
 	_set_editor_setting(KEY_TRANSFORM_STEP, settings.transform_step)
 	_set_editor_setting(KEY_ROTATION_STEP, settings.rotation_step)
+	_set_editor_setting(KEY_MAX_BRUSH_SIZE, settings.max_brush_size)
 	_set_editor_setting(KEY_UI_SCALE, settings.ui_scale)
 	_set_editor_setting(KEY_PALETTE_ITEM_SCALE, settings.palette_item_scale)
 	_set_editor_setting(KEY_SHOW_TOOLBAR_BUTTON, settings.show_toolbar_button)
@@ -125,6 +127,7 @@ func get_settings() -> AssetPlacerSettings:
 
 	settings.transform_step = _get_editor_setting(KEY_TRANSFORM_STEP, settings.transform_step)
 	settings.rotation_step = _get_editor_setting(KEY_ROTATION_STEP, settings.rotation_step)
+	settings.max_brush_size = _get_editor_setting(KEY_MAX_BRUSH_SIZE, settings.max_brush_size)
 	settings.ui_scale = _get_editor_setting(KEY_UI_SCALE, settings.ui_scale)
 	settings.palette_item_scale = _get_editor_setting(
 		KEY_PALETTE_ITEM_SCALE, settings.palette_item_scale

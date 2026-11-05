@@ -6,6 +6,8 @@ var options: AssetPlacerOptions:
 	get:
 		return AssetPlacerOptionsManager.get_options()
 
+@onready var settings_presenter = SettingsPresenter.new()
+
 @onready var grid_snapping_checkbox = %GridSnappingCheckbox
 @onready var grid_snap_value_spin_box: SpinBox = %GridSnapValueSpinBox
 @onready var min_rotation_selector: SpinBoxVector3 = %MinRotationSelector
@@ -36,6 +38,7 @@ var options: AssetPlacerOptions:
 
 
 func _ready():
+	settings_presenter.show_settings.connect(update_settings)
 	presenter = AssetPlacerPresenter.instance
 	options.changed.connect(set_options)
 	presenter.parent_changed.connect(show_parent)
@@ -107,8 +110,17 @@ func _ready():
 		func(): EditorInterface.popup_node_selector(presenter.select_parent, [&"Node3D"])
 	)
 
+	settings_presenter.ready()
 	set_options()
 	presenter.ready()
+
+
+func update_settings(settings: AssetPlacerSettings):
+	brush_radius_slider.set_block_signals(true)
+	brush_radius_slider.max_value = settings.max_brush_size
+	brush_radius_slider.set_block_signals(false)
+	if options.brush_radius > settings.max_brush_size:
+		options.set_brush_radius(settings.max_brush_size)
 
 
 func _show_terrain_3d_selector():
