@@ -2,6 +2,7 @@ class_name AssetPlacerSettingsRepository
 extends RefCounted
 
 signal settings_changed(settings: AssetPlacerSettings)
+signal update_channel_changed(channel: AssetPlacerSettings.UpdateChannel)
 
 const KEY_BASE = "asset_placer/%s"
 const KEY_TRANSFORM_STEP: String = "general/transform_step_normal"
@@ -110,6 +111,9 @@ func set_settings(settings: AssetPlacerSettings):
 	_set_project_setting(KEY_GENERAL_PREVIEW_MATERIAL, settings.preview_material_resource)
 	_set_project_setting(KEY_GENERAL_PLANE_MATERIAL, settings.plane_material_resource)
 	_set_project_setting(KEY_ASSET_LIBRARY_PATH, settings.asset_library_path)
+
+	if current.update_channel != settings.update_channel:
+		update_channel_changed.emit(settings.update_channel)
 
 	settings_changed.emit(get_settings())
 

@@ -29,9 +29,7 @@ var updater: PluginUpdater = PluginUpdater.instance
 func _ready():
 	version_label.text = "Version %s" % get_plugin_version()
 	var settings = settings_repository.get_settings()
-	settings_repository.settings_changed.connect(
-		func(s): updater.check_for_updates(s.update_channel)
-	)
+	settings_repository.update_channel_changed.connect(updater.check_for_updates)
 	updater.show_update_loading.connect(_show_update_loading)
 	updater.updater_update_available.connect(_show_update_available_for_download)
 	updater.update_ready.connect(_show_update_ready_to_apply)
