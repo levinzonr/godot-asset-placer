@@ -7,10 +7,6 @@
 
 - Fixed MultiMesh painting creating duplicate batches after reopening the editor instead of continuing to add instances to an existing batch.
 
-### Changes
-
-- Simplified MultiMesh batch matching to use only the asset ID and source mesh-node path under the resolved Assets Parent or collection group.
-- Reusing a MultiMesh batch preserves its existing mesh, materials, and rendering settings. Source asset changes no longer prevent reuse or trigger automatic batch rebuilding.
 
 ---
 
