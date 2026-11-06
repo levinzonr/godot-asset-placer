@@ -16,15 +16,31 @@ func _process(_delta):
 
 
 func set_resource(resource: AssetResource):
+	clear_resource()
+	if not is_instance_valid(resource):
+		return
 	_resource = resource
 	var cache_store := ThumbnailCacheStore.instance
 	_thumbnail_identifier = cache_store.identifier_for_asset(resource) if cache_store else ""
+	set_process(true)
 	_refresh_thumbnail(true)
 
 
+func clear_resource():
+	_resource = null
+	_thumbnail_identifier = ""
+	last_time_modified = 0
+	texture = null
+	set_process(false)
+
+
 func _ready():
+	set_process(is_instance_valid(_resource))
 	var coordinator := ThumbnailGenerationCoordinator.instance
-	if is_instance_valid(coordinator):
+	if (
+		is_instance_valid(coordinator)
+		and not coordinator.thumbnail_updated.is_connected(_on_thumbnail_updated)
+	):
 		coordinator.thumbnail_updated.connect(_on_thumbnail_updated)
 
 
@@ -56,5 +72,9 @@ func _refresh_thumbnail(request_regeneration: bool):
 
 
 func _on_thumbnail_updated(identifier: String, _thumbnail_path: String):
-	if identifier == _thumbnail_identifier:
+	if (
+		is_instance_valid(_resource)
+		and not _thumbnail_identifier.is_empty()
+		and identifier == _thumbnail_identifier
+	):
 		_refresh_thumbnail(false)

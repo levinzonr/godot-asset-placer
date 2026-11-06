@@ -14,6 +14,7 @@ var _thumbnail_regeneration_dialog: ThumbnailRegenerationDialog
 
 @onready var trasform_step_spin_box: SpinBox = %TrasformStepSpinBox
 @onready var rotation_step_spin_box: SpinBox = %RotationStepSpinBox
+@onready var max_brush_size_spin_box: SpinBox = %MaxBrushSizeSpinBox
 @onready var ui_scale_h_slider: HSlider = %UIScaleHSlider
 @onready var slider_value = %SliderValue
 @onready var palette_item_scale_h_slider: HSlider = %PaletteItemScaleHSlider
@@ -24,6 +25,10 @@ var _thumbnail_regeneration_dialog: ThumbnailRegenerationDialog
 
 # Keybinds
 
+@onready var kb_brush_size_increase = %KeybindingOptionBrushSizeIncrease
+@onready var kb_brush_size_decrease = %KeybindingOptionBrushSizeDecrease
+@onready var kb_brush_density_increase = %KeybindingOptionBrushDensityIncrease
+@onready var kb_brush_density_decrease = %KeybindingOptionBrushDensityDecrease
 @onready var kb_rotate = %KeybindingOptionRotate
 @onready var kb_scale = %KeybindingOptionScale
 @onready var kb_translate = %KeybindingOptionTranslate
@@ -36,8 +41,10 @@ var _thumbnail_regeneration_dialog: ThumbnailRegenerationDialog
 @onready var kb_axis_y = %KeybindingOptionAxisY
 @onready var kb_axis_z = %KeybindingOptionAxisZ
 @onready var kb_plane_mode = %KeybindingOptionPlaneMode
+@onready var kb_instancing_mode = %KeybindingOptionInstancingMode
 @onready var kb_palette_next = %KeybindingOptionPalleteNext
 @onready var kb_palette_previous = %KeybindingOptionPalletePrevious
+@onready var toggle_visibility_check_button: CheckButton = %ToggleVisibilityCheckButton
 
 
 func _ready():
@@ -67,6 +74,9 @@ func _ready():
 	)
 	trasform_step_spin_box.value_changed.connect(_presenter.set_default_transform_step)
 	rotation_step_spin_box.value_changed.connect(_presenter.set_rotation_step)
+	max_brush_size_spin_box.min_value = AssetPlacerSettings.MIN_BRUSH_SIZE
+	max_brush_size_spin_box.value_changed.connect(_presenter.set_max_brush_size)
+	toggle_visibility_check_button.toggled.connect(_presenter.set_show_toolbar_button)
 
 	update_channel_option_button.item_selected.connect(_presenter.set_update_channel)
 	update_channel_info_button.pressed.connect(
@@ -77,6 +87,14 @@ func _ready():
 	var bindings := AssetPlacerSettings.Bindings
 	var set_binding := _presenter.set_binding
 
+	kb_brush_size_increase.keybind_changed.connect(set_binding.bind(bindings.BrushSizeIncrease))
+	kb_brush_size_decrease.keybind_changed.connect(set_binding.bind(bindings.BrushSizeDecrease))
+	kb_brush_density_increase.keybind_changed.connect(
+		set_binding.bind(bindings.BrushDensityIncrease)
+	)
+	kb_brush_density_decrease.keybind_changed.connect(
+		set_binding.bind(bindings.BrushDensityDecrease)
+	)
 	kb_rotate.keybind_changed.connect(set_binding.bind(bindings.Rotate))
 	kb_scale.keybind_changed.connect(set_binding.bind(bindings.Scale))
 	kb_translate.keybind_changed.connect(set_binding.bind(bindings.Translate))
@@ -90,6 +108,7 @@ func _ready():
 	kb_axis_y.keybind_changed.connect(set_binding.bind(bindings.ToggleAxisY))
 	kb_axis_z.keybind_changed.connect(set_binding.bind(bindings.ToggleAxisZ))
 	kb_plane_mode.keybind_changed.connect(set_binding.bind(bindings.TogglePlaneMode))
+	kb_instancing_mode.keybind_changed.connect(set_binding.bind(bindings.ToggleInstancingMode))
 	kb_palette_next.keybind_changed.connect(set_binding.bind(bindings.PaletteNext))
 	kb_palette_previous.keybind_changed.connect(set_binding.bind(bindings.PalettePrevious))
 	_presenter.ready()
@@ -115,10 +134,16 @@ func _show_settings(setting: AssetPlacerSettings):
 	palette_item_scale_h_slider.set_value_no_signal(setting.palette_item_scale)
 	trasform_step_spin_box.set_value_no_signal(setting.transform_step)
 	rotation_step_spin_box.set_value_no_signal(setting.rotation_step)
+	max_brush_size_spin_box.set_value_no_signal(setting.max_brush_size)
+	toggle_visibility_check_button.set_pressed_no_signal(setting.show_toolbar_button)
 
 	update_channel_option_button.select(setting.update_channel)
 
 	var bindings := AssetPlacerSettings.Bindings
+	kb_brush_size_increase.set_keybind(setting.bindings[bindings.BrushSizeIncrease])
+	kb_brush_size_decrease.set_keybind(setting.bindings[bindings.BrushSizeDecrease])
+	kb_brush_density_increase.set_keybind(setting.bindings[bindings.BrushDensityIncrease])
+	kb_brush_density_decrease.set_keybind(setting.bindings[bindings.BrushDensityDecrease])
 	kb_rotate.set_keybind(setting.bindings[bindings.Rotate])
 	kb_translate.set_keybind(setting.bindings[bindings.Translate])
 	kb_scale.set_keybind(setting.bindings[bindings.Scale])
@@ -133,6 +158,7 @@ func _show_settings(setting: AssetPlacerSettings):
 	kb_palette_previous.set_keybind(setting.bindings[bindings.PalettePrevious])
 	kb_axis_z.set_keybind(setting.bindings[bindings.ToggleAxisZ])
 	kb_plane_mode.set_keybind(setting.bindings[bindings.TogglePlaneMode])
+	kb_instancing_mode.set_keybind(setting.bindings[bindings.ToggleInstancingMode])
 
 
 func _show_preview_material_picker():

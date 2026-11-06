@@ -11,7 +11,7 @@ func _init(node: Node3D):
 func get_placement_point(camera: Camera3D, mouse_position: Vector2) -> CollisionHit:
 	if terrain_3d_node.has_method("get_intersection"):
 		var from := camera.project_ray_origin(mouse_position)
-		var to := from + camera.project_ray_normal(mouse_position) * 1000
+		var to := from + camera.project_ray_normal(mouse_position) * maxf(1000.0, camera.far)
 		var direction = (to - from).normalized()
 		# Using cpu-mode is too inaccurate for most placing.
 		var hit_position: Vector3 = terrain_3d_node.get_intersection(from, direction, true)

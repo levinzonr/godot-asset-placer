@@ -37,6 +37,12 @@ func set_default_transform_step(value: float):
 	_repository.set_settings(settings)
 
 
+func set_max_brush_size(value: float):
+	var settings = _repository.get_settings()
+	settings.max_brush_size = value
+	_repository.set_settings(settings)
+
+
 func set_ui_scale(value: float):
 	var settings = _repository.get_settings()
 	settings.ui_scale = value
@@ -46,6 +52,12 @@ func set_ui_scale(value: float):
 func set_palette_item_scale(value: float):
 	var settings = _repository.get_settings()
 	settings.palette_item_scale = value
+	_repository.set_settings(settings)
+
+
+func set_show_toolbar_button(value: bool):
+	var settings = _repository.get_settings()
+	settings.show_toolbar_button = value
 	_repository.set_settings(settings)
 
 
