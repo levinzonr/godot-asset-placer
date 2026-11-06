@@ -23,15 +23,13 @@ const RENDER_PROPERTIES = [
 
 @export_storage var source_asset_id: String
 @export_storage var source_mesh_path: NodePath
-@export_storage var source_mesh: Mesh
-@export_storage var source_surface_materials: Array[Material] = []
 
 
 func configure(asset_id: String, mesh_path: NodePath, source: MeshInstance3D) -> void:
 	source_asset_id = asset_id
 	source_mesh_path = mesh_path
-	source_mesh = source.mesh
-	source_surface_materials = _get_surface_materials(source)
+	var source_mesh := source.mesh
+	var source_surface_materials := _get_surface_materials(source)
 
 	var batch_mesh := source_mesh
 	if source_surface_materials.any(func(material): return material != null):
@@ -51,17 +49,8 @@ func configure(asset_id: String, mesh_path: NodePath, source: MeshInstance3D) ->
 		set(property, source.get(property))
 
 
-func matches_source(asset_id: String, mesh_path: NodePath, source: MeshInstance3D) -> bool:
-	if source_asset_id != asset_id or source_mesh_path != mesh_path:
-		return false
-	if multimesh == null or source_mesh != source.mesh or multimesh.mesh == null:
-		return false
-	if source_surface_materials != _get_surface_materials(source):
-		return false
-	for property in RENDER_PROPERTIES:
-		if get(property) != source.get(property):
-			return false
-	return true
+func matches_source(asset_id: String, mesh_path: NodePath) -> bool:
+	return source_asset_id == asset_id and source_mesh_path == mesh_path
 
 
 func get_instance_transforms() -> Array[Transform3D]:
@@ -73,7 +62,6 @@ func get_instance_transforms() -> Array[Transform3D]:
 
 
 func set_instance_transforms(transforms: Array[Transform3D]) -> void:
-	# Rebuild private storage so resizing cannot lose old transforms or mutate a shared resource.
 	var updated := MultiMesh.new()
 	updated.resource_local_to_scene = true
 	updated.transform_format = MultiMesh.TRANSFORM_3D
@@ -90,8 +78,6 @@ func set_instance_transforms(transforms: Array[Transform3D]) -> void:
 
 
 func truncate_instances(count: int) -> void:
-	# A stroke can append to this batch more than once. Undo methods may run in forward
-	# order, so a later undo must never grow a batch already truncated by an earlier one.
 	var transforms := get_instance_transforms()
 	transforms.resize(mini(count, transforms.size()))
 	set_instance_transforms(transforms)

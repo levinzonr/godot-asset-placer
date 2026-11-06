@@ -101,7 +101,7 @@ func _place_mesh_part(
 	parent: Node3D,
 	scene_owner: Node
 ) -> void:
-	var batch := _find_batch(parent, asset.id, part)
+	var batch := _find_batch(parent, asset.id, part.mesh_path)
 	var is_new := batch == null
 	if is_new:
 		batch = AssetPlacerMultiMeshBatch.new()
@@ -122,10 +122,12 @@ func _place_mesh_part(
 	_do_placement(batch, parent, scene_owner, transforms)
 
 
-func _find_batch(parent: Node3D, asset_id: String, part: MeshPart) -> AssetPlacerMultiMeshBatch:
+func _find_batch(
+	parent: Node3D, asset_id: String, mesh_path: NodePath
+) -> AssetPlacerMultiMeshBatch:
 	for child in parent.get_children():
 		if child is AssetPlacerMultiMeshBatch:
-			if child.matches_source(asset_id, part.mesh_path, part.mesh_instance):
+			if child.matches_source(asset_id, mesh_path):
 				return child
 	return null
 
