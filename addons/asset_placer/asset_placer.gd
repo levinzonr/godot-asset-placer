@@ -1,7 +1,7 @@
 class_name AssetPlacer
 extends RefCounted
 
-const META_ASSET_ID = &"asset_placer_res_id"
+const META_ASSET_ID = SceneInstancingStrategy.META_ASSET_ID
 const DEBOUNCE_DELAY_SEC: float = 0.3
 
 var preview_node: Node3D
@@ -18,14 +18,31 @@ var _stroke_id: int = 0
 
 var _is_node_transform_mode: bool = false
 var _original_transform: Transform3D
-var _strategy: AssetPlacementStrategy
+var _placement_strategy: AssetPlacementStrategy
+var _instancing_strategy: InstancingStrategy
+
 var _presenter: AssetPlacerPresenter:
 	get:
 		return AssetPlacerPresenter.instance
 
+var _options: AssetPlacerOptions:
+	get:
+		return AssetPlacerOptionsManager.get_options()
+
 
 func _init(undo_redo: EditorUndoRedoManager):
 	self.undo_redo = undo_redo
+	set_instancing_mode(SceneInstancingStrategy.new())
+
+
+func set_instancing_mode(strategy: InstancingStrategy) -> void:
+	if strategy == null or strategy == _instancing_strategy:
+		return
+	end_stroke()
+	strategy.setup(undo_redo)
+
+	_instancing_strategy = strategy
+	last_placed_position = Vector3(INF, INF, INF)
 
 
 func start_placement(root: Window, asset: AssetResource, placement: GapPlacementMode):
@@ -47,6 +64,7 @@ func start_placement(root: Window, asset: AssetResource, placement: GapPlacement
 	if selected.size() == 1 and selected[0] is Node3D and _presenter != null:
 		# Randomize the preview once
 		preview_node.force_next_stroke()
+	self.preview_aabb = AABBProvider.provide_aabb(preview_node)
 
 
 func start_node_transform(node: Node3D, placement: GapPlacementMode):
@@ -59,15 +77,15 @@ func start_node_transform(node: Node3D, placement: GapPlacementMode):
 
 func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 	if preview_node and _presenter != null:
-		var hit = _strategy.get_placement_point(camera, mouse_position)
+		var hit = _placement_strategy.get_placement_point(camera, mouse_position)
 		var normal = Vector3.UP
 
-		if _presenter.options.align_normals and hit:
+		if _options.align_normals and hit:
 			normal = hit.normal
 
 		var snapped_pos = _snap_position(hit.position, normal)
-		if _strategy is Terrain3DAssetPlacementStrategy:
-			snapped_pos.y = _strategy.terrain_3d_node.data.get_height(snapped_pos)
+		if _placement_strategy is Terrain3DAssetPlacementStrategy:
+			snapped_pos.y = _placement_strategy.terrain_3d_node.data.get_height(snapped_pos)
 
 		var is_brush_mode = _presenter.options.brush_radius > 0.0
 
@@ -97,7 +115,7 @@ func move_preview(mouse_position: Vector2, camera: Camera3D) -> bool:
 		return false
 
 
-func place_asset(focus_on_placement: bool):
+func place_asset():
 	if preview_node and _presenter != null:
 		if _is_node_transform_mode:
 			_confirm_node_transform()
@@ -118,19 +136,21 @@ func place_asset(focus_on_placement: bool):
 
 			if not _is_in_stroke:
 				undo_redo.create_action("Place Asset(s): %s" % asset.name, 0, parent)
+				# Mode changes replace the strategy; history must retain its original method target.
+				undo_redo.add_do_reference(_instancing_strategy)
 				_is_in_stroke = true
 
+			var transforms: Array[Transform3D] = []
 			if is_brush_mode:
-				_place_brush_instances(parent, focus_on_placement)
+				transforms = _get_brush_transforms()
+			elif preview_node is AssetPreviewContainer:
+				var preview_transforms = preview_node.get_children_transforms()
+				if preview_transforms.size() > 0:
+					transforms.append(preview_transforms[0])
 			else:
-				if preview_node is AssetPreviewContainer:
-					var transforms = preview_node.get_children_transforms()
-					if transforms.size() > 0:
-						_spawn_and_record_instance(transforms[0], parent, focus_on_placement)
-				else:
-					_spawn_and_record_instance(
-						preview_node.global_transform, parent, focus_on_placement
-					)
+				transforms.append(preview_node.global_transform)
+
+			_instancing_strategy.place_instances(asset, transforms, parent)
 
 			_presenter.on_asset_placed()
 			last_placed_position = (
@@ -184,25 +204,10 @@ func should_drag_place() -> bool:
 	return current_pos.distance_to(last_placed_position) >= spacing
 
 
-func _spawn_and_record_instance(
-	transform: Transform3D, parent: Node3D, select_after_placement: bool
-):
-	var new_node: Node3D = _instantiate_asset_resource(asset)
-	new_node.global_transform = transform
-	new_node.transform = parent.global_transform.affine_inverse() * transform
-	new_node.name = _pick_name(new_node, parent)
-	new_node.set_meta(META_ASSET_ID, asset.id)
-
-	undo_redo.add_do_reference(new_node)
-	undo_redo.add_do_method(self, "_do_placement", new_node, parent, select_after_placement)
-	undo_redo.add_undo_method(self, "_undo_placement", new_node, parent)
-
-	_do_placement(new_node, parent, select_after_placement)
-
-
-func _place_brush_instances(parent: Node3D, focus_on_placement: bool):
+func _get_brush_transforms() -> Array[Transform3D]:
+	var transforms: Array[Transform3D] = []
 	if not brush_decal or not (preview_node is AssetPreviewContainer):
-		return
+		return transforms
 
 	var space_state = preview_node.get_world_3d().direct_space_state
 	var brush_normal = brush_decal.global_transform.basis.y
@@ -212,8 +217,8 @@ func _place_brush_instances(parent: Node3D, focus_on_placement: bool):
 		var hit_pos = query_pos
 		var hit_normal = brush_normal
 
-		if _strategy is Terrain3DAssetPlacementStrategy:
-			hit_pos.y = _strategy.terrain_3d_node.data.get_height(query_pos)
+		if _placement_strategy is Terrain3DAssetPlacementStrategy:
+			hit_pos.y = _placement_strategy.terrain_3d_node.data.get_height(query_pos)
 		else:
 			var ray_from = query_pos + brush_normal * 100.0
 			var ray_to = query_pos - brush_normal * 100.0
@@ -243,7 +248,9 @@ func _place_brush_instances(parent: Node3D, focus_on_placement: bool):
 		var adjust = snapped_pos - bottom_world
 		new_transform.origin += adjust
 
-		_spawn_and_record_instance(new_transform, parent, focus_on_placement)
+		transforms.append(new_transform)
+
+	return transforms
 
 
 func set_plugin_settings(settings: AssetPlacerSettings):
@@ -298,10 +305,10 @@ func transform_preview(
 
 
 func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
-	if !_presenter.options.snapping_enabled:
+	if !_options.grid_snap_enabled:
 		return hit_pos
 
-	var grid_step: float = _presenter.options.snapping_grid_step
+	var grid_step := _options.grid_snap_step
 
 	# Build tangent basis aligned to the surface normal
 	var n := normal.normalized()
@@ -320,20 +327,6 @@ func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
 	var snapped = tangent * snapped_tangent + bitangent * snapped_bitangent + n * local_height
 
 	return snapped
-
-
-func _do_placement(new_node: Node3D, root: Node3D, select_after_placement: bool):
-	var temp_name := new_node.name
-	root.add_child(new_node)
-	new_node.name = temp_name
-	new_node.owner = EditorInterface.get_edited_scene_root()
-	if select_after_placement:
-		_presenter.clear_selection()
-		EditorInterface.edit_node(new_node)
-
-
-func _undo_placement(new_node: Node3D, root: Node3D):
-	root.remove_child(new_node)
 
 
 func _confirm_node_transform():
@@ -373,21 +366,6 @@ func stop_placement():
 		brush_decal = null
 
 
-func _instantiate_asset_resource(asset: AssetResource) -> Node3D:
-	var new_node: Node3D
-	var resource := asset.get_resource()
-	if resource is PackedScene:
-		new_node = (resource.instantiate() as Node3D)
-	elif resource is ArrayMesh:
-		new_node = MeshInstance3D.new()
-		new_node.name = asset.name
-		new_node.mesh = resource.duplicate()
-	else:
-		push_error("Not supported resource type %s" % str(resource))
-
-	return new_node
-
-
 func set_placement_mode(placement_mode: GapPlacementMode):
 	var rids = []
 	if preview_node:
@@ -397,21 +375,15 @@ func set_placement_mode(placement_mode: GapPlacementMode):
 			rids = get_collision_rids(preview_node)
 
 	if placement_mode is GapPlacementMode.SurfacePlacement:
-		_strategy = SurfaceAssetPlacementStrategy.new(rids)
+		_placement_strategy = SurfaceAssetPlacementStrategy.new(rids)
 	elif placement_mode is GapPlacementMode.PlanePlacement:
-		_strategy = PlanePlacementStrategy.new(placement_mode.plane_options)
+		_placement_strategy = PlanePlacementStrategy.new(placement_mode.plane_options)
 	elif placement_mode is GapPlacementMode.Terrain3DPlacement:
-		_strategy = Terrain3DAssetPlacementStrategy.new(placement_mode.get_terrain_3d_node())
+		_placement_strategy = Terrain3DAssetPlacementStrategy.new(
+			placement_mode.get_terrain_3d_node()
+		)
 	else:
 		push_error("Placement mode %s is not supported" % str(placement_mode))
-
-
-func _pick_name(node: Node3D, parent: Node3D) -> String:
-	var number_of_same_scenes := 0
-	for child in parent.get_children():
-		if child.has_meta(META_ASSET_ID) && child.get_meta(META_ASSET_ID) == asset.id:
-			number_of_same_scenes += 1
-	return node.name if number_of_same_scenes == 0 else node.name + " (%s)" % number_of_same_scenes
 
 
 func get_collision_rids(node: Node) -> Array:

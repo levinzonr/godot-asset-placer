@@ -32,6 +32,10 @@ var _state := State.Idle:
 				on_bind()
 
 
+func _ready() -> void:
+	tooltip_text = "Left-click to change shortcut.\nRight-click to unassign."
+
+
 func on_idle():
 	text = _current_key.get_display_name()
 	modulate = Color.WHITE
@@ -77,6 +81,17 @@ func set_keybind_no_signal(key: APInputOption) -> void:
 		modulate = Color.RED
 	else:
 		modulate = Color.WHITE
+
+
+func _gui_input(event: InputEvent) -> void:
+	if disabled:
+		return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		accept_event()
+		if event.pressed:
+			_current_key = APInputOption.none()
+			cancel()
+			key_binding_changed.emit(_current_key)
 
 
 func _input(event: InputEvent):

@@ -2,12 +2,15 @@ class_name AssetPlacerSettingsRepository
 extends RefCounted
 
 signal settings_changed(settings: AssetPlacerSettings)
+signal update_channel_changed(channel: AssetPlacerSettings.UpdateChannel)
 
 const KEY_BASE = "asset_placer/%s"
 const KEY_TRANSFORM_STEP: String = "general/transform_step_normal"
 const KEY_ROTATION_STEP: String = "general/rotation_step_normal"
+const KEY_MAX_BRUSH_SIZE: String = "general/max_brush_size"
 const KEY_UI_SCALE: String = "general/ui_scale"
 const KEY_PALETTE_ITEM_SCALE: String = "general/palette_item_scale"
+const KEY_SHOW_TOOLBAR_BUTTON: String = "general/show_toolbar_button"
 const KEY_UPDATE_CHANNEL: String = "general/update_channel"
 const KEY_MANAGE_COLLECTIONS_DIALOG_SIZE: String = "ui/manage_collections_dialog_size"
 
@@ -23,10 +26,19 @@ const KEY_BINDING_TOGGLE_AXIS_X: String = "bindings/toggle_axis_x"
 const KEY_BINDING_TOGGLE_AXIS_Y: String = "bindings/toggle_axis_y"
 const KEY_BINDING_TOGGLE_AXIS_Z: String = "bindings/toggle_axis_z"
 const KEY_BINDING_TOGGLE_PLANE_MODE: String = "bindings/toggle_plane_mode"
+const KEY_BINDING_TOGGLE_INSTANCING_MODE: String = "bindings/toggle_instancing_mode"
 const KEY_BINDING_PALETTE_NEXT: String = "bindings/palette_next"
 const KEY_BINDING_PALETTE_PREVIOUS: String = "bindings/palette_previous"
 const KEY_BINDING_TOGGLE_PLUGIN_ACTIVE: String = "bindings/toggle_plugin_active"
+const KEY_BINDING_BRUSH_SIZE_INCREASE := "bindings/brush_size_increase"
+const KEY_BINDING_BRUSH_SIZE_DECREASE := "bindings/brush_size_decrease"
+const KEY_BINDING_BRUSH_DENSITY_INCREASE := "bindings/brush_density_increase"
+const KEY_BINDING_BRUSH_DENSITY_DECREASE := "bindings/brush_density_decrease"
 const _BINDING_KEYS := {
+	AssetPlacerSettings.Bindings.BrushSizeIncrease: KEY_BINDING_BRUSH_SIZE_INCREASE,
+	AssetPlacerSettings.Bindings.BrushSizeDecrease: KEY_BINDING_BRUSH_SIZE_DECREASE,
+	AssetPlacerSettings.Bindings.BrushDensityIncrease: KEY_BINDING_BRUSH_DENSITY_INCREASE,
+	AssetPlacerSettings.Bindings.BrushDensityDecrease: KEY_BINDING_BRUSH_DENSITY_DECREASE,
 	AssetPlacerSettings.Bindings.Rotate: KEY_BINDING_ROTATE,
 	AssetPlacerSettings.Bindings.Scale: KEY_BINDING_SCALE,
 	AssetPlacerSettings.Bindings.Translate: KEY_BINDING_TRANSLATE,
@@ -38,6 +50,7 @@ const _BINDING_KEYS := {
 	AssetPlacerSettings.Bindings.ToggleAxisY: KEY_BINDING_TOGGLE_AXIS_Y,
 	AssetPlacerSettings.Bindings.ToggleAxisZ: KEY_BINDING_TOGGLE_AXIS_Z,
 	AssetPlacerSettings.Bindings.TogglePlaneMode: KEY_BINDING_TOGGLE_PLANE_MODE,
+	AssetPlacerSettings.Bindings.ToggleInstancingMode: KEY_BINDING_TOGGLE_INSTANCING_MODE,
 	AssetPlacerSettings.Bindings.PaletteNext: KEY_BINDING_PALETTE_NEXT,
 	AssetPlacerSettings.Bindings.PalettePrevious: KEY_BINDING_PALETTE_PREVIOUS,
 	AssetPlacerSettings.Bindings.TogglePluginActive: KEY_BINDING_TOGGLE_PLUGIN_ACTIVE,
@@ -89,13 +102,18 @@ func set_settings(settings: AssetPlacerSettings):
 
 	_set_editor_setting(KEY_TRANSFORM_STEP, settings.transform_step)
 	_set_editor_setting(KEY_ROTATION_STEP, settings.rotation_step)
+	_set_editor_setting(KEY_MAX_BRUSH_SIZE, settings.max_brush_size)
 	_set_editor_setting(KEY_UI_SCALE, settings.ui_scale)
 	_set_editor_setting(KEY_PALETTE_ITEM_SCALE, settings.palette_item_scale)
+	_set_editor_setting(KEY_SHOW_TOOLBAR_BUTTON, settings.show_toolbar_button)
 	_set_editor_setting(KEY_UPDATE_CHANNEL, settings.update_channel)
 
 	_set_project_setting(KEY_GENERAL_PREVIEW_MATERIAL, settings.preview_material_resource)
 	_set_project_setting(KEY_GENERAL_PLANE_MATERIAL, settings.plane_material_resource)
 	_set_project_setting(KEY_ASSET_LIBRARY_PATH, settings.asset_library_path)
+
+	if current.update_channel != settings.update_channel:
+		update_channel_changed.emit(settings.update_channel)
 
 	settings_changed.emit(get_settings())
 
@@ -113,9 +131,13 @@ func get_settings() -> AssetPlacerSettings:
 
 	settings.transform_step = _get_editor_setting(KEY_TRANSFORM_STEP, settings.transform_step)
 	settings.rotation_step = _get_editor_setting(KEY_ROTATION_STEP, settings.rotation_step)
+	settings.max_brush_size = _get_editor_setting(KEY_MAX_BRUSH_SIZE, settings.max_brush_size)
 	settings.ui_scale = _get_editor_setting(KEY_UI_SCALE, settings.ui_scale)
 	settings.palette_item_scale = _get_editor_setting(
 		KEY_PALETTE_ITEM_SCALE, settings.palette_item_scale
+	)
+	settings.show_toolbar_button = _get_editor_setting(
+		KEY_SHOW_TOOLBAR_BUTTON, settings.show_toolbar_button
 	)
 	settings.update_channel = _get_editor_setting(KEY_UPDATE_CHANNEL, settings.update_channel)
 
