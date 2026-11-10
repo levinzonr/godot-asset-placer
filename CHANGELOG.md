@@ -1,5 +1,8 @@
 # Godot Asset Placer Changelog
 
+## 1.7.0-beta1
+
+No changes promoting to beta, while testing for the stable release :) 
 
 ## 1.7.0-alpha7
 
