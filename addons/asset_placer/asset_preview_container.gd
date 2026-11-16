@@ -35,9 +35,8 @@ func update_preview(snapped_pos: Vector3, normal: Vector3, is_brush_mode: bool) 
 		var density_factor = options.brush_density
 		var brush_area = PI * r * r
 		var asset_area = max(0.25, preview_aabb.size.x * preview_aabb.size.z)
-		var max_assets = (brush_area / asset_area) * 0.2
-		var curved_density = pow(density_factor, 2.0)
-		amount_to_spawn = max(1, int(round(max_assets * curved_density)))
+		var max_assets = brush_area / asset_area
+		amount_to_spawn = max(1, int(round(max_assets * density_factor)))
 
 	_sync_preview_children(amount_to_spawn, is_brush_mode)
 
