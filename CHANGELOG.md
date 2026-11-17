@@ -1,6 +1,6 @@
 # Godot Asset Placer Changelog
 
-## 🚀 1.7.0
+## 1.7.0
 
 Version **1.7.0** introduces **MultiMesh instancing** for repeated static geometry, **orthographic placement**, persistent placement options, and faster browsing of large asset libraries.
 
