@@ -1,5 +1,55 @@
 # Godot Asset Placer Changelog
 
+## 🚀 1.7.0
+
+Version **1.7.0** introduces **MultiMesh instancing** for repeated static geometry, **orthographic placement**, persistent placement options, and faster browsing of large asset libraries.
+
+### ✨ New Features
+
+#### 🌿 MultiMesh Instancing
+
+Choose between **Individual Scene** (the existing default) and **MultiMesh** in Placement Options, or press **V** to switch modes.
+
+- **Batch repeated static geometry** — Place foliage, rocks, and decorative props without creating a separate scene instance for every copy.
+- **Use your existing assets** — Supported `MeshInstance3D` nodes are extracted automatically, preserving nested transforms, mesh materials, and surface material overrides. Assets with multiple mesh nodes produce a separate batch for each mesh node.
+- **Single placement and brush painting** — Both modes support snapping, randomized rotation and scale, and surface normal alignment across Surface, Plane, and Terrain3D placement.
+- 
+**⚠️ Limitations:** MultiMesh copies static mesh visuals only, not collision, scripts, animation, or other non-mesh content.
+
+
+#### 📐 Orthographic Placement
+
+Added support to Place and transform assets in standard **Top, Front, and Side** views, as well as free-look orthographic views
+
+#### 💾 Persistent Placement Options
+
+Placement options are now automatically saved and restored across editor restarts
+
+#### 🖌️ Brush Controls
+
+- **Alt + Mouse Wheel Up/Down** — Increase/decrease brush size.
+- **Alt + Shift + Mouse Wheel Up/Down** — Increase/decrease brush density.
+- Both shortcuts are configurable in Settings.
+- Added a **Max Brush Size** preference to configure the brush size slider's upper limit. The default maximum is now **20**, down from **200**, for finer slider control.
+
+### ⚡ Performance
+
+- Reworked the Asset Library panel to recycle and reuse item views while scrolling instead of rendering the entire library at once, improving browsing performance for large libraries.
+
+### 🛠️ Changes
+
+- Added an **Asset Placer** toggle button to the 3D editor toolbar, with a Settings option to show or hide it.
+- **Toggle Asset Placer** is now unassigned by default instead of `Shift+A`. Existing saved bindings are preserved; configure or clear the shortcut in Settings.
+- Shortcut buttons now support **right-click to unassign**.
+
+### 🐛 Fixed
+
+- Fixed OBJ asset previews failing because imported mesh resources were treated as scenes. Mesh resources are now wrapped in `MeshInstance3D` for preview and supported by both instancing modes.
+- Fixed single-asset placement skipping randomized rotation and scale. Randomization now applies to the initial preview and subsequent previews, with manual transforms applied afterward.
+- Fixed an editor crash when frequently updating Settings. 
+
+---
+
 ## 1.7.0-beta1
 
 No changes promoting to beta, while testing for the stable release :) 

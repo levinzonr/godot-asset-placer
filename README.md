@@ -148,7 +148,7 @@ This mode allows you to place assets directly onto a Terrain3D surface. When sel
 
 #### Instancing Modes
 
-> Available since version 1.7.0-alpha2
+> Available since version 1.7.0
 
 Choose **Instancing Mode** in the Placement Options:
 
